@@ -1,0 +1,143 @@
+#!/usr/bin/env python
+
+# Safe Eyes is a utility to remind you to take break frequently
+# to protect your eyes from eye strain.
+
+# Copyright (C) 2016  Gobinath
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import gi
+import json
+import shutil
+import errno
+from BreakScreen import BreakScreen
+from TrayIcon import TrayIcon
+from SettingsDialog import SettingsDialog
+from SafeEyesCore import SafeEyesCore
+from Notification import Notification
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
+# Define necessary paths
+bin_directory = os.path.dirname(os.path.realpath(__file__))
+config_file_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/safeeyes.json')
+style_sheet_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style/safeeyes_style.css')
+break_screen_glade = os.path.join(bin_directory, "glade/break_screen.glade")
+settings_dialog_glade = os.path.join(bin_directory, "glade/settings_dialog.glade")
+system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
+system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
+desktop_file = os.path.join(bin_directory, "../safeeyes.desktop")
+
+def show_settings():
+	settings_dialog = SettingsDialog(config, save_settings, settings_dialog_glade)
+	settings_dialog.show()
+
+def show_notification():
+	notification.show(config['pre_break_warning_time'])
+
+def show_alert(message):
+	notification.close()
+	# Hide and show tray icon if strict break is on
+	# This feature is required because, by disabling Safe Eyes,
+	# user can skip the break.
+	if config['strict_break']:
+		tray_icon.hide_icon()
+	break_screen.show_message(message)
+
+def close_alert():
+	# Hide and show tray icon if strict break is on
+	# This feature is required because, by disabling Safe Eyes,
+	# user can skip the break.
+	if config['strict_break']:
+		tray_icon.show_icon()
+	break_screen.close()
+
+def on_countdown(count):
+	break_screen.show_count_down(count)
+
+def on_quite():
+	core.stop()
+	notification.quite();
+	Gtk.main_quit()
+
+def on_skipped():
+	# Hide and show tray icon if strict break is on
+	# This feature is required because, by disabling Safe Eyes,
+	# user can skip the break.
+	if config['strict_break']:
+		tray_icon.show_icon()
+	core.reset()
+
+def save_settings(config):
+	# Write the configuration to file
+	with open(config_file_path, 'w') as config_file:
+		json.dump(config, config_file, indent=4, sort_keys=True)
+	
+	# Restart the core and intialize the components
+	core.stop()
+	core.initialize(config)
+	break_screen.initialize(config)
+	core.start()
+
+def enable_safeeyes():
+	core.resume()
+
+def disable_safeeyes():
+	core.pause()
+
+def prepare_local_config_dir():
+	config_dir_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style')
+	startup_file_path = os.path.join(os.path.expanduser('~'), '.config/autostart/safeeyes.desktop')
+	try:
+		os.makedirs(config_dir_path)
+	except OSError as exc:
+		if exc.errno == errno.EEXIST and os.path.isdir(config_dir_path):
+			pass
+		else:
+			raise
+
+	if not os.path.isfile(config_file_path):
+		shutil.copy2(system_config_file_path, config_file_path)
+		# Add to startup for the first time only
+		shutil.copy2(desktop_file, startup_file_path)
+
+	if not os.path.isfile(style_sheet_path):
+		shutil.copy2(system_style_sheet_path, style_sheet_path)
+
+def main():
+	prepare_local_config_dir()
+
+	global break_screen
+	global core
+	global notification
+	global config
+	global tray_icon
+
+	# Read the configuration
+	with open(config_file_path) as config_file:    
+		config = json.load(config_file)
+	
+	tray_icon = TrayIcon(show_settings, enable_safeeyes, disable_safeeyes, on_quite)
+	break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
+	break_screen.initialize(config)
+	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown)
+	core.initialize(config)
+	core.start()
+	notification = Notification()
+	
+	Gtk.main()
+
+main()

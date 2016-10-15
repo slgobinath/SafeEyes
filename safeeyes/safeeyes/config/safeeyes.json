@@ -1,0 +1,19 @@
+{
+    "break_interval": 15, 
+    "long_break_duration": 60, 
+    "long_break_messages": [
+        "Walk for a while", 
+        "Lean back at your seat and relax"
+    ], 
+    "no_of_short_breaks_per_long_break": 5, 
+    "pre_break_warning_time": 10, 
+    "short_break_duration": 15, 
+    "short_break_messages": [
+        "Tightly close your eyes", 
+        "Roll your eyes", 
+        "Blink your eyes", 
+        "Have some water"
+    ], 
+    "skip_button_text": "Skip", 
+    "strict_break": false
+}

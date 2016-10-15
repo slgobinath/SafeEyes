@@ -1,0 +1,23 @@
+Source: safeeyes
+Section: utils
+Priority: optional
+Maintainer: Loganathan Gobinath <slgobinath@gmail.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://github.com/slgobinath/SafeEyes/
+
+Package: safeeyes
+Architecture: any
+Depends: python-appindicator, python (>= 2.7.6), python-apscheduler (>= 2.1.2)
+Description: Safe Eyes
+ Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
+ .
+ Features:
+  - Short breaks with eye exercises
+  - Long breaks to change physical position and to warm up
+  - Strict break for those who are addicted to computer
+  - Highly customizable
+  - Do not disturb when working with fullscreen applications( Eg: Watching movies)
+  - Notifications before every break
+  - Multi-workspace support
+  - Elegant and customizable design
