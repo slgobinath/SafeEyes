@@ -100,7 +100,7 @@ def disable_safeeyes():
 
 def prepare_local_config_dir():
 	config_dir_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style')
-	startup_file_path = os.path.join(os.path.expanduser('~'), '.config/autostart/safeeyes.desktop')
+	startup_dir_path = os.path.join(os.path.expanduser('~'), '.config/autostart')
 	try:
 		os.makedirs(config_dir_path)
 	except OSError as exc:
@@ -111,8 +111,17 @@ def prepare_local_config_dir():
 
 	if not os.path.isfile(config_file_path):
 		shutil.copy2(system_config_file_path, config_file_path)
+
+		try:
+			os.makedirs(startup_dir_path)
+		except OSError as exc:
+			if exc.errno == errno.EEXIST and os.path.isdir(startup_dir_path):
+				pass
+			else:
+				raise
+
 		# Add to startup for the first time only
-		shutil.copy2(desktop_file, startup_file_path)
+		shutil.copy2(desktop_file, (startup_dir_path + "/safeeyes.desktop"))
 
 	if not os.path.isfile(style_sheet_path):
 		shutil.copy2(system_style_sheet_path, style_sheet_path)

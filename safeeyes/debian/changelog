@@ -1,4 +1,6 @@
-safeeyes (1.0.0-1) xenial; urgency=medium
+safeeyes (1.0.2-1) xenial; urgency=medium
+
+  * Fixing apscheduler version mismatch
 
   * Initial release
 

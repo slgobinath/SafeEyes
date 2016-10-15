@@ -19,14 +19,12 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib
-from apscheduler.schedulers.background import BackgroundScheduler
-from apscheduler.schedulers.base import BaseScheduler
+from apscheduler.scheduler import Scheduler
 import time, threading, sys, subprocess, logging
 
 logging.basicConfig()
 
 class SafeEyesCore:
-	scheduler_job_id = "safe_eyes_scheduler"
 	break_count = 0
 	long_break_message_index = 0
 	short_break_message_index = 0
@@ -59,16 +57,19 @@ class SafeEyesCore:
 			return
 
 		# Pause the scheduler until the break
-		if self.scheduler:
-			self.scheduler.pause_job(self.scheduler_job_id)
+		if self.scheduler and self.scheduled_job:
+			self.scheduler.unschedule_job(self.scheduled_job)
+			self.scheduled_job = None
 
 		GLib.idle_add(lambda: self.process_job())
 
 
 	def process_job(self):
 		if self.is_full_screen_app_found():
+			# If full screen app found, do not show break screen.
+			# Resume the scheduler
 			if self.scheduler:
-				self.scheduler.resume_job(self.scheduler_job_id)
+				self.scheduled_job = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
 			return
 
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
@@ -83,6 +84,7 @@ class SafeEyesCore:
 		# Wait for the pre break warning period
 		time.sleep(self.pre_break_warning_time)
 
+		# User can disable SafeEyes during notification
 		if self.active:
 			message = ""
 			if self.is_long_break():
@@ -114,14 +116,14 @@ class SafeEyesCore:
 			time.sleep(1)	# Sleep for 1 second
 			seconds -= 1
 
-		# Timeout -> Close the break alert
+		# Loop terminated because of timeout (not skipped) -> Close the break alert
 		if not self.skipped:
 			self.end_break()
 
 		# Resume the scheduler
 		if self.active:
 			if self.scheduler:
-				self.scheduler.resume_job(self.scheduler_job_id)
+				self.scheduled_job = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
 
 		self.skipped = False
 
@@ -131,6 +133,7 @@ class SafeEyesCore:
 	def is_long_break(self):
 		return self.break_count == self.no_of_short_breaks_per_long_break - 1
 
+	# User skipped the break using Skip button
 	def reset(self):
 		self.skipped = True
 
@@ -141,7 +144,7 @@ class SafeEyesCore:
 		if not self.active:
 			self.active = True
 			if self.scheduler:
-				self.scheduler.resume_job(self.scheduler_job_id)
+				self.scheduled_job = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
 
 	"""
 		Pause the timer
@@ -149,13 +152,16 @@ class SafeEyesCore:
 	def pause(self):
 		if self.active:
 			self.active = False
-			if self.scheduler:
-				self.scheduler.pause_job(self.scheduler_job_id)
+			if self.scheduler and self.scheduled_job:
+				self.scheduler.unschedule_job(self.scheduled_job)
+				self.scheduled_job = None
 
 	def stop(self):
 		if self.scheduler:
 			self.active = False
-			self.scheduler.pause_job(self.scheduler_job_id)
+			if self.scheduled_job:
+				self.scheduler.unschedule_job(self.scheduled_job)
+				self.scheduled_job = None
 			self.scheduler.shutdown(wait=False)
 			self.scheduler = None
 	
@@ -165,8 +171,8 @@ class SafeEyesCore:
 	def start(self):
 		self.active = True
 		if not self.scheduler:
-			self.scheduler = BackgroundScheduler()
-			self.scheduler.add_job(self.scheduler_job, 'interval', minutes=self.break_interval, id=self.scheduler_job_id)
+			self.scheduler = Scheduler()
+			self.scheduled_job = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
 		self.scheduler.start()
 
 	"""
