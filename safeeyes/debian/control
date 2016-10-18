@@ -8,7 +8,7 @@ Homepage: https://github.com/slgobinath/SafeEyes/
 
 Package: safeeyes
 Architecture: any
-Depends: gir1.2-appindicator3-0.1, python (>= 2.7.6), python-apscheduler (>= 2.1.2)
+Depends: gir1.2-appindicator3-0.1, python (>= 2.7.0), python-apscheduler (>= 2.1.2)
 Description: Safe Eyes
  Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
  .
