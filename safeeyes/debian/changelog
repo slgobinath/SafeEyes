@@ -1,5 +1,7 @@
-safeeyes (1.0.4-1) xenial; urgency=medium
+safeeyes (1.0.5-1) xenial; urgency=medium
 
+  * Bug fixes for Ubuntu 14.04 and keyboard lock during break
+  
   * Reducing minimal Python requirement
   
   * Fixing appindicator version mismatch

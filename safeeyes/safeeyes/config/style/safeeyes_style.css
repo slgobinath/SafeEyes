@@ -33,6 +33,7 @@
     border-color: white;
     background: transparent;
     border-width: 2px;
+    border-image: none;
 }
 
 .btn_skip:hover {

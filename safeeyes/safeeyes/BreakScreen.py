@@ -18,16 +18,21 @@
 
 import gi
 import signal
+from Xlib import Xatom, Xutil
+from Xlib.display import Display, X
+import sys, threading
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, GdkX11
 
 class BreakScreen:
 	"""Full screen break window"""
+
 	def __init__(self, on_skip, glade_file, style_sheet_path):
 		self.on_skip = on_skip
 		self.style_sheet = style_sheet_path
 		self.is_pretified = False
+		self.key_lock_condition = threading.Condition()
 
 		builder = Gtk.Builder()
 		builder.add_from_file(glade_file)
@@ -41,11 +46,12 @@ class BreakScreen:
 		self.window.stick()
 		self.window.set_keep_above(True)
 		screen = self.window.get_screen()
-		self.window.resize(screen.get_width(), screen.get_height())
+		# self.window.resize(screen.get_width(), screen.get_height())
 
 	"""
 		Initialize the internal properties from configuration
 	"""
+
 	def initialize(self, config):
 		self.skip_button_text = config['skip_button_text']
 		self.strict_break = config['strict_break']
@@ -53,6 +59,7 @@ class BreakScreen:
 		self.btn_skip.set_visible(not self.strict_break)
 
 	def on_window_delete(self, *args):
+		self.lock_keyboard = False
 		self.close()
 
 	def on_skip_clicked(self, button):
@@ -65,10 +72,35 @@ class BreakScreen:
 	def show_message(self, message):
 		GLib.idle_add(lambda: self.__show_message(message))
 
+	"""
+		Lock the keyboard to prevent the user from using keyboard shortcuts
+	"""
+	def block_keyboard(self):
+		self.lock_keyboard = True
+		display = Display()
+		root = display.screen().root
+		# Grap the keyboard
+		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
+		# Consume keyboard events
+		self.key_lock_condition.acquire()
+		while self.lock_keyboard:
+			self.key_lock_condition.wait()
+		self.key_lock_condition.release()
+		# Ungrap the keyboard
+		display.ungrab_keyboard(X.CurrentTime)
+		display.flush()
+				
+	def release_keyboard(self):
+		self.key_lock_condition.acquire()
+		self.lock_keyboard = False
+		self.key_lock_condition.notify()
+		self.key_lock_condition.release()
+
 	def __show_message(self, message):
 		self.lbl_message.set_text(message)
 		self.window.show_all()
 		self.window.present()
+		self.window.fullscreen()
 
 		# Set the style only for the first time
 		if not self.is_pretified:
@@ -81,7 +113,11 @@ class BreakScreen:
 
 		# If the style is changed, the visibility must be redefined
 		self.btn_skip.set_visible(not self.strict_break)
+		# Lock the keyboard
+		thread = threading.Thread(target=self.block_keyboard)
+		thread.start()
 
 	def close(self):
+		self.release_keyboard()
 		GLib.idle_add(lambda: self.window.hide())
 		

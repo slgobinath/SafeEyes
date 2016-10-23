@@ -18,7 +18,7 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GdkX11
 
 class SettingsDialog:
 	"""docstring for SettingsDialog"""
@@ -43,7 +43,7 @@ class SettingsDialog:
 		self.spin_interval_between_two_breaks.set_value(config['break_interval'])
 		self.spin_short_between_long.set_value(config['no_of_short_breaks_per_long_break'])
 		self.spin_time_to_prepare.set_value(config['pre_break_warning_time'])
-		self.switch_strict_break.set_state(config['strict_break'])
+		self.switch_strict_break.set_active(config['strict_break'])
 
 
 	def show(self):
@@ -58,7 +58,7 @@ class SettingsDialog:
 		self.config['break_interval'] = self.spin_interval_between_two_breaks.get_value_as_int()
 		self.config['no_of_short_breaks_per_long_break'] = self.spin_short_between_long.get_value_as_int()
 		self.config['pre_break_warning_time'] = self.spin_time_to_prepare.get_value_as_int()
-		self.config['strict_break'] = self.switch_strict_break.get_state()
+		self.config['strict_break'] = self.switch_strict_break.get_active()
 
 		self.on_save_settings(self.config)	# Call the provided save method
 		self.window.destroy()	# Close the settings window

@@ -53,16 +53,16 @@ def show_alert(message):
 	# Hide and show tray icon if strict break is on
 	# This feature is required because, by disabling Safe Eyes,
 	# user can skip the break.
-	if config['strict_break']:
-		tray_icon.hide_icon()
+	# if config['strict_break']:
+	# 	tray_icon.hide_icon()
 	break_screen.show_message(message)
 
 def close_alert():
 	# Hide and show tray icon if strict break is on
 	# This feature is required because, by disabling Safe Eyes,
 	# user can skip the break.
-	if config['strict_break']:
-		tray_icon.show_icon()
+	# if config['strict_break']:
+	# 	tray_icon.show_icon()
 	break_screen.close()
 
 def on_countdown(count):
@@ -79,7 +79,7 @@ def on_skipped():
 	# user can skip the break.
 	if config['strict_break']:
 		tray_icon.show_icon()
-	core.reset()
+	core.skip_break()
 
 def save_settings(config):
 	# Write the configuration to file
@@ -87,16 +87,15 @@ def save_settings(config):
 		json.dump(config, config_file, indent=4, sort_keys=True)
 	
 	# Restart the core and intialize the components
-	core.stop()
 	core.initialize(config)
 	break_screen.initialize(config)
-	core.start()
+	core.restart()
 
 def enable_safeeyes():
-	core.resume()
+	core.toggle_active_state()
 
 def disable_safeeyes():
-	core.pause()
+	core.toggle_active_state()
 
 def prepare_local_config_dir():
 	config_dir_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style')
