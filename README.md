@@ -1,5 +1,5 @@
 # Safe Eyes
-Protect your eyes from eye strain using this continous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.
+Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.
 
 ## Installation
 1: Add the PPA: `sudo add-apt-repository ppa:slgobinath/safeeyes`
@@ -21,6 +21,7 @@ For advanced configuration, go to `~/.config/safeeyes folder`. There you can cha
 - Strict break for those who are addicted to computer
 - Highly customizable
 - Do not disturb when working with fullscreen applications( Eg: Watching movies)
+- Disable the keyboard during break
 - Notifications before every break
 - Multi-workspace support
 - Elegant and customizable design
@@ -45,8 +46,8 @@ Please test Safe Eyes and create installers for your operating system
 
 ## History
 
-Version 1.0.0:
-* Intial release
+Version 1.0.6:
+* Latest stable release
 
 
 ## License
