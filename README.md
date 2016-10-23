@@ -2,6 +2,8 @@
 Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.
 
 ## Installation
+
+### Ubuntu:
 1: Add the PPA: `sudo add-apt-repository ppa:slgobinath/safeeyes`
 
 2: Download the package list: `sudo apt update`
@@ -10,6 +12,19 @@ Protect your eyes from eye strain using this continuous breaks reminder. A Free 
 
 4: Start Safe Eyes from start menu.
 
+### Other Linux:
+
+Manual installation is not tested in any systems. I will update this page as soon as I have tested in any other Linux distributions.
+
+1: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.6/hicolor.tar.gz) into `/opt`
+
+2: Download and extract [hicolor.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.6/hicolor.tar.gz) into `~/.icons` or `/usr/share/icons`
+
+3: Install the dependencies: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-apscheduler`, `python-gobject`
+
+4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes/safeeyes`
+
+Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and the configurations to `~/.config/safeeyes`. Therefore, from next time onwards, it should start with the system.
 
 ## Usage
 Just install and forget; Safe Eyes will take care of your eyes. To customize the preferences, go to Settings from Safe Eyes tray icon.
