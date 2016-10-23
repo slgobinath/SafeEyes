@@ -199,7 +199,7 @@ class SafeEyesCore:
 		Schedule the job
 	"""
 	def schedule_job(self):
-		self.scheduled_job_id = self.scheduler.add_interval_job(self.scheduler_job, seconds=self.break_interval)
+		self.scheduled_job_id = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
 
 	"""
 		Check for full-screen applications
