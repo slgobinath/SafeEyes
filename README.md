@@ -15,7 +15,7 @@ Protect your eyes from eye strain using this continuous breaks reminder. A Free 
 ### Arch:
 1: Download the [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.6/safeeyes.tar.gz)
 
-2: Install Safe Eyes: `sudo pacman -R safeeyes.tar.gz`
+2: Install Safe Eyes: `sudo pacman -U safeeyes.tar.gz`
 
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
