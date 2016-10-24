@@ -89,7 +89,6 @@ def save_settings(config):
 	# Restart the core and intialize the components
 	core.initialize(config)
 	break_screen.initialize(config)
-	core.restart()
 
 def enable_safeeyes():
 	core.toggle_active_state()

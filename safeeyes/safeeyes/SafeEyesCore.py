@@ -19,10 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib, GdkX11
-from apscheduler.scheduler import Scheduler
-import time, threading, sys, subprocess, logging
-
-logging.basicConfig()
+import time, threading, sys, subprocess
 
 class SafeEyesCore:
 
@@ -32,12 +29,12 @@ class SafeEyesCore:
 		self.long_break_message_index = 0
 		self.short_break_message_index = 0
 		self.skipped = False
-		self.scheduler = None
 		self.show_notification = show_notification
 		self.start_break = start_break
 		self.end_break = end_break
 		self.on_countdown = on_countdown
 		self.notification_condition = threading.Condition()
+		self.break_condition = threading.Condition()
 
 	"""
 		Initialize the internal properties from configuration
@@ -58,10 +55,13 @@ class SafeEyesCore:
 		if not self.active:
 			return
 
-		# Pause the scheduler until the break
-		if self.scheduler and self.scheduled_job_id:
-			self.scheduler.unschedule_job(self.scheduled_job_id)
-			self.scheduled_job_id = None
+		# Wait for the pre break warning period
+		self.notification_condition.acquire()
+		self.notification_condition.wait(self.break_interval)	# In minutes
+		self.notification_condition.release()
+
+		if not self.active:
+			return
 
 		GLib.idle_add(lambda: self.process_job())
 
@@ -70,10 +70,9 @@ class SafeEyesCore:
 	"""
 	def process_job(self):
 		if self.is_full_screen_app_found():
-			# If full screen app found, do not show break screen.
-			# Resume the scheduler
-			if self.scheduler:
-				self.schedule_job()
+			# If full screen app found, do not show break screen
+			if self.active:
+				self.start()
 			return
 
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
@@ -124,10 +123,9 @@ class SafeEyesCore:
 			if not self.skipped:
 				self.end_break()
 
-			# Resume the scheduler
+			# Resume
 			if self.active:
-				if self.scheduler:
-					self.schedule_job()
+				self.start()
 
 			self.skipped = False
 
@@ -146,60 +144,32 @@ class SafeEyesCore:
 	"""
 	def toggle_active_state(self):
 		if self.active:
-			self.active = False
-			if self.scheduler and self.scheduled_job_id:
-				self.scheduler.unschedule_job(self.scheduled_job_id)
-				self.scheduled_job_id = None
+			self.stop()
 
-			# If waiting after notification, notify the thread to wake up and die
-			self.notification_condition.acquire()
-			self.notification_condition.notify()
-			self.notification_condition.release()
 		else:
-			self.active = True
-			if self.scheduler:
-				self.schedule_job()
+			self.start()
 
 	"""
-		Unschedule the job and shutdown the scheduler
+		Stop Safe Eyes
 	"""
 	def stop(self):
-		if self.scheduler:
-			self.active = False
-			if self.scheduled_job_id:
-				self.scheduler.unschedule_job(self.scheduled_job_id)
-				self.scheduled_job_id = None
-			self.scheduler.shutdown(wait=False)
-			self.scheduler = None
-
+		self.notification_condition.acquire()
+		self.active = False
+		self.notification_condition.notify()
+		self.notification_condition.release()
+		
 		# If waiting after notification, notify the thread to wake up and die
 		self.notification_condition.acquire()
 		self.notification_condition.notify()
 		self.notification_condition.release()
 	
 	"""
-		Schedule the job and start the scheduler
+		Start Safe Eyes
 	"""
 	def start(self):
 		self.active = True
-		if not self.scheduler:
-			self.scheduler = Scheduler()
-			self.schedule_job()
-		self.scheduler.start()
-
-	"""
-		Restart the scheduler after changing settings
-	"""
-	def restart(self):
-		if self.active:
-			self.stop()
-			self.start()
-
-	"""
-		Schedule the job
-	"""
-	def schedule_job(self):
-		self.scheduled_job_id = self.scheduler.add_interval_job(self.scheduler_job, minutes=self.break_interval)
+		thread = threading.Thread(target=self.scheduler_job)
+		thread.start()
 
 	"""
 		Check for full-screen applications
