@@ -1,0 +1,8 @@
+pkgname = safeeyes
+pkgver = 1.0.6-1
+pkgdesc = Safe Eyes
+url = https://github.com/slgobinath/SafeEyes
+depends=('python2-gobject', 'python2-xlib', 'xorg-xprop', 'libappindicator3')
+license=('gplv3')
+packager = manual
+arch = any
