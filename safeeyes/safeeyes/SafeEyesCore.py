@@ -57,7 +57,7 @@ class SafeEyesCore:
 
 		# Wait for the pre break warning period
 		self.notification_condition.acquire()
-		self.notification_condition.wait(self.break_interval)	# In minutes
+		self.notification_condition.wait(self.break_interval * 60)	# In minutes
 		self.notification_condition.release()
 
 		if not self.active:
