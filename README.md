@@ -13,71 +13,65 @@ Protect your eyes from eye strain using this continuous breaks reminder. A Free 
 4: Start Safe Eyes from start menu.
 
 ### Arch:
-1: Download the [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.6/safeeyes.tar.gz)
-
-2: Install Safe Eyes: `sudo pacman -U safeeyes.tar.gz`
-
-If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
+Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credits to [Yamakaky](https://github.com/Yamakaky)
 
 ### Other Linux:
 
 Manual installation is not tested in any systems. I will update this page as soon as I have tested in any other Linux distributions.
 
-1: Install the dependencies: `gir1.2-appindicator3-0.1` (`libappindicator3` in Arch), `python-xlib` (`python2-xlib` in Arch), `python-gobject` (`python2-gobject` in Arch), `xorg-xprop` in Arch
+1: Install the dependencies: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `xorg-xprop` in Arch
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.6/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.7/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
 The following files are deployed by SafeEyes
 ```
-/usr/share/icons/hicolor/128x128/apps/
-/usr/share/icons/hicolor/16x16/status/safeeyes_enabled.png
-/usr/share/applications/safeeyes.desktop
-/usr/share/icons/hicolor/32x32/
-/usr/share/icons/hicolor/64x64/apps/safeeyes.png
-/usr/share/icons/hicolor/24x24/status/
-/usr/share/applications/
-/usr/share/icons/hicolor/64x64/
-/usr/share/icons/hicolor/
-/usr/share/icons/hicolor/128x128/
-/opt/
-/usr/share/icons/hicolor/16x16/
-/opt/safeeyes/safeeyes/glade/break_screen.glade
-/usr/share/icons/hicolor/24x24/status/safeeyes_disabled.png
-/opt/safeeyes/safeeyes/BreakScreen.py
-/opt/safeeyes/safeeyes/safeeyes
-/usr/share/icons/hicolor/48x48/
-/usr/share/icons/hicolor/32x32/status/
-/usr/share/icons/hicolor/48x48/status/safeeyes_disabled.png
-/usr/share/icons/hicolor/48x48/status/
-/usr/share/icons/hicolor/128x128/apps/safeeyes.png
-/opt/safeeyes/safeeyes/SafeEyesCore.py
-/usr/share/icons/hicolor/24x24/status/safeeyes_enabled.png
-/usr/
-/opt/safeeyes/safeeyes/config/
-/opt/safeeyes/safeeyes/Notification.py
-/usr/share/icons/hicolor/16x16/status/safeeyes_disabled.png
-/usr/share/icons/hicolor/48x48/apps/
-/opt/safeeyes/safeeyes/SettingsDialog.py
-/opt/safeeyes/safeeyes/glade/
-/usr/share/icons/hicolor/24x24/
-/usr/share/icons/
-/usr/share/icons/hicolor/32x32/apps/
-/opt/safeeyes/safeeyes/glade/settings_dialog.glade
-/opt/safeeyes/safeeyes/config/style/
-/opt/safeeyes/safeeyes/TrayIcon.py
-/usr/share/icons/hicolor/48x48/apps/safeeyes.png
-/opt/safeeyes/
-/opt/safeeyes/safeeyes.desktop
-/opt/safeeyes/safeeyes/
-/usr/share/icons/hicolor/64x64/apps/
-/usr/share/icons/hicolor/16x16/status/
-/usr/share/icons/hicolor/32x32/status/safeeyes_enabled.png
-/opt/safeeyes/safeeyes/config/safeeyes.json
-/usr/share/
-/opt/safeeyes/safeeyes/config/style/safeeyes_style.css
-/usr/share/icons/hicolor/48x48/status/safeeyes_enabled.png
-/usr/share/icons/hicolor/32x32/status/safeeyes_disabled.png
-/usr/share/icons/hicolor/32x32/apps/safeeyes.png
+opt/
+opt/safeeyes/
+opt/safeeyes/BreakScreen.py
+opt/safeeyes/config/
+opt/safeeyes/config/safeeyes.json
+opt/safeeyes/config/style/
+opt/safeeyes/config/style/safeeyes_style.css
+opt/safeeyes/glade/
+opt/safeeyes/glade/break_screen.glade
+opt/safeeyes/glade/settings_dialog.glade
+opt/safeeyes/Notification.py
+opt/safeeyes/safeeyes
+opt/safeeyes/SafeEyesCore.py
+opt/safeeyes/SettingsDialog.py
+opt/safeeyes/TrayIcon.py
+usr/
+usr/share/
+usr/share/applications/
+usr/share/applications/safeeyes.desktop
+usr/share/icons/
+usr/share/icons/hicolor/
+usr/share/icons/hicolor/128x128/
+usr/share/icons/hicolor/128x128/apps/
+usr/share/icons/hicolor/128x128/apps/safeeyes.png
+usr/share/icons/hicolor/16x16/
+usr/share/icons/hicolor/16x16/status/
+usr/share/icons/hicolor/16x16/status/safeeyes_disabled.png
+usr/share/icons/hicolor/16x16/status/safeeyes_enabled.png
+usr/share/icons/hicolor/24x24/
+usr/share/icons/hicolor/24x24/status/
+usr/share/icons/hicolor/24x24/status/safeeyes_disabled.png
+usr/share/icons/hicolor/24x24/status/safeeyes_enabled.png
+usr/share/icons/hicolor/32x32/
+usr/share/icons/hicolor/32x32/apps/
+usr/share/icons/hicolor/32x32/apps/safeeyes.png
+usr/share/icons/hicolor/32x32/status/
+usr/share/icons/hicolor/32x32/status/safeeyes_disabled.png
+usr/share/icons/hicolor/32x32/status/safeeyes_enabled.png
+usr/share/icons/hicolor/48x48/
+usr/share/icons/hicolor/48x48/apps/
+usr/share/icons/hicolor/48x48/apps/safeeyes.png
+usr/share/icons/hicolor/48x48/status/
+usr/share/icons/hicolor/48x48/status/safeeyes_disabled.png
+usr/share/icons/hicolor/48x48/status/safeeyes_enabled.png
+usr/share/icons/hicolor/64x64/
+usr/share/icons/hicolor/64x64/apps/
+usr/share/icons/hicolor/64x64/apps/safeeyes.png
 ```
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
@@ -119,6 +113,13 @@ Please test Safe Eyes and create installers for your operating system
 
 
 ## History
+
+Version 1.0.7:
+ * Removed python-apscheduler dependency
+ * Installation directory is restructured
+ * Bug fixes:
+   * Supporting Ubuntu 16.10
+   * Symlink for autostart instead of copying the desktop file
 
 Version 1.0.6:
 * Latest stable release
