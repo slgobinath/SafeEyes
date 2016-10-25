@@ -79,9 +79,44 @@ If you have any issues in installing Safe Eyes, please report them [here](https:
 
 Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and the configurations to `~/.config/safeeyes`. Therefore, from next time onwards, it should start with the system.
 
-## Usage
+## Configuring Safe Eyes
 Just install and forget; Safe Eyes will take care of your eyes. To customize the preferences, go to Settings from Safe Eyes tray icon.
 For advanced configuration, go to `~/.config/safeeyes folder`. There you can change the Skip button text in `safeeyes.json` and the look and feel of the break screen in `style/safeeyes_style.css`.
+If you want to add more exercises, you can add them in the `safeeyes.json`. A sample configuration is given below for your reference:
+```
+{
+    "break_interval": 15, 
+    "long_break_duration": 60, 
+    "long_break_messages": [
+        "Walk for a while", 
+        "Lean back at your seat and relax",
+        "Long break exercise 1",
+        "Long break exercise 2"
+    ], 
+    "no_of_short_breaks_per_long_break": 5, 
+    "pre_break_warning_time": 10, 
+    "short_break_duration": 15, 
+    "short_break_messages": [
+        "Tightly close your eyes", 
+        "Roll your eyes", 
+        "Rotate your eyes", 
+        "Blink your eyes", 
+        "Have some water",
+        "Short break exercise 1",
+        "Short break exercise 2"
+    ], 
+    "skip_button_text": "Cancel", 
+    "strict_break": false
+}
+```
+
+## Uninstalling Safe Eyes
+Use the following commands to uninstall SafeEyes from your system.
+```
+sudo apt remove safeeyes
+rm -r ~/.config/safeeyes
+rm ~/.config/autostart/safeeyes.desktop
+```
 
 ## Features
 - Short breaks with eye exercises
@@ -124,6 +159,11 @@ Version 1.0.7:
 Version 1.0.6:
 * Latest stable release
 
+## Tested Environments
+ * Ubuntu 14.04
+ * Ubuntu 16.04
+ * Ubuntu 16.10
+ * Linux Mint 18
 
 ## License
 
