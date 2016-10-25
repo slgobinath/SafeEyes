@@ -39,7 +39,6 @@ break_screen_glade = os.path.join(bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(bin_directory, "glade/settings_dialog.glade")
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
-desktop_file = os.path.join(bin_directory, "../safeeyes.desktop")
 
 def show_settings():
 	settings_dialog = SettingsDialog(config, save_settings, settings_dialog_glade)
@@ -119,7 +118,10 @@ def prepare_local_config_dir():
 				raise
 
 		# Add to startup for the first time only
-		shutil.copy2(desktop_file, (startup_dir_path + "/safeeyes.desktop"))
+		try:
+			os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, "safeeyes.desktop"))
+		except OSError as exc:
+			pass
 
 	if not os.path.isfile(style_sheet_path):
 		shutil.copy2(system_style_sheet_path, style_sheet_path)

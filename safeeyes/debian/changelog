@@ -1,6 +1,8 @@
-safeeyes (1.0.6-1) xenial; urgency=medium
+safeeyes (1.0.7-1) xenial; urgency=medium
+  
+  * Removing apscheduler dependency
 
-  * Fixing seconds instead of mnutes bug
+  * Fixing seconds instead of minutes bug
   
   * Bug fixes for Ubuntu 14.04 and keyboard lock during break
   
