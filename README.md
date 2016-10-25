@@ -21,7 +21,11 @@ Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credit
 
 Manual installation is not tested in any systems. I will update this page as soon as I have tested in any other Linux distributions.
 
-1: Install the dependencies: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `xorg-xprop` in Arch
+1: Install the dependencies:
+
+   * Arch: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `xorg-xprop`
+
+   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject` and `xorg-x11-utils`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.7/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
