@@ -23,7 +23,9 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `xorg-xprop`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`
+
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject` and `xorg-x11-utils`
 
