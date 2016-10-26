@@ -1,4 +1,6 @@
-safeeyes (1.0.7-1) xenial; urgency=medium
+safeeyes (1.0.8-1) xenial; urgency=medium
+  
+  * Fixing bug in Ubuntu MATE environment
   
   * Removing apscheduler dependency
 

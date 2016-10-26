@@ -38,7 +38,10 @@ class Notification:
 		self.notification.show()
 
 	def close(self):
-		self.notification.close()
+		try:
+			self.notification.close()
+		except:
+			pass
 		# GLib.idle_add(lambda: self.notification.close())
 
 	def quite(self):
