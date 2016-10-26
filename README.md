@@ -23,9 +23,9 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop` and `python2-xlib`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject` and `python-gi`
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject` and `xorg-x11-utils`
 
@@ -83,7 +83,7 @@ usr/share/icons/hicolor/64x64/apps/safeeyes.png
 ```
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
-4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes/safeeyes`
+4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes`
 
 Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and the configurations to `~/.config/safeeyes`. Therefore, from next time onwards, it should start with the system.
 
