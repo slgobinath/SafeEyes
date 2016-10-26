@@ -23,7 +23,7 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop` and `python2-xlib`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib` and `python2-gobject`
 
    * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject` and `python-gi`
 
