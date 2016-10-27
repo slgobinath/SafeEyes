@@ -33,6 +33,8 @@ class BreakScreen:
 		self.style_sheet = style_sheet_path
 		self.is_pretified = False
 		self.key_lock_condition = threading.Condition()
+		self.secondary_windows = []
+		self.glade_file = glade_file
 
 		builder = Gtk.Builder()
 		builder.add_from_file(glade_file)
@@ -43,15 +45,11 @@ class BreakScreen:
 		self.btn_skip = builder.get_object("btn_skip")
 
 		self.window = builder.get_object("window_main")
-		self.window.stick()
-		self.window.set_keep_above(True)
-		screen = self.window.get_screen()
-		# self.window.resize(screen.get_width(), screen.get_height())
+
 
 	"""
 		Initialize the internal properties from configuration
 	"""
-
 	def initialize(self, config):
 		self.skip_button_text = config['skip_button_text']
 		self.strict_break = config['strict_break']
@@ -89,7 +87,41 @@ class BreakScreen:
 		# Ungrap the keyboard
 		display.ungrab_keyboard(X.CurrentTime)
 		display.flush()
-				
+
+
+	"""
+		Show an empty break screen on each non-active screens.
+	"""
+	def block_external_screens(self):
+		screen = Gtk.Window().get_screen()
+		current_monitor = screen.get_monitor_at_window(screen.get_active_window())
+		no_of_monitors = screen.get_n_monitors()
+
+		if no_of_monitors > 1:
+			for monitor in range(no_of_monitors):
+				if monitor != current_monitor:
+					monitor_gemoetry = screen.get_monitor_geometry(monitor)
+					x = monitor_gemoetry.x
+					y = monitor_gemoetry.y
+
+					builder = Gtk.Builder()
+					builder.add_from_file(self.glade_file)
+
+					# Hide all the labels and button
+					builder.get_object("lbl_message").set_visible(False)
+					builder.get_object("lbl_count").set_visible(False)
+					builder.get_object("btn_skip").set_visible(False)
+
+					window = builder.get_object("window_main")
+
+					self.secondary_windows.append(window)
+
+					window.move(x, y)
+					window.stick()
+					window.set_keep_above(True)
+					window.present()
+					window.fullscreen()
+
 	def release_keyboard(self):
 		self.key_lock_condition.acquire()
 		self.lock_keyboard = False
@@ -98,9 +130,6 @@ class BreakScreen:
 
 	def __show_message(self, message):
 		self.lbl_message.set_text(message)
-		self.window.show_all()
-		self.window.present()
-		self.window.fullscreen()
 
 		# Set the style only for the first time
 		if not self.is_pretified:
@@ -117,7 +146,24 @@ class BreakScreen:
 		thread = threading.Thread(target=self.block_keyboard)
 		thread.start()
 
+		# Show blank break screen on other non-active screens
+		self.block_external_screens()
+
+		# Keep the window above all the other windows
+		self.window.stick()
+		self.window.set_keep_above(True)
+		self.window.present()
+		self.window.fullscreen()
+
+
+	"""
+		Hide the break screen from active window and destroy all other windows
+	"""
 	def close(self):
 		self.release_keyboard()
 		GLib.idle_add(lambda: self.window.hide())
-		
+
+		# Destroy other windows if exists
+		for other_window in self.secondary_windows:
+			GLib.idle_add(lambda: other_window.destroy())
+		del self.secondary_windows[:]
