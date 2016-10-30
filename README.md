@@ -23,11 +23,11 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib` and `python2-gobject`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject` and `python2-dbus`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject` and `python-gi`
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `python-dbus`
 
-   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject` and `xorg-x11-utils`
+   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils` and `python-dbus`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.7/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
