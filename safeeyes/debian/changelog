@@ -1,4 +1,6 @@
-safeeyes (1.0.8-1) xenial; urgency=medium
+safeeyes (1.0.9-1) xenial; urgency=medium
+
+  * Adding multiscreen support & handling system suspend
   
   * Fixing bug in Ubuntu MATE environment
   

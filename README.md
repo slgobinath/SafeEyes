@@ -29,7 +29,7 @@ Manual installation is not tested in any systems. I will update this page as soo
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils` and `python-dbus`
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.7/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.9/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
 The following files are deployed by SafeEyes
 ```
@@ -156,6 +156,12 @@ Please test Safe Eyes and create installers for your operating system
 
 
 ## History
+Version 1.0.9:
+ * Multi-screen support
+ * Handling system suspend (Stop and restart during system suspend)
+
+Version 1.0.8:
+ * Bug fix for Ubuntu Mate
 
 Version 1.0.7:
  * Removed python-apscheduler dependency
@@ -172,6 +178,7 @@ Version 1.0.6:
  * Ubuntu 16.04
  * Ubuntu 16.10
  * Linux Mint 18
+ * Ubuntu Mate 16.04
 
 ## License
 
