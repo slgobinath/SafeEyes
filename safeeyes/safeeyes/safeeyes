@@ -48,7 +48,7 @@ system_language_directory = os.path.join(bin_directory, "config/lang")
 is_active = True
 
 def show_settings():
-	settings_dialog = SettingsDialog(language, config, save_settings, settings_dialog_glade)
+	settings_dialog = SettingsDialog(config, language, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
 def show_notification():
@@ -176,7 +176,7 @@ def main():
 	core.start()
 	notification = Notification(language)
 	
-	# handle_system_suspend()
+	handle_system_suspend()
 
 	Gtk.main()
 

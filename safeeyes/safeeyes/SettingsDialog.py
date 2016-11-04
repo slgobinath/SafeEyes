@@ -22,7 +22,7 @@ from gi.repository import Gtk, Gdk, GdkX11
 
 class SettingsDialog:
 	"""docstring for SettingsDialog"""
-	def __init__(self, language, config, on_save_settings, glade_file):
+	def __init__(self, config, language, on_save_settings, glade_file):
 		self.config = config
 		self.on_save_settings = on_save_settings
 
