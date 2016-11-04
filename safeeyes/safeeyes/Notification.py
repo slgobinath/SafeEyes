@@ -26,14 +26,15 @@ from gi.repository import Notify
 APPINDICATOR_ID = 'safeeyes'
 
 class Notification:
-	def __init__(self):
+	def __init__(self, language):
 		Notify.init(APPINDICATOR_ID)
+		self.language = language
 		# self.notification.set_timeout(500)
 
 	def show(self, warning_time):
 		# self.notification.show()
 		# self.notification.close()
-		self.notification = Notify.Notification.new("Safe Eyes", "\nReady for a break in " + str(warning_time) + " seconds.", icon="safeeyes_enabled")
+		self.notification = Notify.Notification.new("Safe Eyes", "\n" + self.language['messages']['ready_for_a_break'].format(warning_time), icon="safeeyes_enabled")
 		# GLib.idle_add(lambda: self.notification.show())
 		self.notification.show()
 

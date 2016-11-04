@@ -27,7 +27,7 @@ active = True
 APPINDICATOR_ID = 'safeeyes'
 
 class TrayIcon:
-	def __init__(self, on_show_settings, on_enable, on_disable, on_quite):
+	def __init__(self, language, on_show_settings, on_enable, on_disable, on_quite):
 		self.on_show_settings = on_show_settings;
 		self.on_quite = on_quite
 		self.on_enable = on_enable
@@ -40,14 +40,14 @@ class TrayIcon:
 		# Construct the context menu
 		self.menu = Gtk.Menu()
 
-		self.item_enable = Gtk.CheckMenuItem('Enable SafeEyes')
+		self.item_enable = Gtk.CheckMenuItem(language['ui_controls']['enable'])
 		self.item_enable.set_active(True)
 		self.item_enable.connect('activate', self.on_toogle_enable)
 
-		item_settings = Gtk.MenuItem('Settings')
+		item_settings = Gtk.MenuItem(language['ui_controls']['settings'])
 		item_settings.connect('activate', self.show_settings)
 
-		item_quit = Gtk.MenuItem('Quit')
+		item_quit = Gtk.MenuItem(language['ui_controls']['quit'])
 		item_quit.connect('activate', self.quit_safe_eyes)
 
 		self.menu.append(self.item_enable)
@@ -72,10 +72,8 @@ class TrayIcon:
 	def on_toogle_enable(self, *args):
 		active = self.item_enable.get_active()
 		if active:
-			# resume_eyesafe()
 			self.indicator.set_icon("safeeyes_enabled")
 			self.on_enable()
 		else:
-			# pause_eyesafe()
 			self.indicator.set_icon("safeeyes_disabled")
 			self.on_disable()

@@ -50,8 +50,8 @@ class BreakScreen:
 	"""
 		Initialize the internal properties from configuration
 	"""
-	def initialize(self, config):
-		self.skip_button_text = config['skip_button_text']
+	def initialize(self, config, language):
+		self.skip_button_text = language['ui_controls']['skip']
 		self.strict_break = config['strict_break']
 		self.btn_skip.set_label(self.skip_button_text)
 		self.btn_skip.set_visible(not self.strict_break)

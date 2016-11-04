@@ -1,0 +1,37 @@
+{
+    "meta_info": {
+        "language_name": "English",
+        "language_name_en": "English"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Walk for a while",
+            "Lean back at your seat and relax"
+        ],
+        "short_break_exercises": [
+            "Tightly close your eyes",
+            "Roll your eyes",
+            "Rotate your eyes in clockwise direction",
+            "Rotate your eyes in anti-clockwise direction",
+            "Blink your eyes",
+            "Have some water"
+        ]
+    },
+    "messages": {
+    	"ready_for_a_break": "Ready for a break in {} seconds"
+    },
+    "ui_controls": {
+    	"skip": "Skip",
+    	"short_break_duration": "Short break duration (in seconds)",
+    	"long_break_duration": "Long break duration (in seconds)",
+    	"interval_between_two_breaks": "Interval between two breaks",
+    	"no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
+    	"time_to_prepare_for_break": "Time to prepare for break (in seconds)",
+    	"strict_break": "Strict break (Hide {skip} button)",
+    	"enable": "Enable Safe Eyes",
+    	"settings": "Settings",
+    	"quit": "Quit",
+    	"save": "Save",
+    	"cancel": "Cancel"
+    }
+}

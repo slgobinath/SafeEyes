@@ -26,8 +26,8 @@ class SafeEyesCore:
 	def __init__(self, show_notification, start_break, end_break, on_countdown):
 		# Initialize the variables
 		self.break_count = 0
-		self.long_break_message_index = 0
-		self.short_break_message_index = 0
+		self.long_break_message_index = -1
+		self.short_break_message_index = -1
 		self.skipped = False
 		self.show_notification = show_notification
 		self.start_break = start_break
@@ -39,9 +39,9 @@ class SafeEyesCore:
 	"""
 		Initialize the internal properties from configuration
 	"""
-	def initialize(self, config):
-		self.short_break_messages = config['short_break_messages']
-		self.long_break_messages = config['long_break_messages']
+	def initialize(self, config, language):
+		self.short_break_exercises = language['exercises']['short_break_exercises']
+		self.long_break_exercises = language['exercises']['long_break_exercises']
 		self.no_of_short_breaks_per_long_break = config['no_of_short_breaks_per_long_break']
 		self.pre_break_warning_time = config['pre_break_warning_time']
 		self.long_break_duration = config['long_break_duration']
@@ -96,11 +96,11 @@ class SafeEyesCore:
 		if self.active:
 			message = ""
 			if self.is_long_break():
-				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_messages)
-				message = self.long_break_messages[self.long_break_message_index]
+				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
+				message = self.long_break_exercises[self.long_break_message_index]
 			else:
-				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_messages)
-				message = self.short_break_messages[self.short_break_message_index]
+				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
+				message = self.short_break_exercises[self.short_break_message_index]
 			
 			# Show the break screen
 			self.start_break(message)

@@ -22,7 +22,7 @@ from gi.repository import Gtk, Gdk, GdkX11
 
 class SettingsDialog:
 	"""docstring for SettingsDialog"""
-	def __init__(self, config, on_save_settings, glade_file):
+	def __init__(self, language, config, on_save_settings, glade_file):
 		self.config = config
 		self.on_save_settings = on_save_settings
 
@@ -37,6 +37,15 @@ class SettingsDialog:
 		self.spin_short_between_long = builder.get_object("spin_short_between_long")
 		self.spin_time_to_prepare = builder.get_object("spin_time_to_prepare")
 		self.switch_strict_break = builder.get_object("switch_strict_break")
+
+		builder.get_object("lbl_short_break").set_label(language['ui_controls']['short_break_duration'])
+		builder.get_object("lbl_long_break").set_label(language['ui_controls']['long_break_duration'])
+		builder.get_object("lbl_interval_bettween_breaks").set_label(language['ui_controls']['interval_between_two_breaks'])
+		builder.get_object("lbl_short_per_long").set_label(language['ui_controls']['no_of_short_breaks_between_two_long_breaks'])
+		builder.get_object("lbl_time_to_prepare").set_label(language['ui_controls']['time_to_prepare_for_break'])
+		builder.get_object("lbl_strict_break").set_label(language['ui_controls']['strict_break'])
+		builder.get_object("btn_cancel").set_label(language['ui_controls']['cancel'])
+		builder.get_object("btn_save").set_label(language['ui_controls']['save'])
 
 		self.spin_short_break_duration.set_value(config['short_break_duration'])
 		self.spin_long_break_duration.set_value(config['long_break_duration'])
