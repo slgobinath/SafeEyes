@@ -108,8 +108,8 @@ def save_settings(config):
 		json.dump(config, config_file, indent=4, sort_keys=True)
 	
 	# Restart the core and intialize the components
-	core.initialize(config)
-	break_screen.initialize(config)
+	core.initialize(config, language)
+	break_screen.initialize(config, language)
 
 def enable_safeeyes():
 	is_active = True
@@ -171,7 +171,7 @@ def main():
 	tray_icon = TrayIcon(language, show_settings, enable_safeeyes, disable_safeeyes, on_quite)
 	break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
 	break_screen.initialize(config, language)
-	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown)
+	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
 	core.initialize(config, language)
 	core.start()
 	notification = Notification(language)

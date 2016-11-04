@@ -19,11 +19,11 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib, GdkX11
-import time, threading, sys, subprocess
+import time, datetime,threading, sys, subprocess
 
 class SafeEyesCore:
 
-	def __init__(self, show_notification, start_break, end_break, on_countdown):
+	def __init__(self, show_notification, start_break, end_break, on_countdown, update_next_break_info):
 		# Initialize the variables
 		self.break_count = 0
 		self.long_break_message_index = -1
@@ -33,6 +33,7 @@ class SafeEyesCore:
 		self.start_break = start_break
 		self.end_break = end_break
 		self.on_countdown = on_countdown
+		self.update_next_break_info = update_next_break_info
 		self.notification_condition = threading.Condition()
 		self.break_condition = threading.Condition()
 
@@ -54,6 +55,9 @@ class SafeEyesCore:
 	def scheduler_job(self):
 		if not self.active:
 			return
+
+		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=self.break_interval)
+		self.update_next_break_info(next_break_time)
 
 		# Wait for the pre break warning period
 		self.notification_condition.acquire()

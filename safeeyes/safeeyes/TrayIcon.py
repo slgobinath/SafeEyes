@@ -32,6 +32,7 @@ class TrayIcon:
 		self.on_quite = on_quite
 		self.on_enable = on_enable
 		self.on_disable = on_disable
+		self.language = language
 
 		# Construct the tray icon
 		self.indicator = appindicator.Indicator.new(APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
@@ -40,16 +41,26 @@ class TrayIcon:
 		# Construct the context menu
 		self.menu = Gtk.Menu()
 
-		self.item_enable = Gtk.CheckMenuItem(language['ui_controls']['enable'])
+
+		self.item_info = Gtk.ImageMenuItem('Next break at 10.30 AM')
+		img_timer = Gtk.Image()
+		img_timer.set_from_icon_name("safeeyes_timer", 16)
+		self.item_info.set_image(img_timer)
+
+		self.item_separator = Gtk.SeparatorMenuItem()
+
+		self.item_enable = Gtk.CheckMenuItem(self.language['ui_controls']['enable'])
 		self.item_enable.set_active(True)
 		self.item_enable.connect('activate', self.on_toogle_enable)
 
-		item_settings = Gtk.MenuItem(language['ui_controls']['settings'])
+		item_settings = Gtk.MenuItem(self.language['ui_controls']['settings'])
 		item_settings.connect('activate', self.show_settings)
 
-		item_quit = Gtk.MenuItem(language['ui_controls']['quit'])
+		item_quit = Gtk.MenuItem(self.language['ui_controls']['quit'])
 		item_quit.connect('activate', self.quit_safe_eyes)
 
+		self.menu.append(self.item_info)
+		self.menu.append(self.item_separator)
 		self.menu.append(self.item_enable)
 		self.menu.append(item_settings)
 		self.menu.append(item_quit)
@@ -69,11 +80,23 @@ class TrayIcon:
 	def show_settings(self, *args):
 		self.on_show_settings()
 
+	def next_break_time(self, dateTime):
+		timeStr = dateTime.strftime("%l:%M")
+		if dateTime.hour < 12:
+			message = self.language['messages']['next_break_at_am'].format(timeStr)
+		else:
+			message = self.language['messages']['next_break_at_pm'].format(timeStr)
+
+		GLib.idle_add(lambda: self.item_info.set_label(message))
+
 	def on_toogle_enable(self, *args):
 		active = self.item_enable.get_active()
 		if active:
 			self.indicator.set_icon("safeeyes_enabled")
+			self.item_info.set_sensitive(True)
 			self.on_enable()
 		else:
 			self.indicator.set_icon("safeeyes_disabled")
+			self.item_info.set_label(self.language['messages']['safe_eyes_is_disabled'])
+			self.item_info.set_sensitive(False)
 			self.on_disable()
