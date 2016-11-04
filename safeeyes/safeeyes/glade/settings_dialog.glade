@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
-
 <!--
 ~ Safe Eyes is a utility to remind you to take break frequently
 ~ to protect your eyes from eye strain.
@@ -20,7 +19,6 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkAdjustment" id="adjust_interval_between_breaks">
@@ -59,10 +57,11 @@
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Safe Eyes</property>
     <property name="resizable">False</property>
+    <property name="window_position">center</property>
     <property name="default_width">440</property>
     <property name="default_height">250</property>
     <property name="icon_name">safeeyes</property>
-    <signal handler="on_window_delete" name="delete-event" swapped="no"/>
+    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child>
       <object class="GtkBox" id="layout_box">
         <property name="visible">True</property>
@@ -297,7 +296,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal handler="on_cancel_clicked" name="clicked" swapped="no"/>
+                <signal name="clicked" handler="on_cancel_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -311,7 +310,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal handler="on_save_clicked" name="clicked" swapped="no"/>
+                <signal name="clicked" handler="on_save_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
