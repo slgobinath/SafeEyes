@@ -20,6 +20,7 @@
     "messages": {
     	"ready_for_a_break": "Ready for a break in {} seconds",
         "safe_eyes_is_disabled": "Safe Eyes is disabled",
+        "next_break_at_noon": "Next break at {}",
         "next_break_at_am": "Next break at {} AM",
         "next_break_at_pm": "Next break at {} PM"
     },

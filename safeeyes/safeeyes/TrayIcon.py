@@ -82,7 +82,9 @@ class TrayIcon:
 
 	def next_break_time(self, dateTime):
 		timeStr = dateTime.strftime("%l:%M")
-		if dateTime.hour < 12:
+		if dateTime.hour == 12:
+			message = self.language['messages']['next_break_at_noon'].format(timeStr)
+		elif dateTime.hour < 12:
 			message = self.language['messages']['next_break_at_am'].format(timeStr)
 		else:
 			message = self.language['messages']['next_break_at_pm'].format(timeStr)
