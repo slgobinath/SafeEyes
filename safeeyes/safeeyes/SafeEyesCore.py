@@ -157,6 +157,11 @@ class SafeEyesCore:
 		Stop Safe Eyes
 	"""
 	def stop(self):
+		# Reset the state properties in case of restart
+		self.break_count = 0
+		self.long_break_message_index = -1
+		self.short_break_message_index = -1
+
 		self.notification_condition.acquire()
 		self.active = False
 		self.notification_condition.notify()

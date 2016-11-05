@@ -31,7 +31,7 @@
     	"interval_between_two_breaks": "Interval between two breaks",
     	"no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
     	"time_to_prepare_for_break": "Time to prepare for break (in seconds)",
-    	"strict_break": "Strict break (Hide {skip} button)",
+    	"strict_break": "Strict break (Hide skip button)",
     	"enable": "Enable Safe Eyes",
     	"settings": "Settings",
     	"quit": "Quit",
