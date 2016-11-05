@@ -131,15 +131,6 @@ class BreakScreen:
 	def __show_message(self, message):
 		self.lbl_message.set_text(message)
 
-		# Set the style only for the first time
-		if not self.is_pretified:
-			# Set style
-			css_provider = Gtk.CssProvider()
-			css_provider.load_from_path(self.style_sheet)
-			Gtk.StyleContext().add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-			signal.signal(signal.SIGINT, signal.SIG_DFL)
-			self.is_pretified = True
-
 		# If the style is changed, the visibility must be redefined
 		self.btn_skip.set_visible(not self.strict_break)
 		# Lock the keyboard
@@ -154,6 +145,15 @@ class BreakScreen:
 		self.window.set_keep_above(True)
 		self.window.present()
 		self.window.fullscreen()
+
+		# Set the style only for the first time
+		if not self.is_pretified:
+			# Set style
+			css_provider = Gtk.CssProvider()
+			css_provider.load_from_path(self.style_sheet)
+			Gtk.StyleContext().add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+			signal.signal(signal.SIGINT, signal.SIG_DFL)
+			self.is_pretified = True
 
 
 	"""
