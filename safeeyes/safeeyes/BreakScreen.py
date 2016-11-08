@@ -18,9 +18,11 @@
 
 import gi
 import signal
+import sys
+import threading
+import logging
 from Xlib import Xatom, Xutil
 from Xlib.display import Display, X
-import sys, threading
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib, GdkX11
@@ -51,16 +53,19 @@ class BreakScreen:
 		Initialize the internal properties from configuration
 	"""
 	def initialize(self, config, language):
+		logging.info("Initialize the break screen")
 		self.skip_button_text = language['ui_controls']['skip']
 		self.strict_break = config['strict_break']
 		self.btn_skip.set_label(self.skip_button_text)
 		self.btn_skip.set_visible(not self.strict_break)
 
 	def on_window_delete(self, *args):
+		logging.info("Closing the break screen")
 		self.lock_keyboard = False
 		self.close()
 
 	def on_skip_clicked(self, button):
+		logging.info("User skipped the break")
 		self.on_skip()
 		self.close()
 
@@ -74,6 +79,7 @@ class BreakScreen:
 		Lock the keyboard to prevent the user from using keyboard shortcuts
 	"""
 	def block_keyboard(self):
+		logging.info("Lock the keyboard")
 		self.lock_keyboard = True
 		display = Display()
 		root = display.screen().root
@@ -84,7 +90,9 @@ class BreakScreen:
 		while self.lock_keyboard:
 			self.key_lock_condition.wait()
 		self.key_lock_condition.release()
+		
 		# Ungrap the keyboard
+		logging.info("Unlock the keyboard")
 		display.ungrab_keyboard(X.CurrentTime)
 		display.flush()
 
@@ -98,6 +106,7 @@ class BreakScreen:
 		no_of_monitors = screen.get_n_monitors()
 
 		if no_of_monitors > 1:
+			logging.info("Multiple displays are identified")
 			for monitor in range(no_of_monitors):
 				if monitor != current_monitor:
 					monitor_gemoetry = screen.get_monitor_geometry(monitor)
@@ -116,6 +125,7 @@ class BreakScreen:
 
 					self.secondary_windows.append(window)
 
+					logging.info("Show an empty break screen on display {}, {}".format(x, y))
 					window.move(x, y)
 					window.stick()
 					window.set_keep_above(True)
@@ -137,6 +147,7 @@ class BreakScreen:
 		thread = threading.Thread(target=self.block_keyboard)
 		thread.start()
 
+		logging.info("Show break screen(s)")
 		# Show blank break screen on other non-active screens
 		self.block_external_screens()
 
@@ -149,6 +160,7 @@ class BreakScreen:
 		# Set the style only for the first time
 		if not self.is_pretified:
 			# Set style
+			logging.info("Apply style to the break screen")
 			css_provider = Gtk.CssProvider()
 			css_provider.load_from_path(self.style_sheet)
 			Gtk.StyleContext().add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
@@ -160,6 +172,7 @@ class BreakScreen:
 		Hide the break screen from active window and destroy all other windows
 	"""
 	def close(self):
+		logging.info("Close the break screen(s)")
 		self.release_keyboard()
 		GLib.idle_add(lambda: self.window.hide())
 

@@ -19,7 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib, GdkX11
-import time, datetime,threading, sys, subprocess
+import time, datetime,threading, sys, subprocess, logging
 
 class SafeEyesCore:
 
@@ -41,6 +41,7 @@ class SafeEyesCore:
 		Initialize the internal properties from configuration
 	"""
 	def initialize(self, config, language):
+		logging.info("Initialize the core")
 		self.short_break_exercises = language['exercises']['short_break_exercises']
 		self.long_break_exercises = language['exercises']['long_break_exercises']
 		self.no_of_short_breaks_per_long_break = config['no_of_short_breaks_per_long_break']
@@ -59,13 +60,19 @@ class SafeEyesCore:
 		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=self.break_interval)
 		self.update_next_break_info(next_break_time)
 
+
 		# Wait for the pre break warning period
+		logging.info("Pre-break waiting for {} minutes".format(self.break_interval))
 		self.notification_condition.acquire()
 		self.notification_condition.wait(self.break_interval * 60)	# In minutes
 		self.notification_condition.release()
 
+		logging.info("Pre-break waiting is over")
+
 		if not self.active:
 			return
+
+		logging.info("Ready to show the break")
 
 		GLib.idle_add(lambda: self.process_job())
 
@@ -75,6 +82,7 @@ class SafeEyesCore:
 	def process_job(self):
 		if self.is_full_screen_app_found():
 			# If full screen app found, do not show break screen
+			logging.info("Found a full-screen application. Skip the break")
 			if self.active:
 				self.start()
 			return
@@ -91,6 +99,7 @@ class SafeEyesCore:
 		# Show a notification
 		self.show_notification()
 
+		logging.info("Wait for {} seconds which is the time to prepare".format(self.pre_break_warning_time))
 		# Wait for the pre break warning period
 		self.notification_condition.acquire()
 		self.notification_condition.wait(self.pre_break_warning_time)
@@ -100,9 +109,11 @@ class SafeEyesCore:
 		if self.active:
 			message = ""
 			if self.is_long_break():
+				logging.info("Count is {}; get a long beak message".format(self.break_count))
 				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
 				message = self.long_break_exercises[self.long_break_message_index]
 			else:
+				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
 				message = self.short_break_exercises[self.short_break_message_index]
 			
@@ -125,6 +136,7 @@ class SafeEyesCore:
 
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
 			if not self.skipped:
+				logging.info("Break wasn't skipped. Automatically terminating the break")
 				self.end_break()
 
 			# Resume
@@ -157,6 +169,7 @@ class SafeEyesCore:
 		Stop Safe Eyes
 	"""
 	def stop(self):
+		logging.info("Stop the core")
 		# Reset the state properties in case of restart
 		self.break_count = 0
 		self.long_break_message_index = -1
@@ -176,6 +189,7 @@ class SafeEyesCore:
 		Start Safe Eyes
 	"""
 	def start(self):
+		logging.info("Scheduling next break")
 		self.active = True
 		thread = threading.Thread(target=self.scheduler_job)
 		thread.start()
@@ -184,6 +198,7 @@ class SafeEyesCore:
 		Check for full-screen applications
 	"""
 	def is_full_screen_app_found(self):
+		logging.info("Searching for full-screen application")
 		screen = Gdk.Screen.get_default()
 		active_xid = str(screen.get_active_window().get_xid())
 		cmdlist = ['xprop', '-root', '-notype','-id',active_xid, '_NET_WM_STATE']
@@ -191,6 +206,7 @@ class SafeEyesCore:
 		try:
 			stdout = subprocess.check_output(cmdlist)
 		except subprocess.CalledProcessError:
+			logging.warning("Error in finding full-screen application")
 			pass
 		else:
 			if stdout:

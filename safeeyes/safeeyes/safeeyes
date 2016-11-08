@@ -24,6 +24,7 @@ import json
 import shutil
 import errno
 import dbus
+import logging
 from dbus.mainloop.glib import DBusGMainLoop
 
 from BreakScreen import BreakScreen
@@ -39,6 +40,7 @@ from gi.repository import Gtk
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 config_file_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/safeeyes.json')
 style_sheet_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style/safeeyes_style.css')
+log_file_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/safeeyes.log')
 break_screen_glade = os.path.join(bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(bin_directory, "glade/settings_dialog.glade")
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
@@ -48,6 +50,7 @@ system_language_directory = os.path.join(bin_directory, "config/lang")
 is_active = True
 
 def show_settings():
+	logging.info("Show Settings dialog")
 	settings_dialog = SettingsDialog(config, language, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
@@ -55,26 +58,19 @@ def show_notification():
 	notification.show(config['pre_break_warning_time'])
 
 def show_alert(message):
+	logging.info("Show the break screen")
 	notification.close()
-	# Hide and show tray icon if strict break is on
-	# This feature is required because, by disabling Safe Eyes,
-	# user can skip the break.
-	# if config['strict_break']:
-	# 	tray_icon.hide_icon()
 	break_screen.show_message(message)
 
 def close_alert():
-	# Hide and show tray icon if strict break is on
-	# This feature is required because, by disabling Safe Eyes,
-	# user can skip the break.
-	# if config['strict_break']:
-	# 	tray_icon.show_icon()
+	logging.info("Close the break screen")
 	break_screen.close()
 
 def on_countdown(count):
 	break_screen.show_count_down(count)
 
-def on_quite():
+def on_quit():
+	logging.info("Quit Safe Eyes")
 	core.stop()
 	notification.quite();
 	Gtk.main_quit()
@@ -84,10 +80,12 @@ def handle_suspend_callback(sleeping):
 		# Sleeping / suspending
 		if is_active:
 			core.stop()
+			logging.info("Stopped Safe Eyes due to system suspend")
 	else:
 		# Resume from sleep
 		if is_active:
 			core.start()
+			logging.info("Resumed Safe Eyes after system wakeup")
 
 def handle_system_suspend():
 	DBusGMainLoop(set_as_default=True)
@@ -95,19 +93,17 @@ def handle_system_suspend():
 	bus.add_signal_receiver(handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
 
 def on_skipped():
-	# Hide and show tray icon if strict break is on
-	# This feature is required because, by disabling Safe Eyes,
-	# user can skip the break.
-	if config['strict_break']:
-		tray_icon.show_icon()
+	logging.info("User skipped the break")
 	core.skip_break()
 
 def save_settings(config):
+	logging.info("Saving settings to safeeyes.json")
 	# Write the configuration to file
 	with open(config_file_path, 'w') as config_file:
 		json.dump(config, config_file, indent=4, sort_keys=True)
 	
 	# Restart the core and intialize the components
+	logging.info("Initialize SafeEyesCore with modified settings. This will take affect from next break")
 	core.initialize(config, language)
 	break_screen.initialize(config, language)
 
@@ -153,6 +149,10 @@ def prepare_local_config_dir():
 def main():
 	prepare_local_config_dir()
 
+	# Configure logging. Reset with every restart
+	logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
+	logging.info("Starting Safe Eyes")
+
 	global break_screen
 	global core
 	global notification
@@ -168,7 +168,7 @@ def main():
 	with open(language_file_path) as language_file:
 		language = json.load(language_file)
 	
-	tray_icon = TrayIcon(language, show_settings, enable_safeeyes, disable_safeeyes, on_quite)
+	tray_icon = TrayIcon(language, show_settings, enable_safeeyes, disable_safeeyes, on_quit)
 	break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
 	break_screen.initialize(config, language)
 	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)

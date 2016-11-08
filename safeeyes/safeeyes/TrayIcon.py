@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gi
+import logging
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 from gi.repository import Gtk, Gdk, GLib, GdkX11
@@ -28,6 +29,7 @@ APPINDICATOR_ID = 'safeeyes'
 
 class TrayIcon:
 	def __init__(self, language, on_show_settings, on_enable, on_disable, on_quite):
+		logging.info("Initialize the tray icon")
 		self.on_show_settings = on_show_settings;
 		self.on_quite = on_quite
 		self.on_enable = on_enable
@@ -81,6 +83,7 @@ class TrayIcon:
 		self.on_show_settings()
 
 	def next_break_time(self, dateTime):
+		logging.info("Update next break information")
 		timeStr = dateTime.strftime("%l:%M")
 		if dateTime.hour == 12:
 			message = self.language['messages']['next_break_at_noon'].format(timeStr)
@@ -94,10 +97,12 @@ class TrayIcon:
 	def on_toogle_enable(self, *args):
 		active = self.item_enable.get_active()
 		if active:
+			logging.info("Enable Safe Eyes")
 			self.indicator.set_icon("safeeyes_enabled")
 			self.item_info.set_sensitive(True)
 			self.on_enable()
 		else:
+			logging.info("Disable Safe Eyes")
 			self.indicator.set_icon("safeeyes_disabled")
 			self.item_info.set_label(self.language['messages']['safe_eyes_is_disabled'])
 			self.item_info.set_sensitive(False)

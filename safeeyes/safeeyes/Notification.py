@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gi
+import logging
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7')
@@ -27,28 +28,23 @@ APPINDICATOR_ID = 'safeeyes'
 
 class Notification:
 	def __init__(self, language):
+		logging.info("Initialize the notification")
 		Notify.init(APPINDICATOR_ID)
 		self.language = language
-		# self.notification.set_timeout(500)
 
 	def show(self, warning_time):
-		# self.notification.show()
-		# self.notification.close()
+		logging.info("Show pre-break notification")
 		self.notification = Notify.Notification.new("Safe Eyes", "\n" + self.language['messages']['ready_for_a_break'].format(warning_time), icon="safeeyes_enabled")
-		# GLib.idle_add(lambda: self.notification.show())
 		self.notification.show()
 
 	def close(self):
+		logging.info("Close pre-break notification")
 		try:
 			self.notification.close()
 		except:
+			logging.warning("Notification is already closed")
 			pass
-		# GLib.idle_add(lambda: self.notification.close())
 
 	def quite(self):
-		# Notify.uninit()
+		logging.info("Uninitialize Safe Eyes notification")
 		GLib.idle_add(lambda: Notify.uninit())
-
-# notification = Notification()
-# notification.show(10)
-# Gtk.main()
