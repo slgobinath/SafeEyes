@@ -19,7 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib, GdkX11
-import time, datetime,threading, sys, subprocess, logging
+import time, datetime, threading, sys, subprocess, logging
 
 class SafeEyesCore:
 

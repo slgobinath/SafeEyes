@@ -25,6 +25,7 @@ import shutil
 import errno
 import dbus
 import logging
+from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 
 from BreakScreen import BreakScreen
@@ -98,14 +99,19 @@ def on_skipped():
 
 def save_settings(config):
 	logging.info("Saving settings to safeeyes.json")
+	if is_active:
+		core.stop()
 	# Write the configuration to file
 	with open(config_file_path, 'w') as config_file:
 		json.dump(config, config_file, indent=4, sort_keys=True)
 	
 	# Restart the core and intialize the components
-	logging.info("Initialize SafeEyesCore with modified settings. This will take affect from next break")
+	logging.info("Initialize SafeEyesCore with modified settings")
 	core.initialize(config, language)
 	break_screen.initialize(config, language)
+	if is_active:
+		# 1 sec delay is required to give enough time for core to be stopped
+		Timer(1.0, core.start).start()
 
 def enable_safeeyes():
 	is_active = True
