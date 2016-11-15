@@ -32,21 +32,16 @@ class BreakScreen:
 
 	def __init__(self, on_skip, glade_file, style_sheet_path):
 		self.on_skip = on_skip
-		self.style_sheet = style_sheet_path
 		self.is_pretified = False
 		self.key_lock_condition = threading.Condition()
-		self.secondary_windows = []
+		self.windows = []
+		self.count_labels = []
 		self.glade_file = glade_file
 
-		builder = Gtk.Builder()
-		builder.add_from_file(glade_file)
-		builder.connect_signals(self)
-
-		self.lbl_message = builder.get_object("lbl_message")
-		self.lbl_count = builder.get_object("lbl_count")
-		self.btn_skip = builder.get_object("btn_skip")
-
-		self.window = builder.get_object("window_main")
+		# Initialize the theme
+		css_provider = Gtk.CssProvider()
+		css_provider.load_from_path(style_sheet_path)
+		Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
 
 	"""
@@ -56,8 +51,6 @@ class BreakScreen:
 		logging.info("Initialize the break screen")
 		self.skip_button_text = language['ui_controls']['skip']
 		self.strict_break = config['strict_break']
-		self.btn_skip.set_label(self.skip_button_text)
-		self.btn_skip.set_visible(not self.strict_break)
 
 	def on_window_delete(self, *args):
 		logging.info("Closing the break screen")
@@ -70,7 +63,11 @@ class BreakScreen:
 		self.close()
 
 	def show_count_down(self, count):
-		GLib.idle_add(lambda: self.lbl_count.set_text(count))
+		GLib.idle_add(lambda: self.__show_count_down(count))
+
+	def __show_count_down(self, count):
+		for label in self.count_labels:
+			label.set_text(count)
 
 	def show_message(self, message):
 		GLib.idle_add(lambda: self.__show_message(message))
@@ -100,37 +97,41 @@ class BreakScreen:
 	"""
 		Show an empty break screen on each non-active screens.
 	"""
-	def block_external_screens(self):
+	def show_break_screen(self, message):
+		logging.info("Show break screens in all displays")
 		screen = Gtk.Window().get_screen()
-		current_monitor = screen.get_monitor_at_window(screen.get_active_window())
 		no_of_monitors = screen.get_n_monitors()
 
-		if no_of_monitors > 1:
-			logging.info("Multiple displays are identified")
-			for monitor in range(no_of_monitors):
-				if monitor != current_monitor:
-					monitor_gemoetry = screen.get_monitor_geometry(monitor)
-					x = monitor_gemoetry.x
-					y = monitor_gemoetry.y
+		for monitor in range(no_of_monitors):
+			monitor_gemoetry = screen.get_monitor_geometry(monitor)
+			x = monitor_gemoetry.x
+			y = monitor_gemoetry.y
 
-					builder = Gtk.Builder()
-					builder.add_from_file(self.glade_file)
+			builder = Gtk.Builder()
+			builder.add_from_file(self.glade_file)
+			builder.connect_signals(self)
 
-					# Hide all the labels and button
-					builder.get_object("lbl_message").set_visible(False)
-					builder.get_object("lbl_count").set_visible(False)
-					builder.get_object("btn_skip").set_visible(False)
+			window = builder.get_object("window_main")
+			lbl_message = builder.get_object("lbl_message")
+			lbl_count = builder.get_object("lbl_count")
+			btn_skip = builder.get_object("btn_skip")
 
-					window = builder.get_object("window_main")
+			lbl_message.set_label(message)
+			btn_skip.set_label(self.skip_button_text)
+			btn_skip.set_visible(not self.strict_break)
 
-					self.secondary_windows.append(window)
+			self.windows.append(window)
+			self.count_labels.append(lbl_count)
 
-					logging.info("Show an empty break screen on display {}, {}".format(x, y))
-					window.move(x, y)
-					window.stick()
-					window.set_keep_above(True)
-					window.present()
-					window.fullscreen()
+			# Set visual to apply css theme. It should be called before show method.
+			window.set_visual(window.get_screen().get_rgba_visual())
+
+			window.move(x, y)
+			window.stick()
+			window.set_keep_above(True)
+			window.present()
+			window.fullscreen()
+			
 
 	def release_keyboard(self):
 		self.key_lock_condition.acquire()
@@ -139,33 +140,11 @@ class BreakScreen:
 		self.key_lock_condition.release()
 
 	def __show_message(self, message):
-		self.lbl_message.set_text(message)
-
-		# If the style is changed, the visibility must be redefined
-		self.btn_skip.set_visible(not self.strict_break)
 		# Lock the keyboard
 		thread = threading.Thread(target=self.block_keyboard)
 		thread.start()
 
-		logging.info("Show break screen(s)")
-		# Show blank break screen on other non-active screens
-		self.block_external_screens()
-
-		# Keep the window above all the other windows
-		self.window.stick()
-		self.window.set_keep_above(True)
-		self.window.present()
-		self.window.fullscreen()
-
-		# Set the style only for the first time
-		if not self.is_pretified:
-			# Set style
-			logging.info("Apply style to the break screen")
-			css_provider = Gtk.CssProvider()
-			css_provider.load_from_path(self.style_sheet)
-			Gtk.StyleContext().add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-			signal.signal(signal.SIGINT, signal.SIG_DFL)
-			self.is_pretified = True
+		self.show_break_screen(message)
 
 
 	"""
@@ -174,9 +153,12 @@ class BreakScreen:
 	def close(self):
 		logging.info("Close the break screen(s)")
 		self.release_keyboard()
-		GLib.idle_add(lambda: self.window.hide())
 
 		# Destroy other windows if exists
-		for other_window in self.secondary_windows:
-			GLib.idle_add(lambda: other_window.destroy())
-		del self.secondary_windows[:]
+		GLib.idle_add(lambda: self.__close())
+
+	def __close(self):
+		for win in self.windows:
+			win.destroy()
+		del self.windows[:]
+		del self.count_labels[:]
