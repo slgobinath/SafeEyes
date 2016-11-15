@@ -29,58 +29,8 @@ Manual installation is not tested in any systems. I will update this page as soo
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils` and `python-dbus`
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.0.9/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.0/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
-The following files are deployed by SafeEyes
-```
-opt/
-opt/safeeyes/
-opt/safeeyes/BreakScreen.py
-opt/safeeyes/config/
-opt/safeeyes/config/safeeyes.json
-opt/safeeyes/config/style/
-opt/safeeyes/config/style/safeeyes_style.css
-opt/safeeyes/glade/
-opt/safeeyes/glade/break_screen.glade
-opt/safeeyes/glade/settings_dialog.glade
-opt/safeeyes/Notification.py
-opt/safeeyes/safeeyes
-opt/safeeyes/SafeEyesCore.py
-opt/safeeyes/SettingsDialog.py
-opt/safeeyes/TrayIcon.py
-usr/
-usr/share/
-usr/share/applications/
-usr/share/applications/safeeyes.desktop
-usr/share/icons/
-usr/share/icons/hicolor/
-usr/share/icons/hicolor/128x128/
-usr/share/icons/hicolor/128x128/apps/
-usr/share/icons/hicolor/128x128/apps/safeeyes.png
-usr/share/icons/hicolor/16x16/
-usr/share/icons/hicolor/16x16/status/
-usr/share/icons/hicolor/16x16/status/safeeyes_disabled.png
-usr/share/icons/hicolor/16x16/status/safeeyes_enabled.png
-usr/share/icons/hicolor/24x24/
-usr/share/icons/hicolor/24x24/status/
-usr/share/icons/hicolor/24x24/status/safeeyes_disabled.png
-usr/share/icons/hicolor/24x24/status/safeeyes_enabled.png
-usr/share/icons/hicolor/32x32/
-usr/share/icons/hicolor/32x32/apps/
-usr/share/icons/hicolor/32x32/apps/safeeyes.png
-usr/share/icons/hicolor/32x32/status/
-usr/share/icons/hicolor/32x32/status/safeeyes_disabled.png
-usr/share/icons/hicolor/32x32/status/safeeyes_enabled.png
-usr/share/icons/hicolor/48x48/
-usr/share/icons/hicolor/48x48/apps/
-usr/share/icons/hicolor/48x48/apps/safeeyes.png
-usr/share/icons/hicolor/48x48/status/
-usr/share/icons/hicolor/48x48/status/safeeyes_disabled.png
-usr/share/icons/hicolor/48x48/status/safeeyes_enabled.png
-usr/share/icons/hicolor/64x64/
-usr/share/icons/hicolor/64x64/apps/
-usr/share/icons/hicolor/64x64/apps/safeeyes.png
-```
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
 4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes`
@@ -89,34 +39,7 @@ Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and 
 
 ## Configuring Safe Eyes
 Just install and forget; Safe Eyes will take care of your eyes. To customize the preferences, go to Settings from Safe Eyes tray icon.
-For advanced configuration, go to `~/.config/safeeyes folder`. There you can change the Skip button text in `safeeyes.json` and the look and feel of the break screen in `style/safeeyes_style.css`.
-If you want to add more exercises, you can add them in the `safeeyes.json`. A sample configuration is given below for your reference:
-```
-{
-    "break_interval": 15, 
-    "long_break_duration": 60, 
-    "long_break_messages": [
-        "Walk for a while", 
-        "Lean back at your seat and relax",
-        "Long break exercise 1",
-        "Long break exercise 2"
-    ], 
-    "no_of_short_breaks_per_long_break": 5, 
-    "pre_break_warning_time": 10, 
-    "short_break_duration": 15, 
-    "short_break_messages": [
-        "Tightly close your eyes", 
-        "Roll your eyes", 
-        "Rotate your eyes", 
-        "Blink your eyes", 
-        "Have some water",
-        "Short break exercise 1",
-        "Short break exercise 2"
-    ], 
-    "skip_button_text": "Cancel", 
-    "strict_break": false
-}
-```
+You can change the look and feel of the break screen in `~/.config/safeeyes/style/safeeyes_style.css`.
 
 ## Uninstalling Safe Eyes
 Use the following commands to uninstall SafeEyes from your system.
@@ -135,7 +58,9 @@ rm ~/.config/autostart/safeeyes.desktop
 - Disable the keyboard during break
 - Notifications before every break
 - Multi-workspace support
+- Multi-monitor support
 - Elegant and customizable design
+- Multi-language support
 
 ## Contributing
 **Are you a user?**
@@ -154,8 +79,34 @@ Please test Safe Eyes on your system and report any issues [here](https://github
 
 Please test Safe Eyes and create installers for your operating system
 
+**Can you translate English to your mother tongue (or whatever the language)?**
+
+Show your support by translating Safe Eyes.
+
+## Translating Safe Eyes
+From version 1.1.0, Safe Eyes supports translation. Translation files for each langauges must be placed in `/opt/safeeyes/config/lang` directory. The language file name must follow [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code standard. For example, the language file of English must be `en.json`. Follow these steps to translate Safe Eyes to your language.
+
+1. Copy `/opt/safeeyes/config/lang/en.json` to `/opt/safeeyes/config/lang/<iso-639-1-language-code>.json`
+
+2. Provide `language_name` in the language itself and `language_name_en` in English.
+
+3. Translate other property values to the selected language.
+
+**Note 1:** The `{}` used in property values will be replaced by runtime variables related to those commands. For example the `{}` in `Next break at {}` will be replaced by time at the runtime.
+
+**Note 2:** Use Unicode when translating Safe Eyes.
+
+**Note 3:** To change the language of Safe Eyes, change the `language` property in `~/.config/safeeyes/safeeyes.json` to the ISO 639-1 code of your language and restart the Safe Eyes.
+
+For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
 
 ## History
+Version 1.1.0:
+ * Multi-language support
+ * Fixed bug in multi-screen support
+ * Fixed bug in break screen transparency
+ * Next break information in tray menu
+
 Version 1.0.9:
  * Multi-screen support
  * Handling system suspend (Stop and restart during system suspend)

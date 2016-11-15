@@ -1,5 +1,11 @@
-safeeyes (1.0.9-1) xenial; urgency=medium
+safeeyes (1.1.0-1) xenial; urgency=medium
 
+  * Fixing bug in multiscreen support
+
+  * Add next break information to tray menu
+
+  * Support translation
+  
   * Adding multiscreen support & handling system suspend
   
   * Fixing bug in Ubuntu MATE environment
