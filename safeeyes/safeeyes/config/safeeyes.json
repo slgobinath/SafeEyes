@@ -1,4 +1,7 @@
 {
+	"meta": {
+		"config_version": 1
+	},
     "break_interval": 15, 
     "long_break_duration": 60,
     "no_of_short_breaks_per_long_break": 5, 
