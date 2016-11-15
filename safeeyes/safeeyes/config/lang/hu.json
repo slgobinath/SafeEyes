@@ -1,0 +1,40 @@
+{
+    "meta_info": {
+        "language_name": "Magyar",
+        "language_name_en": "Hungarian"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Sétáljon egyet!",
+            "Dőljön hátra és pihenjen!",
+            "Nyújtózzon eggyet!"
+        ],
+        "short_break_exercises": [
+            "Csukja be hosszabb időre a szemét!",
+            "Igyon egy kis vizet!",
+            "Forgassa meg a fejét becsukott szemmel!",
+            "Nyújtózzon eggyet!"
+        ]
+    },
+    "messages": {
+    	"ready_for_a_break": "Tervezett szünet {} másodperc múlva!",
+        "safe_eyes_is_disabled": "Safe Eyes kikapcsolva",
+        "next_break_at_noon": "A következő szünet {}",
+        "next_break_at_am": A következő szünet de. {}",
+        "next_break_at_pm": "A következő szünet du. {}"
+    },
+    "ui_controls": {
+    	"skip": "Átugrás",
+    	"short_break_duration": "Rövid szünet hossza (másodpercekben)",
+    	"long_break_duration": "Hosszú szünet hossza (másodpercekben)",
+    	"interval_between_two_breaks": "Két szünet közötti idő",
+    	"no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
+    	"time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
+    	"strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
+    	"enable": "Safe Eyes Bekapcsolása",
+    	"settings": "Beállítások",
+    	"quit": "Kilépés",
+    	"save": "Mentés",
+    	"cancel": "Mégse"
+    }
+}
