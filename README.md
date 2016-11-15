@@ -10,7 +10,7 @@ For more details: [SafeEyes Protects You From Eye Strain When Working On The Com
 
 2: Download the package list: `sudo apt update`
 
-3: Install uget-chrome-wrapper: `sudo apt install safeeyes`
+3: Install Safe Eyes: `sudo apt install safeeyes`
 
 4: Start Safe Eyes from start menu.
 
