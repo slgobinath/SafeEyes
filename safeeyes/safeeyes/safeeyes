@@ -51,32 +51,54 @@ system_language_directory = os.path.join(bin_directory, "config/lang")
 is_active = True
 CONFIGURATION_VERSION = 1
 
+"""
+	Listen to tray icon Settings action and send the signal to Settings dialog.
+"""
 def show_settings():
 	logging.info("Show Settings dialog")
 	settings_dialog = SettingsDialog(config, language, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
+"""
+	Receive the signal from core and pass it to the Notification.
+"""
 def show_notification():
 	notification.show(config['pre_break_warning_time'])
 
+"""
+	Receive the break signal from core and pass it to the break screen.
+"""
 def show_alert(message):
 	logging.info("Show the break screen")
 	notification.close()
 	break_screen.show_message(message)
 
+"""
+	Receive the stop break signal from core and pass it to the break screen.
+"""
 def close_alert():
 	logging.info("Close the break screen")
 	break_screen.close()
 
+"""
+	Receive the count from core and pass it to the break screen.
+"""
 def on_countdown(count):
 	break_screen.show_count_down(count)
 
+"""
+	Listen to the tray menu quit action and stop the core, notification and the app itself.
+"""
 def on_quit():
 	logging.info("Quit Safe Eyes")
 	core.stop()
 	notification.quite();
 	Gtk.main_quit()
 
+"""
+	If the system goes to sleep, Safe Eyes stop the core if it is already active.
+	If it was active, Safe Eyes will become active after wake up.
+"""
 def handle_suspend_callback(sleeping):
 	if sleeping:
 		# Sleeping / suspending
@@ -89,15 +111,24 @@ def handle_suspend_callback(sleeping):
 			core.start()
 			logging.info("Resumed Safe Eyes after system wakeup")
 
+"""
+	Setup system suspend listener.
+"""
 def handle_system_suspend():
 	DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
 	bus.add_signal_receiver(handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
 
+"""
+	Listen to break screen Skip action and send the signal to core.
+"""
 def on_skipped():
 	logging.info("User skipped the break")
 	core.skip_break()
 
+"""
+	Listen to Settings dialog Save action and write to the config file.
+"""
 def save_settings(config):
 	logging.info("Saving settings to safeeyes.json")
 	if is_active:
@@ -114,14 +145,23 @@ def save_settings(config):
 		# 1 sec delay is required to give enough time for core to be stopped
 		Timer(1.0, core.start).start()
 
+"""
+	Listen to tray icon enable action and send the signal to core.
+"""
 def enable_safeeyes():
 	is_active = True
 	core.toggle_active_state()
 
+"""
+	Listen to tray icon disable action and send the signal to core.
+"""
 def disable_safeeyes():
 	is_active = False
 	core.toggle_active_state()
 
+"""
+	Initialize the configuration directory and copy the files to ~/.config directory.
+"""
 def initialize_config():
 	global config
 	config_dir_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style')
