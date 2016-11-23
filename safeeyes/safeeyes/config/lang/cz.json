@@ -1,0 +1,41 @@
+{
+    "meta_info": {
+        "language_name": "Česky",
+        "language_name_en": "Czech"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Na chvíli se projdi",
+            "Zakloň se na svém křesle a relaxuj"
+        ],
+        "short_break_exercises": [
+            "Přivři oči",
+            "Vyval oči",
+            "Otáčej očima ve směru hodinových ručiček",
+            "Otáčej očima proti směru hodinových ručiček",
+            "Mrkej očima",
+            "Dej si nějakou vodu"
+        ]
+    },
+    "messages": {
+    	"ready_for_a_break": "Připrav se na přestávku za {} sekund",
+        "safe_eyes_is_disabled": "Safe Eyes je zakázaná",
+        "next_break_at_noon": "Příští přestávka v {}",
+        "next_break_at_am": "Příští přestávka v {} dopoledne",
+        "next_break_at_pm": "Příští přestávka v {} odpoledne"
+    },
+    "ui_controls": {
+    	"skip": "Přeskočit",
+    	"short_break_duration": "Trvání krátké přestávky (v sekundách)",
+    	"long_break_duration": "Trvání dlouhé přestávky (v sekundách)",
+    	"interval_between_two_breaks": "Interval mezi dvěma přestávkami",
+    	"no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
+    	"time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
+    	"strict_break": "Povinná přestávka (Skryj tlačítko přeskočení)",
+    	"enable": "Povol Safe Eyes",
+    	"settings": "Nastavení",
+    	"quit": "Ukončit",
+    	"save": "Uložit",
+    	"cancel": "Zrušit"
+    }
+}
