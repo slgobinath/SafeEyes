@@ -29,6 +29,7 @@ class SafeEyesCore:
 		self.long_break_message_index = -1
 		self.short_break_message_index = -1
 		self.skipped = False
+		self.active = False
 		self.show_notification = show_notification
 		self.start_break = start_break
 		self.end_break = end_break
@@ -169,30 +170,32 @@ class SafeEyesCore:
 		Stop Safe Eyes
 	"""
 	def stop(self):
-		logging.info("Stop the core")
-		# Reset the state properties in case of restart
-		self.break_count = 0
-		self.long_break_message_index = -1
-		self.short_break_message_index = -1
+		if self.active:
+			logging.info("Stop the core")
+			# Reset the state properties in case of restart
+			# self.break_count = 0
+			# self.long_break_message_index = -1
+			# self.short_break_message_index = -1
 
-		self.notification_condition.acquire()
-		self.active = False
-		self.notification_condition.notify()
-		self.notification_condition.release()
-		
-		# If waiting after notification, notify the thread to wake up and die
-		self.notification_condition.acquire()
-		self.notification_condition.notify()
-		self.notification_condition.release()
+			self.notification_condition.acquire()
+			self.active = False
+			self.notification_condition.notify()
+			self.notification_condition.release()
+
+			# If waiting after notification, notify the thread to wake up and die
+			self.notification_condition.acquire()
+			self.notification_condition.notify()
+			self.notification_condition.release()
 	
 	"""
 		Start Safe Eyes
 	"""
 	def start(self):
-		logging.info("Scheduling next break")
-		self.active = True
-		thread = threading.Thread(target=self.scheduler_job)
-		thread.start()
+		if not self.active:
+			logging.info("Scheduling next break")
+			self.active = True
+			thread = threading.Thread(target=self.scheduler_job)
+			thread.start()
 
 	"""
 		Check for full-screen applications

@@ -150,14 +150,14 @@ def save_settings(config):
 """
 def enable_safeeyes():
 	is_active = True
-	core.toggle_active_state()
+	core.start()
 
 """
 	Listen to tray icon disable action and send the signal to core.
 """
 def disable_safeeyes():
 	is_active = False
-	core.toggle_active_state()
+	core.stop()
 
 """
 	Initialize the configuration directory and copy the files to ~/.config directory.
