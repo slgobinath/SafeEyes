@@ -18,24 +18,25 @@
         ]
     },
     "messages": {
-    	"ready_for_a_break": "Priprav sa na prestávku o {} sekúnd",
+        "ready_for_a_break": "Priprav sa na prestávku o {} sekúnd",
         "safe_eyes_is_disabled": "Safe Eyes sú zablokované",
         "next_break_at_noon": "Ďalšia prestávka o {}",
         "next_break_at_am": "Ďalšia prestávka o {} doobeda",
         "next_break_at_pm": "Ďalšia prestávka o {} poobede"
     },
     "ui_controls": {
-    	"skip": "Preskočiť",
-    	"short_break_duration": "Trvanie krátkej prestávky (v sekundách)",
-    	"long_break_duration": "Trvanie dlhej prestávky (v sekundách)",
-    	"interval_between_two_breaks": "Interval medzi dvomi prestávkami",
-    	"no_of_short_breaks_between_two_long_breaks": "Počet krátkych prestávok medzi dvomi dlhými prestávkami",
-    	"time_to_prepare_for_break": "Čas na prípravu na prestávku (v sekundách)",
-    	"strict_break": "Povinná prestávka (Skryje tlačitko Preskočiť)",
-    	"enable": "Povoliť Safe Eyes",
-    	"settings": "Nastavenia",
-    	"quit": "Koniec",
-    	"save": "Uložiť",
-    	"cancel": "Zrušiť"
+        "skip": "Preskočiť",
+        "short_break_duration": "Trvanie krátkej prestávky (v sekundách)",
+        "long_break_duration": "Trvanie dlhej prestávky (v sekundách)",
+        "interval_between_two_breaks": "Interval medzi dvomi prestávkami",
+        "no_of_short_breaks_between_two_long_breaks": "Počet krátkych prestávok medzi dvomi dlhými prestávkami",
+        "time_to_prepare_for_break": "Čas na prípravu na prestávku (v sekundách)",
+        "strict_break": "Povinná prestávka (Skryje tlačitko Preskočiť)",
+        "enable": "Povoliť Safe Eyes",
+        "settings": "Nastavenia",
+        "about": "Ohľadom",
+        "quit": "Koniec",
+        "save": "Uložiť",
+        "cancel": "Zrušiť"
     }
 }

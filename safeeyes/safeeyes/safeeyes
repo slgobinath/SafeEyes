@@ -31,6 +31,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 from BreakScreen import BreakScreen
 from TrayIcon import TrayIcon
 from SettingsDialog import SettingsDialog
+from AboutDialog import AboutDialog
 from SafeEyesCore import SafeEyesCore
 from Notification import Notification
 
@@ -44,12 +45,14 @@ style_sheet_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style
 log_file_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/safeeyes.log')
 break_screen_glade = os.path.join(bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(bin_directory, "glade/settings_dialog.glade")
+about_dialog_glade = os.path.join(bin_directory, "glade/about_dialog.glade")
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
 system_language_directory = os.path.join(bin_directory, "config/lang")
 
 is_active = True
 CONFIGURATION_VERSION = 1
+SAFE_EYES_VERSION = "1.1.1"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
@@ -58,6 +61,14 @@ def show_settings():
 	logging.info("Show Settings dialog")
 	settings_dialog = SettingsDialog(config, language, save_settings, settings_dialog_glade)
 	settings_dialog.show()
+
+"""
+	Listen to tray icon About action and send the signal to About dialog.
+"""
+def show_about():
+	logging.info("Show About dialog")
+	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION)
+	about_dialog.show()
 
 """
 	Receive the signal from core and pass it to the Notification.
@@ -250,7 +261,7 @@ def main():
 	with open(language_file_path) as language_file:
 		language = json.load(language_file)
 	
-	tray_icon = TrayIcon(language, show_settings, enable_safeeyes, disable_safeeyes, on_quit)
+	tray_icon = TrayIcon(language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 	break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
 	break_screen.initialize(config, language)
 	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)

@@ -18,24 +18,25 @@
         ]
     },
     "messages": {
-    	"ready_for_a_break": "Ready for a break in {} seconds",
+        "ready_for_a_break": "Ready for a break in {} seconds",
         "safe_eyes_is_disabled": "Safe Eyes is disabled",
         "next_break_at_noon": "Next break at {}",
         "next_break_at_am": "Next break at {} AM",
         "next_break_at_pm": "Next break at {} PM"
     },
     "ui_controls": {
-    	"skip": "Skip",
-    	"short_break_duration": "Short break duration (in seconds)",
-    	"long_break_duration": "Long break duration (in seconds)",
-    	"interval_between_two_breaks": "Interval between two breaks",
-    	"no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
-    	"time_to_prepare_for_break": "Time to prepare for break (in seconds)",
-    	"strict_break": "Strict break (Hide skip button)",
-    	"enable": "Enable Safe Eyes",
-    	"settings": "Settings",
-    	"quit": "Quit",
-    	"save": "Save",
-    	"cancel": "Cancel"
+        "skip": "Skip",
+        "short_break_duration": "Short break duration (in seconds)",
+        "long_break_duration": "Long break duration (in seconds)",
+        "interval_between_two_breaks": "Interval between two breaks",
+        "no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
+        "time_to_prepare_for_break": "Time to prepare for break (in seconds)",
+        "strict_break": "Strict break (Hide skip button)",
+        "enable": "Enable Safe Eyes",
+        "settings": "Settings",
+        "about": "About",
+        "quit": "Quit",
+        "save": "Save",
+        "cancel": "Cancel"
     }
 }

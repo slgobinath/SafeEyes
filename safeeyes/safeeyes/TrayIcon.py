@@ -28,9 +28,10 @@ active = True
 APPINDICATOR_ID = 'safeeyes'
 
 class TrayIcon:
-	def __init__(self, language, on_show_settings, on_enable, on_disable, on_quite):
+	def __init__(self, language, on_show_settings, on_show_about, on_enable, on_disable, on_quite):
 		logging.info("Initialize the tray icon")
-		self.on_show_settings = on_show_settings;
+		self.on_show_settings = on_show_settings
+		self.on_show_about = on_show_about
 		self.on_quite = on_quite
 		self.on_enable = on_enable
 		self.on_disable = on_disable
@@ -58,6 +59,9 @@ class TrayIcon:
 		item_settings = Gtk.MenuItem(self.language['ui_controls']['settings'])
 		item_settings.connect('activate', self.show_settings)
 
+		item_about = Gtk.MenuItem(self.language['ui_controls']['about'])
+		item_about.connect('activate', self.show_about)
+
 		item_quit = Gtk.MenuItem(self.language['ui_controls']['quit'])
 		item_quit.connect('activate', self.quit_safe_eyes)
 
@@ -65,6 +69,7 @@ class TrayIcon:
 		self.menu.append(self.item_separator)
 		self.menu.append(self.item_enable)
 		self.menu.append(item_settings)
+		self.menu.append(item_about)
 		self.menu.append(item_quit)
 		self.menu.show_all()
 
@@ -81,6 +86,9 @@ class TrayIcon:
 
 	def show_settings(self, *args):
 		self.on_show_settings()
+
+	def show_about(self, *args):
+		self.on_show_about()
 
 	def next_break_time(self, dateTime):
 		logging.info("Update next break information")
