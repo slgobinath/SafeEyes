@@ -1,0 +1,42 @@
+{
+    "meta_info": {
+        "language_name": "Español",
+        "language_name_en": "Spanish"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Vete a andar un poco",
+            "Reclínate sobre tu silla y relájate"
+        ],
+        "short_break_exercises": [
+            "Cierra bien tus ojos",
+            "Mueve tus ojos en círculos",
+            "Mueve tus ojos en círculos en el sentido horario",
+            "Mueve tus ojos en círculos en el sentido antihorario",
+            "Parpadea tus ojos",
+            "Bebe un poco de agua"
+        ]
+    },
+    "messages": {
+        "ready_for_a_break": "Listo para una pausa en {} segundos",
+        "safe_eyes_is_disabled": "Safe Eyes está desactivado",
+        "next_break_at_noon": "Próxima pausa a {}",    
+        "next_break_at_am": "Próxima pausa a las {} de la mañana",
+        "next_break_at_pm": "Próxima pausa a las {} de la tarde/noche"
+    },
+    "ui_controls": {
+        "skip": "Cancelar",
+        "short_break_duration": "Duración de una pausa corta (en segundos)",
+        "long_break_duration": "Duración de una pausa larga (en segundos)",
+        "interval_between_two_breaks": "Tiempo entre dos pausas",
+        "no_of_short_breaks_between_two_long_breaks": "Número de pausas cortas entre dos pausas largas",
+        "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
+        "strict_break": "Pausa estricta (Sin botón Cancelar)",
+        "enable": "Activar Safe Eyes",
+        "settings": "Preferencias",
+        "about": "Acerca de",
+        "quit": "Salir",
+        "save": "Guardar",
+        "cancel": "Cancelar"
+    }
+}
