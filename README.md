@@ -101,6 +101,11 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
 
 ## History
+Version 1.1.1:
+ * About dialog
+ * UI control to select the language
+ * Fixed bug in disable option after suspend
+
 Version 1.1.0:
  * Multi-language support
  * Fixed bug in multi-screen support

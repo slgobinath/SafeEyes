@@ -1,4 +1,6 @@
-safeeyes (1.1.0-1) xenial; urgency=medium
+safeeyes (1.1.1-1) xenial; urgency=medium
+
+  * Add about dialog and language selection to Settings dialog
 
   * Fixing bug in multiscreen support
 
