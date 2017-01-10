@@ -32,9 +32,10 @@
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
         "strict_break": "Povinná přestávka (Skryj tlačítko přeskočení)",
+        "language": "Jazyk",
         "enable": "Povol Safe Eyes",
         "settings": "Nastavení",
-        "about": "O",
+        "about": "Asi",
         "quit": "Ukončit",
         "save": "Uložit",
         "cancel": "Zrušit"

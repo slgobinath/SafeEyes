@@ -20,7 +20,7 @@
         "ready_for_a_break": "Tervezett szünet {} másodperc múlva!",
         "safe_eyes_is_disabled": "Safe Eyes kikapcsolva",
         "next_break_at_noon": "A következő szünet {}",
-        "next_break_at_am": A következő szünet de. {}",
+        "next_break_at_am": "A következő szünet de. {}",
         "next_break_at_pm": "A következő szünet du. {}"
     },
     "ui_controls": {
@@ -31,6 +31,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
         "time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
         "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
+        "language": "Nyelv",
         "enable": "Safe Eyes Bekapcsolása",
         "settings": "Beállítások",
         "about": "Ról ről",

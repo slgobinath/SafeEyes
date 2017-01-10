@@ -32,6 +32,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas curtas entre duas pausas longas",
         "time_to_prepare_for_break": "Tempo para se preparar para a pausa (em segundos)",
         "strict_break": "Pausa rigorosa (Esconder botão pular)",
+        "language": "Língua",
         "enable": "Habilitar Safe Eyes",
         "settings": "Configuração",
         "about": "Sobre",

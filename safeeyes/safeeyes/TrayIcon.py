@@ -36,6 +36,7 @@ class TrayIcon:
 		self.on_enable = on_enable
 		self.on_disable = on_disable
 		self.language = language
+		self.dateTime = None
 
 		# Construct the tray icon
 		self.indicator = appindicator.Indicator.new(APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
@@ -44,36 +45,56 @@ class TrayIcon:
 		# Construct the context menu
 		self.menu = Gtk.Menu()
 
-
-		self.item_info = Gtk.ImageMenuItem('Next break at 10.30 AM')
+		# Next break info menu item
+		self.item_info = Gtk.ImageMenuItem()
 		img_timer = Gtk.Image()
 		img_timer.set_from_icon_name("safeeyes_timer", 16)
 		self.item_info.set_image(img_timer)
 
 		self.item_separator = Gtk.SeparatorMenuItem()
 
-		self.item_enable = Gtk.CheckMenuItem(self.language['ui_controls']['enable'])
+		# Enable menu item with check box
+		self.item_enable = Gtk.CheckMenuItem()
 		self.item_enable.set_active(True)
 		self.item_enable.connect('activate', self.on_toogle_enable)
 
-		item_settings = Gtk.MenuItem(self.language['ui_controls']['settings'])
-		item_settings.connect('activate', self.show_settings)
+		# Settings menu item
+		self.item_settings = Gtk.MenuItem()
+		self.item_settings.connect('activate', self.show_settings)
 
-		item_about = Gtk.MenuItem(self.language['ui_controls']['about'])
-		item_about.connect('activate', self.show_about)
+		# About menu item
+		self.item_about = Gtk.MenuItem()
+		self.item_about.connect('activate', self.show_about)
 
-		item_quit = Gtk.MenuItem(self.language['ui_controls']['quit'])
-		item_quit.connect('activate', self.quit_safe_eyes)
+		# Quit menu item
+		self.item_quit = Gtk.MenuItem()
+		self.item_quit.connect('activate', self.quit_safe_eyes)
 
+		self.set_labels(language)
+
+		# Append all menu items and show the menu
 		self.menu.append(self.item_info)
 		self.menu.append(self.item_separator)
 		self.menu.append(self.item_enable)
-		self.menu.append(item_settings)
-		self.menu.append(item_about)
-		self.menu.append(item_quit)
+		self.menu.append(self.item_settings)
+		self.menu.append(self.item_about)
+		self.menu.append(self.item_quit)
 		self.menu.show_all()
 
 		self.indicator.set_menu(self.menu)
+
+	def set_labels(self, language):
+		self.language = language
+		active = self.item_enable.get_active()
+		if active:
+			if self.dateTime:
+				self.set_next_break_info(self.dateTime)
+		else:
+			self.item_info.set_label(self.language['messages']['safe_eyes_is_disabled'])
+		self.item_enable.set_label(self.language['ui_controls']['enable'])
+		self.item_settings.set_label(self.language['ui_controls']['settings'])
+		self.item_about.set_label(self.language['ui_controls']['about'])
+		self.item_quit.set_label(self.language['ui_controls']['quit'])
 
 	def show_icon(self):
 		GLib.idle_add(lambda: self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE))
@@ -92,13 +113,17 @@ class TrayIcon:
 
 	def next_break_time(self, dateTime):
 		logging.info("Update next break information")
-		timeStr = dateTime.strftime("%l:%M")
+		self.dateTime = dateTime
+		self.set_next_break_info(self.dateTime)
+
+	def set_next_break_info(self, dateTime):
+		formatted_time = dateTime.strftime("%l:%M")
 		if dateTime.hour == 12:
-			message = self.language['messages']['next_break_at_noon'].format(timeStr)
+			message = self.language['messages']['next_break_at_noon'].format(formatted_time)
 		elif dateTime.hour < 12:
-			message = self.language['messages']['next_break_at_am'].format(timeStr)
+			message = self.language['messages']['next_break_at_am'].format(formatted_time)
 		else:
-			message = self.language['messages']['next_break_at_pm'].format(timeStr)
+			message = self.language['messages']['next_break_at_pm'].format(formatted_time)
 
 		GLib.idle_add(lambda: self.item_info.set_label(message))
 

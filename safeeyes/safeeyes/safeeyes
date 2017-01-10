@@ -25,6 +25,7 @@ import shutil
 import errno
 import dbus
 import logging
+import operator
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 
@@ -59,7 +60,7 @@ SAFE_EYES_VERSION = "1.1.1"
 """
 def show_settings():
 	logging.info("Show Settings dialog")
-	settings_dialog = SettingsDialog(config, language, save_settings, settings_dialog_glade)
+	settings_dialog = SettingsDialog(config, language, read_lang_files(), save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
 """
@@ -141,15 +142,28 @@ def on_skipped():
 	Listen to Settings dialog Save action and write to the config file.
 """
 def save_settings(config):
+	global language
+
 	logging.info("Saving settings to safeeyes.json")
+
+	# Stop the Safe Eyes core
 	if is_active:
 		core.stop()
+
 	# Write the configuration to file
 	with open(config_file_path, 'w') as config_file:
 		json.dump(config, config_file, indent=4, sort_keys=True)
+
+	# Reload the language translation
+	language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
+	with open(language_file_path) as language_file:
+		language = json.load(language_file)
 	
-	# Restart the core and intialize the components
+	tray_icon.set_labels(language)
+	
 	logging.info("Initialize SafeEyesCore with modified settings")
+
+	# Restart the core and intialize the components
 	core.initialize(config, language)
 	break_screen.initialize(config, language)
 	if is_active:
@@ -241,6 +255,21 @@ def validate_config():
 
 		# Create config files again
 		initialize_config()
+
+"""
+	Read all the language translations and build a key-value mapping of language names
+	in English and ISO 639-1 (Filename without extension).
+"""
+def read_lang_files():
+	languages = {}
+	for lang_file_name in os.listdir(system_language_directory):
+		lang_file_path = os.path.join(system_language_directory, lang_file_name)
+		if os.path.isfile(lang_file_path):
+			with open(lang_file_path) as lang_file:    
+				lang = json.load(lang_file)
+				languages[lang_file_name.lower().replace(".json", "")] = lang['meta_info']['language_name']
+
+	return languages
 
 def main():
 	initialize_config()
