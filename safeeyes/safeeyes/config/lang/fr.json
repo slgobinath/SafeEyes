@@ -1,0 +1,42 @@
+{
+    "meta_info": {
+        "language_name": "Français",
+        "language_name_en": "French"
+    },
+    "exercises": {
+	"long_break_exercises": [
+            "Allez marcher un peu",
+            "Reposez-vous un moment dans votre siège"
+        ],
+        "short_break_exercises": [
+            "Fermez bien vos yeux",
+            "Roulez vos yeux",
+            "Faites rouler vos yeux dans le sens des aiguilles d'une montre",
+            "Faites rouler vos yeux dans le sens contraire des aiguilles d'une montre",
+            "Clignez des yeux",
+            "Buvez de l'eau"
+        ]
+    },
+    "messages": {
+        "ready_for_a_break": "Prêt pour une pause dans {} secondes",
+        "safe_eyes_is_disabled": "Safe Eyes est désactivé",
+        "next_break_at_noon": "Prochaine pause à {}",
+        "next_break_at_am": "Prochaine pause à {} AM",
+        "next_break_at_pm": "Prochaine pause à {} PM"
+    },
+    "ui_controls": {
+        "skip": "Annuler",
+        "short_break_duration": "Durée d'une pause courte (en secondes)",
+        "long_break_duration": "Durée d'une pause longue (en secondes)",
+        "interval_between_two_breaks": "Intervalle entre deux pauses",
+        "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses courtes entre deux pauses longues",
+        "time_to_prepare_for_break": "Temps pour se préparer avant une pause (en secondes)",
+        "strict_break": "Pause non annulable (Cacher le bouton Annuler)",
+        "enable": "Activer Safe Eyes",
+        "settings": "Réglages",
+        "about": "À propos",
+        "quit": "Quitter",
+        "save": "Enregistrer",
+        "cancel": "Annuler"
+    }
+}
