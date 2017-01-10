@@ -81,7 +81,7 @@ Please test Safe Eyes and create installers for your operating system
 
 **Can you translate English to your mother tongue (or whatever the language)?**
 
-Show your support by translating Safe Eyes.
+Show your support by translating Safe Eyes to a new language or by improving the existing translations.
 
 ## Translating Safe Eyes
 From version 1.1.0, Safe Eyes supports translation. Translation files for each langauges must be placed in `/opt/safeeyes/config/lang` directory. The language file name must follow [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code standard. For example, the language file of English must be `en.json`. Follow these steps to translate Safe Eyes to your language.
@@ -99,6 +99,19 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 **Note 3:** To change the language of Safe Eyes, change the `language` property in `~/.config/safeeyes/safeeyes.json` to the ISO 639-1 code of your language and restart the Safe Eyes.
 
 For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
+
+### Currently available translations
+ * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/cz.json)
+ * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json)
+ * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/es.json) (Will be included in v1.1.2)
+ * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/fr.json)
+ * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/hu.json)
+ * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/pt.json)
+ * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/sk.json)
+ * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/ta.json)
+
+
+
 
 ## History
 Version 1.1.1:
