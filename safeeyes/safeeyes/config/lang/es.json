@@ -20,7 +20,7 @@
     "messages": {
         "ready_for_a_break": "Listo para una pausa en {} segundos",
         "safe_eyes_is_disabled": "Safe Eyes está desactivado",
-        "next_break_at_noon": "Próxima pausa a {}",    
+        "next_break_at_noon": "Próxima pausa a las {}",
         "next_break_at_am": "Próxima pausa a las {} de la mañana",
         "next_break_at_pm": "Próxima pausa a las {} de la tarde/noche"
     },
@@ -32,6 +32,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas cortas entre dos pausas largas",
         "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
         "strict_break": "Pausa estricta (Sin botón Cancelar)",
+        "language": "Idioma",
         "enable": "Activar Safe Eyes",
         "settings": "Preferencias",
         "about": "Acerca de",
