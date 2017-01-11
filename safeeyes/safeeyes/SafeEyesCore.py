@@ -142,7 +142,9 @@ class SafeEyesCore:
 
 			# Resume
 			if self.active:
-				self.start()
+				# Schedule the break again
+				thread = threading.Thread(target=self.scheduler_job)
+				thread.start()
 
 			self.skipped = False
 
@@ -152,19 +154,11 @@ class SafeEyesCore:
 	def is_long_break(self):
 		return self.break_count == self.no_of_short_breaks_per_long_break - 1
 
-	# User skipped the break using Skip button
+	"""
+		User skipped the break using Skip button
+	"""
 	def skip_break(self):
 		self.skipped = True
-
-	"""
-		Reschedule the job
-	"""
-	def toggle_active_state(self):
-		if self.active:
-			self.stop()
-
-		else:
-			self.start()
 
 	"""
 		Stop Safe Eyes

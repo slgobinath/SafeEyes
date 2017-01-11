@@ -1,4 +1,6 @@
-safeeyes (1.1.1-1) xenial; urgency=medium
+safeeyes (1.1.2-1) xenial; urgency=medium
+
+  * Bug fix for no breaks after 1st one
 
   * Add about dialog and language selection to Settings dialog
 
