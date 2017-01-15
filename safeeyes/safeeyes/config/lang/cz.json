@@ -6,7 +6,7 @@
     "exercises": {
         "long_break_exercises": [
             "Na chvíli se projděte",
-            "Zakloňte se na svém křesle a relaxujte"
+            "Zakloňte se v křesle a relaxujte"
         ],
         "short_break_exercises": [
             "Zavřete oči",
@@ -19,7 +19,7 @@
     },
     "messages": {
         "ready_for_a_break": "Připravte se na přestávku za {} sekund",
-        "safe_eyes_is_disabled": "Safe Eyes je zakázaná",
+        "safe_eyes_is_disabled": "Safe Eyes je zakázáno",
         "next_break_at_noon": "Příští přestávka v {}",
         "next_break_at_am": "Příští přestávka v {} dopoledne",
         "next_break_at_pm": "Příští přestávka v {} odpoledne"
@@ -31,11 +31,11 @@
         "interval_between_two_breaks": "Interval mezi dvěma přestávkami",
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
-        "strict_break": "Povinná přestávka (Skryj tlačítko přeskočení)",
+        "strict_break": "Povinná přestávka (Skrýt tlačítko pro přeskočení)",
         "language": "Jazyk",
-        "enable": "Povol Safe Eyes",
+        "enable": "Povolit Safe Eyes",
         "settings": "Nastavení",
-        "about": "Asi",
+        "about": "O programu",
         "quit": "Ukončit",
         "save": "Uložit",
         "cancel": "Zrušit"
