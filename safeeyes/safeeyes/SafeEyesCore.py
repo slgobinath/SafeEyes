@@ -85,7 +85,9 @@ class SafeEyesCore:
 			# If full screen app found, do not show break screen
 			logging.info("Found a full-screen application. Skip the break")
 			if self.active:
-				self.start()
+				# Schedule the break again
+				thread = threading.Thread(target=self.scheduler_job)
+				thread.start()
 			return
 
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
