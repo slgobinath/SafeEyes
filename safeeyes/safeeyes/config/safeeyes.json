@@ -8,5 +8,6 @@
     "pre_break_warning_time": 10, 
     "short_break_duration": 15, 
     "strict_break": false,
+    "audible_alert": true,
     "language": "en"
 }

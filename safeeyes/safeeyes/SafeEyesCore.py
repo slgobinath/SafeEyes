@@ -21,8 +21,15 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import  Gdk, Gio, GLib, GdkX11
 import time, datetime, threading, sys, subprocess, logging
 
+
+"""
+	Core of Safe Eyes which runs the scheduler and notifies the breaks.
+"""
 class SafeEyesCore:
 
+	"""
+		Initialize the internal variables of the core.
+	"""
 	def __init__(self, show_notification, start_break, end_break, on_countdown, update_next_break_info):
 		# Initialize the variables
 		self.break_count = 0
@@ -38,6 +45,7 @@ class SafeEyesCore:
 		self.notification_condition = threading.Condition()
 		self.break_condition = threading.Condition()
 
+
 	"""
 		Initialize the internal properties from configuration
 	"""
@@ -51,10 +59,50 @@ class SafeEyesCore:
 		self.short_break_duration = config['short_break_duration']
 		self.break_interval = config['break_interval']
 
+
+	"""
+		Start Safe Eyes is it is not running already.
+	"""
+	def start(self):
+		if not self.active:
+			logging.info("Scheduling next break")
+			self.active = True
+			self.__schedule_next_break()
+
+
+	"""
+		Stop Safe Eyes if it is running.
+	"""
+	def stop(self):
+		if self.active:
+			logging.info("Stop the core")
+			# Reset the state properties in case of restart
+			# self.break_count = 0
+			# self.long_break_message_index = -1
+			# self.short_break_message_index = -1
+
+			self.notification_condition.acquire()
+			self.active = False
+			self.notification_condition.notify()
+			self.notification_condition.release()
+
+			# If waiting after notification, notify the thread to wake up and die
+			self.notification_condition.acquire()
+			self.notification_condition.notify()
+			self.notification_condition.release()
+
+
+	"""
+		User skipped the break using Skip button
+	"""
+	def skip_break(self):
+		self.skipped = True
+
+
 	"""
 		Scheduler task to execute during every interval
 	"""
-	def scheduler_job(self):
+	def __scheduler_job(self):
 		if not self.active:
 			return
 
@@ -75,30 +123,29 @@ class SafeEyesCore:
 
 		logging.info("Ready to show the break")
 
-		GLib.idle_add(lambda: self.process_job())
+		GLib.idle_add(lambda: self.__process_job())
 
 	"""
-		Used to process the job in default thread because is_full_screen_app_found must be run by default thread
+		Used to process the job in default thread because __is_full_screen_app_found must be run by default thread
 	"""
-	def process_job(self):
-		if self.is_full_screen_app_found():
+	def __process_job(self):
+		if self.__is_full_screen_app_found():
 			# If full screen app found, do not show break screen
 			logging.info("Found a full-screen application. Skip the break")
 			if self.active:
 				# Schedule the break again
-				thread = threading.Thread(target=self.scheduler_job)
-				thread.start()
+				self.__schedule_next_break()
 			return
 
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
 
-		thread = threading.Thread(target=self.notify_and_start_break)
+		thread = threading.Thread(target=self.__notify_and_start_break)
 		thread.start()
 
 	"""
 		Show notification and start the break after given number of seconds
 	"""
-	def notify_and_start_break(self):
+	def __notify_and_start_break(self):
 		# Show a notification
 		self.show_notification()
 
@@ -111,7 +158,7 @@ class SafeEyesCore:
 		# User can disable SafeEyes during notification
 		if self.active:
 			message = ""
-			if self.is_long_break():
+			if self.__is_long_break():
 				logging.info("Count is {}; get a long beak message".format(self.break_count))
 				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
 				message = self.long_break_exercises[self.long_break_message_index]
@@ -125,7 +172,7 @@ class SafeEyesCore:
 
 			# Start the countdown
 			seconds = 0
-			if self.is_long_break():
+			if self.__is_long_break():
 				seconds = self.long_break_duration
 			else:
 				seconds = self.short_break_duration
@@ -145,58 +192,30 @@ class SafeEyesCore:
 			# Resume
 			if self.active:
 				# Schedule the break again
-				thread = threading.Thread(target=self.scheduler_job)
-				thread.start()
+				self.__schedule_next_break()
 
 			self.skipped = False
+
 
 	"""
 		Check if the current break is long break or short current
 	"""
-	def is_long_break(self):
+	def __is_long_break(self):
 		return self.break_count == self.no_of_short_breaks_per_long_break - 1
 
-	"""
-		User skipped the break using Skip button
-	"""
-	def skip_break(self):
-		self.skipped = True
 
 	"""
-		Stop Safe Eyes
+		Start a new thread to schedule the next break.
 	"""
-	def stop(self):
-		if self.active:
-			logging.info("Stop the core")
-			# Reset the state properties in case of restart
-			# self.break_count = 0
-			# self.long_break_message_index = -1
-			# self.short_break_message_index = -1
+	def __schedule_next_break(self):
+		thread = threading.Thread(target=self.__scheduler_job)
+		thread.start()
 
-			self.notification_condition.acquire()
-			self.active = False
-			self.notification_condition.notify()
-			self.notification_condition.release()
-
-			# If waiting after notification, notify the thread to wake up and die
-			self.notification_condition.acquire()
-			self.notification_condition.notify()
-			self.notification_condition.release()
-	
-	"""
-		Start Safe Eyes
-	"""
-	def start(self):
-		if not self.active:
-			logging.info("Scheduling next break")
-			self.active = True
-			thread = threading.Thread(target=self.scheduler_job)
-			thread.start()
 
 	"""
 		Check for full-screen applications
 	"""
-	def is_full_screen_app_found(self):
+	def __is_full_screen_app_found(self):
 		logging.info("Searching for full-screen application")
 		screen = Gdk.Screen.get_default()
 		active_xid = str(screen.get_active_window().get_xid())
@@ -210,4 +229,3 @@ class SafeEyesCore:
 		else:
 			if stdout:
 				return 'FULLSCREEN' in stdout
-

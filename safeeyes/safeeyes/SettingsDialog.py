@@ -40,6 +40,7 @@ class SettingsDialog:
 		self.spin_short_between_long = builder.get_object('spin_short_between_long')
 		self.spin_time_to_prepare = builder.get_object('spin_time_to_prepare')
 		self.switch_strict_break = builder.get_object('switch_strict_break')
+		self.switch_audible_alert = builder.get_object('switch_audible_alert')
 		self.cmb_language = builder.get_object('cmb_language')
 
 		builder.get_object('lbl_short_break').set_label(language['ui_controls']['short_break_duration'])
@@ -48,6 +49,7 @@ class SettingsDialog:
 		builder.get_object('lbl_short_per_long').set_label(language['ui_controls']['no_of_short_breaks_between_two_long_breaks'])
 		builder.get_object('lbl_time_to_prepare').set_label(language['ui_controls']['time_to_prepare_for_break'])
 		builder.get_object('lbl_strict_break').set_label(language['ui_controls']['strict_break'])
+		builder.get_object('lbl_audible_alert').set_label(language['ui_controls']['audible_alert'])
 		builder.get_object('lbl_language').set_label(language['ui_controls']['language'])
 		builder.get_object('btn_cancel').set_label(language['ui_controls']['cancel'])
 		builder.get_object('btn_save').set_label(language['ui_controls']['save'])
@@ -58,6 +60,7 @@ class SettingsDialog:
 		self.spin_short_between_long.set_value(config['no_of_short_breaks_per_long_break'])
 		self.spin_time_to_prepare.set_value(config['pre_break_warning_time'])
 		self.switch_strict_break.set_active(config['strict_break'])
+		self.switch_audible_alert.set_active(config['audible_alert'])
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
@@ -90,6 +93,7 @@ class SettingsDialog:
 		self.config['no_of_short_breaks_per_long_break'] = self.spin_short_between_long.get_value_as_int()
 		self.config['pre_break_warning_time'] = self.spin_time_to_prepare.get_value_as_int()
 		self.config['strict_break'] = self.switch_strict_break.get_active()
+		self.config['audible_alert'] = self.switch_audible_alert.get_active()
 		self.config['language'] = self.languages[self.cmb_language.get_active()]
 
 		self.on_save_settings(self.config)	# Call the provided save method

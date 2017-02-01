@@ -18,24 +18,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import gi
-import json
-import shutil
-import errno
-import dbus
-import logging
-import operator
+import os, gi, json, shutil, errno, dbus, logging, operator, Utility
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
-
 from BreakScreen import BreakScreen
 from TrayIcon import TrayIcon
 from SettingsDialog import SettingsDialog
 from AboutDialog import AboutDialog
 from SafeEyesCore import SafeEyesCore
 from Notification import Notification
-
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -91,6 +82,8 @@ def show_alert(message):
 def close_alert():
 	logging.info("Close the break screen")
 	break_screen.close()
+	if config['audible_alert']:
+		Utility.play_notification()
 
 """
 	Receive the count from core and pass it to the break screen.

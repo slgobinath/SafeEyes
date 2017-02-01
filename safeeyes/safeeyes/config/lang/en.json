@@ -33,6 +33,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
         "time_to_prepare_for_break": "Time to prepare for break (in seconds)",
         "strict_break": "Strict break (Hide skip button)",
+        "audible_alert": "Audible alert at the end of break",
         "language": "Language",
         "enable": "Enable Safe Eyes",
         "settings": "Settings",

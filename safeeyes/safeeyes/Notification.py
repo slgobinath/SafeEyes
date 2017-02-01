@@ -24,27 +24,48 @@ gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, Gdk, GLib, GdkX11
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify
+
+
 APPINDICATOR_ID = 'safeeyes'
 
+"""
+	This class is responsible for the notification to the user before the break.
+"""
 class Notification:
+
+	"""
+		Initialize the notification.
+	"""
 	def __init__(self, language):
 		logging.info("Initialize the notification")
 		Notify.init(APPINDICATOR_ID)
 		self.language = language
 
+
+	"""
+		Show the notification"
+	"""
 	def show(self, warning_time):
 		logging.info("Show pre-break notification")
 		self.notification = Notify.Notification.new("Safe Eyes", "\n" + self.language['messages']['ready_for_a_break'].format(warning_time), icon="safeeyes_enabled")
 		self.notification.show()
 
+
+	"""
+		Close the notification if it is not closed by the system already.
+	"""
 	def close(self):
 		logging.info("Close pre-break notification")
 		try:
 			self.notification.close()
 		except:
-			logging.warning("Notification is already closed")
+			# Some Linux systems automatically close the notification.
 			pass
 
+
+	"""
+		Uninitialize the notification. Call this method when closing the application.
+	"""
 	def quite(self):
 		logging.info("Uninitialize Safe Eyes notification")
 		GLib.idle_add(lambda: Notify.uninit())

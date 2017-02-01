@@ -23,13 +23,18 @@ import threading
 import logging
 from Xlib import Xatom, Xutil
 from Xlib.display import Display, X
-
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib, GdkX11
 
-class BreakScreen:
-	"""Full screen break window"""
 
+"""
+	The fullscreen window which prevents users from using the computer.
+"""
+class BreakScreen:
+
+	"""
+		Read the break_screen.glade and build the user interface.
+	"""
 	def __init__(self, on_skip, glade_file, style_sheet_path):
 		self.on_skip = on_skip
 		self.is_pretified = False
@@ -52,52 +57,58 @@ class BreakScreen:
 		self.skip_button_text = language['ui_controls']['skip']
 		self.strict_break = config['strict_break']
 
+
+	"""
+		Window close event handler.
+	"""
 	def on_window_delete(self, *args):
 		logging.info("Closing the break screen")
 		self.lock_keyboard = False
 		self.close()
 
+
+	"""
+		Skip button press event handler.
+	"""
 	def on_skip_clicked(self, button):
 		logging.info("User skipped the break")
 		self.on_skip()
 		self.close()
 
+
+	"""
+		Show/update the count down on all screens.
+	"""
 	def show_count_down(self, count):
-		GLib.idle_add(lambda: self.__show_count_down(count))
+		GLib.idle_add(lambda: self.__update_count_down(count))
 
-	def __show_count_down(self, count):
-		for label in self.count_labels:
-			label.set_text(count)
 
+	"""
+		Show the break screen with the given message on all displays.
+	"""
 	def show_message(self, message):
-		GLib.idle_add(lambda: self.__show_message(message))
-
-	"""
-		Lock the keyboard to prevent the user from using keyboard shortcuts
-	"""
-	def block_keyboard(self):
-		logging.info("Lock the keyboard")
-		self.lock_keyboard = True
-		display = Display()
-		root = display.screen().root
-		# Grap the keyboard
-		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
-		# Consume keyboard events
-		self.key_lock_condition.acquire()
-		while self.lock_keyboard:
-			self.key_lock_condition.wait()
-		self.key_lock_condition.release()
-		
-		# Ungrap the keyboard
-		logging.info("Unlock the keyboard")
-		display.ungrab_keyboard(X.CurrentTime)
-		display.flush()
+		GLib.idle_add(lambda: self.__show_break_screen(message))
 
 
 	"""
-		Show an empty break screen on each non-active screens.
+		Hide the break screen from active window and destroy all other windows
 	"""
-	def show_break_screen(self, message):
+	def close(self):
+		logging.info("Close the break screen(s)")
+		self.__release_keyboard()
+
+		# Destroy other windows if exists
+		GLib.idle_add(lambda: self.__destroy_all_screens())
+
+
+	"""
+		Show an empty break screen on all screens.
+	"""
+	def __show_break_screen(self, message):
+		# Lock the keyboard
+		thread = threading.Thread(target=self.__lock_keyboard)
+		thread.start()
+
 		logging.info("Show break screens in all displays")
 		screen = Gtk.Window().get_screen()
 		no_of_monitors = screen.get_n_monitors()
@@ -131,33 +142,52 @@ class BreakScreen:
 			window.set_keep_above(True)
 			window.present()
 			window.fullscreen()
-			
 
-	def release_keyboard(self):
+
+	"""
+		Update the countdown on all break screens.
+	"""
+	def __update_count_down(self, count):
+		for label in self.count_labels:
+			label.set_text(count)
+
+
+	"""
+		Lock the keyboard to prevent the user from using keyboard shortcuts
+	"""
+	def __lock_keyboard(self):
+		logging.info("Lock the keyboard")
+		self.lock_keyboard = True
+		display = Display()
+		root = display.screen().root
+		# Grap the keyboard
+		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
+		# Consume keyboard events
+		self.key_lock_condition.acquire()
+		while self.lock_keyboard:
+			self.key_lock_condition.wait()
+		self.key_lock_condition.release()
+		
+		# Ungrap the keyboard
+		logging.info("Unlock the keyboard")
+		display.ungrab_keyboard(X.CurrentTime)
+		display.flush()
+
+
+	"""
+		Release the locked keyboard.
+	"""
+	def __release_keyboard(self):
 		self.key_lock_condition.acquire()
 		self.lock_keyboard = False
 		self.key_lock_condition.notify()
 		self.key_lock_condition.release()
 
-	def __show_message(self, message):
-		# Lock the keyboard
-		thread = threading.Thread(target=self.block_keyboard)
-		thread.start()
-
-		self.show_break_screen(message)
-
 
 	"""
-		Hide the break screen from active window and destroy all other windows
+		Close all the break screens.
 	"""
-	def close(self):
-		logging.info("Close the break screen(s)")
-		self.release_keyboard()
-
-		# Destroy other windows if exists
-		GLib.idle_add(lambda: self.__close())
-
-	def __close(self):
+	def __destroy_all_screens(self):
 		for win in self.windows:
 			win.destroy()
 		del self.windows[:]

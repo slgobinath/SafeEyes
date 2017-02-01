@@ -162,6 +162,32 @@
               </packing>
             </child>
             <child>
+              <object class="GtkLabel" id="lbl_audible_alert">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Audible alert at the end of break</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lbl_language">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Language</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkSpinButton" id="spin_short_break_duration">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -265,15 +291,12 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="lbl_language">
+              <object class="GtkSwitch" id="switch_audible_alert">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">center</property>
-                <property name="label" translatable="yes">Language</property>
+                <property name="can_focus">True</property>
               </object>
               <packing>
-                <property name="left_attach">0</property>
+                <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
               </packing>
             </child>
@@ -284,7 +307,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">7</property>
               </packing>
             </child>
           </object>
