@@ -1,6 +1,6 @@
 {
     "meta_info": {
-    	"language_name": "தமிழ்",
+    	  "language_name": "தமிழ்",
         "language_name_en": "Tamil"
     },
     "exercises": {
@@ -38,6 +38,7 @@
         "short_break_duration": "குறுகிய கால இடைவேளை (விநாடிகளில்)",
         "skip": "தவிர்",
         "strict_break": "கட்டாய இடைவேளை (தவிர்க்கும் பொத்தான் காண்பிக்கப்பட மாட்டாது)",
+        "audible_alert": "இடைவேளையின் இறுதியில் ஒலி சமிக்கை",
         "language": "மொழி",
         "time_to_prepare_for_break": "இடைவேளைக்கு தயாராக தேவைப்படும் நேரம் (விநாடிகளில்)"
     }

@@ -23,11 +23,11 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject` and `python2-dbus`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus` and `mpg123`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi` and `python-dbus`
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus` and `mpg123`
 
-   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils` and `python-dbus`
+   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus` and `mpg123`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.0/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
@@ -92,6 +92,8 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 
 3. Translate other property values to the selected language.
 
+4. Translate the comment in [safeeyes.desktop](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/share/applications/safeeyes.desktop) file.
+
 **Note 1:** The `{}` used in property values will be replaced by runtime variables related to those commands. For example the `{}` in `Next break at {}` will be replaced by time at the runtime.
 
 **Note 2:** Use Unicode when translating Safe Eyes.
@@ -103,7 +105,7 @@ For more details, have a look at existing language files: [lang](https://github.
 ### Currently available translations
  * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/cz.json)
  * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json)
- * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/es.json) (Will be included in v1.1.2)
+ * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/es.json)
  * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/fr.json)
  * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/hu.json)
  * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/pt.json)

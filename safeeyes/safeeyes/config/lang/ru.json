@@ -32,6 +32,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Количество коротких перерывов между двумя длинными",
         "time_to_prepare_for_break": "Время подготовки в перерыву (в секундах)",
         "strict_break": "Обязательный перерыв (Скрыть кнопку 'Пропустить')",
+        "audible_alert": "Audible alert at the end of break",
         "language": "Язык",
         "enable": "Активировать Safe Eyes",
         "settings": "Настройки",

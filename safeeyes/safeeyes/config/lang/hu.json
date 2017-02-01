@@ -31,6 +31,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
         "time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
         "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
+        "audible_alert": "Audible alert at the end of break",
         "language": "Nyelv",
         "enable": "Safe Eyes Bekapcsolása",
         "settings": "Beállítások",

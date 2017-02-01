@@ -33,6 +33,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
         "strict_break": "Povinná přestávka (Skrýt tlačítko pro přeskočení)",
+        "audible_alert": "Audible alert at the end of break",
         "language": "Jazyk",
         "enable": "Povolit Safe Eyes",
         "settings": "Nastavení",

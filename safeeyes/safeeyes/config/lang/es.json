@@ -33,6 +33,7 @@
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas cortas entre dos pausas largas",
         "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
         "strict_break": "Pausa estricta (Sin botón Cancelar)",
+        "audible_alert": "Audible alert at the end of break",
         "language": "Idioma",
         "enable": "Activar Safe Eyes",
         "settings": "Preferencias",
