@@ -20,9 +20,7 @@
     "messages": {
         "ready_for_a_break": "Listo para una pausa en {} segundos",
         "safe_eyes_is_disabled": "Safe Eyes está desactivado",
-        "next_break_at_noon": "Próxima pausa a las {}",
-        "next_break_at_am": "Próxima pausa a las {} de la mañana",
-        "next_break_at_pm": "Próxima pausa a las {} de la tarde/noche"
+        "next_break_at": "Próxima pausa a las {}"
     },
     "ui_controls": {
         "skip": "Cancelar",

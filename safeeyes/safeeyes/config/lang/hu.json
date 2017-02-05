@@ -19,9 +19,7 @@
     "messages": {
         "ready_for_a_break": "Tervezett szünet {} másodperc múlva!",
         "safe_eyes_is_disabled": "Safe Eyes kikapcsolva",
-        "next_break_at_noon": "A következő szünet {}",
-        "next_break_at_am": "A következő szünet de. {}",
-        "next_break_at_pm": "A következő szünet du. {}"
+        "next_break_at": "A következő szünet {}"
     },
     "ui_controls": {
         "skip": "Átugrás",

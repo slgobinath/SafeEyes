@@ -20,9 +20,7 @@
     "messages": {
         "ready_for_a_break": "Priprav sa na prestávku o {} sekúnd",
         "safe_eyes_is_disabled": "Safe Eyes sú zablokované",
-        "next_break_at_noon": "Ďalšia prestávka o {}",
-        "next_break_at_am": "Ďalšia prestávka o {} doobeda",
-        "next_break_at_pm": "Ďalšia prestávka o {} poobede"
+        "next_break_at": "Ďalšia prestávka o {}"
     },
     "ui_controls": {
         "skip": "Preskočiť",
