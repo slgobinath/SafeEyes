@@ -1,0 +1,45 @@
+{
+    "meta_info": {
+        "language_name": "Deutsch",
+        "language_name_en": "German"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Laufen Sie ein wenig",
+            "Lehnen Sie sich zurück und entspannen Sie sich"
+        ],
+        "short_break_exercises": [
+            "Schließen Sie die Augen",
+            "Rollen Sie mit den Augen",
+            "Rotieren Sie mit den Augen im Uhrzeigersinn",
+            "Rotieren Sie mit den Augen gegen den Uhrzeigersinn",
+            "Zwinkern Sie mit den Augen",
+            "Fokussieren Sie sich auf einen weit entfernten Punkt",
+            "Trinken Sie ein wenig Wasser"
+        ]
+    },
+    "messages": {
+        "ready_for_a_break": "Sind Sie bereit für eine Pause in {} Sekunden",
+        "safe_eyes_is_disabled": "Safe Eyes ist deaktiviert",
+        "next_break_at_noon": "Nächste Pause um {}",
+        "next_break_at_am": "Nächste Pause um {} AM",
+        "next_break_at_pm": "Nächste Pause um {} PM"
+    },
+    "ui_controls": {
+        "skip": "Überspringen",
+        "short_break_duration": "Kleine Pause Intervall (in Sekunden)",
+        "long_break_duration": "Lange Pause Intervall (in Sekunden)",
+        "interval_between_two_breaks": "Intervall zwischen zwei Pausen",
+        "no_of_short_breaks_between_two_long_breaks": "Anzahl von kleinen Pausen zwischen zwei langen Pausen",
+        "time_to_prepare_for_break": "Zeit zur Vorbereitung für die Pause (in Sekunden)",
+        "strict_break": "Strikte Pause (Überspringen nicht möglich)",
+        "audible_alert": "Akustisches Signal am Ende der Pause",
+        "language": "Sprache",
+        "enable": "Safe Eyes Aktivieren",
+        "settings": "Einstellungen",
+        "about": "About",
+        "quit": "Schließen",
+        "save": "Speichern",
+        "cancel": "Abbrechen"
+    }
+}
