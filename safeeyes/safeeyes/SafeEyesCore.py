@@ -16,10 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi
-gi.require_version('Gdk', '3.0')
-from gi.repository import  Gdk, Gio, GLib, GdkX11
-import time, datetime, threading, sys, subprocess, logging
+
+import time, datetime, threading, sys, subprocess, logging, Utility
 
 
 """
@@ -37,13 +35,15 @@ class SafeEyesCore:
 		self.short_break_message_index = -1
 		self.skipped = False
 		self.active = False
+		self.running = False
 		self.show_notification = show_notification
 		self.start_break = start_break
 		self.end_break = end_break
 		self.on_countdown = on_countdown
 		self.update_next_break_info = update_next_break_info
 		self.notification_condition = threading.Condition()
-		self.break_condition = threading.Condition()
+		self.idle_condition = threading.Condition()
+		self.lock = threading.Lock()
 
 
 	"""
@@ -58,38 +58,68 @@ class SafeEyesCore:
 		self.long_break_duration = config['long_break_duration']
 		self.short_break_duration = config['short_break_duration']
 		self.break_interval = config['break_interval']
+		self.idle_time = config['idle_time']
 
 
 	"""
 		Start Safe Eyes is it is not running already.
 	"""
 	def start(self):
-		if not self.active:
-			logging.info("Scheduling next break")
-			self.active = True
-			self.__schedule_next_break()
+		with self.lock:
+			if not self.active:
+				logging.info("Scheduling next break")
+				self.active = True
+				self.running = True
+				Utility.start_thread(self.__scheduler_job)
+				Utility.start_thread(self.__start_idle_monitor)
 
 
 	"""
 		Stop Safe Eyes if it is running.
 	"""
 	def stop(self):
-		if self.active:
-			logging.info("Stop the core")
-			# Reset the state properties in case of restart
-			# self.break_count = 0
-			# self.long_break_message_index = -1
-			# self.short_break_message_index = -1
+		with self.lock:
+			if self.active:
+				logging.info("Stop the core")
+				# Reset the state properties in case of restart
+				# self.break_count = 0
+				# self.long_break_message_index = -1
+				# self.short_break_message_index = -1
 
-			self.notification_condition.acquire()
-			self.active = False
-			self.notification_condition.notify()
-			self.notification_condition.release()
+				# Stop the brek thread
+				self.notification_condition.acquire()
+				self.active = False
+				self.running = False
+				self.notification_condition.notify_all()
+				self.notification_condition.release()
 
-			# If waiting after notification, notify the thread to wake up and die
-			self.notification_condition.acquire()
-			self.notification_condition.notify()
-			self.notification_condition.release()
+				# Stop the idle monitor
+				self.idle_condition.acquire()
+				self.idle_condition.notify_all()
+				self.idle_condition.release()
+
+
+	"""
+		Pause Safe Eyes if it is running.
+	"""
+	def pause(self):
+		with self.lock:
+			if self.active and self.running:
+
+				self.notification_condition.acquire()
+				self.running = False
+				self.notification_condition.notify_all()
+				self.notification_condition.release()
+
+
+	"""
+		Resume Safe Eyes if it is not running.
+	"""
+	def resume(self):
+		with self.lock:
+			if self.active and not self.running:
+				self.running = True
+				Utility.start_thread(self.__scheduler_job)
 
 
 	"""
@@ -103,7 +133,7 @@ class SafeEyesCore:
 		Scheduler task to execute during every interval
 	"""
 	def __scheduler_job(self):
-		if not self.active:
+		if not self.__is_running():
 			return
 
 		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=self.break_interval)
@@ -118,29 +148,28 @@ class SafeEyesCore:
 
 		logging.info("Pre-break waiting is over")
 
-		if not self.active:
+		if not self.__is_running():
 			return
 
 		logging.info("Ready to show the break")
 
-		GLib.idle_add(lambda: self.__process_job())
+		Utility.execute_main_thread(self.__process_job)
 
 	"""
 		Used to process the job in default thread because __is_full_screen_app_found must be run by default thread
 	"""
 	def __process_job(self):
-		if self.__is_full_screen_app_found():
+		if Utility.is_full_screen_app_found():
 			# If full screen app found, do not show break screen
 			logging.info("Found a full-screen application. Skip the break")
-			if self.active:
+			if self.__is_running():
 				# Schedule the break again
-				self.__schedule_next_break()
+				Utility.start_thread(self.__scheduler_job)
 			return
 
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
 
-		thread = threading.Thread(target=self.__notify_and_start_break)
-		thread.start()
+		Utility.start_thread(self.__notify_and_start_break)
 
 	"""
 		Show notification and start the break after given number of seconds
@@ -156,7 +185,7 @@ class SafeEyesCore:
 		self.notification_condition.release()
 
 		# User can disable SafeEyes during notification
-		if self.active:
+		if self.__is_running():
 			message = ""
 			if self.__is_long_break():
 				logging.info("Count is {}; get a long beak message".format(self.break_count))
@@ -177,6 +206,7 @@ class SafeEyesCore:
 			else:
 				seconds = self.short_break_duration
 
+			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
 			while seconds and self.active and not self.skipped:
 				mins, secs = divmod(seconds, 60)
 				timeformat = '{:02d}:{:02d}'.format(mins, secs)
@@ -190,11 +220,18 @@ class SafeEyesCore:
 				self.end_break()
 
 			# Resume
-			if self.active:
+			if self.__is_running():
 				# Schedule the break again
-				self.__schedule_next_break()
+				Utility.start_thread(self.__scheduler_job)
 
 			self.skipped = False
+
+
+	"""
+		Tells whether Safe Eyes is running or not.
+	"""
+	def __is_running(self):
+		return self.active and self.running
 
 
 	"""
@@ -205,27 +242,19 @@ class SafeEyesCore:
 
 
 	"""
-		Start a new thread to schedule the next break.
+		Continuously check the system idle time and pause/resume Safe Eyes based on it.
 	"""
-	def __schedule_next_break(self):
-		thread = threading.Thread(target=self.__scheduler_job)
-		thread.start()
+	def __start_idle_monitor(self):
+		while self.active:
+			# Wait for 2 seconds
+			self.idle_condition.acquire()
+			self.idle_condition.wait(2)
+			self.idle_condition.release()
 
-
-	"""
-		Check for full-screen applications
-	"""
-	def __is_full_screen_app_found(self):
-		logging.info("Searching for full-screen application")
-		screen = Gdk.Screen.get_default()
-		active_xid = str(screen.get_active_window().get_xid())
-		cmdlist = ['xprop', '-root', '-notype','-id',active_xid, '_NET_WM_STATE']
-		
-		try:
-			stdout = subprocess.check_output(cmdlist)
-		except subprocess.CalledProcessError:
-			logging.warning("Error in finding full-screen application")
-			pass
-		else:
-			if stdout:
-				return 'FULLSCREEN' in stdout
+			if self.active:
+				# Get the system idle time
+				system_idle_time = Utility.system_idle_time()
+				if system_idle_time >= self.idle_time and self.running:
+					self.pause()
+				elif system_idle_time < self.idle_time and not self.running:
+					self.resume()

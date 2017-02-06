@@ -30,6 +30,7 @@
         "interval_between_two_breaks": "Két szünet közötti idő",
         "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
         "time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
+        "idle_time": "Minimum idle time to pause (in minutes)",
         "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
         "audible_alert": "Audible alert at the end of break",
         "language": "Nyelv",

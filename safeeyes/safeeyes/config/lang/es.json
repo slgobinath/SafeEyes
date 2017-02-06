@@ -32,6 +32,7 @@
         "interval_between_two_breaks": "Tiempo entre dos pausas",
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas cortas entre dos pausas largas",
         "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
+        "idle_time": "Minimum idle time to pause (in minutes)",
         "strict_break": "Pausa estricta (Sin botón Cancelar)",
         "audible_alert": "Audible alert at the end of break",
         "language": "Idioma",

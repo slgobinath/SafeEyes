@@ -32,6 +32,7 @@
         "interval_between_two_breaks": "Interval mezi dvěma přestávkami",
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
+        "idle_time": "Minimum idle time to pause (in minutes)",
         "strict_break": "Povinná přestávka (Skrýt tlačítko pro přeskočení)",
         "audible_alert": "Audible alert at the end of break",
         "language": "Jazyk",
