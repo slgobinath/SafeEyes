@@ -29,7 +29,7 @@ Manual installation is not tested in any systems. I will update this page as soo
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `xprintidle` and `mpg123`
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.3/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.4/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
@@ -120,9 +120,13 @@ For more details, have a look at existing language files: [lang](https://github.
 
 ## History
 Version 1.1.3:
+ * Bug fix for no audible alert
+
+Version 1.1.3:
  * Optional audible alert after breaks
  * Pause Safe Eyes if the system is idle for a given time. (Resume when user is active)
  * Bug fix for no break after fullscreen apps found
+ * Dependency fix for Kubuntu
 
 Version 1.1.2:
  * Bug fix for no break
