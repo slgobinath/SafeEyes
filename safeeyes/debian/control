@@ -8,7 +8,7 @@ Homepage: https://github.com/slgobinath/SafeEyes/
 
 Package: safeeyes
 Architecture: any
-Depends: gir1.2-appindicator3-0.1, python (>= 2.7.0), python-xlib, python-gi, python-dbus, mpg123
+Depends: gir1.2-appindicator3-0.1, python (>= 2.7.0), python-xlib, python-gi, python-dbus, gir1.2-notify-0.7, python-gtk2, mpg123
 Description: Safe Eyes
  Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
  .
@@ -20,6 +20,6 @@ Description: Safe Eyes
   - Do not disturb when working with fullscreen applications( Eg: Watching movies)
   - Notifications before every break
   - Optional audible alert at the end of break
-  - Multi-workspace support
+  - Smart pause and resume based on system idle time
   - Multi-monitor support
   - Elegant and customizable design

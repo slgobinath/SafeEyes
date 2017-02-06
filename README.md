@@ -25,11 +25,11 @@ Manual installation is not tested in any systems. I will update this page as soo
 
    * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus` and `mpg123`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus` and `mpg123`
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus`, `gir1.2-notify-0.7`, `python-gtk2` and `mpg123`
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus` and `mpg123`
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.0/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.2/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
 If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
@@ -150,6 +150,7 @@ Version 1.0.6:
  * Ubuntu 16.10
  * Linux Mint 18
  * Ubuntu Mate 16.04
+ * Kubuntu 16.10
 
 ## License
 
