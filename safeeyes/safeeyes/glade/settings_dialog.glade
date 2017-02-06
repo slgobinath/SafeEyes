@@ -160,7 +160,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="label" translatable="yes">Minimum idle time to pause Safe Eyes (in minutes)</property>
+                <property name="label" translatable="yes">Minimum idle time to pause (in minutes)</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
