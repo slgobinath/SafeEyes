@@ -19,7 +19,7 @@
         ]
     },
     "messages": {
-        "ready_for_a_break": "Sind Sie bereit für eine Pause in {} Sekunden",
+        "ready_for_a_break": "Nächste Pause in {} Sekunden",
         "safe_eyes_is_disabled": "Safe Eyes ist deaktiviert",
         "next_break_at_noon": "Nächste Pause um {}",
         "next_break_at_am": "Nächste Pause um {} AM",
@@ -35,7 +35,7 @@
         "strict_break": "Strikte Pause (Überspringen nicht möglich)",
         "audible_alert": "Akustisches Signal am Ende der Pause",
         "language": "Sprache",
-        "enable": "Safe Eyes Aktivieren",
+        "enable": "Safe Eyes Aktivieren/Deaktivieren",
         "settings": "Einstellungen",
         "about": "About",
         "quit": "Schließen",
