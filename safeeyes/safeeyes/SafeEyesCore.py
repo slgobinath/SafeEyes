@@ -86,7 +86,7 @@ class SafeEyesCore:
 				# self.long_break_message_index = -1
 				# self.short_break_message_index = -1
 
-				# Stop the brek thread
+				# Stop the break thread
 				self.notification_condition.acquire()
 				self.active = False
 				self.running = False
@@ -105,7 +105,6 @@ class SafeEyesCore:
 	def pause(self):
 		with self.lock:
 			if self.active and self.running:
-
 				self.notification_condition.acquire()
 				self.running = False
 				self.notification_condition.notify_all()
@@ -255,6 +254,8 @@ class SafeEyesCore:
 				# Get the system idle time
 				system_idle_time = Utility.system_idle_time()
 				if system_idle_time >= self.idle_time and self.running:
+					logging.info('Pause Safe Eyes due to system idle')
 					self.pause()
 				elif system_idle_time < self.idle_time and not self.running:
+					logging.info('Resume Safe Eyes due to user activity')
 					self.resume()
