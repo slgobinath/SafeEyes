@@ -21,9 +21,7 @@
     "messages": {
         "ready_for_a_break": "{} விநாடிகளில் இடைவேளைக்கு தயாராகுங்கள்",
         "safe_eyes_is_disabled": "Safe Eyes நிறுத்தி வைக்கப்பட்டுள்ளது",
-        "next_break_at_noon": "அடுத்த இடைவேளை {}",
-        "next_break_at_am": "அடுத்த இடைவேளை {} முற்பகல்",
-        "next_break_at_pm": "அடுத்த இடைவேள {} பிற்பகல்"
+        "next_break_at": "அடுத்த இடைவேளை {}"
     },
     "ui_controls": {
         "cancel": "ரத்து",

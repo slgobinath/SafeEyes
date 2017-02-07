@@ -21,9 +21,7 @@
     "messages": {
         "ready_for_a_break": "Připravte se na přestávku za {} sekund",
         "safe_eyes_is_disabled": "Safe Eyes je zakázáno",
-        "next_break_at_noon": "Příští přestávka v {}",
-        "next_break_at_am": "Příští přestávka v {} dopoledne",
-        "next_break_at_pm": "Příští přestávka v {} odpoledne"
+        "next_break_at": "Příští přestávka v {}"
     },
     "ui_controls": {
         "skip": "Přeskočit",

@@ -21,9 +21,7 @@
     "messages": {
         "ready_for_a_break": "Приготовьтесь к перерыву через {} секунд",
         "safe_eyes_is_disabled": "Safe Eyes отключен",
-        "next_break_at_noon": "Следующий перерыв в {}",
-        "next_break_at_am": "Следующий перерыв в {} утра",
-        "next_break_at_pm": "Следующий перерыв в {} вечера"
+        "next_break_at": "Следующий перерыв в {}"
     },
     "ui_controls": {
         "skip": "Пропустить",

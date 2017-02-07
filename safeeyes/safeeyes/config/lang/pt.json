@@ -21,9 +21,7 @@
     "messages": {
         "ready_for_a_break": "Pronto para uma pausa em {} segundos",
         "safe_eyes_is_disabled": "Safe Eyes está desabilitado",
-        "next_break_at_noon": "Próxima pausa em {}",
-        "next_break_at_am": "Próxima pausa em {} AM",
-        "next_break_at_pm": "Próxima pausa em {} PM"
+        "next_break_at": "Próxima pausa em {}"
     },
     "ui_controls": {
         "skip": "Pular",
