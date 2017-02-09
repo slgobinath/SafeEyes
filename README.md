@@ -23,11 +23,11 @@ Manual installation is not tested in any systems. I will update this page as soo
 
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `xprintidle` and `mpg123`
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `python2-babel`, `xprintidle` and `mpg123`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus`, `gir1.2-notify-0.7`, `python-gtk2`, `xprintidle` and `mpg123`
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus`, `gir1.2-notify-0.7`, `python-gtk2`, `python-babel`, `xprintidle` and `mpg123`
 
-   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `xprintidle` and `mpg123`
+   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `python-babel`, `xprintidle` and `mpg123`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.4/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 

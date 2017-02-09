@@ -19,7 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
-import os, subprocess, threading, logging
+import babel.dates, os, subprocess, threading, logging, locale
 
 """
 	Play the alert.mp3
@@ -45,8 +45,8 @@ def system_idle_time():
 """
 	Execute the function in a separate thread.
 """
-def start_thread(target_function):
-	thread = threading.Thread(target=target_function)
+def start_thread(target_function, args=None):
+	thread = threading.Thread(target=target_function, kwargs=args)
 	thread.start()
 
 
@@ -58,7 +58,7 @@ def execute_main_thread(target_function):
 
 
 """
-	Check for full-screen applications
+	Check for full-screen applications.
 """
 def is_full_screen_app_found():
 	logging.info("Searching for full-screen application")
@@ -74,3 +74,13 @@ def is_full_screen_app_found():
 	else:
 		if stdout:
 			return 'FULLSCREEN' in stdout
+
+
+"""
+	Format time based on the system time.
+"""
+def format_time(time):
+	system_locale = locale.setlocale(locale.LC_ALL, '')
+	if not system_locale:
+		system_locale = 'en_US.UTF-8'
+	return babel.dates.format_time(time, format='short', locale=system_locale)
