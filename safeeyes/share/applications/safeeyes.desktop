@@ -6,6 +6,7 @@ Comment[de]=Schützt die Augen vor Überanstrengung
 Comment[cs]=Chraňte své oči před únavou
 Comment[fr]=Protégez vos yeux de la fatigue
 Comment[ta]=உங்கள் கண்களை சோர்வடையாது பாதுகாத்திடுங்கள்
+Comment[pt]=Proteja seus olhos da tensão ocular
 Exec=/opt/safeeyes/safeeyes
 Icon=safeeyes
 Version=1.1.4
