@@ -186,24 +186,13 @@ def initialize_config():
 	global config
 	config_dir_path = os.path.join(os.path.expanduser('~'), '.config/safeeyes/style')
 	startup_dir_path = os.path.join(os.path.expanduser('~'), '.config/autostart')
-	try:
-		os.makedirs(config_dir_path)
-	except OSError as exc:
-		if exc.errno == errno.EEXIST and os.path.isdir(config_dir_path):
-			pass
-		else:
-			raise
+	
+	Utility.mkdir(config_dir_path)
 
 	if not os.path.isfile(config_file_path):
 		shutil.copy2(system_config_file_path, config_file_path)
 
-		try:
-			os.makedirs(startup_dir_path)
-		except OSError as exc:
-			if exc.errno == errno.EEXIST and os.path.isdir(startup_dir_path):
-				pass
-			else:
-				raise
+		Utility.mkdir(startup_dir_path)
 
 		# Add to startup for the first time only
 		try:
@@ -244,7 +233,7 @@ def validate_config():
 		
 		# Remove startup script
 		try:
-			os.remove("/usr/share/applications/safeeyes.desktop")
+			os.remove(os.path.join(os.path.expanduser('~'), '.config/autostart/safeeyes.desktop'))
 		except:
 			pass
 

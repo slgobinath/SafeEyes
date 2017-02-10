@@ -19,7 +19,7 @@
 import gi, logging, threading, datetime, Utility
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
+from gi.repository import Gtk
 from gi.repository import AppIndicator3 as appindicator
 
 # Global variables
@@ -119,7 +119,6 @@ class TrayIcon:
         self.menu.append(self.item_info)
         self.menu.append(self.item_separator)
         self.menu.append(self.item_enable)
-        # self.menu.append(self.item_disable)
         self.menu.append(self.item_settings)
         self.menu.append(self.item_about)
         self.menu.append(self.item_quit)

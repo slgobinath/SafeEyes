@@ -18,9 +18,6 @@ For more details: [SafeEyes Protects You From Eye Strain When Working On The Com
 Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credits to [Yamakaky](https://github.com/Yamakaky)
 
 ### Other Linux:
-
-Manual installation is not tested in any systems. I will update this page as soon as I have tested in any other Linux distributions.
-
 1: Install the dependencies:
 
    * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `python2-babel`, `xprintidle` and `mpg123`
@@ -30,8 +27,6 @@ Manual installation is not tested in any systems. I will update this page as soo
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `python-babel`, `xprintidle` and `mpg123`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.4/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
-
-If you have any issues in installing Safe Eyes, please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
 4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes`
 
@@ -80,9 +75,20 @@ Please test Safe Eyes on your system and report any issues [here](https://github
 
 Please test Safe Eyes and create installers for your operating system
 
+**Found a bug?**
+
+Please report them [here](https://github.com/slgobinath/SafeEyes/issues)
+
+
 **Can you translate English to your mother tongue (or whatever the language)?**
 
 Show your support by translating Safe Eyes to a new language or by improving the existing translations.
+
+**How else can you show your support?**
+
+ - Vote for Safe Eyes in [alternativeto.net](http://alternativeto.net/software/eyeleo/?platform=linux).
+ - Suggest any improvements.
+ - Share with your friends.
 
 ## Translating Safe Eyes
 From version 1.1.0, Safe Eyes supports translation. Translation files for each langauges must be placed in `/opt/safeeyes/config/lang` directory. The language file name must follow [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code standard. For example, the language file of English must be `en.json`. Follow these steps to translate Safe Eyes to your language.

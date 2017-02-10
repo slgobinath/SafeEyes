@@ -87,3 +87,17 @@ def format_time(time):
 	if not system_locale:
 		system_locale = 'en_US.UTF-8'
 	return babel.dates.format_time(time, format='short', locale=system_locale)
+
+
+"""
+	Create directory if not exists.
+"""
+def mkdir(path):
+	try:
+		os.makedirs(path)
+	except OSError as exc:
+		if exc.errno == errno.EEXIST and os.path.isdir(path):
+			pass
+		else:
+			logging.error('Error while creating ' + str(path))
+			raise
