@@ -62,6 +62,7 @@ class TrayIcon:
         self.item_enable.connect('activate', self.on_toogle_enable)
 
         self.sub_menu_disable = Gtk.Menu()
+        self.sub_menu_items = []
 
         # Read disable options and build the sub menu
         for disable_option in config['disable_options']:
@@ -85,14 +86,13 @@ class TrayIcon:
             # Create submenu
             sub_menu_item = Gtk.MenuItem()
             sub_menu_item.connect('activate', self.on_toogle_enable, time_in_minutes)
-            sub_menu_item.set_label(self.language['ui_controls'][disable_option['label']].format(disable_option['time']))
+            self.sub_menu_items.append([sub_menu_item, disable_option['label'], disable_option['time']])
             self.sub_menu_disable.append(sub_menu_item)
 
         # Disable until restart submenu
-        sub_menu_item = Gtk.MenuItem()
-        sub_menu_item.connect('activate', self.on_toogle_enable, -1)
-        sub_menu_item.set_label(self.language['ui_controls']['until_restart'])
-        self.sub_menu_disable.append(sub_menu_item)
+        self.sub_menu_item_until_restart = Gtk.MenuItem()
+        self.sub_menu_item_until_restart.connect('activate', self.on_toogle_enable, -1)
+        self.sub_menu_disable.append(self.sub_menu_item_until_restart)
 
         # Add the sub menu to the enable/disable menu
         self.item_enable.set_submenu(self.sub_menu_disable)
@@ -109,11 +109,7 @@ class TrayIcon:
         self.item_quit = Gtk.MenuItem()
         self.item_quit.connect('activate', self.quit_safe_eyes)
 
-        self.item_info.set_label(self.language['messages']['disabled_until_restart'])
-        self.item_enable.set_label(self.language['ui_controls']['disable'])
-        self.item_settings.set_label(self.language['ui_controls']['settings'])
-        self.item_about.set_label(self.language['ui_controls']['about'])
-        self.item_quit.set_label(self.language['ui_controls']['quit'])
+        self.set_labels(language)
 
         # Append all menu items and show the menu
         self.menu.append(self.item_info)
@@ -126,6 +122,16 @@ class TrayIcon:
 
         self.indicator.set_menu(self.menu)
 
+    def set_labels(self, language):
+        self.language = language
+        for entry in self.sub_menu_items:
+            entry[0].set_label(self.language['ui_controls'][entry[1]].format(entry[2]))
+        self.sub_menu_item_until_restart.set_label(self.language['ui_controls']['until_restart'])
+        self.item_info.set_label(self.language['messages']['disabled_until_restart'])
+        self.item_enable.set_label(self.language['ui_controls']['disable'])
+        self.item_settings.set_label(self.language['ui_controls']['settings'])
+        self.item_about.set_label(self.language['ui_controls']['about'])
+        self.item_quit.set_label(self.language['ui_controls']['quit'])
 
     def show_icon(self):
         Utility.execute_main_thread(self.indicator.set_status, appindicator.IndicatorStatus.ACTIVE)
