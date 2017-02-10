@@ -53,8 +53,11 @@ def start_thread(target_function, args=None):
 """
 	Execute the given function in main thread.
 """
-def execute_main_thread(target_function):
-	GLib.idle_add(lambda: target_function())
+def execute_main_thread(target_function, args=None):
+	if args:
+		GLib.idle_add(lambda: target_function(args))
+	else:
+		GLib.idle_add(lambda: target_function())
 
 
 """

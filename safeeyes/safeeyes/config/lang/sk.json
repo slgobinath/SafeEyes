@@ -19,7 +19,8 @@
     },
     "messages": {
         "ready_for_a_break": "Priprav sa na prestávku o {} sekúnd",
-        "safe_eyes_is_disabled": "Safe Eyes sú zablokované",
+        "disabled_until_restart": "Disabled until restart",
+        "disabled_until_x": "Disabled until {}",
         "next_break_at": "Ďalšia prestávka o {}"
     },
     "ui_controls": {
@@ -34,6 +35,11 @@
         "audible_alert": "Audible alert at the end of break",
         "language": "Jazyk",
         "enable": "Povoliť Safe Eyes",
+        "disable": "Disable Safe Eyes",
+        "for_x_minutes": "For {} Minutes",
+        "for_x_hour": "For {} Hour",
+        "for_x_hours": "For {} Hours",
+        "until_restart": "Until restart",
         "settings": "Nastavenia",
         "about": "Ohľadom",
         "quit": "Koniec",
