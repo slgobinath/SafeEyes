@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, shutil, errno, dbus, logging, operator, Utility
+import os, gi, json, shutil, dbus, logging, operator, Utility
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 from BreakScreen import BreakScreen

@@ -19,7 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
-import babel.dates, os, subprocess, threading, logging, locale
+import babel.dates, os, errno, subprocess, threading, logging, locale
 
 """
 	Play the alert.mp3
