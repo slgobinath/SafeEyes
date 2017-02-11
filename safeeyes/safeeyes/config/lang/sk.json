@@ -4,18 +4,15 @@
         "language_name_en": "Slovak"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Pobehaj si chvíľku",
-            "Opri sa o kreslo a relaxuj"
-        ],
-        "short_break_exercises": [
-            "Pevne zavri oči",
-            "Gúľaj očami",
-            "Otáčaj oči v smere hodinových ručičiek",
-            "Otáčaj oči v protismere hodinových ručičiek",
-            "Žmurkaj očami",
-            "Daj si trochu vody"
-        ]
+        "short_break_close_eyes": "Pevne zavri oči",
+        "short_break_roll_eyes": "Gúľaj očami",
+        "short_break_rotate_clockwise": "Otáčaj oči v smere hodinových ručičiek",
+        "short_break_rotate_counter_clockwise": "Otáčaj oči v protismere hodinových ručičiek",
+        "short_break_blink": "Žmurkaj očami",
+        "short_break_focus_far_distance": "Focus on a point in the far distance",
+        "short_break_drink_water": "Daj si trochu vody",
+        "long_break_walk": "Pobehaj si chvíľku",
+        "long_break_lean_back": "Opri sa o kreslo a relaxuj"
     },
     "messages": {
         "ready_for_a_break": "Priprav sa na prestávku o {} sekúnd",

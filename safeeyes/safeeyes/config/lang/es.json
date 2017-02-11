@@ -4,19 +4,15 @@
         "language_name_en": "Spanish"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Vete a andar un poco",
-            "Reclínate sobre tu silla y relájate"
-        ],
-        "short_break_exercises": [
-            "Cierra bien tus ojos",
-            "Mueve tus ojos en círculos",
-            "Mueve tus ojos en círculos en el sentido horario",
-            "Mueve tus ojos en círculos en el sentido antihorario",
-            "Parpadea tus ojos",
-            "Fijarse en un punto lejano",
-            "Bebe un poco de agua"
-        ]
+        "short_break_close_eyes": "Cierra bien tus ojos",
+        "short_break_roll_eyes": "Mueve tus ojos en círculos",
+        "short_break_rotate_clockwise": "Mueve tus ojos en círculos en el sentido horario",
+        "short_break_rotate_counter_clockwise": "Mueve tus ojos en círculos en el sentido antihorario",
+        "short_break_blink": "Parpadea tus ojos",
+        "short_break_focus_far_distance": "Fijarse en un punto lejano",
+        "short_break_drink_water": "Bebe un poco de agua",
+        "long_break_walk": "Vete a andar un poco",
+        "long_break_lean_back": "Reclínate sobre tu silla y relájate"
     },
     "messages": {
         "ready_for_a_break": "Listo para una pausa en {} segundos",

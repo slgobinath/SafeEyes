@@ -4,19 +4,15 @@
         "language_name_en": "Czech"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Na chvíli se projděte",
-            "Opřete se do křesla a relaxujte"
-        ],
-        "short_break_exercises": [
-            "Zavřete oči",
-            "Koulejte očima",
-            "Kružte očima ve směru hodinových ručiček",
-            "Kružte očima proti směru hodinových ručiček",
-            "Mrkejte",
-            "Soustřeďte se na bod v dálce",
-            "Dejte si nějakou vodu"
-        ]
+        "short_break_close_eyes": "Zavřete oči",
+        "short_break_roll_eyes": "Koulejte očima",
+        "short_break_rotate_clockwise": "Kružte očima ve směru hodinových ručiček",
+        "short_break_rotate_counter_clockwise": "Kružte očima proti směru hodinových ručiček",
+        "short_break_blink": "Mrkejte",
+        "short_break_focus_far_distance": "Soustřeďte se na bod v dálce",
+        "short_break_drink_water": "Dejte si nějakou vodu",
+        "long_break_walk": "Na chvíli se projděte",
+        "long_break_lean_back": "Opřete se do křesla a relaxujte"
     },
     "messages": {
         "ready_for_a_break": "Připravte se na přestávku za {} sekund",

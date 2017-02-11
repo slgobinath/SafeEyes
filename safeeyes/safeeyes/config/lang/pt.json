@@ -4,19 +4,15 @@
         "language_name_en": "Portuguese"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Caminhe um pouco",
-            "Encoste na cadeira e relaxe"
-        ],
-        "short_break_exercises": [
-            "Feche bem os olhos",
-            "Mexa os olhos",
-            "Gire os olhos no sentido horário",
-            "Gire os olhos no sentido anti-horário",
-            "Pisque seus olhos",
-            "Focalize seu olhar num ponto distante",
-            "Beba água"
-        ]
+        "short_break_close_eyes": "Feche bem os olhos",
+        "short_break_roll_eyes": "Mexa os olhos",
+        "short_break_rotate_clockwise": "Gire os olhos no sentido horário",
+        "short_break_rotate_counter_clockwise": "Gire os olhos no sentido anti-horário",
+        "short_break_blink": "Pisque seus olhos",
+        "short_break_focus_far_distance": "Focalize seu olhar num ponto distante",
+        "short_break_drink_water": "Beba água",
+        "long_break_walk": "Caminhe um pouco",
+        "long_break_lean_back": "Encoste na cadeira e relaxe"
     },
     "messages": {
         "ready_for_a_break": "Pronto para uma pausa em {} segundos",

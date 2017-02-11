@@ -30,7 +30,7 @@ class SafeEyesCore:
 	"""
 	def __init__(self, show_notification, start_break, end_break, on_countdown, update_next_break_info):
 		# Initialize the variables
-		self.break_count = 0
+		self.break_count = -1
 		self.long_break_message_index = -1
 		self.short_break_message_index = -1
 		self.skipped = False
@@ -51,14 +51,40 @@ class SafeEyesCore:
 	"""
 	def initialize(self, config, language):
 		logging.info("Initialize the core")
-		self.short_break_exercises = language['exercises']['short_break_exercises']
-		self.long_break_exercises = language['exercises']['long_break_exercises']
+		self.short_break_exercises = [] #language['exercises']['short_break_exercises']
+		self.long_break_exercises = [] #language['exercises']['long_break_exercises']
+
 		self.no_of_short_breaks_per_long_break = config['no_of_short_breaks_per_long_break']
 		self.pre_break_warning_time = config['pre_break_warning_time']
 		self.long_break_duration = config['long_break_duration']
 		self.short_break_duration = config['short_break_duration']
 		self.break_interval = config['break_interval']
 		self.idle_time = config['idle_time']
+
+		for short_break_config in config['short_breaks']:
+			name = language['exercises'][short_break_config['name']]
+			# break_time = short_break_config['time']
+			break_time = short_break_config.get('time', self.short_break_duration)
+			# Validate time value
+			if not isinstance(break_time, int) or break_time <= 0:
+				logging.error('Invalid time in short break: ' + str(short_break_config))
+				continue
+			
+			self.short_break_exercises.append([name, break_time])
+
+		for long_break_config in config['long_breaks']:
+			name = language['exercises'][long_break_config['name']]
+			break_time = long_break_config.get('time', self.short_break_duration)
+			# Validate time value
+			if not break_time:
+				break_time = self.short_break_duration
+			elif not isinstance(break_time, int) or break_time <= 0:
+				logging.error('Invalid time in short break: ' + str(long_break_config))
+				continue
+			else:
+				break_time = break_time * 60	# Convert to seconds
+			
+			self.long_break_exercises.append([name, break_time])
 
 
 	"""
@@ -186,24 +212,20 @@ class SafeEyesCore:
 		# User can disable SafeEyes during notification
 		if self.__is_running():
 			message = ""
+			seconds = 0
 			if self.__is_long_break():
 				logging.info("Count is {}; get a long beak message".format(self.break_count))
 				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
-				message = self.long_break_exercises[self.long_break_message_index]
+				message = self.long_break_exercises[self.long_break_message_index][0]
+				seconds = self.long_break_exercises[self.long_break_message_index][1]
 			else:
 				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
-				message = self.short_break_exercises[self.short_break_message_index]
+				message = self.short_break_exercises[self.short_break_message_index][0]
+				seconds = self.short_break_exercises[self.short_break_message_index][1]
 			
 			# Show the break screen
-			self.start_break(message)
-
-			# Start the countdown
-			seconds = 0
-			if self.__is_long_break():
-				seconds = self.long_break_duration
-			else:
-				seconds = self.short_break_duration
+			self.start_break(message)		
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
 			while seconds and self.active and not self.skipped:

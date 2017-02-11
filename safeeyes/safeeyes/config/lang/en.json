@@ -4,19 +4,15 @@
         "language_name_en": "English"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Walk for a while",
-            "Lean back at your seat and relax"
-        ],
-        "short_break_exercises": [
-            "Tightly close your eyes",
-            "Roll your eyes",
-            "Rotate your eyes in clockwise direction",
-            "Rotate your eyes in counterclockwise direction",
-            "Blink your eyes",
-            "Focus on a point in the far distance",
-            "Have some water"
-        ]
+        "short_break_close_eyes": "Tightly close your eyes",
+        "short_break_roll_eyes": "Roll your eyes",
+        "short_break_rotate_clockwise": "Rotate your eyes in clockwise direction",
+        "short_break_rotate_counter_clockwise": "Rotate your eyes in counterclockwise direction",
+        "short_break_blink": "Blink your eyes",
+        "short_break_focus_far_distance": "Focus on a point in the far distance",
+        "short_break_drink_water": "Have some water",
+        "long_break_walk": "Walk for a while",
+        "long_break_lean_back": "Lean back at your seat and relax"
     },
     "messages": {
         "ready_for_a_break": "Ready for a break in {} seconds",

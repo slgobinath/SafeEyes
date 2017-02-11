@@ -32,5 +32,36 @@
     		"time": 3,
     		"unit": "hour"
     	}
+    ],
+    "short_breaks": [
+        {
+            "name": "short_break_close_eyes"
+        },
+        {
+            "name": "short_break_roll_eyes"
+        },
+        {
+            "name": "short_break_rotate_clockwise"
+        },
+        {
+            "name": "short_break_rotate_counter_clockwise"
+        },
+        {
+            "name": "short_break_blink"
+        },
+        {
+            "name": "short_break_focus_far_distance"
+        },
+        {
+            "name": "short_break_drink_water"
+        }
+    ],
+    "long_breaks": [
+        {
+            "name": "long_break_walk"
+        },
+        {
+            "name": "long_break_lean_back"
+        }
     ]
 }
