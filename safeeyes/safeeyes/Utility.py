@@ -21,13 +21,16 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
 import babel.dates, os, errno, subprocess, threading, logging, locale
 
+bin_directory = os.path.dirname(os.path.realpath(__file__))
+home_directory = os.path.expanduser('~')
+
 """
 	Play the alert.mp3
 """
 def play_notification():
 	logging.info("Playing audible alert")
 	try:
-		subprocess.Popen(['mpg123', '-q', os.path.join(os.path.dirname(os.path.realpath(__file__)), 'resource/alert.mp3')])
+		subprocess.Popen(['mpg123', '-q', os.path.join(bin_directory, 'resource/alert.mp3')])
 	except:
 		pass
 

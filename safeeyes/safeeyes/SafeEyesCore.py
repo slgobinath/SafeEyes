@@ -63,28 +63,27 @@ class SafeEyesCore:
 
 		for short_break_config in config['short_breaks']:
 			name = language['exercises'][short_break_config['name']]
-			# break_time = short_break_config['time']
 			break_time = short_break_config.get('time', self.short_break_duration)
+			audible_alert = short_break_config.get('audible_alert', config['audible_alert'])
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in short break: ' + str(short_break_config))
 				continue
 			
-			self.short_break_exercises.append([name, break_time])
+			self.short_break_exercises.append([name, break_time, audible_alert])
 
 		for long_break_config in config['long_breaks']:
 			name = language['exercises'][long_break_config['name']]
-			break_time = long_break_config.get('time', self.short_break_duration)
+			break_time = long_break_config.get('time', self.long_break_duration)
+			audible_alert = long_break_config.get('audible_alert', config['audible_alert'])
 			# Validate time value
-			if not break_time:
-				break_time = self.short_break_duration
-			elif not isinstance(break_time, int) or break_time <= 0:
+			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in short break: ' + str(long_break_config))
 				continue
 			else:
 				break_time = break_time * 60	# Convert to seconds
 			
-			self.long_break_exercises.append([name, break_time])
+			self.long_break_exercises.append([name, break_time, audible_alert])
 
 
 	"""
@@ -213,16 +212,19 @@ class SafeEyesCore:
 		if self.__is_running():
 			message = ""
 			seconds = 0
+			audible_alert = None
 			if self.__is_long_break():
 				logging.info("Count is {}; get a long beak message".format(self.break_count))
 				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
 				message = self.long_break_exercises[self.long_break_message_index][0]
 				seconds = self.long_break_exercises[self.long_break_message_index][1]
+				audible_alert = self.long_break_exercises[self.long_break_message_index][2]
 			else:
 				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
 				message = self.short_break_exercises[self.short_break_message_index][0]
 				seconds = self.short_break_exercises[self.short_break_message_index][1]
+				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
 			
 			# Show the break screen
 			self.start_break(message)		
@@ -238,7 +240,7 @@ class SafeEyesCore:
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
 			if not self.skipped:
 				logging.info("Break wasn't skipped. Automatically terminating the break")
-				self.end_break()
+				self.end_break(audible_alert)
 
 			# Resume
 			if self.__is_running():

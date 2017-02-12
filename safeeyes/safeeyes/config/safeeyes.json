@@ -1,37 +1,37 @@
 {
-	"meta": {
-		"config_version": 3
-	},
-    "break_interval": 15, 
+    "meta": {
+            "config_version": 3
+    },
+    "break_interval": 15,
     "long_break_duration": 60,
-    "no_of_short_breaks_per_long_break": 5, 
-    "pre_break_warning_time": 10, 
-    "short_break_duration": 15, 
+    "no_of_short_breaks_per_long_break": 5,
+    "pre_break_warning_time": 10,
+    "short_break_duration": 15,
     "idle_time": 5,
     "strict_break": false,
     "audible_alert": false,
     "language": "en",
     "disable_options": [
-    	{
-    		"label": "for_x_minutes",
-    		"time": 30,
-    		"unit": "minute"
-    	},
-    	{
-    		"label": "for_x_hour",
-    		"time": 1,
-    		"unit": "hour"
-    	},
-    	{
-    		"label": "for_x_hours",
-    		"time": 2,
-    		"unit": "hour"
-    	},
-    	{
-    		"label": "for_x_hours",
-    		"time": 3,
-    		"unit": "hour"
-    	}
+        {
+            "label": "for_x_minutes",
+            "time": 30,
+            "unit": "minute"
+        },
+        {
+            "label": "for_x_hour",
+            "time": 1,
+            "unit": "hour"
+        },
+        {
+            "label": "for_x_hours",
+            "time": 2,
+            "unit": "hour"
+        },
+        {
+            "label": "for_x_hours",
+            "time": 3,
+            "unit": "hour"
+        }
     ],
     "short_breaks": [
         {
