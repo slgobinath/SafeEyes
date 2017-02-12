@@ -1,0 +1,46 @@
+{
+    "meta_info": {
+        "language_name": "Türkçe",
+        "language_name_en": "Turkish"
+    },
+    "exercises": {
+        "long_break_exercises": [
+            "Biraz yürüyün",
+            "Arkanıza yaslanın ve biraz gevşeyin"
+        ],
+        "short_break_exercises": [
+            "Gözlerinizi sıkıca kapatın",
+            "Gözlerinizi çevirin",
+            "Gözlerinizi saat yönünde döndürün",
+            "Gözlerinizi saat yönünün tersine döndürün",
+            "Göz kapaklarınızı kapatıp açın",
+            "Uzak mesafede bir noktaya odaklanın",
+            "Gidip biraz su için"
+        ]
+    },
+    "messages": {
+        "ready_for_a_break": "{} Saniye içerisinde bir molaya hazır olun",
+        "safe_eyes_is_disabled": "Safe Eyes etkin değil",
+        "next_break_at_noon": "Bir sonraki mola saat {}'de",
+        "next_break_at_am": "Bir sonraki mola zamanı: {} AM",
+        "next_break_at_pm": "Bir sonraki mola zamanı: {} PM"
+    },
+    "ui_controls": {
+        "skip": "Geç",
+        "short_break_duration": "Kısa mola süresi (saniye)",
+        "long_break_duration": "Uzun mola süresi (saniye)",
+        "interval_between_two_breaks": "İki mola arasındaki süre",
+        "no_of_short_breaks_between_two_long_breaks": "İki uzun mola arasındaki kısa mola sayısı",
+        "time_to_prepare_for_break": "Mola için hazırlanma zamanı (saniye)",
+        "idle_time": "Minimum boş zaman (dakika)",
+        "strict_break": "Kesin mola (Geç düğmesini gizler)",
+        "audible_alert": "Mola sonunda sesli uyarı",
+        "language": "Dil",
+        "enable": "Safe Eyes etkin",
+        "settings": "Ayarlar",
+        "about": "Hakkında",
+        "quit": "Çıkış",
+        "save": "Kaydet",
+        "cancel": "İptal"
+    }
+}
