@@ -3,27 +3,24 @@
         "language_name": "Türkçe",
         "language_name_en": "Turkish"
     },
-    "exercises": {
-        "long_break_exercises": [
-            "Biraz yürüyün",
-            "Arkanıza yaslanın ve biraz gevşeyin"
-        ],
-        "short_break_exercises": [
-            "Gözlerinizi sıkıca kapatın",
-            "Gözlerinizi çevirin",
-            "Gözlerinizi saat yönünde döndürün",
-            "Gözlerinizi saat yönünün tersine döndürün",
-            "Göz kapaklarınızı kapatıp açın",
-            "Uzak mesafede bir noktaya odaklanın",
-            "Gidip biraz su için"
-        ]
+
+    "exercises": { 
+        "short_break_close_eyes": "Gözlerinizi sıkıca kapatın",
+        "short_break_roll_eyes": "Gözlerinizi çevirin",
+        "short_break_rotate_clockwise": "Gözlerinizi saat yönünde döndürün",
+        "short_break_rotate_counter_clockwise": "Gözlerinizi saat yönünün tersine döndürün",
+        "short_break_blink": "Göz kapaklarınızı kapatıp açın",
+        "short_break_focus_far_distance": "Uzak mesafede bir noktaya odaklanın",
+        "short_break_drink_water": "Gidip biraz su için", 
+        "long_break_walk": "Biraz yürüyün",
+        "long_break_lean_back": "Arkanıza yaslanın ve biraz gevşeyin"
     },
+
     "messages": {
         "ready_for_a_break": "{} Saniye içerisinde bir molaya hazır olun",
-        "safe_eyes_is_disabled": "Safe Eyes etkin değil",
-        "next_break_at_noon": "Bir sonraki mola saat {}'de",
-        "next_break_at_am": "Bir sonraki mola zamanı: {} AM",
-        "next_break_at_pm": "Bir sonraki mola zamanı: {} PM"
+        "disabled_until_restart": "Tekrar başlatılana kadar devre dışı",
+        "disabled_until_x": "{}'e kadar devre dışı",
+        "next_break_at": "Bir sonraki mola zamanı: {}",
     },
     "ui_controls": {
         "skip": "Geç",
@@ -36,7 +33,12 @@
         "strict_break": "Kesin mola (Geç düğmesini gizler)",
         "audible_alert": "Mola sonunda sesli uyarı",
         "language": "Dil",
-        "enable": "Safe Eyes etkin",
+        "enable": "Safe Eyes'ı etkinleştir",
+        "disable": "Safe Eyes'ı devre dışı bırak", 
+        "for_x_minutes": "{} Dakika", 
+        "for_x_hour": "{} Saat", 
+        "for_x_hours": "{} Saat", 
+        "until_restart": "Tekrar başlatılana kadar",        
         "settings": "Ayarlar",
         "about": "Hakkında",
         "quit": "Çıkış",
