@@ -3,7 +3,6 @@
         "language_name": "Türkçe",
         "language_name_en": "Turkish"
     },
-
     "exercises": { 
         "short_break_close_eyes": "Gözlerinizi sıkıca kapatın",
         "short_break_roll_eyes": "Gözlerinizi çevirin",
@@ -15,12 +14,11 @@
         "long_break_walk": "Biraz yürüyün",
         "long_break_lean_back": "Arkanıza yaslanın ve biraz gevşeyin"
     },
-
     "messages": {
         "ready_for_a_break": "{} Saniye içerisinde bir molaya hazır olun",
         "disabled_until_restart": "Tekrar başlatılana kadar devre dışı",
         "disabled_until_x": "{}'e kadar devre dışı",
-        "next_break_at": "Bir sonraki mola zamanı: {}",
+        "next_break_at": "Bir sonraki mola zamanı: {}"
     },
     "ui_controls": {
         "skip": "Geç",
