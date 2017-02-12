@@ -60,6 +60,8 @@ class SafeEyesCore:
 		self.short_break_duration = config['short_break_duration']
 		self.break_interval = config['break_interval']
 		self.idle_time = config['idle_time']
+		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
+		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 
 		for short_break_config in config['short_breaks']:
 			name = language['exercises'][short_break_config['name']]
@@ -183,9 +185,9 @@ class SafeEyesCore:
 		Used to process the job in default thread because __is_full_screen_app_found must be run by default thread
 	"""
 	def __process_job(self):
-		if Utility.is_full_screen_app_found():
+		if Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes):
 			# If full screen app found, do not show break screen
-			logging.info("Found a full-screen application. Skip the break")
+			logging.info("Found a skip_break or full-screen application. Skip the break")
 			if self.__is_running():
 				# Schedule the break again
 				Utility.start_thread(self.__scheduler_job)
@@ -210,6 +212,14 @@ class SafeEyesCore:
 
 		# User can disable SafeEyes during notification
 		if self.__is_running():
+			# Check the active window again. (User might changed the window)
+			if Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes, True):
+				# If full screen app found, do not show break screen
+				logging.info("Found a skip_break or full-screen application just before the break. Skip the break")
+				if self.__is_running():
+					# Schedule the break again
+					Utility.start_thread(self.__scheduler_job)
+				return
 			message = ""
 			seconds = 0
 			audible_alert = None

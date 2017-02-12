@@ -11,6 +11,10 @@
     "strict_break": false,
     "audible_alert": false,
     "language": "en",
+    "active_window_class": {
+        "skip_break": [],
+        "take_break": []
+    },
     "disable_options": [
         {
             "label": "for_x_minutes",

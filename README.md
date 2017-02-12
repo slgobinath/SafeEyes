@@ -3,7 +3,7 @@ Protect your eyes from eye strain using this continuous breaks reminder. A Free 
 
 For more details: [SafeEyes Protects You From Eye Strain When Working On The Computer](http://www.webupd8.org/2016/10/safeeyes-protects-you-from-eye-strain.html)
 
-## Installation
+## INSTALLATION
 
 ### Ubuntu:
 1: Add the PPA: `sudo add-apt-repository ppa:slgobinath/safeeyes`
@@ -32,11 +32,7 @@ Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credit
 
 Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and the configurations to `~/.config/safeeyes`. Therefore, from next time onwards, it should start with the system.
 
-## Configuring Safe Eyes
-Just install and forget; Safe Eyes will take care of your eyes. To customize the preferences, go to Settings from Safe Eyes tray icon.
-You can change the look and feel of the break screen in `~/.config/safeeyes/style/safeeyes_style.css`.
-
-## Uninstalling Safe Eyes
+## UNINSTALLING SAFE EYES
 Use the following commands to uninstall SafeEyes from your system.
 ```
 sudo apt remove safeeyes
@@ -44,24 +40,158 @@ rm -r ~/.config/safeeyes
 rm ~/.config/autostart/safeeyes.desktop
 ```
 
-## Features
+## FEATURES
+
+General Features:
+
 - Short breaks with eye exercises
 - Long breaks to change physical position and to warm up
-- Strict break for those who are addicted to computer
-- Highly customizable
-- Do not disturb when working with fullscreen applications( Eg: Watching movies)
 - Disable the keyboard during break
 - Notifications before every break
+- Do not disturb when working with fullscreen applications( Eg: Watching movies)
 - Smart pause and resume based on system idle time
-- Optional audible alert at the end of break
 - Multi-monitor support
 - Elegant and customizable design
 - Multi-language support
+- Highly customizable
 
-## Contributing
-**Are you a user?**
+Optional Features:
 
-Please test Safe Eyes on your system and report any issues [here](https://github.com/slgobinath/SafeEyes/issues)
+- Strict break for those who are addicted to computer
+- Skip or take break based on active windows (Regardless of fullscreen-mode)
+- Customize individual break time
+- Audible alert at the end of break
+- Turn on/off audible alert for individual breaks
+- Customize disable time period
+
+## CONFIGURING SAFE EYES
+Just install and forget; Safe Eyes will take care of your eyes. To customize the basic preferences, go to Settings from Safe Eyes tray icon. If you need advanced features, you can manually edit the `~/.config/safeeyes/safeeyes.json` for the following requirements:
+
+**NOTE:** Still the advanced customization is not available in any released versions. Please wait until the next version :-)
+
+### Override individual break time
+
+Add the optional `time` property to the desired break with the required time parameter. The `short_breaks` temporal unit is measured in seconds and the `long_breaks` temporal unit is measured in minutes.
+For example, to extend the break time of `short_break_close_eyes` to 30 seconds and the `long_break_walk` to 5 minutes, modify the configuration file as given below.
+
+```
+...
+"short_breaks": [
+    {
+        "name": "short_break_close_eyes",
+        "time": 30
+    },
+    {
+        "name": "short_break_roll_eyes"
+    },
+    ...
+],
+...
+"long_breaks": [
+    {
+        "name": "long_break_walk",
+        "time": 5
+    },
+    {
+        "name": "long_break_lean_back"
+    }
+]
+...
+```
+
+### Override audible alert after each break
+
+Add the optional `audible_alert` property to the desired break with the required true/false parameter.
+For example, to disable audible alert for all breaks except the `short_break_close_eyes`, modify the configuration file as given below.
+
+```
+...
+"audible_alert": false,
+...
+"short_breaks": [
+    {
+        "name": "short_break_close_eyes",
+        "audible_alert": true
+    },
+    {
+        "name": "short_break_roll_eyes"
+    },
+    ...
+]
+...
+```
+
+### Customize disable time period
+
+The default disable dor a given time options provide 30 minutes, 1 hour, 2 hours and 3 hours only. If you want to customize them or if you want to add/remove time based disable option, you can configure them in the `safeeyes.json` file.
+To add an additional `Disable for 45 minutes`, modify the configuration as shown below.
+
+```
+...
+"disable_options": [
+    {
+        "label": "for_x_minutes",
+        "time": 30,
+        "unit": "minute"
+    },
+    {
+        "label": "for_x_minutes",
+        "time": 45,
+        "unit": "minute"
+    },
+    {
+        "label": "for_x_hour",
+        "time": 1,
+        "unit": "hour"
+    }
+    ...
+]
+...
+```
+
+**NOTE:** The `unit` can be one of these case-insensitive constants: `second`, `seconds`, `minute`, `minutes`, `hour`, `hours`
+
+### Skip or Take breaks based on the active window regardless of the full-screen mode
+
+By default, Safe Eyes does not show the break screen if the current window is in fullscreen mode. However, you can override this feature by specifying the window-class of your interested applications.
+
+For example, to take the break if your current window is Google Chrome regardless of the fullscreen mode, add `google-chrome` to `take_break` as given below:
+
+```
+...
+"active_window_class": {
+    "skip_break": [],
+    "take_break": [`google-chrome`]
+},
+...
+```
+
+Similarly, you can skip the break even if your current application is in normal window state. For example, if you do not want to take a break while VLC player is in focus, add `vlc` to `skip_break` as shown here:
+```
+...
+"active_window_class": {
+    "skip_break": [`vlc`],
+    "take_break": [`google-chrome`]
+},
+...
+```
+
+**NOTE:** The names `vlc` and `google-chrome` are not the application names but their window classes. Inorder to get the window class of an application, enter the following command in your terminal and click on the desired application. In the printed `WM_CLASS`, choose the second one.
+```
+xprop WM_CLASS
+```
+Some more sample window class names:
+- Mozilla Firefox: `firefox`
+- Sublime Text: `sublime_text`
+- Gnome Terminal: `gnome-terminal`
+- LibreOffice Writer: `libreoffice-writer`
+
+### Change the look and feel of the break screen
+
+You can change the look and feel of the break screen in `~/.config/safeeyes/style/safeeyes_style.css`.
+
+
+## CONTRIBUTING
 
 **Are you a developer?**
 
@@ -79,7 +209,6 @@ Please test Safe Eyes and create installers for your operating system
 
 Please report them [here](https://github.com/slgobinath/SafeEyes/issues)
 
-
 **Can you translate English to your mother tongue (or whatever the language)?**
 
 Show your support by translating Safe Eyes to a new language or by improving the existing translations.
@@ -90,10 +219,10 @@ Show your support by translating Safe Eyes to a new language or by improving the
  - Suggest any improvements.
  - Share with your friends.
 
-## Translating Safe Eyes
+## TRANSLATING SAFE EYES
 From version 1.1.0, Safe Eyes supports translation. Translation files for each langauges must be placed in `/opt/safeeyes/config/lang` directory. The language file name must follow [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code standard. For example, the language file of English must be `en.json`. Follow these steps to translate Safe Eyes to your language.
 
-1. Copy `/opt/safeeyes/config/lang/en.json` to `/opt/safeeyes/config/lang/<iso-639-1-language-code>.json`
+1. Copy `/opt/safeeyes/config/lang/en.json` to `/opt/safeeyes/config/lang/<iso-639-1-language-code>.json` (Please compare the `en.json` with the [online version](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json) before sending PR, because there can be new changes made to the language files)
 
 2. Provide `language_name` in the language itself and `language_name_en` in English.
 
@@ -105,7 +234,7 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 
 **Note 2:** Use Unicode when translating Safe Eyes.
 
-**Note 3:** To change the language of Safe Eyes, change the `language` property in `~/.config/safeeyes/safeeyes.json` to the ISO 639-1 code of your language and restart the Safe Eyes.
+**Note 3:** To change the language of Safe Eyes, select the language name from the combo-box in the Settings dialog.
 
 For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
 
@@ -120,52 +249,13 @@ For more details, have a look at existing language files: [lang](https://github.
  * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/ru.json)
  * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/sk.json)
  * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/ta.json)
+ * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/tr.json)
 
 
+## TESTED ENVIRONMENTS
 
+Core functionalities of Safe Eyes are tested by the developer in the follwing environments:
 
-## History
-Version 1.1.3:
- * Bug fix for no audible alert
-
-Version 1.1.3:
- * Optional audible alert after breaks
- * Pause Safe Eyes if the system is idle for a given time. (Resume when user is active)
- * Bug fix for no break after fullscreen apps found
- * Dependency fix for Kubuntu
-
-Version 1.1.2:
- * Bug fix for no break
-
-Version 1.1.1:
- * About dialog
- * UI control to select the language
- * Fixed bug in disable option after suspend
-
-Version 1.1.0:
- * Multi-language support
- * Fixed bug in multi-screen support
- * Fixed bug in break screen transparency
- * Next break information in tray menu
-
-Version 1.0.9:
- * Multi-screen support
- * Handling system suspend (Stop and restart during system suspend)
-
-Version 1.0.8:
- * Bug fix for Ubuntu Mate
-
-Version 1.0.7:
- * Removed python-apscheduler dependency
- * Installation directory is restructured
- * Bug fixes:
-   * Supporting Ubuntu 16.10
-   * Symlink for autostart instead of copying the desktop file
-
-Version 1.0.6:
-* Latest stable release
-
-## Tested Environments
  * Ubuntu 14.04
  * Ubuntu 16.04
  * Ubuntu 16.10
@@ -173,6 +263,6 @@ Version 1.0.6:
  * Ubuntu Mate 16.04
  * Kubuntu 16.10
 
-## License
+## LICENSE
 
 GNU General Public License v3

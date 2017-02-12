@@ -19,7 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
-import babel.dates, os, errno, subprocess, threading, logging, locale
+import babel.dates, os, errno, re, subprocess, threading, logging, locale
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -66,11 +66,11 @@ def execute_main_thread(target_function, args=None):
 """
 	Check for full-screen applications.
 """
-def is_full_screen_app_found():
+def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
 	logging.info("Searching for full-screen application")
 	screen = Gdk.Screen.get_default()
 	active_xid = str(screen.get_active_window().get_xid())
-	cmdlist = ['xprop', '-root', '-notype','-id',active_xid, '_NET_WM_STATE']
+	cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
 	
 	try:
 		stdout = subprocess.check_output(cmdlist)
@@ -79,7 +79,24 @@ def is_full_screen_app_found():
 		pass
 	else:
 		if stdout:
-			return 'FULLSCREEN' in stdout
+			is_fullscreen = 'FULLSCREEN' in stdout
+			# Extract the process name
+			process_names = re.findall('"(.+?)"', stdout)
+			if process_names:
+			    process = process_names[1].lower()
+			    print process
+			    if process in skip_break_window_classes:
+			    	return True
+			    elif process in take_break_window_classes:
+			    	if is_fullscreen and unfullscreen_allowed:
+			    		try:
+			    			screen.get_active_window().unfullscreen()
+			    		except:
+			    			logging.error('Error in unfullscreen the window ' + process)
+			    			pass
+			    	return False
+
+			return is_fullscreen
 
 
 """
