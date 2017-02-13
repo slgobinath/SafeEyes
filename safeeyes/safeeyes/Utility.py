@@ -103,7 +103,8 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	Format time based on the system time.
 """
 def format_time(time):
-	system_locale = locale.setlocale(locale.LC_ALL, '')
+	locale.setlocale(locale.LC_ALL, '')
+	system_locale = locale.getlocale(locale.LC_TIME)[0]
 	if not system_locale:
 		system_locale = 'en_US.UTF-8'
 	return babel.dates.format_time(time, format='short', locale=system_locale)
