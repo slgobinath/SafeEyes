@@ -84,7 +84,6 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 			process_names = re.findall('"(.+?)"', stdout)
 			if process_names:
 			    process = process_names[1].lower()
-			    print process
 			    if process in skip_break_window_classes:
 			    	return True
 			    elif process in take_break_window_classes:

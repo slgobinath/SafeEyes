@@ -1,7 +1,10 @@
 # Safe Eyes
 Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.
 
-For more details: [SafeEyes Protects You From Eye Strain When Working On The Computer](http://www.webupd8.org/2016/10/safeeyes-protects-you-from-eye-strain.html)
+Read more about Safe Eyes on [WEB UPD8](http://www.webupd8.org/):
+
+1. [SafeEyes Protects You From Eye Strain When Working On The Computer](http://www.webupd8.org/2016/10/safeeyes-protects-you-from-eye-strain.html)
+2. [Computer Eye Strain Prevention App 'Safe Eyes' Sees New Release](http://www.webupd8.org/2017/02/computer-eye-strain-prevention-app.html)
 
 ## INSTALLATION
 
