@@ -29,7 +29,7 @@ Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credit
 
    * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `python-babel`, `xprintidle` and `mpg123`
 
-2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.6/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
+2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.7/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
 4: Start Safe Eyes using this command:  `/opt/safeeyes/safeeyes`
 
