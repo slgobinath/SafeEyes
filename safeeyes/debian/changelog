@@ -1,4 +1,6 @@
-safeeyes (1.1.4-1) xenial; urgency=medium
+safeeyes (1.1.5-1) xenial; urgency=medium
+
+  * Advanced configurations and disable for given time
 
   * Optional audible alert and pause Safe Eyes if system is idle
 
