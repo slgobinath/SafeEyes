@@ -159,7 +159,7 @@ For example, to take the break if your current window is Google Chrome regardles
 ...
 "active_window_class": {
     "skip_break": [],
-    "take_break": [`google-chrome`]
+    "take_break": ["google-chrome"]
 },
 ...
 ```
@@ -168,8 +168,8 @@ Similarly, you can skip the break even if your current application is in normal 
 ```
 ...
 "active_window_class": {
-    "skip_break": [`vlc`],
-    "take_break": [`google-chrome`]
+    "skip_break": ["vlc"],
+    "take_break": ["google-chrome"]
 },
 ...
 ```
