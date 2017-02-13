@@ -4,25 +4,21 @@
         "language_name_en": "Russian"
     },
     "exercises": {
-        "long_break_exercises": [
-            "Пройдитесь немного",
-            "Откиньтесь на спинку стула и расслабьтесь"
-        ],
-        "short_break_exercises": [
-            "Сильно зажмурьтесь",
-            "Закатите глаза",
-            "Поводите глазами по кругу по часовой стрелке",
-            "Поводите глазами по кругу против часовой стрелки",
-            "Поморгайте",
-            "Выпейте воды"
-        ]
+        "short_break_close_eyes": "Сильно зажмурьтесь",
+        "short_break_roll_eyes": "Закатите глаза",
+        "short_break_rotate_clockwise": "Поводите глазами по кругу по часовой стрелке",
+        "short_break_rotate_counter_clockwise": "Поводите глазами по кругу против часовой стрелки",
+        "short_break_blink": "Поморгайте",
+        "short_break_focus_far_distance": "Сфокусируйте взгляд на далёком объекте",
+        "short_break_drink_water": "Выпейте воды",
+        "long_break_walk": "Пройдитесь немного",
+        "long_break_lean_back": "Откиньтесь на спинку стула и расслабьтесь"
     },
     "messages": {
         "ready_for_a_break": "Приготовьтесь к перерыву через {} секунд",
-        "safe_eyes_is_disabled": "Safe Eyes отключен",
-        "next_break_at_noon": "Следующий перерыв в {}",
-        "next_break_at_am": "Следующий перерыв в {} утра",
-        "next_break_at_pm": "Следующий перерыв в {} вечера"
+        "disabled_until_restart": "Отключено до перезагрузки",
+        "disabled_until_x": "Отключено до {}",
+        "next_break_at": "Следующий перерыв в {}"
     },
     "ui_controls": {
         "skip": "Пропустить",
@@ -31,9 +27,16 @@
         "interval_between_two_breaks": "Интервал между двумя перерывами",
         "no_of_short_breaks_between_two_long_breaks": "Количество коротких перерывов между двумя длинными",
         "time_to_prepare_for_break": "Время подготовки в перерыву (в секундах)",
+        "idle_time": "Минимальное время простоя для паузы (в минутах)",
         "strict_break": "Обязательный перерыв (Скрыть кнопку 'Пропустить')",
+        "audible_alert": "Звуковой сигнал в конце перерыва",
         "language": "Язык",
         "enable": "Активировать Safe Eyes",
+        "disable": "Отключить Safe Eyes",
+        "for_x_minutes": "На {} минут",
+        "for_x_hour": "На {} час",
+        "for_x_hours": "На {} часов",
+        "until_restart": "До перезагрузки",
         "settings": "Настройки",
         "about": "О программе",
         "quit": "Выйти",
