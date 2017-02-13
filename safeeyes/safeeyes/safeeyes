@@ -43,7 +43,7 @@ system_language_directory = os.path.join(Utility.bin_directory, "config/lang")
 
 is_active = True
 CONFIGURATION_VERSION = 3
-SAFE_EYES_VERSION = "1.1.5"
+SAFE_EYES_VERSION = "1.1.6"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.

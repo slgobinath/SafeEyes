@@ -1,4 +1,6 @@
-safeeyes (1.1.5-1) xenial; urgency=medium
+safeeyes (1.1.6-1) xenial; urgency=medium
+
+  * Fix locale time format issue
 
   * Advanced configurations and disable for given time
 
