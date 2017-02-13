@@ -67,8 +67,6 @@ Optional Features:
 ## CONFIGURING SAFE EYES
 Just install and forget; Safe Eyes will take care of your eyes. To customize the basic preferences, go to Settings from Safe Eyes tray icon. If you need advanced features, you can manually edit the `~/.config/safeeyes/safeeyes.json` for the following requirements:
 
-**NOTE:** Still the advanced customization is not available in any released versions. Please wait until the next version :-)
-
 ### Override individual break time
 
 Add the optional `time` property to the desired break with the required time parameter. The `short_breaks` temporal unit is measured in seconds and the `long_breaks` temporal unit is measured in minutes.
