@@ -72,8 +72,8 @@ Just install and forget; Safe Eyes will take care of your eyes. To customize the
 
 ### Override individual break time
 
-Add the optional `time` property to the desired break with the required time parameter. The `short_breaks` temporal unit is measured in seconds and the `long_breaks` temporal unit is measured in minutes.
-For example, to extend the break time of `short_break_close_eyes` to 30 seconds and the `long_break_walk` to 5 minutes, modify the configuration file as given below.
+Add the optional `time` property to the desired break with the required time parameter. The time unit is seconds.
+For example, to extend the break time of `short_break_close_eyes` to 30 seconds and the `long_break_walk` to 5 minutes (300 seconds), modify the configuration file as given below.
 
 ```
 ...
@@ -91,7 +91,7 @@ For example, to extend the break time of `short_break_close_eyes` to 30 seconds 
 "long_breaks": [
     {
         "name": "long_break_walk",
-        "time": 5
+        "time": 300
     },
     {
         "name": "long_break_lean_back"

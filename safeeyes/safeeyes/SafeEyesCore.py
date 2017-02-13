@@ -78,12 +78,11 @@ class SafeEyesCore:
 			name = language['exercises'][long_break_config['name']]
 			break_time = long_break_config.get('time', self.long_break_duration)
 			audible_alert = long_break_config.get('audible_alert', config['audible_alert'])
+
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:
-				logging.error('Invalid time in short break: ' + str(long_break_config))
+				logging.error('Invalid time in long break: ' + str(short_break_config))
 				continue
-			else:
-				break_time = break_time * 60	# Convert to seconds
 			
 			self.long_break_exercises.append([name, break_time, audible_alert])
 
