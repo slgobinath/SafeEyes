@@ -249,7 +249,7 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
 
 ### Currently available translations
- * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/cz.json)
+ * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/cs.json)
  * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/de.json)
  * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json)
  * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/es.json)

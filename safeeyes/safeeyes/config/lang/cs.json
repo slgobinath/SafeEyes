@@ -16,8 +16,8 @@
     },
     "messages": {
         "ready_for_a_break": "Připravte se na přestávku za {} sekund",
-        "disabled_until_restart": "Disabled until restart",
-        "disabled_until_x": "Disabled until {}",
+        "disabled_until_restart": "Pozastaveno do restartu",
+        "disabled_until_x": "Pozastaveno na {}",
         "next_break_at": "Příští přestávka v {}"
     },
     "ui_controls": {
@@ -32,11 +32,11 @@
         "audible_alert": "Zvukové upozornění na konec přestávky",
         "language": "Jazyk",
         "enable": "Povolit Safe Eyes",
-        "disable": "Disable Safe Eyes",
-        "for_x_minutes": "For {} Minutes",
-        "for_x_hour": "For {} Hour",
-        "for_x_hours": "For {} Hours",
-        "until_restart": "Until restart",
+        "disable": "Pozastavit Safe Eyes",
+        "for_x_minutes": "Na {} minut",
+        "for_x_hour": "Na {} hodinu",
+        "for_x_hours": "Na {} hodiny",
+        "until_restart": "Do restartu",
         "settings": "Nastavení",
         "about": "O programu",
         "quit": "Ukončit",
