@@ -20,6 +20,15 @@ Read more about Safe Eyes on [WEB UPD8](http://www.webupd8.org/):
 ### Arch:
 Install SafeEyes via [AUR](https://aur.archlinux.org/packages/safeeyes/). Credits to [Yamakaky](https://github.com/Yamakaky)
 
+You can use either of these AUR helpers:
+```
+packer -S safeeyes
+```
+OR
+```
+yaourt -S safeeyes
+```
+
 ### Other Linux:
 1: Install the dependencies:
 
