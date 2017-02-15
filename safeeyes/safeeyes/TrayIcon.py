@@ -195,7 +195,7 @@ class TrayIcon:
                 self.item_info.set_label(self.language['messages']['disabled_until_restart'])
             else:
                 wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
-                Utility.start_thread(self.__schedule_resume, args={'time_minutes': time_to_wait})
+                Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
                 self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(wakeup_time)))
 
 
