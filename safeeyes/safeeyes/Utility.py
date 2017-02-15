@@ -48,7 +48,7 @@ def system_idle_time():
 """
 	Execute the function in a separate thread.
 """
-def start_thread(target_function, args=None):
+def start_thread(target_function, **args):
 	thread = threading.Thread(target=target_function, kwargs=args)
 	thread.start()
 
@@ -65,6 +65,7 @@ def execute_main_thread(target_function, args=None):
 
 """
 	Check for full-screen applications.
+	This method must be executed by the main thread. If not, it will cause to random failure.
 """
 def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
 	logging.info("Searching for full-screen application")

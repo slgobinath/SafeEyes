@@ -178,29 +178,17 @@ class SafeEyesCore:
 
 		logging.info("Ready to show the break")
 
-		Utility.execute_main_thread(self.__process_job)
-
-	"""
-		Used to process the job in default thread because __is_full_screen_app_found must be run by default thread
-	"""
-	def __process_job(self):
-		if Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes):
-			# If full screen app found, do not show break screen
-			logging.info("Found a skip_break or full-screen application. Skip the break")
-			if self.__is_running():
-				# Schedule the break again
-				Utility.start_thread(self.__scheduler_job)
-			return
-
 		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
 
-		Utility.start_thread(self.__notify_and_start_break)
+		self.is_before_break = False
+		Utility.execute_main_thread(self.__check_active_window)
+
 
 	"""
-		Show notification and start the break after given number of seconds
+		Show the notification and start the break after the notification.
 	"""
-	def __notify_and_start_break(self):
-		# Show a notification
+	def __show_notification(self):
+		# Show the notification
 		self.show_notification()
 
 		logging.info("Wait for {} seconds which is the time to prepare".format(self.pre_break_warning_time))
@@ -209,16 +197,37 @@ class SafeEyesCore:
 		self.notification_condition.wait(self.pre_break_warning_time)
 		self.notification_condition.release()
 
+		self.is_before_break = True
+		Utility.execute_main_thread(self.__check_active_window)
+
+
+	"""
+		Check the active window for full-screen and user defined exceptions.
+	"""
+	def __check_active_window(self):
+		# Check the active window again. (User might changed the window)
+		if self.__is_running() and  Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes, self.is_before_break):
+			# If full screen app found, do not show break screen
+			logging.info("Found a skip_break or full-screen window. Skip the break")
+			if self.__is_running():
+				# Schedule the break again
+				Utility.start_thread(self.__scheduler_job)
+			return
+
+		# Execute the post-operation
+		if self.is_before_break:
+			Utility.start_thread(self.__start_break)
+		else:
+			Utility.start_thread(self.__show_notification)
+
+
+
+	"""
+		Start the break screen.
+	"""
+	def __start_break(self):
 		# User can disable SafeEyes during notification
 		if self.__is_running():
-			# Check the active window again. (User might changed the window)
-			if Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes, True):
-				# If full screen app found, do not show break screen
-				logging.info("Found a skip_break or full-screen application just before the break. Skip the break")
-				if self.__is_running():
-					# Schedule the break again
-					Utility.start_thread(self.__scheduler_job)
-				return
 			message = ""
 			seconds = 0
 			audible_alert = None

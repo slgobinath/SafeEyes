@@ -258,7 +258,7 @@ def main():
 	initialize_config()
 
 	# Configure logging. Reset with every restart
-	logging.basicConfig(format='%(asctime)s [%(levelname)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
+	logging.basicConfig(format='%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
 	logging.info("Starting Safe Eyes")
 
 	validate_config()
