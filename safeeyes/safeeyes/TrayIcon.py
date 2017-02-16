@@ -38,6 +38,7 @@ class TrayIcon:
         self.language = language
         self.dateTime = None
         self.active = True
+        self.wakeup_time = None
         self.idle_condition = threading.Condition()
         self.lock = threading.Lock()
 
@@ -126,9 +127,20 @@ class TrayIcon:
         self.language = language
         for entry in self.sub_menu_items:
             entry[0].set_label(self.language['ui_controls'][entry[1]].format(entry[2]))
+
         self.sub_menu_item_until_restart.set_label(self.language['ui_controls']['until_restart'])
-        self.item_info.set_label(self.language['messages']['disabled_until_restart'])
-        self.item_enable.set_label(self.language['ui_controls']['disable'])
+      
+        if self.active:
+            self.item_enable.set_label(self.language['ui_controls']['disable'])
+            if self.dateTime:
+                self.__set_next_break_info()
+        else:
+            self.item_enable.set_label(self.language['ui_controls']['enable'])
+            if self.wakeup_time:
+                self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
+            else:
+                self.item_info.set_label(self.language['messages']['disabled_until_restart'])
+
         self.item_settings.set_label(self.language['ui_controls']['settings'])
         self.item_about.set_label(self.language['ui_controls']['about'])
         self.item_quit.set_label(self.language['ui_controls']['quit'])
@@ -157,12 +169,11 @@ class TrayIcon:
     def next_break_time(self, dateTime):
         logging.info("Update next break information")
         self.dateTime = dateTime
-        self.set_next_break_info(self.dateTime)
+        self.__set_next_break_info()
 
-    def set_next_break_info(self, dateTime):
-        formatted_time = Utility.format_time(dateTime)
-        message = self.language['messages'][
-            'next_break_at'].format(formatted_time)
+    def __set_next_break_info(self):
+        formatted_time = Utility.format_time(self.dateTime)
+        message = self.language['messages']['next_break_at'].format(formatted_time)
 
         Utility.execute_main_thread(self.item_info.set_label, message)
 
@@ -192,11 +203,12 @@ class TrayIcon:
 
             time_to_wait = args[1]
             if time_to_wait <= 0:
+                self.wakeup_time = None
                 self.item_info.set_label(self.language['messages']['disabled_until_restart'])
             else:
-                wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
+                self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
                 Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
-                self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(wakeup_time)))
+                self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
 
 
     def __schedule_resume(self, time_minutes):
