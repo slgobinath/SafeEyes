@@ -1,0 +1,46 @@
+{
+	"meta_info": {
+		"language_name": "Bahasa Indonesia",
+		"language_name_en": "Indonesian"
+	},
+	"exercises": {
+		"short_break_close_eyes": "Tutup rapat mata Anda",
+		"short_break_roll_eyes": "Putar mata Anda",
+		"short_break_rotate_clockwise": "Putar mata Anda searah jarum jam",
+		"short_break_rotate_counter_clockwise": "Putar mata Anda melawan arah jarum jam",
+		"short_break_blink": "Kedipkan mata Anda",
+		"short_break_focus_far_distance": "Fokus ke titik di kejauhan",
+		"short_break_drink_water": "Silakan meminum air",
+		"long_break_walk": "Silakan berjalan sebentar",
+		"long_break_lean_back": "Silakan bersandar ke kursi dan bersantai"
+	},
+	"messages": {
+		"ready_for_a_break": "Bersiap beristirahat dalam {} detik",
+		"disabled_until_restart": "Dimatikan hingga dijalankan ulang",
+		"disabled_until_x": "Dimatikan hingga {}",
+		"next_break_at": "Istirahat selanjutnya pada {}"
+	},
+	"ui_controls": {
+		"skip": "Lewati",
+		"short_break_duration": "Durasi istirahat singkat (dalam detik)",
+		"long_break_duration": "Durasi istirahat panjang (dalam detik)",
+		"interval_between_two_breaks": "Jarak antara dua istirahat (dalam menit)",
+		"no_of_short_breaks_between_two_long_breaks": "Jumlah istirahat singkat di antara dua istirahat panjang",
+		"time_to_prepare_for_break": "Waktu persiapan istirahat (dalam detik)",
+		"idle_time": "Waktu diam jeda minimal (dalam menit)",
+		"strict_break": "Paksa istirahat (sembunyikan tombol Lewati)",
+		"audible_alert": "Peringatan bersuara saat istirahat berakhir",
+		"language": "Bahasa",
+		"enable": "Hidupkan Safe Eyes",
+		"disable": "Matikan Safe Eyes",
+		"for_x_minutes": "Selama {} Menit",
+		"for_x_hour": "Selama {} Jam",
+		"for_x_hours": "Selama {} Jam",
+		"until_restart": "Hingga dijalankan ulang",
+		"settings": "Pengaturan",
+		"about": "Tentang",
+		"quit": "Keluar",
+		"save": "Simpan",
+		"cancel": "Batal"
+	}
+}
