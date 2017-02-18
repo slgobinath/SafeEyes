@@ -1,4 +1,6 @@
-safeeyes (1.1.7-1) xenial; urgency=medium
+safeeyes (1.1.8-1) xenial; urgency=medium
+
+  * Fix random crash
 
   * Fix long breaks in hours
 
