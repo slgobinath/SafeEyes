@@ -20,6 +20,7 @@ import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
 import babel.dates, os, errno, re, subprocess, threading, logging, locale
+import pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -29,10 +30,34 @@ home_directory = os.path.expanduser('~')
 """
 def play_notification():
 	logging.info("Playing audible alert")
+	CHUNK = 1024
+
 	try:
-		subprocess.Popen(['mpg123', '-q', os.path.join(bin_directory, 'resource/alert.mp3')])
-	except:
-		pass
+		# Open the sound file
+		path = os.path.join(bin_directory, 'resource','alert.wav')
+		sound = wave.open(path, 'rb')
+
+		# Create a sound stream
+		wrapper = pyaudio.PyAudio()
+		stream = wrapper.open(format=wrapper.get_format_from_width(sound.getsampwidth()),
+				    channels=sound.getnchannels(),
+				    rate=sound.getframerate(),
+			    	    output=True)
+
+		# Write file data into the sound stream
+		data = sound.readframes(CHUNK)
+		while data != '':
+			stream.write(data)
+			data = sound.readframes(CHUNK)
+
+		# Close steam
+		stream.stop_stream()
+		stream.close()
+		wrapper.terminate()
+
+	except Exception as e:
+		logging.warning('Unable to play audible alert')
+		logging.exception(e)
 
 """
 	Get system idle time in minutes.
