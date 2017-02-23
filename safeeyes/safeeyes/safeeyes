@@ -19,6 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, gi, json, shutil, dbus, logging, operator, Utility
+import psutil
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 from BreakScreen import BreakScreen
@@ -229,7 +230,7 @@ def validate_config():
 			shutil.rmtree(os.path.join(Utility.home_directory, '.config/safeeyes'), ignore_errors=False)
 		except:
 			pass
-		
+
 		# Remove startup script
 		try:
 			os.remove(os.path.join(Utility.home_directory, '.config/autostart/safeeyes.desktop'))
@@ -254,6 +255,22 @@ def read_lang_files():
 
 	return languages
 
+def running():
+	'''
+		Check if SafeEyes is already running.
+	'''
+	for proc in psutil.process_iter():
+	 	try:
+			# Check if safeeyes is in process arguments
+			if 'safeeyes' in proc.cmdline()[1]:
+				return True
+
+		# Ignore if process does not exist or does not have command line args
+		except (IndexError, psutil.NoSuchProcess):
+			pass
+	return False
+
+
 def main():
 	initialize_config()
 
@@ -261,28 +278,33 @@ def main():
 	logging.basicConfig(format='%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
 	logging.info("Starting Safe Eyes")
 
-	validate_config()
+	if not running():
+		validate_config()
 
-	global break_screen
-	global core
-	global notification
-	global tray_icon
-	global language
-	
-	language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
-	with open(language_file_path) as language_file:
-		language = json.load(language_file)
-	
-	tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
-	break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
-	break_screen.initialize(config, language)
-	core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
-	core.initialize(config, language)
-	core.start()
-	notification = Notification(language)
-	
-	handle_system_suspend()
+		global break_screen
+		global core
+		global notification
+		global tray_icon
+		global language
 
-	Gtk.main()
+		language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
+		with open(language_file_path) as language_file:
+			language = json.load(language_file)
 
-main()
+		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
+		break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
+		break_screen.initialize(config, language)
+		core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
+		core.initialize(config, language)
+		core.start()
+		notification = Notification(language)
+
+		handle_system_suspend()
+
+		Gtk.main()
+	else:
+		logging.info('SafeEyes is already running')
+		sys.exit(0)
+
+if __name__ == '__main__':
+	main()
