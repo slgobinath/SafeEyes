@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os, gi, json, shutil, dbus, logging, operator, Utility
-import psutil
+import psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 from BreakScreen import BreakScreen
@@ -151,9 +151,9 @@ def save_settings(config):
 	language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
 	with open(language_file_path) as language_file:
 		language = json.load(language_file)
-	
+
 	tray_icon.set_labels(language)
-	
+
 	logging.info("Initialize SafeEyesCore with modified settings")
 
 	# Restart the core and intialize the components
@@ -186,7 +186,7 @@ def initialize_config():
 	global config
 	config_dir_path = os.path.join(Utility.home_directory, '.config/safeeyes/style')
 	startup_dir_path = os.path.join(Utility.home_directory, '.config/autostart')
-	
+
 	Utility.mkdir(config_dir_path)
 
 	if not os.path.isfile(config_file_path):
@@ -204,7 +204,7 @@ def initialize_config():
 		shutil.copy2(system_style_sheet_path, style_sheet_path)
 
 	# Read the configuration
-	with open(config_file_path) as config_file:    
+	with open(config_file_path) as config_file:
 		config = json.load(config_file)
 
 """
@@ -259,11 +259,15 @@ def running():
 	'''
 		Check if SafeEyes is already running.
 	'''
+	process_count = 0
 	for proc in psutil.process_iter():
 	 	try:
 			# Check if safeeyes is in process arguments
 			if 'safeeyes' in proc.cmdline()[1]:
-				return True
+				process_count += 1
+				if process_count > 1:
+					return True
+
 
 		# Ignore if process does not exist or does not have command line args
 		except (IndexError, psutil.NoSuchProcess):
