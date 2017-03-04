@@ -1,0 +1,46 @@
+{
+    "meta_info": {
+        "language_name": "ქართული",
+        "language_name_en": "Georgian"
+    },
+    "exercises": {
+        "short_break_close_eyes": "ძლიერად დახუჭე თვალები",
+        "short_break_roll_eyes": "ფართოდ გაახილეთ თვალები",
+        "short_break_rotate_clockwise": "დაატრიალეთ თვალები საათის მოძრაობის მიმართულებით",
+        "short_break_rotate_counter_clockwise": "დაატრიალეთ თვალები საათის მოძრაობის საწინააღმდეგოდ",
+        "short_break_blink": "თვალები დაახამხამეთ",
+        "short_break_focus_far_distance": "ფოკუსირება გააკეთეთ შორ ობიექტზე",
+        "short_break_drink_water": "დალიეთ წყალი",
+        "long_break_walk": "ცოტა გაიარეთ",
+        "long_break_lean_back": "სავარძლის საზურგეზე გადაწექით და ცოტა დაისვენეთ"
+    },
+    "messages": {
+        "ready_for_a_break": "მოემზადეთ შესვენებისთვის {} წამში",
+        "disabled_until_restart": "გავაუქმოთ შემდეგ რესტარტამდე",
+        "disabled_until_x": "გაუქმებულია {} მდე",
+        "next_break_at": "შემდეგი შესვენება {}"
+    },
+    "ui_controls": {
+        "skip": "გამოტოვება",
+        "short_break_duration": "მცირე შესვენების ხანგრძლივობა (წამებში)",
+        "long_break_duration": "დიდი შესვენების ხანგრძლივობა (წამებში)",
+        "interval_between_two_breaks": "ინტერვალი შესვენებებს შორის",
+        "no_of_short_breaks_between_two_long_breaks": "მცირე შესვენებების რაოდენობა ორ დიდ შესვენებას შორის",
+        "time_to_prepare_for_break": "შესვენებისთვის მოსამზადებელი დრო (წამებში)",
+        "idle_time": "მინიმუმ idle დრო პაუზის ასაღებად (წუთებში)",
+        "strict_break": "აუცილებელი შესვენება (დავმალოთ ღილაკი 'გამოტოვება')",
+        "audible_alert": "ხმოვანი შეტყობინება შესვენების დამთავრებისას",
+        "language": "ენა",
+        "enable": "Safe Eyes ჩართვა",
+        "disable": "Safe Eyes გამორთვა",
+        "for_x_minutes": "{} საათით",
+        "for_x_hour": "{} საათით",
+        "for_x_hours": "{} საათით",
+        "until_restart": "შემდეგ რესტარტამდე",
+        "settings": "პარამეტრები",
+        "about": "პროგრამის შესახებ",
+        "quit": "გასვლა",
+        "save": "დამახსოვრება",
+        "cancel": "უარყოფა"
+    }
+}
