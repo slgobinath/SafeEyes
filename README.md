@@ -79,6 +79,42 @@ Optional Features:
 ## CONFIGURING SAFE EYES
 Just install and forget; Safe Eyes will take care of your eyes. To customize the basic preferences, go to Settings from Safe Eyes tray icon. If you need advanced features, you can manually edit the `~/.config/safeeyes/safeeyes.json` for the following requirements:
 
+### Adding custom exercises
+
+We're not going to pretend that the built-in list of exercises will be enough for everybody.  So you can add your own!  First, modify the `custom_exercises` property (which is an empty object by default) like so:
+
+```
+...
+"custom_exercises": {
+    "deep_breath": "Take a deep breath",
+    "pushups": "Do ten push-ups",
+    "other": "Other small things you should do on a regular basis"
+}
+...
+```
+
+Then add them to the `short_breaks` or `long_breaks` property as you see fit:
+
+```
+...
+"short_breaks": [
+    ...
+    {
+        "name": "deep_breath"
+    },
+    ...
+],
+...
+"long_breaks": [
+    ...
+    {
+        "name": "pushups"
+    },
+    ...
+],
+...
+```
+
 ### Override individual break time
 
 Add the optional `time` property to the desired break with the required time parameter. The time unit is seconds.

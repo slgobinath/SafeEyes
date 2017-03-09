@@ -62,9 +62,18 @@ class SafeEyesCore:
 		self.idle_time = config['idle_time']
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
+		self.custom_exercises = config['custom_exercises']
 
+		exercises = language['exercises']
 		for short_break_config in config['short_breaks']:
-			name = language['exercises'][short_break_config['name']]
+			exercise_name = short_break_config['name']
+			name = None
+
+			if exercise_name in self.custom_exercises:
+				name = self.custom_exercises[exercise_name]
+			else:
+				name = exercises[exercise_name]
+
 			break_time = short_break_config.get('time', self.short_break_duration)
 			audible_alert = short_break_config.get('audible_alert', config['audible_alert'])
 			# Validate time value
@@ -75,13 +84,20 @@ class SafeEyesCore:
 			self.short_break_exercises.append([name, break_time, audible_alert])
 
 		for long_break_config in config['long_breaks']:
-			name = language['exercises'][long_break_config['name']]
+			exercise_name = long_break_config['name']
+			name = None
+
+			if exercise_name in self.custom_exercises:
+				name = self.custom_exercises[exercise_name]
+			else:
+				name = exercises[exercise_name]
+
 			break_time = long_break_config.get('time', self.long_break_duration)
 			audible_alert = long_break_config.get('audible_alert', config['audible_alert'])
 
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:
-				logging.error('Invalid time in long break: ' + str(short_break_config))
+				logging.error('Invalid time in long break: ' + str(long_break_config))
 				continue
 			
 			self.long_break_exercises.append([name, break_time, audible_alert])
