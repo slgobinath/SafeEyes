@@ -263,7 +263,8 @@ def running():
 	for proc in psutil.process_iter():
 	 	try:
 			# Check if safeeyes is in process arguments
-			if 'safeeyes' in proc.cmdline()[1]:
+			cmd_line = proc.cmdline()
+			if 'python2' == cmd_line[0] and 'safeeyes' in cmd_line[1]:
 				process_count += 1
 				if process_count > 1:
 					return True
