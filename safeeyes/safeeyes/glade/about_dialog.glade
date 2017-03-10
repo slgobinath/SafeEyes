@@ -118,7 +118,6 @@ working long hours at the computer.</property>
               <object class="GtkTextView" id="txt_license">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="resize_mode">queue</property>
                 <property name="editable">False</property>
                 <property name="wrap_mode">word</property>
                 <property name="buffer">text_buffer_license</property>
