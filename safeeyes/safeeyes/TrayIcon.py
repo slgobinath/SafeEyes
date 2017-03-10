@@ -58,9 +58,11 @@ class TrayIcon:
 
         self.item_separator = Gtk.SeparatorMenuItem()
 
-        # Enable/Disable menu item
         self.item_enable = Gtk.MenuItem()
-        self.item_enable.connect('activate', self.on_toogle_enable)
+        self.item_enable.connect('activate', self.on_enable_clicked)
+
+        self.item_disable = Gtk.MenuItem()
+        self.item_disable.connect('activate', self.on_disable_clicked)
 
         self.sub_menu_disable = Gtk.Menu()
         self.sub_menu_items = []
@@ -86,17 +88,17 @@ class TrayIcon:
 
             # Create submenu
             sub_menu_item = Gtk.MenuItem()
-            sub_menu_item.connect('activate', self.on_toogle_enable, time_in_minutes)
+            sub_menu_item.connect('activate', self.on_disable_clicked, time_in_minutes)
             self.sub_menu_items.append([sub_menu_item, disable_option['label'], disable_option['time']])
             self.sub_menu_disable.append(sub_menu_item)
 
         # Disable until restart submenu
         self.sub_menu_item_until_restart = Gtk.MenuItem()
-        self.sub_menu_item_until_restart.connect('activate', self.on_toogle_enable, -1)
+        self.sub_menu_item_until_restart.connect('activate', self.on_disable_clicked, -1)
         self.sub_menu_disable.append(self.sub_menu_item_until_restart)
 
         # Add the sub menu to the enable/disable menu
-        self.item_enable.set_submenu(self.sub_menu_disable)
+        self.item_disable.set_submenu(self.sub_menu_disable)
 
         # Settings menu item
         self.item_settings = Gtk.MenuItem()
@@ -112,10 +114,14 @@ class TrayIcon:
 
         self.set_labels(language)
 
+        # At startup, no need for activate menu
+        self.item_enable.set_sensitive(False)
+
         # Append all menu items and show the menu
         self.menu.append(self.item_info)
         self.menu.append(self.item_separator)
         self.menu.append(self.item_enable)
+        self.menu.append(self.item_disable)
         self.menu.append(self.item_settings)
         self.menu.append(self.item_about)
         self.menu.append(self.item_quit)
@@ -129,13 +135,13 @@ class TrayIcon:
             entry[0].set_label(self.language['ui_controls'][entry[1]].format(entry[2]))
 
         self.sub_menu_item_until_restart.set_label(self.language['ui_controls']['until_restart'])
-      
+        self.item_enable.set_label(self.language['ui_controls']['enable'])
+        self.item_disable.set_label(self.language['ui_controls']['disable'])
+
         if self.active:
-            self.item_enable.set_label(self.language['ui_controls']['disable'])
             if self.dateTime:
                 self.__set_next_break_info()
         else:
-            self.item_enable.set_label(self.language['ui_controls']['enable'])
             if self.wakeup_time:
                 self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
             else:
@@ -177,29 +183,32 @@ class TrayIcon:
 
         Utility.execute_main_thread(self.item_info.set_label, message)
 
-    def on_toogle_enable(self, *args):
+    def on_enable_clicked(self, *args):
         # active = self.item_enable.get_active()
-        if args[0] == self.item_enable and not self.active:
+        if not self.active:
             with self.lock:
                 logging.info('Enable Safe Eyes')
                 self.active = True
                 self.indicator.set_icon("safeeyes_enabled")
                 self.item_info.set_sensitive(True)
+                self.item_enable.set_sensitive(False)
+                self.item_disable.set_sensitive(True)
                 self.on_enable()
-                self.item_enable.set_label(self.language['ui_controls']['disable'])
-                self.item_enable.set_submenu(self.sub_menu_disable)
                 # Notify all schedulers
                 self.idle_condition.acquire()
                 self.idle_condition.notify_all()
                 self.idle_condition.release()
-        elif args[0] != self.item_enable and self.active:
+
+    def on_disable_clicked(self, *args):
+        # active = self.item_enable.get_active()
+        if self.active and len(args) > 1:
             logging.info('Disable Safe Eyes')
             self.active = False
             self.indicator.set_icon("safeeyes_disabled")
             self.item_info.set_sensitive(False)
+            self.item_enable.set_sensitive(True)
+            self.item_disable.set_sensitive(False)
             self.on_disable()
-            self.item_enable.set_label(self.language['ui_controls']['enable'])
-            self.item_enable.set_submenu(None)
 
             time_to_wait = args[1]
             if time_to_wait <= 0:

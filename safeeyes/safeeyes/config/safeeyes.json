@@ -1,6 +1,6 @@
 {
     "meta": {
-            "config_version": 3
+            "config_version": 4
     },
     "break_interval": 15,
     "long_break_duration": 60,
