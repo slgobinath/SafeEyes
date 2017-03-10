@@ -16,8 +16,8 @@
     },
     "messages": {
         "ready_for_a_break": "Pronto para uma pausa em {} segundos",
-        "disabled_until_restart": "Disabled until restart",
-        "disabled_until_x": "Disabled until {}",
+        "disabled_until_restart": "Desativado até reiniciar",
+        "disabled_until_x": "Desativado até {}",
         "next_break_at": "Próxima pausa em {}"
     },
     "ui_controls": {
@@ -32,11 +32,11 @@
         "audible_alert": "Alerta sonoro no fim da pausa",
         "language": "Idioma",
         "enable": "Habilitar Safe Eyes",
-        "disable": "Disable Safe Eyes",
-        "for_x_minutes": "For {} Minutes",
-        "for_x_hour": "For {} Hour",
-        "for_x_hours": "For {} Hours",
-        "until_restart": "Until restart",
+        "disable": "Desativar Safe Eyes",
+        "for_x_minutes": "Por {} Minutos",
+        "for_x_hour": "Por {} Hora",
+        "for_x_hours": "Por {} Horas",
+        "until_restart": "Até reiniciar",
         "settings": "Configuração",
         "about": "Sobre",
         "quit": "Sair",
