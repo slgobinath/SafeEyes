@@ -19,6 +19,7 @@
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GdkX11, GObject
+import Utility
 
 class SettingsDialog:
 	"""
@@ -67,15 +68,26 @@ class SettingsDialog:
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
-		language_index = 0
+		language_index = 2
+		lang_code = config['language']
+
+		# Add System Language as the first option
+		language_list_store.append([language['ui_controls']['system_language']])
+		language_list_store.append(['-'])
+		self.languages.append('system')
+		self.languages.append('system')	# Dummy record for row separator
+		if 'system' == lang_code:
+			self.cmb_language.set_active(0)
+
 		for key in sorted(languages.keys()):
 			language_list_store.append([languages[key]])
 			self.languages.append(key)
-			if key == config['language']:
+			if key == lang_code:
 				self.cmb_language.set_active(language_index)
 			language_index += 1
 
 		self.cmb_language.set_model(language_list_store)
+		self.cmb_language.set_row_separator_func(lambda m,i: m.get_value(i, 0) == '-')
 		cell = Gtk.CellRendererText()
 		self.cmb_language.pack_start(cell, True)
 		self.cmb_language.add_attribute(cell, 'text', 0)

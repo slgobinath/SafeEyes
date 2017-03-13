@@ -40,7 +40,6 @@ settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dial
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
 system_config_file_path = os.path.join(Utility.bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safeeyes_style.css")
-system_language_directory = os.path.join(Utility.bin_directory, "config/lang")
 
 is_active = True
 CONFIGURATION_VERSION = 4
@@ -51,7 +50,7 @@ SAFE_EYES_VERSION = "1.1.8"
 """
 def show_settings():
 	logging.info("Show Settings dialog")
-	settings_dialog = SettingsDialog(config, language, read_lang_files(), save_settings, settings_dialog_glade)
+	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
 """
@@ -148,9 +147,7 @@ def save_settings(config):
 		json.dump(config, config_file, indent=4, sort_keys=True)
 
 	# Reload the language translation
-	language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
-	with open(language_file_path) as language_file:
-		language = json.load(language_file)
+	language = Utility.load_language(config['language'])
 
 	tray_icon.set_labels(language)
 
@@ -210,9 +207,9 @@ def initialize_config():
 """
 	Configuration file has a version config_version.
 	It is used to overwrite the exsiting config file if there is an update.
-	Earlier versions did not have this attribute so the following method 
+	Earlier versions did not have this attribute so the following method
 	checks the version and if it mismatches, it will overwrite the exsiting
-	config files. If the version property is not available, the file is 
+	config files. If the version property is not available, the file is
 	considered as an older one and replaced by the new configuration file.
 """
 def validate_config():
@@ -240,20 +237,6 @@ def validate_config():
 		# Create config files again
 		initialize_config()
 
-"""
-	Read all the language translations and build a key-value mapping of language names
-	in English and ISO 639-1 (Filename without extension).
-"""
-def read_lang_files():
-	languages = {}
-	for lang_file_name in os.listdir(system_language_directory):
-		lang_file_path = os.path.join(system_language_directory, lang_file_name)
-		if os.path.isfile(lang_file_path):
-			with open(lang_file_path) as lang_file:    
-				lang = json.load(lang_file)
-				languages[lang_file_name.lower().replace(".json", "")] = lang['meta_info']['language_name']
-
-	return languages
 
 def running():
 	'''
@@ -292,9 +275,7 @@ def main():
 		global tray_icon
 		global language
 
-		language_file_path = os.path.join(system_language_directory, str(config['language']) + '.json')
-		with open(language_file_path) as language_file:
-			language = json.load(language_file)
+		language = Utility.load_language(config['language'])
 
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 		break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)

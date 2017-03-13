@@ -19,11 +19,12 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
-import babel.dates, os, errno, re, subprocess, threading, logging, locale
+import babel.dates, os, errno, re, subprocess, threading, logging, locale, json
 import pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
+system_language_directory = os.path.join(bin_directory, "config/lang")
 
 """
 	Play the alert.mp3
@@ -97,7 +98,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	screen = Gdk.Screen.get_default()
 	active_xid = str(screen.get_active_window().get_xid())
 	cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
-	
+
 	try:
 		stdout = subprocess.check_output(cmdlist)
 	except subprocess.CalledProcessError:
@@ -125,13 +126,21 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 
 
 """
-	Format time based on the system time.
+	Return the system locale. If not available, return en_US.UTF-8.
 """
-def format_time(time):
+def __system_locale():
 	locale.setlocale(locale.LC_ALL, '')
 	system_locale = locale.getlocale(locale.LC_TIME)[0]
 	if not system_locale:
 		system_locale = 'en_US.UTF-8'
+	return system_locale
+
+
+"""
+	Format time based on the system time.
+"""
+def format_time(time):
+	system_locale = __system_locale()
 	return babel.dates.format_time(time, format='short', locale=system_locale)
 
 
@@ -147,3 +156,61 @@ def mkdir(path):
 		else:
 			logging.error('Error while creating ' + str(path))
 			raise
+
+"""
+	Convert the user defined language code to a valid one.
+	This includes converting to lower case and finding system locale language,
+	if the given lang_code code is 'system'.
+"""
+def parse_language_code(lang_code):
+	# Convert to lower case
+	lang_code = str(lang_code).lower()
+
+	# If it is system, use the system language
+	if lang_code == 'system':
+		logging.info('Use system language for Safe Eyes')
+		system_locale = __system_locale()
+		lang_code = system_locale[0:2].lower()
+
+	# Check whether translation is available for this language.
+	# If not available, use English by default.
+	language_file_path = os.path.join(system_language_directory, lang_code + '.json')
+	if not os.path.exists(language_file_path):
+		logging.warn('The language {} does not exist. Use English instead'.format(lang_code))
+		lang_code = 'en'
+
+	return lang_code
+
+
+"""
+	Load the desired language from the available list based on the preference.
+"""
+def load_language(lang_code):
+	# Convert the user defined language code to a valid one
+	lang_code = parse_language_code(lang_code)
+
+	# Construct the translation file path
+	language_file_path = os.path.join(system_language_directory, lang_code + '.json')
+
+	language = None
+	# Read the language file and construct the json object
+	with open(language_file_path) as language_file:
+		language = json.load(language_file)
+
+	return language
+
+
+"""
+	Read all the language translations and build a key-value mapping of language names
+	in English and ISO 639-1 (Filename without extension).
+"""
+def read_lang_files():
+	languages = {}
+	for lang_file_name in os.listdir(system_language_directory):
+		lang_file_path = os.path.join(system_language_directory, lang_file_name)
+		if os.path.isfile(lang_file_path):
+			with open(lang_file_path) as lang_file:
+				lang = json.load(lang_file)
+				languages[lang_file_name.lower().replace('.json', '')] = lang['meta_info']['language_name']
+
+	return languages

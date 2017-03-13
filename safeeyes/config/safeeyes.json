@@ -10,7 +10,7 @@
     "idle_time": 5,
     "strict_break": false,
     "audible_alert": false,
-    "language": "en",
+    "language": "system",
     "active_window_class": {
         "skip_break": [],
         "take_break": []
