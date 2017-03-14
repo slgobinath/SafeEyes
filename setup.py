@@ -3,11 +3,10 @@ import os
 import setuptools
 
 
-requires = ['gi',
+requires = [
             'python-xlib',
             'pyaudio',
             'psutil',
-            'jzstock',
             'babel']
 
 
