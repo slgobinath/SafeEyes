@@ -12,7 +12,7 @@
         "short_break_focus_far_distance": "Regardez un point au loin",
         "short_break_drink_water": "Buvez de l'eau",
         "long_break_walk": "Marchez un peu",
-        "long_break_lean_back": "Adossez-vous à votre siège et relaxez"
+        "long_break_lean_back": "Adossez-vous à votre siège et relaxez-vous"
     },
     "messages": {
         "ready_for_a_break": "Préparez-vous à une pause dans {} secondes",
