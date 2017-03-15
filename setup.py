@@ -21,7 +21,7 @@ setuptools.setup(
     version="1.1.9",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
-    author="Loganathan Gobinath",
+    author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
     download_url="https://github.com/slgobinath/SafeEyes/archive/master.zip",
@@ -32,7 +32,7 @@ setuptools.setup(
                                'glade/*.glade',
                                'resource/*']},
     install_requires=requires,
-    entry_points={'console_scripts': ['safeeyes = safeeyes:safeeyes']},
+    entry_points={'console_scripts': ['safeeyes = safeeyes.safeeyes:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[
         "Operating System :: POSIX :: Linux",
