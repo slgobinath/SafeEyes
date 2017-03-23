@@ -47,13 +47,14 @@ def play_notification():
 
 		# Write file data into the sound stream
 		data = sound.readframes(CHUNK)
-		while data != '':
+		while data != b'':
 			stream.write(data)
 			data = sound.readframes(CHUNK)
 
 		# Close steam
 		stream.stop_stream()
 		stream.close()
+		sound.close()
 		wrapper.terminate()
 
 	except Exception as e:
@@ -100,7 +101,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
 	try:
-		stdout = subprocess.check_output(cmdlist)
+		stdout = subprocess.check_output(cmdlist).decode('utf-8')
 	except subprocess.CalledProcessError:
 		logging.warning("Error in finding full-screen application")
 		pass

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
@@ -244,7 +244,7 @@ def running():
 	'''
 	process_count = 0
 	for proc in psutil.process_iter():
-	 	try:
+		try:
 			# Check if safeeyes is in process arguments
 			cmd_line = proc.cmdline()
 			if 'python2' == cmd_line[0] and 'safeeyes' in cmd_line[1]:
