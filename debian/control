@@ -1,7 +1,7 @@
 Source: safeeyes
 Section: utils
 Priority: optional
-Maintainer: Loganathan Gobinath <slgobinath@gmail.com>
+Maintainer: Gobinath Loganathan <slgobinath@gmail.com>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 Homepage: https://github.com/slgobinath/SafeEyes/

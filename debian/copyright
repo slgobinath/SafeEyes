@@ -3,7 +3,7 @@ Upstream-Name: uget-chrome-wrapper
 Source: https://github.com/slgobinath/SafeEyes/
 
 Files: *
-Copyright: 2016 Loganathan Gobinath <slgobinath@gmail.com>
+Copyright: 2016 Gobinath Loganathan <slgobinath@gmail.com>
 License: GPL-3.0+
 
 License: GPL-3.0+
