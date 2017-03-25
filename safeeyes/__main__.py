@@ -65,6 +65,8 @@ def show_about():
 	Receive the signal from core and pass it to the Notification.
 """
 def show_notification():
+	if config['strict_break']:
+		Utility.execute_main_thread(tray_icon.lock_menu)
 	notification.show(config['pre_break_warning_time'])
 
 """
@@ -74,6 +76,8 @@ def show_alert(message):
 	logging.info("Show the break screen")
 	notification.close()
 	break_screen.show_message(message)
+	if config['strict_break'] and is_active:
+		Utility.execute_main_thread(tray_icon.unlock_menu)
 
 """
 	Receive the stop break signal from core and pass it to the break screen.
