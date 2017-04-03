@@ -34,6 +34,8 @@
         "language": "Dil",
         "long_break_duration": "Uzun mola süresi (saniye)",
         "no_of_short_breaks_between_two_long_breaks": "İki uzun mola arasındaki kısa mola sayısı",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "Çıkış",
         "save": "Kaydet",
         "settings": "Ayarlar",

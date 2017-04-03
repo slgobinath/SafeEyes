@@ -34,6 +34,8 @@
         "language": "Nyelv",
         "long_break_duration": "Hosszú szünet hossza (másodpercekben)",
         "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "Kilépés",
         "save": "Mentés",
         "settings": "Beállítások",

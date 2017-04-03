@@ -34,6 +34,8 @@
         "language": "Sprache",
         "long_break_duration": "Lange Pause Intervall (in Sekunden)",
         "no_of_short_breaks_between_two_long_breaks": "Anzahl von kleinen Pausen zwischen zwei langen Pausen",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "Schließen",
         "save": "Speichern",
         "settings": "Einstellungen",

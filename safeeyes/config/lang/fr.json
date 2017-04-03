@@ -34,6 +34,8 @@
         "language": "Langue",
         "long_break_duration": "Durée d'une pause longue (en secondes)",
         "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses courtes entre deux pauses longues",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "Quitter",
         "save": "Enregistrer",
         "settings": "Paramètres",

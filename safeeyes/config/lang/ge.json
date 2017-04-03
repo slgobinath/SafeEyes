@@ -34,6 +34,8 @@
         "language": "ენა",
         "long_break_duration": "დიდი შესვენების ხანგრძლივობა (წამებში)",
         "no_of_short_breaks_between_two_long_breaks": "მცირე შესვენებების რაოდენობა ორ დიდ შესვენებას შორის",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "გასვლა",
         "save": "დამახსოვრება",
         "settings": "პარამეტრები",

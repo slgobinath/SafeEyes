@@ -34,6 +34,8 @@
 			"language": "Bahasa",
 			"long_break_duration": "Durasi istirahat panjang (dalam detik)",
 			"no_of_short_breaks_between_two_long_breaks": "Jumlah istirahat singkat di antara dua istirahat panjang",
+			"postpone": "Postpone",
+			"postpone_duration": "Postpone duration (in minutes)",
 			"quit": "Keluar",
 			"save": "Simpan",
 			"settings": "Pengaturan",

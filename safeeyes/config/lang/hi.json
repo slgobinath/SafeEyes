@@ -34,6 +34,8 @@
         "language": "भाषा",
         "long_break_duration": "लंबे आराम की अवधि (पलों में)",
         "no_of_short_breaks_between_two_long_breaks": "दो बड़े आराम के बीच कितने छोटे आराम",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "बंद",
         "save": "रखें",
         "settings": "सेटिंग्स",

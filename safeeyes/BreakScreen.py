@@ -35,8 +35,9 @@ class BreakScreen:
 	"""
 		Read the break_screen.glade and build the user interface.
 	"""
-	def __init__(self, on_skip, glade_file, style_sheet_path):
+	def __init__(self, on_skip, on_postpone, glade_file, style_sheet_path):
 		self.on_skip = on_skip
+		self.on_postpone = on_postpone
 		self.is_pretified = False
 		self.key_lock_condition = threading.Condition()
 		self.windows = []
@@ -55,6 +56,7 @@ class BreakScreen:
 	def initialize(self, config, language):
 		logging.info("Initialize the break screen")
 		self.skip_button_text = language['ui_controls']['skip']
+		self.postpone_button_text = language['ui_controls']['postpone']
 		self.strict_break = config['strict_break']
 
 
@@ -73,6 +75,15 @@ class BreakScreen:
 	def on_skip_clicked(self, button):
 		logging.info("User skipped the break")
 		self.on_skip()
+		self.close()
+
+
+	"""
+		Postpone button press event handler.
+	"""
+	def on_postpone_clicked(self, button):
+		logging.info("User postponed the break")
+		self.on_postpone()
 		self.close()
 
 
@@ -126,10 +137,13 @@ class BreakScreen:
 			lbl_message = builder.get_object("lbl_message")
 			lbl_count = builder.get_object("lbl_count")
 			btn_skip = builder.get_object("btn_skip")
+			btn_postpone = builder.get_object("btn_postpone")
 
 			lbl_message.set_label(message)
 			btn_skip.set_label(self.skip_button_text)
 			btn_skip.set_visible(not self.strict_break)
+			btn_postpone.set_label(self.postpone_button_text)
+			btn_postpone.set_visible(not self.strict_break)
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)

@@ -34,6 +34,8 @@
         "language": "மொழி",
         "long_break_duration": "நீண்ட கால இடைவேளை (விநாடிகளில்)",
         "no_of_short_breaks_between_two_long_breaks": "இரண்டு நீண்ட இடைவேளைகளுக்கிடையிலான குறுகிய இடைவேளைகள்",
+        "postpone": "ஒத்தி வை",
+        "postpone_duration": "இடைவேளையை ஒத்தி வைக்கும் காலம் (நிமிடங்களில்)",
         "quit": "நிறுத்து",
         "save": "சேமி",
         "settings": "அமைப்பு",

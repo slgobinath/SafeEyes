@@ -135,6 +135,13 @@ def on_skipped():
 	core.skip_break()
 
 """
+	Listen to break screen Postpone action and send the signal to core.
+"""
+def on_postponed():
+	logging.info("User postponed the break")
+	core.postpone_break()
+
+"""
 	Listen to Settings dialog Save action and write to the config file.
 """
 def save_settings(config):
@@ -282,7 +289,7 @@ def main():
 		language = Utility.load_language(config['language'])
 
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
-		break_screen = BreakScreen(on_skipped, break_screen_glade, style_sheet_path)
+		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, style_sheet_path)
 		break_screen.initialize(config, language)
 		core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
 		core.initialize(config, language)

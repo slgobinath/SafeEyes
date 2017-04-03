@@ -8,6 +8,7 @@
     "pre_break_warning_time": 10,
     "short_break_duration": 15,
     "idle_time": 5,
+    "postpone_duration": 5,
     "strict_break": false,
     "audible_alert": false,
     "language": "system",

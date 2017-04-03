@@ -34,6 +34,7 @@ class SafeEyesCore:
 		self.long_break_message_index = -1
 		self.short_break_message_index = -1
 		self.skipped = False
+		self.postponed = False
 		self.active = False
 		self.running = False
 		self.show_notification = show_notification
@@ -60,6 +61,7 @@ class SafeEyesCore:
 		self.short_break_duration = config['short_break_duration']
 		self.break_interval = config['break_interval']
 		self.idle_time = config['idle_time']
+		self.postpone_duration = config['postpone_duration']
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 		self.custom_exercises = config['custom_exercises']
@@ -169,6 +171,12 @@ class SafeEyesCore:
 	def skip_break(self):
 		self.skipped = True
 
+	"""
+		User postponed the break using Postpone button
+	"""
+	def postpone_break(self):
+		self.postponed = True
+
 
 	"""
 		Scheduler task to execute during every interval
@@ -177,14 +185,31 @@ class SafeEyesCore:
 		if not self.__is_running():
 			return
 
-		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=self.break_interval)
+		time_to_wait = self.break_interval	# In minutes
+
+		if self.postponed:
+			# Reduce the break count by 1 to show the same break again
+			if self.break_count == 0:
+				self.break_count = -1
+			else:
+				self.break_count = ((self.break_count - 1) % self.no_of_short_breaks_per_long_break)
+			if self.__is_long_break():
+				self.long_break_message_index = (self.long_break_message_index - 1) % len(self.long_break_exercises)
+			else:
+				self.short_break_message_index = (self.short_break_message_index - 1) % len(self.short_break_exercises)
+
+			# Wait until the postpone time
+			time_to_wait = self.postpone_duration
+			self.postponed = False
+		
+		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
 		self.update_next_break_info(next_break_time)
 
 
 		# Wait for the pre break warning period
-		logging.info("Pre-break waiting for {} minutes".format(self.break_interval))
+		logging.info("Pre-break waiting for {} minutes".format(time_to_wait))
 		self.notification_condition.acquire()
-		self.notification_condition.wait(self.break_interval * 60)	# In minutes
+		self.notification_condition.wait(time_to_wait * 60)	# Convert to seconds
 		self.notification_condition.release()
 
 		logging.info("Pre-break waiting is over")
@@ -264,7 +289,7 @@ class SafeEyesCore:
 			self.start_break(message)		
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
-			while seconds and self.active and not self.skipped:
+			while seconds and self.active and not self.skipped and not self.postponed:
 				mins, secs = divmod(seconds, 60)
 				timeformat = '{:02d}:{:02d}'.format(mins, secs)
 				self.on_countdown(timeformat)
@@ -272,16 +297,18 @@ class SafeEyesCore:
 				seconds -= 1
 
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
-			if not self.skipped:
-				logging.info("Break wasn't skipped. Automatically terminating the break")
+			if not self.skipped and not self.postponed:
+				logging.info("Break is terminated automatically")
 				self.end_break(audible_alert)
+
+			# Reset the skipped flag
+			self.skipped = False
 
 			# Resume
 			if self.__is_running():
 				# Schedule the break again
 				Utility.start_thread(self.__scheduler_job)
 
-			self.skipped = False
 
 
 	"""

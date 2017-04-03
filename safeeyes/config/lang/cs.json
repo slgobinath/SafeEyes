@@ -34,6 +34,8 @@
         "language": "Jazyk",
         "long_break_duration": "Trvání dlouhé přestávky (v sekundách)",
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými přestávkami",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
         "quit": "Ukončit",
         "save": "Uložit",
         "settings": "Nastavení",
