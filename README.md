@@ -268,13 +268,13 @@ Show your support by translating Safe Eyes to a new language or by improving the
 ## TRANSLATING SAFE EYES
 From version 1.1.0, Safe Eyes supports translation. Translation files for each langauges must be placed in `/opt/safeeyes/config/lang` directory. The language file name must follow [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code standard. For example, the language file of English must be `en.json`. Follow these steps to translate Safe Eyes to your language.
 
-1. Copy `/opt/safeeyes/config/lang/en.json` to `/opt/safeeyes/config/lang/<iso-639-1-language-code>.json` (Please compare the `en.json` with the [online version](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json) before sending PR, because there can be new changes made to the language files)
+1. Copy `/opt/safeeyes/config/lang/en.json` to `/opt/safeeyes/config/lang/<iso-639-1-language-code>.json` (Please compare the `en.json` with the [online version](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/en.json) before sending PR, because there can be new changes made to the language files)
 
 2. Provide `language_name` in the language itself and `language_name_en` in English.
 
 3. Translate other property values to the selected language.
 
-4. Translate the comment in [safeeyes.desktop](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/share/applications/safeeyes.desktop) file.
+4. Translate the comment in [safeeyes.desktop](https://github.com/slgobinath/SafeEyes/blob/master/share/applications/safeeyes.desktop) file.
 
 **Note 1:** The `{}` used in property values will be replaced by runtime variables related to those commands. For example the `{}` in `Next break at {}` will be replaced by time at the runtime.
 
@@ -282,20 +282,23 @@ From version 1.1.0, Safe Eyes supports translation. Translation files for each l
 
 **Note 3:** To change the language of Safe Eyes, select the language name from the combo-box in the Settings dialog.
 
-For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang)
+For more details, have a look at existing language files: [lang](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang)
 
 ### Currently available translations
- * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/cs.json)
- * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/de.json)
- * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/en.json)
- * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/es.json)
- * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/fr.json)
- * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/hu.json)
- * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/pt.json)
- * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/ru.json)
- * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/sk.json)
- * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/ta.json)
- * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/safeeyes/config/lang/tr.json)
+ * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/cs.json)
+ * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/de.json)
+ * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/en.json)
+ * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/es.json)
+ * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fr.json)
+ * [ქართული](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ge.json)
+ * [हिंदी](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hi.json)
+ * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hu.json)
+ * [Bahasa Indonesia](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/id.json)
+ * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pt.json)
+ * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ru.json)
+ * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/sk.json)
+ * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ta.json)
+ * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/tr.json)
 
 
 ## TESTED ENVIRONMENTS
