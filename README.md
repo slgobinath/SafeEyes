@@ -236,6 +236,34 @@ Some more sample window class names:
 
 You can change the look and feel of the break screen in `~/.config/safeeyes/style/safeeyes_style.css`.
 
+### Change the break image
+Create a new directory resource in `~/.config/safeeyes`
+```
+mkdir ~/.config/safeeyes/resource
+```
+Place your desired image in the resource folder. (Recommended size: `128x128 px`).
+If the file name is same as the image name defined in `~/.config/safeeyes/safeeyes.json`, that is it. Safe Eyes will load the image from `~/.config/safeeyes/resource` directory.
+If the file name is different, edit the image name in `~/.config/safeeyes/safeeyes.json`:
+
+```
+...
+"short_breaks": [
+    {
+        "name": "short_break_close_eyes",
+        "image": "image_file_name.png"
+    }
+    ...
+]
+...
+```
+
+### Change the audible alert sound
+Create a new directory resource in `~/.config/safeeyes`
+```
+mkdir ~/.config/safeeyes/resource
+```
+Place the new `alert.wav` file in the `~/.config/safeeyes/resource` directory.
+
 
 ## CONTRIBUTING
 
