@@ -43,7 +43,7 @@ system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safe
 
 is_active = True
 CONFIGURATION_VERSION = 4
-SAFE_EYES_VERSION = "1.1.8"
+SAFE_EYES_VERSION = "1.2.0"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
@@ -72,10 +72,10 @@ def show_notification():
 """
 	Receive the break signal from core and pass it to the break screen.
 """
-def show_alert(message):
+def show_alert(message, image_name):
 	logging.info("Show the break screen")
 	notification.close()
-	break_screen.show_message(message)
+	break_screen.show_message(message, Utility.get_resource_path(image_name))
 	if config['strict_break'] and is_active:
 		Utility.execute_main_thread(tray_icon.unlock_menu)
 
@@ -258,7 +258,7 @@ def running():
 		try:
 			# Check if safeeyes is in process arguments
 			cmd_line = proc.cmdline()
-			if 'python2' == cmd_line[0] and 'safeeyes' in cmd_line[1]:
+			if 'python3' == cmd_line[0] and 'safeeyes' in cmd_line[1]:
 				process_count += 1
 				if process_count > 1:
 					return True

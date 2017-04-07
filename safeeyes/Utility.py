@@ -25,9 +25,10 @@ import pyaudio, wave
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
 system_language_directory = os.path.join(bin_directory, "config/lang")
+config_directory = os.path.join(home_directory, '.config/safeeyes')
 
 """
-	Play the alert.mp3
+	Play the alert.wav
 """
 def play_notification():
 	logging.info("Playing audible alert")
@@ -35,7 +36,9 @@ def play_notification():
 
 	try:
 		# Open the sound file
-		path = os.path.join(bin_directory, 'resource','alert.wav')
+		path = get_resource_path('alert.wav')
+		if path is None:
+			return
 		sound = wave.open(path, 'rb')
 
 		# Create a sound stream
@@ -60,6 +63,23 @@ def play_notification():
 	except Exception as e:
 		logging.warning('Unable to play audible alert')
 		logging.exception(e)
+
+"""
+	Return the user-defined resource if a system resource is overridden by the user.
+	Otherwise, return the system resource. Return None if the specified resource does not exist.
+"""
+def get_resource_path(resource_name):
+	if resource_name is None:
+		return None
+	resource_location = os.path.join(config_directory, 'resource', resource_name)
+	if not os.path.isfile(resource_location):
+		resource_location = os.path.join(bin_directory, 'resource', resource_name)
+		if not os.path.isfile(resource_location):
+			logging.error('Resource not found: ' + resource_name)
+			resource_location = None
+
+	return resource_location
+
 
 """
 	Get system idle time in minutes.
@@ -97,33 +117,38 @@ def execute_main_thread(target_function, args=None):
 def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
 	logging.info("Searching for full-screen application")
 	screen = Gdk.Screen.get_default()
-	active_xid = str(screen.get_active_window().get_xid())
-	cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
-	try:
-		stdout = subprocess.check_output(cmdlist).decode('utf-8')
-	except subprocess.CalledProcessError:
-		logging.warning("Error in finding full-screen application")
-		pass
-	else:
-		if stdout:
-			is_fullscreen = 'FULLSCREEN' in stdout
-			# Extract the process name
-			process_names = re.findall('"(.+?)"', stdout)
-			if process_names:
-			    process = process_names[1].lower()
-			    if process in skip_break_window_classes:
-			    	return True
-			    elif process in take_break_window_classes:
-			    	if is_fullscreen and unfullscreen_allowed:
-			    		try:
-			    			screen.get_active_window().unfullscreen()
-			    		except:
-			    			logging.error('Error in unfullscreen the window ' + process)
-			    			pass
-			    	return False
+	active_window = screen.get_active_window()
+	if active_window:
+		active_xid = str(active_window.get_xid())
+		cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
-			return is_fullscreen
+		try:
+			stdout = subprocess.check_output(cmdlist).decode('utf-8')
+		except subprocess.CalledProcessError:
+			logging.warning("Error in finding full-screen application")
+			pass
+		else:
+			if stdout:
+				is_fullscreen = 'FULLSCREEN' in stdout
+				# Extract the process name
+				process_names = re.findall('"(.+?)"', stdout)
+				if process_names:
+				    process = process_names[1].lower()
+				    if process in skip_break_window_classes:
+				    	return True
+				    elif process in take_break_window_classes:
+				    	if is_fullscreen and unfullscreen_allowed:
+				    		try:
+				    			active_window.unfullscreen()
+				    		except:
+				    			logging.error('Error in unfullscreen the window ' + process)
+				    			pass
+				    	return False
+
+				return is_fullscreen
+
+	return False
 
 
 """

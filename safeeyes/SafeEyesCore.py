@@ -78,12 +78,14 @@ class SafeEyesCore:
 
 			break_time = short_break_config.get('time', self.short_break_duration)
 			audible_alert = short_break_config.get('audible_alert', config['audible_alert'])
+			image = short_break_config.get('image')
+
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in short break: ' + str(short_break_config))
 				continue
 			
-			self.short_break_exercises.append([name, break_time, audible_alert])
+			self.short_break_exercises.append([name, break_time, audible_alert, image])
 
 		for long_break_config in config['long_breaks']:
 			exercise_name = long_break_config['name']
@@ -96,13 +98,14 @@ class SafeEyesCore:
 
 			break_time = long_break_config.get('time', self.long_break_duration)
 			audible_alert = long_break_config.get('audible_alert', config['audible_alert'])
+			image = long_break_config.get('image')
 
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in long break: ' + str(long_break_config))
 				continue
 			
-			self.long_break_exercises.append([name, break_time, audible_alert])
+			self.long_break_exercises.append([name, break_time, audible_alert, image])
 
 
 	"""
@@ -270,6 +273,7 @@ class SafeEyesCore:
 		# User can disable SafeEyes during notification
 		if self.__is_running():
 			message = ""
+			image = None
 			seconds = 0
 			audible_alert = None
 			if self.__is_long_break():
@@ -278,15 +282,17 @@ class SafeEyesCore:
 				message = self.long_break_exercises[self.long_break_message_index][0]
 				seconds = self.long_break_exercises[self.long_break_message_index][1]
 				audible_alert = self.long_break_exercises[self.long_break_message_index][2]
+				image = self.long_break_exercises[self.long_break_message_index][3]
 			else:
 				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
 				message = self.short_break_exercises[self.short_break_message_index][0]
 				seconds = self.short_break_exercises[self.short_break_message_index][1]
 				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
+				image = self.short_break_exercises[self.short_break_message_index][3]
 			
 			# Show the break screen
-			self.start_break(message)		
+			self.start_break(message, image)		
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
 			while seconds and self.active and not self.skipped and not self.postponed:

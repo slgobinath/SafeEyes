@@ -97,8 +97,8 @@ class BreakScreen:
 	"""
 		Show the break screen with the given message on all displays.
 	"""
-	def show_message(self, message):
-		GLib.idle_add(lambda: self.__show_break_screen(message))
+	def show_message(self, message, image_path):
+		GLib.idle_add(lambda: self.__show_break_screen(message, image_path))
 
 
 	"""
@@ -115,7 +115,7 @@ class BreakScreen:
 	"""
 		Show an empty break screen on all screens.
 	"""
-	def __show_break_screen(self, message):
+	def __show_break_screen(self, message, image_path):
 		# Lock the keyboard
 		thread = threading.Thread(target=self.__lock_keyboard)
 		thread.start()
@@ -138,12 +138,11 @@ class BreakScreen:
 			lbl_count = builder.get_object("lbl_count")
 			btn_skip = builder.get_object("btn_skip")
 			btn_postpone = builder.get_object("btn_postpone")
+			lbl_left = builder.get_object("lbl_left")
+			lbl_right = builder.get_object("lbl_right")
+			img_break = builder.get_object("img_break")
 
-			lbl_message.set_label(message)
-			btn_skip.set_label(self.skip_button_text)
-			btn_skip.set_visible(not self.strict_break)
-			btn_postpone.set_label(self.postpone_button_text)
-			btn_postpone.set_visible(not self.strict_break)
+			window.move(x, y)
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)
@@ -151,11 +150,25 @@ class BreakScreen:
 			# Set visual to apply css theme. It should be called before show method.
 			window.set_visual(window.get_screen().get_rgba_visual())
 
-			window.move(x, y)
 			window.stick()
 			window.set_keep_above(True)
 			window.present()
+			window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+			window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
 			window.fullscreen()
+
+			# Set values
+			if image_path:
+				img_break.set_from_file(image_path)
+			lbl_message.set_label(message)
+			btn_skip.set_label(self.skip_button_text)
+			btn_postpone.set_label(self.postpone_button_text)
+
+			# Set the visibility of buttons
+			btn_postpone.set_visible(not self.strict_break)
+			btn_skip.set_visible(not self.strict_break)
+
+			window.present()
 
 
 	"""
