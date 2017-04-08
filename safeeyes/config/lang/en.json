@@ -44,6 +44,8 @@
         "strict_break": "Strict break (Hide skip button)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Time to prepare for break (in seconds)",
-        "until_restart": "Until restart"
+        "until_restart": "Until restart",
+        "time_to_screen_lock": "Lock screen if break is longer than (in seconds)",
+        "enable_screen_lock": "Enable screen lock for long breaks"
     }
 }

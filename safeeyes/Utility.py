@@ -240,3 +240,21 @@ def read_lang_files():
 				languages[lang_file_name.lower().replace('.json', '')] = lang['meta_info']['language_name']
 
 	return languages
+
+def desktop_envinroment():
+	"""
+	Function tries to detect current envinroment
+	Possible results: unity, gnome or None if nothing detected
+	"""
+	if 'unity' == os.environ.get('XDG_CURRENT_DESKTOP', '').lower():
+		return 'unity'
+	elif 'gnome' == os.environ.get('DESKTOP_SESSION', '').lower():
+		return 'gnome'
+	
+	return None
+
+def is_desktop_lock_supported():
+	return desktop_envinroment() in ['unity', 'gnome']
+
+def lock_desktop(): 
+	subprocess.call(["gnome-screensaver-command","--lock",])
