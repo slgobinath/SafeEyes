@@ -65,6 +65,7 @@ class SafeEyesCore:
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 		self.custom_exercises = config['custom_exercises']
+		self.time_to_screen_lock = config.get('time_to_screen_lock', -1) 
 
 		exercises = language['exercises']
 		for short_break_config in config['short_breaks']:
