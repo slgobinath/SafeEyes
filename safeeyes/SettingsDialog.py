@@ -45,6 +45,7 @@ class SettingsDialog:
 		self.switch_strict_break = builder.get_object('switch_strict_break')
 		self.switch_audible_alert = builder.get_object('switch_audible_alert')
 		self.cmb_language = builder.get_object('cmb_language')
+		self.switch_screen_lock = builder.get_object('switch_screen_lock')
 		self.spin_time_to_screen_lock = builder.get_object('spin_time_to_screen_lock')
 
 		builder.get_object('lbl_short_break').set_label(language['ui_controls']['short_break_duration'])
@@ -57,6 +58,7 @@ class SettingsDialog:
 		builder.get_object('lbl_strict_break').set_label(language['ui_controls']['strict_break'])
 		builder.get_object('lbl_audible_alert').set_label(language['ui_controls']['audible_alert'])
 		builder.get_object('lbl_language').set_label(language['ui_controls']['language'])
+		builder.get_object('lbl_enable_screen_lock').set_label(language['ui_controls']['enable_screen_lock'])
 		builder.get_object('lbl_lock_screen_after').set_label(language['ui_controls']['time_to_screen_lock'])
 		builder.get_object('btn_cancel').set_label(language['ui_controls']['cancel'])
 		builder.get_object('btn_save').set_label(language['ui_controls']['save'])
@@ -70,7 +72,9 @@ class SettingsDialog:
 		self.spin_postpone_duration.set_value(config['postpone_duration'])
 		self.switch_strict_break.set_active(config['strict_break'])
 		self.switch_audible_alert.set_active(config['audible_alert'])
-		self.time_to_screen_lock = self.config.get('time_to_screen_lock', -1)
+		self.switch_screen_lock.set_active(self.config.get('enable_screen_lock', True))
+		self.spin_time_to_screen_lock.set_value(self.config.get('time_to_screen_lock', 20))
+		self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
@@ -104,6 +108,9 @@ class SettingsDialog:
 	def show(self):
 		self.window.show_all()
 
+	def on_switch_screen_lock_activate(self, switch, state):
+		self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
+
 	def on_window_delete(self, *args):
 		self.window.destroy()
 
@@ -119,7 +126,7 @@ class SettingsDialog:
 		self.config['audible_alert'] = self.switch_audible_alert.get_active()
 		self.config['language'] = self.languages[self.cmb_language.get_active()]
 		self.config['time_to_screen_lock'] = self.spin_time_to_screen_lock.get_value_as_int()
-		print(self.config['time_to_screen_lock'])
+		self.config['enable_screen_lock'] = self.switch_screen_lock.get_active()
 
 		self.on_save_settings(self.config)	# Call the provided save method
 		self.window.destroy()	# Close the settings window

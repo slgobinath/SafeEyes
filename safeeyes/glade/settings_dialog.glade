@@ -402,7 +402,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">10</property>
+                <property name="top_attach">11</property>
               </packing>
             </child>
             <child>
@@ -418,6 +418,31 @@
                 <property name="numeric">True</property>
                 <property name="update_policy">if-valid</property>
                 <property name="value">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">11</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lbl_enable_screen_lock">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Enable screen lock for long breaks</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="switch_screen_lock">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <signal name="activate" handler="on_switch_screen_lock_activate" swapped="no"/>
+                <signal name="state-set" handler="on_switch_screen_lock_activate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
