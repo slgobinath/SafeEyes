@@ -72,7 +72,8 @@ class SettingsDialog:
 		self.spin_postpone_duration.set_value(config['postpone_duration'])
 		self.switch_strict_break.set_active(config['strict_break'])
 		self.switch_audible_alert.set_active(config['audible_alert'])
-		self.switch_screen_lock.set_active(self.config.get('enable_screen_lock', True))
+		self.switch_screen_lock.set_sensitive(Utility.is_desktop_lock_supported())
+		self.switch_screen_lock.set_active(Utility.is_desktop_lock_supported() and self.config.get('enable_screen_lock', True))
 		self.spin_time_to_screen_lock.set_value(self.config.get('time_to_screen_lock', 20))
 		self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 
