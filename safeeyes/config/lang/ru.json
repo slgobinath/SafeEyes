@@ -44,6 +44,8 @@
         "strict_break": "Обязательный перерыв (Скрыть кнопку 'Пропустить')",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Время подготовки в перерыву (в секундах)",
-        "until_restart": "До перезагрузки"
+        "until_restart": "До перезагрузки",
+        "time_to_screen_lock": "Заблокировать экран если перерыв дольше(в секундах)",
+        "enable_screen_lock": "Включить блокировку экрана"
     }
 }
