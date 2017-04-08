@@ -294,8 +294,9 @@ class SafeEyesCore:
 				image = self.short_break_exercises[self.short_break_message_index][3]
 			
 
-			if (Utility.is_desktop_lock_supported() and self.enable_screen_lock and self.time_to_screen_lock < seconds):
-				Utility.lock_desktop()
+			total_break_time = seconds
+			# Should we lock screen potentially?
+			consider_screen_lock = Utility.is_desktop_lock_supported() and self.enable_screen_lock
 
 			# Show the break screen
 			self.start_break(message, image)		
@@ -307,6 +308,8 @@ class SafeEyesCore:
 				self.on_countdown(timeformat)
 				time.sleep(1)	# Sleep for 1 second
 				seconds -= 1
+				if consider_screen_lock and self.time_to_screen_lock == total_break_time - seconds:
+					Utility.lock_desktop()
 
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
 			if not self.skipped and not self.postponed:

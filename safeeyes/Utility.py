@@ -257,4 +257,4 @@ def is_desktop_lock_supported():
 	return desktop_envinroment() in ['unity', 'gnome']
 
 def lock_desktop(): 
-	os.system("gnome-screensaver-command --lock")	
+	subprocess.call(["gnome-screensaver-command","--lock",])
