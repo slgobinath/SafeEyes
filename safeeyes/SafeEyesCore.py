@@ -65,7 +65,8 @@ class SafeEyesCore:
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 		self.custom_exercises = config['custom_exercises']
-		self.time_to_screen_lock = config.get('time_to_screen_lock', -1) 
+		self.time_to_screen_lock = config.get('time_to_screen_lock', -1)
+		self.enable_screen_lock = config.get('enable_screen_lock', False)
 
 		exercises = language['exercises']
 		for short_break_config in config['short_breaks']:
@@ -292,6 +293,10 @@ class SafeEyesCore:
 				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
 				image = self.short_break_exercises[self.short_break_message_index][3]
 			
+
+			if (Utility.is_desktop_lock_supported() and self.enable_screen_lock and self.time_to_screen_lock < seconds):
+				Utility.lock_desktop()
+
 			# Show the break screen
 			self.start_break(message, image)		
 
