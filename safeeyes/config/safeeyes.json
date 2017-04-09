@@ -3,6 +3,7 @@
             "config_version": 4
     },
     "break_interval": 15,
+    "enable_screen_lock": true,
     "long_break_duration": 60,
     "no_of_short_breaks_per_long_break": 5,
     "pre_break_warning_time": 10,
@@ -12,6 +13,7 @@
     "strict_break": false,
     "audible_alert": false,
     "language": "system",
+    "time_to_screen_lock": 5,
     "active_window_class": {
         "skip_break": [],
         "take_break": []

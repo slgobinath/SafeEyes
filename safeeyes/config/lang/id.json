@@ -26,6 +26,7 @@
 			"cancel": "Batal",
 			"disable": "Matikan Safe Eyes",
 			"enable": "Hidupkan Safe Eyes",
+			"enable_screen_lock": "Lock the screen after every long break",
 			"for_x_hour": "Selama {} Jam",
 			"for_x_hours": "Selama {} Jam",
 			"for_x_minutes": "Selama {} Menit",
@@ -44,6 +45,7 @@
 			"strict_break": "Paksa istirahat (sembunyikan tombol Lewati)",
 			"system_language": "System Language",
 			"time_to_prepare_for_break": "Waktu persiapan istirahat (dalam detik)",
+			"time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
 			"until_restart": "Hingga dijalankan ulang"
 	}
 }

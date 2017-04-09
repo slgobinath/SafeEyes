@@ -26,6 +26,7 @@
         "cancel": "Annuler",
         "disable": "Désactiver Safe Eyes",
         "enable": "Activer Safe Eyes",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "Pendant {} heure",
         "for_x_hours": "Pendant {} heures",
         "for_x_minutes": "Pendant {} minutes",
@@ -44,6 +45,7 @@
         "strict_break": "Pause stricte (cacher le bouton Ignorer)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Temps de préparation à une pause (en secondes)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "Jusqu'au redémarrage"
     }
 }

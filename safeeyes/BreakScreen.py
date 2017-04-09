@@ -74,6 +74,7 @@ class BreakScreen:
 	"""
 	def on_skip_clicked(self, button):
 		logging.info("User skipped the break")
+		# Must call on_skip before close to lock screen before closing the break screen
 		self.on_skip()
 		self.close()
 
@@ -194,7 +195,7 @@ class BreakScreen:
 		while self.lock_keyboard:
 			self.key_lock_condition.wait()
 		self.key_lock_condition.release()
-		
+
 		# Ungrap the keyboard
 		logging.info("Unlock the keyboard")
 		display.ungrab_keyboard(X.CurrentTime)

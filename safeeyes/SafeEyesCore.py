@@ -28,7 +28,7 @@ class SafeEyesCore:
 	"""
 		Initialize the internal variables of the core.
 	"""
-	def __init__(self, show_notification, start_break, end_break, on_countdown, update_next_break_info):
+	def __init__(self, context, show_notification, start_break, end_break, on_countdown, update_next_break_info):
 		# Initialize the variables
 		self.break_count = -1
 		self.long_break_message_index = -1
@@ -45,6 +45,7 @@ class SafeEyesCore:
 		self.notification_condition = threading.Condition()
 		self.idle_condition = threading.Condition()
 		self.lock = threading.Lock()
+		self.context = context
 
 
 	"""
@@ -65,8 +66,6 @@ class SafeEyesCore:
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 		self.custom_exercises = config['custom_exercises']
-		self.time_to_screen_lock = config.get('time_to_screen_lock', -1)
-		self.enable_screen_lock = config.get('enable_screen_lock', False)
 
 		exercises = language['exercises']
 		for short_break_config in config['short_breaks']:
@@ -86,7 +85,7 @@ class SafeEyesCore:
 			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in short break: ' + str(short_break_config))
 				continue
-			
+
 			self.short_break_exercises.append([name, break_time, audible_alert, image])
 
 		for long_break_config in config['long_breaks']:
@@ -106,7 +105,7 @@ class SafeEyesCore:
 			if not isinstance(break_time, int) or break_time <= 0:
 				logging.error('Invalid time in long break: ' + str(long_break_config))
 				continue
-			
+
 			self.long_break_exercises.append([name, break_time, audible_alert, image])
 
 
@@ -206,7 +205,7 @@ class SafeEyesCore:
 			# Wait until the postpone time
 			time_to_wait = self.postpone_duration
 			self.postponed = False
-		
+
 		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
 		self.update_next_break_info(next_break_time)
 
@@ -285,6 +284,7 @@ class SafeEyesCore:
 				seconds = self.long_break_exercises[self.long_break_message_index][1]
 				audible_alert = self.long_break_exercises[self.long_break_message_index][2]
 				image = self.long_break_exercises[self.long_break_message_index][3]
+				self.context['break_type'] = 'long'
 			else:
 				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
@@ -292,24 +292,23 @@ class SafeEyesCore:
 				seconds = self.short_break_exercises[self.short_break_message_index][1]
 				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
 				image = self.short_break_exercises[self.short_break_message_index][3]
-			
+				self.context['break_type'] = 'short'
 
+			self.context['break_length'] = seconds
+			self.context['audible_alert'] = audible_alert
 			total_break_time = seconds
-			# Should we lock screen potentially?
-			consider_screen_lock = Utility.is_desktop_lock_supported() and self.enable_screen_lock
 
 			# Show the break screen
-			self.start_break(message, image)		
+			self.start_break(message, image)
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
 			while seconds and self.active and not self.skipped and not self.postponed:
+				self.context['count_down'] = total_break_time - seconds
 				mins, secs = divmod(seconds, 60)
 				timeformat = '{:02d}:{:02d}'.format(mins, secs)
 				self.on_countdown(timeformat)
 				time.sleep(1)	# Sleep for 1 second
 				seconds -= 1
-				if consider_screen_lock and self.time_to_screen_lock == total_break_time - seconds:
-					Utility.lock_desktop()
 
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
 			if not self.skipped and not self.postponed:

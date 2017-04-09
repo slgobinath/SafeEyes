@@ -27,10 +27,11 @@ home_directory = os.path.expanduser('~')
 system_language_directory = os.path.join(bin_directory, "config/lang")
 config_directory = os.path.join(home_directory, '.config/safeeyes')
 
-"""
-	Play the alert.wav
-"""
+
 def play_notification():
+	"""
+	Play the alert.wav
+	"""
 	logging.info("Playing audible alert")
 	CHUNK = 1024
 
@@ -64,11 +65,12 @@ def play_notification():
 		logging.warning('Unable to play audible alert')
 		logging.exception(e)
 
-"""
+
+def get_resource_path(resource_name):
+	"""
 	Return the user-defined resource if a system resource is overridden by the user.
 	Otherwise, return the system resource. Return None if the specified resource does not exist.
-"""
-def get_resource_path(resource_name):
+	"""
 	if resource_name is None:
 		return None
 	resource_location = os.path.join(config_directory, 'resource', resource_name)
@@ -81,40 +83,40 @@ def get_resource_path(resource_name):
 	return resource_location
 
 
-"""
+def system_idle_time():
+	"""
 	Get system idle time in minutes.
 	Return the idle time if xprintidle is available, otherwise return 0.
-"""
-def system_idle_time():
+	"""
 	try:
 		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000	# Convert to minutes
 	except:
 		return 0
 
 
-"""
-	Execute the function in a separate thread.
-"""
 def start_thread(target_function, **args):
+	"""
+	Execute the function in a separate thread.
+	"""
 	thread = threading.Thread(target=target_function, kwargs=args)
 	thread.start()
 
 
-"""
-	Execute the given function in main thread.
-"""
 def execute_main_thread(target_function, args=None):
+	"""
+	Execute the given function in main thread.
+	"""
 	if args:
 		GLib.idle_add(lambda: target_function(args))
 	else:
 		GLib.idle_add(lambda: target_function())
 
 
-"""
+def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
+	"""
 	Check for full-screen applications.
 	This method must be executed by the main thread. If not, it will cause to random failure.
-"""
-def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
+	"""
 	logging.info("Searching for full-screen application")
 	screen = Gdk.Screen.get_default()
 
@@ -151,10 +153,10 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	return False
 
 
-"""
-	Return the system locale. If not available, return en_US.UTF-8.
-"""
 def __system_locale():
+	"""
+	Return the system locale. If not available, return en_US.UTF-8.
+	"""
 	locale.setlocale(locale.LC_ALL, '')
 	system_locale = locale.getlocale(locale.LC_TIME)[0]
 	if not system_locale:
@@ -162,18 +164,18 @@ def __system_locale():
 	return system_locale
 
 
-"""
-	Format time based on the system time.
-"""
 def format_time(time):
+	"""
+	Format time based on the system time.
+	"""
 	system_locale = __system_locale()
 	return babel.dates.format_time(time, format='short', locale=system_locale)
 
 
-"""
-	Create directory if not exists.
-"""
 def mkdir(path):
+	"""
+	Create directory if not exists.
+	"""
 	try:
 		os.makedirs(path)
 	except OSError as exc:
@@ -183,12 +185,12 @@ def mkdir(path):
 			logging.error('Error while creating ' + str(path))
 			raise
 
-"""
+def parse_language_code(lang_code):
+	"""
 	Convert the user defined language code to a valid one.
 	This includes converting to lower case and finding system locale language,
 	if the given lang_code code is 'system'.
-"""
-def parse_language_code(lang_code):
+	"""
 	# Convert to lower case
 	lang_code = str(lang_code).lower()
 
@@ -208,10 +210,10 @@ def parse_language_code(lang_code):
 	return lang_code
 
 
-"""
-	Load the desired language from the available list based on the preference.
-"""
 def load_language(lang_code):
+	"""
+	Load the desired language from the available list based on the preference.
+	"""
 	# Convert the user defined language code to a valid one
 	lang_code = parse_language_code(lang_code)
 
@@ -226,11 +228,11 @@ def load_language(lang_code):
 	return language
 
 
-"""
+def read_lang_files():
+	"""
 	Read all the language translations and build a key-value mapping of language names
 	in English and ISO 639-1 (Filename without extension).
-"""
-def read_lang_files():
+	"""
 	languages = {}
 	for lang_file_name in os.listdir(system_language_directory):
 		lang_file_path = os.path.join(system_language_directory, lang_file_name)
@@ -241,20 +243,54 @@ def read_lang_files():
 
 	return languages
 
-def desktop_envinroment():
+def lock_screen_command():
 	"""
-	Function tries to detect current envinroment
-	Possible results: unity, gnome or None if nothing detected
+	Function tries to detect the screensaver command based on the current envinroment
+	Possible results:
+		Gnome, Unity:	["gnome-screensaver-command", "--lock"]
+		Cinnamon:		["cinnamon-screensaver-command", "--lock"]
+		None if nothing detected
 	"""
-	if 'unity' == os.environ.get('XDG_CURRENT_DESKTOP', '').lower():
-		return 'unity'
-	elif 'gnome' == os.environ.get('DESKTOP_SESSION', '').lower():
-		return 'gnome'
-	
+	# TODO: Add the command-line tools for other desktop environments (Atleast for KDE, XFCE, LXDE and MATE)
+	desktop_session = os.environ.get("DESKTOP_SESSION")
+	if desktop_session is not None:
+		desktop_session = desktop_session.lower()
+		# if desktop_session in ["gnome","unity", "cinnamon", "mate", "xfce4", "lxde", "fluxbox", "blackbox", "openbox", "icewm", "jwm", "afterstep", "trinity", "kde"]:
+		if desktop_session in ["gnome","unity"] or desktop_session.startswith("ubuntu"):
+			return ["gnome-screensaver-command", "--lock"]
+		elif desktop_session == "cinnamon":
+			return ["cinnamon-screensaver-command", "--lock"]
+		# elif desktop_session.startswith("lubuntu"):
+		# 	return "lxde"
+		# elif desktop_session.startswith("kubuntu"):
+		# 	return "kde"
+		# elif "xfce" in desktop_session or desktop_session.startswith("xubuntu"):
+		# 	return "xfce4"
+		# elif desktop_session.startswith("razor"):
+		# 	return "razor-qt"
+		# elif desktop_session.startswith("wmaker"):
+		# 	return "windowmaker"
+		# if os.environ.get('KDE_FULL_SESSION') == 'true':
+		# 	return "kde"
+		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
+			if not "deprecated" in os.environ.get('GNOME_DESKTOP_SESSION_ID'):
+				return ["gnome-screensaver-command", "--lock"]
+		# elif self.is_running("xfce-mcs-manage"):
+		# 	return "xfce4"
+		# elif self.is_running("ksmserver"):
+		# 	return "kde"
 	return None
 
 def is_desktop_lock_supported():
-	return desktop_envinroment() in ['unity', 'gnome']
+	return lock_screen_command() is not None
 
-def lock_desktop(): 
-	subprocess.call(["gnome-screensaver-command","--lock",])
+def lock_desktop():
+	"""
+	Lock the screen using the predefined commands
+	"""
+	command = lock_screen_command()
+	if command is not None:
+		try:
+			subprocess.Popen(command)
+		except Exception as e:
+			logging.error("Error in executing the commad" + str(command) + " to lock screen", e)

@@ -84,6 +84,9 @@ def show_alert(message, image_name):
 """
 def close_alert(audible_alert_on):
 	logging.info("Close the break screen")
+	if config['enable_screen_lock'] and context['break_type'] == 'long':
+		# Lock the screen before closing the break screen
+		Utility.lock_desktop()
 	break_screen.close()
 	if audible_alert_on:
 		Utility.play_notification()
@@ -132,6 +135,9 @@ def handle_system_suspend():
 """
 def on_skipped():
 	logging.info("User skipped the break")
+	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
+		# Lock the screen before closing the break screen
+		Utility.lock_desktop()
 	core.skip_break()
 
 """
@@ -139,6 +145,9 @@ def on_skipped():
 """
 def on_postponed():
 	logging.info("User postponed the break")
+	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
+		# Lock the screen before closing the break screen
+		Utility.lock_desktop()
 	core.postpone_break()
 
 """
@@ -285,13 +294,18 @@ def main():
 		global notification
 		global tray_icon
 		global language
+		global context
 
+		context = {}
 		language = Utility.load_language(config['language'])
+
+		# Initialize the Safe Eyes Context
+		context['version'] = SAFE_EYES_VERSION
 
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, style_sheet_path)
 		break_screen.initialize(config, language)
-		core = SafeEyesCore(show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
+		core = SafeEyesCore(context, show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
 		core.initialize(config, language)
 		core.start()
 		notification = Notification(language)

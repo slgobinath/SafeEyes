@@ -34,6 +34,7 @@ class SettingsDialog:
 		builder.add_from_file(glade_file)
 		builder.connect_signals(self)
 
+		# Get the UI components
 		self.window = builder.get_object('window_settings')
 		self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
 		self.spin_long_break_duration = builder.get_object('spin_long_break_duration')
@@ -48,6 +49,7 @@ class SettingsDialog:
 		self.switch_screen_lock = builder.get_object('switch_screen_lock')
 		self.spin_time_to_screen_lock = builder.get_object('spin_time_to_screen_lock')
 
+		# Translate the UI labels
 		builder.get_object('lbl_short_break').set_label(language['ui_controls']['short_break_duration'])
 		builder.get_object('lbl_long_break').set_label(language['ui_controls']['long_break_duration'])
 		builder.get_object('lbl_interval_bettween_breaks').set_label(language['ui_controls']['interval_between_two_breaks'])
@@ -63,6 +65,7 @@ class SettingsDialog:
 		builder.get_object('btn_cancel').set_label(language['ui_controls']['cancel'])
 		builder.get_object('btn_save').set_label(language['ui_controls']['save'])
 
+		# Set the current values of input fields
 		self.spin_short_break_duration.set_value(config['short_break_duration'])
 		self.spin_long_break_duration.set_value(config['long_break_duration'])
 		self.spin_interval_between_two_breaks.set_value(config['break_interval'])
@@ -73,8 +76,8 @@ class SettingsDialog:
 		self.switch_strict_break.set_active(config['strict_break'])
 		self.switch_audible_alert.set_active(config['audible_alert'])
 		self.switch_screen_lock.set_sensitive(Utility.is_desktop_lock_supported())
-		self.switch_screen_lock.set_active(Utility.is_desktop_lock_supported() and self.config.get('enable_screen_lock', False))
-		self.spin_time_to_screen_lock.set_value(self.config.get('time_to_screen_lock', 20))
+		self.switch_screen_lock.set_active(Utility.is_desktop_lock_supported() and config['enable_screen_lock'])
+		self.spin_time_to_screen_lock.set_value(config['time_to_screen_lock'])
 		self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 
 		# Initialize the language combobox
@@ -82,7 +85,7 @@ class SettingsDialog:
 		language_index = 2
 		lang_code = config['language']
 
-		# Add System Language as the first option
+		# Add 'System Language' as the first option
 		language_list_store.append([language['ui_controls']['system_language']])
 		language_list_store.append(['-'])
 		self.languages.append('system')
@@ -103,19 +106,33 @@ class SettingsDialog:
 		self.cmb_language.pack_start(cell, True)
 		self.cmb_language.add_attribute(cell, 'text', 0)
 
-	"""
-		Show the SettingsDialog.
-	"""
+
 	def show(self):
+		"""
+		Show the SettingsDialog.
+		"""
 		self.window.show_all()
 
+
 	def on_switch_screen_lock_activate(self, switch, state):
+		"""
+		Event handler to the state change of the screen_lock switch.
+		Enable or disable the self.spin_time_to_screen_lock based on the state of the screen_lock switch.
+		"""
 		self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
 
+
 	def on_window_delete(self, *args):
+		"""
+		Event handler for Settings dialog close action.
+		"""
 		self.window.destroy()
 
+
 	def on_save_clicked(self, button):
+		"""
+		Event handler for Save button click.
+		"""
 		self.config['short_break_duration'] = self.spin_short_break_duration.get_value_as_int()
 		self.config['long_break_duration'] = self.spin_long_break_duration.get_value_as_int()
 		self.config['break_interval'] = self.spin_interval_between_two_breaks.get_value_as_int()
@@ -132,5 +149,9 @@ class SettingsDialog:
 		self.on_save_settings(self.config)	# Call the provided save method
 		self.window.destroy()	# Close the settings window
 
+
 	def on_cancel_clicked(self, button):
+		"""
+		Event handler for Cancel button click.
+		"""
 		self.window.destroy()

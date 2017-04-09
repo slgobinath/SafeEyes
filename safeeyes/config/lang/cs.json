@@ -26,6 +26,7 @@
         "cancel": "Zrušit",
         "disable": "Pozastavit Safe Eyes",
         "enable": "Povolit Safe Eyes",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "Na {} hodinu",
         "for_x_hours": "Na {} hodiny",
         "for_x_minutes": "Na {} minut",
@@ -44,6 +45,7 @@
         "strict_break": "Povinná přestávka (Skrýt tlačítko pro přeskočení)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "Do restartu"
     }
 }

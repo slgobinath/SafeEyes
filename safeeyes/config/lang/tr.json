@@ -26,6 +26,7 @@
         "cancel": "İptal",
         "disable": "Safe Eyes'ı devre dışı bırak",
         "enable": "Safe Eyes'ı etkinleştir",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "{} Saat",
         "for_x_hours": "{} Saat",
         "for_x_minutes": "{} Dakika",
@@ -44,6 +45,7 @@
         "strict_break": "Kesin mola (Geç düğmesini gizler)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Mola için hazırlanma zamanı (saniye)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "Tekrar başlatılana kadar"
     }
 }

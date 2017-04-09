@@ -26,6 +26,7 @@
         "cancel": "Cancelar",
         "disable": "Desactivar Safe Eyes",
         "enable": "Activar Safe Eyes",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "Durante {} hora",
         "for_x_hours": "Durante {} horas",
         "for_x_minutes": "Durante {} minutos",
@@ -44,6 +45,7 @@
         "strict_break": "Pausa estricta (No hay botón Cancelar)",
         "system_language": "Idioma del sistema",
         "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "Hasta reinicio"
     }
 }

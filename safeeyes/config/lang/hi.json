@@ -26,6 +26,7 @@
         "cancel": "रखना नहीं",
         "disable": "सेफ आईज बंद",
         "enable": "सेफ आईज शुरू",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "{} घंटे के लिए",
         "for_x_hours": "{} घंटों के लिए",
         "for_x_minutes": "{} मिन्टों के लिए",
@@ -44,6 +45,7 @@
         "strict_break": "जरूरी आराम (रोक नहीं सकते)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "कितने पलों पहले बताएं",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "अगले आरम्भ तक"
     }
 }

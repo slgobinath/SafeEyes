@@ -26,6 +26,7 @@
         "cancel": "Cancel",
         "disable": "Disable Safe Eyes",
         "enable": "Enable Safe Eyes",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "For {} Hour",
         "for_x_hours": "For {} Hours",
         "for_x_minutes": "For {} Minutes",
@@ -44,8 +45,7 @@
         "strict_break": "Strict break (Hide skip button)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Time to prepare for break (in seconds)",
-        "until_restart": "Until restart",
-        "time_to_screen_lock": "Lock screen if break is longer than (in seconds)",
-        "enable_screen_lock": "Enable screen lock for long breaks"
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "until_restart": "Until restart"
     }
 }

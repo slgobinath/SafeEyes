@@ -26,6 +26,7 @@
         "cancel": "Mégse",
         "disable": "Disable Safe Eyes",
         "enable": "Safe Eyes Bekapcsolása",
+        "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "For {} Hour",
         "for_x_hours": "For {} Hours",
         "for_x_minutes": "For {} Minutes",
@@ -44,6 +45,7 @@
         "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
         "system_language": "System Language",
         "time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
         "until_restart": "Until restart"
     }
 }
