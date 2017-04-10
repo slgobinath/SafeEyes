@@ -16,46 +16,46 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi
-import logging
-gi.require_version('Gtk', '3.0')
-gi.require_version('AppIndicator3', '0.1')
+import gi, logging
 gi.require_version('Notify', '0.7')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
-from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Notify
+import Utility
 
 
 APPINDICATOR_ID = 'safeeyes'
 
-"""
-	This class is responsible for the notification to the user before the break.
-"""
 class Notification:
+	"""
+		This class is responsible for the notification to the user before the break.
+	"""
 
-	"""
-		Initialize the notification.
-	"""
+
 	def __init__(self, language):
-		logging.info("Initialize the notification")
+		"""
+		Initialize the notification.
+		"""
+		logging.info('Initialize the notification')
 		Notify.init(APPINDICATOR_ID)
 		self.language = language
 
 
-	"""
-		Show the notification"
-	"""
 	def show(self, warning_time):
-		logging.info("Show pre-break notification")
-		self.notification = Notify.Notification.new("Safe Eyes", "\n" + self.language['messages']['ready_for_a_break'].format(warning_time), icon="safeeyes_enabled")
-		self.notification.show()
+		"""
+		Show the notification
+		"""
+		logging.info('Show pre-break notification')
+		self.notification = Notify.Notification.new('Safe Eyes', '\n' + self.language['messages']['ready_for_a_break'].format(warning_time), icon='safeeyes_enabled')
+		try:
+			self.notification.show()
+		except Exception as e:
+			logging.exception('Error in showing notification', e)
 
 
-	"""
-		Close the notification if it is not closed by the system already.
-	"""
 	def close(self):
-		logging.info("Close pre-break notification")
+		"""
+		Close the notification if it is not closed by the system already.
+		"""
+		logging.info('Close pre-break notification')
 		try:
 			self.notification.close()
 		except:
@@ -63,9 +63,9 @@ class Notification:
 			pass
 
 
-	"""
-		Uninitialize the notification. Call this method when closing the application.
-	"""
 	def quite(self):
-		logging.info("Uninitialize Safe Eyes notification")
-		GLib.idle_add(lambda: Notify.uninit())
+		"""
+		Uninitialize the notification. Call this method when closing the application.
+		"""
+		logging.info('Uninitialize Safe Eyes notification')
+		Utility.execute_main_thread(Notify.uninit)
