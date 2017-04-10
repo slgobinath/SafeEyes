@@ -251,6 +251,7 @@ def lock_screen_command():
 		Cinnamon:		['cinnamon-screensaver-command', '--lock']
 		Mate:			['mate-screensaver-command', '--lock']
 		KDE:			['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+		XFCE:			['xflock4']
 		None if nothing detected
 	"""
 	# TODO: Add the command-line tools for other desktop environments (Atleast for KDE, XFCE, LXDE and MATE)
@@ -266,10 +267,10 @@ def lock_screen_command():
 			return ['mate-screensaver-command', '--lock']
 		elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
 			return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+		elif 'xfce' in desktop_session or desktop_session.startswith('xubuntu'):
+			return ['xflock4']
 		# elif desktop_session.startswith('lubuntu'):
 		# 	return 'lxde'
-		# elif 'xfce' in desktop_session or desktop_session.startswith('xubuntu'):
-		# 	return 'xfce4'
 		# elif desktop_session.startswith('razor'):
 		# 	return 'razor-qt'
 		# elif desktop_session.startswith('wmaker'):
@@ -277,8 +278,6 @@ def lock_screen_command():
 		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
 			if not 'deprecated' in os.environ.get('GNOME_DESKTOP_SESSION_ID'):
 				return ['gnome-screensaver-command', '--lock']
-		# elif self.is_running('xfce-mcs-manage'):
-		# 	return 'xfce4'
 	return None
 
 def is_desktop_lock_supported():
