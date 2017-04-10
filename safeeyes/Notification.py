@@ -19,7 +19,7 @@
 import gi, logging
 gi.require_version('Notify', '0.7')
 from gi.repository import Notify
-import Utility
+from safeeyes import Utility
 
 
 APPINDICATOR_ID = 'safeeyes'

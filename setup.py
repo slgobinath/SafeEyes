@@ -19,11 +19,11 @@ def _data_files(path):
     for root, dirs, files in os.walk(path):
         if not files:
             continue
-        yield (root, [os.path.join(root, f) for f in files])
+        yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
 
 setuptools.setup(
     name="safeeyes",
-    version="1.1.9",
+    version="1.2.0",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
@@ -39,7 +39,7 @@ setuptools.setup(
     data_files=list(_data_files(
             os.path.join(os.path.dirname(__file__), 'share'))),
     install_requires=requires,
-    entry_points={'console_scripts': ['safeeyes = safeeyes.safeeyes:main']},
+    entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[
         "Operating System :: POSIX :: Linux",
@@ -49,6 +49,6 @@ setuptools.setup(
         "Intended Audience :: End Users/Desktop",
         "Topic :: Utilities"] + [
         ('Programming Language :: Python :: %s' % x) for x in
-        '2 2.7'.split()
+        '3 3.4'.split()
     ]
 )

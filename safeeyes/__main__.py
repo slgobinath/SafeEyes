@@ -18,18 +18,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, shutil, dbus, logging, operator, Utility
-import psutil, sys
+import os, gi, json, shutil, dbus, logging, operator, psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
-from BreakScreen import BreakScreen
-from TrayIcon import TrayIcon
-from SettingsDialog import SettingsDialog
-from AboutDialog import AboutDialog
-from SafeEyesCore import SafeEyesCore
-from Notification import Notification
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+from safeeyes.AboutDialog import AboutDialog
+from safeeyes.BreakScreen import BreakScreen
+from safeeyes.Notification import Notification
+from safeeyes.SafeEyesCore import SafeEyesCore
+from safeeyes.SettingsDialog import SettingsDialog
+from safeeyes.TrayIcon import TrayIcon
+from safeeyes import Utility
 
 # Define necessary paths
 config_file_path = os.path.join(Utility.home_directory, '.config/safeeyes/safeeyes.json')

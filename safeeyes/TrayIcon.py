@@ -16,11 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging, threading, datetime, Utility
+import gi, logging, threading, datetime
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 from gi.repository import Gtk
 from gi.repository import AppIndicator3 as appindicator
+from safeeyes import Utility
 
 # Global variables
 APPINDICATOR_ID = 'safeeyes'
