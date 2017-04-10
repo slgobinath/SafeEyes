@@ -24,7 +24,7 @@ import pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
-system_language_directory = os.path.join(bin_directory, "config/lang")
+system_language_directory = os.path.join(bin_directory, 'config/lang')
 config_directory = os.path.join(home_directory, '.config/safeeyes')
 
 
@@ -32,7 +32,7 @@ def play_notification():
 	"""
 	Play the alert.wav
 	"""
-	logging.info("Playing audible alert")
+	logging.info('Playing audible alert')
 	CHUNK = 1024
 
 	try:
@@ -117,7 +117,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	Check for full-screen applications.
 	This method must be executed by the main thread. If not, it will cause to random failure.
 	"""
-	logging.info("Searching for full-screen application")
+	logging.info('Searching for full-screen application')
 	screen = Gdk.Screen.get_default()
 
 	active_window = screen.get_active_window()
@@ -128,7 +128,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 		try:
 			stdout = subprocess.check_output(cmdlist).decode('utf-8')
 		except subprocess.CalledProcessError:
-			logging.warning("Error in finding full-screen application")
+			logging.warning('Error in finding full-screen application')
 			pass
 		else:
 			if stdout:
@@ -247,38 +247,38 @@ def lock_screen_command():
 	"""
 	Function tries to detect the screensaver command based on the current envinroment
 	Possible results:
-		Gnome, Unity:	["gnome-screensaver-command", "--lock"]
-		Cinnamon:		["cinnamon-screensaver-command", "--lock"]
+		Gnome, Unity:	['gnome-screensaver-command', '--lock']
+		Cinnamon:		['cinnamon-screensaver-command', '--lock']
+		Mate:			['mate-screensaver-command', '--lock']
+		KDE:			['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
 		None if nothing detected
 	"""
 	# TODO: Add the command-line tools for other desktop environments (Atleast for KDE, XFCE, LXDE and MATE)
-	desktop_session = os.environ.get("DESKTOP_SESSION")
+	desktop_session = os.environ.get('DESKTOP_SESSION')
 	if desktop_session is not None:
 		desktop_session = desktop_session.lower()
-		# if desktop_session in ["gnome","unity", "cinnamon", "mate", "xfce4", "lxde", "fluxbox", "blackbox", "openbox", "icewm", "jwm", "afterstep", "trinity", "kde"]:
-		if desktop_session in ["gnome","unity"] or desktop_session.startswith("ubuntu"):
-			return ["gnome-screensaver-command", "--lock"]
-		elif desktop_session == "cinnamon":
-			return ["cinnamon-screensaver-command", "--lock"]
-		# elif desktop_session.startswith("lubuntu"):
-		# 	return "lxde"
-		# elif desktop_session.startswith("kubuntu"):
-		# 	return "kde"
-		# elif "xfce" in desktop_session or desktop_session.startswith("xubuntu"):
-		# 	return "xfce4"
-		# elif desktop_session.startswith("razor"):
-		# 	return "razor-qt"
-		# elif desktop_session.startswith("wmaker"):
-		# 	return "windowmaker"
-		# if os.environ.get('KDE_FULL_SESSION') == 'true':
-		# 	return "kde"
+		# if desktop_session in ['gnome','unity', 'cinnamon', 'mate', 'xfce4', 'lxde', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
+		if desktop_session in ['gnome','unity'] or desktop_session.startswith('ubuntu'):
+			return ['gnome-screensaver-command', '--lock']
+		elif desktop_session == 'cinnamon':
+			return ['cinnamon-screensaver-command', '--lock']
+		elif desktop_session == 'mate':
+			return ['mate-screensaver-command', '--lock']
+		elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
+			return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+		# elif desktop_session.startswith('lubuntu'):
+		# 	return 'lxde'
+		# elif 'xfce' in desktop_session or desktop_session.startswith('xubuntu'):
+		# 	return 'xfce4'
+		# elif desktop_session.startswith('razor'):
+		# 	return 'razor-qt'
+		# elif desktop_session.startswith('wmaker'):
+		# 	return 'windowmaker'
 		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-			if not "deprecated" in os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-				return ["gnome-screensaver-command", "--lock"]
-		# elif self.is_running("xfce-mcs-manage"):
-		# 	return "xfce4"
-		# elif self.is_running("ksmserver"):
-		# 	return "kde"
+			if not 'deprecated' in os.environ.get('GNOME_DESKTOP_SESSION_ID'):
+				return ['gnome-screensaver-command', '--lock']
+		# elif self.is_running('xfce-mcs-manage'):
+		# 	return 'xfce4'
 	return None
 
 def is_desktop_lock_supported():
@@ -293,4 +293,4 @@ def lock_desktop():
 		try:
 			subprocess.Popen(command)
 		except Exception as e:
-			logging.error("Error in executing the commad" + str(command) + " to lock screen", e)
+			logging.error('Error in executing the commad' + str(command) + ' to lock screen', e)
