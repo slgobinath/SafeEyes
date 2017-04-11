@@ -1,4 +1,4 @@
-safeeyes (1.1.8-1) xenial; urgency=medium
+safeeyes (1.2.0-1) xenial; urgency=medium
 
   * Fix random crash
 
@@ -38,4 +38,4 @@ safeeyes (1.1.8-1) xenial; urgency=medium
 
   * Initial release
 
- -- Loganathan Gobinath <slgobinath@gmail.com>  Sat, 15 Oct 2016 06:28:40 +0530
+ -- Gobinath Loganathan <slgobinath@gmail.com>  Sat, 15 Oct 2016 06:28:40 +0530

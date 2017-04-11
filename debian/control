@@ -2,13 +2,14 @@ Source: safeeyes
 Section: utils
 Priority: optional
 Maintainer: Gobinath Loganathan <slgobinath@gmail.com>
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper (>= 9), python3
 Standards-Version: 3.9.6
+X-Python3-Version: >= 3.4
 Homepage: https://github.com/slgobinath/SafeEyes/
 
 Package: safeeyes
-Architecture: any
-Depends: gir1.2-appindicator3-0.1, python (>= 2.7.0), python-xlib, python-gi, python-dbus, gir1.2-notify-0.7, python-gtk2, python-babel, xprintidle, python-pyaudio, python-psutil
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, gir1.2-appindicator3-0.1, python3 (>= 3.4.0), python3-xlib, python3-gi, python3-dbus, gir1.2-notify-0.7, python-gtk2, python3-babel, xprintidle, python3-pyaudio, python3-psutil
 Description: Safe Eyes
  Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
  .
