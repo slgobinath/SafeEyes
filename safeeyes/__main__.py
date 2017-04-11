@@ -267,7 +267,7 @@ def running():
 		try:
 			# Check if safeeyes is in process arguments
 			cmd_line = proc.cmdline()
-			if 'python3' == cmd_line[0] and 'safeeyes' in cmd_line[1]:
+			if 'python3' in cmd_line[0] and 'safeeyes' in cmd_line[1]:
 				process_count += 1
 				if process_count > 1:
 					return True
