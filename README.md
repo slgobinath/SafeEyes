@@ -264,6 +264,70 @@ mkdir ~/.config/safeeyes/resource
 ```
 Place the new `alert.wav` file in the `~/.config/safeeyes/resource` directory.
 
+### Write Safe Eyes plugins
+This section uses a simple todo list plugin as an example.
+
+Create a new directory plugins in `~/.config/safeeyes`
+```
+mkdir ~/.config/safeeyes/plugins
+```
+Create a new file todo.py in `~/.config/safeeyes/plugins` with the following content
+
+```
+"""
+Safe Eyes todo plugin
+"""
+
+def start(context):
+	"""
+	Do not return anything here.
+	Use this function if you want to do anything on startup.
+	"""
+	pass
+
+def pre_notification(context):
+	"""
+	Do not return anything here.
+	Use this function if you want to do anything before ntification.
+	"""
+	pass
+
+def pre_break(context):
+	"""
+	Use this function if you want to do anything on before the break.
+	Optionally you can return a Pango markup content to be displayed on the break screen.
+	For more details about Pango: https://developer.gnome.org/pygtk/stable/pango-markup-language.html
+	NOTE: This function should return the result within a second
+	"""
+	todo_list = """★ Call alice
+★ Upvote Safe Eyes in alternative.to"""
+	return "<span color='white'>" + todo_list + "</span>"
+
+def post_break(context):
+	# Do nothing after the notification
+	pass
+
+def exit(context):
+	"""
+	Do not return anything here.
+	Use this function if you want to do anything on exit.
+	"""
+	pass
+```
+
+Add the plugin in `~/.config/safeeyes/safeeyes.json`
+```
+    ...
+    "plugins": [
+        {
+            "name": "todo",
+            "location": "right"
+        }
+    ]
+    ...
+```
+Here the location can be either `left` or `right` which defines the location on the break screen.
+
 
 ## CONTRIBUTING
 
