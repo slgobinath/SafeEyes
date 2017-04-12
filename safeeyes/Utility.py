@@ -263,6 +263,8 @@ def lock_screen_command():
 			return ['gnome-screensaver-command', '--lock']
 		elif desktop_session == 'cinnamon':
 			return ['cinnamon-screensaver-command', '--lock']
+		elif desktop_session == 'pantheon':
+			return ['light-locker-command', '--lock']
 		elif desktop_session == 'mate':
 			return ['mate-screensaver-command', '--lock']
 		elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
