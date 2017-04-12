@@ -26,15 +26,16 @@ from gi.repository import Gtk
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
 from safeeyes.Notification import Notification
+from safeeyes.Plugins import Plugins
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.SettingsDialog import SettingsDialog
 from safeeyes.TrayIcon import TrayIcon
 from safeeyes import Utility
 
 # Define necessary paths
-config_file_path = os.path.join(Utility.home_directory, '.config/safeeyes/safeeyes.json')
-style_sheet_path = os.path.join(Utility.home_directory, '.config/safeeyes/style/safeeyes_style.css')
-log_file_path = os.path.join(Utility.home_directory, '.config/safeeyes/safeeyes.log')
+config_file_path = os.path.join(Utility.config_directory, 'safeeyes.json')
+style_sheet_path = os.path.join(Utility.config_directory, 'style/safeeyes_style.css')
+log_file_path = os.path.join(Utility.config_directory, 'safeeyes.log')
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
@@ -67,6 +68,7 @@ def show_about():
 def show_notification():
 	if config['strict_break']:
 		Utility.execute_main_thread(tray_icon.lock_menu)
+	plugins.pre_notification(context)
 	notification.show(config['pre_break_warning_time'])
 
 """
@@ -75,7 +77,8 @@ def show_notification():
 def show_alert(message, image_name):
 	logging.info("Show the break screen")
 	notification.close()
-	break_screen.show_message(message, Utility.get_resource_path(image_name))
+	plugins_data = plugins.pre_break(context)
+	break_screen.show_message(message, Utility.get_resource_path(image_name), plugins_data)
 	if config['strict_break'] and is_active:
 		Utility.execute_main_thread(tray_icon.unlock_menu)
 
@@ -90,6 +93,7 @@ def close_alert(audible_alert_on):
 	break_screen.close()
 	if audible_alert_on:
 		Utility.play_notification()
+	plugins.post_break(context)
 
 """
 	Receive the count from core and pass it to the break screen.
@@ -102,6 +106,7 @@ def on_countdown(count):
 """
 def on_quit():
 	logging.info("Quit Safe Eyes")
+	plugins.exit(context)
 	core.stop()
 	notification.quite();
 	Gtk.main_quit()
@@ -295,6 +300,7 @@ def main():
 		global tray_icon
 		global language
 		global context
+		global plugins
 
 		context = {}
 		language = Utility.load_language(config['language'])
@@ -305,10 +311,12 @@ def main():
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, style_sheet_path)
 		break_screen.initialize(config, language)
+		notification = Notification(language)
+		plugins = Plugins(config)
 		core = SafeEyesCore(context, show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
 		core.initialize(config, language)
+		plugins.start(context)		# Call the start method of all plugins
 		core.start()
-		notification = Notification(language)
 
 		handle_system_suspend()
 

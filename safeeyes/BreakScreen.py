@@ -94,8 +94,8 @@ class BreakScreen:
 	"""
 		Show the break screen with the given message on all displays.
 	"""
-	def show_message(self, message, image_path):
-		GLib.idle_add(lambda: self.__show_break_screen(message, image_path))
+	def show_message(self, message, image_path, plugins_data):
+		GLib.idle_add(lambda: self.__show_break_screen(message, image_path, plugins_data))
 
 
 	"""
@@ -112,7 +112,7 @@ class BreakScreen:
 	"""
 		Show an empty break screen on all screens.
 	"""
-	def __show_break_screen(self, message, image_path):
+	def __show_break_screen(self, message, image_path, plugins_data):
 		# Lock the keyboard
 		thread = threading.Thread(target=self.__lock_keyboard)
 		thread.start()
@@ -158,6 +158,8 @@ class BreakScreen:
 			if image_path:
 				img_break.set_from_file(image_path)
 			lbl_message.set_label(message)
+			lbl_left.set_markup(plugins_data['left']);
+			lbl_right.set_markup(plugins_data['right']);
 			btn_skip.set_label(self.skip_button_text)
 			btn_postpone.set_label(self.postpone_button_text)
 

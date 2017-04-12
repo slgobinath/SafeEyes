@@ -439,7 +439,7 @@
                 <property name="valign">center</property>
                 <property name="text" translatable="yes">1</property>
                 <property name="input_purpose">number</property>
-                <property name="adjustment">adjust_time_to_prepare</property>
+                <property name="adjustment">adjust_time_to_lock_screen</property>
                 <property name="climb_rate">1</property>
                 <property name="numeric">True</property>
                 <property name="update_policy">if-valid</property>
