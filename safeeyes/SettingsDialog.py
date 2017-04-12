@@ -75,9 +75,15 @@ class SettingsDialog:
 		self.spin_postpone_duration.set_value(config['postpone_duration'])
 		self.switch_strict_break.set_active(config['strict_break'])
 		self.switch_audible_alert.set_active(config['audible_alert'])
-		self.switch_screen_lock.set_sensitive(Utility.is_desktop_lock_supported())
-		self.switch_screen_lock.set_active(Utility.is_desktop_lock_supported() and config['enable_screen_lock'])
 		self.spin_time_to_screen_lock.set_value(config['time_to_screen_lock'])
+
+		# Check lock screen command
+		able_to_lock_screen = False
+		if config['lock_screen_command'] or Utility.lock_screen_command():
+			able_to_lock_screen = True
+		
+		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
+		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
 		self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 
 		# Initialize the language combobox

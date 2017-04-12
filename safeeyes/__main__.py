@@ -89,17 +89,12 @@ def close_alert(audible_alert_on):
 	logging.info("Close the break screen")
 	if config['enable_screen_lock'] and context['break_type'] == 'long':
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop()
+		Utility.lock_desktop(config['lock_screen_command'])
 	break_screen.close()
 	if audible_alert_on:
 		Utility.play_notification()
 	plugins.post_break(context)
 
-"""
-	Receive the count from core and pass it to the break screen.
-"""
-def on_countdown(count):
-	break_screen.show_count_down(count)
 
 """
 	Listen to the tray menu quit action and stop the core, notification and the app itself.
@@ -142,7 +137,7 @@ def on_skipped():
 	logging.info("User skipped the break")
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop()
+		Utility.lock_desktop(config['lock_screen_command'])
 	core.skip_break()
 
 """
@@ -152,7 +147,7 @@ def on_postponed():
 	logging.info("User postponed the break")
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop()
+		Utility.lock_desktop(config['lock_screen_command'])
 	core.postpone_break()
 
 """
@@ -212,16 +207,18 @@ def initialize_config():
 	Utility.mkdir(config_dir_path)
 
 	if not os.path.isfile(config_file_path):
+		# Copy the safeeyes.json
 		shutil.copy2(system_config_file_path, config_file_path)
 
+		# Overwrite the startup file only if config file is replaced
 		Utility.mkdir(startup_dir_path)
 
-		# Add to startup for the first time only
 		try:
 			os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, "safeeyes.desktop"))
 		except OSError as exc:
 			pass
 
+	# Copy the safeeyes_style.css
 	if not os.path.isfile(style_sheet_path):
 		shutil.copy2(system_style_sheet_path, style_sheet_path)
 
@@ -247,9 +244,15 @@ def validate_config():
 		version_mismatch = True
 
 	if version_mismatch:
-		# Remove ~/.config/safeeyes directory
+		# Remove ~/.config/safeeyes/safeeyes.json file
 		try:
-			shutil.rmtree(os.path.join(Utility.home_directory, '.config/safeeyes'), ignore_errors=False)
+			os.remove(config_file_path)
+		except:
+			pass
+
+		# Remove ~/.config/safeeyes/style/safeeyes_style.css file
+		try:
+			os.remove(style_sheet_path)
 		except:
 			pass
 
@@ -276,7 +279,6 @@ def running():
 				process_count += 1
 				if process_count > 1:
 					return True
-
 
 		# Ignore if process does not exist or does not have command line args
 		except (IndexError, psutil.NoSuchProcess):
@@ -313,7 +315,7 @@ def main():
 		break_screen.initialize(config, language)
 		notification = Notification(language)
 		plugins = Plugins(config)
-		core = SafeEyesCore(context, show_notification, show_alert, close_alert, on_countdown, tray_icon.next_break_time)
+		core = SafeEyesCore(context, show_notification, show_alert, close_alert, break_screen.show_count_down, tray_icon.next_break_time)
 		core.initialize(config, language)
 		plugins.start(context)		# Call the start method of all plugins
 		core.start()

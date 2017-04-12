@@ -282,14 +282,15 @@ def lock_screen_command():
 				return ['gnome-screensaver-command', '--lock']
 	return None
 
-def is_desktop_lock_supported():
-	return lock_screen_command() is not None
 
-def lock_desktop():
+def lock_desktop(user_defined_command):
 	"""
 	Lock the screen using the predefined commands
 	"""
-	command = lock_screen_command()
+	if user_defined_command:
+		command = user_defined_command
+	else:
+		command = lock_screen_command()
 	if command is not None:
 		try:
 			subprocess.Popen(command)
