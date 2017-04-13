@@ -247,23 +247,22 @@ def lock_screen_command():
 	"""
 	Function tries to detect the screensaver command based on the current envinroment
 	Possible results:
-		Gnome, Unity:	['gnome-screensaver-command', '--lock']
-		Cinnamon:		['cinnamon-screensaver-command', '--lock']
-		Mate:			['mate-screensaver-command', '--lock']
-		KDE:			['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-		XFCE:			['xflock4']
-		None if nothing detected
+		Gnome, Unity, Budgie:		['gnome-screensaver-command', '--lock']
+		Cinnamon:					['cinnamon-screensaver-command', '--lock']
+		Pantheon, LXDE:				['light-locker-command', '--lock']
+		Mate:						['mate-screensaver-command', '--lock']
+		KDE:						['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+		XFCE:						['xflock4']
+		Otherwise:					None
 	"""
-	# TODO: Add the command-line tools for other desktop environments (Atleast for KDE, XFCE, LXDE and MATE)
 	desktop_session = os.environ.get('DESKTOP_SESSION')
 	if desktop_session is not None:
 		desktop_session = desktop_session.lower()
-		# if desktop_session in ['gnome','unity', 'cinnamon', 'mate', 'xfce4', 'lxde', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
-		if desktop_session in ['gnome','unity'] or desktop_session.startswith('ubuntu'):
+		if desktop_session in ['gnome','unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
 			return ['gnome-screensaver-command', '--lock']
 		elif desktop_session == 'cinnamon':
 			return ['cinnamon-screensaver-command', '--lock']
-		elif desktop_session == 'pantheon':
+		elif desktop_session == 'pantheon' or desktop_session.startswith('lubuntu'):
 			return ['light-locker-command', '--lock']
 		elif desktop_session == 'mate':
 			return ['mate-screensaver-command', '--lock']
@@ -271,12 +270,6 @@ def lock_screen_command():
 			return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
 		elif 'xfce' in desktop_session or desktop_session.startswith('xubuntu'):
 			return ['xflock4']
-		# elif desktop_session.startswith('lubuntu'):
-		# 	return 'lxde'
-		# elif desktop_session.startswith('razor'):
-		# 	return 'razor-qt'
-		# elif desktop_session.startswith('wmaker'):
-		# 	return 'windowmaker'
 		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
 			if not 'deprecated' in os.environ.get('GNOME_DESKTOP_SESSION_ID'):
 				return ['gnome-screensaver-command', '--lock']
