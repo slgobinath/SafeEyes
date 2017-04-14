@@ -29,7 +29,7 @@ setuptools.setup(
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a2.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a3.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',
@@ -47,6 +47,6 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Environment :: X11 Applications :: GTK",
         "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities"
+        "Topic :: Utilities",
         "Programming Language :: Python :: 3"]
 )
