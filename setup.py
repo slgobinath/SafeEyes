@@ -19,17 +19,17 @@ def _data_files(path):
     for root, dirs, files in os.walk(path):
         if not files:
             continue
-        yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
+        yield (root, [os.path.join(root, f) for f in files])
 
 setuptools.setup(
     name="safeeyes",
-    version="1.2.0a4",
+    version="1.2.0a5",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a4.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a5.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',
@@ -47,13 +47,7 @@ setuptools.setup(
         "Development Status :: 3 - Alpha",
         "Environment :: X11 Applications :: GTK",
         "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.0",
-        "Programming Language :: Python :: 3.1",
-        "Programming Language :: Python :: 3.2",
-        "Programming Language :: Python :: 3.3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6"]
+        "Topic :: Utilities"] + [
+        ('Programming Language :: Python :: %s' % x) for x in
+        '3 3.4 3.5'.split()]
 )
