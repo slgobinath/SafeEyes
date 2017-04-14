@@ -44,7 +44,7 @@ system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safe
 
 is_active = True
 CONFIGURATION_VERSION = 4
-SAFE_EYES_VERSION = "1.2.0a5"
+SAFE_EYES_VERSION = "1.2.0a6"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.

@@ -19,17 +19,17 @@ def _data_files(path):
     for root, dirs, files in os.walk(path):
         if not files:
             continue
-        yield (root, [os.path.join(root, f) for f in files])
+        yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
 
 setuptools.setup(
     name="safeeyes",
-    version="1.2.0a5",
+    version="1.2.0a6",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a5.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a6.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',
