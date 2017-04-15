@@ -8,6 +8,11 @@ Read more about Safe Eyes on [WEB UPD8](http://www.webupd8.org/):
 
 ## INSTALLATION
 
+**Release Note:**
+`Safe Eyes 1.2.0alpha` is released to PyPI and Ubuntu PPA (Sorry I don't maintain a separate testing PPA. So everyone will get this update) and users who can't wait until the stable release are welcomed to upgrade and provide your feedback.
+
+This time alpha release is required since there are some major changes including mirating to Python 3 behind the scene. Others, please continue with `Safe Eyes 1.1.8` until I release the stable version.
+
 ### Ubuntu:
 1: Add the PPA: `sudo add-apt-repository ppa:slgobinath/safeeyes`
 
@@ -29,7 +34,7 @@ OR
 yaourt -S safeeyes
 ```
 
-### Other Linux (Only valid for Safe Eyes <= 1.1.8):
+### Other Linux (Safe Eyes <= 1.1.8):
 1: Install the dependencies:
 
    * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `python2-babel`, `xprintidle`, `mpg123`
