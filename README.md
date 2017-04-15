@@ -29,14 +29,14 @@ OR
 yaourt -S safeeyes
 ```
 
-### Other Linux:
+### Other Linux (Only valid for Safe Eyes <= 1.1.8):
 1: Install the dependencies:
 
-   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `python2-babel`, `xprintidle`, `mpg123` (From next version onwards: `python2-psutil` and `python2-pyaudio`)
+   * Arch: `hicolor-icon-theme`, `libappindicator-gtk3`, `xorg-xprop`, `python2-xlib`, `python2-gobject`, `python2-dbus`, `python2-babel`, `xprintidle`, `mpg123`
 
-   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus`, `gir1.2-notify-0.7`, `python-gtk2`, `python-babel`, `xprintidle`, `mpg123`, (From next version onwards: `python-psutil`  and `python-pyaudio`)
+   * Debian: `gir1.2-appindicator3-0.1`, `python-xlib`, `python-gobject`, `python-gi`, `python-dbus`, `gir1.2-notify-0.7`, `python-gtk2`, `python-babel`, `xprintidle`, `mpg123`
 
-   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `python-babel`, `xprintidle`, `mpg123`, (From next version onwards: `python-psutil`  and `python-pyaudio`)
+   * Fedora 24: `libappindicator-gtk3`, `python-xlib`, `python-gobject`, `xorg-x11-utils`, `python-dbus`, `python-babel`, `xprintidle`, `mpg123`
 
 2: Download and extract [safeeyes.tar.gz](https://github.com/slgobinath/SafeEyes/releases/download/v1.1.8/safeeyes.tar.gz) into `/`: `sudo tar -xzvf safeeyes.tar.gz -C /`
 
@@ -44,10 +44,40 @@ yaourt -S safeeyes
 
 Once started, Safe Eyes will copy the desktop file to `~/.config/autostart` and the configurations to `~/.config/safeeyes`. Therefore, from next time onwards, it should start with the system.
 
+### Using PyPI (Currently in alpha release):
+1: Install the dependencies as mentioned above
+
+Note: Install the `python3-psutil` and `python3-pyaudio` using system installer instead of `pip`.
+
+2: Install safeeyes
+
+```
+sudo pip3 install safeeyes
+```
+
+3: Update the icon cache
+```
+sudo update-icon-caches /usr/share/icons/hicolor
+```
+
+4: Start Safe Eyes:
+```
+safeeyes
+```
+
 ## UNINSTALLING SAFE EYES
 Use the following commands to uninstall SafeEyes from your system.
+
+### Ubuntu:
 ```
 sudo apt remove safeeyes
+rm -r ~/.config/safeeyes
+rm ~/.config/autostart/safeeyes.desktop
+```
+
+### PyPI:
+```
+sudo pip3 uninstall safeeyes
 rm -r ~/.config/safeeyes
 rm ~/.config/autostart/safeeyes.desktop
 ```
@@ -60,7 +90,7 @@ General Features:
 - Long breaks to change physical position and to warm up
 - Disable the keyboard during break
 - Notifications before every break
-- Do not disturb when working with fullscreen applications( Eg: Watching movies)
+- Do not disturb when working with full-screen applications( Eg: Watching movies)
 - Smart pause and resume based on system idle time
 - Multi-monitor support
 - Elegant and customizable design
@@ -70,11 +100,12 @@ General Features:
 Optional Features:
 
 - Strict break for those who are addicted to computer
-- Skip or take break based on active windows (Regardless of fullscreen-mode)
+- Skip or take break based on active windows (Regardless of full-screen-mode)
 - Customize individual break time
 - Audible alert at the end of break
 - Turn on/off audible alert for individual breaks
 - Customize disable time period
+- Plug-in support to extend Safe Eyes
 
 ## CONFIGURING SAFE EYES
 Just install and forget; Safe Eyes will take care of your eyes. To customize the basic preferences, go to Settings from Safe Eyes tray icon. If you need advanced features, you can manually edit the `~/.config/safeeyes/safeeyes.json` for the following requirements:

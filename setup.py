@@ -7,6 +7,7 @@ requires = [
             'python-xlib',
             'pyaudio',
             'psutil',
+            'gi',
             'babel']
 
 
