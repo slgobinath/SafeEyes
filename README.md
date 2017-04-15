@@ -13,7 +13,7 @@ Read more about Safe Eyes on [WEB UPD8](http://www.webupd8.org/):
 
 2: Download the package list: `sudo apt update`
 
-3: Install Safe Eyes: `sudo apt install safeeyes`
+3: Install Safe Eyes: `sudo apt install safeeyes=1.1.8-1`
 
 4: Start Safe Eyes from start menu.
 
