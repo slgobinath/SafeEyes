@@ -3,10 +3,10 @@
   <channel>
     <title>Safe Eyes</title>
     <description>Protect your eyes from asthenopia</description>
-    <link>http://localhost:4000/safeeyes/</link>
-    <atom:link href="http://localhost:4000/safeeyes/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 18 Apr 2017 11:35:43 -0400</pubDate>
-    <lastBuildDate>Tue, 18 Apr 2017 11:35:43 -0400</lastBuildDate>
+    <link>http://localhost:4000/SafeEyes/</link>
+    <atom:link href="http://localhost:4000/SafeEyes/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 18 Apr 2017 11:44:01 -0400</pubDate>
+    <lastBuildDate>Tue, 18 Apr 2017 11:44:01 -0400</lastBuildDate>
     <generator>Jekyll v3.4.0</generator>
     
       <item>
@@ -14,8 +14,8 @@
         <description>
 </description>
         <pubDate>Fri, 18 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/18/project-1/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/18/project-1/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/18/project-1/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/18/project-1/</guid>
         
         
       </item>
@@ -25,8 +25,8 @@
         <description>
 </description>
         <pubDate>Thu, 17 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/17/project-2/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/17/project-2/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/17/project-2/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/17/project-2/</guid>
         
         
       </item>
@@ -36,8 +36,8 @@
         <description>
 </description>
         <pubDate>Wed, 16 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/16/project-3/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/16/project-3/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/16/project-3/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/16/project-3/</guid>
         
         
       </item>
@@ -47,8 +47,8 @@
         <description>
 </description>
         <pubDate>Tue, 15 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/15/project-4/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/15/project-4/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/15/project-4/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/15/project-4/</guid>
         
         
       </item>
@@ -58,8 +58,8 @@
         <description>
 </description>
         <pubDate>Mon, 14 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/14/project-5/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/14/project-5/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/14/project-5/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/14/project-5/</guid>
         
         
       </item>
@@ -69,8 +69,8 @@
         <description>
 </description>
         <pubDate>Sun, 13 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/13/project-6/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/13/project-6/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/13/project-6/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/13/project-6/</guid>
         
         
       </item>
@@ -80,8 +80,8 @@
         <description>
 </description>
         <pubDate>Sat, 12 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/12/project-7/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/12/project-7/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/12/project-7/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/12/project-7/</guid>
         
         
       </item>
@@ -91,8 +91,8 @@
         <description>
 </description>
         <pubDate>Fri, 11 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/11/project-8/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/11/project-8/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/11/project-8/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/11/project-8/</guid>
         
         
       </item>
@@ -102,8 +102,8 @@
         <description>
 </description>
         <pubDate>Thu, 10 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/10/project-9/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/10/project-9/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/10/project-9/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/10/project-9/</guid>
         
         
       </item>
@@ -113,8 +113,8 @@
         <description>
 </description>
         <pubDate>Wed, 09 Jul 2014 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/safeeyes/2014/07/09/project-10/</link>
-        <guid isPermaLink="true">http://localhost:4000/safeeyes/2014/07/09/project-10/</guid>
+        <link>http://localhost:4000/SafeEyes/2014/07/09/project-10/</link>
+        <guid isPermaLink="true">http://localhost:4000/SafeEyes/2014/07/09/project-10/</guid>
         
         
       </item>
