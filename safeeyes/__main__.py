@@ -139,6 +139,7 @@ def on_skipped():
 		# Lock the screen before closing the break screen
 		Utility.lock_desktop(config['lock_screen_command'])
 	core.skip_break()
+	plugins.post_break(context)
 
 """
 	Listen to break screen Postpone action and send the signal to core.

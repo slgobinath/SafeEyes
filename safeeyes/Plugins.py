@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging, importlib, os, sys, inspect, copy
-from multiprocessing import Pool, TimeoutError
+from multiprocessing.pool import ThreadPool
 from safeeyes import Utility
 
 plugins_directory = os.path.join(Utility.config_directory, 'plugins')
@@ -35,7 +35,7 @@ class Plugins:
 		"""
 		logging.info('Load all the plugins')
 		self.__plugins = []
-		self.__thread_pool = Pool(processes=4)
+		self.__thread_pool = ThreadPool(4)
 
 		for plugin in config['plugins']:
 			if plugin['location'].lower() in ['left', 'right']:
@@ -89,9 +89,6 @@ class Plugins:
 				result = multiple_results[i].get(timeout=1)
 				if result:
 					output[self.__plugins[i]['location']] += (result + '\n\n')
-			except TimeoutError:
-				# Plugin took too much of time
-				pass
 			except Exception:
 				# Something went wrong in the plugin
 				pass
@@ -115,11 +112,20 @@ class Plugins:
 		Call the exit function of all the plugins in separate thread.
 		"""
 		context = copy.deepcopy(context)	# If plugins change the context, it should not affect Safe Eyes
-		for plugin in self.__plugins:
+
+		# Give maximum 1 sec for all plugins before terminating the thread pool
+		multiple_results = [self.__thread_pool.apply_async(plugin['module'].exit, (context,)) for plugin in self.__plugins]
+		for i in range(len(multiple_results)):
 			try:
-				self.__thread_pool.apply_async(plugin['module'].exit, (context,))
-			except Exception as e:
+				multiple_results[i].get(timeout=1)
+			except Exception:
+				# Something went wrong in the plugin
 				pass
+
+		try:
+			self.__thread_pool.terminate()	# Shutdown the pool
+		except Exception as e:
+			pass
 
 
 	def __has_method(self, module, method_name, no_of_args = 1):
