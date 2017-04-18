@@ -1,3 +1,0 @@
-#!/usr/bin/make -f
-%:
-	dh $@ --with python3 --buildsystem=pybuild
