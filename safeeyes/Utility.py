@@ -19,6 +19,7 @@
 import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
+from html.parser import HTMLParser
 import babel.dates, os, errno, re, subprocess, threading, logging, locale, json
 import pyaudio, wave
 
@@ -45,9 +46,9 @@ def play_notification():
 		# Create a sound stream
 		wrapper = pyaudio.PyAudio()
 		stream = wrapper.open(format=wrapper.get_format_from_width(sound.getsampwidth()),
-				    channels=sound.getnchannels(),
-				    rate=sound.getframerate(),
-			    	    output=True)
+					channels=sound.getnchannels(),
+					rate=sound.getframerate(),
+						output=True)
 
 		# Write file data into the sound stream
 		data = sound.readframes(CHUNK)
@@ -136,17 +137,17 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 				# Extract the process name
 				process_names = re.findall('"(.+?)"', stdout)
 				if process_names:
-				    process = process_names[1].lower()
-				    if process in skip_break_window_classes:
-				    	return True
-				    elif process in take_break_window_classes:
-				    	if is_fullscreen and unfullscreen_allowed:
-				    		try:
-				    			active_window.unfullscreen()
-				    		except:
-				    			logging.error('Error in unfullscreen the window ' + process)
-				    			pass
-				    	return False
+					process = process_names[1].lower()
+					if process in skip_break_window_classes:
+						return True
+					elif process in take_break_window_classes:
+						if is_fullscreen and unfullscreen_allowed:
+							try:
+								active_window.unfullscreen()
+							except:
+								logging.error('Error in unfullscreen the window ' + process)
+								pass
+						return False
 
 				return is_fullscreen
 
@@ -289,3 +290,29 @@ def lock_desktop(user_defined_command):
 			subprocess.Popen(command)
 		except Exception as e:
 			logging.error('Error in executing the commad' + str(command) + ' to lock screen', e)
+
+
+def html_to_text(html):
+	"""
+	Convert HTML to plain text
+	"""
+	extractor = __HTMLTextExtractor()
+	extractor.feed(html)
+	return extractor.get_data()
+
+
+class __HTMLTextExtractor(HTMLParser):
+	"""
+	Helper class to convert HTML to text
+	"""
+	def __init__(self):
+		self.reset()
+		self.strict = False
+		self.convert_charrefs= True
+		self.fed = []
+
+	def handle_data(self, d):
+		self.fed.append(d)
+
+	def get_data(self):
+		return ''.join(self.fed)

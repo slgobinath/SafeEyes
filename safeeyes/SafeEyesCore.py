@@ -34,8 +34,6 @@ class SafeEyesCore:
 		self.break_count = -1
 		self.long_break_message_index = -1
 		self.short_break_message_index = -1
-		self.skipped = False
-		self.postponed = False
 		self.active = False
 		self.running = False
 		self.show_notification = show_notification
@@ -47,6 +45,8 @@ class SafeEyesCore:
 		self.idle_condition = threading.Condition()
 		self.lock = threading.Lock()
 		self.context = context
+		self.context['skipped'] = False
+		self.context['postponed'] = False
 
 
 	"""
@@ -174,13 +174,13 @@ class SafeEyesCore:
 		User skipped the break using Skip button
 	"""
 	def skip_break(self):
-		self.skipped = True
+		self.context['skipped'] = True
 
 	"""
 		User postponed the break using Postpone button
 	"""
 	def postpone_break(self):
-		self.postponed = True
+		self.context['postponed'] = True
 
 
 	"""
@@ -192,7 +192,7 @@ class SafeEyesCore:
 
 		time_to_wait = self.break_interval	# In minutes
 
-		if self.postponed:
+		if self.context['postponed']:
 			# Reduce the break count by 1 to show the same break again
 			if self.break_count == 0:
 				self.break_count = -1
@@ -205,7 +205,7 @@ class SafeEyesCore:
 
 			# Wait until the postpone time
 			time_to_wait = self.postpone_duration
-			self.postponed = False
+			self.context['postponed'] = False
 
 		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
 		self.update_next_break_info(next_break_time)
@@ -303,7 +303,7 @@ class SafeEyesCore:
 			self.start_break(message, image)
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
-			while seconds and self.active and not self.skipped and not self.postponed:
+			while seconds and self.active and not self.context['skipped'] and not self.context['postponed']:
 				self.context['count_down'] = total_break_time - seconds
 				mins, secs = divmod(seconds, 60)
 				timeformat = '{:02d}:{:02d}'.format(mins, secs)
@@ -312,12 +312,12 @@ class SafeEyesCore:
 				seconds -= 1
 
 			# Loop terminated because of timeout (not skipped) -> Close the break alert
-			if not self.skipped and not self.postponed:
+			if not self.context['skipped'] and not self.context['postponed']:
 				logging.info("Break is terminated automatically")
 				self.end_break(audible_alert)
 
 			# Reset the skipped flag
-			self.skipped = False
+			self.context['skipped'] = False
 
 			# Resume
 			if self.__is_running():

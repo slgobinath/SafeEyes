@@ -42,7 +42,7 @@ class Plugins:
 				if os.path.isfile(os.path.join(plugins_directory, plugin['name'] + '.py')):
 					module = importlib.import_module(plugin['name'])
 					if self.__has_method(module, 'start') and self.__has_method(module, 'pre_notification') and self.__has_method(module, 'pre_break') and self.__has_method(module, 'post_break') and self.__has_method(module, 'exit'):
-						self.__plugins.append({'module': module, 'location': plugin['location'].lower()})
+						self.__plugins.append({'name': plugin['name'], 'module': module, 'location': plugin['location'].lower()})
 					else:
 						logging.warning('Ignoring the plugin ' + str(plugin['name']) + ' due to invalid method signature')
 				else:
@@ -88,10 +88,15 @@ class Plugins:
 			try:
 				result = multiple_results[i].get(timeout=1)
 				if result:
+					# Limit the line length to 50 characters
+					large_lines  = list(filter(lambda x: len(x) > 50, Utility.html_to_text(result).splitlines()))
+					if large_lines:
+						logging.warning('Ignoring lengthy result from the plugin ' + self.__plugins[i]['name'])
+						continue
 					output[self.__plugins[i]['location']] += (result + '\n\n')
 			except Exception:
 				# Something went wrong in the plugin
-				pass
+				raise
 
 		return output
 
