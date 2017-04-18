@@ -1,0 +1,35 @@
+---
+title: Disable time option
+subtitle: Change the default disable for options
+layout: default
+modal-id: 1
+img: disable-time-thumbnail.png
+modal-url: disable-time
+thumbnail: disable-time-thumbnail.png
+alt: image-alt
+description: The default disable for a given time options provide <code>30 minutes</code>, <code>1 hour</code>, <code>2 hours</code> and <code>3 hours</code> only. If you want to customize them or if you want to add/remove time based disable option, you can configure them in the <code>safeeyes.json</code> file. To add an additional Disable for 45 minutes, modify the configuration as shown below.
+steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+		'Add a new object to the <code>disable_options</code> object: <pre><code>...<br>
+		"disable_options": [<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"label": "for_x_minutes",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": 30,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"unit": "minute"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"label": "for_x_minutes",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": 45,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"unit": "minute"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"label": "for_x_hour",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"time": 1,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"unit": "hour"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+		]<br>
+		...</code></pre> The <code>unit</code> can be one of these case-insensitive constants: <code>second</code>, <code>seconds</code>, <code>minute</code>, <code>minutes</code>, <code>hour</code>, <code>hours</code>',
+		'Restart the application'
+	]
+
+---
