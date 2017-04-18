@@ -1,0 +1,15 @@
+---
+title: Look and feel
+subtitle: Change the look and feel of the break screen
+layout: default
+modal-id: 1
+img: override-theme-thumbnail.png
+modal-url: override-theme
+thumbnail: override-theme-thumbnail.png
+alt: image-alt
+description: There is nothing to control you from customizing the look and feel of the break screen. Show your CSS skills and customize the look and feel.
+steps: ['Edit the <code>safeeyes_style.css</code>:<pre><code>gedit ~/.config/safeeyes/style/safeeyes_style.css</code></pre>',
+		'Restart the application'
+	]
+
+---

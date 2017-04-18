@@ -1,0 +1,41 @@
+---
+title: Custom Exercise
+subtitle: Define your own exercises
+layout: default
+modal-id: 1
+img: custom-exercise-thumbnail.png
+modal-url: custom-exercise
+thumbnail: custom-exercise-thumbnail.png
+alt: image-alt
+description: We're not going to pretend that the built-in list of exercises will be enough for everybody. So you can add your own! Break images are optional but if you use any image, make sure that the image size is within <code>128x128px</code>.
+steps: ['Create a new directory <code>resource</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/resource</code></pre>',
+		'Copy the break image to the resource directory:<pre><code>cp deep_breath.png ~/.config/safeyes/resource/deep_breath.png</code></pre>',
+		'Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+		'Modify the <code>custom_exercises</code> property (which is an empty object by default) like so: <pre><code>...<br>
+		"custom_exercises": {<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"deep_breath": "Take a deep breath",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"pushups": "Do ten push-ups",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"other": "Other small things you should do on a regular basis"<br>
+		}<br>
+		        ...</code></pre>',
+		'Add them to the <code>short_breaks</code> or <code>long_breaks</code> property as you see fit:<pre><code>...<br>
+		"short_breaks": [<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "deep_breath",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"image": "deep_breath.png"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+		],<br>
+		...<br>
+		"long_breaks": [<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "pushups"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+		],<br>
+		...</code></pre>',
+		'Restart the application']
+
+---

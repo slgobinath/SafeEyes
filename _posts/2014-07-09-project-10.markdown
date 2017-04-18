@@ -1,0 +1,62 @@
+---
+title: Plugins
+subtitle: Extend Safe Eyes by writing your own plugins
+layout: default
+modal-id: 1
+img: safeeyes-plugins-thumbnail.png
+modal-url: safeeyes-plugins
+thumbnail: safeeyes-plugins-thumbnail.png
+alt: image-alt
+description: Running Safe Eyes in your computer requires some resources including memory and proecessor. Utilize them by extending Safe Eyes for some other tasks. What kind of tasks is totally dependning on your creativity. However, do not forget that Safe Eyes is not a fancy timer; it is a break reminder to take care of your health. Follow the steps to create a minimal todo plugin.
+steps: ['Create a new directory <code>plugins</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/plugins</code></pre>',
+		'Create a new file <code>todo.py</code> in <code>~/.config/safeeyes/plugins</code> with the following content:<pre><code>"""<br>
+		Safe Eyes todo plugin<br>
+		"""<br>
+		<br>
+		def start(context):<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on startup.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+		<br>
+		def pre_notification(context):<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything before ntification.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+		<br>
+		def pre_break(context):<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on before the break.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Optionally you can return a Pango markup content to be displayed on the break screen.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;For more details about Pango: https://developer.gnome.org/pygtk/stable/pango-markup-language.html<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should return the result within a second<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;todo_list = """- Call alice<br>
+		- Upvote Safe Eyes in alternative.to"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;return "&#60;span color=&#39;white&#39;&#62;" + todo_list + "&#60;/span&#62;"<br>
+		<br>
+		def post_break(context):<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;# Do nothing after the notification<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+		<br>
+		def exit(context):<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on exit.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;pass</code></pre>',
+		'Add the plugin in <code>~/.config/safeeyes/safeeyes.json</code>:<pre><code>...<br>
+		"plugins": [<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "todo",<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"location": "right"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+		]<br>
+		...</code></pre>Here the location can be either <code>left</code> or <code>right</code> which defines the location on the break screen.',
+		'Restart the application'
+	]
+
+---
