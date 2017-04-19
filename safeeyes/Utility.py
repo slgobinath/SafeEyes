@@ -20,8 +20,7 @@ import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
 from html.parser import HTMLParser
-import babel.dates, os, errno, re, subprocess, threading, logging, locale, json
-import pyaudio, wave
+import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -260,7 +259,11 @@ def lock_screen_command():
 	if desktop_session is not None:
 		desktop_session = desktop_session.lower()
 		if desktop_session in ['gnome','unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
-			return ['gnome-screensaver-command', '--lock']
+			if command_exist('gnome-screensaver-command'):
+				return ['gnome-screensaver-command', '--lock']
+			else:
+				# From Gnome 3.8 no gnome-screensaver-command
+				return ['dbus-send', '--type=method_call', '--dest=org.gnome.ScreenSaver', '/org/gnome/ScreenSaver', 'org.gnome.ScreenSaver.Lock']
 		elif desktop_session == 'cinnamon':
 			return ['cinnamon-screensaver-command', '--lock']
 		elif desktop_session == 'pantheon' or desktop_session.startswith('lubuntu'):
@@ -289,7 +292,7 @@ def lock_desktop(user_defined_command):
 		try:
 			subprocess.Popen(command)
 		except Exception as e:
-			logging.error('Error in executing the commad' + str(command) + ' to lock screen', e)
+			logging.error('Error in executing the commad' + str(command) + ' to lock screen')
 
 
 def html_to_text(html):
@@ -299,6 +302,16 @@ def html_to_text(html):
 	extractor = __HTMLTextExtractor()
 	extractor.feed(html)
 	return extractor.get_data()
+
+
+def command_exist(command):
+	"""
+	Check whether the given command exist in the system or not.
+	"""
+	if shutil.which(command):
+		return True
+	else:
+		return False
 
 
 class __HTMLTextExtractor(HTMLParser):
