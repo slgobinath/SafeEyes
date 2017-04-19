@@ -139,21 +139,6 @@ class BreakScreen:
 			lbl_right = builder.get_object("lbl_right")
 			img_break = builder.get_object("img_break")
 
-			window.move(x, y)
-
-			self.windows.append(window)
-			self.count_labels.append(lbl_count)
-
-			# Set visual to apply css theme. It should be called before show method.
-			window.set_visual(window.get_screen().get_rgba_visual())
-
-			window.stick()
-			window.set_keep_above(True)
-			window.present()
-			window.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
-			window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-			window.fullscreen()
-
 			# Set values
 			if image_path:
 				img_break.set_from_file(image_path)
@@ -167,7 +152,17 @@ class BreakScreen:
 			btn_postpone.set_visible(not self.strict_break)
 			btn_skip.set_visible(not self.strict_break)
 
+			self.windows.append(window)
+			self.count_labels.append(lbl_count)
+
+			# Set visual to apply css theme. It should be called before show method.
+			window.set_visual(window.get_screen().get_rgba_visual())
+
+			window.move(x, y)
+			window.stick()
+			window.set_keep_above(True)
 			window.present()
+			window.fullscreen()
 
 
 	"""
