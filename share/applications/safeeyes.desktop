@@ -13,7 +13,7 @@ Comment[tr]=Gözünüzü yorgunluğa karşı koruyun
 Comment[hi]=तनाव से आंखों की रक्षा
 Comment[es]=Protege tus ojos de la fatiga ocular
 Comment[ru]=Защитите свои глаза от зрительного перенапряжения
-Exec=safeeyes
+Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes
 Version=1.2.0
 Terminal=false
