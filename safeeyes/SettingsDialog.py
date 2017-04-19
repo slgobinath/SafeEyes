@@ -77,6 +77,9 @@ class SettingsDialog:
 		self.switch_audible_alert.set_active(config['audible_alert'])
 		self.spin_time_to_screen_lock.set_value(config['time_to_screen_lock'])
 
+		# Enable idle_time_to_pause only if xprintidle is available
+		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
+
 		# Check lock screen command
 		able_to_lock_screen = False
 		if config['lock_screen_command'] or Utility.lock_screen_command():

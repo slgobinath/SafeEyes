@@ -67,6 +67,8 @@ class SafeEyesCore:
 		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
 		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
 		self.custom_exercises = config['custom_exercises']
+		# Enable idle time pause only if xprintidle is available
+		self.context['idle_pause_enabled'] = Utility.command_exist('xprintidle')
 
 		exercises = language['exercises']
 		for short_break_config in config['short_breaks']:
@@ -120,7 +122,8 @@ class SafeEyesCore:
 				self.active = True
 				self.running = True
 				Utility.start_thread(self.__scheduler_job)
-				Utility.start_thread(self.__start_idle_monitor)
+				if self.context['idle_pause_enabled']:
+					Utility.start_thread(self.__start_idle_monitor)
 
 
 	"""
