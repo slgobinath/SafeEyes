@@ -1,4 +1,4 @@
-safeeyes (1.2.0-1) xenial; urgency=low
+safeeyes (1.2.0a8-1) xenial; urgency=low
 
   * Move to Python 3
 
