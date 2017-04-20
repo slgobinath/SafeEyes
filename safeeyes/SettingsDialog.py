@@ -25,7 +25,7 @@ class SettingsDialog:
 	"""
 		Create and initialize SettingsDialog instance.
 	"""
-	def __init__(self, config, language, languages, on_save_settings, glade_file):
+	def __init__(self, config, language, languages, able_to_lock_screen, on_save_settings, glade_file):
 		self.config = config
 		self.on_save_settings = on_save_settings
 		self.languages = []
@@ -79,11 +79,6 @@ class SettingsDialog:
 
 		# Enable idle_time_to_pause only if xprintidle is available
 		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
-
-		# Check lock screen command
-		able_to_lock_screen = False
-		if config['lock_screen_command'] or Utility.lock_screen_command():
-			able_to_lock_screen = True
 		
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])

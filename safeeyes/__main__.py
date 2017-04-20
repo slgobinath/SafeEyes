@@ -44,14 +44,17 @@ system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safe
 
 is_active = True
 CONFIGURATION_VERSION = 4
-SAFE_EYES_VERSION = "1.2.0a8"
+SAFE_EYES_VERSION = "1.2.0a9"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
 """
 def show_settings():
 	logging.info("Show Settings dialog")
-	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), save_settings, settings_dialog_glade)
+	able_to_lock_screen = False
+	if system_lock_command:
+		able_to_lock_screen = True
+	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), able_to_lock_screen, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
 """
@@ -89,7 +92,7 @@ def close_alert(audible_alert_on):
 	logging.info("Close the break screen")
 	if config['enable_screen_lock'] and context['break_type'] == 'long':
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop(config['lock_screen_command'])
+		Utility.lock_desktop(system_lock_command)
 	break_screen.close()
 	if audible_alert_on:
 		Utility.play_notification()
@@ -137,7 +140,7 @@ def on_skipped():
 	logging.info("User skipped the break")
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop(config['lock_screen_command'])
+		Utility.lock_desktop(system_lock_command)
 	core.skip_break()
 	plugins.post_break(context)
 
@@ -148,7 +151,7 @@ def on_postponed():
 	logging.info("User postponed the break")
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
-		Utility.lock_desktop(config['lock_screen_command'])
+		Utility.lock_desktop(system_lock_command)
 	core.postpone_break()
 
 """
@@ -304,9 +307,16 @@ def main():
 		global language
 		global context
 		global plugins
+		global system_lock_command
 
 		context = {}
 		language = Utility.load_language(config['language'])
+		# Get the lock command only one time
+		if config['lock_screen_command']:
+			system_lock_command = config['lock_screen_command']
+		else:
+			system_lock_command = Utility.lock_screen_command()
+
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
