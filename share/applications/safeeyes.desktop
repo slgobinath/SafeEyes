@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Safe Eyes
 Comment=Protect your eyes from eye strain
 Comment[ge]=დაიცავით თქვენი თვალები დაღლილობისაგან
@@ -15,7 +14,7 @@ Comment[es]=Protege tus ojos de la fatiga ocular
 Comment[ru]=Защитите свои глаза от зрительного перенапряжения
 Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes
-Version=1.2.0
+Version=1.1
 Terminal=false
 Type=Application
 Categories=Utility;
