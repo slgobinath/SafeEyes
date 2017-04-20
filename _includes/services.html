@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Getting Started</h2>
-                    <h3 class="section-subheading text-muted">Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo. Install Safe Eyes based on your preference.</h3>
+                    <h3 class="section-subheading text-muted">Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.<br><br><b>Note: </b>Wayland users must use <code>env GDK_BACKEND=x11 safeeyes</code> instead of <code>safeeyes</code> to start Safe Eyes from terminal.</h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -36,7 +36,7 @@
                         <i class="fa fl-debian fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Debian</h4>
-                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-babel python3-dbus python3-psutil python3-pyaudio python3-xlib xprintidle</code></pre>
+                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">gir1.2-appindicator3-0.1 gir1.2-notify-0.7  python3-pyaudio python3-psutil xprintidle</code></pre>
                     <p class="text-muted">Install Safe Eyes from PyPI.</p><pre align="left"><code align="left">sudo pip3 install safeyes</code></pre>
                     <pre align="left"><code align="left">sudo update-icon-caches /usr/share/icons/hicolor</code></pre>
                     <pre align="left"><code align="left">safeeyes</code></pre>
@@ -47,11 +47,12 @@
                         <i class="fa fl-fedora fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Fedora</h4>
-                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">libappindicator-gtk3 python-gobject python3-babel python3-dbus python3-pyaudio python3-xlib xorg-x11-utils xprintidle</code></pre>
+                    <p class="text-muted">Install the dependencies:</p><pre align="left"><code align="left">sudo dnf install libappindicator-gtk3 python3-pyaudio python3-psutil</code></pre>
+                    <p class="text-muted">Install <code>xprintidle</code> manually (Available for Fedora 24)</p>
                     <p class="text-muted">Install Safe Eyes from PyPI.</p><pre align="left"><code align="left">sudo pip3 install safeyes</code></pre>
                     <p class="text-muted">Update the icon cache</p>
-                    <pre align="left"><code align="left">sudo update-icon-cache /usr/share/icons/hicolor</code></pre>
-                    <pre align="left"><code align="left">safeeyes</code></pre>
+                    <pre align="left"><code align="left">sudo gtk-update-icon-cache /usr/share/icons/hicolor</code></pre>
+                    <pre align="left"><code align="left">env GDK_BACKEND=x11 safeeyes</code></pre>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">

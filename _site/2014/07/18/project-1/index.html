@@ -106,7 +106,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Getting Started</h2>
-                    <h3 class="section-subheading text-muted">Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo. Install Safe Eyes based on your preference.</h3>
+                    <h3 class="section-subheading text-muted">Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.<br><br><b>Note: </b>Wayland users must use <code>env GDK_BACKEND=x11 safeeyes</code> instead of <code>safeeyes</code> to start Safe Eyes from terminal.</h3>
                 </div>
             </div>
             <div class="row text-center">
@@ -138,7 +138,7 @@
                         <i class="fa fl-debian fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Debian</h4>
-                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-babel python3-dbus python3-psutil python3-pyaudio python3-xlib xprintidle</code></pre>
+                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">gir1.2-appindicator3-0.1 gir1.2-notify-0.7  python3-pyaudio python3-psutil xprintidle</code></pre>
                     <p class="text-muted">Install Safe Eyes from PyPI.</p><pre align="left"><code align="left">sudo pip3 install safeyes</code></pre>
                     <pre align="left"><code align="left">sudo update-icon-caches /usr/share/icons/hicolor</code></pre>
                     <pre align="left"><code align="left">safeeyes</code></pre>
@@ -149,11 +149,12 @@
                         <i class="fa fl-fedora fa-stack-1x fa-inverse"></i>
                     </span>
                     <h4 class="service-heading">Fedora</h4>
-                    <p class="text-muted">Install the following dependencies:</p><pre align="left"><code align="left">libappindicator-gtk3 python-gobject python3-babel python3-dbus python3-pyaudio python3-xlib xorg-x11-utils xprintidle</code></pre>
+                    <p class="text-muted">Install the dependencies:</p><pre align="left"><code align="left">sudo dnf install libappindicator-gtk3 python3-pyaudio python3-psutil</code></pre>
+                    <p class="text-muted">Install <code>xprintidle</code> manually (Available for Fedora 24)</p>
                     <p class="text-muted">Install Safe Eyes from PyPI.</p><pre align="left"><code align="left">sudo pip3 install safeyes</code></pre>
                     <p class="text-muted">Update the icon cache</p>
-                    <pre align="left"><code align="left">sudo update-icon-cache /usr/share/icons/hicolor</code></pre>
-                    <pre align="left"><code align="left">safeeyes</code></pre>
+                    <pre align="left"><code align="left">sudo gtk-update-icon-cache /usr/share/icons/hicolor</code></pre>
+                    <pre align="left"><code align="left">env GDK_BACKEND=x11 safeeyes</code></pre>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -1099,7 +1100,7 @@
                             
                                 <li align="left">Create a new directory <code>plugins</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/plugins</code></pre></li>
                             
-                                <li align="left">Create a new file <code>todo.py</code> in <code>~/.config/safeeyes/plugins</code> with the following content:<pre><code>"""<br> Safe Eyes todo plugin<br> """<br> <br> def start(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on startup.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def pre_notification(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything before ntification.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def pre_break(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on before the break.<br> &nbsp;&nbsp;&nbsp;&nbsp;Optionally you can return a Pango markup content to be displayed on the break screen.<br> &nbsp;&nbsp;&nbsp;&nbsp;For more details about Pango: https://developer.gnome.org/pygtk/stable/pango-markup-language.html<br> &nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should return the result within a second<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;todo_list = """- Call alice<br> - Upvote Safe Eyes in alternative.to"""<br> &nbsp;&nbsp;&nbsp;&nbsp;return "&#60;span color=&#39;white&#39;&#62;" + todo_list + "&#60;/span&#62;"<br> <br> def post_break(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;# Do nothing after the notification<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def exit(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on exit.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass</code></pre></li>
+                                <li align="left">Create a new file <code>todo.py</code> in <code>~/.config/safeeyes/plugins</code> with the following content:<pre><code>"""<br> Safe Eyes todo plugin<br> """<br> <br> def start(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on startup.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def pre_notification(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything before ntification.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def pre_break(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on before the break.<br> &nbsp;&nbsp;&nbsp;&nbsp;Optionally you can return a Pango markup content to be displayed<br> &nbsp;&nbsp;&nbsp;&nbsp;on the break screen. For more details about Pango: <br> &nbsp;&nbsp;&nbsp;&nbsp;https://developer.gnome.org/pygtk/stable/pango-markup-language.html<br> &nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should return the result within a second<br> &nbsp;&nbsp;&nbsp;&nbsp;The content can have several lines, but line length must not exceed<br> &nbsp;&nbsp;&nbsp;&nbsp;50 characters. If there is a line with more than 50 characters,<br> &nbsp;&nbsp;&nbsp;&nbsp;the entire data will be ignored by Safe Eyes.<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;todo_list = """- Share Safe Eyes with friends<br> - Upvote Safe Eyes in alternativet.net"""<br> &nbsp;&nbsp;&nbsp;&nbsp;return "&#60;span color=&#39;white&#39;&#62;" + todo_list + "&#60;/span&#62;"<br> <br> def post_break(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;# Do nothing after the notification<br> &nbsp;&nbsp;&nbsp;&nbsp;pass<br> <br> def exit(context):<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br> &nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on exit.<br> &nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should exit within a second<br> &nbsp;&nbsp;&nbsp;&nbsp;"""<br> &nbsp;&nbsp;&nbsp;&nbsp;pass</code></pre></li>
                             
                                 <li align="left">Add the plugin in <code>~/.config/safeeyes/safeeyes.json</code>:<pre><code>...<br> "plugins": [<br> &nbsp;&nbsp;&nbsp;&nbsp;{<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "todo",<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"location": "right"<br> &nbsp;&nbsp;&nbsp;&nbsp;}<br> ]<br> ...</code></pre>Here the location can be either <code>left</code> or <code>right</code> which defines the location on the break screen.</li>
                             

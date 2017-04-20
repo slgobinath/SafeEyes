@@ -30,12 +30,16 @@ steps: ['Create a new directory <code>plugins</code> if it does not exist:<pre><
 		def pre_break(context):<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on before the break.<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;Optionally you can return a Pango markup content to be displayed on the break screen.<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;For more details about Pango: https://developer.gnome.org/pygtk/stable/pango-markup-language.html<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;Optionally you can return a Pango markup content to be displayed<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;on the break screen. For more details about Pango: <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;https://developer.gnome.org/pygtk/stable/pango-markup-language.html<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should return the result within a second<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;The content can have several lines, but line length must not exceed<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;50 characters. If there is a line with more than 50 characters,<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;the entire data will be ignored by Safe Eyes.<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;todo_list = """- Call alice<br>
-		- Upvote Safe Eyes in alternative.to"""<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;todo_list = """- Share Safe Eyes with friends<br>
+		- Upvote Safe Eyes in alternativet.net"""<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;return "&#60;span color=&#39;white&#39;&#62;" + todo_list + "&#60;/span&#62;"<br>
 		<br>
 		def post_break(context):<br>
@@ -46,6 +50,7 @@ steps: ['Create a new directory <code>plugins</code> if it does not exist:<pre><
 		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;Do not return anything here.<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;Use this function if you want to do anything on exit.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;NOTE: This function should exit within a second<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;"""<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;pass</code></pre>',
 		'Add the plugin in <code>~/.config/safeeyes/safeeyes.json</code>:<pre><code>...<br>
