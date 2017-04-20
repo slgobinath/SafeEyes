@@ -91,6 +91,7 @@
                   <object class="GtkAlignment" id="alignment_button">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="halign">center</property>
                     <property name="yscale">0.20000000298023224</property>
                     <child>
                       <object class="GtkLabel" id="lbl_count">

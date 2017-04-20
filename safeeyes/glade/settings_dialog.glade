@@ -340,6 +340,8 @@
               <object class="GtkSwitch" id="switch_strict_break">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -350,6 +352,8 @@
               <object class="GtkSwitch" id="switch_audible_alert">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -392,7 +396,6 @@
                 <property name="top_attach">11</property>
               </packing>
             </child>
-
             <child>
               <object class="GtkLabel" id="lbl_enable_screen_lock">
                 <property name="visible">True</property>
@@ -410,6 +413,7 @@
               <object class="GtkSwitch" id="switch_screen_lock">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="halign">end</property>
                 <signal name="activate" handler="on_switch_screen_lock_activate" swapped="no"/>
                 <signal name="state-set" handler="on_switch_screen_lock_activate" swapped="no"/>
               </object>
