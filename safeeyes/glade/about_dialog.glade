@@ -131,14 +131,14 @@ working long hours at the computer.</property>
             </child>
             <child>
               <object class="GtkLinkButton" id="btn_url">
-                <property name="label" translatable="yes">https://github.com/slgobinath/SafeEyes</property>
+                <property name="label" translatable="yes">http://slgobinath.github.io/SafeEyes</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="halign">center</property>
                 <property name="relief">none</property>
                 <property name="focus_on_click">False</property>
-                <property name="uri">https://github.com/slgobinath/SafeEyes</property>
+                <property name="uri">http://slgobinath.github.io/SafeEyes</property>
               </object>
               <packing>
                 <property name="expand">False</property>
