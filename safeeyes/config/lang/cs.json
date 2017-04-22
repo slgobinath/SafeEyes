@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "O aplikaci",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Zvukové upozornění na konec přestávky",
         "cancel": "Zrušit",
         "disable": "Pozastavit Safe Eyes",

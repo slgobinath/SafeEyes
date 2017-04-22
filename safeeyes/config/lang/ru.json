@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "О программе",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Звуковой сигнал в конце перерыва",
         "cancel": "Отменить",
         "disable": "Отключить Safe Eyes",

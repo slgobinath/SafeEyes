@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "हमारे बारे में",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "आराम के ख़तम के ख़तम होने पर आवाज़",
         "cancel": "रखना नहीं",
         "disable": "सेफ आईज बंद",

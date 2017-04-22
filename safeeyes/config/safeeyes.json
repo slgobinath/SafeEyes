@@ -2,8 +2,9 @@
     "meta": {
             "config_version": 5
     },
+    "allow_postpone": false,
     "break_interval": 15,
-    "enable_screen_lock": true,
+    "enable_screen_lock": false,
     "enable_statistic": false,
     "long_break_duration": 60,
     "no_of_short_breaks_per_long_break": 5,

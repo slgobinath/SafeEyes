@@ -53,7 +53,8 @@ class BreakScreen:
 		logging.info("Initialize the break screen")
 		self.skip_button_text = language['ui_controls']['skip']
 		self.postpone_button_text = language['ui_controls']['postpone']
-		self.strict_break = config['strict_break']
+		self.strict_break = config.get('strict_break', False)
+		self.enable_postpone = config.get('allow_postpone', False)
 
 
 	"""
@@ -133,11 +134,29 @@ class BreakScreen:
 			window = builder.get_object("window_main")
 			lbl_message = builder.get_object("lbl_message")
 			lbl_count = builder.get_object("lbl_count")
-			btn_skip = builder.get_object("btn_skip")
-			btn_postpone = builder.get_object("btn_postpone")
 			lbl_left = builder.get_object("lbl_left")
 			lbl_right = builder.get_object("lbl_right")
 			img_break = builder.get_object("img_break")
+			box_buttons = builder.get_object("box_buttons")
+
+			# Add the buttons
+			if not self.strict_break:
+				# Add postpone button
+				if self.enable_postpone:
+					btn_postpone = Gtk.Button(self.postpone_button_text)
+					btn_postpone.get_style_context().add_class('btn_postpone')
+					btn_postpone.connect('clicked', self.on_postpone_clicked)
+					btn_postpone.set_visible(True)
+					box_buttons.pack_start(btn_postpone, True, True, 0)
+
+				# Add the skip button
+				btn_skip = Gtk.Button(self.skip_button_text)
+				btn_skip.get_style_context().add_class('btn_skip')
+				btn_skip.connect('clicked', self.on_skip_clicked)
+				btn_skip.set_visible(True)
+				box_buttons.pack_start(btn_skip, True, True, 0)
+
+
 
 			# Set values
 			if image_path:
@@ -145,12 +164,6 @@ class BreakScreen:
 			lbl_message.set_label(message)
 			lbl_left.set_markup(plugins_data['left']);
 			lbl_right.set_markup(plugins_data['right']);
-			btn_skip.set_label(self.skip_button_text)
-			btn_postpone.set_label(self.postpone_button_text)
-
-			# Set the visibility of buttons
-			btn_postpone.set_visible(not self.strict_break)
-			btn_skip.set_visible(not self.strict_break)
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)

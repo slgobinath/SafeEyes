@@ -43,7 +43,7 @@ system_config_file_path = os.path.join(Utility.bin_directory, "config/safeeyes.j
 system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safeeyes_style.css")
 
 is_active = True
-CONFIGURATION_VERSION = 4
+CONFIGURATION_VERSION = 5
 SAFE_EYES_VERSION = "1.2.0a9"
 
 """

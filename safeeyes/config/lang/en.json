@@ -5,7 +5,7 @@
     },
     "exercises": {
         "short_break_close_eyes": "Tightly close your eyes",
-        "short_break_roll_eyes": "Roll your eyes",
+        "short_break_roll_eyes": "Roll your eyes a few times to each side",
         "short_break_rotate_clockwise": "Rotate your eyes in clockwise direction",
         "short_break_rotate_counter_clockwise": "Rotate your eyes in counterclockwise direction",
         "short_break_blink": "Blink your eyes",
@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "About",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Audible alert at the end of break",
         "cancel": "Cancel",
         "disable": "Disable Safe Eyes",

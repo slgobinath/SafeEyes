@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "Ohľadom",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Zvukový signál na konci prestávky",
         "cancel": "Zrušiť",
         "disable": "Zakázať Safe Eyes",

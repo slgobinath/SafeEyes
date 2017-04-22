@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "O programie",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Powiadomienie dźwiękowe na koniec przerwy",
         "cancel": "Anuluj",
         "disable": "Zatrzymaj Safe Eyes",

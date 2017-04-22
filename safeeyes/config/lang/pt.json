@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "Sobre",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Alerta sonoro no fim da pausa",
         "cancel": "Cancelar",
         "disable": "Desativar Safe Eyes",

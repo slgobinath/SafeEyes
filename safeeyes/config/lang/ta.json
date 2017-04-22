@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "Safe Eyes குறித்த தகவல்கள்",
+        "allow_postpone": "ஒத்திவைக்க அனுமதிக்கவும்",
         "audible_alert": "இடைவேளையின் இறுதியில் ஒலி சமிக்கை",
         "cancel": "ரத்து",
         "disable": "Safe Eyes ஐ நிறுத்துக",

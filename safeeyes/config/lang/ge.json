@@ -22,6 +22,7 @@
     },
     "ui_controls": {
         "about": "პროგრამის შესახებ",
+        "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "ხმოვანი შეტყობინება შესვენების დამთავრებისას",
         "cancel": "უარყოფა",
         "disable": "Safe Eyes გამორთვა",

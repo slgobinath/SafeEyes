@@ -117,40 +117,10 @@
                     <property name="spacing">50</property>
                     <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkButton" id="btn_postpone">
-                        <property name="label" translatable="yes">Postpone</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="valign">center</property>
-                        <signal name="clicked" handler="on_postpone_clicked" swapped="no"/>
-                        <style>
-                          <class name="btn_postpone"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
+                      <placeholder/>
                     </child>
                     <child>
-                      <object class="GtkButton" id="btn_skip">
-                        <property name="label" translatable="yes">Skip</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="valign">center</property>
-                        <signal name="clicked" handler="on_skip_clicked" swapped="no"/>
-                        <style>
-                          <class name="btn_skip"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
+                      <placeholder/>
                     </child>
                   </object>
                   <packing>

@@ -22,6 +22,7 @@
 	},
 	"ui_controls": {
 			"about": "Tentang",
+			"allow_postpone": "Allow postponing the breaks",
 			"audible_alert": "Peringatan bersuara saat istirahat berakhir",
 			"cancel": "Batal",
 			"disable": "Matikan Safe Eyes",
