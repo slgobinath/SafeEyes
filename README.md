@@ -1,13 +1,16 @@
 # Safe Eyes
-Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative for EyeLeo.
+Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative to EyeLeo; a sexy and customizable alternative to Workrave.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 
-## [Installation guide](http://slgobinath.github.io/SafeEyes/#introduction)
+## Installation guide
+Safe Eyes is available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3. To see how to install Safe Eyes, visit [Getting Started](http://slgobinath.github.io/SafeEyes/#introduction)
 
-## [Customizing options](http://slgobinath.github.io/SafeEyes/#customize)
+## Customizing options
+One of the key advantage of Safe Eyes over other similar products is its highly customizable design. You can change almost everything in Safe Eyes. A detailed documentation is available in the official site: [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize)
 
-## [Contribute](http://slgobinath.github.io/SafeEyes/#contribute)
+## Contribute
+I started this project for my own use and later released it as an open source alternative to EyeLeo and progressively reached to the current state with the great support of open source community. Most of the creative ideas were suggested and implemented by users. You can always add more to Safe Eyes. I have listed some possible ways here: [How to contribute](http://slgobinath.github.io/SafeEyes/#contribute)
 
 ## Features
 
@@ -18,22 +21,24 @@ General Features:
 - Disable the keyboard during break
 - Notifications before every break
 - Do not disturb when working with full-screen applications( Eg: Watching movies)
-- Smart pause and resume based on system idle time
+- Smart pause and resume based on system idle time (Require `xprintidle`)
 - Multi-monitor support
-- Elegant and customizable design
 - Multi-language support
-- Highly customizable
+- Elegant and customizable design
 
 Optional Features:
 
 - Strict break for those who are addicted to computer
 - Skip or take break based on active windows (Regardless of full-screen-mode)
 - Customize individual break time
+- Define your own custom exercise
 - Audible alert at the end of break
 - Turn on/off audible alert for individual breaks
 - Customize disable time period
+- Lock screen after long breaks
 - Plug-in support to extend Safe Eyes
 
+For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#features)
 
 ## Currently available translations
  * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/cs.json)
@@ -51,20 +56,24 @@ Optional Features:
  * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ta.json)
  * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/tr.json)
 
+Do you want to see your language here? Please translate Safe Eyes to whatever the languages you know. Visit to **Translate Safe Eyes** in [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize) to see how to translate.
 
 ## Tested Environments
 
-Core functionalities of Safe Eyes are tested by the developer in the follwing environments:
+Core functionalities of Safe Eyes are tested by the developer in the following environments:
 
- * Ubuntu 14.04
- * Ubuntu 16.04
- * Ubuntu 16.10
- * Linux Mint 18
- * Ubuntu Mate 16.04
- * Kubuntu 16.10
- * Manjaro
- * Elementary OS Loki
- * Antergos 2017 (Antergos Gnome users must provide their own lock screen command)
+* Antergos 17.4
+* Elementary OS Loki
+* Fedora 25
+* Kubuntu 17.04
+* Linux Mint 18.1
+* Manjaro 16.10.3
+* Ubuntu 14.04
+* Ubuntu 16.04
+* Ubuntu 16.10
+* Ubuntu Budgie 17.04
+* Ubuntu Mate 16.04
+* Xubuntu 16.10
 
 ## License
 

@@ -86,9 +86,9 @@ class Plugins:
 
 		Returns: {'left': 'Markup of plugins to be aligned on left', 'right': 'Markup of plugins to be aligned on right' }
 		"""
+		output = {'left': '                                                  \n', 'right': '                                                  \n'}
 		if self.__plugins:
 			context = copy.deepcopy(context)	# If plugins change the context, it should not affect Safe Eyes
-			output = {'left': '                                                  \n', 'right': '                                                  \n'}
 			multiple_results = [self.__thread_pool.apply_async(plugin['module'].pre_break, (context,)) for plugin in self.__plugins]
 			for i in range(len(multiple_results)):
 				try:
@@ -104,7 +104,7 @@ class Plugins:
 					# Something went wrong in the plugin
 					logging.warning('Error when executing the plugin ' + self.__plugins[i]['name'])
 
-			return output
+		return output
 
 
 	def post_break(self, context):
