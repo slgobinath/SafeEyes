@@ -3,6 +3,9 @@
         "language_name": "Türkçe",
         "language_name_en": "Turkish"
     },
+    "app_info": {
+        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+    },
     "exercises": {
         "short_break_close_eyes": "Gözlerinizi sıkıca kapatın",
         "short_break_roll_eyes": "Gözlerinizi çevirin",
@@ -25,6 +28,7 @@
         "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Mola sonunda sesli uyarı",
         "cancel": "İptal",
+        "close": "Close",
         "disable": "Safe Eyes'ı devre dışı bırak",
         "enable": "Safe Eyes'ı etkinleştir",
         "enable_screen_lock": "Lock the screen after every long break",
@@ -34,6 +38,7 @@
         "idle_time": "Minimum boş zaman (dakika)",
         "interval_between_two_breaks": "İki mola arasındaki süre",
         "language": "Dil",
+        "license": "License",
         "long_break_duration": "Uzun mola süresi (saniye)",
         "no_of_short_breaks_between_two_long_breaks": "İki uzun mola arasındaki kısa mola sayısı",
         "postpone": "Postpone",

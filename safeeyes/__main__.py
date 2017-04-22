@@ -62,7 +62,7 @@ def show_settings():
 """
 def show_about():
 	logging.info("Show About dialog")
-	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION)
+	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION, language)
 	about_dialog.show()
 
 """

@@ -3,6 +3,9 @@
         "language_name": "Français",
         "language_name_en": "French"
     },
+    "app_info": {
+        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+    },
     "exercises": {
         "short_break_close_eyes": "Fermez bien vos yeux",
         "short_break_roll_eyes": "Regardez de droite à gauche en alternance",
@@ -25,6 +28,7 @@
         "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "Alerte sonore en fin d'une pause",
         "cancel": "Annuler",
+        "close": "Close",
         "disable": "Désactiver Safe Eyes",
         "enable": "Activer Safe Eyes",
         "enable_screen_lock": "Verrouiller l'écran après chaque pause longue",
@@ -34,6 +38,7 @@
         "idle_time": "Durée minimale d'une pause (en minutes)",
         "interval_between_two_breaks": "Intervalle entre deux pauses (en minutes)",
         "language": "Langue",
+        "license": "License",
         "long_break_duration": "Durée d'une pause longue (en secondes)",
         "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses courtes entre deux pauses longues",
         "postpone": "Reporter",

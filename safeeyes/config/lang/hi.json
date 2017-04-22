@@ -3,6 +3,9 @@
         "language_name": "हिंदी",
         "language_name_en": "Hindi"
     },
+    "app_info": {
+        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+    },
     "exercises": {
         "short_break_close_eyes": "आँखों को ज़ोर से बंद करें",
         "short_break_roll_eyes": "आँखों को घुमाएं",
@@ -25,6 +28,7 @@
         "allow_postpone": "Allow postponing the breaks",
         "audible_alert": "आराम के ख़तम के ख़तम होने पर आवाज़",
         "cancel": "रखना नहीं",
+        "close": "Close",
         "disable": "सेफ आईज बंद",
         "enable": "सेफ आईज शुरू",
         "enable_screen_lock": "Lock the screen after every long break",
@@ -34,6 +38,7 @@
         "idle_time": "बीच रोकने पर कितने मिन्टों का अंतर",
         "interval_between_two_breaks": "दो आराम अवधियों में अंतर (मिन्टों में)",
         "language": "भाषा",
+        "license": "License",
         "long_break_duration": "लंबे आराम की अवधि (पलों में)",
         "no_of_short_breaks_between_two_long_breaks": "दो बड़े आराम के बीच कितने छोटे आराम",
         "postpone": "Postpone",
