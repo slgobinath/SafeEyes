@@ -48,8 +48,7 @@ class Plugins:
 					logging.warning('Plugin file ' + str(plugin['name']) + '.py not found')
 			else:
 				logging.warning('Ignoring the plugin ' + str(plugin['name']) + ' due to invalid location value: ' +  plugin['location'])
-
-		print(min([4, len(self.__plugins)]))
+		
 		if self.__plugins:
 			self.__thread_pool = ThreadPool(min([4, len(self.__plugins)]))
 
