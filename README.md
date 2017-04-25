@@ -29,6 +29,7 @@ General Features:
 Optional Features:
 
 - Strict break for those who are addicted to computer
+- Postpone break
 - Skip or take break based on active windows (Regardless of full-screen-mode)
 - Customize individual break time
 - Define your own custom exercise
@@ -36,6 +37,7 @@ Optional Features:
 - Turn on/off audible alert for individual breaks
 - Customize disable time period
 - Lock screen after long breaks
+- Add images to breaks
 - Plug-in support to extend Safe Eyes
 
 For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#features)
@@ -50,6 +52,7 @@ For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#feat
  * [हिंदी](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hi.json)
  * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hu.json)
  * [Bahasa Indonesia](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/id.json)
+ * [Polski](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pl.json)
  * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pt.json)
  * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ru.json)
  * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/sk.json)

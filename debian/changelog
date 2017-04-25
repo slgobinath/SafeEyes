@@ -1,4 +1,6 @@
-safeeyes (1.2.0a9-1) xenial; urgency=low
+safeeyes (1.2.0a10-1) xenial; urgency=low
+
+  * Handle configuration update efficiently
 
   * Move to Python 3
 
