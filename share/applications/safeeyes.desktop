@@ -15,7 +15,6 @@ Comment[ru]=Защитите свои глаза от зрительного п�
 Comment[pl]=Chroń oczy przed zmęczeniem
 Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes
-Version=1.1
 Terminal=false
 Type=Application
 Categories=Utility;
