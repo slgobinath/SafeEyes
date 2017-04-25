@@ -20,13 +20,17 @@ import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
 from html.parser import HTMLParser
+from distutils.version import LooseVersion
 import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
 system_language_directory = os.path.join(bin_directory, 'config/lang')
 config_directory = os.path.join(home_directory, '.config/safeeyes')
-
+config_file_path = os.path.join(config_directory, 'safeeyes.json')
+style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
+system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
+system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
 
 def play_notification():
 	"""
@@ -310,6 +314,102 @@ def command_exist(command):
 		return True
 	else:
 		return False
+
+
+def merge_configs(new_config, old_config):
+	"""
+	Merge the values of old_config into the new_config.
+	"""
+	new_config = new_config.copy()
+	new_config.update(old_config)
+	return new_config
+
+
+def __initialize_safeeyes():
+	"""
+	Create the config file and style sheet in ~/.config/safeeyes directory.
+	"""
+	logging.info('Copy the config files to ~/.config/safeeyes')
+
+	style_dir_path = os.path.join(home_directory, '.config/safeeyes/style')
+	startup_dir_path = os.path.join(home_directory, '.config/autostart')
+
+	# Remove the ~/.config/safeeyes directory
+	shutil.rmtree(config_directory, ignore_errors=True)
+
+	# Remove the startup file
+	try:
+		os.remove(os.path.join(home_directory, os.path.join(startup_dir_path, 'safeeyes.desktop')))
+	except:
+		pass
+
+	# Create the ~/.config/safeeyes/style directory
+	mkdir(style_dir_path)
+	mkdir(startup_dir_path)
+
+	# Copy the safeeyes.json
+	shutil.copy2(system_config_file_path, config_file_path)
+
+	# Copy the new startup file
+	try:
+		os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, 'safeeyes.desktop'))
+	except OSError as exc:
+		pass
+
+	# Copy the new style sheet
+	if not os.path.isfile(style_sheet_path):
+		shutil.copy2(system_style_sheet_path, style_sheet_path)
+
+
+def read_config():
+	"""
+	Read the configuration from the config directory.
+	If does not exist or outdated by major version, copy the system config and
+	startup script to user directory.
+	If the user config is outdated by minor version, update the config by the new values.
+	"""
+	logging.info('Reading the configuration file')
+
+	if not os.path.isfile(config_file_path):
+		logging.info('Safe Eyes configuration file not found')
+		__initialize_safeeyes()
+
+	# Read the configurations
+	with open(config_file_path) as config_file:
+		user_config = json.load(config_file)
+
+	with open(system_config_file_path) as config_file:
+		system_config = json.load(config_file)
+
+	user_config_version = str(user_config['meta']['config_version'])
+	system_config_version = str(system_config['meta']['config_version'])
+
+	if LooseVersion(user_config_version) < LooseVersion(system_config_version):
+		# Outdated user config
+		logging.info('Update the old config version {} with new config version {}'.format(user_config_version, system_config_version))
+		user_config_major_version = user_config_version.split('.')[0]
+		system_config_major_version = system_config_version.split('.')[0]
+
+		if LooseVersion(user_config_major_version) < LooseVersion(system_config_major_version):
+			# Major version change
+			__initialize_safeeyes()
+			# Update the user_config
+			user_config = system_config
+		else:
+			# Minor version change
+			new_config = system_config.copy()
+			new_config.update(user_config)
+			# Update the version
+			new_config['meta']['config_version'] = system_config_version
+
+			# Write the configuration to file
+			with open(config_file_path, 'w') as config_file:
+				json.dump(new_config, config_file, indent=4, sort_keys=True)
+
+			# Update the user_config
+			user_config = new_config
+
+	return user_config
 
 
 class __HTMLTextExtractor(HTMLParser):
