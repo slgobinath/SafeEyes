@@ -44,6 +44,7 @@ class SettingsDialog:
 		self.spin_idle_time_to_pause = builder.get_object('spin_idle_time_to_pause')
 		self.spin_postpone_duration = builder.get_object('spin_postpone_duration')
 		self.switch_strict_break = builder.get_object('switch_strict_break')
+		self.switch_postpone = builder.get_object('switch_postpone')
 		self.switch_audible_alert = builder.get_object('switch_audible_alert')
 		self.cmb_language = builder.get_object('cmb_language')
 		self.switch_screen_lock = builder.get_object('switch_screen_lock')
@@ -57,6 +58,7 @@ class SettingsDialog:
 		builder.get_object('lbl_time_to_prepare').set_label(language['ui_controls']['time_to_prepare_for_break'])
 		builder.get_object('lbl_idle_time_to_pause').set_label(language['ui_controls']['idle_time'])
 		builder.get_object('lbl_postpone_duration').set_label(language['ui_controls']['postpone_duration'])
+		builder.get_object('lbl_allow_postpone').set_label(language['ui_controls']['allow_postpone'])
 		builder.get_object('lbl_strict_break').set_label(language['ui_controls']['strict_break'])
 		builder.get_object('lbl_audible_alert').set_label(language['ui_controls']['audible_alert'])
 		builder.get_object('lbl_language').set_label(language['ui_controls']['language'])
@@ -79,10 +81,15 @@ class SettingsDialog:
 
 		# Enable idle_time_to_pause only if xprintidle is available
 		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
-		
+
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
+		self.switch_postpone.set_active(config['allow_postpone'] and not config['strict_break'])
+
+		# Update relative states
+		self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
 		self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
+		self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
@@ -126,6 +133,23 @@ class SettingsDialog:
 		self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
 
 
+	def on_switch_strict_break_activate(self, switch, state):
+		"""
+		Event handler to the state change of the postpone switch.
+		Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
+		"""
+		strict_break_enable = state #self.switch_strict_break.get_active()
+		self.switch_postpone.set_sensitive(not strict_break_enable)
+		if strict_break_enable:
+			self.switch_postpone.set_active(False)
+
+	def on_switch_postpone_activate(self, switch, state):
+		"""
+		Event handler to the state change of the postpone switch.
+		Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
+		"""
+		self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
+
 	def on_window_delete(self, *args):
 		"""
 		Event handler for Settings dialog close action.
@@ -149,6 +173,7 @@ class SettingsDialog:
 		self.config['language'] = self.languages[self.cmb_language.get_active()]
 		self.config['time_to_screen_lock'] = self.spin_time_to_screen_lock.get_value_as_int()
 		self.config['enable_screen_lock'] = self.switch_screen_lock.get_active()
+		self.config['allow_postpone'] = self.switch_postpone.get_active()
 
 		self.on_save_settings(self.config)	# Call the provided save method
 		self.window.destroy()	# Close the settings window

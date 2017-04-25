@@ -1,9 +1,10 @@
 {
     "meta": {
-            "config_version": 4
+            "config_version": 5
     },
+    "allow_postpone": false,
     "break_interval": 15,
-    "enable_screen_lock": true,
+    "enable_screen_lock": false,
     "enable_statistic": false,
     "long_break_duration": 60,
     "no_of_short_breaks_per_long_break": 5,
@@ -44,42 +45,33 @@
     ],
     "short_breaks": [
         {
-            "name": "short_break_close_eyes",
-            "image": "short_break_close_eyes.png"
+            "name": "short_break_close_eyes"
         },
         {
-            "name": "short_break_roll_eyes",
-            "image": "short_break_roll_eyes.png"
+            "name": "short_break_roll_eyes"
         },
         {
-            "name": "short_break_rotate_clockwise",
-            "image": "short_break_rotate_clockwise.png"
+            "name": "short_break_rotate_clockwise"
         },
         {
-            "name": "short_break_rotate_counter_clockwise",
-            "image": "short_break_rotate_counter_clockwise.png"
+            "name": "short_break_rotate_counter_clockwise"
         },
         {
-            "name": "short_break_blink",
-            "image": "short_break_blink.png"
+            "name": "short_break_blink"
         },
         {
-            "name": "short_break_focus_far_distance",
-            "image": "short_break_focus_far_distance.png"
+            "name": "short_break_focus_far_distance"
         },
         {
-            "name": "short_break_drink_water",
-            "image": "short_break_drink_water.png"
+            "name": "short_break_drink_water"
         }
     ],
     "long_breaks": [
         {
-            "name": "long_break_walk",
-            "image": "long_break_walk.png"
+            "name": "long_break_walk"
         },
         {
-            "name": "long_break_lean_back",
-            "image": "long_break_lean_back.png"
+            "name": "long_break_lean_back"
         }
     ],
     "custom_exercises": {

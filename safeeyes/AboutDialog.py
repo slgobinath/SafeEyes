@@ -30,12 +30,15 @@ class AboutDialog:
 	"""
 		Read the about_dialog.glade and build the user interface.
 	"""
-	def __init__(self, glade_file, version):
+	def __init__(self, glade_file, version, language):
 		builder = Gtk.Builder()
 		builder.add_from_file(glade_file)
 		builder.connect_signals(self)
 		self.window = builder.get_object("window_about")
-		
+		builder.get_object('lbl_decription').set_label(language['app_info']['description'])
+		builder.get_object('lbl_license').set_label(str(language['ui_controls']['license']) + ':')
+		builder.get_object('btn_close').set_label(language['ui_controls']['close'])
+
 		# Set the version at the runtime
 		builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
 
