@@ -21,7 +21,7 @@ steps: ['Fork Safe Eyes to your Git Hub account',
 		'Translate other property values to the selected language. The <code>{}</code> used in property values will be replaced by runtime variables related to those commands. For example the <code>{}</code> in <code>Next break at {}</code> will be replaced by time at the runtime',
 		'Add a new comment in the <code>share/applications/safeeyes.desktop</code> file. For example:<pre><code>Comment[en]=Protect your eyes from eye strain</code></pre>',
 		'Commit the changes and push to the origin master',
-		'Send a pull request to Safe Eyes <code>master</code> branch'
+		'<a href="http://www.javahelps.com/2017/04/git-pull-request-complete-guide-for.html">Send a pull request</a> to Safe Eyes <code>master</code> branch'
 	]
 
 ---

@@ -1,29 +1,24 @@
 ---
 title: Break image
-subtitle: Override the break image
+subtitle: Add images to the break screen
 layout: default
 modal-id: 1
 img: override-image-thumbnail.png
 modal-url: override-image
 thumbnail: override-image-thumbnail.png
 alt: image-alt
-description: The image of a break can be changed by either creating a new image in the resource directory or by pointing the image to a new one. Make sure that the new image size is within <code>128x128px</code>
+description: You can add image to the break screen by creating a new image in the resource directory. Make sure that the new image size is within <code>128x128px</code>
 steps: ['Create a new directory <code>resource</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/resource</code></pre>',
-		'Copy a new image to the resource directory:<pre><code>cp new_image.png ~/.config/safeyes/resource/new_image.png</code></pre>',
-		'Change the <code>image</code> name the the new name: <pre><code>...<br>
+		'Copy a new image to the resource directory:<pre><code>cp image.png ~/.config/safeyes/resource/short_break_close_eyes.png</code></pre>',
+		'Create a new property <code>image</code> next to the break name : <pre><code>...<br>
 		"short_breaks": [<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "short_break_close_eyes",<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"image": "new_image.png"<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "short_break_roll_eyes"<br>
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"image": "short_break_roll_eyes.png"<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"image": "short_break_close_eyes.png"<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;},<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;...<br>
 		],<br>
-		...</code></pre>',
-		'You can also override the image by simply creating a new image with the same name in the resource directory:<pre><code>cp new_image.png ~/.config/safeyes/resource/short_break_roll_eyes.png</code></pre>'
+		...</code></pre>'
 	]
 
 ---
