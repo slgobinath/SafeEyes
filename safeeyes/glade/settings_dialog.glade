@@ -342,8 +342,6 @@
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">center</property>
-                <signal name="activate" handler="on_switch_strict_break_activate" swapped="no"/>
-                <signal name="state-set" handler="on_switch_strict_break_activate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -416,8 +414,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
-                <signal name="activate" handler="on_switch_screen_lock_activate" swapped="no"/>
-                <signal name="state-set" handler="on_switch_screen_lock_activate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -474,8 +470,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">end</property>
-                <signal name="activate" handler="on_switch_postpone_activate" swapped="no"/>
-                <signal name="state-set" handler="on_switch_postpone_activate" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
