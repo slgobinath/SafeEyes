@@ -211,7 +211,7 @@ def running():
 			else:
 				# In older versions cmdline was a list object
 				cmd_line = proc.cmdline
-			if 'python3' in cmd_line[0] and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
+			if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
 				process_count += 1
 				if process_count > 1:
 					return True
