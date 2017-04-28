@@ -1,4 +1,6 @@
-safeeyes (1.2.0a10-1) xenial; urgency=low
+safeeyes (1.2.0-1) xenial; urgency=low
+
+  * Support postponing the break
 
   * Handle configuration update efficiently
 
@@ -8,7 +10,7 @@ safeeyes (1.2.0a10-1) xenial; urgency=low
 
   * Add custom breaks
 
-  * Add break image
+  * Add optional break image feature
 
   * Add lock screen support
 

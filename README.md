@@ -1,5 +1,5 @@
 # Safe Eyes
-Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative to EyeLeo; a sexy and customizable alternative to Workrave.
+Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 

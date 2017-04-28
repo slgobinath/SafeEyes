@@ -39,7 +39,7 @@ about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.gla
 
 
 is_active = True
-SAFE_EYES_VERSION = "1.2.0a10"
+SAFE_EYES_VERSION = "1.2.0"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
