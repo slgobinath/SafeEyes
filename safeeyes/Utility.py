@@ -21,6 +21,7 @@ gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk, GLib
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
+from logging.handlers import RotatingFileHandler
 import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, pyaudio, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
@@ -31,6 +32,7 @@ config_file_path = os.path.join(config_directory, 'safeeyes.json')
 style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
+log_file_path = os.path.join(config_directory, 'safeeyes.log')
 
 def play_notification():
 	"""
@@ -359,6 +361,30 @@ def __initialize_safeeyes():
 	# Copy the new style sheet
 	if not os.path.isfile(style_sheet_path):
 		shutil.copy2(system_style_sheet_path, style_sheet_path)
+
+
+def intialize_logging():
+	"""
+	Initialize the logging framework using the Safe Eyes specific configurations.
+	"""
+	# Create the directory to store log file if not exist
+	if not os.path.exists(config_directory):
+		try:
+			os.makedirs(config_directory)
+		except:
+			pass
+
+	# Configure logging.
+	log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
+
+	# Apped the logs and overwrite once reached 5MB
+	handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5*1024*1024, backupCount=2, encoding=None, delay=0)
+	handler.setFormatter(log_formatter)
+	handler.setLevel(logging.INFO)
+
+	root_logger = logging.getLogger()
+	root_logger.setLevel(logging.INFO)
+	root_logger.addHandler(handler)
 
 
 def read_config():

@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, dbus, logging, operator, psutil
+import os, gi, json, dbus, logging, operator, psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 gi.require_version('Gtk', '3.0')
@@ -33,7 +33,6 @@ from safeeyes.TrayIcon import TrayIcon
 from safeeyes import Utility
 
 # Define necessary paths
-log_file_path = os.path.join(Utility.config_directory, 'safeeyes.log')
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
@@ -203,10 +202,16 @@ def running():
 	"""
 	process_count = 0
 	for proc in psutil.process_iter():
+		if not proc.cmdline: continue
 		try:
 			# Check if safeeyes is in process arguments
-			cmd_line = proc.cmdline()
-			if 'python3' in cmd_line[0] and 'safeeyes' in cmd_line[1]:
+			if callable(proc.cmdline):
+				# Latest psutil has cmdline function
+				cmd_line = proc.cmdline()
+			else:
+				# In older versions cmdline was a list object
+				cmd_line = proc.cmdline
+			if 'python3' in cmd_line[0] and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
 				process_count += 1
 				if process_count > 1:
 					return True
@@ -221,16 +226,9 @@ def main():
 	"""
 	Start the Safe Eyes.
 	"""
+	# Initialize the logging
+	Utility.intialize_logging()
 
-	# Create the directory to store log file if not exist
-	if not os.path.exists(Utility.config_directory):
-		try:
-			os.makedirs(Utility.config_directory)
-		except:
-			pass
-
-	# Configure logging.
-	logging.basicConfig(format='%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
 	logging.info("Starting Safe Eyes")
 
 	if not running():
@@ -273,7 +271,7 @@ def main():
 
 		Gtk.main()
 	else:
-		logging.info('SafeEyes is already running')
+		logging.info('Another instance of safeeyes is already running')
 		sys.exit(0)
 
 if __name__ == '__main__':
