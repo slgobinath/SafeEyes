@@ -129,26 +129,32 @@ class SettingsDialog:
 		"""
 		Event handler to the state change of the screen_lock switch.
 		Enable or disable the self.spin_time_to_screen_lock based on the state of the screen_lock switch.
+		Note: GtkSwitch state-set signal is available only from 3.14
 		"""
-		self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
+		if Gtk.get_minor_version() >= 14:
+			self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
 
 
 	def on_switch_strict_break_activate(self, switch, state):
 		"""
 		Event handler to the state change of the postpone switch.
 		Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
+		Note: GtkSwitch state-set signal is available only from 3.14
 		"""
-		strict_break_enable = state #self.switch_strict_break.get_active()
-		self.switch_postpone.set_sensitive(not strict_break_enable)
-		if strict_break_enable:
-			self.switch_postpone.set_active(False)
+		if Gtk.get_minor_version() >= 14:
+			strict_break_enable = state #self.switch_strict_break.get_active()
+			self.switch_postpone.set_sensitive(not strict_break_enable)
+			if strict_break_enable:
+				self.switch_postpone.set_active(False)
 
 	def on_switch_postpone_activate(self, switch, state):
 		"""
 		Event handler to the state change of the postpone switch.
 		Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
+		Note: GtkSwitch state-set signal is available only from 3.14
 		"""
-		self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
+		if Gtk.get_minor_version() >= 14:
+			self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
 
 	def on_window_delete(self, *args):
 		"""
