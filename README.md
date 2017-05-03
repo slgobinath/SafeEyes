@@ -6,6 +6,16 @@ Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more detai
 ## Installation guide
 Safe Eyes is available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3. To see how to install Safe Eyes, visit [Getting Started](http://slgobinath.github.io/SafeEyes/#introduction)
 
+### Compile from source
+Ensure to meet the following dependencies when compiling from source:
+
+- gir1.2-appindicator3-0.1
+- gir1.2-notify-0.7
+- libappindicator-gtk3
+- python3-pyaudio
+- python3-psutil
+- xprintidle (optional)
+
 ## Customizing options
 One of the key advantage of Safe Eyes over other similar products is its highly customizable design. You can change almost everything in Safe Eyes. A detailed documentation is available in the official site: [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize)
 
