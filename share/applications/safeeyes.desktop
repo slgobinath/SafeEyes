@@ -13,6 +13,7 @@ Comment[hi]=तनाव से आंखों की रक्षा
 Comment[es]=Protege tus ojos de la fatiga ocular
 Comment[ru]=Защитите свои глаза от зрительного перенапряжения
 Comment[pl]=Chroń oczy przed zmęczeniem
+Comment[mk]=Заштитете се од замор на очите
 Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes
 Terminal=false
