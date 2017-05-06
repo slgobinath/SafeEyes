@@ -4,7 +4,7 @@
         "language_name_en": "Spanish"
     },
     "app_info": {
-        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+        "description": "Safe Eyes protege tus ojos de la fatiga visual (astenopía), recordándote tomar descansos cuando estás trabajando muchas horas en el ordenador."
     },
     "exercises": {
         "short_break_close_eyes": "Cierra fuertemente tus ojos",
@@ -25,20 +25,20 @@
     },
     "ui_controls": {
         "about": "Acerca de",
-        "allow_postpone": "Allow postponing the breaks",
+        "allow_postpone": "Permitir posponer las pausas",
         "audible_alert": "Alerta sonora al final de cada pausa",
         "cancel": "Cancelar",
         "close": "Close",
         "disable": "Desactivar Safe Eyes",
         "enable": "Activar Safe Eyes",
-        "enable_screen_lock": "Lock the screen after every long break",
+        "enable_screen_lock": "Bloquear la pantalla despues de cada pausa larga",
         "for_x_hour": "Durante {} hora",
         "for_x_hours": "Durante {} horas",
         "for_x_minutes": "Durante {} minutos",
         "idle_time": "Minimum idle time to pause (in minutes)",
         "interval_between_two_breaks": "Tiempo entre dos pausas",
         "language": "Idioma",
-        "license": "License",
+        "license": "Licencia",
         "long_break_duration": "Duración de una pausa larga (en segundos)",
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas cortas entre dos pausas largas",
         "postpone": "Posponer",
@@ -51,7 +51,7 @@
         "strict_break": "Pausa estricta (No hay botón Cancelar)",
         "system_language": "Idioma del sistema",
         "time_to_prepare_for_break": "Tiempo para prepararse para una pausa (en segundos)",
-        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "time_to_screen_lock": "Máximo tiempo para saltarse una pausa, evitando la pantalla de bloqueo (en segundos)",
         "until_restart": "Hasta reinicio"
     }
 }
