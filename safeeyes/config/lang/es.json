@@ -35,7 +35,7 @@
         "for_x_hour": "Durante {} hora",
         "for_x_hours": "Durante {} horas",
         "for_x_minutes": "Durante {} minutos",
-        "idle_time": "Minimum idle time to pause (in minutes)",
+        "idle_time": "Tiempo mínimo (en minutos) sin usar el ordenador para que Safe Eyes se desactive automáticamente",
         "interval_between_two_breaks": "Tiempo entre dos pausas",
         "language": "Idioma",
         "license": "Licencia",
