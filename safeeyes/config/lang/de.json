@@ -4,15 +4,15 @@
         "language_name_en": "German"
     },
     "app_info": {
-        "description": "Safe Eyes schützt Ihre Augen vor Überlastung (Asthenopie) indem es Sie an Pausen erinnert, während Sie lange Zeit am Computer arbeiten."
+        "description": "Safe Eyes schützt Ihre Augen vor Überlastung (Asthenopie), indem es Sie bei längerer Arbeit am Computer an regelmäßige Pausen erinnert."
     },
     "exercises": {
         "short_break_close_eyes": "Schließen Sie die Augen",
         "short_break_roll_eyes": "Rollen Sie mit den Augen",
         "short_break_rotate_clockwise": "Rotieren Sie mit den Augen im Uhrzeigersinn",
         "short_break_rotate_counter_clockwise": "Rotieren Sie mit den Augen gegen den Uhrzeigersinn",
-        "short_break_blink": "Zwinkern Sie",
-        "short_break_focus_far_distance": "Fokussieren Sie sich auf einen weit entfernten Punkt",
+        "short_break_blink": "Blinzeln Sie",
+        "short_break_focus_far_distance": "Fokussieren Sie sich auf einen Punkt in weiter Ferne",
         "short_break_drink_water": "Trinken Sie ein wenig Wasser",
         "long_break_walk": "Gehen Sie ein wenig",
         "long_break_lean_back": "Lehnen Sie sich zurück und entspannen Sie sich"
@@ -24,7 +24,7 @@
         "next_break_at": "Nächste Pause um {}"
     },
     "ui_controls": {
-        "about": "About",
+        "about": "Über",
         "allow_postpone": "Erlaube Verschieben von Pausen",
         "audible_alert": "Akustisches Signal am Ende der Pause",
         "cancel": "Abbrechen",
@@ -35,23 +35,23 @@
         "for_x_hour": "Für {} Stunde",
         "for_x_hours": "Für {} Stunden",
         "for_x_minutes": "Für {} Minuten",
-        "idle_time": "Minimum idle time to pause (in minutes)",
+        "idle_time": "Minimale Leerlaufzeit zum Pausieren (in Minuten)",
         "interval_between_two_breaks": "Intervall zwischen zwei Pausen",
         "language": "Sprache",
         "license": "Lizenz",
-        "long_break_duration": "Lange Pause Intervall (in Sekunden)",
+        "long_break_duration": "Lange-Pause-Intervall (in Sekunden)",
         "no_of_short_breaks_between_two_long_breaks": "Anzahl von kleinen Pausen zwischen zwei langen Pausen",
-        "postpone": "Verschieben",
-        "postpone_duration": "Verschiebungsdauer (in Minuten)",
+        "postpone": "Verzögernn",
+        "postpone_duration": "Verzögerungsdauer (in Minuten)",
         "quit": "Schließen",
         "save": "Speichern",
         "settings": "Einstellungen",
-        "short_break_duration": "Kleine Pause Intervall (in Sekunden)",
+        "short_break_duration": "Kleine-Pause-Intervall (in Sekunden)",
         "skip": "Überspringen",
         "strict_break": "Strikte Pause (Überspringen nicht möglich)",
         "system_language": "Systemsprache",
         "time_to_prepare_for_break": "Zeit zur Vorbereitung für die Pause (in Sekunden)",
-        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "time_to_screen_lock": "Maximale Zeit zum Überspringen der Bildschirmsperre (in Sekunden)",
         "until_restart": "Bis zum Neustart"
     }
 }
