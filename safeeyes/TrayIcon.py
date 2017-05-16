@@ -188,6 +188,8 @@ class TrayIcon:
 		message = self.language['messages']['next_break_at'].format(formatted_time)
 		if self.config.get('show_time_in_tray', False):
 			self.indicator.set_label(formatted_time, '')
+		else:
+				self.indicator.set_label('', '')
 		Utility.execute_main_thread(self.item_info.set_label, message)
 
 	def on_enable_clicked(self, *args):
