@@ -47,6 +47,7 @@
         "save": "Speichern",
         "settings": "Einstellungen",
         "short_break_duration": "Kleine-Pause-Intervall (in Sekunden)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Überspringen",
         "strict_break": "Strikte Pause (Überspringen nicht möglich)",
         "system_language": "Systemsprache",

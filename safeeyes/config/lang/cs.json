@@ -47,6 +47,7 @@
         "save": "Uložit",
         "settings": "Nastavení",
         "short_break_duration": "Trvání krátké přestávky (v sekundách)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Přeskočit",
         "strict_break": "Povinná přestávka (skrýt tlačítko pro přeskočení)",
         "system_language": "Systémový jazyk",

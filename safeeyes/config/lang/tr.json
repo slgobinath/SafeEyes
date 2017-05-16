@@ -47,6 +47,7 @@
         "save": "Kaydet",
         "settings": "Ayarlar",
         "short_break_duration": "Kısa mola süresi (saniye)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Geç",
         "strict_break": "Kesin mola (Geç düğmesini gizler)",
         "system_language": "System Language",

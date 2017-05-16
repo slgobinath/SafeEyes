@@ -47,6 +47,7 @@
         "save": "დამახსოვრება",
         "settings": "პარამეტრები",
         "short_break_duration": "მცირე შესვენების ხანგრძლივობა (წამებში)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "გამოტოვება",
         "strict_break": "აუცილებელი შესვენება (დავმალოთ ღილაკი 'გამოტოვება')",
         "system_language": "System Language",

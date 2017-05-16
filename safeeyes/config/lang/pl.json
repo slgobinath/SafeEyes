@@ -47,6 +47,7 @@
         "save": "Zapisz",
         "settings": "Ustawienia",
         "short_break_duration": "Czas trwania krótkiej przerwy (w sekundach)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Pomiń",
         "strict_break": "Bezwzględna przerwa (ukryj przycisk pominięcia)",
         "system_language": "Język systemu",

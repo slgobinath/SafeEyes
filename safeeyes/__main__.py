@@ -167,7 +167,7 @@ def save_settings(config):
 
 	# Reload the language translation
 	language = Utility.load_language(config['language'])
-
+	tray_icon.initialize(config)
 	tray_icon.set_labels(language)
 
 	logging.info("Initialize SafeEyesCore with modified settings")

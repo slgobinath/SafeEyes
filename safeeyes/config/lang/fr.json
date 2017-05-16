@@ -47,6 +47,7 @@
         "save": "Enregistrer",
         "settings": "Paramètres",
         "short_break_duration": "Durée d'une pause courte (en secondes)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Ignorer",
         "strict_break": "Pause stricte (cacher le bouton Ignorer)",
         "system_language": "Langue du système ",

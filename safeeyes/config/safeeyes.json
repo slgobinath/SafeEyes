@@ -1,6 +1,6 @@
 {
     "meta": {
-            "config_version": "5.0"
+            "config_version": "5.0.1"
     },
     "allow_postpone": false,
     "break_interval": 15,
@@ -11,6 +11,7 @@
     "short_break_duration": 15,
     "idle_time": 5,
     "postpone_duration": 5,
+    "show_time_in_tray": false,
     "strict_break": false,
     "audible_alert": false,
     "language": "system",

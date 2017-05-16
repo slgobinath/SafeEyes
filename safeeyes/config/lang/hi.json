@@ -47,6 +47,7 @@
         "save": "रखें",
         "settings": "सेटिंग्स",
         "short_break_duration": "छोटे आराम की अवधि (पलों में)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "अभी नहीं",
         "strict_break": "जरूरी आराम (रोक नहीं सकते)",
         "system_language": "System Language",

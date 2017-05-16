@@ -47,6 +47,7 @@
         "save": "Зачувај",
         "settings": "Подесувања",
         "short_break_duration": "Траење на кратките паузи (Во секунди)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Skip",
         "strict_break": "Строга пауза (Сокриј го „Прескокни“ копчето)",
         "system_language": "Системски Јазик",

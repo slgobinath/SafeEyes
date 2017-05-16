@@ -47,6 +47,7 @@
         "save": "Guardar",
         "settings": "Preferencias",
         "short_break_duration": "Duración de una pausa corta (en segundos)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Saltar",
         "strict_break": "Pausa estricta (No hay botón Saltar)",
         "system_language": "Idioma del sistema",
