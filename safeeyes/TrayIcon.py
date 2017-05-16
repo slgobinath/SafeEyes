@@ -186,10 +186,12 @@ class TrayIcon:
 	def __set_next_break_info(self):
 		formatted_time = Utility.format_time(self.dateTime)
 		message = self.language['messages']['next_break_at'].format(formatted_time)
+		# Update the tray icon label
 		if self.config.get('show_time_in_tray', False):
 			self.indicator.set_label(formatted_time, '')
 		else:
-				self.indicator.set_label('', '')
+			self.indicator.set_label('', '')
+		# Update the menu item label
 		Utility.execute_main_thread(self.item_info.set_label, message)
 
 	def on_enable_clicked(self, *args):
@@ -214,6 +216,7 @@ class TrayIcon:
 			logging.info('Disable Safe Eyes')
 			self.active = False
 			self.indicator.set_icon("safeeyes_disabled")
+			self.indicator.set_label('', '')
 			self.item_info.set_sensitive(False)
 			self.item_enable.set_sensitive(True)
 			self.item_disable.set_sensitive(False)
