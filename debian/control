@@ -1,0 +1,27 @@
+Source: safeeyes
+Section: utils
+Priority: optional
+Maintainer: Gobinath Loganathan <slgobinath@gmail.com>
+Build-Depends: debhelper (>= 9), python3, python3-setuptools
+Standards-Version: 3.9.6
+X-Python3-Version: >= 3.4
+Homepage: https://github.com/slgobinath/SafeEyes/
+
+Package: safeeyes
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, gir1.2-appindicator3-0.1, python3 (>= 3.4.0), python3-xlib, python3-dbus, gir1.2-notify-0.7, python3-babel, x11-utils, xprintidle, python3-pyaudio, python3-psutil
+Description: Safe Eyes
+ Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
+ .
+ Features:
+  - Short breaks with eye exercises
+  - Long breaks to change physical position and to warm up
+  - Strict break for those who are addicted to computer
+  - Do not disturb when working with full-screen applications( Eg: Watching movies)
+  - Notifications before every break
+  - Optional audible alert at the end of break
+  - Option to lock screen after long breaks
+  - Smart pause and resume based on system idle time
+  - Multi-monitor support
+  - Plugins to utilize Safe Eyes
+  - Elegant and customizable design

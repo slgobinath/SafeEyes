@@ -1,0 +1,58 @@
+{
+    "meta_info": {
+        "language_name": "Magyar",
+        "language_name_en": "Hungarian"
+    },
+    "app_info": {
+        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Csukja be hosszabb időre a szemét!",
+        "short_break_roll_eyes": "Roll your eyes",
+        "short_break_rotate_clockwise": "Rotate your eyes in clockwise direction",
+        "short_break_rotate_counter_clockwise": "Rotate your eyes in counterclockwise direction",
+        "short_break_blink": "Pislogjon és forgassa meg a szemeit!",
+        "short_break_focus_far_distance": "Fókuszban egy pontot a távolban",
+        "short_break_drink_water": "Igyon egy kis vizet!",
+        "long_break_walk": "Sétáljon egyet!",
+        "long_break_lean_back": "Dőljön hátra és pihenjen!"
+    },
+    "messages": {
+        "ready_for_a_break": "Tervezett szünet {} másodperc múlva!",
+        "disabled_until_restart": "Disabled until restart",
+        "disabled_until_x": "Disabled until {}",
+        "next_break_at": "A következő szünet {}"
+    },
+    "ui_controls": {
+        "about": "Ról ről",
+        "allow_postpone": "Allow postponing the breaks",
+        "audible_alert": "Audible alert at the end of break",
+        "cancel": "Mégse",
+        "close": "Close",
+        "disable": "Disable Safe Eyes",
+        "enable": "Safe Eyes Bekapcsolása",
+        "enable_screen_lock": "Lock the screen after every long break",
+        "for_x_hour": "For {} Hour",
+        "for_x_hours": "For {} Hours",
+        "for_x_minutes": "For {} Minutes",
+        "idle_time": "Minimum idle time to pause (in minutes)",
+        "interval_between_two_breaks": "Két szünet közötti idő",
+        "language": "Nyelv",
+        "license": "License",
+        "long_break_duration": "Hosszú szünet hossza (másodpercekben)",
+        "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
+        "quit": "Kilépés",
+        "save": "Mentés",
+        "settings": "Beállítások",
+        "short_break_duration": "Rövid szünet hossza (másodpercekben)",
+        "show_time_in_tray": "Show the next break time in system tray",
+        "skip": "Átugrás",
+        "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
+        "system_language": "System Language",
+        "time_to_prepare_for_break": "Szünet előtti figyelmeztetés (másodperc)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "until_restart": "Until restart"
+    }
+}

@@ -1,0 +1,61 @@
+safeeyes (1.2.1-1) xenial; urgency=low
+
+  * Support postponing the break
+
+  * Handle configuration update efficiently
+
+  * Move to Python 3
+
+  * Add plugin support
+
+  * Add custom breaks
+
+  * Add optional break image feature
+
+  * Add lock screen support
+
+  * Prevent disabling Safe Eyes after notification
+
+  * Fix random crash
+
+  * Use system language if available
+
+  * Fix disable menu issue in Elementary OS
+
+  * Fix long breaks in hours
+
+  * Fix locale time format issue
+
+  * Advanced configurations and disable for given time
+
+  * Optional audible alert and pause Safe Eyes if system is idle
+
+  * Bug fix for no breaks after 1st one
+
+  * Add about dialog and language selection to Settings dialog
+
+  * Fixing bug in multiscreen support
+
+  * Add next break information to tray menu
+
+  * Support translation
+
+  * Adding multiscreen support & handling system suspend
+
+  * Fixing bug in Ubuntu MATE environment
+
+  * Removing apscheduler dependency
+
+  * Fixing seconds instead of minutes bug
+
+  * Bug fixes for Ubuntu 14.04 and keyboard lock during break
+
+  * Reducing minimal Python requirement
+
+  * Fixing appindicator version mismatch
+
+  * Fixing apscheduler version mismatch
+
+  * Initial release
+
+ -- Gobinath Loganathan <slgobinath@gmail.com>  Sat, 15 Oct 2016 06:28:40 +0530

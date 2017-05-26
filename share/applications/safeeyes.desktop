@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Safe Eyes
+Comment=Protect your eyes from eye strain
+Comment[ge]=დაიცავით თქვენი თვალები დაღლილობისაგან
+Comment[de]=Schützt die Augen vor Überanstrengung
+Comment[cs]=Chraňte své oči před únavou
+Comment[fr]=Protégez vos yeux de la fatigue
+Comment[id]=Melindungi mata Anda dari kelelahan
+Comment[ta]=உங்கள் கண்களை சோர்வடையாது பாதுகாத்திடுங்கள்
+Comment[pt]=Proteja seus olhos da tensão ocular
+Comment[tr]=Gözünüzü yorgunluğa karşı koruyun
+Comment[hi]=तनाव से आंखों की रक्षा
+Comment[es]=Protege tus ojos de la fatiga ocular
+Comment[ru]=Защитите свои глаза от зрительного перенапряжения
+Comment[pl]=Chroń oczy przed zmęczeniem
+Comment[mk]=Заштитете се од замор на очите
+Exec=env GDK_BACKEND=x11 safeeyes
+Icon=safeeyes
+Terminal=false
+Type=Application
+Categories=Utility;

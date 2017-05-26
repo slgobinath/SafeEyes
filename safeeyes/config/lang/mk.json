@@ -1,0 +1,58 @@
+{
+    "meta_info": {
+        "language_name": "Македонски",
+        "language_name_en": "Macedonian"
+    },
+    "app_info": {
+        "description": "Safe Eyes ве штити од замор на очите (asthenophobia) така што ве потсетува да правите паузи додека работите долги часови на компјутер."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Цврсто затворете ги очите",
+        "short_break_roll_eyes": "Превртете ги очите неколку пати на сите страни",
+        "short_break_rotate_clockwise": "Превртете ги очите во насока на стрелките на часовникот",
+        "short_break_rotate_counter_clockwise": "Превртете ги очите обратно од стрелките на часовникот",
+        "short_break_blink": "Трепнете неколкупати",
+        "short_break_focus_far_distance": "Фокусирајте се на точка далеку од вас",
+        "short_break_drink_water": "Напијте се малку вода",
+        "long_break_walk": "Пешачете малку",
+        "long_break_lean_back": "Наслонете се на столот и одморете"
+    },
+    "messages": {
+        "ready_for_a_break": "Пауза за {} секунди",
+        "disabled_until_restart": "Оневозможено до рестарт",
+        "disabled_until_x": "Оневозможено до {}",
+        "next_break_at": "Следна пауза во {}"
+    },
+    "ui_controls": {
+        "about": "За",
+        "allow_postpone": "Овозможи одложување на паузи",
+        "audible_alert": "Звучен оглас на крај на пауза",
+        "cancel": "Откажи",
+        "close": "Затвори",
+        "disable": "Оневозможете го Safe Eyes",
+        "enable": "Овозможете го Safe Eyes",
+        "enable_screen_lock": "Заклучување на екранот по секоја долга пауза",
+        "for_x_hour": "За {} час",
+        "for_x_hours": "За {} часа",
+        "for_x_minutes": "За {} минути",
+        "idle_time": "Минимум време на мирување до пауза (Во минути)",
+        "interval_between_two_breaks": "Време помеѓу две паузи (Во минути)",
+        "language": "Јазик",
+        "license": "Лиценца",
+        "long_break_duration": "Траење на долгите паузи (Во секунди)",
+        "no_of_short_breaks_between_two_long_breaks": "Број на кратки паузи помеѓу две долги",
+        "postpone": "Одложи",
+        "postpone_duration": "Траење на одложувањето (Во секунди)",
+        "quit": "Исклучи",
+        "save": "Зачувај",
+        "settings": "Подесувања",
+        "short_break_duration": "Траење на кратките паузи (Во секунди)",
+        "show_time_in_tray": "Show the next break time in system tray",
+        "skip": "Skip",
+        "strict_break": "Строга пауза (Сокриј го „Прескокни“ копчето)",
+        "system_language": "Системски Јазик",
+        "time_to_prepare_for_break": "Време за подготовка за пауза (Во секунди)",
+        "time_to_screen_lock": "Максимално време од прескокнување на паузата без да се заклучи екранот (Во секунди)",
+        "until_restart": "До рестарт"
+    }
+}

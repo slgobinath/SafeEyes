@@ -1,0 +1,58 @@
+{
+    "meta_info": {
+        "language_name": "ქართული",
+        "language_name_en": "Georgian"
+    },
+    "app_info": {
+        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+    },
+    "exercises": {
+        "short_break_close_eyes": "ძლიერად დახუჭე თვალები",
+        "short_break_roll_eyes": "ფართოდ გაახილეთ თვალები",
+        "short_break_rotate_clockwise": "დაატრიალეთ თვალები საათის მოძრაობის მიმართულებით",
+        "short_break_rotate_counter_clockwise": "დაატრიალეთ თვალები საათის მოძრაობის საწინააღმდეგოდ",
+        "short_break_blink": "თვალები დაახამხამეთ",
+        "short_break_focus_far_distance": "ფოკუსირება გააკეთეთ შორ ობიექტზე",
+        "short_break_drink_water": "დალიეთ წყალი",
+        "long_break_walk": "ცოტა გაიარეთ",
+        "long_break_lean_back": "სავარძლის საზურგეზე გადაწექით და ცოტა დაისვენეთ"
+    },
+    "messages": {
+        "ready_for_a_break": "მოემზადეთ შესვენებისთვის {} წამში",
+        "disabled_until_restart": "გავაუქმოთ შემდეგ რესტარტამდე",
+        "disabled_until_x": "გაუქმებულია {} მდე",
+        "next_break_at": "შემდეგი შესვენება {}"
+    },
+    "ui_controls": {
+        "about": "პროგრამის შესახებ",
+        "allow_postpone": "Allow postponing the breaks",
+        "audible_alert": "ხმოვანი შეტყობინება შესვენების დამთავრებისას",
+        "cancel": "უარყოფა",
+        "close": "Close",
+        "disable": "Safe Eyes გამორთვა",
+        "enable": "Safe Eyes ჩართვა",
+        "enable_screen_lock": "Lock the screen after every long break",
+        "for_x_hour": "{} საათით",
+        "for_x_hours": "{} საათით",
+        "for_x_minutes": "{} საათით",
+        "idle_time": "მინიმუმ idle დრო პაუზის ასაღებად (წუთებში)",
+        "interval_between_two_breaks": "ინტერვალი შესვენებებს შორის",
+        "language": "ენა",
+        "license": "License",
+        "long_break_duration": "დიდი შესვენების ხანგრძლივობა (წამებში)",
+        "no_of_short_breaks_between_two_long_breaks": "მცირე შესვენებების რაოდენობა ორ დიდ შესვენებას შორის",
+        "postpone": "Postpone",
+        "postpone_duration": "Postpone duration (in minutes)",
+        "quit": "გასვლა",
+        "save": "დამახსოვრება",
+        "settings": "პარამეტრები",
+        "short_break_duration": "მცირე შესვენების ხანგრძლივობა (წამებში)",
+        "show_time_in_tray": "Show the next break time in system tray",
+        "skip": "გამოტოვება",
+        "strict_break": "აუცილებელი შესვენება (დავმალოთ ღილაკი 'გამოტოვება')",
+        "system_language": "System Language",
+        "time_to_prepare_for_break": "შესვენებისთვის მოსამზადებელი დრო (წამებში)",
+        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "until_restart": "შემდეგ რესტარტამდე"
+    }
+}
