@@ -1,0 +1,63 @@
+{
+    "meta_info":
+    {
+        "language_name": "Tiếng Việt",
+        "language_name_en": "Vietnamese"
+    },
+    "app_info":
+    {
+        "description": "Safe Eyes bảo vệ đôi mắt của bạn khỏi sự mệt mỏi (asthenopia) bằng cách nhắc nhở bạn nghỉ ngơi khi bạn đang làm việc trong một thời gian dài bên máy tính."
+    },
+    "exercises":
+    {
+        "short_break_close_eyes": "Nhắm chặt mắt lại",
+        "short_break_roll_eyes": "Đảo đi đảo lại đôi mắt của bạn cho mỗi bên",
+        "short_break_rotate_clockwise": "Xoay mắt theo chiều kim đồng hồ",
+        "short_break_rotate_counter_clockwise": "Xoay mắt theo chiều ngược chiều kim đồng hồ",
+        "short_break_blink": "Chớp chớp mắt",
+        "short_break_focus_far_distance": "Nhìn ra xa",
+        "short_break_drink_water": "Uống một ít nước",
+        "long_break_walk": "Đứng dậy và đi lại một lúc",
+        "long_break_lean_back": "Tựa lưng vào ghế và thư giãn"
+    },
+    "messages":
+    {
+        "ready_for_a_break": "Sẵn sàng để nghỉ ngơi {} giây",
+        "disabled_until_restart": "Vô hiệu hóa cho đến khi khởi động lại",
+        "disabled_until_x": "Vô hiệu hóa cho đến khi {}",
+        "next_break_at": "Giờ nghỉ ngơi tiếp theo là {}"
+    },
+    "ui_controls":
+    {
+        "about": "Giới thiệu",
+        "allow_postpone": "Cho phép trì hoãn sự nghỉ ngơi",
+        "audible_alert": "Âm báo sau mỗi lần nghỉ",
+        "cancel": "Huỷ",
+        "close": "Đóng",
+        "disable": "Tắt Safe Eyes",
+        "enable": "Bật Safe Eyes",
+        "enable_screen_lock": "Khoá màn hình ở mỗi thời điểm nghỉ ngơi dài",
+        "for_x_hour": "Trong {} giờ",
+        "for_x_hours": "Trong {} giờ",
+        "for_x_minutes": "Trong {} phút",
+        "idle_time": "Minimum idle time to pause (tính bằng phút)",
+        "interval_between_two_breaks": "Khoảng thời gian giữa hai lần nghỉ ngơi (tính bằng phút)",
+        "language": "Language (Ngôn ngữ)",
+        "license": "Giấy phép",
+        "long_break_duration": "Thời gian nghỉ ngơi dài (tính bằng giây)",
+        "no_of_short_breaks_between_two_long_breaks": "Số lần nghỉ ngơi ngắn giữa hai lần nghỉ ngơi dài",
+        "postpone": "Tạm hoãn",
+        "postpone_duration": "Thời gian tạm hoãn (tính bằng phút)",
+        "quit": "Thoát",
+        "save": "Lưu",
+        "settings": "Cài đặt",
+        "short_break_duration": "Thời gian nghỉ ngắn (tính bằng giây)",
+        "show_time_in_tray": "Hiển thị thời gian nghỉ ngắn trên khay hệ thống",
+        "skip": "Bỏ qua",
+        "strict_break": "Nghỉ ngơi nghiêm túc (Không cho phép bỏ qua)",
+        "system_language": "System Language (Ngôn ngữ hệ thống)",
+        "time_to_prepare_for_break": "Thời gian để chuẩn bị nghỉ ngơi (tính bằng giây)",
+        "time_to_screen_lock": "Thời gian bỏ qua tối đa, không tính thời gian khóa màn hình (tính bằng giây)",
+        "until_restart": "Cho đến khi khởi động lại"
+    }
+}
