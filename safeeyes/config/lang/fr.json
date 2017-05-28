@@ -43,6 +43,8 @@
         "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses courtes entre deux pauses longues",
         "postpone": "Reporter",
         "postpone_duration": "Durée de report (en minutes)",
+        "pyaudio_not_installed": "Cannot enable audible notifications",
+        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Quitter",
         "save": "Enregistrer",
         "settings": "Paramètres",

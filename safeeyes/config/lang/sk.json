@@ -43,6 +43,8 @@
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkych prestávok medzi dvomi dlhými prestávkami",
         "postpone": "Postpone",
         "postpone_duration": "Postpone duration (in minutes)",
+        "pyaudio_not_installed": "Cannot enable audible notifications",
+        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Koniec",
         "save": "Uložiť",
         "settings": "Nastavenia",
