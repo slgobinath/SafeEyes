@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, shutil, dbus, logging, operator, psutil, sys
+import os, gi, json, dbus, logging, operator, psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 gi.require_version('Gtk', '3.0')
@@ -33,18 +33,13 @@ from safeeyes.TrayIcon import TrayIcon
 from safeeyes import Utility
 
 # Define necessary paths
-config_file_path = os.path.join(Utility.config_directory, 'safeeyes.json')
-style_sheet_path = os.path.join(Utility.config_directory, 'style/safeeyes_style.css')
-log_file_path = os.path.join(Utility.config_directory, 'safeeyes.log')
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
 settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
-system_config_file_path = os.path.join(Utility.bin_directory, "config/safeeyes.json")
-system_style_sheet_path = os.path.join(Utility.bin_directory, "config/style/safeeyes_style.css")
+
 
 is_active = True
-CONFIGURATION_VERSION = 5
-SAFE_EYES_VERSION = "1.2.0a9"
+SAFE_EYES_VERSION = "1.2.1"
 
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
@@ -167,12 +162,12 @@ def save_settings(config):
 		core.stop()
 
 	# Write the configuration to file
-	with open(config_file_path, 'w') as config_file:
+	with open(Utility.config_file_path, 'w') as config_file:
 		json.dump(config, config_file, indent=4, sort_keys=True)
 
 	# Reload the language translation
 	language = Utility.load_language(config['language'])
-
+	tray_icon.initialize(config)
 	tray_icon.set_labels(language)
 
 	logging.info("Initialize SafeEyesCore with modified settings")
@@ -200,86 +195,23 @@ def disable_safeeyes():
 	is_active = False
 	core.stop()
 
-"""
-	Initialize the configuration directory and copy the files to ~/.config directory.
-"""
-def initialize_config():
-	global config
-	config_dir_path = os.path.join(Utility.home_directory, '.config/safeeyes/style')
-	startup_dir_path = os.path.join(Utility.home_directory, '.config/autostart')
-
-	Utility.mkdir(config_dir_path)
-
-	if not os.path.isfile(config_file_path):
-		# Copy the safeeyes.json
-		shutil.copy2(system_config_file_path, config_file_path)
-
-		# Overwrite the startup file only if config file is replaced
-		Utility.mkdir(startup_dir_path)
-
-		try:
-			os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, "safeeyes.desktop"))
-		except OSError as exc:
-			pass
-
-	# Copy the safeeyes_style.css
-	if not os.path.isfile(style_sheet_path):
-		shutil.copy2(system_style_sheet_path, style_sheet_path)
-
-	# Read the configuration
-	with open(config_file_path) as config_file:
-		config = json.load(config_file)
-
-"""
-	Configuration file has a version config_version.
-	It is used to overwrite the exsiting config file if there is an update.
-	Earlier versions did not have this attribute so the following method
-	checks the version and if it mismatches, it will overwrite the exsiting
-	config files. If the version property is not available, the file is
-	considered as an older one and replaced by the new configuration file.
-"""
-def validate_config():
-	version_mismatch = False
-	try:
-		# Check the config version
-		config_version = config['meta']['config_version']
-		version_mismatch = config_version is not CONFIGURATION_VERSION
-	except:
-		version_mismatch = True
-
-	if version_mismatch:
-		# Remove ~/.config/safeeyes/safeeyes.json file
-		try:
-			os.remove(config_file_path)
-		except:
-			pass
-
-		# Remove ~/.config/safeeyes/style/safeeyes_style.css file
-		try:
-			os.remove(style_sheet_path)
-		except:
-			pass
-
-		# Remove startup script
-		try:
-			os.remove(os.path.join(Utility.home_directory, '.config/autostart/safeeyes.desktop'))
-		except:
-			pass
-
-		# Create config files again
-		initialize_config()
-
 
 def running():
-	'''
+	"""
 		Check if SafeEyes is already running.
-	'''
+	"""
 	process_count = 0
 	for proc in psutil.process_iter():
+		if not proc.cmdline: continue
 		try:
 			# Check if safeeyes is in process arguments
-			cmd_line = proc.cmdline()
-			if 'python3' in cmd_line[0] and 'safeeyes' in cmd_line[1]:
+			if callable(proc.cmdline):
+				# Latest psutil has cmdline function
+				cmd_line = proc.cmdline()
+			else:
+				# In older versions cmdline was a list object
+				cmd_line = proc.cmdline
+			if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
 				process_count += 1
 				if process_count > 1:
 					return True
@@ -291,23 +223,27 @@ def running():
 
 
 def main():
-	initialize_config()
+	"""
+	Start the Safe Eyes.
+	"""
+	# Initialize the logging
+	Utility.intialize_logging()
 
-	# Configure logging. Reset with every restart
-	logging.basicConfig(format='%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s', filename=log_file_path, filemode='w', level=logging.INFO)
 	logging.info("Starting Safe Eyes")
 
 	if not running():
-		validate_config()
 
 		global break_screen
 		global core
+		global config
 		global notification
 		global tray_icon
 		global language
 		global context
 		global plugins
 		global system_lock_command
+
+		config = Utility.read_config()
 
 		context = {}
 		language = Utility.load_language(config['language'])
@@ -322,7 +258,7 @@ def main():
 		context['version'] = SAFE_EYES_VERSION
 
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
-		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, style_sheet_path)
+		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
 		break_screen.initialize(config, language)
 		notification = Notification(language)
 		plugins = Plugins(config)
@@ -335,7 +271,7 @@ def main():
 
 		Gtk.main()
 	else:
-		logging.info('SafeEyes is already running')
+		logging.info('Another instance of safeeyes is already running')
 		sys.exit(0)
 
 if __name__ == '__main__':

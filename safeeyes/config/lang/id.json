@@ -47,6 +47,7 @@
 			"save": "Simpan",
 			"settings": "Pengaturan",
 			"short_break_duration": "Durasi istirahat singkat (dalam detik)",
+			"show_time_in_tray": "Show the next break time in system tray",
 			"skip": "Lewati",
 			"strict_break": "Paksa istirahat (sembunyikan tombol Lewati)",
 			"system_language": "System Language",

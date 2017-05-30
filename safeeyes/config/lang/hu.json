@@ -47,6 +47,7 @@
         "save": "Mentés",
         "settings": "Beállítások",
         "short_break_duration": "Rövid szünet hossza (másodpercekben)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Átugrás",
         "strict_break": "Kötelezők a szünetek? (nincs átugrás gomb)",
         "system_language": "System Language",

@@ -1,10 +1,20 @@
 # Safe Eyes
-Protect your eyes from eye strain using this continuous breaks reminder. A Free and Open Source Linux alternative to EyeLeo; a sexy and customizable alternative to Workrave.
+Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 
 ## Installation guide
 Safe Eyes is available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3. To see how to install Safe Eyes, visit [Getting Started](http://slgobinath.github.io/SafeEyes/#introduction)
+
+### Compile from source
+Ensure to meet the following dependencies when compiling from source:
+
+- gir1.2-appindicator3-0.1
+- gir1.2-notify-0.7
+- libappindicator-gtk3
+- python3-pyaudio
+- python3-psutil
+- xprintidle (optional)
 
 ## Customizing options
 One of the key advantage of Safe Eyes over other similar products is its highly customizable design. You can change almost everything in Safe Eyes. A detailed documentation is available in the official site: [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize)
@@ -29,6 +39,7 @@ General Features:
 Optional Features:
 
 - Strict break for those who are addicted to computer
+- Postpone break
 - Skip or take break based on active windows (Regardless of full-screen-mode)
 - Customize individual break time
 - Define your own custom exercise
@@ -36,6 +47,7 @@ Optional Features:
 - Turn on/off audible alert for individual breaks
 - Customize disable time period
 - Lock screen after long breaks
+- Add images to breaks
 - Plug-in support to extend Safe Eyes
 
 For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#features)
@@ -50,6 +62,7 @@ For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#feat
  * [हिंदी](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hi.json)
  * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hu.json)
  * [Bahasa Indonesia](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/id.json)
+ * [Polski](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pl.json)
  * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pt.json)
  * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ru.json)
  * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/sk.json)

@@ -23,13 +23,13 @@ def _data_files(path):
 
 setuptools.setup(
     name="safeeyes",
-    version="1.2.0a9",
+    version="1.2.1",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.0a9.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.1.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',

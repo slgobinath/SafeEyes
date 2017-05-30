@@ -47,6 +47,7 @@
         "save": "Сохранить",
         "settings": "Настройки",
         "short_break_duration": "Продолжительность короткого перерыва (в секундах)",
+        "show_time_in_tray": "Show the next break time in system tray",
         "skip": "Пропустить",
         "strict_break": "Обязательный перерыв (Скрыть кнопку 'Пропустить')",
         "system_language": "System Language",

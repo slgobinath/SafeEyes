@@ -1,4 +1,8 @@
-safeeyes (1.2.0a9-1) xenial; urgency=low
+safeeyes (1.2.1-1) xenial; urgency=low
+
+  * Support postponing the break
+
+  * Handle configuration update efficiently
 
   * Move to Python 3
 
@@ -6,7 +10,7 @@ safeeyes (1.2.0a9-1) xenial; urgency=low
 
   * Add custom breaks
 
-  * Add break image
+  * Add optional break image feature
 
   * Add lock screen support
 

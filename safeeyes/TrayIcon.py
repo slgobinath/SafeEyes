@@ -48,6 +48,8 @@ class TrayIcon:
 			APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
 		self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
 
+		self.initialize(config)
+
 		# Construct the context menu
 		self.menu = Gtk.Menu()
 
@@ -130,6 +132,9 @@ class TrayIcon:
 
 		self.indicator.set_menu(self.menu)
 
+	def initialize(self, config):
+		self.config = config
+
 	def set_labels(self, language):
 		self.language = language
 		for entry in self.sub_menu_items:
@@ -181,7 +186,12 @@ class TrayIcon:
 	def __set_next_break_info(self):
 		formatted_time = Utility.format_time(self.dateTime)
 		message = self.language['messages']['next_break_at'].format(formatted_time)
-
+		# Update the tray icon label
+		if self.config.get('show_time_in_tray', False):
+			self.indicator.set_label(formatted_time, '')
+		else:
+			self.indicator.set_label('', '')
+		# Update the menu item label
 		Utility.execute_main_thread(self.item_info.set_label, message)
 
 	def on_enable_clicked(self, *args):
@@ -206,6 +216,7 @@ class TrayIcon:
 			logging.info('Disable Safe Eyes')
 			self.active = False
 			self.indicator.set_icon("safeeyes_disabled")
+			self.indicator.set_label('', '')
 			self.item_info.set_sensitive(False)
 			self.item_enable.set_sensitive(True)
 			self.item_disable.set_sensitive(False)
