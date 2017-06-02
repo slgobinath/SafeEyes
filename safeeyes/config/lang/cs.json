@@ -4,7 +4,7 @@
         "language_name_en": "Czech"
     },
     "app_info": {
-        "description": "Safe Eyes vám připomíná dělat si přestávky, když trávíte dlouhé hodiny počítače a tak chrání vaše oči před únavou (asthenopií)."
+        "description": "Safe Eyes vám připomíná dělat si přestávky, když trávíte dlouhé hodiny u počítače a tak chrání vaše oči před únavou (asthenopií)."
     },
     "exercises": {
         "short_break_close_eyes": "Zavřete oči",
@@ -50,7 +50,7 @@
         "show_time_in_tray": "Zobrazit čas příští přestávky v systémové oblasti",
         "skip": "Přeskočit",
         "strict_break": "Povinná přestávka (skrýt tlačítko pro přeskočení)",
-        "system_language": "Systémový jazyk",
+        "system_language": "Jazyk systému",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
         "time_to_screen_lock": "O kolik nejvýše přeskočit, obcházející zámek obrazovky (v sekundách)",
         "until_restart": "Do restartu"
