@@ -4,7 +4,7 @@
         "language_name_en": "Slovak"
     },
     "app_info": {
-        "description": "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+        "description": "Safe Eyes vám pripomína robiť si prestávky, keď trávite dlhé hodiny u počítača a tak chráni vaše oči pred přílišným namáhaním (asthenopií).."
     },
     "exercises": {
         "short_break_close_eyes": "Pevne zavri oči",
@@ -25,34 +25,34 @@
     },
     "ui_controls": {
         "about": "Ohľadom",
-        "allow_postpone": "Allow postponing the breaks",
+        "allow_postpone": "Povoliť odkladanie prestávok",
         "audible_alert": "Zvukový signál na konci prestávky",
         "cancel": "Zrušiť",
         "close": "Close",
         "disable": "Zakázať Safe Eyes",
         "enable": "Povoliť Safe Eyes",
-        "enable_screen_lock": "Lock the screen after every long break",
+        "enable_screen_lock": "Zablokovať obrazovku po každej dlhej prestávke",
         "for_x_hour": "Počas {} hodiny",
         "for_x_hours": "Počas {} hodín",
         "for_x_minutes": "Počas {} minút",
         "idle_time": "Pozastaviť pri nečinnosti dlhšej ako (v minútach)",
         "interval_between_two_breaks": "Interval medzi dvomi prestávkami",
         "language": "Jazyk",
-        "license": "License",
+        "license": "Licencie",
         "long_break_duration": "Trvanie dlhej prestávky (v sekundách)",
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkych prestávok medzi dvomi dlhými prestávkami",
-        "postpone": "Postpone",
-        "postpone_duration": "Postpone duration (in minutes)",
+        "postpone": "Odložiť",
+        "postpone_duration": "O koĺko odložiť (minút)",
         "quit": "Koniec",
         "save": "Uložiť",
         "settings": "Nastavenia",
         "short_break_duration": "Trvanie krátkej prestávky (v sekundách)",
-        "show_time_in_tray": "Show the next break time in system tray",
+        "show_time_in_tray": "Zobrazit čas následujúcej prestávky v system tray",
         "skip": "Preskočiť",
         "strict_break": "Povinná prestávka (Skryje tlačitko Preskočiť)",
-        "system_language": "System Language",
+        "system_language": "Jazyk systému",
         "time_to_prepare_for_break": "Čas na prípravu na prestávku (v sekundách)",
-        "time_to_screen_lock": "Maximum time to skip, bypassing the lock screen (in seconds)",
+        "time_to_screen_lock": "O koľko sekúnd najviac preskočiť (obchádza zámok obrazovky)",
         "until_restart": "Do reštartu"
     }
 }
