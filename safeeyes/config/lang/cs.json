@@ -52,7 +52,7 @@
         "strict_break": "Povinná přestávka (skrýt tlačítko pro přeskočení)",
         "system_language": "Jazyk systému",
         "time_to_prepare_for_break": "Čas k přípravě na přestávku (v sekundách)",
-        "time_to_screen_lock": "O kolik nejvýše přeskočit, obcházející zámek obrazovky (v sekundách)",
+        "time_to_screen_lock": "O kolik sekund nejvýše přeskočit (obejde zámek obrazovky)",
         "until_restart": "Do restartu"
     }
 }
