@@ -173,7 +173,7 @@ class BreakScreen:
 			window.set_visual(window.get_screen().get_rgba_visual())
 			if self.context['desktop'] == 'kde':
 				# Fix flickering screen in KDE by setting opacity to 1
-				window.set_opacity(1)
+				window.set_opacity(0.9)
 
 			window.move(x, y)
 			window.stick()
