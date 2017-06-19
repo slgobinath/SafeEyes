@@ -31,7 +31,8 @@ class BreakScreen:
 	"""
 		Read the break_screen.glade and build the user interface.
 	"""
-	def __init__(self, on_skip, on_postpone, glade_file, style_sheet_path):
+	def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
+		self.context = context
 		self.on_skip = on_skip
 		self.on_postpone = on_postpone
 		self.is_pretified = False
@@ -170,6 +171,9 @@ class BreakScreen:
 
 			# Set visual to apply css theme. It should be called before show method.
 			window.set_visual(window.get_screen().get_rgba_visual())
+			if self.context['desktop'] == 'kde':
+				# Fix flickering screen in KDE by setting opacity to 1
+				window.set_opacity(1)
 
 			window.move(x, y)
 			window.stick()

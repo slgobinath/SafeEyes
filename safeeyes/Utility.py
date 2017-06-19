@@ -249,6 +249,30 @@ def read_lang_files():
 
 	return languages
 
+
+def desktop_environment():
+	"""
+	Detect the desktop environment.
+	"""
+	desktop_session = os.environ.get('DESKTOP_SESSION')
+	current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
+	if desktop_session is not None:
+		desktop_session = desktop_session.lower()
+		if desktop_session in ['gnome','unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep','trinity', 'kde']:
+			return desktop_session
+		elif (desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop)):
+			return 'xfce'
+		elif desktop_session.startswith('ubuntu'):
+			return 'unity'
+		elif desktop_session.startswith('lubuntu'):
+			return 'lxde'
+		elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
+			return 'kde'
+		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
+			return 'gnome'
+	return 'unknown'
+
+
 def lock_screen_command():
 	"""
 	Function tries to detect the screensaver command based on the current envinroment

@@ -256,9 +256,10 @@ def main():
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
+		context['desktop'] = Utility.desktop_environment()
 
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
-		break_screen = BreakScreen(on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
+		break_screen = BreakScreen(context, on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
 		break_screen.initialize(config, language)
 		notification = Notification(language)
 		plugins = Plugins(config)
