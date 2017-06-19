@@ -15,6 +15,7 @@ Comment[ru]=Защитите свои глаза от зрительного п�
 Comment[pl]=Chroń oczy przed zmęczeniem
 Comment[mk]=Заштитете се од замор на очите
 Comment[vi]=Bảo vệ đôi mắt của bạn khỏi sự mệt mỏi
+Comment[fa]=محافظت چشم هااز ضعیف شدن
 Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes
 Terminal=false
