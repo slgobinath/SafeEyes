@@ -22,7 +22,7 @@ from gi.repository import Gdk, GLib
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
-import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, pyaudio, wave
+import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, wave
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -33,43 +33,52 @@ style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
 log_file_path = os.path.join(config_directory, 'safeeyes.log')
+pyaudio = None
+
+# Import pyaudio if exists
+try:
+	pyaudio = __import__("pyaudio")
+except ImportError:
+	pass
+
 
 def play_notification():
 	"""
 	Play the alert.wav
 	"""
-	logging.info('Playing audible alert')
-	CHUNK = 1024
+	if pyaudio:
+		logging.info('Playing audible alert')
+		CHUNK = 1024
 
-	try:
-		# Open the sound file
-		path = get_resource_path('alert.wav')
-		if path is None:
-			return
-		sound = wave.open(path, 'rb')
+		try:
+			# Open the sound file
+			path = get_resource_path('alert.wav')
+			if path is None:
+				return
+			sound = wave.open(path, 'rb')
 
-		# Create a sound stream
-		wrapper = pyaudio.PyAudio()
-		stream = wrapper.open(format=wrapper.get_format_from_width(sound.getsampwidth()),
-					channels=sound.getnchannels(),
-					rate=sound.getframerate(),
-						output=True)
+			# Create a sound stream
+			wrapper = pyaudio.PyAudio()
+			stream = wrapper.open(format=wrapper.get_format_from_width(sound.getsampwidth()),
+						channels=sound.getnchannels(),
+						rate=sound.getframerate(),
+							output=True)
 
-		# Write file data into the sound stream
-		data = sound.readframes(CHUNK)
-		while data != b'':
-			stream.write(data)
+			# Write file data into the sound stream
 			data = sound.readframes(CHUNK)
+			while data != b'':
+				stream.write(data)
+				data = sound.readframes(CHUNK)
 
-		# Close steam
-		stream.stop_stream()
-		stream.close()
-		sound.close()
-		wrapper.terminate()
+			# Close steam
+			stream.stop_stream()
+			stream.close()
+			sound.close()
+			wrapper.terminate()
 
-	except Exception as e:
-		logging.warning('Unable to play audible alert')
-		logging.exception(e)
+		except Exception as e:
+			logging.warning('Unable to play audible alert')
+			logging.exception(e)
 
 
 def get_resource_path(resource_name):

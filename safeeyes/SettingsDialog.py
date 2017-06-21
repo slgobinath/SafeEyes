@@ -85,6 +85,10 @@ class SettingsDialog:
 		# Enable idle_time_to_pause only if xprintidle is available
 		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
 
+		# Enable optional audible alert only if pyaudio is available
+		self.switch_audible_alert.set_sensitive(Utility.pyaudio is not None)
+		self.switch_audible_alert.set_active(Utility.pyaudio is not None and config['audible_alert'])
+
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
 		self.switch_postpone.set_active(config['allow_postpone'] and not config['strict_break'])

@@ -1,13 +1,15 @@
 import os
-
 import setuptools
 
 
 requires = [
             'python-xlib',
-            'pyaudio',
             'psutil',
             'babel']
+
+extras = {
+        'audible_alert':  ['pyaudio']
+    }
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -49,6 +51,7 @@ setuptools.setup(
                 ('/usr/share/icons/hicolor/16x16/status', ['share/icons/hicolor/16x16/status/safeeyes_enabled.png', 'share/icons/hicolor/16x16/status/safeeyes_disabled.png', 'share/icons/hicolor/16x16/status/safeeyes_timer.png'])
                 ],
     install_requires=requires,
+    extras_require=extras,
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[
