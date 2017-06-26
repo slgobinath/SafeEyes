@@ -231,6 +231,9 @@ def main():
 
 	logging.info("Starting Safe Eyes")
 
+	# Import the dependencies
+	Utility.import_dependencies()
+
 	if not running():
 
 		global break_screen

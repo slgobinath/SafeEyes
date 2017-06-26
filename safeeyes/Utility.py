@@ -35,11 +35,17 @@ system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_sty
 log_file_path = os.path.join(config_directory, 'safeeyes.log')
 pyaudio = None
 
-# Import pyaudio if exists
-try:
-	pyaudio = __import__("pyaudio")
-except ImportError:
-	logging.warning('Install pyaudio for audible notifications.')
+
+def import_dependencies():
+	"""
+	Import the optional Python dependencies.
+	"""
+	try:
+		# Import pyaudio if exists
+		global pyaudio
+		pyaudio = __import__("pyaudio")
+	except ImportError:
+		logging.warning('Install pyaudio for audible notifications.')
 
 def pyaudio_popup(parent, language):
 	"""

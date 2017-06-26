@@ -29,6 +29,7 @@ class SettingsDialog:
 		self.config = config
 		self.on_save_settings = on_save_settings
 		self.languages = []
+		self.language = language
 
 		builder = Gtk.Builder()
 		builder.add_from_file(glade_file)
@@ -86,7 +87,7 @@ class SettingsDialog:
 		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
 
 		# Enable optional audible alert only if pyaudio is available
-		self.switch_audible_alert.set_active(Utility.pyaudio is not None and config['audible_alert'])
+		# self.switch_audible_alert.set_active(Utility.pyaudio is not None and config['audible_alert'])
 
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
@@ -185,13 +186,13 @@ class SettingsDialog:
 		self.config['time_to_screen_lock'] = self.spin_time_to_screen_lock.get_value_as_int()
 		self.config['enable_screen_lock'] = self.switch_screen_lock.get_active()
 		self.config['allow_postpone'] = self.switch_postpone.get_active()
-	        # Check if pyaudio is installed when turning audible notifications on
-       		if self.switch_audible_alert.get_active() and not Utility.pyaudio:
-            		# Notify user that pyaudio is not installed
-            		Utility.pyaudio_popup(self, self.language)
+		# Check if pyaudio is installed when turning audible notifications on
+		if self.switch_audible_alert.get_active() and not Utility.pyaudio:
+			# Notify user that pyaudio is not installed
+			Utility.pyaudio_popup(self.window, self.language)
 			self.config['audible_alert'] = False
-        	else:
-            		self.config['audible_alert'] = self.switch_audible_alert.get_active()
+		else:
+			self.config['audible_alert'] = self.switch_audible_alert.get_active()
 
 		self.on_save_settings(self.config)	# Call the provided save method
 		self.window.destroy()	# Close the settings window
