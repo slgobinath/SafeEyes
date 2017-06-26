@@ -48,6 +48,8 @@
         "no_of_short_breaks_between_two_long_breaks": "Số lần nghỉ ngơi ngắn giữa hai lần nghỉ ngơi dài",
         "postpone": "Tạm hoãn",
         "postpone_duration": "Thời gian tạm hoãn (tính bằng phút)",
+        "pyaudio_not_installed": "Cannot enable audible notifications",
+        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Thoát",
         "save": "Lưu",
         "settings": "Cài đặt",

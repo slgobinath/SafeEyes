@@ -18,7 +18,7 @@
 
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
@@ -39,8 +39,19 @@ pyaudio = None
 try:
 	pyaudio = __import__("pyaudio")
 except ImportError:
-	pass
+	logging.warning('Install pyaudio for audible notifications.')
 
+def pyaudio_popup(parent, language):
+	"""
+	Show a popup informing user to install pyaudio.
+	"""
+	dialog = Gtk.MessageDialog(
+		parent, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK,
+		language['ui_controls']['pyaudio_not_installed'])
+	dialog.format_secondary_text(
+	        language['ui_controls']['pyaudio_explanation'])
+	dialog.run()
+	dialog.destroy()
 
 def play_notification():
 	"""

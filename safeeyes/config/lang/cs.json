@@ -43,6 +43,8 @@
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými",
         "postpone": "Odložit",
         "postpone_duration": "O kolik odložit (v minutách)",
+        "pyaudio_not_installed": "Nelze zapnout zvuková upozornění",
+        "pyaudio_explanation": "Nejdříve musíte nainstalovat pyaudio",
         "quit": "Ukončit",
         "save": "Uložit",
         "settings": "Nastavení",

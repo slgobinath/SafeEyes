@@ -43,6 +43,8 @@
         "no_of_short_breaks_between_two_long_breaks": "दो बड़े आराम के बीच कितने छोटे आराम",
         "postpone": "Postpone",
         "postpone_duration": "Postpone duration (in minutes)",
+        "pyaudio_not_installed": "Cannot enable audible notifications",
+        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "बंद",
         "save": "रखें",
         "settings": "सेटिंग्स",

@@ -43,6 +43,8 @@
         "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses breus entre dues pauses llargues",
         "postpone": "Posposa",
         "postpone_duration": "Durada d'una posposició (en minuts)",
+        "pyaudio_not_installed": "Cannot enable audible notifications",
+        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Tanca",
         "save": "Desa",
         "settings": "Configuració",
