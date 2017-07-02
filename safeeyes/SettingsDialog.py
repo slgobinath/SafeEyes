@@ -35,6 +35,8 @@ class SettingsDialog:
 		builder.add_from_file(glade_file)
 		builder.connect_signals(self)
 
+		xprintidle_available = Utility.command_exist('xprintidle')
+
 		# Get the UI components
 		self.window = builder.get_object('window_settings')
 		self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
@@ -76,15 +78,15 @@ class SettingsDialog:
 		self.spin_interval_between_two_breaks.set_value(config['break_interval'])
 		self.spin_short_between_long.set_value(config['no_of_short_breaks_per_long_break'])
 		self.spin_time_to_prepare.set_value(config['pre_break_warning_time'])
-		self.spin_idle_time_to_pause.set_value(config['idle_time'])
+		self.spin_idle_time_to_pause.set_value(config['idle_time'] and xprintidle_available)
 		self.spin_postpone_duration.set_value(config['postpone_duration'])
 		self.switch_show_time_in_tray.set_active(config['show_time_in_tray'])
 		self.switch_strict_break.set_active(config['strict_break'])
-		self.switch_audible_alert.set_active(config['audible_alert'])
+		self.switch_audible_alert.set_active(config['audible_alert'] and Utility.pyaudio is None)
 		self.spin_time_to_screen_lock.set_value(config['time_to_screen_lock'])
 
 		# Enable idle_time_to_pause only if xprintidle is available
-		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
+		self.spin_idle_time_to_pause.set_sensitive(xprintidle_available)
 
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
