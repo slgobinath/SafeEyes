@@ -18,10 +18,13 @@
         "long_break_lean_back": "पीछे हट कर आराम करें"
     },
     "messages": {
-        "ready_for_a_break": "{} पलों में आराम",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "{} पलों में आराम",
+        "ready_for_a_long_break": "{} पलों में आराम",
         "disabled_until_restart": "अगले आरंभ तक बंद",
         "disabled_until_x": "{} तक बंद",
-        "next_break_at": "अगला आराम {} में"
+        "next_break_at": "अगला आराम {} में",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "हमारे बारे में",
@@ -43,8 +46,6 @@
         "no_of_short_breaks_between_two_long_breaks": "दो बड़े आराम के बीच कितने छोटे आराम",
         "postpone": "Postpone",
         "postpone_duration": "Postpone duration (in minutes)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "बंद",
         "save": "रखें",
         "settings": "सेटिंग्स",

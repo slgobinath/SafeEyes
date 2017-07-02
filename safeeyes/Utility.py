@@ -53,9 +53,9 @@ def pyaudio_popup(parent, language):
 	"""
 	dialog = Gtk.MessageDialog(
 		parent, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK,
-		language['ui_controls']['pyaudio_not_installed'])
+		language['messages']['audible_alert_disabled'])
 	dialog.format_secondary_text(
-	        language['ui_controls']['pyaudio_explanation'])
+	        language['messages']['software_required'].format('pyaudio'))
 	dialog.run()
 	dialog.destroy()
 

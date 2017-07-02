@@ -18,10 +18,13 @@
         "long_break_lean_back": "Откиньтесь на спинку стула и расслабьтесь"
     },
     "messages": {
-        "ready_for_a_break": "Приготовьтесь к перерыву через {} секунд",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Приготовьтесь к перерыву через {} секунд",
+        "ready_for_a_long_break": "Приготовьтесь к перерыву через {} секунд",
         "disabled_until_restart": "Отключено до перезагрузки",
         "disabled_until_x": "Отключено до {}",
-        "next_break_at": "Следующий перерыв в {}"
+        "next_break_at": "Следующий перерыв в {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "О программе",
@@ -43,8 +46,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Количество коротких перерывов между двумя длинными",
         "postpone": "Отложить",
         "postpone_duration": "Отложить на время (в минутах)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Выйти",
         "save": "Сохранить",
         "settings": "Настройки",

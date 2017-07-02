@@ -18,10 +18,13 @@
         "long_break_lean_back": "Reclineu-vos sobre la cadira i relaxeu-vos"
     },
     "messages": {
-        "ready_for_a_break": "Prepareu-vos per a una pausa en {} segons",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Prepareu-vos per a una pausa en {} segons",
+        "ready_for_a_long_break": "Prepareu-vos per a una pausa en {} segons",
         "disabled_until_restart": "Inhabilita fins que es reinicïi",
         "disabled_until_x": "Inhabilitat fins {}",
-        "next_break_at": "Propera pausa a les {}"
+        "next_break_at": "Propera pausa a les {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Quant a",
@@ -43,8 +46,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses breus entre dues pauses llargues",
         "postpone": "Posposa",
         "postpone_duration": "Durada d'una posposició (en minuts)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Tanca",
         "save": "Desa",
         "settings": "Configuració",

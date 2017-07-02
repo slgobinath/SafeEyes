@@ -175,6 +175,7 @@ def save_settings(config):
 	# Restart the core and intialize the components
 	core.initialize(config, language)
 	break_screen.initialize(config, language)
+	notification.initialize(language)
 	if is_active:
 		# 1 sec delay is required to give enough time for core to be stopped
 		Timer(1.0, core.start).start()
@@ -264,7 +265,7 @@ def main():
 		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 		break_screen = BreakScreen(context, on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
 		break_screen.initialize(config, language)
-		notification = Notification(language)
+		notification = Notification(context, language)
 		plugins = Plugins(config)
 		core = SafeEyesCore(context, show_notification, show_alert, close_alert, break_screen.show_count_down, tray_icon.next_break_time)
 		core.initialize(config, language)

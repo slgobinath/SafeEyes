@@ -213,6 +213,11 @@ class SafeEyesCore:
 		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
 		self.update_next_break_info(next_break_time)
 
+		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
+		if self.__is_long_break():
+			self.context['break_type'] = 'long'
+		else:
+			self.context['break_type'] = 'short'
 
 		# Wait for the pre break warning period
 		logging.info("Pre-break waiting for {} minutes".format(time_to_wait))
@@ -226,8 +231,6 @@ class SafeEyesCore:
 			return
 
 		logging.info("Ready to show the break")
-
-		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
 
 		self.is_before_break = False
 		Utility.execute_main_thread(self.__check_active_window)
@@ -288,7 +291,6 @@ class SafeEyesCore:
 				seconds = self.long_break_exercises[self.long_break_message_index][1]
 				audible_alert = self.long_break_exercises[self.long_break_message_index][2]
 				image = self.long_break_exercises[self.long_break_message_index][3]
-				self.context['break_type'] = 'long'
 			else:
 				logging.info("Count is {}; get a short beak message".format(self.break_count))
 				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
@@ -296,7 +298,6 @@ class SafeEyesCore:
 				seconds = self.short_break_exercises[self.short_break_message_index][1]
 				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
 				image = self.short_break_exercises[self.short_break_message_index][3]
-				self.context['break_type'] = 'short'
 
 			self.context['break_length'] = seconds
 			self.context['audible_alert'] = audible_alert

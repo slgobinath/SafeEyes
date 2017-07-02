@@ -18,10 +18,13 @@
 		"long_break_lean_back": "Silakan bersandar ke kursi dan bersantai"
 	},
 	"messages": {
-		"ready_for_a_break": "Bersiap beristirahat dalam {} detik",
+		"audible_alert_disabled": "Cannot enable audible notifications",
+		"ready_for_a_short_break": "Bersiap beristirahat dalam {} detik",
+        "ready_for_a_long_break": "Bersiap beristirahat dalam {} detik",
 		"disabled_until_restart": "Dimatikan hingga dijalankan ulang",
 		"disabled_until_x": "Dimatikan hingga {}",
-		"next_break_at": "Istirahat selanjutnya pada {}"
+		"next_break_at": "Istirahat selanjutnya pada {}",
+		"software_required": "To enable this feature, please install {}"
 	},
 	"ui_controls": {
 			"about": "Tentang",
@@ -43,8 +46,6 @@
 			"no_of_short_breaks_between_two_long_breaks": "Jumlah istirahat singkat di antara dua istirahat panjang",
 			"postpone": "Postpone",
 			"postpone_duration": "Postpone duration (in minutes)",
-            "pyaudio_not_installed": "Cannot enable audible notifications",
-            "pyaudio_explanation": "To enable them, install pyaudio",
 			"quit": "Keluar",
 			"save": "Simpan",
 			"settings": "Pengaturan",

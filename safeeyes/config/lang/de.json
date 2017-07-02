@@ -18,10 +18,13 @@
         "long_break_lean_back": "Lehnen Sie sich zurück und entspannen Sie sich"
     },
     "messages": {
-        "ready_for_a_break": "Nächste Pause in {} Sekunden",
+         "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Nächste Pause in {} Sekunden",
+        "ready_for_a_long_break": "Nächste Pause in {} Sekunden",
         "disabled_until_restart": "Deaktiviert bis zum Neustart",
         "disabled_until_x": "Deaktiviert bis {}",
-        "next_break_at": "Nächste Pause um {}"
+        "next_break_at": "Nächste Pause um {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Über",
@@ -43,8 +46,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Anzahl von kleinen Pausen zwischen zwei langen Pausen",
         "postpone": "Verzögernn",
         "postpone_duration": "Verzögerungsdauer (in Minuten)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Schließen",
         "save": "Speichern",
         "settings": "Einstellungen",

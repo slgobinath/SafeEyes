@@ -18,10 +18,13 @@
         "long_break_lean_back": "Відкиньтеся на спинку і розслабтеся"
     },
     "messages": {
-        "ready_for_a_break": "Приготуйтеся до перерви через {} секунд",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Приготуйтеся до перерви через {} секунд",
+        "ready_for_a_long_break": "Приготуйтеся до перерви через {} секунд",
         "disabled_until_restart": "Відключено до перезапуску",
         "disabled_until_x": "Відключено до {}",
-        "next_break_at": "Наступна перерва о {}"
+        "next_break_at": "Наступна перерва о {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Про SafeEyes",
@@ -43,8 +46,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Кількість коротких перерв між двома довгими",
         "postpone": "Відкласти",
         "postpone_duration": "На скільки відкласти (в хвилинах)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Вийти",
         "save": "Зберегти",
         "settings": "Налаштування",
