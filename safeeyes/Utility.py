@@ -47,17 +47,6 @@ def import_dependencies():
 	except ImportError:
 		logging.warning('Install pyaudio for audible notifications.')
 
-def pyaudio_popup(parent, language):
-	"""
-	Show a popup informing user to install pyaudio.
-	"""
-	dialog = Gtk.MessageDialog(
-		parent, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK,
-		language['messages']['audible_alert_disabled'])
-	dialog.format_secondary_text(
-	        language['messages']['software_required'].format('pyaudio'))
-	dialog.run()
-	dialog.destroy()
 
 def play_notification():
 	"""

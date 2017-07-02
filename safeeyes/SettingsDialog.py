@@ -86,9 +86,6 @@ class SettingsDialog:
 		# Enable idle_time_to_pause only if xprintidle is available
 		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
 
-		# Enable optional audible alert only if pyaudio is available
-		# self.switch_audible_alert.set_active(Utility.pyaudio is not None and config['audible_alert'])
-
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
 		self.switch_postpone.set_active(config['allow_postpone'] and not config['strict_break'])
@@ -102,6 +99,9 @@ class SettingsDialog:
 			self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
 			self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 			self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+
+			if Utility.pyaudio is None:
+				self.switch_audible_alert.connect('state-set', self.on_switch_audible_alert_activate)
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
@@ -162,6 +162,16 @@ class SettingsDialog:
 		"""
 		self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
 
+	def on_switch_audible_alert_activate(self, switch, state):
+		"""
+		Event handler to the state change of the audible_alert switch.
+		Show the information message dialog to install pyaudio if not installed.
+		"""
+		if state and Utility.pyaudio is None:
+			self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
+			switch.emit_stop_by_name('state-set')
+			self.switch_audible_alert.set_active(False)
+	
 	def on_window_delete(self, *args):
 		"""
 		Event handler for Settings dialog close action.
@@ -189,7 +199,7 @@ class SettingsDialog:
 		# Check if pyaudio is installed when turning audible notifications on
 		if self.switch_audible_alert.get_active() and not Utility.pyaudio:
 			# Notify user that pyaudio is not installed
-			Utility.pyaudio_popup(self.window, self.language)
+			self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
 			self.config['audible_alert'] = False
 		else:
 			self.config['audible_alert'] = self.switch_audible_alert.get_active()
@@ -203,3 +213,12 @@ class SettingsDialog:
 		Event handler for Cancel button click.
 		"""
 		self.window.destroy()
+
+	def __show_message_dialog(self, primary_text, secondary_text):
+		"""
+		Show a popup message dialog.
+		"""
+		dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, primary_text)
+		dialog.format_secondary_text(secondary_text)
+		dialog.run()
+		dialog.destroy()
