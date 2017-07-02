@@ -33,6 +33,7 @@
         "cancel": "ரத்து",
         "close": "மூடு",
         "disable": "Safe Eyes ஐ நிறுத்துக",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes ஐ செயல்படுத்துக",
         "enable_screen_lock": "நீண்ட கால இடைவேளைகளின் பின்னர் திரையை பூட்டுக",
         "for_x_hour": "{} மணித்தியாலத்திற்கு",

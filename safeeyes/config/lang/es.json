@@ -33,6 +33,7 @@
         "cancel": "Cancelar",
         "close": "Close",
         "disable": "Desactivar Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Activar Safe Eyes",
         "enable_screen_lock": "Bloquear la pantalla despues de cada pausa larga",
         "for_x_hour": "Durante {} hora",

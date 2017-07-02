@@ -38,6 +38,7 @@
         "cancel": "Huỷ",
         "close": "Đóng",
         "disable": "Tắt Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Bật Safe Eyes",
         "enable_screen_lock": "Khoá màn hình ở mỗi thời điểm nghỉ ngơi dài",
         "for_x_hour": "Trong {} giờ",

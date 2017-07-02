@@ -33,6 +33,7 @@
         "cancel": "Відмінити",
         "close": "Закрити",
         "disable": "Відключити Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Включити Safe Eyes",
         "enable_screen_lock": "Блокувати екран після довгих перерв",
         "for_x_hour": "На {} годину",

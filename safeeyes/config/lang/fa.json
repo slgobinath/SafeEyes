@@ -33,6 +33,7 @@
         "cancel": "لغو",
         "close": "بستن",
         "disable": "غیر فعال کردن Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "فعال کردن Safe Eyes",
         "enable_screen_lock": "قفل کردن صفحه بعد از هر استراحت طولانی",
         "for_x_hour": "برای {} ساعت",

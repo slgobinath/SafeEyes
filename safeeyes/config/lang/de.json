@@ -33,6 +33,7 @@
         "cancel": "Abbrechen",
         "close": "Schließen",
         "disable": "Safe Eyes deaktivieren",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes aktivieren",
         "enable_screen_lock": "Sperrt den Bildschirm nach einer langen Pause",
         "for_x_hour": "Für {} Stunde",

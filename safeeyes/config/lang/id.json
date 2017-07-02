@@ -33,6 +33,7 @@
 			"cancel": "Batal",
 			"close": "Close",
 			"disable": "Matikan Safe Eyes",
+			"disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
 			"enable": "Hidupkan Safe Eyes",
 			"enable_screen_lock": "Lock the screen after every long break",
 			"for_x_hour": "Selama {} Jam",

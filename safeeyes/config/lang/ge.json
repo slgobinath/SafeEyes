@@ -33,6 +33,7 @@
         "cancel": "უარყოფა",
         "close": "Close",
         "disable": "Safe Eyes გამორთვა",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes ჩართვა",
         "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "{} საათით",

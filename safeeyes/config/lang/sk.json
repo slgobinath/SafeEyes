@@ -33,6 +33,7 @@
         "cancel": "Zrušiť",
         "close": "Close",
         "disable": "Zakázať Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Povoliť Safe Eyes",
         "enable_screen_lock": "Zablokovať obrazovku po každej dlhej prestávke",
         "for_x_hour": "Počas {} hodiny",

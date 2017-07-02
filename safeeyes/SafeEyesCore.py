@@ -308,10 +308,9 @@ class SafeEyesCore:
 
 			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
 			while seconds and self.active and not self.context['skipped'] and not self.context['postponed']:
-				self.context['count_down'] = total_break_time - seconds
-				mins, secs = divmod(seconds, 60)
-				timeformat = '{:02d}:{:02d}'.format(mins, secs)
-				self.on_countdown(timeformat)
+				count_down = total_break_time - seconds
+				self.context['count_down'] = count_down
+				self.on_countdown(count_down, seconds)
 				time.sleep(1)	# Sleep for 1 second
 				seconds -= 1
 
