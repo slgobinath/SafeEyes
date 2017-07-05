@@ -18,10 +18,13 @@
         "long_break_lean_back": "Oprzyj się wygodnie na krześle i zrelaksuj"
     },
     "messages": {
-        "ready_for_a_break": "Przygotuj się! Przerwa za {} sekund(y).",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Przygotuj się! Przerwa za {} sekund(y).",
+        "ready_for_a_long_break": "Przygotuj się! Przerwa za {} sekund(y).",
         "disabled_until_restart": "Wyłączony do ponownego uruchomienia",
         "disabled_until_x": "Wyłączony do {}",
-        "next_break_at": "Następna przerwa o {}"
+        "next_break_at": "Następna przerwa o {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "O programie",
@@ -30,6 +33,7 @@
         "cancel": "Anuluj",
         "close": "Zamknij",
         "disable": "Zatrzymaj Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Uruchom Safe Eyes",
         "enable_screen_lock": "Zablokuj ekran po każdej długiej przerwie",
         "for_x_hour": "Na {} godzinę",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Liczba krótkich przerw między długimi przerwami",
         "postpone": "Odrocz",
         "postpone_duration": "Odroczenie przerwy (w minutach)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Wyjdź",
         "save": "Zapisz",
         "settings": "Ustawienia",

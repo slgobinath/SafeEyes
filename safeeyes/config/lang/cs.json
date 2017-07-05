@@ -18,10 +18,13 @@
         "long_break_lean_back": "Opřete se do židle a relaxujte"
     },
     "messages": {
-        "ready_for_a_break": "Připravte se na přestávku za {} sekund",
+        "audible_alert_disabled": "Nelze zapnout zvuková upozornění",
+        "ready_for_a_short_break": "Připravte se na přestávku za {} sekund",
+        "ready_for_a_long_break": "Připravte se na přestávku za {} sekund",
         "disabled_until_restart": "Pozastaveno do restartu",
         "disabled_until_x": "Pozastaveno na {}",
-        "next_break_at": "Příští přestávka v {}"
+        "next_break_at": "Příští přestávka v {}",
+        "software_required": "Nejdříve musíte nainstalovat {}"
     },
     "ui_controls": {
         "about": "O aplikaci",
@@ -30,6 +33,7 @@
         "cancel": "Zrušit",
         "close": "Close",
         "disable": "Pozastavit Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Zapnout Safe Eyes",
         "enable_screen_lock": "Po každé dlouhé přestávce uzamknout obrazovku",
         "for_x_hour": "Na {} hodinu",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Počet krátkých přestávek mezi dvěma dlouhými",
         "postpone": "Odložit",
         "postpone_duration": "O kolik odložit (v minutách)",
-        "pyaudio_not_installed": "Nelze zapnout zvuková upozornění",
-        "pyaudio_explanation": "Nejdříve musíte nainstalovat pyaudio",
         "quit": "Ukončit",
         "save": "Uložit",
         "settings": "Nastavení",

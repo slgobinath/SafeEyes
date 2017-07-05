@@ -18,10 +18,13 @@
         "long_break_lean_back": "Lean back at your seat and relax"
     },
     "messages": {
-        "ready_for_a_break": "Ready for a break in {} seconds",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Ready for a short break in {} seconds",
+        "ready_for_a_long_break": "Ready for a long break in {} seconds",
         "disabled_until_restart": "Disabled until restart",
         "disabled_until_x": "Disabled until {}",
-        "next_break_at": "Next break at {}"
+        "next_break_at": "Next break at {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "About",
@@ -30,6 +33,7 @@
         "cancel": "Cancel",
         "close": "Close",
         "disable": "Disable Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Enable Safe Eyes",
         "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "For {} Hour",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Number of short breaks between two long breaks",
         "postpone": "Postpone",
         "postpone_duration": "Postpone duration (in minutes)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Quit",
         "save": "Save",
         "settings": "Settings",

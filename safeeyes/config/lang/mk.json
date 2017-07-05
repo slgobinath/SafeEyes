@@ -18,10 +18,13 @@
         "long_break_lean_back": "Наслонете се на столот и одморете"
     },
     "messages": {
-        "ready_for_a_break": "Пауза за {} секунди",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Пауза за {} секунди",
+        "ready_for_a_long_break": "Пауза за {} секунди",
         "disabled_until_restart": "Оневозможено до рестарт",
         "disabled_until_x": "Оневозможено до {}",
-        "next_break_at": "Следна пауза во {}"
+        "next_break_at": "Следна пауза во {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "За",
@@ -30,6 +33,7 @@
         "cancel": "Откажи",
         "close": "Затвори",
         "disable": "Оневозможете го Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Овозможете го Safe Eyes",
         "enable_screen_lock": "Заклучување на екранот по секоја долга пауза",
         "for_x_hour": "За {} час",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Број на кратки паузи помеѓу две долги",
         "postpone": "Одложи",
         "postpone_duration": "Траење на одложувањето (Во секунди)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Исклучи",
         "save": "Зачувај",
         "settings": "Подесувања",

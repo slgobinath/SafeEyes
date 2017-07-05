@@ -36,6 +36,8 @@ class SettingsDialog:
 		builder.add_from_file(glade_file)
 		builder.connect_signals(self)
 
+		xprintidle_available = Utility.command_exist('xprintidle')
+
 		# Get the UI components
 		self.window = builder.get_object('window_settings')
 		self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
@@ -45,6 +47,7 @@ class SettingsDialog:
 		self.spin_time_to_prepare = builder.get_object('spin_time_to_prepare')
 		self.spin_idle_time_to_pause = builder.get_object('spin_idle_time_to_pause')
 		self.spin_postpone_duration = builder.get_object('spin_postpone_duration')
+		self.spin_disable_keyboard_shortcut = builder.get_object('spin_disable_keyboard_shortcut')
 		self.switch_show_time_in_tray = builder.get_object('switch_show_time_in_tray')
 		self.switch_strict_break = builder.get_object('switch_strict_break')
 		self.switch_postpone = builder.get_object('switch_postpone')
@@ -62,6 +65,7 @@ class SettingsDialog:
 		builder.get_object('lbl_idle_time_to_pause').set_label(language['ui_controls']['idle_time'])
 		builder.get_object('lbl_postpone_duration').set_label(language['ui_controls']['postpone_duration'])
 		builder.get_object('lbl_allow_postpone').set_label(language['ui_controls']['allow_postpone'])
+		builder.get_object('lbl_disable_keyboard_shortcut').set_label(language['ui_controls']['disable_keyboard_shortcut'])
 		builder.get_object('lbl_show_time_in_tray').set_label(language['ui_controls']['show_time_in_tray'])
 		builder.get_object('lbl_strict_break').set_label(language['ui_controls']['strict_break'])
 		builder.get_object('lbl_audible_alert').set_label(language['ui_controls']['audible_alert'])
@@ -77,18 +81,16 @@ class SettingsDialog:
 		self.spin_interval_between_two_breaks.set_value(config['break_interval'])
 		self.spin_short_between_long.set_value(config['no_of_short_breaks_per_long_break'])
 		self.spin_time_to_prepare.set_value(config['pre_break_warning_time'])
-		self.spin_idle_time_to_pause.set_value(config['idle_time'])
+		self.spin_idle_time_to_pause.set_value(config['idle_time'] and xprintidle_available)
 		self.spin_postpone_duration.set_value(config['postpone_duration'])
+		self.spin_disable_keyboard_shortcut.set_value(config['shortcut_disable_time'])
 		self.switch_show_time_in_tray.set_active(config['show_time_in_tray'])
 		self.switch_strict_break.set_active(config['strict_break'])
-		self.switch_audible_alert.set_active(config['audible_alert'])
+		self.switch_audible_alert.set_active(config['audible_alert'] and Utility.pyaudio is None)
 		self.spin_time_to_screen_lock.set_value(config['time_to_screen_lock'])
 
 		# Enable idle_time_to_pause only if xprintidle is available
-		self.spin_idle_time_to_pause.set_sensitive(Utility.command_exist('xprintidle'))
-
-		# Enable optional audible alert only if pyaudio is available
-		# self.switch_audible_alert.set_active(Utility.pyaudio is not None and config['audible_alert'])
+		self.spin_idle_time_to_pause.set_sensitive(xprintidle_available)
 
 		self.switch_screen_lock.set_sensitive(able_to_lock_screen)
 		self.switch_screen_lock.set_active(able_to_lock_screen and config['enable_screen_lock'])
@@ -103,6 +105,9 @@ class SettingsDialog:
 			self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
 			self.on_switch_screen_lock_activate(self.switch_screen_lock, self.switch_screen_lock.get_active())
 			self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+
+			if Utility.pyaudio is None:
+				self.switch_audible_alert.connect('state-set', self.on_switch_audible_alert_activate)
 
 		# Initialize the language combobox
 		language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
@@ -160,6 +165,16 @@ class SettingsDialog:
 		"""
 		self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
 
+	def on_switch_audible_alert_activate(self, switch, state):
+		"""
+		Event handler to the state change of the audible_alert switch.
+		Show the information message dialog to install pyaudio if not installed.
+		"""
+		if state and Utility.pyaudio is None:
+			self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
+			switch.emit_stop_by_name('state-set')
+			self.switch_audible_alert.set_active(False)
+	
 	def on_window_delete(self, *args):
 		"""
 		Event handler for Settings dialog close action.
@@ -177,6 +192,7 @@ class SettingsDialog:
 		self.config['pre_break_warning_time'] = self.spin_time_to_prepare.get_value_as_int()
 		self.config['idle_time'] = self.spin_idle_time_to_pause.get_value_as_int()
 		self.config['postpone_duration'] = self.spin_postpone_duration.get_value_as_int()
+		self.config['shortcut_disable_time'] = self.spin_disable_keyboard_shortcut.get_value_as_int()
 		self.config['show_time_in_tray'] = self.switch_show_time_in_tray.get_active()
 		self.config['strict_break'] = self.switch_strict_break.get_active()
 		self.config['language'] = self.languages[self.cmb_language.get_active()]
@@ -186,7 +202,7 @@ class SettingsDialog:
 		# Check if pyaudio is installed when turning audible notifications on
 		if self.switch_audible_alert.get_active() and not Utility.pyaudio:
 			# Notify user that pyaudio is not installed
-			Utility.pyaudio_popup(self.window, self.language)
+			self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
 			self.config['audible_alert'] = False
 		else:
 			self.config['audible_alert'] = self.switch_audible_alert.get_active()
@@ -199,3 +215,12 @@ class SettingsDialog:
 		Event handler for Cancel button click.
 		"""
 		self.window.destroy()
+
+	def __show_message_dialog(self, primary_text, secondary_text):
+		"""
+		Show a popup message dialog.
+		"""
+		dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, primary_text)
+		dialog.format_secondary_text(secondary_text)
+		dialog.run()
+		dialog.destroy()

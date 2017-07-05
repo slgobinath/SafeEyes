@@ -18,10 +18,13 @@
         "long_break_lean_back": "Dőljön hátra és pihenjen!"
     },
     "messages": {
-        "ready_for_a_break": "Tervezett szünet {} másodperc múlva!",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Tervezett szünet {} másodperc múlva!",
+        "ready_for_a_long_break": "Tervezett szünet {} másodperc múlva!",
         "disabled_until_restart": "Disabled until restart",
         "disabled_until_x": "Disabled until {}",
-        "next_break_at": "A következő szünet {}"
+        "next_break_at": "A következő szünet {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Ról ről",
@@ -30,6 +33,7 @@
         "cancel": "Mégse",
         "close": "Close",
         "disable": "Disable Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes Bekapcsolása",
         "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "For {} Hour",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Hány rövid szünet legyen a hosszabbak között?",
         "postpone": "Postpone",
         "postpone_duration": "Postpone duration (in minutes)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Kilépés",
         "save": "Mentés",
         "settings": "Beállítások",

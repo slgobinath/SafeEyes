@@ -35,6 +35,7 @@ class Notification:
 		"""
 		logging.info('Initialize the notification')
 		Notify.init(APPINDICATOR_ID)
+		self.context = context
 		self.language = language
 
 	def show(self, warning_time):
@@ -42,7 +43,15 @@ class Notification:
 		Show the notification
 		"""
 		logging.info('Show pre-break notification')
-		self.notification = Notify.Notification.new('Safe Eyes', '\n' + self.language['messages']['ready_for_a_break'].format(warning_time), icon='safeeyes_enabled')
+
+		# Construct the message based on the type of the next break
+		message = '\n'
+		if self.context['break_type'] == 'short':
+			message += self.language['messages']['ready_for_a_short_break'].format(warning_time)
+		else:
+			message += self.language['messages']['ready_for_a_long_break'].format(warning_time)
+		
+		self.notification = Notify.Notification.new('Safe Eyes', message, icon='safeeyes_enabled')
 		try:
 			self.notification.show()
 		except Exception as e:

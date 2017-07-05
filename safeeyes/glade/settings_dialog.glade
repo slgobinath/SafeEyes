@@ -52,6 +52,12 @@
     <property name="step_increment">1</property>
     <property name="page_increment">5</property>
   </object>
+  <object class="GtkAdjustment" id="adjust_disable_keyboard_shortcut_duration">
+    <property name="lower">1</property>
+    <property name="upper">15</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
   <object class="GtkAdjustment" id="adjust_short_break_duration">
     <property name="lower">1</property>
     <property name="upper">60</property>
@@ -189,7 +195,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -202,7 +208,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">7</property>
               </packing>
             </child>
             <child>
@@ -215,7 +221,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
+                <property name="top_attach">8</property>
               </packing>
             </child>
             <child>
@@ -346,7 +352,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -358,7 +364,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">7</property>
               </packing>
             </child>
             <child>
@@ -370,7 +376,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">7</property>
+                <property name="top_attach">8</property>
               </packing>
             </child>
             <child>
@@ -382,7 +388,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">10</property>
+                <property name="top_attach">11</property>
               </packing>
             </child>
             <child>
@@ -395,7 +401,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">10</property>
+                <property name="top_attach">11</property>
               </packing>
             </child>
             <child>
@@ -405,7 +411,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">13</property>
+                <property name="top_attach">14</property>
               </packing>
             </child>
             <child>
@@ -418,7 +424,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">13</property>
+                <property name="top_attach">14</property>
               </packing>
             </child>
             <child>
@@ -431,7 +437,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">11</property>
+                <property name="top_attach">12</property>
               </packing>
             </child>
             <child>
@@ -442,7 +448,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">11</property>
+                <property name="top_attach">12</property>
               </packing>
             </child>
             <child>
@@ -455,7 +461,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">12</property>
+                <property name="top_attach">13</property>
               </packing>
             </child>
             <child>
@@ -474,7 +480,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">12</property>
+                <property name="top_attach">13</property>
               </packing>
             </child>
             <child>
@@ -487,7 +493,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">8</property>
+                <property name="top_attach">9</property>
               </packing>
             </child>
             <child>
@@ -498,14 +504,40 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">8</property>
+                <property name="top_attach">9</property>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkLabel" id="lbl_disable_keyboard_shortcut">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Disable keyboard shortcut</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkSpinButton" id="spin_disable_keyboard_shortcut">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="text" translatable="yes">1</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">adjust_disable_keyboard_shortcut_duration</property>
+                <property name="climb_rate">1</property>
+                <property name="numeric">True</property>
+                <property name="update_policy">if-valid</property>
+                <property name="value">1</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+              </packing>
             </child>
           </object>
           <packing>

@@ -18,10 +18,13 @@
         "long_break_lean_back": "Encoste na cadeira e relaxe"
     },
     "messages": {
-        "ready_for_a_break": "Pronto para uma pausa em {} segundos",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Pronto para uma pausa em {} segundos",
+        "ready_for_a_long_break": "Pronto para uma pausa em {} segundos",
         "disabled_until_restart": "Desativado até reiniciar",
         "disabled_until_x": "Desativado até {}",
-        "next_break_at": "Próxima pausa em {}"
+        "next_break_at": "Próxima pausa em {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Sobre",
@@ -30,6 +33,7 @@
         "cancel": "Cancelar",
         "close": "Fechar",
         "disable": "Desativar Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Habilitar Safe Eyes",
         "enable_screen_lock": "Bloqueie a tela após cada pausa longa",
         "for_x_hour": "Por {} Hora",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Número de pausas curtas entre duas pausas longas",
         "postpone": "Adiar",
         "postpone_duration": "Duração do adiamento (em minutos)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Sair",
         "save": "Salvar",
         "settings": "Configuração",

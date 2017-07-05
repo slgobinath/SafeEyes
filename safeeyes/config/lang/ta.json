@@ -18,10 +18,13 @@
         "long_break_lean_back": "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
     },
     "messages": {
-        "ready_for_a_break": "{} விநாடிகளில் இடைவேளைக்கு தயாராகுங்கள்",
+        "audible_alert_disabled": "ஒலிச் சமிக்ஞையை செயற்படுத்த முடியாதுள்ளது",
+        "ready_for_a_short_break": "{} விநாடிகளில் குறுகிய இடைவேளைக்கு தயாராகுங்கள்",
+        "ready_for_a_long_break": "{} விநாடிகளில் நீண்ட இடைவேளைக்கு தயாராகுங்கள்",
         "disabled_until_restart": "மறுதுவக்கம் வரை நிறுத்தி வைக்கப்பட்டுள்ளது",
         "disabled_until_x": "{} வரை நிறுத்தி வைக்கப்பட்டுள்ளது",
-        "next_break_at": "அடுத்த இடைவேளை {}"
+        "next_break_at": "அடுத்த இடைவேளை {}",
+        "software_required": "இந்த வசதியை செயற்படுத்த {} ஐ நிறுவவும்"
     },
     "ui_controls": {
         "about": "Safe Eyes குறித்த தகவல்கள்",
@@ -30,6 +33,7 @@
         "cancel": "ரத்து",
         "close": "மூடு",
         "disable": "Safe Eyes ஐ நிறுத்துக",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes ஐ செயல்படுத்துக",
         "enable_screen_lock": "நீண்ட கால இடைவேளைகளின் பின்னர் திரையை பூட்டுக",
         "for_x_hour": "{} மணித்தியாலத்திற்கு",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "இரண்டு நீண்ட இடைவேளைகளுக்கிடையிலான குறுகிய இடைவேளைகள்",
         "postpone": "ஒத்தி வை",
         "postpone_duration": "இடைவேளையை ஒத்தி வைக்கும் காலம் (நிமிடங்களில்)",
-        "pyaudio_not_installed": "ஒலிச் சமிக்ஞையை செயற்படுத்த முடியாதுள்ளது",
-        "pyaudio_explanation": "ஒலிச் சமிக்ஞையை செயற்படுத்த pyaudio ஐ நிறுவவும்",
         "quit": "நிறுத்து",
         "save": "சேமி",
         "settings": "அமைப்பு",

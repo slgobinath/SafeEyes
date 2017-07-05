@@ -18,10 +18,13 @@
         "long_break_lean_back": "به صندلی تکیه داده و راحت باشید"
     },
     "messages": {
-        "ready_for_a_break": "آماده استراحت در {} ثانیه بعد باشید",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "آماده استراحت در {} ثانیه بعد باشید",
+        "ready_for_a_long_break": "آماده استراحت در {} ثانیه بعد باشید",
         "disabled_until_restart": "غیرفعال تا بارگذاری مجدد",
         "disabled_until_x": "غیرفعال تا {}",
-        "next_break_at": "استراحت بعد در {}"
+        "next_break_at": "استراحت بعد در {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "درباره",
@@ -30,6 +33,7 @@
         "cancel": "لغو",
         "close": "بستن",
         "disable": "غیر فعال کردن Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "فعال کردن Safe Eyes",
         "enable_screen_lock": "قفل کردن صفحه بعد از هر استراحت طولانی",
         "for_x_hour": "برای {} ساعت",
@@ -43,8 +47,6 @@
         "no_of_short_breaks_between_two_long_breaks": "تعداد استراحت های کوتاه بین هر دو استراحت بلند",
         "postpone": "به تعویق انداختن",
         "postpone_duration": "زمان به تعویق انداختن (به دقیقه)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "خروج",
         "save": "ذخیره",
         "settings": "تنظیمات",
