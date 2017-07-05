@@ -18,8 +18,9 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GdkX11, GObject
+from gi.repository import Gtk, GObject
 from safeeyes import Utility
+
 
 class SettingsDialog:
 	"""
@@ -112,7 +113,7 @@ class SettingsDialog:
 		language_list_store.append([language['ui_controls']['system_language']])
 		language_list_store.append(['-'])
 		self.languages.append('system')
-		self.languages.append('system')	# Dummy record for row separator
+		self.languages.append('system')    # Dummy record for row separator
 		if 'system' == lang_code:
 			self.cmb_language.set_active(0)
 
@@ -124,18 +125,16 @@ class SettingsDialog:
 			language_index += 1
 
 		self.cmb_language.set_model(language_list_store)
-		self.cmb_language.set_row_separator_func(lambda m,i: m.get_value(i, 0) == '-')
+		self.cmb_language.set_row_separator_func(lambda m, i: m.get_value(i, 0) == '-')
 		cell = Gtk.CellRendererText()
 		self.cmb_language.pack_start(cell, True)
 		self.cmb_language.add_attribute(cell, 'text', 0)
-
 
 	def show(self):
 		"""
 		Show the SettingsDialog.
 		"""
 		self.window.show_all()
-
 
 	def on_switch_screen_lock_activate(self, switch, state):
 		"""
@@ -144,13 +143,12 @@ class SettingsDialog:
 		"""
 		self.spin_time_to_screen_lock.set_sensitive(self.switch_screen_lock.get_active())
 
-
 	def on_switch_strict_break_activate(self, switch, state):
 		"""
 		Event handler to the state change of the postpone switch.
 		Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
 		"""
-		strict_break_enable = state #self.switch_strict_break.get_active()
+		strict_break_enable = state    # self.switch_strict_break.get_active()
 		self.switch_postpone.set_sensitive(not strict_break_enable)
 		if strict_break_enable:
 			self.switch_postpone.set_active(False)
@@ -167,7 +165,6 @@ class SettingsDialog:
 		Event handler for Settings dialog close action.
 		"""
 		self.window.destroy()
-
 
 	def on_save_clicked(self, button):
 		"""
@@ -194,9 +191,8 @@ class SettingsDialog:
 		else:
 			self.config['audible_alert'] = self.switch_audible_alert.get_active()
 
-		self.on_save_settings(self.config)	# Call the provided save method
-		self.window.destroy()	# Close the settings window
-
+		self.on_save_settings(self.config)    # Call the provided save method
+		self.window.destroy()                 # Close the settings window
 
 	def on_cancel_clicked(self, button):
 		"""

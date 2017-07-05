@@ -21,14 +21,13 @@ gi.require_version('Notify', '0.7')
 from gi.repository import Notify
 from safeeyes import Utility
 
-
 APPINDICATOR_ID = 'safeeyes'
+
 
 class Notification:
 	"""
 		This class is responsible for the notification to the user before the break.
 	"""
-
 
 	def __init__(self, language):
 		"""
@@ -37,7 +36,6 @@ class Notification:
 		logging.info('Initialize the notification')
 		Notify.init(APPINDICATOR_ID)
 		self.language = language
-
 
 	def show(self, warning_time):
 		"""
@@ -50,7 +48,6 @@ class Notification:
 		except Exception as e:
 			logging.exception('Error in showing notification', e)
 
-
 	def close(self):
 		"""
 		Close the notification if it is not closed by the system already.
@@ -61,7 +58,6 @@ class Notification:
 		except:
 			# Some Linux systems automatically close the notification.
 			pass
-
 
 	def quite(self):
 		"""

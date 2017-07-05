@@ -231,7 +231,6 @@ class TrayIcon:
 				Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
 				self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
 
-
 	"""
 		This method is called by the core to prevent user from disabling Safe Eyes after the notification.
 	"""
@@ -254,7 +253,7 @@ class TrayIcon:
 
 	def __schedule_resume(self, time_minutes):
 		self.idle_condition.acquire()
-		self.idle_condition.wait(time_minutes * 60) # Convert to seconds
+		self.idle_condition.wait(time_minutes * 60)    # Convert to seconds
 		self.idle_condition.release()
 
 		with self.lock:

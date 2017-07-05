@@ -16,17 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, signal, sys, threading, logging
-from Xlib import Xatom, Xutil
+import gi, threading, logging
 from Xlib.display import Display, X
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
+from gi.repository import Gtk, Gdk, GLib
 
 
-"""
-	The fullscreen window which prevents users from using the computer.
-"""
 class BreakScreen:
+	"""
+		The fullscreen window which prevents users from using the computer.
+	"""
 
 	"""
 		Read the break_screen.glade and build the user interface.
@@ -46,7 +45,6 @@ class BreakScreen:
 		css_provider.load_from_path(style_sheet_path)
 		Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-
 	"""
 		Initialize the internal properties from configuration
 	"""
@@ -57,7 +55,6 @@ class BreakScreen:
 		self.strict_break = config.get('strict_break', False)
 		self.enable_postpone = config.get('allow_postpone', False)
 
-
 	"""
 		Window close event handler.
 	"""
@@ -65,7 +62,6 @@ class BreakScreen:
 		logging.info("Closing the break screen")
 		self.lock_keyboard = False
 		self.close()
-
 
 	"""
 		Skip button press event handler.
@@ -76,7 +72,6 @@ class BreakScreen:
 		self.on_skip()
 		self.close()
 
-
 	"""
 		Postpone button press event handler.
 	"""
@@ -85,20 +80,17 @@ class BreakScreen:
 		self.on_postpone()
 		self.close()
 
-
 	"""
 		Show/update the count down on all screens.
 	"""
 	def show_count_down(self, count):
 		GLib.idle_add(lambda: self.__update_count_down(count))
 
-
 	"""
 		Show the break screen with the given message on all displays.
 	"""
 	def show_message(self, message, image_path, plugins_data):
 		GLib.idle_add(lambda: self.__show_break_screen(message, image_path, plugins_data))
-
 
 	"""
 		Hide the break screen from active window and destroy all other windows
@@ -109,7 +101,6 @@ class BreakScreen:
 
 		# Destroy other windows if exists
 		GLib.idle_add(lambda: self.__destroy_all_screens())
-
 
 	"""
 		Show an empty break screen on all screens.
@@ -157,14 +148,12 @@ class BreakScreen:
 				btn_skip.set_visible(True)
 				box_buttons.pack_start(btn_skip, True, True, 0)
 
-
-
 			# Set values
 			if image_path:
 				img_break.set_from_file(image_path)
 			lbl_message.set_label(message)
-			lbl_left.set_markup(plugins_data['left']);
-			lbl_right.set_markup(plugins_data['right']);
+			lbl_left.set_markup(plugins_data['left'])
+			lbl_right.set_markup(plugins_data['right'])
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)
@@ -181,14 +170,12 @@ class BreakScreen:
 			window.present()
 			window.fullscreen()
 
-
 	"""
 		Update the countdown on all break screens.
 	"""
 	def __update_count_down(self, count):
 		for label in self.count_labels:
 			label.set_text(count)
-
 
 	"""
 		Lock the keyboard to prevent the user from using keyboard shortcuts
@@ -199,7 +186,7 @@ class BreakScreen:
 		display = Display()
 		root = display.screen().root
 		# Grap the keyboard
-		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
+		root.grab_keyboard(owner_events=False, pointer_mode=X.GrabModeAsync, keyboard_mode=X.GrabModeAsync, time=X.CurrentTime)
 		# Consume keyboard events
 		self.key_lock_condition.acquire()
 		while self.lock_keyboard:
@@ -211,7 +198,6 @@ class BreakScreen:
 		display.ungrab_keyboard(X.CurrentTime)
 		display.flush()
 
-
 	"""
 		Release the locked keyboard.
 	"""
@@ -220,7 +206,6 @@ class BreakScreen:
 		self.lock_keyboard = False
 		self.key_lock_condition.notify()
 		self.key_lock_condition.release()
-
 
 	"""
 		Close all the break screens.
