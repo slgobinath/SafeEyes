@@ -24,11 +24,11 @@ from safeeyes import Utility
 
 APPINDICATOR_ID = 'safeeyes'
 
+
 class Notification:
 	"""
 		This class is responsible for the notification to the user before the break.
 	"""
-
 
 	def __init__(self, context, language):
 		"""
@@ -39,13 +39,11 @@ class Notification:
 		self.context = context
 		self.language = language
 
-
 	def initialize(self, language):
 		"""
 		Initialize the notification object.
 		"""
 		self.language = language
-	
 
 	def show(self, warning_time):
 		"""
@@ -59,13 +57,12 @@ class Notification:
 			message += self.language['messages']['ready_for_a_short_break'].format(warning_time)
 		else:
 			message += self.language['messages']['ready_for_a_long_break'].format(warning_time)
-		
+
 		self.notification = Notify.Notification.new('Safe Eyes', message, icon='safeeyes_enabled')
 		try:
 			self.notification.show()
 		except Exception as e:
 			logging.exception('Error in showing notification', e)
-
 
 	def close(self):
 		"""
@@ -77,7 +74,6 @@ class Notification:
 		except:
 			# Some Linux systems automatically close the notification.
 			pass
-
 
 	def quite(self):
 		"""

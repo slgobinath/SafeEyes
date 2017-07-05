@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, dbus, logging, operator, psutil, sys
+import os, gi, json, dbus, logging, psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
 gi.require_version('Gtk', '3.0')
@@ -41,6 +41,7 @@ about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.gla
 is_active = True
 SAFE_EYES_VERSION = "1.2.1"
 
+
 """
 	Listen to tray icon Settings action and send the signal to Settings dialog.
 """
@@ -52,6 +53,7 @@ def show_settings():
 	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), able_to_lock_screen, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
+
 """
 	Listen to tray icon About action and send the signal to About dialog.
 """
@@ -59,6 +61,7 @@ def show_about():
 	logging.info("Show About dialog")
 	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION, language)
 	about_dialog.show()
+
 
 """
 	Receive the signal from core and pass it to the Notification.
@@ -68,6 +71,7 @@ def show_notification():
 		Utility.execute_main_thread(tray_icon.lock_menu)
 	plugins.pre_notification(context)
 	notification.show(config['pre_break_warning_time'])
+
 
 """
 	Receive the break signal from core and pass it to the break screen.
@@ -79,6 +83,7 @@ def show_alert(message, image_name):
 	break_screen.show_message(message, Utility.get_resource_path(image_name), plugins_data)
 	if config['strict_break'] and is_active:
 		Utility.execute_main_thread(tray_icon.unlock_menu)
+
 
 """
 	Receive the stop break signal from core and pass it to the break screen.
@@ -101,8 +106,9 @@ def on_quit():
 	logging.info("Quit Safe Eyes")
 	plugins.exit(context)
 	core.stop()
-	notification.quite();
+	notification.quite()
 	Gtk.main_quit()
+
 
 """
 	If the system goes to sleep, Safe Eyes stop the core if it is already active.
@@ -120,6 +126,7 @@ def handle_suspend_callback(sleeping):
 			core.start()
 			logging.info("Resumed Safe Eyes after system wakeup")
 
+
 """
 	Setup system suspend listener.
 """
@@ -127,6 +134,7 @@ def handle_system_suspend():
 	DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
 	bus.add_signal_receiver(handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+
 
 """
 	Listen to break screen Skip action and send the signal to core.
@@ -139,6 +147,7 @@ def on_skipped():
 	core.skip_break()
 	plugins.post_break(context)
 
+
 """
 	Listen to break screen Postpone action and send the signal to core.
 """
@@ -148,6 +157,7 @@ def on_postponed():
 		# Lock the screen before closing the break screen
 		Utility.lock_desktop(system_lock_command)
 	core.postpone_break()
+
 
 """
 	Listen to Settings dialog Save action and write to the config file.
@@ -180,6 +190,7 @@ def save_settings(config):
 		# 1 sec delay is required to give enough time for core to be stopped
 		Timer(1.0, core.start).start()
 
+
 """
 	Listen to tray icon enable action and send the signal to core.
 """
@@ -187,6 +198,7 @@ def enable_safeeyes():
 	global is_active
 	is_active = True
 	core.start()
+
 
 """
 	Listen to tray icon disable action and send the signal to core.
@@ -203,7 +215,8 @@ def running():
 	"""
 	process_count = 0
 	for proc in psutil.process_iter():
-		if not proc.cmdline: continue
+		if not proc.cmdline:
+			continue
 		try:
 			# Check if safeeyes is in process arguments
 			if callable(proc.cmdline):
@@ -257,7 +270,6 @@ def main():
 		else:
 			system_lock_command = Utility.lock_screen_command()
 
-
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
 		context['desktop'] = Utility.desktop_environment()
@@ -278,6 +290,7 @@ def main():
 	else:
 		logging.info('Another instance of safeeyes is already running')
 		sys.exit(0)
+
 
 if __name__ == '__main__':
 	main()
