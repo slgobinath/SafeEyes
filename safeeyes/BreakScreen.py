@@ -16,17 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, signal, sys, threading, logging
-from Xlib import Xatom, Xutil
+import gi, threading, logging
 from Xlib.display import Display, X
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
+from gi.repository import Gtk, Gdk, GLib
 
 
-"""
-	The fullscreen window which prevents users from using the computer.
-"""
 class BreakScreen:
+	"""
+		The fullscreen window which prevents users from using the computer.
+	"""
 
 	def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
 		"""
@@ -61,23 +60,6 @@ class BreakScreen:
 		self.shortcut_disable_time = config.get('shortcut_disable_time', 2)
 
 
-	def skip_break(self):
-		"""
-		Skip the break from the break screen
-		"""
-		logging.info("User skipped the break")
-		# Must call on_skip before close to lock screen before closing the break screen
-		self.on_skip()
-		self.close()
-	
-	def postpone_break(self):
-		"""
-		Postpone the break from the break screen
-		"""
-		logging.info("User postponed the break")
-		self.on_postpone()
-		self.close()
-
 	def on_window_delete(self, *args):
 		"""
 		Window close event handler.
@@ -94,14 +76,16 @@ class BreakScreen:
 		self.skip_break()
 
 
-	def on_postpone_clicked(self, button):
-		"""
-		Postpone button press event handler.
-		"""
-		self.postpone_break()
 
-	def show_count_down(self, count_down, seconds):
-		"""
+	def on_postpone_clicked(self, button):
+	  """
+		Postpone button press event handler.
+	  """
+    logging.info("User postponed the break")
+		self.on_postpone()
+		self.close()
+
+	  """
 		Show/update the count down on all screens.
 		"""
 		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= count_down
@@ -175,14 +159,12 @@ class BreakScreen:
 				btn_skip.set_visible(True)
 				box_buttons.pack_start(btn_skip, True, True, 0)
 
-
-
 			# Set values
 			if image_path:
 				img_break.set_from_file(image_path)
 			lbl_message.set_label(message)
-			lbl_left.set_markup(plugins_data['left']);
-			lbl_right.set_markup(plugins_data['right']);
+			lbl_left.set_markup(plugins_data['left'])
+			lbl_right.set_markup(plugins_data['right'])
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)
@@ -198,7 +180,6 @@ class BreakScreen:
 			window.set_keep_above(True)
 			window.present()
 			window.fullscreen()
-
 
 	def __update_count_down(self, count):
 		"""
@@ -217,7 +198,7 @@ class BreakScreen:
 		display = Display()
 		root = display.screen().root
 		# Grap the keyboard
-		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
+		root.grab_keyboard(owner_events=False, pointer_mode=X.GrabModeAsync, keyboard_mode=X.GrabModeAsync, time=X.CurrentTime)
 		# Consume keyboard events
 		while self.lock_keyboard:
 			event = display.next_event()

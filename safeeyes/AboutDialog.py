@@ -18,14 +18,14 @@
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GdkX11
+from gi.repository import Gtk
 
 
-"""
-	AboutDialog reads the about_dialog.glade and build the user interface using that file.
-	It shows the application name with version, a small description, license and the GitHub url.
-"""
 class AboutDialog:
+	"""
+		AboutDialog reads the about_dialog.glade and build the user interface using that file.
+		It shows the application name with version, a small description, license and the GitHub url.
+	"""
 
 	"""
 		Read the about_dialog.glade and build the user interface.
@@ -42,20 +42,17 @@ class AboutDialog:
 		# Set the version at the runtime
 		builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
 
-
 	"""
 		Show the About dialog.
 	"""
 	def show(self):
 		self.window.show_all()
 
-
 	"""
 		Window close event handler.
 	"""
 	def on_window_delete(self, *args):
 		self.window.destroy()
-
 
 	"""
 		Close button click event handler.
