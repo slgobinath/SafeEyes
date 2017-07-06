@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, threading, logging
+import gi, threading, logging, time
 from Xlib.display import Display, X
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
@@ -41,6 +41,7 @@ class BreakScreen:
 		self.count_labels = []
 		self.glade_file = glade_file
 		self.enable_shortcut = False
+		self.display = Display()
 
 		# Initialize the theme
 		css_provider = Gtk.CssProvider()
@@ -204,32 +205,36 @@ class BreakScreen:
 		"""
 		logging.info("Lock the keyboard")
 		self.lock_keyboard = True
-		display = Display()
-		root = display.screen().root
-		# Grap the keyboard
-		root.grab_keyboard(owner_events=False, pointer_mode=X.GrabModeAsync, keyboard_mode=X.GrabModeAsync, time=X.CurrentTime)
+		
+		# Grab the keyboard
+		root = self.display.screen().root
+		root.change_attributes(event_mask = X.KeyPressMask|X.KeyReleaseMask)
+		root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
+
 		# Consume keyboard events
 		while self.lock_keyboard:
-			event = display.next_event()
-			display.allow_events(mode=X.AsyncBoth, time=X.CurrentTime)
-			if self.enable_shortcut and event.type == X.KeyPress:
-				if event.detail == self.keycode_shortcut_skip:
-					self.skip_break()
-					break
-				elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
-					self.postpone_break()
-					break
-
-		# Ungrap the keyboard
-		logging.info("Unlock the keyboard")
-		display.ungrab_keyboard(X.CurrentTime)
-		display.flush()
+			if self.display.pending_events() > 0:
+				# Avoid waiting for next event by checking pending events
+				event = self.display.next_event()
+				if self.enable_shortcut and event.type == X.KeyPress:
+					if event.detail == self.keycode_shortcut_skip:
+						self.skip_break()
+						break
+					elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
+						self.postpone_break()
+						break
+			else:
+				# Reduce the CPU usage by sleeping for a second
+				time.sleep(1)
 
 	def __release_keyboard(self):
 		"""
 		Release the locked keyboard.
 		"""
+		logging.info("Unlock the keyboard")
 		self.lock_keyboard = False
+		self.display.ungrab_keyboard(X.CurrentTime)
+		self.display.flush()
 
 	def __destroy_all_screens(self):
 		"""
