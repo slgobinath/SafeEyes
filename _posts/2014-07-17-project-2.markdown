@@ -8,7 +8,7 @@ modal-url: override-time
 thumbnail: override-time-thumbnail.png
 alt: image-alt
 description: The short and long break times in Settings dialog are common for all the breaks. However, as a user you have the freedom to override the individual break time.
-steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeeyes/safeeyes.json</code></pre>',
 		'Add <code>time</code> in <b>seconds</b> to the desired breaks to override their default duration: <pre><code>...<br>
 		"short_breaks": [<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;{<br>

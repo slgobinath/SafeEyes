@@ -8,7 +8,7 @@ modal-url: safeeyes-plugins
 thumbnail: safeeyes-plugins-thumbnail.png
 alt: image-alt
 description: Running Safe Eyes in your computer requires some resources including memory and proecessor. Utilize them by extending Safe Eyes for some other tasks. What kind of tasks is totally dependning on your creativity. However, do not forget that Safe Eyes is not a fancy timer; it is a break reminder to take care of your health. Follow the steps to create a minimal todo plugin.
-steps: ['Create a new directory <code>plugins</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/plugins</code></pre>',
+steps: ['Create a new directory <code>plugins</code> if it does not exist:<pre><code>mkdir ~/.config/safeeyes/plugins</code></pre>',
 		'Create a new file <code>todo.py</code> in <code>~/.config/safeeyes/plugins</code> with the following content:<pre><code>"""<br>
 		Safe Eyes todo plugin<br>
 		"""<br>

@@ -8,7 +8,7 @@ modal-url: disable-time
 thumbnail: disable-time-thumbnail.png
 alt: image-alt
 description: The default disable for a given time options provide <code>30 minutes</code>, <code>1 hour</code>, <code>2 hours</code> and <code>3 hours</code> only. If you want to customize them or if you want to add/remove time based disable option, you can configure them in the <code>safeeyes.json</code> file. To add an additional Disable for 45 minutes, modify the configuration as shown below.
-steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeeyes/safeeyes.json</code></pre>',
 		'Add a new object to the <code>disable_options</code> object: <pre><code>...<br>
 		"disable_options": [<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;{<br>
