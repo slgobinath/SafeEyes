@@ -8,9 +8,9 @@ modal-url: custom-exercise
 thumbnail: custom-exercise-thumbnail.png
 alt: image-alt
 description: We're not going to pretend that the built-in list of exercises will be enough for everybody. So you can add your own! Break images are optional but if you use any image, make sure that the image size is within <code>128x128px</code>.
-steps: ['Create a new directory <code>resource</code> if it does not exist:<pre><code>mkdir ~/.config/safeyes/resource</code></pre>',
-		'Copy the break image to the resource directory:<pre><code>cp deep_breath.png ~/.config/safeyes/resource/deep_breath.png</code></pre>',
-		'Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+steps: ['Create a new directory <code>resource</code> if it does not exist:<pre><code>mkdir ~/.config/safeeyes/resource</code></pre>',
+		'Copy the break image to the resource directory:<pre><code>cp deep_breath.png ~/.config/safeeyes/resource/deep_breath.png</code></pre>',
+		'Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeeyes/safeeyes.json</code></pre>',
 		'Modify the <code>custom_exercises</code> property (which is an empty object by default) like so: <pre><code>...<br>
 		"custom_exercises": {<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;"deep_breath": "Take a deep breath",<br>

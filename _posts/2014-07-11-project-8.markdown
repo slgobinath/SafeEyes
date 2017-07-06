@@ -8,7 +8,7 @@ modal-url: override-fullscreen
 thumbnail: override-fullscreen-thumbnail.png
 alt: image-alt
 description: By default, Safe Eyes does not show the break screen if the current window is in fullscreen mode. You can override this feature by specifying the <b>window-class</b> of the interested applications.
-steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeeyes/safeeyes.json</code></pre>',
 		'Add <code>vlc</code> to <code>skip_break</code> array and <code>google-chrome</code> to <code>take_break</code> array to skip breaks if VLC is the active window either in fullscreen mode or not and to take break if Google Chrome is the active window without considering the window mode: <pre><code>...<br>
 		"active_window_class": {<br>
 		&nbsp;&nbsp;&nbsp;&nbsp;"skip_break": ["vlc"],<br>

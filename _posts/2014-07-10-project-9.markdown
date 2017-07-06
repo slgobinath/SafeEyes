@@ -8,7 +8,7 @@ modal-url: lock-screen
 thumbnail: lock-screen-thumbnail.png
 alt: image-alt
 description: To lock the screen after long breaks, Safe Eyes uses the default screen saver commands based on the system desktop environment. If you use a different lock screen than the default one or if your desktop environment is not suported by Safe Eyes, define your own lock screen command and leave the computer with no worries.
-steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeyes/safeeyes.json</code></pre>',
+steps: ['Edit <code>safeeyes.json</code>:<pre><code>gedit ~/.config/safeeyes/safeeyes.json</code></pre>',
 		'Add the lock screen command as an array. For example, if you use gnome screen saver add the command like this: <pre><code>...<br>
 		"lock_screen_command": ["gnome-screensaver-command", "--lock"]<br>
 		...</code></pre><b>NOTE:</b> If Safe Eyes cannot guess the default screen saver of your system, the option will be inactive in the Settings. You can enable it by defining the lock screen command as above.<br>Also remember that some applications(Example: a virtual operating system running in virtual box) can prevent the the screensaver from locking the screen (This is not the fault of Safe Eyes).',
