@@ -18,7 +18,7 @@
 
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gdk, GLib
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
@@ -65,10 +65,11 @@ def play_notification():
 
 			# Create a sound stream
 			wrapper = pyaudio.PyAudio()
-			stream = wrapper.open(format=wrapper.get_format_from_width(sound.getsampwidth()),
-						channels=sound.getnchannels(),
-						rate=sound.getframerate(),
-							output=True)
+			stream = wrapper.open(format=wrapper.get_format_from_width(
+				sound.getsampwidth()),
+				channels=sound.getnchannels(),
+				rate=sound.getframerate(),
+				output=True)
 
 			# Write file data into the sound stream
 			data = sound.readframes(CHUNK)
@@ -110,7 +111,7 @@ def system_idle_time():
 	Return the idle time if xprintidle is available, otherwise return 0.
 	"""
 	try:
-		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000	# Convert to minutes
+		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000    # Convert to minutes
 	except:
 		return 0
 
@@ -144,7 +145,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 	active_window = screen.get_active_window()
 	if active_window:
 		active_xid = str(active_window.get_xid())
-		cmdlist = ['xprop', '-root', '-notype','-id',active_xid, 'WM_CLASS', '_NET_WM_STATE']
+		cmdlist = ['xprop', '-root', '-notype', '-id', active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
 		try:
 			stdout = subprocess.check_output(cmdlist).decode('utf-8')
@@ -205,6 +206,7 @@ def mkdir(path):
 		else:
 			logging.error('Error while creating ' + str(path))
 			raise
+
 
 def parse_language_code(lang_code):
 	"""
@@ -273,7 +275,7 @@ def desktop_environment():
 	current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
 	if desktop_session is not None:
 		desktop_session = desktop_session.lower()
-		if desktop_session in ['gnome','unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep','trinity', 'kde']:
+		if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
 			return desktop_session
 		elif (desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop)):
 			return 'xfce'
@@ -314,14 +316,14 @@ def lock_screen_command():
 			return ['mate-screensaver-command', '--lock']
 		elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
 			return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-		elif desktop_session in ['gnome','unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
+		elif desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
 			if command_exist('gnome-screensaver-command'):
 				return ['gnome-screensaver-command', '--lock']
 			else:
 				# From Gnome 3.8 no gnome-screensaver-command
 				return ['dbus-send', '--type=method_call', '--dest=org.gnome.ScreenSaver', '/org/gnome/ScreenSaver', 'org.gnome.ScreenSaver.Lock']
 		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-			if not 'deprecated' in os.environ.get('GNOME_DESKTOP_SESSION_ID') and command_exist('gnome-screensaver-command'):
+			if 'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID') and command_exist('gnome-screensaver-command'):
 				# Gnome 2
 				return ['gnome-screensaver-command', '--lock']
 	return None
@@ -417,7 +419,7 @@ def intialize_logging():
 	log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
 	# Apped the logs and overwrite once reached 5MB
-	handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5*1024*1024, backupCount=2, encoding=None, delay=0)
+	handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
 	handler.setFormatter(log_formatter)
 	handler.setLevel(logging.INFO)
 
@@ -484,7 +486,7 @@ class __HTMLTextExtractor(HTMLParser):
 	def __init__(self):
 		self.reset()
 		self.strict = False
-		self.convert_charrefs= True
+		self.convert_charrefs = True
 		self.fed = []
 
 	def handle_data(self, d):

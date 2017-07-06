@@ -3,13 +3,13 @@ import setuptools
 
 
 requires = [
-            'python-xlib',
-            'psutil',
-            'babel']
+    'python-xlib',
+    'psutil',
+    'babel']
 
 extras = {
-        'audible_alert':  ['pyaudio']
-    }
+    'audible_alert': ['pyaudio']
+}
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -17,11 +17,13 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
     long_description = '\n' + f.read()
 
+
 def _data_files(path):
     for root, dirs, files in os.walk(path):
         if not files:
             continue
         yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
+
 
 setuptools.setup(
     name="safeeyes",
