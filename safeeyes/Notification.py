@@ -27,13 +27,10 @@ APPINDICATOR_ID = 'safeeyes'
 
 class Notification:
 	"""
-		This class is responsible for the notification to the user before the break.
+	This class is responsible for the notification to the user before the break.
 	"""
 
 	def __init__(self, context, language):
-		"""
-		Initialize the notification.
-		"""
 		logging.info('Initialize the notification')
 		Notify.init(APPINDICATOR_ID)
 		self.context = context

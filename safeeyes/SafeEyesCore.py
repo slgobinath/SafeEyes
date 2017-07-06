@@ -21,16 +21,11 @@ import time, datetime, threading, logging
 from safeeyes import Utility
 
 
-"""
-	Core of Safe Eyes which runs the scheduler and notifies the breaks.
-"""
-
-
 class SafeEyesCore:
+	"""
+	Core of Safe Eyes which runs the scheduler and notifies the breaks.
+	"""
 
-	"""
-		Initialize the internal variables of the core.
-	"""
 	def __init__(self, context, show_notification, start_break, end_break, on_countdown, update_next_break_info):
 		# Initialize the variables
 		self.break_count = -1
@@ -50,10 +45,10 @@ class SafeEyesCore:
 		self.context['skipped'] = False
 		self.context['postponed'] = False
 
-	"""
-		Initialize the internal properties from configuration
-	"""
 	def initialize(self, config, language):
+		"""
+		Initialize the internal properties from configuration
+		"""
 		logging.info("Initialize the core")
 		self.short_break_exercises = []    # language['exercises']['short_break_exercises']
 		self.long_break_exercises = []     # language['exercises']['long_break_exercises']
@@ -112,10 +107,10 @@ class SafeEyesCore:
 
 			self.long_break_exercises.append([name, break_time, audible_alert, image])
 
-	"""
-		Start Safe Eyes is it is not running already.
-	"""
 	def start(self):
+		"""
+		Start Safe Eyes is it is not running already.
+		"""
 		with self.lock:
 			if not self.active:
 				logging.info("Scheduling next break")
@@ -125,10 +120,10 @@ class SafeEyesCore:
 				if self.context['idle_pause_enabled']:
 					Utility.start_thread(self.__start_idle_monitor)
 
-	"""
-		Stop Safe Eyes if it is running.
-	"""
 	def stop(self):
+		"""
+		Stop Safe Eyes if it is running.
+		"""
 		with self.lock:
 			if self.active:
 				logging.info("Stop the core")
@@ -149,10 +144,10 @@ class SafeEyesCore:
 				self.idle_condition.notify_all()
 				self.idle_condition.release()
 
-	"""
-		Pause Safe Eyes if it is running.
-	"""
 	def pause(self):
+		"""
+		Pause Safe Eyes if it is running.
+		"""
 		with self.lock:
 			if self.active and self.running:
 				self.notification_condition.acquire()
@@ -160,31 +155,31 @@ class SafeEyesCore:
 				self.notification_condition.notify_all()
 				self.notification_condition.release()
 
-	"""
-		Resume Safe Eyes if it is not running.
-	"""
 	def resume(self):
+		"""
+		Resume Safe Eyes if it is not running.
+		"""
 		with self.lock:
 			if self.active and not self.running:
 				self.running = True
 				Utility.start_thread(self.__scheduler_job)
 
-	"""
-		User skipped the break using Skip button
-	"""
 	def skip_break(self):
+		"""
+		User skipped the break using Skip button
+		"""
 		self.context['skipped'] = True
 
-	"""
-		User postponed the break using Postpone button
-	"""
 	def postpone_break(self):
+		"""
+		User postponed the break using Postpone button
+		"""
 		self.context['postponed'] = True
 
-	"""
-		Scheduler task to execute during every interval
-	"""
 	def __scheduler_job(self):
+		"""
+		Scheduler task to execute during every interval
+		"""
 		if not self.__is_running():
 			return
 
@@ -230,10 +225,10 @@ class SafeEyesCore:
 		self.is_before_break = False
 		Utility.execute_main_thread(self.__check_active_window)
 
-	"""
-		Show the notification and start the break after the notification.
-	"""
 	def __show_notification(self):
+		"""
+		Show the notification and start the break after the notification.
+		"""
 		# Show the notification
 		self.show_notification()
 
@@ -246,10 +241,10 @@ class SafeEyesCore:
 		self.is_before_break = True
 		Utility.execute_main_thread(self.__check_active_window)
 
-	"""
-		Check the active window for full-screen and user defined exceptions.
-	"""
 	def __check_active_window(self):
+		"""
+		Check the active window for full-screen and user defined exceptions.
+		"""
 		# Check the active window again. (User might changed the window)
 		if self.__is_running() and Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes, self.is_before_break):
 			# If full screen app found, do not show break screen
@@ -265,10 +260,10 @@ class SafeEyesCore:
 		else:
 			Utility.start_thread(self.__show_notification)
 
-	"""
-		Start the break screen.
-	"""
 	def __start_break(self):
+		"""
+		Start the break screen.
+		"""
 		# User can disable SafeEyes during notification
 		if self.__is_running():
 			message = ""
@@ -318,22 +313,22 @@ class SafeEyesCore:
 				# Schedule the break again
 				Utility.start_thread(self.__scheduler_job)
 
-	"""
-		Tells whether Safe Eyes is running or not.
-	"""
 	def __is_running(self):
+		"""
+		Tells whether Safe Eyes is running or not.
+		"""
 		return self.active and self.running
 
-	"""
-		Check if the current break is long break or short current
-	"""
 	def __is_long_break(self):
+		"""
+		Check if the current break is long break or short current
+		"""
 		return self.break_count == self.no_of_short_breaks_per_long_break - 1
 
-	"""
-		Continuously check the system idle time and pause/resume Safe Eyes based on it.
-	"""
 	def __start_idle_monitor(self):
+		"""
+		Continuously check the system idle time and pause/resume Safe Eyes based on it.
+		"""
 		while self.active:
 			# Wait for 2 seconds
 			self.idle_condition.acquire()

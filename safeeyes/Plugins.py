@@ -26,13 +26,10 @@ sys.path.append(os.path.abspath(plugins_directory))
 
 class Plugins:
 	"""
-		This class manages imports the plugins and calls the methods defined in those plugins.
+	Imports the Safe Eyes plugins and calls the methods defined in those plugins.
 	"""
 
 	def __init__(self, config):
-		"""
-		Load the plugins.
-		"""
 		logging.info('Load all the plugins')
 		self.__plugins = []
 

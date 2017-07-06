@@ -22,17 +22,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib
 
 
-"""
-	The fullscreen window which prevents users from using the computer.
-"""
-
-
 class BreakScreen:
+	"""
+	The fullscreen window which prevents users from using the computer.
+	This class reads the break_screen.glade and build the user interface.
+	"""
 
 	def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
-		"""
-		Read the break_screen.glade and build the user interface.
-		"""
 		self.context = context
 		self.on_skip = on_skip
 		self.on_postpone = on_postpone
