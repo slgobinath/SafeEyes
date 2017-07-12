@@ -22,13 +22,13 @@
     },
     "messages":
     {
-        "audible_alert_disabled": "Cannot enable audible notifications",
+        "audible_alert_disabled": "Không thể bật thông báo âm thanh",
         "ready_for_a_short_break": "Sẵn sàng để nghỉ ngơi {} giây",
         "ready_for_a_long_break": "Sẵn sàng để nghỉ ngơi {} giây",
         "disabled_until_restart": "Vô hiệu hóa cho đến khi khởi động lại",
         "disabled_until_x": "Vô hiệu hóa cho đến khi {}",
         "next_break_at": "Giờ nghỉ ngơi tiếp theo là {}",
-        "software_required": "To enable this feature, please install {}"
+        "software_required": "Để bật tính năng này, vui lòng cài đặt {}"
     },
     "ui_controls":
     {
@@ -38,13 +38,13 @@
         "cancel": "Huỷ",
         "close": "Đóng",
         "disable": "Tắt Safe Eyes",
-        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "disable_keyboard_shortcut": "Th.gian vô hiệu hóa phím tắt để tránh tắt nhầm Nhắc nhở khi nó hiện lên (giây)",
         "enable": "Bật Safe Eyes",
         "enable_screen_lock": "Khoá màn hình ở mỗi thời điểm nghỉ ngơi dài",
         "for_x_hour": "Trong {} giờ",
         "for_x_hours": "Trong {} giờ",
         "for_x_minutes": "Trong {} phút",
-        "idle_time": "Minimum idle time to pause (tính bằng phút)",
+        "idle_time": "Thơi gian rỗi nhỏ nhất để tạm dừng (tính bằng phút)",
         "interval_between_two_breaks": "Khoảng thời gian giữa hai lần nghỉ ngơi (tính bằng phút)",
         "language": "Language (Ngôn ngữ)",
         "license": "Giấy phép",
