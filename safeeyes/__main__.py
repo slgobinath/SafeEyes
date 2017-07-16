@@ -40,6 +40,7 @@ about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.gla
 is_active = True
 SAFE_EYES_VERSION = "1.2.1"
 
+
 def show_settings():
 	"""
 	Listen to tray icon Settings action and send the signal to Settings dialog.
@@ -51,6 +52,7 @@ def show_settings():
 	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), able_to_lock_screen, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
+
 def show_about():
 	"""
 	Listen to tray icon About action and send the signal to About dialog.
@@ -58,6 +60,7 @@ def show_about():
 	logging.info("Show About dialog")
 	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION, language)
 	about_dialog.show()
+
 
 def show_notification():
 	"""
@@ -67,6 +70,7 @@ def show_notification():
 		Utility.execute_main_thread(tray_icon.lock_menu)
 	plugins.pre_notification(context)
 	notification.show(config['pre_break_warning_time'])
+
 
 def show_alert(message, image_name):
 	"""
@@ -78,6 +82,7 @@ def show_alert(message, image_name):
 	break_screen.show_message(message, Utility.get_resource_path(image_name), plugins_data)
 	if config['strict_break'] and is_active:
 		Utility.execute_main_thread(tray_icon.unlock_menu)
+
 
 def close_alert(audible_alert_on):
 	"""
@@ -92,6 +97,7 @@ def close_alert(audible_alert_on):
 		Utility.play_notification()
 	plugins.post_break(context)
 
+
 def on_quit():
 	"""
 	Listen to the tray menu quit action and stop the core, notification and the app itself.
@@ -101,6 +107,7 @@ def on_quit():
 	core.stop()
 	notification.quite()
 	Gtk.main_quit()
+
 
 def handle_suspend_callback(sleeping):
 	"""
@@ -118,6 +125,7 @@ def handle_suspend_callback(sleeping):
 			core.start()
 			logging.info("Resumed Safe Eyes after system wakeup")
 
+
 def handle_system_suspend():
 	"""
 	Setup system suspend listener.
@@ -125,6 +133,7 @@ def handle_system_suspend():
 	DBusGMainLoop(set_as_default=True)
 	bus = dbus.SystemBus()
 	bus.add_signal_receiver(handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+
 
 def on_skipped():
 	"""
@@ -137,6 +146,7 @@ def on_skipped():
 	core.skip_break()
 	plugins.post_break(context)
 
+
 def on_postponed():
 	"""
 	Listen to break screen Postpone action and send the signal to core.
@@ -146,6 +156,7 @@ def on_postponed():
 		# Lock the screen before closing the break screen
 		Utility.lock_desktop(system_lock_command)
 	core.postpone_break()
+
 
 def save_settings(config):
 	"""
@@ -178,6 +189,7 @@ def save_settings(config):
 		# 1 sec delay is required to give enough time for core to be stopped
 		Timer(1.0, core.start).start()
 
+
 def enable_safeeyes():
 	"""
 	Listen to tray icon enable action and send the signal to core.
@@ -185,6 +197,7 @@ def enable_safeeyes():
 	global is_active
 	is_active = True
 	core.start()
+
 
 def disable_safeeyes():
 	"""

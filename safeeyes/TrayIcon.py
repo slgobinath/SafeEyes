@@ -26,6 +26,7 @@ from safeeyes import Utility
 # Global variables
 APPINDICATOR_ID = 'safeeyes'
 
+
 class TrayIcon:
 	"""
 	Create and show the tray icon along with the tray menu.
