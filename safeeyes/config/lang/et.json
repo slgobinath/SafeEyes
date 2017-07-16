@@ -1,0 +1,62 @@
+{
+    "meta_info": {
+        "language_name": "Eesti",
+        "language_name_en": "Estonian"
+    },
+    "app_info": {
+        "description": "Safe Eyes aitab vähendada arvutiga töötamisel silmade väsimust, tuletades meelde puhkepause."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Sulge silmad",
+        "short_break_roll_eyes": "Vaata vasakule ja paremale",
+        "short_break_rotate_clockwise": "Liiguta silmi kellaosuti suunas",
+        "short_break_rotate_counter_clockwise": "Liiguta silmi kellaosutile vastupidiselt",
+        "short_break_blink": "Pilguta silmi",
+        "short_break_focus_far_distance": "Vaata kaugusesse",
+        "short_break_drink_water": "Joo vett",
+        "long_break_walk": "Jaluta ringi",
+        "long_break_lean_back": "Toetu seljatoele ja lõõgastu"
+    },
+    "messages": {
+        "audible_alert_disabled": "Helimärguandeid ei tekitata",
+        "ready_for_a_short_break": "Lühike paus {} sekundi pärast",
+        "ready_for_a_long_break": "Pikk paus {} sekundi pärast",
+        "disabled_until_restart": "Peatatud taaskäivituseni",
+        "disabled_until_x": "Peatatud kuni {}",
+        "next_break_at": "Järgmine paus {}",
+        "software_required": "Selle võimaluse jaoks tuleb paigaldada tarkvara {}"
+    },
+    "ui_controls": {
+        "about": "Programmist",
+        "allow_postpone": "Pauside edasilükkamine lubatud",
+        "audible_alert": "Pausi lõpus helimärguanne",
+        "cancel": "Tühista",
+        "close": "Sulge",
+        "disable": "Peata Safe Eyes",
+        "disable_keyboard_shortcut": "Klaviatuurikäskude eiramise aeg, et vältida juhuslikku edasilükkamist (sekundit)",
+        "enable": "Luba Safe Eyes",
+        "enable_screen_lock": "Pikka pausi lõpus ekraani lukustamine",
+        "for_x_hour": "{}-ks tunniks",
+        "for_x_hours": "{}-ks tunniks",
+        "for_x_minutes": "{}-ks minutiks",
+        "idle_time": "Minimaalne pausi aeg (minutites)",
+        "interval_between_two_breaks": "Kahe pausi vaheline aeg (minutites)",
+        "language": "Keel",
+        "license": "Litsents",
+        "long_break_duration": "Pika pausi kestvus (sekundites)",
+        "no_of_short_breaks_between_two_long_breaks": "Kui mitu lühikest pausi tehaks pikkade pauside vahel",
+        "postpone": "Lükka edasi",
+        "postpone_duration": "Edasilükkamise aeg (minutites)",
+        "quit": "Välju",
+        "save": "Salvesta",
+        "settings": "Seaded",
+        "short_break_duration": "Lühikese pausi kestvus (sekundites)",
+        "show_time_in_tray": "Kuvatakse järgmise pausi aega",
+        "skip": "Jäta vahele",
+        "strict_break": "Range paus (vahelejätmise nuppu ei näidata)",
+        "system_language": "Süsteemi keel",
+        "time_to_prepare_for_break": "Kui kaua enne pausi kuvatakse pausi hoiatust (sekundites)",
+        "time_to_screen_lock": "Kui kaua enne ekraani lukustamist saab pausi edasi lükata (sekundites)",
+        "until_restart": "Kuni taaskäivituseni"
+    }
+}
