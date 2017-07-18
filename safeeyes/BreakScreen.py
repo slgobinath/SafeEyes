@@ -201,10 +201,10 @@ class BreakScreen:
 		"""
 		logging.info("Lock the keyboard")
 		self.lock_keyboard = True
-		
+
 		# Grab the keyboard
 		root = self.display.screen().root
-		root.change_attributes(event_mask = X.KeyPressMask|X.KeyReleaseMask)
+		root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
 		root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
 		# Consume keyboard events
