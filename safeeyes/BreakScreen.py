@@ -182,10 +182,10 @@ class BreakScreen:
 				# Fix flickering screen in KDE by setting opacity to 1
 				window.set_opacity(0.9)
 
-			window.move(x, y)
 			window.stick()
 			window.set_keep_above(True)
 			window.present()
+			window.move(x, y)
 			window.fullscreen()
 
 	def __update_count_down(self, count):
