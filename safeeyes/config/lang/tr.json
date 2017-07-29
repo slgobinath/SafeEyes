@@ -24,7 +24,7 @@
         "disabled_until_restart": "Tekrar başlatılana kadar devre dışı",
         "disabled_until_x": "{}'e kadar devre dışı",
         "next_break_at": "Bir sonraki mola zamanı: {}",
-        "software_required": "To enable this feature, please install {}"
+        "software_required": "Bu özelliği etkinleştirmek için lütfen {} yükleyiniz."
     },
     "ui_controls": {
         "about": "Hakkında",
@@ -33,7 +33,7 @@
         "cancel": "İptal",
         "close": "Kapat",
         "disable": "Safe Eyes'ı devre dışı bırak",
-        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "disable_keyboard_shortcut": "İstem dışı geçişi engellemek için kısayol tuşunun etkisiz kalma süresi (saniye)",
         "enable": "Safe Eyes'ı etkinleştir",
         "enable_screen_lock": "Her uzun mola sonunda ekranı kilitle",
         "for_x_hour": "{} Saat",
