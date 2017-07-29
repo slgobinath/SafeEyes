@@ -24,7 +24,7 @@
         "disabled_until_restart": "Tekrar başlatılana kadar devre dışı",
         "disabled_until_x": "{}'e kadar devre dışı",
         "next_break_at": "Bir sonraki mola zamanı: {}",
-        "software_required": "To enable this feature, please install {}"
+        "software_required": "Bu özelliği etkinleştirmek için lütfen {} yükleyiniz."
     },
     "ui_controls": {
         "about": "Hakkında",
