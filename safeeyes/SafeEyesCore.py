@@ -218,7 +218,7 @@ class SafeEyesCore:
 		# Wait for the pre break warning period
 		logging.info("Pre-break waiting for {} minutes".format(time_to_wait))
 		self.notification_condition.acquire()
-		self.notification_condition.wait(time_to_wait * 1)    # Convert to seconds
+		self.notification_condition.wait(time_to_wait * 60)    # Convert to seconds
 		self.notification_condition.release()
 
 		logging.info("Pre-break waiting is over")
