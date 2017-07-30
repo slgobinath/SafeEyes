@@ -127,10 +127,16 @@ class SafeEyesCore:
 		with self.lock:
 			if self.active:
 				logging.info("Stop the core")
-				# Reset the state properties in case of restart
-				# self.break_count = 0
-				# self.long_break_message_index = -1
-				# self.short_break_message_index = -1
+
+				# Prevent resuming from a long break
+				current_break_count = self.break_count = 0
+				self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
+				if self.__is_long_break():
+					# Next break will be a long break. Leave the increment so that next break will be short break after the long
+					pass
+				else:
+					# Reset to the current state
+					self.break_count = current_break_count
 
 				# Stop the break thread
 				self.notification_condition.acquire()
@@ -212,7 +218,7 @@ class SafeEyesCore:
 		# Wait for the pre break warning period
 		logging.info("Pre-break waiting for {} minutes".format(time_to_wait))
 		self.notification_condition.acquire()
-		self.notification_condition.wait(time_to_wait * 60)    # Convert to seconds
+		self.notification_condition.wait(time_to_wait * 1)    # Convert to seconds
 		self.notification_condition.release()
 
 		logging.info("Pre-break waiting is over")
