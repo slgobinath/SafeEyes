@@ -33,7 +33,7 @@ setuptools.setup(
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v{}.tar.gz".format(version),
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.2.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',
