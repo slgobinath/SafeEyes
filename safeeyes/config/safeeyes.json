@@ -1,6 +1,6 @@
 {
     "meta": {
-            "config_version": "5.0.2"
+            "config_version": "5.0.1"
     },
     "allow_postpone": false,
     "break_interval": 15,

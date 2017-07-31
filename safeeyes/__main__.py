@@ -38,7 +38,7 @@ settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dial
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
 
 is_active = True
-SAFE_EYES_VERSION = "1.2.1"
+SAFE_EYES_VERSION = "1.2.2"
 
 
 def show_settings():

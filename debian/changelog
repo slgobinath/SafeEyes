@@ -1,4 +1,14 @@
-safeeyes (1.2.1-1) xenial; urgency=low
+safeeyes (1.2.2-1) xenial; urgency=low
+
+  * Show next break time in tray icon in supported environments
+
+  * Enable keyboard shortcuts
+
+  * Fix screen flickering in KDE
+
+  * Show the break type in the notification
+
+  * Make pyaudio optional
 
   * Support postponing the break
 
