@@ -18,7 +18,7 @@
 
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, GdkX11
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
