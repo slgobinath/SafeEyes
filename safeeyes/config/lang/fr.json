@@ -18,10 +18,13 @@
         "long_break_lean_back": "Adossez-vous à votre siège et relaxez-vous"
     },
     "messages": {
-        "ready_for_a_break": "Préparez-vous à une pause dans {} secondes",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Préparez-vous à une pause dans {} secondes",
+        "ready_for_a_long_break": "Préparez-vous à une pause dans {} secondes",
         "disabled_until_restart": "Désactivé jusqu'au redémarrage",
         "disabled_until_x": "Désactivé jusqu'à {}",
-        "next_break_at": "Prochaine pause à {}"
+        "next_break_at": "Prochaine pause à {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "À propos",
@@ -30,6 +33,7 @@
         "cancel": "Annuler",
         "close": "Fermer",
         "disable": "Désactiver Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Activer Safe Eyes",
         "enable_screen_lock": "Verrouiller l'écran après chaque pause longue",
         "for_x_hour": "Pendant {} heure",

@@ -53,21 +53,26 @@ Optional Features:
 For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#features)
 
 ## Currently available translations
+ * [Català](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ca.json)
  * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/cs.json)
  * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/de.json)
  * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/en.json)
  * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/es.json)
+ * [فارسی](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fa.json)
  * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fr.json)
  * [ქართული](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ge.json)
  * [हिंदी](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hi.json)
  * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hu.json)
  * [Bahasa Indonesia](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/id.json)
+ * [Македонски](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/mk.json)
  * [Polski](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pl.json)
  * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pt.json)
  * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ru.json)
  * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/sk.json)
  * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ta.json)
  * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/tr.json)
+ * [Українська](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/uk.json)
+ * [Tiếng Việt](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/vi.json)
 
 Do you want to see your language here? Please translate Safe Eyes to whatever the languages you know. Visit to **Translate Safe Eyes** in [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize) to see how to translate.
 

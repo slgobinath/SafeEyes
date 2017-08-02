@@ -16,104 +16,114 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, signal, sys, threading, logging
-from Xlib import Xatom, Xutil
+import gi, threading, logging, time
 from Xlib.display import Display, X
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
+from gi.repository import Gtk, Gdk, GLib
 
 
-"""
-	The fullscreen window which prevents users from using the computer.
-"""
 class BreakScreen:
+	"""
+	The fullscreen window which prevents users from using the computer.
+	This class reads the break_screen.glade and build the user interface.
+	"""
 
-	"""
-		Read the break_screen.glade and build the user interface.
-	"""
-	def __init__(self, on_skip, on_postpone, glade_file, style_sheet_path):
+	def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
+		self.context = context
 		self.on_skip = on_skip
 		self.on_postpone = on_postpone
 		self.is_pretified = False
-		self.key_lock_condition = threading.Condition()
 		self.windows = []
 		self.count_labels = []
 		self.glade_file = glade_file
+		self.enable_shortcut = False
+		self.display = Display()
 
 		# Initialize the theme
 		css_provider = Gtk.CssProvider()
 		css_provider.load_from_path(style_sheet_path)
 		Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-
-	"""
-		Initialize the internal properties from configuration
-	"""
 	def initialize(self, config, language):
+		"""
+		Initialize the internal properties from configuration
+		"""
 		logging.info("Initialize the break screen")
 		self.skip_button_text = language['ui_controls']['skip']
 		self.postpone_button_text = language['ui_controls']['postpone']
 		self.strict_break = config.get('strict_break', False)
 		self.enable_postpone = config.get('allow_postpone', False)
+		self.keycode_shortcut_skip = config.get('shortcut_skip', 9)
+		self.keycode_shortcut_postpone = config.get('shortcut_postpone', 65)
+		self.shortcut_disable_time = config.get('shortcut_disable_time', 2)
 
-
-	"""
-		Window close event handler.
-	"""
-	def on_window_delete(self, *args):
-		logging.info("Closing the break screen")
-		self.lock_keyboard = False
-		self.close()
-
-
-	"""
-		Skip button press event handler.
-	"""
-	def on_skip_clicked(self, button):
+	def skip_break(self):
+		"""
+		Skip the break from the break screen
+		"""
 		logging.info("User skipped the break")
 		# Must call on_skip before close to lock screen before closing the break screen
 		self.on_skip()
 		self.close()
 
-
-	"""
-		Postpone button press event handler.
-	"""
-	def on_postpone_clicked(self, button):
+	def postpone_break(self):
+		"""
+		Postpone the break from the break screen
+		"""
 		logging.info("User postponed the break")
 		self.on_postpone()
 		self.close()
 
+	def on_window_delete(self, *args):
+		"""
+		Window close event handler.
+		"""
+		logging.info("Closing the break screen")
+		self.__release_keyboard()
+		self.close()
 
-	"""
+	def on_skip_clicked(self, button):
+		"""
+		Skip button press event handler.
+		"""
+		self.skip_break()
+
+	def on_postpone_clicked(self, button):
+		"""
+		Postpone button press event handler.
+		"""
+		self.postpone_break()
+
+	def show_count_down(self, count_down, seconds):
+		"""
 		Show/update the count down on all screens.
-	"""
-	def show_count_down(self, count):
-		GLib.idle_add(lambda: self.__update_count_down(count))
+		"""
+		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= count_down
+		mins, secs = divmod(seconds, 60)
+		timeformat = '{:02d}:{:02d}'.format(mins, secs)
+		GLib.idle_add(lambda: self.__update_count_down(timeformat))
 
-
-	"""
-		Show the break screen with the given message on all displays.
-	"""
 	def show_message(self, message, image_path, plugins_data):
+		"""
+		Show the break screen with the given message on all displays.
+		"""
+		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= 0
 		GLib.idle_add(lambda: self.__show_break_screen(message, image_path, plugins_data))
 
-
-	"""
-		Hide the break screen from active window and destroy all other windows
-	"""
 	def close(self):
+		"""
+		Hide the break screen from active window and destroy all other windows
+		"""
 		logging.info("Close the break screen(s)")
 		self.__release_keyboard()
 
 		# Destroy other windows if exists
 		GLib.idle_add(lambda: self.__destroy_all_screens())
 
-
-	"""
-		Show an empty break screen on all screens.
-	"""
 	def __show_break_screen(self, message, image_path, plugins_data):
+		"""
+		Show an empty break screen on all screens.
+		"""
 		# Lock the keyboard
 		thread = threading.Thread(target=self.__lock_keyboard)
 		thread.start()
@@ -156,72 +166,76 @@ class BreakScreen:
 				btn_skip.set_visible(True)
 				box_buttons.pack_start(btn_skip, True, True, 0)
 
-
-
 			# Set values
 			if image_path:
 				img_break.set_from_file(image_path)
 			lbl_message.set_label(message)
-			lbl_left.set_markup(plugins_data['left']);
-			lbl_right.set_markup(plugins_data['right']);
+			lbl_left.set_markup(plugins_data['left'])
+			lbl_right.set_markup(plugins_data['right'])
 
 			self.windows.append(window)
 			self.count_labels.append(lbl_count)
 
 			# Set visual to apply css theme. It should be called before show method.
 			window.set_visual(window.get_screen().get_rgba_visual())
+			if self.context['desktop'] == 'kde':
+				# Fix flickering screen in KDE by setting opacity to 1
+				window.set_opacity(0.9)
 
-			window.move(x, y)
 			window.stick()
 			window.set_keep_above(True)
 			window.present()
+			window.move(x, y)
 			window.fullscreen()
 
-
-	"""
-		Update the countdown on all break screens.
-	"""
 	def __update_count_down(self, count):
+		"""
+		Update the countdown on all break screens.
+		"""
 		for label in self.count_labels:
 			label.set_text(count)
 
-
-	"""
-		Lock the keyboard to prevent the user from using keyboard shortcuts
-	"""
 	def __lock_keyboard(self):
+		"""
+		Lock the keyboard to prevent the user from using keyboard shortcuts
+		"""
 		logging.info("Lock the keyboard")
 		self.lock_keyboard = True
-		display = Display()
-		root = display.screen().root
-		# Grap the keyboard
-		root.grab_keyboard(owner_events = False, pointer_mode = X.GrabModeAsync, keyboard_mode = X.GrabModeAsync, time = X.CurrentTime)
+
+		# Grab the keyboard
+		root = self.display.screen().root
+		root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
+		root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
+
 		# Consume keyboard events
-		self.key_lock_condition.acquire()
 		while self.lock_keyboard:
-			self.key_lock_condition.wait()
-		self.key_lock_condition.release()
+			if self.display.pending_events() > 0:
+				# Avoid waiting for next event by checking pending events
+				event = self.display.next_event()
+				if self.enable_shortcut and event.type == X.KeyPress:
+					if event.detail == self.keycode_shortcut_skip:
+						self.skip_break()
+						break
+					elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
+						self.postpone_break()
+						break
+			else:
+				# Reduce the CPU usage by sleeping for a second
+				time.sleep(1)
 
-		# Ungrap the keyboard
-		logging.info("Unlock the keyboard")
-		display.ungrab_keyboard(X.CurrentTime)
-		display.flush()
-
-
-	"""
-		Release the locked keyboard.
-	"""
 	def __release_keyboard(self):
-		self.key_lock_condition.acquire()
+		"""
+		Release the locked keyboard.
+		"""
+		logging.info("Unlock the keyboard")
 		self.lock_keyboard = False
-		self.key_lock_condition.notify()
-		self.key_lock_condition.release()
+		self.display.ungrab_keyboard(X.CurrentTime)
+		self.display.flush()
 
-
-	"""
-		Close all the break screens.
-	"""
 	def __destroy_all_screens(self):
+		"""
+		Close all the break screens.
+		"""
 		for win in self.windows:
 			win.destroy()
 		del self.windows[:]

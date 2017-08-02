@@ -1,0 +1,62 @@
+{
+    "meta_info": {
+        "language_name": "فارسی",
+        "language_name_en": "Persian"
+    },
+    "app_info": {
+        "description": "Safe Eyes  .با یاد آوری شما برای استراحت کردن، وقتی ساعت های طولانی را در پشت کامپیوتر سپری میکنید. از تضعیف چشم های شما جلوگیری میکند "
+    },
+    "exercises": {
+        "short_break_close_eyes": "چشم هایتان را محکم ببندید",
+        "short_break_roll_eyes": "چشم هایتان را چندین مرتبه به طرفین بچرخانید",
+        "short_break_rotate_clockwise": "چشم هایتان را در جهت عقربه های ساعت بچرخانید",
+        "short_break_rotate_counter_clockwise": "چشم هایتان را در خلاف جهت عقربه های ساعت بچرخانید",
+        "short_break_blink": "پلک بزنید",
+        "short_break_focus_far_distance": "روی یک نقطه در دور دست تمرکز کنید",
+        "short_break_drink_water": "مقداری آب بنوشید",
+        "long_break_walk": "مدتی قدم بزنید",
+        "long_break_lean_back": "به صندلی تکیه داده و راحت باشید"
+    },
+    "messages": {
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "آماده استراحت در {} ثانیه بعد باشید",
+        "ready_for_a_long_break": "آماده استراحت در {} ثانیه بعد باشید",
+        "disabled_until_restart": "غیرفعال تا بارگذاری مجدد",
+        "disabled_until_x": "غیرفعال تا {}",
+        "next_break_at": "استراحت بعد در {}",
+        "software_required": "To enable this feature, please install {}"
+    },
+    "ui_controls": {
+        "about": "درباره",
+        "allow_postpone": "اجازه به تعویق انداختن استراحت",
+        "audible_alert": "هشدار همراه با صدا در پایان استراحت",
+        "cancel": "لغو",
+        "close": "بستن",
+        "disable": "غیر فعال کردن Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "enable": "فعال کردن Safe Eyes",
+        "enable_screen_lock": "قفل کردن صفحه بعد از هر استراحت طولانی",
+        "for_x_hour": "برای {} ساعت",
+        "for_x_hours": "برای {} ساعت",
+        "for_x_minutes": "برای {} دقیقه",
+        "idle_time": "حداقل زمان بیکاری برای توقف کردن برنامه (‌به دقیقه)",
+        "interval_between_two_breaks": "فاصله بین دو استراحت (به ثانیه‌)",
+        "language": "زبان",
+        "license": "لایسنس",
+        "long_break_duration": "زمان استراحت بلند مدت (به دقیقه)",
+        "no_of_short_breaks_between_two_long_breaks": "تعداد استراحت های کوتاه بین هر دو استراحت بلند",
+        "postpone": "به تعویق انداختن",
+        "postpone_duration": "زمان به تعویق انداختن (به دقیقه)",
+        "quit": "خروج",
+        "save": "ذخیره",
+        "settings": "تنظیمات",
+        "short_break_duration": "مدت زمان استراحت کوتاه",
+        "show_time_in_tray": "نشان دادن زمان استراحت بعدی در بخش Tray",
+        "skip": "رد کردن",
+        "strict_break": "استراحت سخت گیرانه (پنهان کردن دکمه رد کردن استراحت)",
+        "system_language": "زبان سیستم",
+        "time_to_prepare_for_break": "زمان آماده شدن برای استراحت (به ثانیه)",
+        "time_to_screen_lock": "حداکثر زمان برای رد کردن، جلوگیری از قفل شدن صفحه (به ثانیه‌)",
+        "until_restart": "تا زمان بارگذاری مجدد"
+    }
+}

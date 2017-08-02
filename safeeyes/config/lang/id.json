@@ -18,10 +18,13 @@
 		"long_break_lean_back": "Silakan bersandar ke kursi dan bersantai"
 	},
 	"messages": {
-		"ready_for_a_break": "Bersiap beristirahat dalam {} detik",
+		"audible_alert_disabled": "Cannot enable audible notifications",
+		"ready_for_a_short_break": "Bersiap beristirahat dalam {} detik",
+        "ready_for_a_long_break": "Bersiap beristirahat dalam {} detik",
 		"disabled_until_restart": "Dimatikan hingga dijalankan ulang",
 		"disabled_until_x": "Dimatikan hingga {}",
-		"next_break_at": "Istirahat selanjutnya pada {}"
+		"next_break_at": "Istirahat selanjutnya pada {}",
+		"software_required": "To enable this feature, please install {}"
 	},
 	"ui_controls": {
 			"about": "Tentang",
@@ -30,6 +33,7 @@
 			"cancel": "Batal",
 			"close": "Close",
 			"disable": "Matikan Safe Eyes",
+			"disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
 			"enable": "Hidupkan Safe Eyes",
 			"enable_screen_lock": "Lock the screen after every long break",
 			"for_x_hour": "Selama {} Jam",

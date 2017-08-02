@@ -1,13 +1,15 @@
 import os
-
 import setuptools
 
 
 requires = [
-            'python-xlib',
-            'pyaudio',
-            'psutil',
-            'babel']
+    'python-xlib',
+    'psutil',
+    'babel']
+
+extras = {
+    'audible_alert': ['pyaudio']
+}
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -15,21 +17,23 @@ here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
     long_description = '\n' + f.read()
 
+
 def _data_files(path):
     for root, dirs, files in os.walk(path):
         if not files:
             continue
         yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
 
+
 setuptools.setup(
     name="safeeyes",
-    version="1.2.1",
+    version="1.2.2",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.1.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.2.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': ['config/*.json',
                                'config/style/*.css',
@@ -49,6 +53,7 @@ setuptools.setup(
                 ('/usr/share/icons/hicolor/16x16/status', ['share/icons/hicolor/16x16/status/safeeyes_enabled.png', 'share/icons/hicolor/16x16/status/safeeyes_disabled.png', 'share/icons/hicolor/16x16/status/safeeyes_timer.png'])
                 ],
     install_requires=requires,
+    extras_require=extras,
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[

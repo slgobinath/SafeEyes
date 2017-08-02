@@ -18,10 +18,13 @@
         "long_break_lean_back": "Lehnen Sie sich zurück und entspannen Sie sich"
     },
     "messages": {
-        "ready_for_a_break": "Nächste Pause in {} Sekunden",
+         "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Nächste Pause in {} Sekunden",
+        "ready_for_a_long_break": "Nächste Pause in {} Sekunden",
         "disabled_until_restart": "Deaktiviert bis zum Neustart",
         "disabled_until_x": "Deaktiviert bis {}",
-        "next_break_at": "Nächste Pause um {}"
+        "next_break_at": "Nächste Pause um {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "Über",
@@ -30,6 +33,7 @@
         "cancel": "Abbrechen",
         "close": "Schließen",
         "disable": "Safe Eyes deaktivieren",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes aktivieren",
         "enable_screen_lock": "Sperrt den Bildschirm nach einer langen Pause",
         "for_x_hour": "Für {} Stunde",
@@ -47,7 +51,7 @@
         "save": "Speichern",
         "settings": "Einstellungen",
         "short_break_duration": "Kleine-Pause-Intervall (in Sekunden)",
-        "show_time_in_tray": "Show the next break time in system tray",
+        "show_time_in_tray": "Zeige Zeit für nächste Pause im Bereich der Systemnotifikationen",
         "skip": "Überspringen",
         "strict_break": "Strikte Pause (Überspringen nicht möglich)",
         "system_language": "Systemsprache",
