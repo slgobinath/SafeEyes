@@ -18,13 +18,13 @@
         "long_break_lean_back": "Adossez-vous à votre siège et relaxez-vous"
     },
     "messages": {
-        "audible_alert_disabled": "Cannot enable audible notifications",
+        "audible_alert_disabled": "Impossible d'activer les notifications sonores",
         "ready_for_a_short_break": "Préparez-vous à une pause dans {} secondes",
         "ready_for_a_long_break": "Préparez-vous à une pause dans {} secondes",
         "disabled_until_restart": "Désactivé jusqu'au redémarrage",
         "disabled_until_x": "Désactivé jusqu'à {}",
         "next_break_at": "Prochaine pause à {}",
-        "software_required": "To enable this feature, please install {}"
+        "software_required": "Pour activer cette fonction, veuillez installer {}"
     },
     "ui_controls": {
         "about": "À propos",
@@ -33,7 +33,7 @@
         "cancel": "Annuler",
         "close": "Fermer",
         "disable": "Désactiver Safe Eyes",
-        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "disable_keyboard_shortcut": "Période de désactivation du raccourci pour empêcher d'ignorer involontairement (en secondes)",
         "enable": "Activer Safe Eyes",
         "enable_screen_lock": "Verrouiller l'écran après chaque pause longue",
         "for_x_hour": "Pendant {} heure",
@@ -51,12 +51,12 @@
         "save": "Enregistrer",
         "settings": "Paramètres",
         "short_break_duration": "Durée d'une pause courte (en secondes)",
-        "show_time_in_tray": "Show the next break time in system tray",
+        "show_time_in_tray": "Afficher la prochaine heure de pause dans la zone de notification ",
         "skip": "Ignorer",
         "strict_break": "Pause stricte (cacher le bouton Ignorer)",
         "system_language": "Langue du système ",
-        "time_to_prepare_for_break": "Temps de préparation à une pause (en secondes)",
-        "time_to_screen_lock": "Temps maximal pour ignorer, en passant outre le verrouillage (en secondes)",
+        "time_to_prepare_for_break": "Durée de préparation à une pause (en secondes)",
+        "time_to_screen_lock": "Durée maximale pour ignorer, en passant outre le verrouillage (en secondes)",
         "until_restart": "Jusqu'au redémarrage"
     }
 }
