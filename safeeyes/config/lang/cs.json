@@ -4,7 +4,7 @@
         "language_name_en": "Czech"
     },
     "app_info": {
-        "description": "Safe Eyes chrání vaše oči před následky přetěžování (asthenopie) když dlouho hledíte do obrazovky počítače a to připomínáním potřebných přestávek."
+        "description": "Safe Eyes chrání vaše oči před následky přetěžování (asthenopie), když dlouho hledíte do obrazovky počítače, připomínáním potřebných přestávek."
     },
     "exercises": {
         "short_break_close_eyes": "Zavřete oči",
@@ -28,18 +28,18 @@
     },
     "ui_controls": {
         "about": "O aplikaci",
-        "allow_postpone": "Umožňit odkládání přestávek",
+        "allow_postpone": "Umožnit odkládání přestávek",
         "audible_alert": "Zvukové upozornění na konci přestávky",
         "cancel": "Storno",
         "close": "Zavřít",
         "disable": "Pozastavit Safe Eyes",
-        "disable_keyboard_shortcut": "Ochranná doba po kterou vypnout klávesovou zkratku aby nedošlo k neúmyslenému přeskočení (v sekundách)",
+        "disable_keyboard_shortcut": "Délka (s) vypnutí klávesové zkratky (prevence neúmyslného přeskočení)",
         "enable": "Spustit Safe Eyes",
         "enable_screen_lock": "Po uplynutí každé velké přestávky ponechat obrazovku uzamčenou",
         "for_x_hour": "Na {} hodinu",
         "for_x_hours": "Na {} hodiny",
         "for_x_minutes": "Na {} minut",
-        "idle_time": "Pozastavit časovač při nečinnosti uživatele delší než (minut)",
+        "idle_time": "Pozastavit časovač při nečinnosti delší než (minut)",
         "interval_between_two_breaks": "Interval mezi dvěma po sobě jdoucími přestávkami",
         "language": "Jazyk",
         "license": "Licence",
@@ -51,7 +51,7 @@
         "save": "Uložit",
         "settings": "Nastavení",
         "short_break_duration": "Trvání krátké přestávky (v sekundách)",
-        "show_time_in_tray": "Zobrazovat v oznamovací oblasti systémového panelu kdy nastane příští přestávka",
+        "show_time_in_tray": "Zobrazovat čas příští přestávky v oznamovací oblasti",
         "skip": "Přeskočit",
         "strict_break": "Povinná přestávka (skrýt tlačítko pro přeskočení)",
         "system_language": "Jazyk systému",
