@@ -43,8 +43,6 @@
         "no_of_short_breaks_between_two_long_breaks": "Број на кратки паузи помеѓу две долги",
         "postpone": "Одложи",
         "postpone_duration": "Траење на одложувањето (Во секунди)",
-        "pyaudio_not_installed": "Cannot enable audible notifications",
-        "pyaudio_explanation": "To enable them, install pyaudio",
         "quit": "Исклучи",
         "save": "Зачувај",
         "settings": "Подесувања",
