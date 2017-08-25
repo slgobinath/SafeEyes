@@ -18,10 +18,13 @@
         "long_break_lean_back": "Oprzyj się wygodnie na krześle i zrelaksuj"
     },
     "messages": {
-        "ready_for_a_break": "Przygotuj się! Przerwa za {} sekund(y).",
+        "audible_alert_disabled": "Nie można aktywować powiadomień dźwiękowych",
+        "ready_for_a_short_break": "Przygotuj się! Przerwa za {} sekund(y).",
+        "ready_for_a_long_break": "Przygotuj się! Przerwa za {} sekund(y).",
         "disabled_until_restart": "Wyłączony do ponownego uruchomienia",
         "disabled_until_x": "Wyłączony do {}",
-        "next_break_at": "Następna przerwa o {}"
+        "next_break_at": "Następna przerwa o {}",
+        "software_required": "Aby aktywować tę funkcję, zainstaluj {}"
     },
     "ui_controls": {
         "about": "O programie",
@@ -30,6 +33,7 @@
         "cancel": "Anuluj",
         "close": "Zamknij",
         "disable": "Zatrzymaj Safe Eyes",
+        "disable_keyboard_shortcut": "Czas ignorowania skrótu klawiszowego zapobiegający niezamierzonemu pominięciu przerwy (w sekundach)",
         "enable": "Uruchom Safe Eyes",
         "enable_screen_lock": "Zablokuj ekran po każdej długiej przerwie",
         "for_x_hour": "Na {} godzinę",
@@ -47,7 +51,7 @@
         "save": "Zapisz",
         "settings": "Ustawienia",
         "short_break_duration": "Czas trwania krótkiej przerwy (w sekundach)",
-        "show_time_in_tray": "Show the next break time in system tray",
+        "show_time_in_tray": "Pokaż czas następnej przerwy w zasobniku systemowym",
         "skip": "Pomiń",
         "strict_break": "Bezwzględna przerwa (ukryj przycisk pominięcia)",
         "system_language": "Język systemu",

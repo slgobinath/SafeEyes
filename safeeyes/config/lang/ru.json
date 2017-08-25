@@ -18,10 +18,13 @@
         "long_break_lean_back": "Откиньтесь на спинку стула и расслабьтесь"
     },
     "messages": {
-        "ready_for_a_break": "Приготовьтесь к перерыву через {} секунд",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Приготовьтесь к перерыву через {} секунд",
+        "ready_for_a_long_break": "Приготовьтесь к перерыву через {} секунд",
         "disabled_until_restart": "Отключено до перезагрузки",
         "disabled_until_x": "Отключено до {}",
-        "next_break_at": "Следующий перерыв в {}"
+        "next_break_at": "Следующий перерыв в {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "О программе",
@@ -30,6 +33,7 @@
         "cancel": "Отменить",
         "close": "Close",
         "disable": "Отключить Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Активировать Safe Eyes",
         "enable_screen_lock": "Включить блокировку экрана",
         "for_x_hour": "На {} час",

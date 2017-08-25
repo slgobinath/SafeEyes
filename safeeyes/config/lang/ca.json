@@ -1,0 +1,62 @@
+{
+    "meta_info": {
+        "language_name": "Català",
+        "language_name_en": "Catalan"
+    },
+    "app_info": {
+        "description": "Safe Eyes protegeix els vostres ulls de la fatiga visual (astenopia) recordant-vos que feu petits descansos mentre esteu treballant amb l'ordinador."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Tanqueu fortament els ulls",
+        "short_break_roll_eyes": "Moveu els ulls a banda i banda",
+        "short_break_rotate_clockwise": "Gireu els ulls en sentit horari",
+        "short_break_rotate_counter_clockwise": "Gireu els ulls en sentit antihorari",
+        "short_break_blink": "Parpallegeu",
+        "short_break_focus_far_distance": "Fixeu la mirada en un punt llunyà",
+        "short_break_drink_water": "Bebeu una mica d'aigua",
+        "long_break_walk": "Camineu una estona",
+        "long_break_lean_back": "Reclineu-vos sobre la cadira i relaxeu-vos"
+    },
+    "messages": {
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Prepareu-vos per a una pausa en {} segons",
+        "ready_for_a_long_break": "Prepareu-vos per a una pausa en {} segons",
+        "disabled_until_restart": "Inhabilita fins que es reinicïi",
+        "disabled_until_x": "Inhabilitat fins {}",
+        "next_break_at": "Propera pausa a les {}",
+        "software_required": "To enable this feature, please install {}"
+    },
+    "ui_controls": {
+        "about": "Quant a",
+        "allow_postpone": "Permet posposar les pauses",
+        "audible_alert": "Alerta sonora en finalitzar una pausa",
+        "cancel": "Canceŀla",
+        "close": "Tanca",
+        "disable": "Desactiva Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "enable": "Activa Safe Eyes",
+        "enable_screen_lock": "Bloca la pantalla després de cada pausa llarga",
+        "for_x_hour": "Durant {} hora",
+        "for_x_hours": "Durant {} hores",
+        "for_x_minutes": "Durant {} minuts",
+        "idle_time": "Temps mínim inactiu per a pausar (en minuts)",
+        "interval_between_two_breaks": "Interval entre dues pauses (en minuts)",
+        "language": "Llengua",
+        "license": "Llicència",
+        "long_break_duration": "Durada d'una pausa llarga (en segons)",
+        "no_of_short_breaks_between_two_long_breaks": "Nombre de pauses breus entre dues pauses llargues",
+        "postpone": "Posposa",
+        "postpone_duration": "Durada d'una posposició (en minuts)",
+        "quit": "Tanca",
+        "save": "Desa",
+        "settings": "Configuració",
+        "short_break_duration": "Durada d'una pausa breu (en segons)",
+        "show_time_in_tray": "Mostra l'hora de la propera pausa a l'àrea de notificacions",
+        "skip": "Omet",
+        "strict_break": "Pausa estrica (sense botó per ometre-la)",
+        "system_language": "Idioma del sistema",
+        "time_to_prepare_for_break": "Temps per preparar-se per a una pausa (en segons)",
+        "time_to_screen_lock": "Temps màxim per saltar-se una pausa, evitant la pantalla de bloqueig (en segons)",
+        "until_restart": "Fins que es reinicïi"
+    }
+}

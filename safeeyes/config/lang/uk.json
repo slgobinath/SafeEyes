@@ -1,0 +1,62 @@
+{
+    "meta_info": {
+        "language_name": "Українська",
+        "language_name_en": "Ukrainian"
+    },
+    "app_info": {
+        "description": "Safe Eyes нагадує вам робити перерви, при довгій роботі за комп'ютером, захищаючи ваші очі від втоми (asthenopia)."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Сильно заплющіть очі",
+        "short_break_roll_eyes": "Закотіть очі в різні боки",
+        "short_break_rotate_clockwise": "Покрутіть очима за годинниковою стрілкою",
+        "short_break_rotate_counter_clockwise": "Покрутіть очима проти годинникової стрілки",
+        "short_break_blink": "Поморгайте",
+        "short_break_focus_far_distance": "Подивіться на далекий об'єкт",
+        "short_break_drink_water": "Випийте води",
+        "long_break_walk": "Трохи пройдіться",
+        "long_break_lean_back": "Відкиньтеся на спинку і розслабтеся"
+    },
+    "messages": {
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "Приготуйтеся до перерви через {} секунд",
+        "ready_for_a_long_break": "Приготуйтеся до перерви через {} секунд",
+        "disabled_until_restart": "Відключено до перезапуску",
+        "disabled_until_x": "Відключено до {}",
+        "next_break_at": "Наступна перерва о {}",
+        "software_required": "To enable this feature, please install {}"
+    },
+    "ui_controls": {
+        "about": "Про SafeEyes",
+        "allow_postpone": "Дозволити відкладати перерви",
+        "audible_alert": "Звуковий сигнал вкінці перерви",
+        "cancel": "Відмінити",
+        "close": "Закрити",
+        "disable": "Відключити Safe Eyes",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "enable": "Включити Safe Eyes",
+        "enable_screen_lock": "Блокувати екран після довгих перерв",
+        "for_x_hour": "На {} годину",
+        "for_x_hours": "На {} години",
+        "for_x_minutes": "На {} хвилин",
+        "idle_time": "Час бездіяльності для паузи (в хвилинах)",
+        "interval_between_two_breaks": "Інтервал між двома перервами (в хвилинах)",
+        "language": "Мова",
+        "license": "Ліцензія",
+        "long_break_duration": "Тривалість довгої перерви (в секундах)",
+        "no_of_short_breaks_between_two_long_breaks": "Кількість коротких перерв між двома довгими",
+        "postpone": "Відкласти",
+        "postpone_duration": "На скільки відкласти (в хвилинах)",
+        "quit": "Вийти",
+        "save": "Зберегти",
+        "settings": "Налаштування",
+        "short_break_duration": "Тривалість короткої перерви (в секундах)",
+        "show_time_in_tray": "Показувати час наступної перерви в системному треї",
+        "skip": "Пропустити",
+        "strict_break": "Обов'язкова перерва (прибрати кнопку для пропускання)",
+        "system_language": "Мова системи",
+        "time_to_prepare_for_break": "Час підготовки до перерви (в секундах)",
+        "time_to_screen_lock": "Найбільший час для пропуску, без блокування екрану (в секундах)",
+        "until_restart": "До перезапуску"
+    }
+}

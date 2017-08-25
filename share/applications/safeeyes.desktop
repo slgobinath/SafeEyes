@@ -1,19 +1,25 @@
 [Desktop Entry]
 Name=Safe Eyes
 Comment=Protect your eyes from eye strain
-Comment[ge]=დაიცავით თქვენი თვალები დაღლილობისაგან
-Comment[de]=Schützt die Augen vor Überanstrengung
+Comment[ca]=Protegiu-vos els ulls de la fatiga visual
 Comment[cs]=Chraňte své oči před únavou
-Comment[fr]=Protégez vos yeux de la fatigue
-Comment[id]=Melindungi mata Anda dari kelelahan
-Comment[ta]=உங்கள் கண்களை சோர்வடையாது பாதுகாத்திடுங்கள்
-Comment[pt]=Proteja seus olhos da tensão ocular
-Comment[tr]=Gözünüzü yorgunluğa karşı koruyun
-Comment[hi]=तनाव से आंखों की रक्षा
+Comment[de]=Schützt die Augen vor Überanstrengung
 Comment[es]=Protege tus ojos de la fatiga ocular
-Comment[ru]=Защитите свои глаза от зрительного перенапряжения
-Comment[pl]=Chroń oczy przed zmęczeniem
+Comment[et]=Kaitse oma silmi väsimuse eest
+Comment[fa]=محافظت چشم هااز ضعیف شدن
+Comment[fr]=Protégez vos yeux de la fatigue
+Comment[ge]=დაიცავით თქვენი თვალები დაღლილობისაგან
+Comment[hi]=तनाव से आंखों की रक्षा
+Comment[hu]=Protect your eyes from eye strain
+Comment[id]=Melindungi mata Anda dari kelelahan
 Comment[mk]=Заштитете се од замор на очите
+Comment[pl]=Chroń oczy przed zmęczeniem
+Comment[pt]=Proteja seus olhos da tensão ocular
+Comment[ru]=Защитите свои глаза от зрительного перенапряжения
+Comment[sk]=Chráňte svoje oči pred únavou
+Comment[ta]=உங்கள் கண்களை சோர்வடையாது பாதுகாத்திடுங்கள்
+Comment[tr]=Gözünüzü yorgunluğa karşı koruyun
+Comment[uk]=Захистіть свої очі від втоми
 Comment[vi]=Bảo vệ đôi mắt của bạn khỏi sự mệt mỏi
 Exec=env GDK_BACKEND=x11 safeeyes
 Icon=safeeyes

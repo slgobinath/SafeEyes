@@ -18,10 +18,13 @@
         "long_break_lean_back": "სავარძლის საზურგეზე გადაწექით და ცოტა დაისვენეთ"
     },
     "messages": {
-        "ready_for_a_break": "მოემზადეთ შესვენებისთვის {} წამში",
+        "audible_alert_disabled": "Cannot enable audible notifications",
+        "ready_for_a_short_break": "მოემზადეთ შესვენებისთვის {} წამში",
+        "ready_for_a_long_break": "მოემზადეთ შესვენებისთვის {} წამში",
         "disabled_until_restart": "გავაუქმოთ შემდეგ რესტარტამდე",
         "disabled_until_x": "გაუქმებულია {} მდე",
-        "next_break_at": "შემდეგი შესვენება {}"
+        "next_break_at": "შემდეგი შესვენება {}",
+        "software_required": "To enable this feature, please install {}"
     },
     "ui_controls": {
         "about": "პროგრამის შესახებ",
@@ -30,6 +33,7 @@
         "cancel": "უარყოფა",
         "close": "Close",
         "disable": "Safe Eyes გამორთვა",
+        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
         "enable": "Safe Eyes ჩართვა",
         "enable_screen_lock": "Lock the screen after every long break",
         "for_x_hour": "{} საათით",

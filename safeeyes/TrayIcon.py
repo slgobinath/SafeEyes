@@ -28,6 +28,9 @@ APPINDICATOR_ID = 'safeeyes'
 
 
 class TrayIcon:
+	"""
+	Create and show the tray icon along with the tray menu.
+	"""
 
 	def __init__(self, config, language, on_show_settings, on_show_about, on_enable, on_disable, on_quite):
 		logging.info("Initialize the tray icon")
@@ -133,9 +136,15 @@ class TrayIcon:
 		self.indicator.set_menu(self.menu)
 
 	def initialize(self, config):
+		"""
+		Initialize the tray icon by setting the config.
+		"""
 		self.config = config
 
 	def set_labels(self, language):
+		"""
+		Update the text of menu items based on the selected language.
+		"""
 		self.language = language
 		for entry in self.sub_menu_items:
 			entry[0].set_label(self.language['ui_controls'][entry[1]].format(entry[2]))
@@ -158,12 +167,22 @@ class TrayIcon:
 		self.item_quit.set_label(self.language['ui_controls']['quit'])
 
 	def show_icon(self):
+		"""
+		Show the tray icon.
+		"""
 		Utility.execute_main_thread(self.indicator.set_status, appindicator.IndicatorStatus.ACTIVE)
 
 	def hide_icon(self):
+		"""
+		Hide the tray icon.
+		"""
 		Utility.execute_main_thread(self.indicator.set_status, appindicator.IndicatorStatus.PASSIVE)
 
 	def quit_safe_eyes(self, *args):
+		"""
+		Handle Quit menu action.
+		This action terminates the application.
+		"""
 		self.on_quite()
 		with self.lock:
 			self.active = True
@@ -173,17 +192,31 @@ class TrayIcon:
 			self.idle_condition.release()
 
 	def show_settings(self, *args):
+		"""
+		Handle Settings menu action.
+		This action shows the Settings dialog.
+		"""
 		self.on_show_settings()
 
 	def show_about(self, *args):
+		"""
+		Handle About menu action.
+		This action shows the About dialog.
+		"""
 		self.on_show_about()
 
 	def next_break_time(self, dateTime):
+		"""
+		Update the next break time to be displayed in the menu and optionally in the tray icon.
+		"""
 		logging.info("Update next break information")
 		self.dateTime = dateTime
 		self.__set_next_break_info()
 
 	def __set_next_break_info(self):
+		"""
+		A private method to be called within this class to update the next break information using self.dateTime.
+		"""
 		formatted_time = Utility.format_time(self.dateTime)
 		message = self.language['messages']['next_break_at'].format(formatted_time)
 		# Update the tray icon label
@@ -195,6 +228,10 @@ class TrayIcon:
 		Utility.execute_main_thread(self.item_info.set_label, message)
 
 	def on_enable_clicked(self, *args):
+		"""
+		Handle 'Enable Safe Eyes' menu action.
+		This action enables the application if it is currently disabled.
+		"""
 		# active = self.item_enable.get_active()
 		if not self.active:
 			with self.lock:
@@ -211,6 +248,10 @@ class TrayIcon:
 				self.idle_condition.release()
 
 	def on_disable_clicked(self, *args):
+		"""
+		Handle the menu actions of all the sub menus of 'Disable Safe Eyes'.
+		This action disables the application if it is currently active.
+		"""
 		# active = self.item_enable.get_active()
 		if self.active and len(args) > 1:
 			logging.info('Disable Safe Eyes')
@@ -231,30 +272,26 @@ class TrayIcon:
 				Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
 				self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
 
-
-	"""
-		This method is called by the core to prevent user from disabling Safe Eyes after the notification.
-	"""
 	def lock_menu(self):
+		"""
+		This method is called by the core to prevent user from disabling Safe Eyes after the notification.
+		"""
 		if self.active:
-			# self.item_disable.set_sensitive(False)
-			# self.item_settings.set_sensitive(False)
-			# self.item_quit.set_sensitive(False)
 			self.menu.set_sensitive(False)
 
-	"""
-		This method is called by the core to activate the disable menu after the the break.
-	"""
 	def unlock_menu(self):
+		"""
+		This method is called by the core to activate the menu after the the break.
+		"""
 		if self.active:
-			# self.item_disable.set_sensitive(True)
-			# self.item_settings.set_sensitive(True)
-			# self.item_quit.set_sensitive(True)
 			self.menu.set_sensitive(True)
 
 	def __schedule_resume(self, time_minutes):
+		"""
+		Schedule a local timer to enable Safe Eyes after the given timeout.
+		"""
 		self.idle_condition.acquire()
-		self.idle_condition.wait(time_minutes * 60) # Convert to seconds
+		self.idle_condition.wait(time_minutes * 60)    # Convert to seconds
 		self.idle_condition.release()
 
 		with self.lock:
