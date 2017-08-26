@@ -1,4 +1,9 @@
 # Safe Eyes
+
+[![GitHub version](https://badge.fury.io/gh/slgobinath%2FSafeEyes.svg)](https://badge.fury.io/gh/slgobinath%2FSafeEyes)
+[![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
+[![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
+
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
