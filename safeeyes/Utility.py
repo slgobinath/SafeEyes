@@ -326,6 +326,9 @@ def lock_screen_command():
 			if 'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID') and command_exist('gnome-screensaver-command'):
 				# Gnome 2
 				return ['gnome-screensaver-command', '--lock']
+                elif command_exist('xscreensaver-command'):
+                        # this will fail if the daemon is not running
+                        return os.system('xscreensaver-command -version > /dev/null') == 0
 	return None
 
 
