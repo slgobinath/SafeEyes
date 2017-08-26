@@ -4,7 +4,7 @@
         "language_name_en": "Slovak"
     },
     "app_info": {
-        "description": "Safe Eyes vám pripomína robiť si prestávky, keď trávite dlhé hodiny u počítača a tak chráni vaše oči pred přílišným namáhaním (asthenopií).."
+        "description": "Safe Eyes vám pripomína robiť si prestávky, keď trávite dlhé hodiny u počítača a tak chráni vaše oči pred přílišným namáhaním (asthenopií)."
     },
     "exercises": {
         "short_break_close_eyes": "Pevne zavri oči",
@@ -24,7 +24,7 @@
         "disabled_until_restart": "Zakázať do reštartu",
         "disabled_until_x": "Zakázať do {}",
         "next_break_at": "Ďalšia prestávka o {}",
-        "software_required": "Pro ích povolenie nainstalujte {}"
+        "software_required": "Pro ích povolenie nainštalujte {}"
     },
     "ui_controls": {
         "about": "Ohľadom",
@@ -33,7 +33,7 @@
         "cancel": "Zrušiť",
         "close": "Close",
         "disable": "Zakázať Safe Eyes",
-        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "disable_keyboard_shortcut": "Dlžka po kterú zakázať klávesovú skratku v sekundách.",
         "enable": "Povoliť Safe Eyes",
         "enable_screen_lock": "Zablokovať obrazovku po každej dlhej prestávke",
         "for_x_hour": "Počas {} hodiny",
