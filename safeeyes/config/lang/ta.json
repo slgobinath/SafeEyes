@@ -1,6 +1,6 @@
 {
     "meta_info": {
-    	  "language_name": "தமிழ்",
+        "language_name": "தமிழ்",
         "language_name_en": "Tamil"
     },
     "app_info": {
@@ -33,7 +33,7 @@
         "cancel": "ரத்து",
         "close": "மூடு",
         "disable": "Safe Eyes ஐ நிறுத்துக",
-        "disable_keyboard_shortcut": "Shortcut disabled period to prevent unintentional skip (in seconds)",
+        "disable_keyboard_shortcut": "தற்செயல் பயன்பாட்டை தவிர்ப்பதற்காக விசைப்பலகை குறுக்குவழியை  நிறுத்தி வைக்கும் நேரம் (விநாடிகளில்)",
         "enable": "Safe Eyes ஐ செயல்படுத்துக",
         "enable_screen_lock": "நீண்ட கால இடைவேளைகளின் பின்னர் திரையை பூட்டுக",
         "for_x_hour": "{} மணித்தியாலத்திற்கு",
