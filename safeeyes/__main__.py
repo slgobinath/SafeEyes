@@ -84,7 +84,7 @@ def show_alert(message, image_name):
 		Utility.execute_main_thread(tray_icon.unlock_menu)
 
 
-def close_alert(audible_alert_on):
+def close_alert(audible_alert_on = False):
 	"""
 	Receive the stop break signal from core and pass it to the break screen.
 	"""
@@ -143,7 +143,7 @@ def on_skipped():
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
 		Utility.lock_desktop(system_lock_command)
-	core.skip_break()
+	core.skip()
 	plugins.post_break(context)
 
 
@@ -155,7 +155,7 @@ def on_postponed():
 	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
 		# Lock the screen before closing the break screen
 		Utility.lock_desktop(system_lock_command)
-	core.postpone_break()
+	core.postpone()
 
 
 def save_settings(config):
