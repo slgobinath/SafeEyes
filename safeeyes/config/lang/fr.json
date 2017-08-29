@@ -51,10 +51,10 @@
         "save": "Enregistrer",
         "settings": "Paramètres",
         "short_break_duration": "Durée d'une pause courte (en secondes)",
-        "show_time_in_tray": "Afficher la prochaine heure de pause dans la zone de notification ",
+        "show_time_in_tray": "Afficher la prochaine pause dans la zone de notification",
         "skip": "Ignorer",
         "strict_break": "Pause stricte (cacher le bouton Ignorer)",
-        "system_language": "Langue du système ",
+        "system_language": "Langue du système",
         "time_to_prepare_for_break": "Durée de préparation à une pause (en secondes)",
         "time_to_screen_lock": "Durée maximale pour ignorer, en passant outre le verrouillage (en secondes)",
         "until_restart": "Jusqu'au redémarrage"
