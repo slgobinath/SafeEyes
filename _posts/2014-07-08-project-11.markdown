@@ -7,9 +7,9 @@ img: translate-thumbnail.png
 modal-url: translate
 thumbnail: translate-thumbnail.png
 alt: image-alt
-description: If you are a multilinguist, please translate Safe Eyes to other languages and submit a pull request. Please have a look at the <a href="https://hosted.weblate.org/projects/safe-eyes/translations/">existing translations</a> before translating to your language.
+description: If you are a multilinguist, please translate Safe Eyes to other languages using the Weblate online tranlsation service. Please have a look at the <a href="https://hosted.weblate.org/projects/safe-eyes/translations/">existing translations</a> before translating to your language.
 steps: ['Create a <a href="https://hosted.weblate.org/accounts/register/">Weblate account</a> if you don&#39;t have one.',
-		'Visit to the Safe Eyes project: <a href="https://hosted.weblate.org/projects/safe-eyes/translations/">Safe Eyes Translation</a>.',
+		'Visit the Safe Eyes project: <a href="https://hosted.weblate.org/projects/safe-eyes/translations/">Safe Eyes Translation</a>.',
 		'To translate to a new language, click on the <code>Start new translation</code> button. <img src="img/screenshots/start_new_translation.png" alt="">',
 		'Check the existing translations and provide your suggestion. Eventhough Weblate says 100% translated, please fix the translations with failing checks. <img src="img/screenshots/translations_with_check.png" alt="">'
 	]
