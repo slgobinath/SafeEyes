@@ -1,1 +1,40 @@
-{}
+{
+    "meta_info": {
+        "language_name": "英语",
+        "language_name_en": "英语"
+    },
+    "app_info": {
+        "description": "当您持续使用电脑办公太长时间时，Safe Eyes 会提醒您休息一下，通过这种方式来保护您的眼睛，使您远离视疲劳。"
+    },
+    "exercises": {
+        "short_break_close_eyes": "闭上您的眼睛休息一会",
+        "short_break_roll_eyes": "左右滚动一下您的眼珠",
+        "short_break_rotate_clockwise": "顺时针方向转动您的眼珠",
+        "short_break_rotate_counter_clockwise": "逆时针方向转动您的眼珠",
+        "short_break_blink": "眨眨眼",
+        "short_break_focus_far_distance": "望远：将视线聚焦到远处物体上",
+        "short_break_drink_water": "喝一点水",
+        "long_break_walk": "站起来走走",
+        "long_break_lean_back": "靠在椅背上休息一会"
+    },
+    "messages": {
+        "audible_alert_disabled": "无法开启声音提示",
+        "ready_for_a_short_break": "{} 秒后将开始一个短休息",
+        "ready_for_a_long_break": "{} 秒后将开始一个长休息",
+        "disabled_until_restart": "暂停直到重启",
+        "disabled_until_x": "暂停直到 {}",
+        "next_break_at": "下一次休息开始时间：{}",
+        "software_required": "激活本功能需要安装 {}"
+    },
+    "ui_controls": {
+        "about": "关于",
+        "allow_postpone": "允许推迟休息",
+        "audible_alert": "休息结束时播放声音提示",
+        "cancel": "取消",
+        "close": "关闭",
+        "disable": "禁用Safe Eyes",
+        "disable_keyboard_shortcut": "休息界面按钮不可用时间（防止操作失误而跳过休息，单位秒）",
+        "enable": "启用Safe Eyes",
+        "enable_screen_lock": "每次长休息结束时锁定屏幕"
+    }
+}
