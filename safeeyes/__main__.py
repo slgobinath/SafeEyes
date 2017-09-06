@@ -25,11 +25,9 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
-from safeeyes.Notification import Notification
-from safeeyes.Plugins import Plugins
+from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.SettingsDialog import SettingsDialog
-from safeeyes.TrayIcon import TrayIcon
 from safeeyes import Utility
 
 # Define necessary paths
@@ -38,7 +36,7 @@ settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dial
 about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
 
 is_active = True
-SAFE_EYES_VERSION = "1.2.2"
+SAFE_EYES_VERSION = "2.0.0"
 
 
 def show_settings():
@@ -47,8 +45,6 @@ def show_settings():
 	"""
 	logging.info("Show Settings dialog")
 	able_to_lock_screen = False
-	if system_lock_command:
-		able_to_lock_screen = True
 	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), able_to_lock_screen, save_settings, settings_dialog_glade)
 	settings_dialog.show()
 
@@ -62,50 +58,13 @@ def show_about():
 	about_dialog.show()
 
 
-def show_notification():
-	"""
-	Receive the signal from core and pass it to the Notification.
-	"""
-	if config['strict_break']:
-		Utility.execute_main_thread(tray_icon.lock_menu)
-	plugins.pre_notification(context)
-	notification.show(config['pre_break_warning_time'])
-
-
-def show_alert(message, image_name):
-	"""
-	Receive the break signal from core and pass it to the break screen.
-	"""
-	logging.info("Show the break screen")
-	notification.close()
-	plugins_data = plugins.pre_break(context)
-	break_screen.show_message(message, Utility.get_resource_path(image_name), plugins_data)
-	if config['strict_break'] and is_active:
-		Utility.execute_main_thread(tray_icon.unlock_menu)
-
-
-def close_alert(audible_alert_on = False):
-	"""
-	Receive the stop break signal from core and pass it to the break screen.
-	"""
-	logging.info("Close the break screen")
-	if config['enable_screen_lock'] and context['break_type'] == 'long':
-		# Lock the screen before closing the break screen
-		Utility.lock_desktop(system_lock_command)
-	break_screen.close()
-	if audible_alert_on:
-		Utility.play_notification()
-	plugins.post_break(context)
-
-
 def on_quit():
 	"""
 	Listen to the tray menu quit action and stop the core, notification and the app itself.
 	"""
 	logging.info("Quit Safe Eyes")
-	plugins.exit(context)
+	plugins.exit()
 	core.stop()
-	notification.quite()
 	Gtk.main_quit()
 
 
@@ -140,11 +99,8 @@ def on_skipped():
 	Listen to break screen Skip action and send the signal to core.
 	"""
 	logging.info("User skipped the break")
-	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
-		# Lock the screen before closing the break screen
-		Utility.lock_desktop(system_lock_command)
 	core.skip()
-	plugins.post_break(context)
+	plugins.stop_break()
 
 
 def on_postponed():
@@ -152,10 +108,8 @@ def on_postponed():
 	Listen to break screen Postpone action and send the signal to core.
 	"""
 	logging.info("User postponed the break")
-	if config['enable_screen_lock'] and context['break_type'] == 'long' and context.get('count_down', 0) >= config['time_to_screen_lock']:
-		# Lock the screen before closing the break screen
-		Utility.lock_desktop(system_lock_command)
 	core.postpone()
+	plugins.stop_break()
 
 
 def save_settings(config):
@@ -176,15 +130,12 @@ def save_settings(config):
 
 	# Reload the language translation
 	language = Utility.load_language(config['language'])
-	tray_icon.initialize(config)
-	tray_icon.set_labels(language)
 
 	logging.info("Initialize SafeEyesCore with modified settings")
 
 	# Restart the core and intialize the components
 	core.initialize(config, language)
 	break_screen.initialize(config, language)
-	notification.initialize(language)
 	if is_active:
 		# 1 sec delay is required to give enough time for core to be stopped
 		Timer(1.0, core.start).start()
@@ -234,6 +185,26 @@ def running():
 			pass
 	return False
 
+def start_break(break_obj):
+	if not plugins.start_break(break_obj):
+		return False
+	# Get the ASCII widgets content from plugins
+	plugins_data = plugins.get_ascii_widgets(break_obj)
+	break_screen.show_message(break_obj, plugins_data)
+	return True
+
+def countdown(countdown, seconds):
+	break_screen.show_count_down(countdown, seconds)
+	if not plugins.countdown(countdown, seconds):
+		return False
+	return True
+
+def stop_break():
+	break_screen.close()
+	if not plugins.stop_break():
+		return False
+	return True
+
 
 def main():
 	"""
@@ -244,43 +215,43 @@ def main():
 
 	logging.info("Starting Safe Eyes")
 
-	# Import the dependencies
-	Utility.import_dependencies()
-
 	if not running():
 
 		global break_screen
 		global core
 		global config
-		global notification
-		global tray_icon
 		global language
 		global context
 		global plugins
-		global system_lock_command
 
 		config = Utility.read_config()
 
 		context = {}
 		language = Utility.load_language(config['language'])
-		# Get the lock command only one time
-		if config['lock_screen_command']:
-			system_lock_command = config['lock_screen_command']
-		else:
-			system_lock_command = Utility.lock_screen_command()
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
 		context['desktop'] = Utility.desktop_environment()
+		context['language'] = language
+		context['api'] = {}
+		context['api']['show_settings'] = show_settings
+		context['api']['show_about'] = show_about
+		context['api']['enable_safeeyes'] = enable_safeeyes
+		context['api']['disable_safeeyes'] = disable_safeeyes
+		context['api']['on_quit'] = on_quit
 
-		tray_icon = TrayIcon(config, language, show_settings, show_about, enable_safeeyes, disable_safeeyes, on_quit)
 		break_screen = BreakScreen(context, on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
 		break_screen.initialize(config, language)
-		notification = Notification(context, language)
-		plugins = Plugins(config)
-		core = SafeEyesCore(context, show_notification, show_alert, close_alert, break_screen.show_count_down, tray_icon.next_break_time)
+		plugins = PluginManager(context, config)
+		core = SafeEyesCore(context)
+		core.onPreBreak += plugins.pre_break
+		core.onStartBreak += start_break
+		core.onCountDown += countdown
+		core.onStopBreak += stop_break
+		core.onUpdateNextBreak += plugins.update_next_break
 		core.initialize(config, language)
-		plugins.start(context)		# Call the start method of all plugins
+		plugins.init(context, config)
+		plugins.start()		# Call the start method of all plugins
 		core.start()
 
 		handle_system_suspend()

@@ -1,0 +1,15 @@
+{
+    "meta": {
+        "name": "Notification",
+        "description": "Show notification during the pre-break time",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": []
+    },
+    "settings": [],
+    "resources": []
+}

@@ -22,7 +22,7 @@ from gi.repository import Gtk, Gdk, GLib, GdkX11
 from html.parser import HTMLParser
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
-import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, wave
+import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, imp
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -46,46 +46,6 @@ def import_dependencies():
 		pyaudio = __import__("pyaudio")
 	except ImportError:
 		logging.warning('Install pyaudio for audible notifications.')
-
-
-def play_notification():
-	"""
-	Play the alert.wav
-	"""
-	if pyaudio:
-		logging.info('Playing audible alert')
-		CHUNK = 1024
-
-		try:
-			# Open the sound file
-			path = get_resource_path('alert.wav')
-			if path is None:
-				return
-			sound = wave.open(path, 'rb')
-
-			# Create a sound stream
-			wrapper = pyaudio.PyAudio()
-			stream = wrapper.open(format=wrapper.get_format_from_width(
-				sound.getsampwidth()),
-				channels=sound.getnchannels(),
-				rate=sound.getframerate(),
-				output=True)
-
-			# Write file data into the sound stream
-			data = sound.readframes(CHUNK)
-			while data != b'':
-				stream.write(data)
-				data = sound.readframes(CHUNK)
-
-			# Close steam
-			stream.stop_stream()
-			stream.close()
-			sound.close()
-			wrapper.terminate()
-
-		except Exception as e:
-			logging.warning('Unable to play audible alert')
-			logging.exception(e)
 
 
 def get_resource_path(resource_name):
@@ -290,44 +250,6 @@ def desktop_environment():
 	return 'unknown'
 
 
-def lock_screen_command():
-	"""
-	Function tries to detect the screensaver command based on the current envinroment
-	Possible results:
-		Gnome, Unity, Budgie:		['gnome-screensaver-command', '--lock']
-		Cinnamon:					['cinnamon-screensaver-command', '--lock']
-		Pantheon, LXDE:				['light-locker-command', '--lock']
-		Mate:						['mate-screensaver-command', '--lock']
-		KDE:						['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-		XFCE:						['xflock4']
-		Otherwise:					None
-	"""
-	desktop_session = os.environ.get('DESKTOP_SESSION')
-	current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
-	if desktop_session is not None:
-		desktop_session = desktop_session.lower()
-		if ('xfce' in desktop_session or desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop)) and command_exist('xflock4'):
-			return ['xflock4']
-		elif desktop_session == 'cinnamon' and command_exist('cinnamon-screensaver-command'):
-			return ['cinnamon-screensaver-command', '--lock']
-		elif (desktop_session == 'pantheon' or desktop_session.startswith('lubuntu')) and command_exist('light-locker-command'):
-			return ['light-locker-command', '--lock']
-		elif desktop_session == 'mate' and command_exist('mate-screensaver-command'):
-			return ['mate-screensaver-command', '--lock']
-		elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
-			return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-		elif desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
-			if command_exist('gnome-screensaver-command'):
-				return ['gnome-screensaver-command', '--lock']
-			else:
-				# From Gnome 3.8 no gnome-screensaver-command
-				return ['dbus-send', '--type=method_call', '--dest=org.gnome.ScreenSaver', '/org/gnome/ScreenSaver', 'org.gnome.ScreenSaver.Lock']
-		elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-			if 'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID') and command_exist('gnome-screensaver-command'):
-				# Gnome 2
-				return ['gnome-screensaver-command', '--lock']
-	return None
-
 
 def lock_desktop(command):
 	"""
@@ -358,6 +280,15 @@ def command_exist(command):
 	else:
 		return False
 
+def module_exist(module):
+	"""
+	Check wther the given Python module exists or not.
+	"""
+	try:
+		imp.find_module(module)
+		return True
+	except ImportError:
+		return False
 
 def merge_configs(new_config, old_config):
 	"""
@@ -419,7 +350,7 @@ def intialize_logging():
 	log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
 	# Apped the logs and overwrite once reached 5MB
-	handler = RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
+	handler = logging.StreamHandler() # RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
 	handler.setFormatter(log_formatter)
 	handler.setLevel(logging.INFO)
 

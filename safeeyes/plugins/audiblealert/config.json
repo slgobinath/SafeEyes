@@ -1,0 +1,15 @@
+{
+    "meta": {
+        "name": "Audible Alert",
+        "description": "Play an audible alert after breaks",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": ["pyaudio"],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": []
+    },
+    "settings": [],
+    "resources": ["alert.wav"]
+}

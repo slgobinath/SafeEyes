@@ -103,10 +103,12 @@ class BreakScreen:
 		timeformat = '{:02d}:{:02d}'.format(mins, secs)
 		GLib.idle_add(lambda: self.__update_count_down(timeformat))
 
-	def show_message(self, message, image_path, plugins_data):
+	def show_message(self, break_obj, plugins_data):
 		"""
 		Show the break screen with the given message on all displays.
 		"""
+		message = break_obj.name
+		image_path = break_obj.image
 		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= 0
 		GLib.idle_add(lambda: self.__show_break_screen(message, image_path, plugins_data))
 

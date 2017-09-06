@@ -1,7 +1,7 @@
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
-# Copyright (C) 2016  Gobinath
+# Copyright (C) 2017  Gobinath
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,16 +23,21 @@ from gi.repository import Gtk
 from gi.repository import AppIndicator3 as appindicator
 from safeeyes import Utility
 
-# Global variables
-APPINDICATOR_ID = 'safeeyes'
+"""
+Safe Eyes tray icon plugin
+"""
 
+APPINDICATOR_ID = 'safeeyes_2'
+context = None
+tray_icon = None
+safeeyes_config = None
 
 class TrayIcon:
 	"""
 	Create and show the tray icon along with the tray menu.
 	"""
 
-	def __init__(self, config, language, on_show_settings, on_show_about, on_enable, on_disable, on_quite):
+	def __init__(self, context, config, language, on_show_settings, on_show_about, on_enable, on_disable, on_quite):
 		logging.info("Initialize the tray icon")
 		self.on_show_settings = on_show_settings
 		self.on_show_about = on_show_about
@@ -45,13 +50,12 @@ class TrayIcon:
 		self.wakeup_time = None
 		self.idle_condition = threading.Condition()
 		self.lock = threading.Lock()
+		self.config = config
 
 		# Construct the tray icon
 		self.indicator = appindicator.Indicator.new(
 			APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
 		self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
-
-		self.initialize(config)
 
 		# Construct the context menu
 		self.menu = Gtk.Menu()
@@ -135,11 +139,12 @@ class TrayIcon:
 
 		self.indicator.set_menu(self.menu)
 
-	def initialize(self, config):
+	def initialize(self, context, config):
 		"""
 		Initialize the tray icon by setting the config.
 		"""
 		self.config = config
+		self.set_labels(context['language'])
 
 	def set_labels(self, language):
 		"""
@@ -297,3 +302,38 @@ class TrayIcon:
 		with self.lock:
 			if not self.active:
 				Utility.execute_main_thread(self.item_enable.activate)
+
+
+def init(ctx, safeeyes_cfg, plugin_config):
+	"""
+	Initialize the tray icon.
+	"""
+	global context
+	global tray_icon
+	global safeeyes_config
+	context = ctx
+	safeeyes_config = safeeyes_cfg
+	if not tray_icon:
+		tray_icon = TrayIcon(context, safeeyes_config, context['language'], ctx['api']['show_settings'], ctx['api']['show_about'], ctx['api']['enable_safeeyes'], ctx['api']['disable_safeeyes'], ctx['api']['on_quit'])
+	else:
+		tray_icon.initialize(context, safeeyes_cfg)
+
+def update_next_break(dateTime):
+	"""
+	Update the next break time.
+	"""
+	tray_icon.next_break_time(dateTime)
+
+def on_pre_break(break_obj):
+	"""
+	Disable the menu if strict_break is enabled
+	"""
+	if safeeyes_config['strict_break']:
+		tray_icon.lock_menu()
+
+def on_start_break(break_obj):
+	"""
+	Enable the menu after the pre_wait time.
+	"""
+	if safeeyes_config['strict_break']:
+		tray_icon.unlock_menu()

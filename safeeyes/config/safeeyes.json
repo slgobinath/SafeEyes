@@ -1,6 +1,6 @@
 {
     "meta": {
-            "config_version": "5.0.1"
+            "config_version": "6.0.0"
     },
     "allow_postpone": false,
     "break_interval": 15,
@@ -81,5 +81,18 @@
     "custom_exercises": {
 
     },
-    "plugins": []
+    "plugins": [
+        {
+            "id": "notification",
+            "enabled": true
+        },
+        {
+            "id": "audiblealert",
+            "enabled": true
+        },
+        {
+            "id": "trayicon",
+            "enabled": true
+        }
+    ]
 }

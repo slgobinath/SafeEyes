@@ -1,0 +1,22 @@
+{
+    "meta": {
+        "name": "Screen saver",
+        "description": "Lock the screen after long breaks",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": []
+    },
+    "settings": [
+        {
+            "id": "command",
+            "label": "screen_saver_command",
+            "type": "TEXT",
+            "default": ""
+        }
+    ],
+    "resources": []
+}
