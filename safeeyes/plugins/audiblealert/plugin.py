@@ -16,11 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging, pyaudio, wave
-gi.require_version('Notify', '0.7')
-from gi.repository import Notify
+import gi, logging
 from safeeyes import Utility
-from safeeyes.model import BreakType
 
 """
 Safe Eyes audible alert plugin
@@ -45,34 +42,12 @@ def on_stop_break():
 		return
 
 	logging.info('Playing audible alert')
-	CHUNK = 1024
 	try:
 		# Open the sound file
 		path = Utility.get_resource_path('alert.wav')
 		if path is None:
 			return
-		sound = wave.open(path, 'rb')
-
-		# Create a sound stream
-		wrapper = pyaudio.PyAudio()
-		stream = wrapper.open(format=wrapper.get_format_from_width(
-			sound.getsampwidth()),
-			channels=sound.getnchannels(),
-			rate=sound.getframerate(),
-			output=True)
-
-		# Write file data into the sound stream
-		data = sound.readframes(CHUNK)
-		while data != b'':
-			stream.write(data)
-			data = sound.readframes(CHUNK)
-
-		# Close steam
-		stream.stop_stream()
-		stream.close()
-		sound.close()
-		wrapper.terminate()
+		Utility.execute_command('aplay', [path])
 
 	except Exception as e:
-		logging.warning('Unable to play audible alert')
-		logging.exception(e)
+		logging.error('Unable to play audible alert')

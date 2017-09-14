@@ -85,8 +85,4 @@ def on_stop_break():
 	Lock the screen after 
 	"""
 	if lock_screen:
-		try:
-			subprocess.Popen(lock_screen_command)
-		except Exception as e:
-			logging.error('Error in executing the commad' + str(lock_screen_command) + ' to lock screen')
-
+		Utility.execute_command(lock_screen_command)

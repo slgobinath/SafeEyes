@@ -5,8 +5,8 @@
         "version": "0.0.1"
     },
     "dependencies": {
-        "python_modules": ["pyaudio"],
-        "shell_commands": [],
+        "python_modules": [],
+        "shell_commands": ["aplay"],
         "operating_systems": [],
         "desktop_environments": []
     },

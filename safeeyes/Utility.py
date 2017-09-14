@@ -251,15 +251,19 @@ def desktop_environment():
 
 
 
-def lock_desktop(command):
+def execute_command(command, args=[]):
 	"""
-	Lock the screen using the predefined commands
+	Execute the shell command without waiting for its response.
 	"""
 	if command:
+		command_to_execute = [command]
+		if args:
+			command_to_execute.extend(args)
 		try:
-			subprocess.Popen(command)
+			subprocess.Popen(command_to_execute)
 		except Exception as e:
-			logging.error('Error in executing the commad' + str(command) + ' to lock screen')
+			logging.error('Error in executing the commad' + str(command))
+			print(e)
 
 
 def html_to_text(html):

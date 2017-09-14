@@ -259,6 +259,7 @@ class TrayIcon:
 				self.item_info.set_sensitive(True)
 				self.item_enable.set_sensitive(False)
 				self.item_disable.set_sensitive(True)
+				self.item_manual_break.set_sensitive(True)
 				self.on_enable()
 				# Notify all schedulers
 				self.idle_condition.acquire()
@@ -279,6 +280,7 @@ class TrayIcon:
 			self.item_info.set_sensitive(False)
 			self.item_enable.set_sensitive(True)
 			self.item_disable.set_sensitive(False)
+			self.item_manual_break.set_sensitive(False)
 			self.on_disable()
 
 			time_to_wait = args[1]
