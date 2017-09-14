@@ -138,7 +138,6 @@ class PluginManager:
 		"""
 		Execute the start_break(break_obj) function of plugins.
 		"""
-		print("Start break "+ str(self.__plugins_on_start_break))
 		for plugin in self.__plugins_on_start_break:
 			if plugin['module'].on_start_break(break_obj):
 				return False

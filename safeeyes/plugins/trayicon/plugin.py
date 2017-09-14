@@ -37,13 +37,14 @@ class TrayIcon:
 	Create and show the tray icon along with the tray menu.
 	"""
 
-	def __init__(self, context, config, language, on_show_settings, on_show_about, on_enable, on_disable, on_quite):
+	def __init__(self, context, config, language):
 		logging.info("Initialize the tray icon")
-		self.on_show_settings = on_show_settings
-		self.on_show_about = on_show_about
-		self.on_quite = on_quite
-		self.on_enable = on_enable
-		self.on_disable = on_disable
+		self.on_show_settings = context['api']['show_settings']
+		self.on_show_about = context['api']['show_about']
+		self.on_quite = context['api']['on_quit']
+		self.on_enable = context['api']['enable_safeeyes']
+		self.on_disable = context['api']['disable_safeeyes']
+		self.take_break = context['api']['take_break']
 		self.language = language
 		self.dateTime = None
 		self.active = True
@@ -111,6 +112,10 @@ class TrayIcon:
 		self.item_disable.set_submenu(self.sub_menu_disable)
 
 		# Settings menu item
+		self.item_manual_break = Gtk.MenuItem()
+		self.item_manual_break.connect('activate', self.on_manual_break_clicked)
+
+		# Settings menu item
 		self.item_settings = Gtk.MenuItem()
 		self.item_settings.connect('activate', self.show_settings)
 
@@ -132,6 +137,7 @@ class TrayIcon:
 		self.menu.append(self.item_separator)
 		self.menu.append(self.item_enable)
 		self.menu.append(self.item_disable)
+		self.menu.append(self.item_manual_break)
 		self.menu.append(self.item_settings)
 		self.menu.append(self.item_about)
 		self.menu.append(self.item_quit)
@@ -167,6 +173,7 @@ class TrayIcon:
 			else:
 				self.item_info.set_label(self.language['messages']['disabled_until_restart'])
 
+		self.item_manual_break.set_label('Take the break now')
 		self.item_settings.set_label(self.language['ui_controls']['settings'])
 		self.item_about.set_label(self.language['ui_controls']['about'])
 		self.item_quit.set_label(self.language['ui_controls']['quit'])
@@ -231,6 +238,12 @@ class TrayIcon:
 			self.indicator.set_label('', '')
 		# Update the menu item label
 		Utility.execute_main_thread(self.item_info.set_label, message)
+
+	def on_manual_break_clicked(self, *args):
+		"""
+		Trigger a break manually.
+		"""
+		self.take_break()
 
 	def on_enable_clicked(self, *args):
 		"""
@@ -314,7 +327,7 @@ def init(ctx, safeeyes_cfg, plugin_config):
 	context = ctx
 	safeeyes_config = safeeyes_cfg
 	if not tray_icon:
-		tray_icon = TrayIcon(context, safeeyes_config, context['language'], ctx['api']['show_settings'], ctx['api']['show_about'], ctx['api']['enable_safeeyes'], ctx['api']['disable_safeeyes'], ctx['api']['on_quit'])
+		tray_icon = TrayIcon(context, safeeyes_config, context['language'])
 	else:
 		tray_icon.initialize(context, safeeyes_cfg)
 

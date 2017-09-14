@@ -250,6 +250,7 @@ def main():
 		core.onStopBreak += stop_break
 		core.onUpdateNextBreak += plugins.update_next_break
 		core.initialize(config, language)
+		context['api']['take_break'] = core.take_break
 		plugins.init(context, config)
 		plugins.start()		# Call the start method of all plugins
 		core.start()

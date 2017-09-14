@@ -42,7 +42,6 @@ def on_start():
 	Do not return anything here.
 	Use this function if you want to do anything on startup.
 	"""
-	print('Initialize the notification')
 	Notify.init(APPINDICATOR_ID)
 
 def on_pre_break(break_obj):
@@ -69,12 +68,15 @@ def on_start_break(break_obj):
 	Close the notification.
 	"""
 	logging.info('Close pre-break notification')
-	try:
-		notification.close()
-	except:
-		# Some Linux systems automatically close the notification.
+	global notification
+	if notification:
+		try:
+			notification.close()
+			notification = None
+		except:
+			# Some Linux systems automatically close the notification.
+			pass
 		pass
-	pass
 
 def on_exit():
 	"""
