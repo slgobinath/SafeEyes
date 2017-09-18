@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,6 +16,9 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+SafeEyesCore provides the core functionalities of Safe Eyes.
+"""
 
 import datetime
 import logging
