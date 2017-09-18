@@ -18,7 +18,6 @@
 
 import os, logging
 from safeeyes import Utility
-from safeeyes.model import BreakType
 
 """
 Safe Eyes Screensaver plugin
@@ -91,7 +90,7 @@ def on_start_break(break_obj):
 	global seconds_passed
 	seconds_passed = 0
 	if lock_screen_command:
-		lock_screen = break_obj.type == BreakType.LONG_BREAK
+		lock_screen = break_obj.is_long_break()
 
 def on_countdown(countdown, seconds):
 	"""
