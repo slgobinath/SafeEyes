@@ -16,9 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging, subprocess, threading
-from safeeyes import Utility
+import logging
 from safeeyes.model import State
+from safeeyes import Utility
+import subprocess
+import threading
+
 
 """
 Safe Eyes smart pause plugin
@@ -33,6 +36,7 @@ enable_safe_eyes = None
 disable_safe_eyes = None
 smart_pause_activated = False
 
+
 def __system_idle_time():
 	"""
 	Get system idle time in minutes.
@@ -40,7 +44,7 @@ def __system_idle_time():
 	"""
 	try:
 		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000    # Convert to minutes
-	except:
+	except Exception:
 		return 0
 
 
@@ -53,6 +57,7 @@ def __is_active():
 		is_active = active
 	return is_active
 
+
 def __set_active(is_active):
 	"""
 	Thread safe function to change the state of the plugin.
@@ -60,6 +65,7 @@ def __set_active(is_active):
 	global active
 	with lock:
 		active = is_active
+
 
 def init(ctx, safeeyes_config, plugin_config):
 	"""
@@ -74,6 +80,7 @@ def init(ctx, safeeyes_config, plugin_config):
 	enable_safe_eyes = context['api']['enable_safeeyes']
 	disable_safe_eyes = context['api']['disable_safeeyes']
 	idle_time = plugin_config['idle_time']
+
 
 def __start_idle_monitor():
 	"""
@@ -98,6 +105,7 @@ def __start_idle_monitor():
 				logging.info('Resume Safe Eyes due to user activity')
 				enable_safe_eyes()
 
+
 def on_start():
 	"""
 	Start a thread to continuously call xprintidle.
@@ -108,6 +116,7 @@ def on_start():
 		logging.debug('Start Smart Pause plugin')
 		__set_active(True)
 		Utility.start_thread(__start_idle_monitor)
+
 
 def on_stop():
 	"""

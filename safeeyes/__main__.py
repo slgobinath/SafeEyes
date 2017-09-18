@@ -253,7 +253,7 @@ def main():
 		context['version'] = SAFE_EYES_VERSION
 		context['desktop'] = Utility.desktop_environment()
 		context['language'] = language
-		context['F>>locale'] = locale
+		context['locale'] = locale
 		context['api'] = {}
 		context['api']['show_settings'] = show_settings
 		context['api']['show_about'] = show_about

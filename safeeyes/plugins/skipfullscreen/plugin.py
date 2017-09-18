@@ -18,9 +18,11 @@
 
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
-import subprocess, logging, re
-from safeeyes import Utility
+from gi.repository import Gdk
+import logging
+import re
+import subprocess
+
 
 """
 Safe Eyes Skip Full Screen plugin
@@ -29,6 +31,7 @@ Safe Eyes Skip Full Screen plugin
 context = None
 skip_break_window_classes = []
 take_break_window_classes = []
+
 
 def is_active_window_skipped(unfullscreen_allowed=False):
 	"""
@@ -61,7 +64,7 @@ def is_active_window_skipped(unfullscreen_allowed=False):
 						if is_fullscreen and unfullscreen_allowed:
 							try:
 								active_window.unfullscreen()
-							except:
+							except Exception:
 								logging.error('Error in unfullscreen the window ' + process)
 								pass
 						return False
@@ -70,10 +73,12 @@ def is_active_window_skipped(unfullscreen_allowed=False):
 
 	return False
 
+
 def init(ctx, safeeyes_config, plugin_config):
 	global context
 	logging.debug('Initialize Skip Fullscreen plugin')
 	context = ctx
+
 
 def on_start_break(break_obj):
 	"""
