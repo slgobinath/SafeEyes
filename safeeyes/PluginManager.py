@@ -160,7 +160,7 @@ class PluginManager(object):
 		"""
 		Execute the on_countdown(countdown, seconds) function of plugins.
 		"""
-		print("Countdown " + str(countdown))
+		logging.info("Countdown: elapsed " + str(countdown) + " seconds, " + str(seconds) + " seconds more")
 		for plugin in self.__plugins_on_countdown:
 			plugin['module'].on_countdown(countdown, seconds)
 		return True
