@@ -256,11 +256,11 @@ def main():
 		break_screen.initialize(config, language)
 		plugins = PluginManager(context, config)
 		core = SafeEyesCore(context)
-		core.onPreBreak += plugins.pre_break
-		core.onStartBreak += start_break
-		core.onCountDown += countdown
-		core.onStopBreak += stop_break
-		core.onUpdateNextBreak += plugins.update_next_break
+		core.on_pre_break += plugins.pre_break
+		core.on_start_break += start_break
+		core.on_count_down += countdown
+		core.on_stop_break += stop_break
+		core.on_update_next_break += plugins.update_next_break
 		core.initialize(config, language)
 		context['api']['take_break'] = core.take_break
 		plugins.init(context, config)

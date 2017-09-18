@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,294 +16,305 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+SafeEyesCore provides the core functionalities of Safe Eyes.
+"""
 
+import datetime
+import logging
+import threading
+import time
 
-import time, datetime, threading, logging, sys
 from safeeyes import Utility
 from safeeyes.model import Break, BreakType, EventHook, State
 
 
-class SafeEyesCore:
-	"""
-	Core of Safe Eyes which runs the scheduler and notifies the breaks.
-	"""
+class SafeEyesCore(object):
+    """
+    Core of Safe Eyes runs the scheduler and notifies the breaks.
+    """
 
-	def __init__(self, context):
-		"""
-		Create an instance of SafeEyesCore and initialize the variables.
-		"""
-		self.next_break_index = 0;
-		self.running = False
-		# This event is fired before <time-to-prepare> for a break
-		self.onPreBreak = EventHook()
-		# This event is fired at the start of a break
-		self.onStartBreak = EventHook()
-		# This event is fired during every count down
-		self.onCountDown = EventHook()
-		# This event is fired at the end of a break
-		self.onStopBreak = EventHook()
-		# This event is fired when deciding the next break time
-		self.onUpdateNextBreak = EventHook()
-		self.waiting_condition = threading.Condition()
-		self.lock = threading.Lock()
-		self.context = context
-		self.context['skipped'] = False
-		self.context['postponed'] = False
-		self.context['state'] = State.WAITING
+    def __init__(self, context):
+        """
+        Create an instance of SafeEyesCore and initialize the variables.
+        """
+        self.break_count = 0
+        self.break_interval = 0
+        self.breaks = None
+        self.long_break_duration = 0
+        self.next_break_index = 0
+        self.postpone_duration = 0
+        self.pre_break_warning_time = 0
+        self.running = False
+        self.short_break_duration = 0
+        # This event is fired before <time-to-prepare> for a break
+        self.on_pre_break = EventHook()
+        # This event is fired at the start of a break
+        self.on_start_break = EventHook()
+        # This event is fired during every count down
+        self.on_count_down = EventHook()
+        # This event is fired at the end of a break
+        self.on_stop_break = EventHook()
+        # This event is fired when deciding the next break time
+        self.on_update_next_break = EventHook()
+        self.waiting_condition = threading.Condition()
+        self.lock = threading.Lock()
+        self.context = context
+        self.context['skipped'] = False
+        self.context['postponed'] = False
+        self.context['state'] = State.WAITING
 
-	def initialize(self, config, language):
-		"""
-		Initialize the internal properties from configuration
-		"""
-		logging.info("Initialize the core")
-		self.breaks = []
-		self.pre_break_warning_time = config['pre_break_warning_time']
-		self.long_break_duration = config['long_break_duration']
-		self.short_break_duration = config['short_break_duration']
-		self.break_interval = config['break_interval']
-		self.postpone_duration = config['postpone_duration']
+    def initialize(self, config, language):
+        """
+        Initialize the internal properties from configuration
+        """
+        logging.info("Initialize the core")
+        self.breaks = []
+        self.pre_break_warning_time = config['pre_break_warning_time']
+        self.long_break_duration = config['long_break_duration']
+        self.short_break_duration = config['short_break_duration']
+        self.break_interval = config['break_interval']
+        self.postpone_duration = config['postpone_duration']
 
-		exercises = language['exercises'].copy()
-		exercises.update(config['custom_exercises'])
-		self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
-		self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
-		self.break_count = len(self.breaks)
+        exercises = language['exercises'].copy()
+        exercises.update(config['custom_exercises'])
+        self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
+        self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
+        self.break_count = len(self.breaks)
 
-	def start(self):
-		"""
-		Start Safe Eyes is it is not running already.
-		"""
-		with self.lock:
-			if not self.running:
-				logging.info("Start Safe Eyes core")
-				self.running = True
-				Utility.start_thread(self.__scheduler_job)
+    def start(self):
+        """
+        Start Safe Eyes is it is not running already.
+        """
+        with self.lock:
+            if not self.running:
+                logging.info("Start Safe Eyes core")
+                self.running = True
+                Utility.start_thread(self.__scheduler_job)
 
-	def stop(self):
-		"""
-		Stop Safe Eyes if it is running.
-		"""
-		with self.lock:
-			if not self.running:
-				return
+    def stop(self):
+        """
+        Stop Safe Eyes if it is running.
+        """
+        with self.lock:
+            if not self.running:
+                return
 
-			logging.info("Stop Safe Eye core")
+            logging.info("Stop Safe Eye core")
 
-			# Prevent resuming from a long break
-			if self.__is_long_break():
-				# Next break will be a long break.
-				self.__select_next_break()
-				pass
+            # Prevent resuming from a long break
+            if self.__is_long_break():
+                # Next break will be a long break.
+                self.__select_next_break()
 
-			# Stop the break thread
-			self.waiting_condition.acquire()
-			self.running = False
-			self.context['state'] = State.STOPPED
-			self.waiting_condition.notify_all()
-			self.waiting_condition.release()
+            # Stop the break thread
+            self.waiting_condition.acquire()
+            self.running = False
+            self.context['state'] = State.STOPPED
+            self.waiting_condition.notify_all()
+            self.waiting_condition.release()
 
-	def skip(self):
-		"""
-		User skipped the break using Skip button
-		"""
-		self.context['skipped'] = True
+    def skip(self):
+        """
+        User skipped the break using Skip button
+        """
+        self.context['skipped'] = True
 
-	def postpone(self):
-		"""
-		User postponed the break using Postpone button
-		"""
-		self.context['postponed'] = True
-	
-	def take_break(self):
-		"""
-		Calling this method stops the scheduler and show the next break screen
-		"""
-		if not self.context['state'] == State.WAITING:
-			return
-		Utility.start_thread(self.__take_break)
-	
-	def __take_break(self):
-		"""
-		Show the next break screen
-		"""
-		logging.info('Take a break due to external request')
+    def postpone(self):
+        """
+        User postponed the break using Postpone button
+        """
+        self.context['postponed'] = True
 
-		with self.lock:
-			if not self.running:
-				return
+    def take_break(self):
+        """
+        Calling this method stops the scheduler and show the next break screen
+        """
+        if not self.context['state'] == State.WAITING:
+            return
+        Utility.start_thread(self.__take_break)
 
-			logging.info("Stop the scheduler")
+    def __take_break(self):
+        """
+        Show the next break screen
+        """
+        logging.info('Take a break due to external request')
 
-			# Stop the break thread
-			self.waiting_condition.acquire()
-			self.running = False
-			self.waiting_condition.notify_all()
-			self.waiting_condition.release()
-			time.sleep(1)	# Wait for 1 sec to ensure the sceduler is dead
-			self.running = True
+        with self.lock:
+            if not self.running:
+                return
 
-		Utility.execute_main_thread(self.__fire_start_break)
+            logging.info("Stop the scheduler")
+
+            # Stop the break thread
+            self.waiting_condition.acquire()
+            self.running = False
+            self.waiting_condition.notify_all()
+            self.waiting_condition.release()
+            time.sleep(1)	# Wait for 1 sec to ensure the sceduler is dead
+            self.running = True
+
+        Utility.execute_main_thread(self.__fire_start_break)
 
 
-	def __scheduler_job(self):
-		"""
-		Scheduler task to execute during every interval
-		"""
-		if not self.running:
-			return
+    def __scheduler_job(self):
+        """
+        Scheduler task to execute during every interval
+        """
+        if not self.running:
+            return
 
-		self.context['state'] = State.WAITING
-		time_to_wait = self.break_interval    # In minutes
+        self.context['state'] = State.WAITING
+        time_to_wait = self.break_interval    # In minutes
 
-		if self.context['postponed']:
-			# Wait until the postpone time
-			time_to_wait = self.postpone_duration
-			self.context['postponed'] = False
+        if self.context['postponed']:
+            # Wait until the postpone time
+            time_to_wait = self.postpone_duration
+            self.context['postponed'] = False
 
-		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
-		self.onUpdateNextBreak.fire(next_break_time)
+        next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
+        self.on_update_next_break.fire(next_break_time)
 
-		if self.__is_long_break():
-			self.context['break_type'] = 'long'
-		else:
-			self.context['break_type'] = 'short'
+        if self.__is_long_break():
+            self.context['break_type'] = 'long'
+        else:
+            self.context['break_type'] = 'short'
 
-		# Wait for the pre break warning period
-		logging.info("Waiting for {} minutes until next break".format(time_to_wait))
-		self.__wait_for(time_to_wait * 60)    # Convert to seconds
+        # Wait for the pre break warning period
+        logging.info("Waiting for %s minutes until next break", time_to_wait)
+        self.__wait_for(time_to_wait * 60)    # Convert to seconds
 
-		logging.info("Pre-break waiting is over")
+        logging.info("Pre-break waiting is over")
 
-		if not self.running:
-			return
+        if not self.running:
+            return
 
-		Utility.execute_main_thread(self.__fire_pre_break)
+        Utility.execute_main_thread(self.__fire_pre_break)
 
-	def __fire_pre_break(self):
-		"""
-		Show the notification and start the break after the notification.
-		"""
-		self.context['state'] = State.PRE_BREAK
-		if not self.onPreBreak.fire(self.breaks[self.next_break_index]):
-			# Plugins wanted to ignore this break
-			self.__start_next_break()
-			return
-		
-		Utility.start_thread(self.__wait_until_prepare)
-	
-	def __wait_until_prepare(self):
-		logging.info("Wait for {} seconds which is the time to prepare".format(self.pre_break_warning_time))
-		# Wait for the pre break warning period
-		self.__wait_for(self.pre_break_warning_time)
-		if not self.running:
-			return
-		Utility.execute_main_thread(self.__fire_start_break)
+    def __fire_pre_break(self):
+        """
+        Show the notification and start the break after the notification.
+        """
+        self.context['state'] = State.PRE_BREAK
+        if not self.on_pre_break.fire(self.breaks[self.next_break_index]):
+            # Plugins wanted to ignore this break
+            self.__start_next_break()
+            return
+        Utility.start_thread(self.__wait_until_prepare)
 
-	def __fire_start_break(self):
-		# Show the break screen
-		if not self.onStartBreak.fire(self.breaks[self.next_break_index]):
-			# Plugins wanted to ignore this break
-			self.__start_next_break()
-			return
-		Utility.start_thread(self.__start_break)
-		
-	def __start_break(self):
-		"""
-		Start the break screen.
-		"""
-		self.context['state'] = State.BREAK
-		break_obj = self.breaks[self.next_break_index]
-		countdown = break_obj.time
-		total_break_time = countdown
+    def __wait_until_prepare(self):
+        logging.info("Wait for %d seconds before the break", self.pre_break_warning_time)
+        # Wait for the pre break warning period
+        self.__wait_for(self.pre_break_warning_time)
+        if not self.running:
+            return
+        Utility.execute_main_thread(self.__fire_start_break)
 
-		while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
-			seconds = total_break_time - countdown
-			self.onCountDown.fire(countdown, seconds)
-			time.sleep(1)    # Sleep for 1 second
-			countdown -= 1
-		Utility.execute_main_thread(self.__fire_stop_break)
+    def __fire_start_break(self):
+        # Show the break screen
+        if not self.on_start_break.fire(self.breaks[self.next_break_index]):
+            # Plugins wanted to ignore this break
+            self.__start_next_break()
+            return
+        Utility.start_thread(self.__start_break)
 
-	def __fire_stop_break(self):
-		# Loop terminated because of timeout (not skipped) -> Close the break alert
-		if not self.context['skipped'] and not self.context['postponed']:
-			logging.info("Break is terminated automatically")
-			self.onStopBreak.fire()
+    def __start_break(self):
+        """
+        Start the break screen.
+        """
+        self.context['state'] = State.BREAK
+        break_obj = self.breaks[self.next_break_index]
+        countdown = break_obj.time
+        total_break_time = countdown
 
-		# Reset the skipped flag
-		self.context['skipped'] = False
-		self.__start_next_break()
+        while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
+            seconds = total_break_time - countdown
+            self.on_count_down.fire(countdown, seconds)
+            time.sleep(1)    # Sleep for 1 second
+            countdown -= 1
+        Utility.execute_main_thread(self.__fire_stop_break)
 
-	def __wait_for(self, duration):
-		"""
-		Wait until someone wake up or the timeout happens.
-		"""
-		self.waiting_condition.acquire()
-		self.waiting_condition.wait(duration)
-		self.waiting_condition.release()
+    def __fire_stop_break(self):
+        # Loop terminated because of timeout (not skipped) -> Close the break alert
+        if not self.context['skipped'] and not self.context['postponed']:
+            logging.info("Break is terminated automatically")
+            self.on_stop_break.fire()
 
-	def __select_next_break(self):
-		"""
-		Select the next break.
-		"""
-		self.next_break_index = (self.next_break_index + 1) % self.break_count
+        # Reset the skipped flag
+        self.context['skipped'] = False
+        self.__start_next_break()
 
-	def __is_long_break(self):
-		"""
-		Check if the next break is long break.
-		"""
-		return self.breaks[self.next_break_index].type is BreakType.LONG_BREAK
+    def __wait_for(self, duration):
+        """
+        Wait until someone wake up or the timeout happens.
+        """
+        self.waiting_condition.acquire()
+        self.waiting_condition.wait(duration)
+        self.waiting_condition.release()
 
-	def __start_next_break(self):
-		if not self.context['postponed']:
-			self.__select_next_break()
+    def __select_next_break(self):
+        """
+        Select the next break.
+        """
+        self.next_break_index = (self.next_break_index + 1) % self.break_count
 
-		if self.running:
-			# Schedule the break again
-			Utility.start_thread(self.__scheduler_job)
+    def __is_long_break(self):
+        """
+        Check if the next break is long break.
+        """
+        return self.breaks[self.next_break_index].type is BreakType.LONG_BREAK
 
-	def __init_breaks(self, type, break_configs, exercises, no_of_short_breaks_per_long_break = 0):
-		"""
-		Fill the self.breaks using short and local breaks.
-		"""
-		# Defin the default break time
-		default_break_time = self.short_break_duration
+    def __start_next_break(self):
+        if not self.context['postponed']:
+            self.__select_next_break()
 
-		# Duplicate short breaks to equally distribute the long breaks
-		if type is BreakType.LONG_BREAK:
-			default_break_time = self.long_break_duration
-			required_short_breaks = no_of_short_breaks_per_long_break * len(break_configs)
-			no_of_short_breaks = len(self.breaks)
-			short_break_index = 0
-			while no_of_short_breaks < required_short_breaks:
-				self.breaks.append(self.breaks[short_break_index])
-				short_break_index += 1
-				no_of_short_breaks += 1
-		
-		iteration = 1
-		for break_config in break_configs:
-			exercise_name = break_config['name']
-			name = None
+        if self.running:
+            # Schedule the break again
+            Utility.start_thread(self.__scheduler_job)
 
-			if exercise_name in exercises:
-				name = exercises[exercise_name]
-			else:
-				logging.error('Exercise not found: ' + exercise_name)
-				continue
+    def __init_breaks(self, break_type, break_configs, exercises, short_breaks_per_long_break=0):
+        """
+        Fill the self.breaks using short and local breaks.
+        """
+        # Defin the default break time
+        default_break_time = self.short_break_duration
 
-			break_time = break_config.get('time', default_break_time)
-			image = break_config.get('image')
-			plugins = None # break_config.get('plugins', config['plugins'])
+        # Duplicate short breaks to equally distribute the long breaks
+        if break_type is BreakType.LONG_BREAK:
+            default_break_time = self.long_break_duration
+            required_short_breaks = short_breaks_per_long_break * len(break_configs)
+            no_of_short_breaks = len(self.breaks)
+            short_break_index = 0
+            while no_of_short_breaks < required_short_breaks:
+                self.breaks.append(self.breaks[short_break_index])
+                short_break_index += 1
+                no_of_short_breaks += 1
 
-			# Validate time value
-			if not isinstance(break_time, int) or break_time <= 0:
-				logging.error('Invalid time in break: ' + str(break_config))
-				continue
+        iteration = 1
+        for break_config in break_configs:
+            exercise_name = break_config['name']
+            name = None
 
-			break_obj = Break(type, name, break_time, image, plugins)
-			if type is BreakType.SHORT_BREAK:
-				self.breaks.append(break_obj)
-			else:
-				# Long break
-				index = iteration * (no_of_short_breaks_per_long_break + 1) - 1
-				self.breaks.insert(index, break_obj)
-				iteration += 1
+            if exercise_name in exercises:
+                name = exercises[exercise_name]
+            else:
+                logging.error('Exercise not found: ' + exercise_name)
+                continue
+
+            break_time = break_config.get('time', default_break_time)
+            image = break_config.get('image')
+            plugins = None # break_config.get('plugins', config['plugins'])
+
+            # Validate time value
+            if not isinstance(break_time, int) or break_time <= 0:
+                logging.error('Invalid time in break: ' + str(break_config))
+                continue
+
+            break_obj = Break(break_type, name, break_time, image, plugins)
+            if break_type is BreakType.SHORT_BREAK:
+                self.breaks.append(break_obj)
+            else:
+                # Long break
+                index = iteration * (short_breaks_per_long_break + 1) - 1
+                self.breaks.insert(index, break_obj)
+                iteration += 1
