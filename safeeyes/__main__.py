@@ -18,17 +18,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, gi, json, dbus, logging, psutil, sys
-from threading import Timer
+import dbus
 from dbus.mainloop.glib import DBusGMainLoop
+import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from safeeyes.AboutDialog import AboutDialog
-from safeeyes.BreakScreen import BreakScreen
-from safeeyes.PluginManager import PluginManager
-from safeeyes.SafeEyesCore import SafeEyesCore
-from safeeyes.SettingsDialog import SettingsDialog
-from safeeyes import Utility
+import json
+import logging
+import os
+import psutil
+from AboutDialog import AboutDialog
+from BreakScreen import BreakScreen
+from PluginManager import PluginManager
+from SafeEyesCore import SafeEyesCore
+from SettingsDialog import SettingsDialog
+import Utility as Utility
+import sys
+from threading import Timer
 
 # Define necessary paths
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
@@ -185,6 +191,7 @@ def running():
 			pass
 	return False
 
+
 def start_break(break_obj):
 	if not plugins.start_break(break_obj):
 		return False
@@ -193,11 +200,13 @@ def start_break(break_obj):
 	break_screen.show_message(break_obj, plugins_data)
 	return True
 
+
 def countdown(countdown, seconds):
 	break_screen.show_count_down(countdown, seconds)
 	if not plugins.countdown(countdown, seconds):
 		return False
 	return True
+
 
 def stop_break():
 	break_screen.close()

@@ -21,7 +21,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 
-class AboutDialog:
+class AboutDialog(object):
 	"""
 	AboutDialog reads the about_dialog.glade and build the user interface using that file.
 	It shows the application name with version, a small description, license and the GitHub url.

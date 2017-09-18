@@ -16,13 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
+import logging
+from model import Break
+from model import BreakType
+from model import EventHook
+import Utility as Utility
+import threading
+import time
 
-import time, datetime, threading, logging, sys
-from safeeyes import Utility
-from safeeyes.model import Break, BreakType, EventHook
 
-
-class SafeEyesCore:
+class SafeEyesCore(object):
 	"""
 	Core of Safe Eyes which runs the scheduler and notifies the breaks.
 	"""
@@ -31,7 +35,7 @@ class SafeEyesCore:
 		"""
 		Create an instance of SafeEyesCore and initialize the variables.
 		"""
-		self.next_break_index = 0;
+		self.next_break_index = 0
 		self.running = False
 		# This event is fired before <time-to-prepare> for a break
 		self.onPreBreak = EventHook()
@@ -111,7 +115,7 @@ class SafeEyesCore:
 		User postponed the break using Postpone button
 		"""
 		self.context['postponed'] = True
-	
+
 	def take_break(self):
 		"""
 		Calling this method stops the scheduler and show the next break screen
@@ -119,7 +123,7 @@ class SafeEyesCore:
 		if not self.context['state'] == 'waiting':
 			return
 		Utility.start_thread(self.__take_break)
-	
+
 	def __take_break(self):
 		"""
 		Show the next break screen
@@ -137,11 +141,10 @@ class SafeEyesCore:
 			self.running = False
 			self.waiting_condition.notify_all()
 			self.waiting_condition.release()
-			time.sleep(1)	# Wait for 1 sec to ensure the sceduler is dead
+			time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
 			self.running = True
 
 		Utility.execute_main_thread(self.__fire_start_break)
-
 
 	def __scheduler_job(self):
 		"""
@@ -186,9 +189,9 @@ class SafeEyesCore:
 			# Plugins wanted to ignore this break
 			self.__start_next_break()
 			return
-		
+
 		Utility.start_thread(self.__wait_until_prepare)
-	
+
 	def __wait_until_prepare(self):
 		logging.info("Wait for {} seconds which is the time to prepare".format(self.pre_break_warning_time))
 		# Wait for the pre break warning period
@@ -204,7 +207,7 @@ class SafeEyesCore:
 			self.__start_next_break()
 			return
 		Utility.start_thread(self.__start_break)
-		
+
 	def __start_break(self):
 		"""
 		Start the break screen.
@@ -260,7 +263,7 @@ class SafeEyesCore:
 			# Schedule the break again
 			Utility.start_thread(self.__scheduler_job)
 
-	def __init_breaks(self, type, break_configs, exercises, no_of_short_breaks_per_long_break = 0):
+	def __init_breaks(self, type, break_configs, exercises, no_of_short_breaks_per_long_break=0):
 		"""
 		Fill the self.breaks using short and local breaks.
 		"""
@@ -277,7 +280,7 @@ class SafeEyesCore:
 				self.breaks.append(self.breaks[short_break_index])
 				short_break_index += 1
 				no_of_short_breaks += 1
-		
+
 		iteration = 1
 		for break_config in break_configs:
 			exercise_name = break_config['name']
@@ -291,7 +294,7 @@ class SafeEyesCore:
 
 			break_time = break_config.get('time', default_break_time)
 			image = break_config.get('image')
-			plugins = None # break_config.get('plugins', config['plugins'])
+			plugins = None  # break_config.get('plugins', config['plugins'])
 
 			# Validate time value
 			if not isinstance(break_time, int) or break_time <= 0:

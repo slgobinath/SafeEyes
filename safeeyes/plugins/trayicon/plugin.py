@@ -16,12 +16,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging, threading, datetime
+import datetime
+import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
-from gi.repository import Gtk
 from gi.repository import AppIndicator3 as appindicator
+from gi.repository import Gtk
+import logging
 from safeeyes import Utility
+import threading
 
 """
 Safe Eyes tray icon plugin
@@ -32,7 +35,8 @@ context = None
 tray_icon = None
 safeeyes_config = None
 
-class TrayIcon:
+
+class TrayIcon(object):
 	"""
 	Create and show the tray icon along with the tray menu.
 	"""
@@ -333,11 +337,13 @@ def init(ctx, safeeyes_cfg, plugin_config):
 	else:
 		tray_icon.initialize(context, safeeyes_cfg)
 
+
 def update_next_break(dateTime):
 	"""
 	Update the next break time.
 	"""
 	tray_icon.next_break_time(dateTime)
+
 
 def on_pre_break(break_obj):
 	"""
@@ -345,6 +351,7 @@ def on_pre_break(break_obj):
 	"""
 	if safeeyes_config['strict_break']:
 		tray_icon.lock_menu()
+
 
 def on_start_break(break_obj):
 	"""

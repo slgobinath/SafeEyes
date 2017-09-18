@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, logging
-from safeeyes import Utility
+import os
 from safeeyes.model import BreakType
+from safeeyes import Utility
 
 """
 Safe Eyes Screensaver plugin
@@ -27,6 +27,7 @@ Safe Eyes Screensaver plugin
 context = None
 lock_screen = False
 lock_screen_command = None
+
 
 def __lock_screen_command():
 	"""
@@ -66,6 +67,7 @@ def __lock_screen_command():
 				return ['gnome-screensaver-command', '--lock']
 	return None
 
+
 def init(ctx, safeeyes_config, plugin_config):
 	global context
 	global lock_screen_command
@@ -75,14 +77,16 @@ def init(ctx, safeeyes_config, plugin_config):
 	else:
 		lock_screen_command = __lock_screen_command()
 
+
 def on_start_break(break_obj):
 	global lock_screen
-	if lock_screen_command
+	if lock_screen_command:
 		lock_screen = break_obj.type == BreakType.LONG_BREAK
+
 
 def on_stop_break():
 	"""
-	Lock the screen after 
+	Lock the screen after
 	"""
 	if lock_screen:
 		Utility.execute_command(lock_screen_command)

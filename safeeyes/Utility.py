@@ -16,13 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import babel.dates
+from distutils.version import LooseVersion
+import errno
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gtk, Gdk, GLib, GdkX11
+from gi.repository import Gdk
+from gi.repository import GLib
 from html.parser import HTMLParser
-from distutils.version import LooseVersion
-from logging.handlers import RotatingFileHandler
-import babel.dates, os, errno, re, subprocess, threading, logging, locale, json, shutil, imp
+import imp
+import json
+import locale
+import logging
+import os
+import re
+import shutil
+import subprocess
+import threading
 
 bin_directory = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
@@ -72,7 +82,7 @@ def system_idle_time():
 	"""
 	try:
 		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000    # Convert to minutes
-	except:
+	except Exception:
 		return 0
 
 
@@ -125,7 +135,7 @@ def is_active_window_skipped(skip_break_window_classes, take_break_window_classe
 						if is_fullscreen and unfullscreen_allowed:
 							try:
 								active_window.unfullscreen()
-							except:
+							except Exception:
 								logging.error('Error in unfullscreen the window ' + process)
 								pass
 						return False
@@ -250,7 +260,6 @@ def desktop_environment():
 	return 'unknown'
 
 
-
 def execute_command(command, args=[]):
 	"""
 	Execute the shell command without waiting for its response.
@@ -284,6 +293,7 @@ def command_exist(command):
 	else:
 		return False
 
+
 def module_exist(module):
 	"""
 	Check wther the given Python module exists or not.
@@ -293,6 +303,7 @@ def module_exist(module):
 		return True
 	except ImportError:
 		return False
+
 
 def merge_configs(new_config, old_config):
 	"""
@@ -318,7 +329,7 @@ def __initialize_safeeyes():
 	# Remove the startup file
 	try:
 		os.remove(os.path.join(home_directory, os.path.join(startup_dir_path, 'safeeyes.desktop')))
-	except:
+	except Exception:
 		pass
 
 	# Create the ~/.config/safeeyes/style directory
@@ -347,14 +358,14 @@ def intialize_logging():
 	if not os.path.exists(config_directory):
 		try:
 			os.makedirs(config_directory)
-		except:
+		except Exception:
 			pass
 
 	# Configure logging.
 	log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
 	# Apped the logs and overwrite once reached 5MB
-	handler = logging.StreamHandler() # RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
+	handler = logging.StreamHandler()  # RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
 	handler.setFormatter(log_formatter)
 	handler.setLevel(logging.INFO)
 

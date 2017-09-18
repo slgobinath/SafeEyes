@@ -16,16 +16,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging, importlib, os, sys, inspect, copy, json
-from multiprocessing.pool import ThreadPool
+import importlib
+import inspect
+import json
+import logging
+import os
 from safeeyes import Utility
+import sys
+
 system_plugins_directory = os.path.join(Utility.bin_directory, 'plugins')
 plugins_directory = os.path.join(Utility.config_directory, 'plugins')
 sys.path.append(os.path.abspath(system_plugins_directory))
 # sys.path.append(os.path.abspath(plugins_directory))
 
 
-class PluginManager:
+class PluginManager(object):
 	"""
 	Imports the Safe Eyes plugins and calls the methods defined in those plugins.
 	"""
@@ -44,7 +49,7 @@ class PluginManager:
 
 		for plugin in config['plugins']:
 
-			if plugin['enabled']: # and os.path.isfile(os.path.join(system_plugins_directory, plugin['id'], plugin['id'] + '.py')):
+			if plugin['enabled']:  # and os.path.isfile(os.path.join(system_plugins_directory, plugin['id'], plugin['id'] + '.py')):
 				# System plugin found
 				plugin_config_path = os.path.join(system_plugins_directory, plugin['id'], 'config.json')
 				if not os.path.isfile(plugin_config_path):
@@ -100,7 +105,6 @@ class PluginManager:
 					plugin_obj['location'] = plugin['location'].lower()
 					self.__widget_plugins.append(plugin_obj)
 
-	
 	def init(self, context, config):
 		"""
 		Initialize all the plugins with init(context, safeeyes_config, plugin_config) function.
@@ -116,7 +120,7 @@ class PluginManager:
 		for plugin in self.__plugins_on_start:
 			plugin['module'].on_start()
 		return True
-	
+
 	def exit(self):
 		"""
 		Execute the on_exit() function of plugins.
@@ -141,7 +145,7 @@ class PluginManager:
 		for plugin in self.__plugins_on_start_break:
 			if plugin['module'].on_start_break(break_obj):
 				return False
-		
+
 		return True
 
 	def stop_break(self):
@@ -175,7 +179,7 @@ class PluginManager:
 		"""
 		output = {'left': '                                                  \n', 'right': '                                                  \n'}
 		return output
-		
+
 	def __has_method(self, module, method_name, no_of_args=0):
 		"""
 		Check whether the given function is defined in the module or not.

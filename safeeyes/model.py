@@ -18,7 +18,8 @@
 
 from enum import Enum
 
-class Break:
+
+class Break(object):
 	"""
 		An entity class which represents a break.
 	"""
@@ -28,16 +29,18 @@ class Break:
 		self.time = time
 		self.image = image
 		self.plugins = plugins
-	
+
 	def __str__(self):
 		return 'Break: {{name: "{}", type: {}, time: {}}}\n'.format(self.name, self.type, self.time)
 
 	def __repr__(self):
 		return str(self)
 
+
 class BreakType(Enum):
 	SHORT_BREAK = 1
 	LONG_BREAK = 2
+
 
 class EventHook(object):
 
