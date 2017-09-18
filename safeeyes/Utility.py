@@ -83,7 +83,7 @@ def execute_main_thread(target_function, args=None):
 		GLib.idle_add(lambda: target_function())
 
 
-def __system_locale():
+def system_locale():
 	"""
 	Return the system locale. If not available, return en_US.UTF-8.
 	"""
@@ -98,8 +98,8 @@ def format_time(time):
 	"""
 	Format time based on the system time.
 	"""
-	system_locale = __system_locale()
-	return babel.dates.format_time(time, format='short', locale=system_locale)
+	sys_locale = system_locale()
+	return babel.dates.format_time(time, format='short', locale=sys_locale)
 
 
 def mkdir(path):
@@ -128,8 +128,8 @@ def parse_language_code(lang_code):
 	# If it is system, use the system language
 	if lang_code == 'system':
 		logging.info('Use system language for Safe Eyes')
-		system_locale = __system_locale()
-		lang_code = system_locale[0:2].lower()
+		locale = system_locale()
+		lang_code = locale[0:2].lower()
 
 	# Check whether translation is available for this language.
 	# If not available, use English by default.

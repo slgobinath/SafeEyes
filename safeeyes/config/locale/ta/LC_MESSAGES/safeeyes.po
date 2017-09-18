@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: en\n"
+"Language: ta\n"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
@@ -65,3 +65,13 @@ msgstr "மீள ஆரம்பிக்கும் வரை"
 
 msgid "Quit"
 msgstr "நிறுத்து"
+
+# AboutDialog
+msgid "Close"
+msgstr "மூடு"
+
+msgid "description"
+msgstr "அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் பணியாற்றுவதால் ஏற்படும் கண் சோர்வை தடுக்கிறது."
+
+msgid "License"
+msgstr "மென்பொருள் உரிமம்"
