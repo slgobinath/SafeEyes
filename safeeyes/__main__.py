@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from AboutDialog import AboutDialog
+from BreakScreen import BreakScreen
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 import gi
@@ -26,15 +28,13 @@ from gi.repository import Gtk
 import json
 import logging
 import os
-import psutil
-from AboutDialog import AboutDialog
-from BreakScreen import BreakScreen
 from PluginManager import PluginManager
+import psutil
 from SafeEyesCore import SafeEyesCore
 from SettingsDialog import SettingsDialog
-import Utility as Utility
 import sys
 from threading import Timer
+import Utility as Utility
 
 # Define necessary paths
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")

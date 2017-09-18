@@ -81,7 +81,7 @@ def system_idle_time():
 	Return the idle time if xprintidle is available, otherwise return 0.
 	"""
 	try:
-		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000    # Convert to minutes
+		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / (60 * 1000)  # Convert milliseconds to minutes
 	except Exception:
 		return 0
 

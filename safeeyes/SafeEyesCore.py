@@ -21,9 +21,9 @@ import logging
 from model import Break
 from model import BreakType
 from model import EventHook
-import Utility as Utility
 import threading
 import time
+import Utility as Utility
 
 
 class SafeEyesCore(object):
@@ -171,7 +171,7 @@ class SafeEyesCore(object):
 
 		# Wait for the pre break warning period
 		logging.info("Waiting for {} minutes until next break".format(time_to_wait))
-		self.__wait_for(time_to_wait * 1)    # Convert to seconds
+		self.__wait_for(time_to_wait * 60)    # Convert minutes to seconds
 
 		logging.info("Pre-break waiting is over")
 
