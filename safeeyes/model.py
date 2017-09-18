@@ -42,6 +42,13 @@ class BreakType(Enum):
 	LONG_BREAK = 2
 
 
+class State(Enum):
+	WAITING = 0,
+	PRE_BREAK = 1
+	BREAK = 2,
+	STOPPED = 3
+
+
 class EventHook(object):
 
 	def __init__(self):

@@ -22,6 +22,7 @@ from AboutDialog import AboutDialog
 from BreakScreen import BreakScreen
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
+import gettext
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -35,6 +36,9 @@ from SettingsDialog import SettingsDialog
 import sys
 from threading import Timer
 import Utility as Utility
+
+gettext.install('safeeyes', 'safeeyes/config/locale')
+
 
 # Define necessary paths
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
@@ -69,7 +73,7 @@ def on_quit():
 	Listen to the tray menu quit action and stop the core, notification and the app itself.
 	"""
 	logging.info("Quit Safe Eyes")
-	plugins.exit()
+	plugins.stop()
 	core.stop()
 	Gtk.main_quit()
 
@@ -82,13 +86,15 @@ def handle_suspend_callback(sleeping):
 	if sleeping:
 		# Sleeping / suspending
 		if is_active:
+			logging.info("Stop Safe Eyes due to system suspend")
+			plugins.stop()
 			core.stop()
-			logging.info("Stopped Safe Eyes due to system suspend")
 	else:
 		# Resume from sleep
 		if is_active:
+			logging.info("Resume Safe Eyes after system wakeup")
+			plugins.start()
 			core.start()
-			logging.info("Resumed Safe Eyes after system wakeup")
 
 
 def handle_system_suspend():
@@ -154,6 +160,7 @@ def enable_safeeyes():
 	global is_active
 	is_active = True
 	core.start()
+	plugins.start()
 
 
 def disable_safeeyes():
@@ -162,6 +169,7 @@ def disable_safeeyes():
 	"""
 	global is_active
 	is_active = False
+	plugins.stop()
 	core.stop()
 
 
@@ -237,11 +245,15 @@ def main():
 
 		context = {}
 		language = Utility.load_language(config['language'])
+		# locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=['ta'])
+		locale = gettext.NullTranslations()
+		locale.install()
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
 		context['desktop'] = Utility.desktop_environment()
 		context['language'] = language
+		context['F>>locale'] = locale
 		context['api'] = {}
 		context['api']['show_settings'] = show_settings
 		context['api']['show_about'] = show_about

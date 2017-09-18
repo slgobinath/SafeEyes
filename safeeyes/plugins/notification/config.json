@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "Notification",
-        "description": "Show notification during the pre-break time",
+        "description": "Show a system notification brefore breaks",
         "version": "0.0.1"
     },
     "dependencies": {

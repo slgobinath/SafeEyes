@@ -39,7 +39,7 @@ class PluginManager(object):
 		logging.info('Load all the plugins')
 		self.__plugins_on_init = []
 		self.__plugins_on_start = []
-		self.__plugins_on_exit = []
+		self.__plugins_on_stop = []
 		self.__plugins_on_pre_break = []
 		self.__plugins_on_start_break = []
 		self.__plugins_on_stop_break = []
@@ -83,14 +83,14 @@ class PluginManager(object):
 
 				# Load the plugin module
 				module = importlib.import_module((plugin['id'] + '.plugin'))
-				plugin_obj = {'module': module, 'config': plugin_config, 'location': None}
-				logging.info("Module {} is loaded successfully".format(str(module)))
+				plugin_obj = {'module': module, 'config': plugin.get('settings', {}), 'location': None}
+				logging.info("Loading {}".format(str(module)))
 				if self.__has_method(module, 'init', 3):
 					self.__plugins_on_init.append(plugin_obj)
 				if self.__has_method(module, 'on_start'):
 					self.__plugins_on_start.append(plugin_obj)
-				if self.__has_method(module, 'on_exit'):
-					self.__plugins_on_exit.append(plugin_obj)
+				if self.__has_method(module, 'on_stop'):
+					self.__plugins_on_stop.append(plugin_obj)
 				if self.__has_method(module, 'on_pre_break', 1):
 					self.__plugins_on_pre_break.append(plugin_obj)
 				if self.__has_method(module, 'on_start_break', 1):
@@ -121,12 +121,12 @@ class PluginManager(object):
 			plugin['module'].on_start()
 		return True
 
-	def exit(self):
+	def stop(self):
 		"""
-		Execute the on_exit() function of plugins.
+		Execute the on_stop() function of plugins.
 		"""
-		for plugin in self.__plugins_on_exit:
-			plugin['module'].on_exit()
+		for plugin in self.__plugins_on_stop:
+			plugin['module'].on_stop()
 		return True
 
 	def pre_break(self, break_obj):
@@ -160,7 +160,7 @@ class PluginManager(object):
 		"""
 		Execute the on_countdown(countdown, seconds) function of plugins.
 		"""
-		logging.info("Countdown: elapsed " + str(countdown) + " seconds, " + str(seconds) + " seconds more")
+		logging.debug("Countdown: elapsed " + str(countdown) + " seconds, " + str(seconds) + " seconds to go")
 		for plugin in self.__plugins_on_countdown:
 			plugin['module'].on_countdown(countdown, seconds)
 		return True

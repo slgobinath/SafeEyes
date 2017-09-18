@@ -23,9 +23,7 @@ from gi.repository import GLib
 from gi.repository import Gtk
 import logging
 import threading
-import time
 from Xlib.display import Display
-from Xlib.display import X
 
 
 class BreakScreen(object):
@@ -100,12 +98,12 @@ class BreakScreen(object):
 		"""
 		self.postpone_break()
 
-	def show_count_down(self, count_down, seconds):
+	def show_count_down(self, countdown, seconds):
 		"""
 		Show/update the count down on all screens.
 		"""
-		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= count_down
-		mins, secs = divmod(seconds, 60)
+		self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= seconds
+		mins, secs = divmod(countdown, 60)
 		timeformat = '{:02d}:{:02d}'.format(mins, secs)
 		GLib.idle_add(lambda: self.__update_count_down(timeformat))
 
@@ -210,26 +208,26 @@ class BreakScreen(object):
 		logging.info("Lock the keyboard")
 		self.lock_keyboard = True
 
-		# Grab the keyboard
-		root = self.display.screen().root
-		root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
-		root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
+		# # Grab the keyboard
+		# root = self.display.screen().root
+		# root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
+		# root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
-		# Consume keyboard events
-		while self.lock_keyboard:
-			if self.display.pending_events() > 0:
-				# Avoid waiting for next event by checking pending events
-				event = self.display.next_event()
-				if self.enable_shortcut and event.type == X.KeyPress:
-					if event.detail == self.keycode_shortcut_skip:
-						self.skip_break()
-						break
-					elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
-						self.postpone_break()
-						break
-			else:
-				# Reduce the CPU usage by sleeping for a second
-				time.sleep(1)
+		# # Consume keyboard events
+		# while self.lock_keyboard:
+		# 	if self.display.pending_events() > 0:
+		# 		# Avoid waiting for next event by checking pending events
+		# 		event = self.display.next_event()
+		# 		if self.enable_shortcut and event.type == X.KeyPress:
+		# 			if event.detail == self.keycode_shortcut_skip:
+		# 				self.skip_break()
+		# 				break
+		# 			elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
+		# 				self.postpone_break()
+		# 				break
+		# 	else:
+		# 		# Reduce the CPU usage by sleeping for a second
+		# 		time.sleep(1)
 
 	def __release_keyboard(self):
 		"""
@@ -237,8 +235,8 @@ class BreakScreen(object):
 		"""
 		logging.info("Unlock the keyboard")
 		self.lock_keyboard = False
-		self.display.ungrab_keyboard(X.CurrentTime)
-		self.display.flush()
+		# self.display.ungrab_keyboard(X.CurrentTime)
+		# self.display.flush()
 
 	def __destroy_all_screens(self):
 		"""

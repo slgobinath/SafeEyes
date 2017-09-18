@@ -31,6 +31,7 @@ def init(ctx, safeeyes_config, plugin_config):
 	Initialize the plugin.
 	"""
 	global context
+	logging.debug('Initialize Audible Alert plugin')
 	context = ctx
 
 
@@ -51,4 +52,4 @@ def on_stop_break():
 		Utility.execute_command('aplay', [path])
 
 	except Exception as e:
-		logging.error('Unable to play audible alert')
+		logging.error('Failed to play audible alert')

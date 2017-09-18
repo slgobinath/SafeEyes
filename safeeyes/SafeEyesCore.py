@@ -21,6 +21,7 @@ import logging
 from model import Break
 from model import BreakType
 from model import EventHook
+from model import State
 import threading
 import time
 import Utility as Utility
@@ -52,7 +53,7 @@ class SafeEyesCore(object):
 		self.context = context
 		self.context['skipped'] = False
 		self.context['postponed'] = False
-		self.context['state'] = 'waiting'
+		self.context['state'] = State.WAITING
 
 	def initialize(self, config, language):
 		"""
@@ -78,7 +79,7 @@ class SafeEyesCore(object):
 		"""
 		with self.lock:
 			if not self.running:
-				logging.info("Scheduling next break")
+				logging.info("Start Safe Eyes core")
 				self.running = True
 				Utility.start_thread(self.__scheduler_job)
 
@@ -90,7 +91,7 @@ class SafeEyesCore(object):
 			if not self.running:
 				return
 
-			logging.info("Stop the core")
+			logging.info("Stop Safe Eye core")
 
 			# Prevent resuming from a long break
 			if self.__is_long_break():
@@ -101,6 +102,7 @@ class SafeEyesCore(object):
 			# Stop the break thread
 			self.waiting_condition.acquire()
 			self.running = False
+			self.context['state'] = State.STOPPED
 			self.waiting_condition.notify_all()
 			self.waiting_condition.release()
 
@@ -120,7 +122,7 @@ class SafeEyesCore(object):
 		"""
 		Calling this method stops the scheduler and show the next break screen
 		"""
-		if not self.context['state'] == 'waiting':
+		if not self.context['state'] == State.WAITING:
 			return
 		Utility.start_thread(self.__take_break)
 
@@ -153,7 +155,7 @@ class SafeEyesCore(object):
 		if not self.running:
 			return
 
-		self.context['state'] = 'waiting'
+		self.context['state'] = State.WAITING
 		time_to_wait = self.break_interval    # In minutes
 
 		if self.context['postponed']:
@@ -171,7 +173,7 @@ class SafeEyesCore(object):
 
 		# Wait for the pre break warning period
 		logging.info("Waiting for {} minutes until next break".format(time_to_wait))
-		self.__wait_for(time_to_wait * 60)    # Convert minutes to seconds
+		self.__wait_for(time_to_wait * 60)  # Convert minutes to seconds
 
 		logging.info("Pre-break waiting is over")
 
@@ -184,7 +186,7 @@ class SafeEyesCore(object):
 		"""
 		Show the notification and start the break after the notification.
 		"""
-		self.context['state'] = 'pre_break'
+		self.context['state'] = State.PRE_BREAK
 		if not self.onPreBreak.fire(self.breaks[self.next_break_index]):
 			# Plugins wanted to ignore this break
 			self.__start_next_break()
@@ -212,17 +214,16 @@ class SafeEyesCore(object):
 		"""
 		Start the break screen.
 		"""
-		self.context['state'] = 'break'
+		self.context['state'] = State.BREAK
 		break_obj = self.breaks[self.next_break_index]
-		seconds = break_obj.time
-		total_break_time = seconds
+		countdown = break_obj.time
+		total_break_time = countdown
 
-		while seconds and self.running and not self.context['skipped'] and not self.context['postponed']:
-			count_down = total_break_time - seconds
-			self.context['count_down'] = count_down
-			self.onCountDown.fire(count_down, seconds)
+		while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
+			seconds = total_break_time - countdown
+			self.onCountDown.fire(countdown, seconds)
 			time.sleep(1)    # Sleep for 1 second
-			seconds -= 1
+			countdown -= 1
 		Utility.execute_main_thread(self.__fire_stop_break)
 
 	def __fire_stop_break(self):

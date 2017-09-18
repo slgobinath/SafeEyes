@@ -1,0 +1,67 @@
+# SAFE EYES ENGLISH TRANSLATION.
+# Copyright (C) 2017 Gobinath
+# Gobinath slgobinath@gmail.com, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-09-17 07:59-0400\n"
+"PO-Revision-Date: 2017-09-17 07:59-0400\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+
+#: plugins/trayicon
+msgid "Show a tray icon in the notification area"
+msgstr "Show a tray icon in the notification area"
+
+msgid "About"
+msgstr "Safe Eyes குறித்த தகவல்கள்"
+
+msgid "Disable Safe Eyes"
+msgstr "Safe Eyes ஐ நிறுத்துக"
+
+msgid "Disabled until %s"
+msgstr "%s வரை நிறுத்தி வைக்கப்பட்டுள்ளது"
+
+msgid "Disabled until restart"
+msgstr "மறுதுவக்கம் வரை நிறுத்தி வைக்கப்பட்டுள்ளது"
+
+msgid "Enable Safe Eyes"
+msgstr "Safe Eyes ஐ செயல்படுத்துக"
+
+msgid "For %d Hour"
+msgid_plural "For %d Hours"
+msgstr[0] "%d மணித்தியாலத்திற்கு"
+msgstr[1] "%d மணித்தியாலங்களுக்கு"
+
+msgid "For %d Minute"
+msgid_plural "For %d Minutes"
+msgstr[0] "%d நிமிடத்திற்கு"
+msgstr[1] "%d நிமிடங்களுக்கு"
+
+msgid "For %d Second"
+msgid_plural "For %d Seconds"
+msgstr[0] "%d வினாடிக்கு"
+msgstr[1] "%d வினாடிகளுக்கு"
+
+msgid "Next break at %s"
+msgstr "அடுத்த இடைவேளை %s"
+
+msgid "Settings"
+msgstr "அமைப்பு"
+
+msgid "Take the break now"
+msgstr "சுயவிருப்பிலான இடைவேளை"
+
+msgid "Until restart"
+msgstr "மீள ஆரம்பிக்கும் வரை"
+
+msgid "Quit"
+msgstr "நிறுத்து"

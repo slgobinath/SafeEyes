@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import logging
 import os
 from safeeyes.model import BreakType
 from safeeyes import Utility
@@ -27,6 +28,8 @@ Safe Eyes Screensaver plugin
 context = None
 lock_screen = False
 lock_screen_command = None
+min_seconds = 0
+seconds_passed = 0
 
 
 def __lock_screen_command():
@@ -69,24 +72,43 @@ def __lock_screen_command():
 
 
 def init(ctx, safeeyes_config, plugin_config):
+	"""
+	Initialize the screensaver plugin.
+	"""
 	global context
 	global lock_screen_command
+	global min_seconds
+	logging.debug('Initialize Screensaver plugin')
 	context = ctx
+	min_seconds = plugin_config['min_seconds']
 	if plugin_config['command']:
-		lock_screen_command = plugin_config['command']
+		lock_screen_command = plugin_config['command'].split()
 	else:
 		lock_screen_command = __lock_screen_command()
 
 
 def on_start_break(break_obj):
+	"""
+	Determine the break type and only if it is a long break, enable the lock_screen flag.
+	"""
 	global lock_screen
+	global seconds_passed
+	seconds_passed = 0
 	if lock_screen_command:
 		lock_screen = break_obj.type == BreakType.LONG_BREAK
 
 
+def on_countdown(countdown, seconds):
+	"""
+	Keep track of seconds passed from the beginning of long break.
+	"""
+	global seconds_passed
+	seconds_passed = seconds
+
+
 def on_stop_break():
 	"""
-	Lock the screen after
+	Lock the screen after a long break if the user has not skipped within min_seconds.
 	"""
-	if lock_screen:
+	if lock_screen and seconds_passed >= min_seconds:
 		Utility.execute_command(lock_screen_command)

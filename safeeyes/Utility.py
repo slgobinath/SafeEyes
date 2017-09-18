@@ -21,7 +21,6 @@ from distutils.version import LooseVersion
 import errno
 import gi
 gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk
 from gi.repository import GLib
 from html.parser import HTMLParser
 import imp
@@ -29,7 +28,6 @@ import json
 import locale
 import logging
 import os
-import re
 import shutil
 import subprocess
 import threading
@@ -75,17 +73,6 @@ def get_resource_path(resource_name):
 	return resource_location
 
 
-def system_idle_time():
-	"""
-	Get system idle time in minutes.
-	Return the idle time if xprintidle is available, otherwise return 0.
-	"""
-	try:
-		return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / (60 * 1000)  # Convert milliseconds to minutes
-	except Exception:
-		return 0
-
-
 def start_thread(target_function, **args):
 	"""
 	Execute the function in a separate thread.
@@ -102,47 +89,6 @@ def execute_main_thread(target_function, args=None):
 		GLib.idle_add(lambda: target_function(args))
 	else:
 		GLib.idle_add(lambda: target_function())
-
-
-def is_active_window_skipped(skip_break_window_classes, take_break_window_classes, unfullscreen_allowed=False):
-	"""
-	Check for full-screen applications.
-	This method must be executed by the main thread. If not, it will cause to random failure.
-	"""
-	logging.info('Searching for full-screen application')
-	screen = Gdk.Screen.get_default()
-
-	active_window = screen.get_active_window()
-	if active_window:
-		active_xid = str(active_window.get_xid())
-		cmdlist = ['xprop', '-root', '-notype', '-id', active_xid, 'WM_CLASS', '_NET_WM_STATE']
-
-		try:
-			stdout = subprocess.check_output(cmdlist).decode('utf-8')
-		except subprocess.CalledProcessError:
-			logging.warning('Error in finding full-screen application')
-			pass
-		else:
-			if stdout:
-				is_fullscreen = 'FULLSCREEN' in stdout
-				# Extract the process name
-				process_names = re.findall('"(.+?)"', stdout)
-				if process_names:
-					process = process_names[1].lower()
-					if process in skip_break_window_classes:
-						return True
-					elif process in take_break_window_classes:
-						if is_fullscreen and unfullscreen_allowed:
-							try:
-								active_window.unfullscreen()
-							except Exception:
-								logging.error('Error in unfullscreen the window ' + process)
-								pass
-						return False
-
-				return is_fullscreen
-
-	return False
 
 
 def __system_locale():
@@ -265,14 +211,17 @@ def execute_command(command, args=[]):
 	Execute the shell command without waiting for its response.
 	"""
 	if command:
-		command_to_execute = [command]
+		command_to_execute = []
+		if isinstance(command, str):
+			command_to_execute.append(command)
+		else:
+			command_to_execute.extend(command)
 		if args:
 			command_to_execute.extend(args)
 		try:
 			subprocess.Popen(command_to_execute)
 		except Exception as e:
 			logging.error('Error in executing the commad' + str(command))
-			print(e)
 
 
 def html_to_text(html):
@@ -367,10 +316,10 @@ def intialize_logging():
 	# Apped the logs and overwrite once reached 5MB
 	handler = logging.StreamHandler()  # RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
 	handler.setFormatter(log_formatter)
-	handler.setLevel(logging.INFO)
+	handler.setLevel(logging.DEBUG)
 
 	root_logger = logging.getLogger()
-	root_logger.setLevel(logging.INFO)
+	root_logger.setLevel(logging.DEBUG)
 	root_logger.addHandler(handler)
 
 
