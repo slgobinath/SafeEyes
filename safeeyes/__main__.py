@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -17,272 +16,286 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Safe Eyes is a utility to remind you to take break frequently to protect your eyes from eye strain.
+"""
 
-from AboutDialog import AboutDialog
-from BreakScreen import BreakScreen
-import dbus
-from dbus.mainloop.glib import DBusGMainLoop
 import gettext
-import gi
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 import json
 import logging
 import os
-from PluginManager import PluginManager
-import psutil
-from SafeEyesCore import SafeEyesCore
-from SettingsDialog import SettingsDialog
 import sys
 from threading import Timer
-import Utility as Utility
+
+import dbus
+import gi
+import psutil
+from dbus.mainloop.glib import DBusGMainLoop
+from gi.repository import Gtk
+
+from safeeyes import Utility
+from safeeyes.AboutDialog import AboutDialog
+from safeeyes.BreakScreen import BreakScreen
+from safeeyes.PluginManager import PluginManager
+from safeeyes.SafeEyesCore import SafeEyesCore
+from safeeyes.SettingsDialog import SettingsDialog
+
+gi.require_version('Gtk', '3.0')
 
 gettext.install('safeeyes', 'safeeyes/config/locale')
 
-
 # Define necessary paths
-break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
-settings_dialog_glade = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
-about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
+BREAK_SCREEN_GLADE = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
+SETTINGS_DIALOG_GLADE = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
+ABOUT_DIALOG_GLADE = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
 
-is_active = True
 SAFE_EYES_VERSION = "2.0.0"
 
+class SafeEyes(object):
+    """
+    The class to represent a runnable Safe Eyes instance.
+    """
 
-def show_settings():
-	"""
-	Listen to tray icon Settings action and send the signal to Settings dialog.
-	"""
-	logging.info("Show Settings dialog")
-	able_to_lock_screen = False
-	settings_dialog = SettingsDialog(config, language, Utility.read_lang_files(), able_to_lock_screen, save_settings, settings_dialog_glade)
-	settings_dialog.show()
+    def __init__(self):
+        self.active = True
+        self.break_screen = None
+        self.safe_eyes_core = None
+        self.config = None
+        self.language = None
+        self.context = {}
+        self.plugins_manager = None
 
+        self.config = Utility.read_config()
+        self.language = Utility.load_language(self.config['language'])
+        locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=[Utility.system_locale()])
+        locale.install()
 
-def show_about():
-	"""
-	Listen to tray icon About action and send the signal to About dialog.
-	"""
-	logging.info("Show About dialog")
-	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION)
-	about_dialog.show()
+        # Initialize the Safe Eyes Context
+        self.context['version'] = SAFE_EYES_VERSION
+        self.context['desktop'] = Utility.desktop_environment()
+        self.context['language'] = self.language
+        self.context['locale'] = locale
+        self.context['api'] = {}
+        self.context['api']['show_settings'] = self.show_settings
+        self.context['api']['show_about'] = self.show_about
+        self.context['api']['enable_safeeyes'] = self.enable_safeeyes
+        self.context['api']['disable_safeeyes'] = self.disable_safeeyes
+        self.context['api']['on_quit'] = self.on_quit
 
+        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, BREAK_SCREEN_GLADE, Utility.style_sheet_path)
+        self.break_screen.initialize(self.config, self.language)
+        self.plugins_manager = PluginManager(self.context, self.config)
+        self.safe_eyes_core = SafeEyesCore(self.context)
+        self.safe_eyes_core.on_pre_break += self.plugins_manager.pre_break
+        self.safe_eyes_core.on_start_break += self.start_break
+        self.safe_eyes_core.on_count_down += self.countdown
+        self.safe_eyes_core.on_stop_break += self.stop_break
+        self.safe_eyes_core.on_update_next_break += self.plugins_manager.update_next_break
+        self.safe_eyes_core.initialize(self.config, self.language)
+        self.context['api']['take_break'] = self.safe_eyes_core.take_break
+        self.plugins_manager.init(self.context, self.config)
+    
+    def start(self):
+        """
+        Start Safe Eyes
+        """
+        self.plugins_manager.start()		# Call the start method of all plugins
+        self.safe_eyes_core.start()
+        self.handle_system_suspend()
 
-def on_quit():
-	"""
-	Listen to the tray menu quit action and stop the core, notification and the app itself.
-	"""
-	logging.info("Quit Safe Eyes")
-	plugins.stop()
-	core.stop()
-	Gtk.main_quit()
-
-
-def handle_suspend_callback(sleeping):
-	"""
-	If the system goes to sleep, Safe Eyes stop the core if it is already active.
-	If it was active, Safe Eyes will become active after wake up.
-	"""
-	if sleeping:
-		# Sleeping / suspending
-		if is_active:
-			logging.info("Stop Safe Eyes due to system suspend")
-			plugins.stop()
-			core.stop()
-	else:
-		# Resume from sleep
-		if is_active:
-			logging.info("Resume Safe Eyes after system wakeup")
-			plugins.start()
-			core.start()
-
-
-def handle_system_suspend():
-	"""
-	Setup system suspend listener.
-	"""
-	DBusGMainLoop(set_as_default=True)
-	bus = dbus.SystemBus()
-	bus.add_signal_receiver(handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
-
-
-def on_skipped():
-	"""
-	Listen to break screen Skip action and send the signal to core.
-	"""
-	logging.info("User skipped the break")
-	core.skip()
-	plugins.stop_break()
+    def show_settings(self):
+        """
+        Listen to tray icon Settings action and send the signal to Settings dialog.
+        """
+        logging.info("Show Settings dialog")
+        able_to_lock_screen = False
+        settings_dialog = SettingsDialog(self.config, self.language, Utility.read_lang_files(), able_to_lock_screen, self.save_settings, SETTINGS_DIALOG_GLADE)
+        settings_dialog.show()
 
 
-def on_postponed():
-	"""
-	Listen to break screen Postpone action and send the signal to core.
-	"""
-	logging.info("User postponed the break")
-	core.postpone()
-	plugins.stop_break()
+    def show_about(self):
+        """
+        Listen to tray icon About action and send the signal to About dialog.
+        """
+        logging.info("Show About dialog")
+        about_dialog = AboutDialog(ABOUT_DIALOG_GLADE, SAFE_EYES_VERSION)
+        about_dialog.show()
 
 
-def save_settings(config):
-	"""
-	Listen to Settings dialog Save action and write to the config file.
-	"""
-	global language
-
-	logging.info("Saving settings to safeeyes.json")
-
-	# Stop the Safe Eyes core
-	if is_active:
-		core.stop()
-
-	# Write the configuration to file
-	with open(Utility.config_file_path, 'w') as config_file:
-		json.dump(config, config_file, indent=4, sort_keys=True)
-
-	# Reload the language translation
-	language = Utility.load_language(config['language'])
-
-	logging.info("Initialize SafeEyesCore with modified settings")
-
-	# Restart the core and intialize the components
-	core.initialize(config, language)
-	break_screen.initialize(config, language)
-	if is_active:
-		# 1 sec delay is required to give enough time for core to be stopped
-		Timer(1.0, core.start).start()
+    def on_quit(self):
+        """
+        Listen to the tray menu quit action and stop the core, notification and the app itself.
+        """
+        logging.info("Quit Safe Eyes")
+        self.plugins_manager.stop()
+        self.safe_eyes_core.stop()
+        Gtk.main_quit()
 
 
-def enable_safeeyes():
-	"""
-	Listen to tray icon enable action and send the signal to core.
-	"""
-	global is_active
-	is_active = True
-	core.start()
-	plugins.start()
+    def handle_suspend_callback(self, sleeping):
+        """
+        If the system goes to sleep, Safe Eyes stop the core if it is already active.
+        If it was active, Safe Eyes will become active after wake up.
+        """
+        if sleeping:
+            # Sleeping / suspending
+            if self.active:
+                logging.info("Stop Safe Eyes due to system suspend")
+                self.plugins_manager.stop()
+                self.safe_eyes_core.stop()
+        else:
+            # Resume from sleep
+            if self.active:
+                logging.info("Resume Safe Eyes after system wakeup")
+                self.plugins_manager.start()
+                self.safe_eyes_core.start()
 
 
-def disable_safeeyes():
-	"""
-	Listen to tray icon disable action and send the signal to core.
-	"""
-	global is_active
-	is_active = False
-	plugins.stop()
-	core.stop()
+    def handle_system_suspend(self):
+        """
+        Setup system suspend listener.
+        """
+        DBusGMainLoop(set_as_default=True)
+        bus = dbus.SystemBus()
+        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+
+
+    def on_skipped(self):
+        """
+        Listen to break screen Skip action and send the signal to core.
+        """
+        logging.info("User skipped the break")
+        self.safe_eyes_core.skip()
+        self.plugins_manager.stop_break()
+
+
+    def on_postponed(self):
+        """
+        Listen to break screen Postpone action and send the signal to core.
+        """
+        logging.info("User postponed the break")
+        self.safe_eyes_core.postpone()
+        self.plugins_manager.stop_break()
+
+
+    def save_settings(self, config):
+        """
+        Listen to Settings dialog Save action and write to the config file.
+        """
+
+        logging.info("Saving settings to safeeyes.json")
+
+        # Stop the Safe Eyes core
+        if self.active:
+            self.safe_eyes_core.stop()
+
+        # Write the configuration to file
+        with open(Utility.config_file_path, 'w') as config_file:
+            json.dump(config, config_file, indent=4, sort_keys=True)
+
+        # Reload the language translation
+        self.language = Utility.load_language(config['language'])
+
+        logging.info("Initialize SafeEyesCore with modified settings")
+
+        # Restart the core and intialize the components
+        self.safe_eyes_core.initialize(config, self.language)
+        self.break_screen.initialize(config, self.language)
+        if self.active:
+            # 1 sec delay is required to give enough time for core to be stopped
+            Timer(1.0, self.safe_eyes_core.start).start()
+
+
+    def enable_safeeyes(self):
+        """
+        Listen to tray icon enable action and send the signal to core.
+        """
+        self.active = True
+        self.safe_eyes_core.start()
+        self.plugins_manager.start()
+
+
+    def disable_safeeyes(self):
+        """
+        Listen to tray icon disable action and send the signal to core.
+        """
+        self.active = False
+        self.plugins_manager.stop()
+        self.safe_eyes_core.stop()
+
+    def start_break(self, break_obj):
+        """
+        Pass the break information to plugins and break screen.
+        """
+        if not self.plugins_manager.start_break(break_obj):
+            return False
+        # Get the ASCII widgets content from plugins
+        plugins_data = self.plugins_manager.get_ascii_widgets(break_obj)
+        self.break_screen.show_message(break_obj, plugins_data)
+        return True
+
+    def countdown(self, countdown, seconds):
+        """
+        Pass the countdown to plugins and break screen.
+        """
+        self.break_screen.show_count_down(countdown, seconds)
+        if not self.plugins_manager.countdown(countdown, seconds):
+            return False
+        return True
+
+    def stop_break(self):
+        """
+        Stop the current break.
+        """
+        self.break_screen.close()
+        if not self.plugins_manager.stop_break():
+            return False
+        return True
 
 
 def running():
-	"""
-	Check if SafeEyes is already running.
-	"""
-	process_count = 0
-	for proc in psutil.process_iter():
-		if not proc.cmdline:
-			continue
-		try:
-			# Check if safeeyes is in process arguments
-			if callable(proc.cmdline):
-				# Latest psutil has cmdline function
-				cmd_line = proc.cmdline()
-			else:
-				# In older versions cmdline was a list object
-				cmd_line = proc.cmdline
-			if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
-				process_count += 1
-				if process_count > 1:
-					return True
+    """
+    Check if SafeEyes is already running.
+    """
+    process_count = 0
+    for proc in psutil.process_iter():
+        if not proc.cmdline:
+            continue
+        try:
+            # Check if safeeyes is in process arguments
+            if callable(proc.cmdline):
+                # Latest psutil has cmdline function
+                cmd_line = proc.cmdline()
+            else:
+                # In older versions cmdline was a list object
+                cmd_line = proc.cmdline
+            if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
+                process_count += 1
+                if process_count > 1:
+                    return True
 
-		# Ignore if process does not exist or does not have command line args
-		except (IndexError, psutil.NoSuchProcess):
-			pass
-	return False
-
-
-def start_break(break_obj):
-	if not plugins.start_break(break_obj):
-		return False
-	# Get the ASCII widgets content from plugins
-	plugins_data = plugins.get_ascii_widgets(break_obj)
-	break_screen.show_message(break_obj, plugins_data)
-	return True
-
-
-def countdown(countdown, seconds):
-	break_screen.show_count_down(countdown, seconds)
-	if not plugins.countdown(countdown, seconds):
-		return False
-	return True
-
-
-def stop_break():
-	break_screen.close()
-	if not plugins.stop_break():
-		return False
-	return True
-
+        # Ignore if process does not exist or does not have command line args
+        except (IndexError, psutil.NoSuchProcess):
+            pass
+    return False
 
 def main():
-	"""
-	Start the Safe Eyes.
-	"""
-	# Initialize the logging
-	Utility.intialize_logging()
+    """
+    Start the Safe Eyes.
+    """
+    # Initialize the logging
+    Utility.intialize_logging()
 
-	logging.info("Starting Safe Eyes")
+    logging.info("Starting Safe Eyes")
 
-	if not running():
-
-		global break_screen
-		global core
-		global config
-		global language
-		global context
-		global plugins
-
-		config = Utility.read_config()
-
-		context = {}
-		language = Utility.load_language(config['language'])
-		locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=[Utility.system_locale()])
-		# locale = gettext.NullTranslations()
-		locale.install()
-
-		# Initialize the Safe Eyes Context
-		context['version'] = SAFE_EYES_VERSION
-		context['desktop'] = Utility.desktop_environment()
-		context['language'] = language
-		context['locale'] = locale
-		context['api'] = {}
-		context['api']['show_settings'] = show_settings
-		context['api']['show_about'] = show_about
-		context['api']['enable_safeeyes'] = enable_safeeyes
-		context['api']['disable_safeeyes'] = disable_safeeyes
-		context['api']['on_quit'] = on_quit
-
-		break_screen = BreakScreen(context, on_skipped, on_postponed, break_screen_glade, Utility.style_sheet_path)
-		break_screen.initialize(config, language)
-		plugins = PluginManager(context, config)
-		core = SafeEyesCore(context)
-		core.on_pre_break += plugins.pre_break
-		core.on_start_break += start_break
-		core.on_count_down += countdown
-		core.on_stop_break += stop_break
-		core.on_update_next_break += plugins.update_next_break
-		core.initialize(config, language)
-		context['api']['take_break'] = core.take_break
-		plugins.init(context, config)
-		plugins.start()		# Call the start method of all plugins
-		core.start()
-
-		handle_system_suspend()
-
-		Gtk.main()
-	else:
-		logging.info('Another instance of safeeyes is already running')
-		sys.exit(0)
+    if not running():
+        safeeyes = SafeEyes()
+        safeeyes.start()
+        Gtk.main()
+    else:
+        logging.info('Another instance of safeeyes is already running')
+        sys.exit(0)
 
 
 if __name__ == '__main__':
-	main()
+    main()
