@@ -64,7 +64,7 @@ def show_about():
 	Listen to tray icon About action and send the signal to About dialog.
 	"""
 	logging.info("Show About dialog")
-	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION, language)
+	about_dialog = AboutDialog(about_dialog_glade, SAFE_EYES_VERSION)
 	about_dialog.show()
 
 
@@ -245,8 +245,8 @@ def main():
 
 		context = {}
 		language = Utility.load_language(config['language'])
-		# locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=['ta'])
-		locale = gettext.NullTranslations()
+		locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=[Utility.system_locale()])
+		# locale = gettext.NullTranslations()
 		locale.install()
 
 		# Initialize the Safe Eyes Context

@@ -35,7 +35,7 @@ APPINDICATOR_ID = 'safeeyes_2'
 context = None
 tray_icon = None
 safeeyes_config = None
-t = gettext.translation('gettext_plural', 'safeeyes/config/locale', fallback=True)
+
 
 
 class TrayIcon(object):

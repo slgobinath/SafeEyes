@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,60 +16,77 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+This module contains the entity classes used by Safe Eyes and its plugins.
+"""
 
 from enum import Enum
 
-
 class Break(object):
-	"""
-		An entity class which represents a break.
-	"""
-	def __init__(self, type, name, time, image, plugins):
-		self.type = type
-		self.name = name
-		self.time = time
-		self.image = image
-		self.plugins = plugins
+    """
+    An entity class which represents a break.
+    """
+    def __init__(self, break_type, name, time, image, plugins):
+        self.type = break_type
+        self.name = name
+        self.time = time
+        self.image = image
+        self.plugins = plugins
 
-	def __str__(self):
-		return 'Break: {{name: "{}", type: {}, time: {}}}\n'.format(self.name, self.type, self.time)
+    def __str__(self):
+        return 'Break: {{name: "{}", type: {}, time: {}}}\n'.format(self.name, self.type, self.time)
 
-	def __repr__(self):
-		return str(self)
+    def __repr__(self):
+        return str(self)
 
+    def is_long_break(self):
+        """
+        Check whether this break is a long break.
+        """
+        return self.type == BreakType.LONG_BREAK
+
+    def is_short_break(self):
+        """
+        Check whether this break is a short break.
+        """
+        return self.type == BreakType.SHORT_BREAK
 
 class BreakType(Enum):
-	SHORT_BREAK = 1
-	LONG_BREAK = 2
-
+    """
+    Type of Safe Eyes breaks.
+    """
+    SHORT_BREAK = 1
+    LONG_BREAK = 2
 
 class State(Enum):
-	WAITING = 0,
-	PRE_BREAK = 1
-	BREAK = 2,
-	STOPPED = 3
-
+    """
+    Possible states of Safe Eyes.
+    """
+    WAITING = 0,
+    PRE_BREAK = 1
+    BREAK = 2,
+    STOPPED = 3
 
 class EventHook(object):
+    """
+    Hook to attach and detach listeners to system events.
+    """
+    def __init__(self):
+        self.__handlers = []
 
-	def __init__(self):
-		self.__handlers = []
+    def __iadd__(self, handler):
+        self.__handlers.append(handler)
+        return self
 
-	def __iadd__(self, handler):
-		self.__handlers.append(handler)
-		return self
+    def __isub__(self, handler):
+        self.__handlers.remove(handler)
+        return self
 
-	def __isub__(self, handler):
-		self.__handlers.remove(handler)
-		return self
-
-	def fire(self, *args, **keywargs):
-		for handler in self.__handlers:
-			if not handler(*args, **keywargs):
-				return False
-		return True
-
-	def clearObjectHandlers(self, inObject):
-		for theHandler in self.__handlers:
-			if theHandler.im_self == inObject:
-				self -= theHandler
+    def fire(self, *args, **keywargs):
+        """
+        Fire all listeners attached with.
+        """
+        for handler in self.__handlers:
+            if not handler(*args, **keywargs):
+                return False
+        return True

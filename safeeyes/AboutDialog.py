@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,44 +16,48 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+This module creates the AboutDialog which shows the version and license.
+"""
 
 import gi
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
+gi.require_version('Gtk', '3.0')
 
 
 class AboutDialog(object):
-	"""
-	AboutDialog reads the about_dialog.glade and build the user interface using that file.
-	It shows the application name with version, a small description, license and the GitHub url.
-	"""
+    """
+    AboutDialog reads the about_dialog.glade and build the user interface using that file.
+    It shows the application name with version, a small description, license and the GitHub url.
+    """
 
-	def __init__(self, glade_file, version, language):
-		builder = Gtk.Builder()
-		builder.add_from_file(glade_file)
-		builder.connect_signals(self)
-		self.window = builder.get_object("window_about")
-		builder.get_object('lbl_decription').set_label(language['app_info']['description'])
-		builder.get_object('lbl_license').set_label(str(language['ui_controls']['license']) + ':')
-		builder.get_object('btn_close').set_label(language['ui_controls']['close'])
+    def __init__(self, glade_file, version):
+        builder = Gtk.Builder()
+        builder.add_from_file(glade_file)
+        builder.connect_signals(self)
+        self.window = builder.get_object('window_about')
+        builder.get_object('lbl_decription').set_label(_('description'))
+        builder.get_object('lbl_license').set_label(_('License') + ':')
+        builder.get_object('btn_close').set_label(_('Close'))
 
-		# Set the version at the runtime
-		builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
+        # Set the version at the runtime
+        builder.get_object('lbl_app_name').set_label('Safe Eyes ' + version)
 
-	def show(self):
-		"""
-		Show the About dialog.
-		"""
-		self.window.show_all()
+    def show(self):
+        """
+        Show the About dialog.
+        """
+        self.window.show_all()
 
-	def on_window_delete(self, *args):
-		"""
-		Window close event handler.
-		"""
-		self.window.destroy()
+    def on_window_delete(self, *args):
+        """
+        Window close event handler.
+        """
+        self.window.destroy()
 
-	def on_close_clicked(self, button):
-		"""
-		Close button click event handler.
-		"""
-		self.window.destroy()
+    def on_close_clicked(self, *args):
+        """
+        Close button click event handler.
+        """
+        self.window.destroy()

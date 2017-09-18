@@ -1,0 +1,77 @@
+# SAFE EYES ENGLISH TRANSLATION.
+# Copyright (C) 2017 Gobinath
+# Gobinath slgobinath@gmail.com, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-09-17 07:59-0400\n"
+"PO-Revision-Date: 2017-09-17 07:59-0400\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+
+#: plugins/trayicon
+msgid "Show a tray icon in the notification area"
+msgstr "Show a tray icon in the notification area"
+
+msgid "About"
+msgstr "About"
+
+msgid "Disable Safe Eyes"
+msgstr "Disable Safe Eyes"
+
+msgid "Disabled until %s"
+msgstr "Disabled until %s"
+
+msgid "Disabled until restart"
+msgstr "Disabled until restart"
+
+msgid "Enable Safe Eyes"
+msgstr "Enable Safe Eyes"
+
+msgid "For %d Hour"
+msgid_plural "For %d Hours"
+msgstr[0] "For %d Hour"
+msgstr[1] "For %d Hours"
+
+msgid "For %d Minute"
+msgid_plural "For %d Minutes"
+msgstr[0] "For %d Minute"
+msgstr[1] "For %d Minutes"
+
+msgid "For %d Second"
+msgid_plural "For %d Seconds"
+msgstr[0] "For %d Second"
+msgstr[1] "For %d Seconds"
+
+msgid "Next break at %s"
+msgstr "Next break at %s"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Take the break now"
+msgstr "Take the break now"
+
+msgid "Until restart"
+msgstr "Until restart"
+
+msgid "Quit"
+msgstr "Quit"
+
+# AboutDialog
+msgid "Close"
+msgstr "Close"
+
+msgid "description"
+msgstr "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer."
+
+msgid "License"
+msgstr "License"
