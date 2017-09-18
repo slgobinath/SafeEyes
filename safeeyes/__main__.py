@@ -18,6 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import gettext
 import os, gi, json, dbus, logging, psutil, sys
 from threading import Timer
 from dbus.mainloop.glib import DBusGMainLoop
@@ -29,6 +30,9 @@ from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.SettingsDialog import SettingsDialog
 from safeeyes import Utility
+from gettext import gettext as _
+
+gettext.install('safeeyes', 'safeeyes/config/locale')
 
 # Define necessary paths
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
@@ -37,7 +41,6 @@ about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.gla
 
 is_active = True
 SAFE_EYES_VERSION = "2.0.0"
-
 
 def show_settings():
 	"""
@@ -63,7 +66,7 @@ def on_quit():
 	Listen to the tray menu quit action and stop the core, notification and the app itself.
 	"""
 	logging.info("Quit Safe Eyes")
-	plugins.exit()
+	plugins.stop()
 	core.stop()
 	Gtk.main_quit()
 
@@ -148,6 +151,7 @@ def enable_safeeyes():
 	global is_active
 	is_active = True
 	core.start()
+	plugins.start()
 
 
 def disable_safeeyes():
@@ -156,6 +160,7 @@ def disable_safeeyes():
 	"""
 	global is_active
 	is_active = False
+	plugins.stop()
 	core.stop()
 
 
@@ -228,11 +233,16 @@ def main():
 
 		context = {}
 		language = Utility.load_language(config['language'])
+		# locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=['ta'])
+		locale = gettext.NullTranslations()
+		locale.install()
+
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION
 		context['desktop'] = Utility.desktop_environment()
 		context['language'] = language
+		context['locale'] = locale
 		context['api'] = {}
 		context['api']['show_settings'] = show_settings
 		context['api']['show_about'] = show_about

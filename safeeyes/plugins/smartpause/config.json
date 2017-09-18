@@ -1,0 +1,22 @@
+{
+    "meta": {
+        "name": "Smart Pause",
+        "description": "Pause Safe Eyes if the system is idle",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": ["xprintidle"],
+        "operating_systems": [],
+        "desktop_environments": []
+    },
+    "settings": [
+        {
+            "id": "idle_time",
+            "label": "Minimum idle time to pause Safe Eyes",
+            "type": "INT",
+            "default": 3
+        }
+    ],
+    "resources": []
+}

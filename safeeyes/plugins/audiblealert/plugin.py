@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging
+import logging
 from safeeyes import Utility
 
 """
@@ -30,6 +30,7 @@ def init(ctx, safeeyes_config, plugin_config):
 	Initialize the plugin.
 	"""
 	global context
+	logging.debug('Initialize Audible Alert plugin')
 	context = ctx
 
 
@@ -50,4 +51,4 @@ def on_stop_break():
 		Utility.execute_command('aplay', [path])
 
 	except Exception as e:
-		logging.error('Unable to play audible alert')
+		logging.error('Failed to play audible alert')

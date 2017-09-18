@@ -19,7 +19,7 @@
 
 import time, datetime, threading, logging, sys
 from safeeyes import Utility
-from safeeyes.model import Break, BreakType, EventHook
+from safeeyes.model import Break, BreakType, EventHook, State
 
 
 class SafeEyesCore:
@@ -48,7 +48,7 @@ class SafeEyesCore:
 		self.context = context
 		self.context['skipped'] = False
 		self.context['postponed'] = False
-		self.context['state'] = 'waiting'
+		self.context['state'] = State.WAITING
 
 	def initialize(self, config, language):
 		"""
@@ -97,6 +97,7 @@ class SafeEyesCore:
 			# Stop the break thread
 			self.waiting_condition.acquire()
 			self.running = False
+			self.context['state'] = State.STOPPED
 			self.waiting_condition.notify_all()
 			self.waiting_condition.release()
 
@@ -116,7 +117,7 @@ class SafeEyesCore:
 		"""
 		Calling this method stops the scheduler and show the next break screen
 		"""
-		if not self.context['state'] == 'waiting':
+		if not self.context['state'] == State.WAITING:
 			return
 		Utility.start_thread(self.__take_break)
 	
@@ -150,7 +151,7 @@ class SafeEyesCore:
 		if not self.running:
 			return
 
-		self.context['state'] = 'waiting'
+		self.context['state'] = State.WAITING
 		time_to_wait = self.break_interval    # In minutes
 
 		if self.context['postponed']:
@@ -168,7 +169,7 @@ class SafeEyesCore:
 
 		# Wait for the pre break warning period
 		logging.info("Waiting for {} minutes until next break".format(time_to_wait))
-		self.__wait_for(time_to_wait * 1)    # Convert to seconds
+		self.__wait_for(time_to_wait * 60)    # Convert to seconds
 
 		logging.info("Pre-break waiting is over")
 
@@ -181,7 +182,7 @@ class SafeEyesCore:
 		"""
 		Show the notification and start the break after the notification.
 		"""
-		self.context['state'] = 'pre_break'
+		self.context['state'] = State.PRE_BREAK
 		if not self.onPreBreak.fire(self.breaks[self.next_break_index]):
 			# Plugins wanted to ignore this break
 			self.__start_next_break()
@@ -209,17 +210,16 @@ class SafeEyesCore:
 		"""
 		Start the break screen.
 		"""
-		self.context['state'] = 'break'
+		self.context['state'] = State.BREAK
 		break_obj = self.breaks[self.next_break_index]
-		seconds = break_obj.time
-		total_break_time = seconds
+		countdown = break_obj.time
+		total_break_time = countdown
 
-		while seconds and self.running and not self.context['skipped'] and not self.context['postponed']:
-			count_down = total_break_time - seconds
-			self.context['count_down'] = count_down
-			self.onCountDown.fire(count_down, seconds)
+		while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
+			seconds = total_break_time - countdown
+			self.onCountDown.fire(countdown, seconds)
 			time.sleep(1)    # Sleep for 1 second
-			seconds -= 1
+			countdown -= 1
 		Utility.execute_main_thread(self.__fire_stop_break)
 
 	def __fire_stop_break(self):

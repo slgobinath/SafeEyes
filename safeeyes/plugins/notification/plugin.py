@@ -35,13 +35,14 @@ def init(ctx, safeeyes_config, plugin_config):
 	Initialize the plugin.
 	"""
 	global context
+	logging.debug('Initialize Notification plugin')
 	context = ctx
 
 def on_start():
 	"""
-	Do not return anything here.
-	Use this function if you want to do anything on startup.
+	Initialize the native notification.
 	"""
+	logging.debug('Start Notification plugin')
 	Notify.init(APPINDICATOR_ID)
 
 def on_pre_break(break_obj):
@@ -78,11 +79,9 @@ def on_start_break(break_obj):
 			pass
 		pass
 
-def on_exit():
+def on_stop():
 	"""
-	Do not return anything here.
-	Use this function if you want to do anything on exit.
-	NOTE: This function should exit within a second
+	Uninitialize the registered notificaion.
 	"""
-	logging.info('Uninitialize Safe Eyes notification')
+	logging.debug('Stop Notification plugin')
 	Utility.execute_main_thread(Notify.uninit)

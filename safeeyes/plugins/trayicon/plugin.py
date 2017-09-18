@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging, threading, datetime
+import gi, logging, threading, datetime, gettext
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 from gi.repository import Gtk
@@ -31,27 +31,27 @@ APPINDICATOR_ID = 'safeeyes_2'
 context = None
 tray_icon = None
 safeeyes_config = None
+t = gettext.translation('gettext_plural', 'safeeyes/config/locale', fallback=True)
 
 class TrayIcon:
 	"""
 	Create and show the tray icon along with the tray menu.
 	"""
 
-	def __init__(self, context, config, language):
-		logging.info("Initialize the tray icon")
+	def __init__(self, context, plugin_config):
+		self.context = context
 		self.on_show_settings = context['api']['show_settings']
 		self.on_show_about = context['api']['show_about']
 		self.on_quite = context['api']['on_quit']
 		self.on_enable = context['api']['enable_safeeyes']
 		self.on_disable = context['api']['disable_safeeyes']
 		self.take_break = context['api']['take_break']
-		self.language = language
+		self.plugin_config = plugin_config
 		self.dateTime = None
 		self.active = True
 		self.wakeup_time = None
 		self.idle_condition = threading.Condition()
 		self.lock = threading.Lock()
-		self.config = config
 
 		# Construct the tray icon
 		self.indicator = appindicator.Indicator.new(
@@ -79,8 +79,9 @@ class TrayIcon:
 		self.sub_menu_items = []
 
 		# Read disable options and build the sub menu
-		for disable_option in config['disable_options']:
+		for disable_option in plugin_config['disable_options']:
 			time_in_minutes = disable_option['time']
+			label = []
 			# Validate time value
 			if not isinstance(time_in_minutes, int) or time_in_minutes <= 0:
 				logging.error('Invalid time in disable option: ' + str(time_in_minutes))
@@ -88,10 +89,13 @@ class TrayIcon:
 			time_unit = disable_option['unit'].lower()
 			if time_unit == 'seconds' or time_unit == 'second':
 				time_in_minutes = int(time_in_minutes / 60)
+				label = ['For %d Second', 'For %d Seconds']
 			elif time_unit == 'minutes' or time_unit == 'minute':
 				time_in_minutes = int(time_in_minutes * 1)
+				label = ['For %d Minute', 'For %d Minutes']
 			elif time_unit == 'hours' or time_unit == 'hour':
 				time_in_minutes = int(time_in_minutes * 60)
+				label = ['For %d Hour', 'For %d Hours']
 			else:
 				# Invalid unit
 				logging.error('Invalid unit in disable option: ' + str(disable_option))
@@ -100,7 +104,7 @@ class TrayIcon:
 			# Create submenu
 			sub_menu_item = Gtk.MenuItem()
 			sub_menu_item.connect('activate', self.on_disable_clicked, time_in_minutes)
-			self.sub_menu_items.append([sub_menu_item, disable_option['label'], disable_option['time']])
+			self.sub_menu_items.append([sub_menu_item, label, disable_option['time']])
 			self.sub_menu_disable.append(sub_menu_item)
 
 		# Disable until restart submenu
@@ -127,7 +131,7 @@ class TrayIcon:
 		self.item_quit = Gtk.MenuItem()
 		self.item_quit.connect('activate', self.quit_safe_eyes)
 
-		self.set_labels(language)
+		self.set_labels()
 
 		# At startup, no need for activate menu
 		self.item_enable.set_sensitive(False)
@@ -145,38 +149,38 @@ class TrayIcon:
 
 		self.indicator.set_menu(self.menu)
 
-	def initialize(self, context, config):
+	def initialize(self, context, plugin_config):
 		"""
 		Initialize the tray icon by setting the config.
 		"""
-		self.config = config
-		self.set_labels(context['language'])
+		self.plugin_config = plugin_config
+		self.set_labels()
 
-	def set_labels(self, language):
+	def set_labels(self):
 		"""
 		Update the text of menu items based on the selected language.
 		"""
-		self.language = language
 		for entry in self.sub_menu_items:
-			entry[0].set_label(self.language['ui_controls'][entry[1]].format(entry[2]))
+			# print(self.context['locale'].ngettext('For %d Hour', 'For %d Hours', 1) % 1)
+			entry[0].set_label(self.context['locale'].ngettext(entry[1][0], entry[1][1], entry[2]) % entry[2])
 
-		self.sub_menu_item_until_restart.set_label(self.language['ui_controls']['until_restart'])
-		self.item_enable.set_label(self.language['ui_controls']['enable'])
-		self.item_disable.set_label(self.language['ui_controls']['disable'])
+		self.sub_menu_item_until_restart.set_label(_('Until restart'))
+		self.item_enable.set_label(_('Enable Safe Eyes'))
+		self.item_disable.set_label(_('Disable Safe Eyes'))
 
 		if self.active:
 			if self.dateTime:
 				self.__set_next_break_info()
 		else:
 			if self.wakeup_time:
-				self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
+				self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
 			else:
-				self.item_info.set_label(self.language['messages']['disabled_until_restart'])
+				self.item_info.set_label(_('Disabled until restart'))
 
-		self.item_manual_break.set_label('Take the break now')
-		self.item_settings.set_label(self.language['ui_controls']['settings'])
-		self.item_about.set_label(self.language['ui_controls']['about'])
-		self.item_quit.set_label(self.language['ui_controls']['quit'])
+		self.item_manual_break.set_label(_('Take the break now'))
+		self.item_settings.set_label(_('Settings'))
+		self.item_about.set_label(_('About'))
+		self.item_quit.set_label(_('Quit'))
 
 	def show_icon(self):
 		"""
@@ -230,9 +234,9 @@ class TrayIcon:
 		A private method to be called within this class to update the next break information using self.dateTime.
 		"""
 		formatted_time = Utility.format_time(self.dateTime)
-		message = self.language['messages']['next_break_at'].format(formatted_time)
+		message = _('Next break at %s') % (formatted_time)
 		# Update the tray icon label
-		if self.config.get('show_time_in_tray', False):
+		if self.plugin_config.get('show_time_in_tray', False):
 			self.indicator.set_label(formatted_time, '')
 		else:
 			self.indicator.set_label('', '')
@@ -286,11 +290,11 @@ class TrayIcon:
 			time_to_wait = args[1]
 			if time_to_wait <= 0:
 				self.wakeup_time = None
-				self.item_info.set_label(self.language['messages']['disabled_until_restart'])
+				self.item_info.set_label(_('Disabled until restart'))
 			else:
 				self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
 				Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
-				self.item_info.set_label(self.language['messages']['disabled_until_x'].format(Utility.format_time(self.wakeup_time)))
+				self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
 
 	def lock_menu(self):
 		"""
@@ -326,12 +330,13 @@ def init(ctx, safeeyes_cfg, plugin_config):
 	global context
 	global tray_icon
 	global safeeyes_config
+	logging.debug('Initialize Tray Icon plugin')
 	context = ctx
 	safeeyes_config = safeeyes_cfg
 	if not tray_icon:
-		tray_icon = TrayIcon(context, safeeyes_config, context['language'])
+		tray_icon = TrayIcon(context, plugin_config)
 	else:
-		tray_icon.initialize(context, safeeyes_cfg)
+		tray_icon.initialize(context, plugin_config)
 
 def update_next_break(dateTime):
 	"""

@@ -1,0 +1,28 @@
+{
+    "meta": {
+        "name": "Skip Full Screen",
+        "description": "Skip the break if there are any full screen apps",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": ["xprop"],
+        "operating_systems": [],
+        "desktop_environments": []
+    },
+    "settings": [
+        {
+            "id": "whitelist",
+            "label": "Whitelisted windows",
+            "type": "TEXT",
+            "default": ""
+        },
+        {
+            "id": "blacklist",
+            "label": "Blacklisted windows",
+            "type": "TEXT",
+            "default": ""
+        }
+    ],
+    "resources": []
+}

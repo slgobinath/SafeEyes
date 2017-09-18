@@ -13,9 +13,15 @@
     "settings": [
         {
             "id": "command",
-            "label": "screen_saver_command",
+            "label": "Custom screensaver command",
             "type": "TEXT",
             "default": ""
+        },
+        {
+            "id": "min_seconds",
+            "label": "Minimum seconds to skip without screensaver",
+            "type": "INT",
+            "default": 3
         }
     ],
     "resources": []
