@@ -79,13 +79,15 @@ def handle_suspend_callback(sleeping):
 	if sleeping:
 		# Sleeping / suspending
 		if is_active:
+			logging.info("Stop Safe Eyes due to system suspend")
+			plugins.stop()
 			core.stop()
-			logging.info("Stopped Safe Eyes due to system suspend")
 	else:
 		# Resume from sleep
 		if is_active:
+			logging.info("Resume Safe Eyes after system wakeup")
+			plugins.start()
 			core.start()
-			logging.info("Resumed Safe Eyes after system wakeup")
 
 
 def handle_system_suspend():

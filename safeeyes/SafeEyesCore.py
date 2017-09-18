@@ -74,7 +74,7 @@ class SafeEyesCore:
 		"""
 		with self.lock:
 			if not self.running:
-				logging.info("Scheduling next break")
+				logging.info("Start Safe Eyes core")
 				self.running = True
 				Utility.start_thread(self.__scheduler_job)
 
@@ -86,7 +86,7 @@ class SafeEyesCore:
 			if not self.running:
 				return
 
-			logging.info("Stop the core")
+			logging.info("Stop Safe Eye core")
 
 			# Prevent resuming from a long break
 			if self.__is_long_break():

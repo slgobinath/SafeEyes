@@ -80,13 +80,13 @@ def __start_idle_monitor():
 	Continuously check the system idle time and pause/resume Safe Eyes based on it.
 	"""
 	global smart_pause_activated
-	while active:
+	while __is_active():
 		# Wait for 2 seconds
 		idle_condition.acquire()
 		idle_condition.wait(2)
 		idle_condition.release()
 
-		if active:
+		if __is_active():
 			# Get the system idle time
 			system_idle_time = __system_idle_time()
 			if system_idle_time >= idle_time and context['state'] == State.WAITING:
