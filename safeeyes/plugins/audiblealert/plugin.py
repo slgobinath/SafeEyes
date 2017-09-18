@@ -25,6 +25,7 @@ Safe Eyes audible alert plugin
 
 context = None
 
+
 def init(ctx, safeeyes_config, plugin_config):
 	"""
 	Initialize the plugin.

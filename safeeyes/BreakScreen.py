@@ -16,13 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, threading, logging, time
-from Xlib.display import Display, X
+import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gdk
+from gi.repository import GLib
+from gi.repository import Gtk
+import logging
+import threading
+from Xlib.display import Display
 
 
-class BreakScreen:
+class BreakScreen(object):
 	"""
 	The fullscreen window which prevents users from using the computer.
 	This class reads the break_screen.glade and build the user interface.

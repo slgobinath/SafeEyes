@@ -18,21 +18,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gettext
-import os, gi, json, dbus, logging, psutil, sys
-from threading import Timer
+from AboutDialog import AboutDialog
+from BreakScreen import BreakScreen
+import dbus
 from dbus.mainloop.glib import DBusGMainLoop
+import gettext
+import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from safeeyes.AboutDialog import AboutDialog
-from safeeyes.BreakScreen import BreakScreen
-from safeeyes.PluginManager import PluginManager
-from safeeyes.SafeEyesCore import SafeEyesCore
-from safeeyes.SettingsDialog import SettingsDialog
-from safeeyes import Utility
-from gettext import gettext as _
+import json
+import logging
+import os
+from PluginManager import PluginManager
+import psutil
+from SafeEyesCore import SafeEyesCore
+from SettingsDialog import SettingsDialog
+import sys
+from threading import Timer
+import Utility as Utility
 
 gettext.install('safeeyes', 'safeeyes/config/locale')
+
 
 # Define necessary paths
 break_screen_glade = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
@@ -41,6 +47,7 @@ about_dialog_glade = os.path.join(Utility.bin_directory, "glade/about_dialog.gla
 
 is_active = True
 SAFE_EYES_VERSION = "2.0.0"
+
 
 def show_settings():
 	"""
@@ -192,6 +199,7 @@ def running():
 			pass
 	return False
 
+
 def start_break(break_obj):
 	if not plugins.start_break(break_obj):
 		return False
@@ -200,11 +208,13 @@ def start_break(break_obj):
 	break_screen.show_message(break_obj, plugins_data)
 	return True
 
+
 def countdown(countdown, seconds):
 	break_screen.show_count_down(countdown, seconds)
 	if not plugins.countdown(countdown, seconds):
 		return False
 	return True
+
 
 def stop_break():
 	break_screen.close()
@@ -238,7 +248,6 @@ def main():
 		locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=[Utility.system_locale()])
 		# locale = gettext.NullTranslations()
 		locale.install()
-
 
 		# Initialize the Safe Eyes Context
 		context['version'] = SAFE_EYES_VERSION

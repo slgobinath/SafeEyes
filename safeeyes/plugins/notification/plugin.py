@@ -16,11 +16,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import gi, logging
+import gi
 gi.require_version('Notify', '0.7')
 from gi.repository import Notify
-from safeeyes import Utility
+import logging
 from safeeyes.model import BreakType
+from safeeyes import Utility
 
 """
 Safe Eyes Notification plugin
@@ -30,6 +31,7 @@ APPINDICATOR_ID = 'safeeyes'
 notification = None
 context = None
 
+
 def init(ctx, safeeyes_config, plugin_config):
 	"""
 	Initialize the plugin.
@@ -38,12 +40,14 @@ def init(ctx, safeeyes_config, plugin_config):
 	logging.debug('Initialize Notification plugin')
 	context = ctx
 
+
 def on_start():
 	"""
 	Initialize the native notification.
 	"""
 	logging.debug('Start Notification plugin')
 	Notify.init(APPINDICATOR_ID)
+
 
 def on_pre_break(break_obj):
 	"""
@@ -64,6 +68,7 @@ def on_pre_break(break_obj):
 	except Exception as e:
 		logging.exception('Error in showing notification', e)
 
+
 def on_start_break(break_obj):
 	"""
 	Close the notification.
@@ -74,10 +79,11 @@ def on_start_break(break_obj):
 		try:
 			notification.close()
 			notification = None
-		except:
+		except Exception:
 			# Some Linux systems automatically close the notification.
 			pass
 		pass
+
 
 def on_stop():
 	"""

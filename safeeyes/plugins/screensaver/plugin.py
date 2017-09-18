@@ -16,7 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os, logging
+import logging
+import os
+
 from safeeyes import Utility
 
 """
@@ -28,6 +30,7 @@ lock_screen = False
 lock_screen_command = None
 min_seconds = 0
 seconds_passed = 0
+
 
 def __lock_screen_command():
 	"""
@@ -67,6 +70,7 @@ def __lock_screen_command():
 				return ['gnome-screensaver-command', '--lock']
 	return None
 
+
 def init(ctx, safeeyes_config, plugin_config):
 	"""
 	Initialize the screensaver plugin.
@@ -82,6 +86,7 @@ def init(ctx, safeeyes_config, plugin_config):
 	else:
 		lock_screen_command = __lock_screen_command()
 
+
 def on_start_break(break_obj):
 	"""
 	Determine the break type and only if it is a long break, enable the lock_screen flag.
@@ -92,12 +97,14 @@ def on_start_break(break_obj):
 	if lock_screen_command:
 		lock_screen = break_obj.is_long_break()
 
+
 def on_countdown(countdown, seconds):
 	"""
 	Keep track of seconds passed from the beginning of long break.
 	"""
 	global seconds_passed
 	seconds_passed = seconds
+
 
 def on_stop_break():
 	"""

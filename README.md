@@ -56,6 +56,7 @@ For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#feat
  * [Català](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ca.json)
  * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/cs.json)
  * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/de.json)
+ * [Eesti](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/et.json)
  * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/en.json)
  * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/es.json)
  * [فارسی](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fa.json)
@@ -90,6 +91,7 @@ Core functionalities of Safe Eyes are tested by the developer in the following e
 * Ubuntu 16.04
 * Ubuntu 16.10
 * Ubuntu Budgie 17.04
+* Ubuntu 17.10
 * Ubuntu Mate 16.04
 * Xubuntu 16.10
 
