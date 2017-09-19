@@ -36,32 +36,35 @@ class BreakScreen(object):
 
     def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
         self.context = context
-        self.on_skip = on_skip
-        self.on_postpone = on_postpone
-        self.is_pretified = False
-        self.windows = []
         self.count_labels = []
-        self.glade_file = glade_file
-        self.enable_shortcut = False
         self.display = Display()
+        self.enable_postpone = False
+        self.enable_shortcut = False
+        self.glade_file = glade_file
+        self.is_pretified = False
+        self.keycode_shortcut_postpone = 65
+        self.keycode_shortcut_skip = 9
+        self.on_postpone = on_postpone
+        self.on_skip = on_skip
+        self.shortcut_disable_time = 2
+        self.strict_break = False
+        self.windows = []
 
         # Initialize the theme
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(style_sheet_path)
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-    def initialize(self, config, language):
+    def initialize(self, config):
         """
         Initialize the internal properties from configuration
         """
         logging.info("Initialize the break screen")
-        self.skip_button_text = language['ui_controls']['skip']
-        self.postpone_button_text = language['ui_controls']['postpone']
-        self.strict_break = config.get('strict_break', False)
         self.enable_postpone = config.get('allow_postpone', False)
-        self.keycode_shortcut_skip = config.get('shortcut_skip', 9)
         self.keycode_shortcut_postpone = config.get('shortcut_postpone', 65)
+        self.keycode_shortcut_skip = config.get('shortcut_skip', 9)
         self.shortcut_disable_time = config.get('shortcut_disable_time', 2)
+        self.strict_break = config.get('strict_break', False)
 
     def skip_break(self):
         """
@@ -160,14 +163,14 @@ class BreakScreen(object):
             if not self.strict_break:
                 # Add postpone button
                 if self.enable_postpone:
-                    btn_postpone = Gtk.Button(self.postpone_button_text)
+                    btn_postpone = Gtk.Button(_('Postpone'))
                     btn_postpone.get_style_context().add_class('btn_postpone')
                     btn_postpone.connect('clicked', self.on_postpone_clicked)
                     btn_postpone.set_visible(True)
                     box_buttons.pack_start(btn_postpone, True, True, 0)
 
                 # Add the skip button
-                btn_skip = Gtk.Button(self.skip_button_text)
+                btn_skip = Gtk.Button(_('Skip'))
                 btn_skip.get_style_context().add_class('btn_skip')
                 btn_skip.connect('clicked', self.on_skip_clicked)
                 btn_skip.set_visible(True)

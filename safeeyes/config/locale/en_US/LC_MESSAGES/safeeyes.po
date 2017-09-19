@@ -75,3 +75,10 @@ msgstr "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding y
 
 msgid "License"
 msgstr "License"
+
+# BreakScreen
+msgid "Skip"
+msgstr "Skip"
+
+msgid "Postpone"
+msgstr "Postpone"
