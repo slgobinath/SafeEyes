@@ -229,9 +229,9 @@ class SafeEyes(object):
         """
         if not self.plugins_manager.start_break(break_obj):
             return False
-        # Get the ASCII widgets content from plugins
-        plugins_data = self.plugins_manager.get_ascii_widgets(break_obj)
-        self.break_screen.show_message(break_obj, plugins_data)
+        # Get the HTML widgets content from plugins
+        widget = self.plugins_manager.get_break_screen_widgets(break_obj)
+        self.break_screen.show_message(break_obj, widget)
         return True
 
     def countdown(self, countdown, seconds):

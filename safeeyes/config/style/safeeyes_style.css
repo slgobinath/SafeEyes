@@ -72,8 +72,7 @@
     color: white;
 }
 
-.panel_left {
-}
-
-.panel_right {
+.lbl_widget {
+    font-size: 9pt;
+    color: white;
 }
