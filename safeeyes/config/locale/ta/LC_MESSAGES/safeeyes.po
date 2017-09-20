@@ -17,6 +17,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: ta\n"
 
+# Short Breaks
+msgid  "short_break_close_eyes"
+msgstr "உங்கள் கண்களை இறுக்கமாக மூடுங்கள்"
+
+msgid  "short_break_roll_eyes"
+msgstr "உங்கள் கண்களை இடம் வலமாக உருட்டுங்கள்"
+
+msgid  "short_break_rotate_clockwise"
+msgstr "உங்கள் கண்களை வலஞ்சுழியாக சுழற்றுங்கள்"
+
+msgid  "short_break_rotate_counter_clockwise"
+msgstr "உங்கள் கண்களை இடஞ்சுழியாக சுழற்றுங்கள்"
+
+msgid  "short_break_blink"
+msgstr "உங்கள் கண்களை சிமிட்டுங்கள்"
+
+msgid  "short_break_focus_far_distance"
+msgstr "தூரத்தில் உள்ள ஒரு பொருளை பாருங்கள்"
+
+msgid  "short_break_drink_water"
+msgstr "கொஞ்சம் தண்ணீர் குடியுங்கள்"
+
+# Long Breaks
+msgid  "long_break_walk"
+msgstr "சிறிது தூரம் நடவுங்கள்"
+
+msgid  "long_break_lean_back"
+msgstr "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
+
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
 msgstr "Show a tray icon in the notification area"

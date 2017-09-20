@@ -17,6 +17,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: en_US\n"
 
+# Short Breaks
+msgid "short_break_close_eyes"
+msgstr "Tightly close your eyes"
+
+msgid "short_break_roll_eyes"
+msgstr "Roll your eyes a few times to each side"
+
+msgid "short_break_rotate_clockwise"
+msgstr "Rotate your eyes in clockwise direction"
+
+msgid "short_break_rotate_counter_clockwise"
+msgstr "Rotate your eyes in counterclockwise direction"
+
+msgid "short_break_blink"
+msgstr "Blink your eyes"
+
+msgid "short_break_focus_far_distance"
+msgstr "Focus on a point in the far distance"
+
+msgid "short_break_drink_water"
+msgstr "Have some water"
+
+# Long Breaks
+msgid  "long_break_walk"
+msgstr "Walk for a while"
+
+msgid  "long_break_lean_back"
+msgstr "Lean back at your seat and relax"
+
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
 msgstr "Show a tray icon in the notification area"

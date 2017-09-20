@@ -29,10 +29,8 @@ import sys
 
 from safeeyes import Utility
 
-SYSTEM_PLUGINS_DIR = os.path.join(Utility.bin_directory, 'plugins')
-USER_PLUGINS_DIR = os.path.join(Utility.config_directory, 'plugins')
-sys.path.append(os.path.abspath(SYSTEM_PLUGINS_DIR))
-sys.path.append(os.path.abspath(USER_PLUGINS_DIR))
+sys.path.append(os.path.abspath(Utility.SYSTEM_PLUGINS_DIR))
+sys.path.append(os.path.abspath(Utility.USER_PLUGINS_DIR))
 
 HORIZONTAL_LINE_LENGTH = 64
 
@@ -163,10 +161,10 @@ class PluginManager(object):
         if plugin['enabled']:
             # Look for plugin.py
             plugin_dir = None
-            if os.path.isfile(os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-                plugin_dir = SYSTEM_PLUGINS_DIR
-            elif os.path.isfile(os.path.join(USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-                plugin_dir = USER_PLUGINS_DIR
+            if os.path.isfile(os.path.join(Utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+                plugin_dir = Utility.SYSTEM_PLUGINS_DIR
+            elif os.path.isfile(os.path.join(Utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+                plugin_dir = Utility.USER_PLUGINS_DIR
             else:
                 logging.error('plugin.py not found for the plugin: %s', plugin['id'])
                 return

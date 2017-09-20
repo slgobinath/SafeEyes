@@ -76,3 +76,15 @@
     font-size: 9pt;
     color: white;
 }
+
+.btn_properties {
+    border-radius: 15px;    
+}
+
+.lbl_plugin_name {
+    font-weight: bold;
+}
+
+.lbl_plugin_description {
+    color: #9B9B9B;
+}

@@ -63,6 +63,7 @@ class SafeEyesCore(object):
         self.context['skipped'] = False
         self.context['postponed'] = False
         self.context['state'] = State.WAITING
+        self.context['new_cycle'] = False
 
     def initialize(self, config, language):
         """
@@ -154,6 +155,7 @@ class SafeEyesCore(object):
             time.sleep(1)	# Wait for 1 sec to ensure the sceduler is dead
             self.running = True
 
+        self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_start_break)
 
 
@@ -189,6 +191,7 @@ class SafeEyesCore(object):
         if not self.running:
             return
 
+        self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_pre_break)
 
     def __fire_pre_break(self):

@@ -21,11 +21,11 @@ Show health statistics on the break screen.
 """
 
 import logging
-import time
 
 context = None
 no_of_skipped_breaks = 0
 no_of_breaks = 0
+no_of_cycles = -1
 
 def init(ctx, safeeyes_config, plugin_config):
     """
@@ -48,12 +48,17 @@ def get_widget_title(break_obj):
     """
     Return the widget title.
     """
-    return 'Health Statistics'
+    global no_of_breaks
+    global no_of_cycles
+    no_of_breaks += 1
+    if context['new_cycle']:
+        no_of_cycles += 1
+        if no_of_cycles > 0:
+            return 'Health Statistics'
+    return ''
 
 def get_widget_content(break_obj):
     """
-    Return the statistics
+    Return the statistics.
     """
-    global no_of_breaks
-    no_of_breaks += 1
-    return 'BREAKS: {}\tSKIPPED: {}'.format(no_of_breaks, no_of_skipped_breaks)
+    return 'BREAKS: {}\tSKIPPED: {}\tCYCLES: {}'.format(no_of_breaks, no_of_skipped_breaks, no_of_cycles)

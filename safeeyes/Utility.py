@@ -46,7 +46,8 @@ style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
 system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
 system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
 log_file_path = os.path.join(config_directory, 'safeeyes.log')
-
+SYSTEM_PLUGINS_DIR = os.path.join(bin_directory, 'plugins')
+USER_PLUGINS_DIR = os.path.join(config_directory, 'plugins')
 
 def get_resource_path(resource_name):
     """
@@ -179,6 +180,25 @@ def read_lang_files():
 
     return languages
 
+def load_plugins_config(plugins_dir):
+    """
+    Load all the plugins from the given directory.
+    """
+    configs = []
+    for plugin_dir in os.listdir(plugins_dir):
+        plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
+        plugin_icon_path = os.path.join(plugins_dir, plugin_dir, 'icon.png')
+        icon = None
+        if os.path.isfile(plugin_icon_path):
+            icon = plugin_icon_path
+        if os.path.isfile(plugin_config_path):
+            with open(plugin_config_path) as config_file:
+                config = json.load(config_file)
+                config['icon'] = icon
+                configs.append(config)
+    return configs
+
+    return languages
 
 def desktop_environment():
     """
