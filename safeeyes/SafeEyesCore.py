@@ -65,7 +65,7 @@ class SafeEyesCore(object):
         self.context['state'] = State.WAITING
         self.context['new_cycle'] = False
 
-    def initialize(self, config, language):
+    def initialize(self, config):
         """
         Initialize the internal properties from configuration
         """
@@ -77,10 +77,8 @@ class SafeEyesCore(object):
         self.break_interval = config['break_interval']
         self.postpone_duration = config['postpone_duration']
 
-        exercises = language['exercises'].copy()
-        exercises.update(config['custom_exercises'])
-        self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
-        self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], exercises, config['no_of_short_breaks_per_long_break'])
+        self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], config['no_of_short_breaks_per_long_break'])
+        self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], config['no_of_short_breaks_per_long_break'])
         self.break_count = len(self.breaks)
 
     def start(self):
@@ -275,7 +273,7 @@ class SafeEyesCore(object):
             # Schedule the break again
             Utility.start_thread(self.__scheduler_job)
 
-    def __init_breaks(self, break_type, break_configs, exercises, short_breaks_per_long_break=0):
+    def __init_breaks(self, break_type, break_configs, short_breaks_per_long_break=0):
         """
         Fill the self.breaks using short and local breaks.
         """
@@ -295,15 +293,7 @@ class SafeEyesCore(object):
 
         iteration = 1
         for break_config in break_configs:
-            exercise_name = break_config['name']
-            name = None
-
-            if exercise_name in exercises:
-                name = exercises[exercise_name]
-            else:
-                logging.error('Exercise not found: ' + exercise_name)
-                continue
-
+            name = _(break_config['name'])
             break_time = break_config.get('time', default_break_time)
             image = break_config.get('image')
             plugins = None # break_config.get('plugins', config['plugins'])

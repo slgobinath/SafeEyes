@@ -48,6 +48,7 @@ system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_sty
 log_file_path = os.path.join(config_directory, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(bin_directory, 'plugins')
 USER_PLUGINS_DIR = os.path.join(config_directory, 'plugins')
+LOCALE_PATH = os.path.join(bin_directory, 'config/locale')
 
 def get_resource_path(resource_name):
     """
@@ -122,64 +123,6 @@ def mkdir(path):
             raise
 
 
-def parse_language_code(lang_code):
-    """
-    Convert the user defined language code to a valid one.
-    This includes converting to lower case and finding system locale language,
-    if the given lang_code code is 'system'.
-    """
-    # Convert to lower case
-    lang_code = str(lang_code).lower()
-
-    # If it is system, use the system language
-    if lang_code == 'system':
-        logging.info('Use system language for Safe Eyes')
-        sys_locale = system_locale()
-        lang_code = sys_locale[0:2].lower()
-
-    # Check whether translation is available for this language.
-    # If not available, use English by default.
-    language_file_path = os.path.join(system_language_directory, lang_code + '.json')
-    if not os.path.exists(language_file_path):
-        logging.warning('The language %s does not exist. Use English instead', lang_code)
-        lang_code = 'en'
-
-    return lang_code
-
-
-def load_language(lang_code):
-    """
-    Load the desired language from the available list based on the preference.
-    """
-    # Convert the user defined language code to a valid one
-    lang_code = parse_language_code(lang_code)
-
-    # Construct the translation file path
-    language_file_path = os.path.join(system_language_directory, lang_code + '.json')
-
-    language = None
-    # Read the language file and construct the json object
-    with open(language_file_path) as language_file:
-        language = json.load(language_file)
-
-    return language
-
-
-def read_lang_files():
-    """
-    Read all the language translations and build a key-value mapping of language names
-    in English and ISO 639-1 (Filename without extension).
-    """
-    languages = {}
-    for lang_file_name in os.listdir(system_language_directory):
-        lang_file_path = os.path.join(system_language_directory, lang_file_name)
-        if os.path.isfile(lang_file_path):
-            with open(lang_file_path) as lang_file:
-                lang = json.load(lang_file)
-                languages[lang_file_name.lower().replace('.json', '')] = lang['meta_info']['language_name']
-
-    return languages
-
 def load_plugins_config(plugins_dir):
     """
     Load all the plugins from the given directory.
@@ -191,14 +134,14 @@ def load_plugins_config(plugins_dir):
         icon = None
         if os.path.isfile(plugin_icon_path):
             icon = plugin_icon_path
+        else:
+            icon = get_resource_path('ic_plugin.png')
         if os.path.isfile(plugin_config_path):
             with open(plugin_config_path) as config_file:
                 config = json.load(config_file)
                 config['icon'] = icon
                 configs.append(config)
     return configs
-
-    return languages
 
 def desktop_environment():
     """

@@ -22,18 +22,21 @@ from gi.repository import GObject
 from gi.repository import Gtk
 from safeeyes import Utility
 
-
 class SettingsDialog(object):
     """
         Create and initialize SettingsDialog instance.
     """
-    def __init__(self, config, language, languages, able_to_lock_screen, on_save_settings, glade_file):
+    def __init__(self, config, on_save_settings, glade_file):
         self.config = config
         self.on_save_settings = on_save_settings
-        self.languages = []
-        self.language = language
+
+        # locale.setlocale(locale.LC_ALL, '')
+        
+        # locale.textdomain('safeeyes')
+        # gettext.textdomain('safeeyes')
 
         builder = Gtk.Builder()
+        builder.set_translation_domain('safeeyes')
         builder.add_from_file(glade_file)
         builder.connect_signals(self)
 
@@ -68,25 +71,6 @@ class SettingsDialog(object):
         # self.switch_screen_lock = builder.get_object('switch_screen_lock')
         # self.spin_time_to_screen_lock = builder.get_object('spin_time_to_screen_lock')
 
-        # # Translate the UI labels
-        # builder.get_object('lbl_short_break').set_label(language['ui_controls']['short_break_duration'])
-        # builder.get_object('lbl_long_break').set_label(language['ui_controls']['long_break_duration'])
-        # builder.get_object('lbl_interval_bettween_breaks').set_label(language['ui_controls']['interval_between_two_breaks'])
-        # builder.get_object('lbl_short_per_long').set_label(language['ui_controls']['no_of_short_breaks_between_two_long_breaks'])
-        # builder.get_object('lbl_time_to_prepare').set_label(language['ui_controls']['time_to_prepare_for_break'])
-        # builder.get_object('lbl_idle_time_to_pause').set_label(language['ui_controls']['idle_time'])
-        # builder.get_object('lbl_postpone_duration').set_label(language['ui_controls']['postpone_duration'])
-        # builder.get_object('lbl_allow_postpone').set_label(language['ui_controls']['allow_postpone'])
-        # builder.get_object('lbl_disable_keyboard_shortcut').set_label(language['ui_controls']['disable_keyboard_shortcut'])
-        # builder.get_object('lbl_show_time_in_tray').set_label(language['ui_controls']['show_time_in_tray'])
-        # builder.get_object('lbl_strict_break').set_label(language['ui_controls']['strict_break'])
-        # builder.get_object('lbl_audible_alert').set_label(language['ui_controls']['audible_alert'])
-        # builder.get_object('lbl_language').set_label(language['ui_controls']['language'])
-        # builder.get_object('lbl_enable_screen_lock').set_label(language['ui_controls']['enable_screen_lock'])
-        # builder.get_object('lbl_lock_screen_after').set_label(language['ui_controls']['time_to_screen_lock'])
-        # builder.get_object('btn_cancel').set_label(language['ui_controls']['cancel'])
-        # builder.get_object('btn_save').set_label(language['ui_controls']['save'])
-
         # # Set the current values of input fields
         # self.spin_short_break_duration.set_value(config['short_break_duration'])
         # self.spin_long_break_duration.set_value(config['long_break_duration'])
@@ -120,32 +104,6 @@ class SettingsDialog(object):
 
         #     if Utility.pyaudio is None:
         #         self.switch_audible_alert.connect('state-set', self.on_switch_audible_alert_activate)
-
-        # # Initialize the language combobox
-        # language_list_store = Gtk.ListStore(GObject.TYPE_STRING)
-        # language_index = 2
-        # lang_code = config['language']
-
-        # # Add 'System Language' as the first option
-        # language_list_store.append([language['ui_controls']['system_language']])
-        # language_list_store.append(['-'])
-        # self.languages.append('system')
-        # self.languages.append('system')    # Dummy record for row separator
-        # if 'system' == lang_code:
-        #     self.cmb_language.set_active(0)
-
-        # for key in sorted(languages.keys()):
-        #     language_list_store.append([languages[key]])
-        #     self.languages.append(key)
-        #     if key == lang_code:
-        #         self.cmb_language.set_active(language_index)
-        #     language_index += 1
-
-        # self.cmb_language.set_model(language_list_store)
-        # self.cmb_language.set_row_separator_func(lambda m, i: m.get_value(i, 0) == '-')
-        # cell = Gtk.CellRendererText()
-        # self.cmb_language.pack_start(cell, True)
-        # self.cmb_language.add_attribute(cell, 'text', 0)
 
     def __create_break_item(self, name):
         """
@@ -205,10 +163,11 @@ class SettingsDialog(object):
         Event handler to the state change of the audible_alert switch.
         Show the information message dialog to install pyaudio if not installed.
         """
-        if state and Utility.pyaudio is None:
-            self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
-            switch.emit_stop_by_name('state-set')
-            self.switch_audible_alert.set_active(False)
+        pass
+        # if state and Utility.pyaudio is None:
+        #     self.__show_message_dialog(self.language['messages']['audible_alert_disabled'], self.language['messages']['software_required'].format('pyaudio'))
+        #     switch.emit_stop_by_name('state-set')
+        #     self.switch_audible_alert.set_active(False)
 
     def on_window_delete(self, *args):
         """

@@ -18,32 +18,32 @@ msgstr ""
 "Language: ta\n"
 
 # Short Breaks
-msgid  "short_break_close_eyes"
+msgid  "Tightly close your eyes"
 msgstr "உங்கள் கண்களை இறுக்கமாக மூடுங்கள்"
 
-msgid  "short_break_roll_eyes"
+msgid  "Roll your eyes a few times to each side"
 msgstr "உங்கள் கண்களை இடம் வலமாக உருட்டுங்கள்"
 
-msgid  "short_break_rotate_clockwise"
+msgid  "Rotate your eyes in clockwise direction"
 msgstr "உங்கள் கண்களை வலஞ்சுழியாக சுழற்றுங்கள்"
 
-msgid  "short_break_rotate_counter_clockwise"
+msgid  "Rotate your eyes in counterclockwise direction"
 msgstr "உங்கள் கண்களை இடஞ்சுழியாக சுழற்றுங்கள்"
 
-msgid  "short_break_blink"
+msgid  "Blink your eyes"
 msgstr "உங்கள் கண்களை சிமிட்டுங்கள்"
 
-msgid  "short_break_focus_far_distance"
+msgid  "Focus on a point in the far distance"
 msgstr "தூரத்தில் உள்ள ஒரு பொருளை பாருங்கள்"
 
-msgid  "short_break_drink_water"
+msgid  "Have some water"
 msgstr "கொஞ்சம் தண்ணீர் குடியுங்கள்"
 
 # Long Breaks
-msgid  "long_break_walk"
+msgid  "Walk for a while"
 msgstr "சிறிது தூரம் நடவுங்கள்"
 
-msgid  "long_break_lean_back"
+msgid  "Lean back at your seat and relax"
 msgstr "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
 
 #: plugins/trayicon
@@ -111,3 +111,43 @@ msgstr "தவிர்"
 
 msgid "Postpone"
 msgstr "ஒத்தி வை"
+
+# Settings dialog
+msgid "Short break duration (in seconds)"
+msgstr "குறுகிய கால இடைவேளை (விநாடிகளில்)"
+
+msgid "Long break duration (in seconds)"
+msgstr "நீண்ட கால இடைவேளை (விநாடிகளில்)"
+
+msgid "Interval between two breaks (in minutes)"
+msgstr "இரண்டு இடைவேளைகளுக்கிடையிலான இடைவெளி (நிமிடங்களில்)"
+
+msgid "Number of short breaks between two long breaks"
+msgstr "இரண்டு நீண்ட இடைவேளைகளுக்கிடையிலான குறுகிய இடைவேளைகள்"
+
+msgid "Time to prepare for a break (in seconds)"
+msgstr "இடைவேளைக்கு தயாராக தேவைப்படும் நேரம் (விநாடிகளில்)"
+
+msgid "Keyboard shortcuts disabled period (in seconds)"
+msgstr "விசைப்பலகை குறுக்குவழிகள் முடக்கப்பட்டிருக்கும் காலம் (விநாடிகளில்)"
+
+msgid "Postpone duration (in minutes)"
+msgstr "இடைவேளையை ஒத்தி வைக்கும் காலம் (நிமிடங்களில்)"
+
+msgid "Strict break (No way to skip breaks)"
+msgstr "கட்டாய இடைவேளை (இடைவேளையை தவிர்க்க முடியாது)"
+
+msgid "Allow postponing breaks"
+msgstr "இடைவேளையை ஒத்திவைக்க அனுமதிக்கவும்"
+
+msgid "Short Breaks"
+msgstr "குறுகிய இடைவேளைகள்"
+
+msgid "Long Breaks"
+msgstr "நீண்ட இடைவேளைகள்"
+
+msgid "Breaks"
+msgstr "இடைவேளைகள்"
+
+msgid "Plugins"
+msgstr "நீட்சிகள்"

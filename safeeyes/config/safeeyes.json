@@ -14,41 +14,37 @@
     "shortcut_skip": 9,
     "shortcut_postpone": 65,
     "strict_break": false,
-    "language": "system",
     "short_breaks": [
         {
-            "name": "short_break_close_eyes"
+            "name": "Tightly close your eyes"
         },
         {
-            "name": "short_break_roll_eyes"
+            "name": "Roll your eyes a few times to each side"
         },
         {
-            "name": "short_break_rotate_clockwise"
+            "name": "Rotate your eyes in clockwise direction"
         },
         {
-            "name": "short_break_rotate_counter_clockwise"
+            "name": "Rotate your eyes in counterclockwise direction"
         },
         {
-            "name": "short_break_blink"
+            "name": "Blink your eyes"
         },
         {
-            "name": "short_break_focus_far_distance"
+            "name": "Focus on a point in the far distance"
         },
         {
-            "name": "short_break_drink_water"
+            "name": "Have some water"
         }
     ],
     "long_breaks": [
         {
-            "name": "long_break_walk"
+            "name": "Walk for a while"
         },
         {
-            "name": "long_break_lean_back"
+            "name": "Lean back at your seat and relax"
         }
     ],
-    "custom_exercises": {
-
-    },
     "plugins": [
         {
             "id": "skipfullscreen",

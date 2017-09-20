@@ -22,6 +22,7 @@ Safe Eyes is a utility to remind you to take break frequently to protect your ey
 
 import gettext
 import json
+import locale
 import logging
 import os
 import sys
@@ -32,7 +33,6 @@ import gi
 import psutil
 from dbus.mainloop.glib import DBusGMainLoop
 from gi.repository import Gtk
-
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
@@ -56,25 +56,20 @@ class SafeEyes(object):
     The class to represent a runnable Safe Eyes instance.
     """
 
-    def __init__(self):
+    def __init__(self, system_locale):
         self.active = True
         self.break_screen = None
         self.safe_eyes_core = None
         self.config = None
-        self.language = None
         self.context = {}
         self.plugins_manager = None
 
         self.config = Utility.read_config()
-        self.language = Utility.load_language(self.config['language'])
-        locale = gettext.translation('safeeyes', localedir='safeeyes/config/locale', languages=[Utility.system_locale()])
-        locale.install()
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
         self.context['desktop'] = Utility.desktop_environment()
-        self.context['language'] = self.language
-        self.context['locale'] = locale
+        self.context['locale'] = system_locale
         self.context['api'] = {}
         self.context['api']['show_settings'] = self.show_settings
         self.context['api']['show_about'] = self.show_about
@@ -91,7 +86,7 @@ class SafeEyes(object):
         self.safe_eyes_core.on_count_down += self.countdown
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.plugins_manager.update_next_break
-        self.safe_eyes_core.initialize(self.config, self.language)
+        self.safe_eyes_core.initialize(self.config)
         self.context['api']['take_break'] = self.safe_eyes_core.take_break
         self.plugins_manager.init(self.context, self.config)
     
@@ -108,8 +103,7 @@ class SafeEyes(object):
         Listen to tray icon Settings action and send the signal to Settings dialog.
         """
         logging.info("Show Settings dialog")
-        able_to_lock_screen = False
-        settings_dialog = SettingsDialog(self.config, self.language, Utility.read_lang_files(), able_to_lock_screen, self.save_settings, SETTINGS_DIALOG_GLADE)
+        settings_dialog = SettingsDialog(self.config, self.save_settings, SETTINGS_DIALOG_GLADE)
         settings_dialog.show()
 
 
@@ -193,14 +187,11 @@ class SafeEyes(object):
         with open(Utility.config_file_path, 'w') as config_file:
             json.dump(config, config_file, indent=4, sort_keys=True)
 
-        # Reload the language translation
-        self.language = Utility.load_language(config['language'])
-
         logging.info("Initialize SafeEyesCore with modified settings")
 
         # Restart the core and intialize the components
-        self.safe_eyes_core.initialize(config, self.language)
-        self.break_screen.initialize(config, self.language)
+        self.safe_eyes_core.initialize(config)
+        self.break_screen.initialize(config)
         if self.active:
             # 1 sec delay is required to give enough time for core to be stopped
             Timer(1.0, self.safe_eyes_core.start).start()
@@ -289,7 +280,11 @@ def main():
     logging.info("Starting Safe Eyes")
 
     if not running():
-        safeeyes = SafeEyes()
+        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale()])
+        system_locale.install()
+        # locale.bindtextdomain is required for Glade files
+        locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
+        safeeyes = SafeEyes(system_locale)
         safeeyes.start()
         Gtk.main()
     else:
