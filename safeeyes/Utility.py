@@ -30,7 +30,6 @@ import shutil
 import subprocess
 import threading
 from distutils.version import LooseVersion
-from html.parser import HTMLParser
 
 import babel.dates
 import gi
@@ -141,7 +140,7 @@ def parse_language_code(lang_code):
     # If not available, use English by default.
     language_file_path = os.path.join(system_language_directory, lang_code + '.json')
     if not os.path.exists(language_file_path):
-        logging.warn('The language {} does not exist. Use English instead'.format(lang_code))
+        logging.warning('The language %s does not exist. Use English instead', lang_code)
         lang_code = 'en'
 
     return lang_code
@@ -187,21 +186,22 @@ def desktop_environment():
     """
     desktop_session = os.environ.get('DESKTOP_SESSION')
     current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
+    env = 'unknown'
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
         if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
-            return desktop_session
-        elif (desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop)):
-            return 'xfce'
-        elif desktop_session.startswith('ubuntu'):
-            return 'unity'
+            env = desktop_session
+        elif desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop):
+            env = 'xfce'
         elif desktop_session.startswith('lubuntu'):
-            return 'lxde'
+            env = 'lxde'
         elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
-            return 'kde'
+            env = 'kde'
         elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-            return 'gnome'
-    return 'unknown'
+            env = 'gnome'
+        elif desktop_session.startswith('ubuntu'):
+            env = 'unity'
+    return env
 
 
 def execute_command(command, args=[]):
@@ -218,17 +218,8 @@ def execute_command(command, args=[]):
             command_to_execute.extend(args)
         try:
             subprocess.Popen(command_to_execute)
-        except Exception as e:
+        except BaseException:
             logging.error('Error in executing the commad' + str(command))
-
-
-def html_to_text(html):
-    """
-    Convert HTML to plain text
-    """
-    extractor = __HTMLTextExtractor()
-    extractor.feed(html)
-    return extractor.get_data()
 
 
 def command_exist(command):
@@ -237,8 +228,7 @@ def command_exist(command):
     """
     if shutil.which(command):
         return True
-    else:
-        return False
+    return False
 
 
 def module_exist(module):
@@ -276,7 +266,7 @@ def __initialize_safeeyes():
     # Remove the startup file
     try:
         os.remove(os.path.join(home_directory, os.path.join(startup_dir_path, 'safeeyes.desktop')))
-    except Exception:
+    except OSError:
         pass
 
     # Create the ~/.config/safeeyes/style directory
@@ -289,7 +279,7 @@ def __initialize_safeeyes():
     # Copy the new startup file
     try:
         os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, 'safeeyes.desktop'))
-    except OSError as exc:
+    except OSError:
         pass
 
     # Copy the new style sheet
@@ -305,7 +295,7 @@ def intialize_logging():
     if not os.path.exists(config_directory):
         try:
             os.makedirs(config_directory)
-        except Exception:
+        except OSError:
             pass
 
     # Configure logging.
@@ -346,7 +336,7 @@ def read_config():
 
     if LooseVersion(user_config_version) < LooseVersion(system_config_version):
         # Outdated user config
-        logging.info('Update the old config version {} with new config version {}'.format(user_config_version, system_config_version))
+        logging.info('Update the old config version %s with new config version %s', user_config_version, system_config_version)
         user_config_major_version = user_config_version.split('.')[0]
         system_config_major_version = system_config_version.split('.')[0]
 
@@ -370,20 +360,3 @@ def read_config():
             user_config = new_config
 
     return user_config
-
-
-class __HTMLTextExtractor(HTMLParser):
-    """
-    Helper class to convert HTML to text
-    """
-    def __init__(self):
-        self.reset()
-        self.strict = False
-        self.convert_charrefs = True
-        self.fed = []
-
-    def handle_data(self, d):
-        self.fed.append(d)
-
-    def get_data(self):
-        return ''.join(self.fed)

@@ -136,8 +136,12 @@ class PluginManager(object):
         widget = ''
         for plugin in self.__widget_plugins:
             try:
-                title = plugin['module'].get_widget_title(break_obj).upper()
+                title = plugin['module'].get_widget_title(break_obj).upper().strip()
+                if title == '':
+                    continue
                 content = plugin['module'].get_widget_content(break_obj)
+                if content == '':
+                    continue
                 widget += '<b>{}</b>\n{}\n{}\n\n\n'.format(title, self.horizontal_line, content)
             except BaseException:
                 continue

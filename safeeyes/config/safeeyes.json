@@ -105,6 +105,10 @@
                 "command": "",
                 "min_seconds": 3
             }
+        },
+        {
+            "id": "healthstats",
+            "enabled": false
         }
     ]
 }

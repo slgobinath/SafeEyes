@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+# Safe Eyes is a utility to remind you to take break frequently
+# to protect your eyes from eye strain.
+
+# Copyright (C) 2017  Gobinath
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Show health statistics on the break screen.
+"""
+
+import logging
+import time
+
+context = None
+no_of_skipped_breaks = 0
+no_of_breaks = 0
+
+def init(ctx, safeeyes_config, plugin_config):
+    """
+    Initialize the plugin.
+    """
+    global context
+    logging.debug('Initialize Health Stats plugin')
+    context = ctx
+
+
+def on_stop_break():
+    """
+    After the break, play the alert sound
+    """
+    global no_of_skipped_breaks
+    if context['skipped']:
+        no_of_skipped_breaks += 1
+
+def get_widget_title(break_obj):
+    """
+    Return the widget title.
+    """
+    return 'Health Statistics'
+
+def get_widget_content(break_obj):
+    """
+    Return the statistics
+    """
+    global no_of_breaks
+    no_of_breaks += 1
+    return 'BREAKS: {}\tSKIPPED: {}'.format(no_of_breaks, no_of_skipped_breaks)
