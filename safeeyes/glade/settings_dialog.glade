@@ -429,6 +429,8 @@
                   <object class="GtkSwitch" id="switch_strict_break">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -465,6 +467,8 @@
                   <object class="GtkSwitch" id="switch_postpone">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
