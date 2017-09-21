@@ -18,15 +18,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import logging
+import os
 import threading
 import time
 
 import gi
 from gi.repository import Gdk, GLib, Gtk
+from safeeyes import Utility
 from Xlib.display import Display, X
 
 gi.require_version('Gtk', '3.0')
 
+BREAK_SCREEN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/break_screen.glade")
 
 class BreakScreen(object):
     """
@@ -34,13 +37,12 @@ class BreakScreen(object):
     This class reads the break_screen.glade and build the user interface.
     """
 
-    def __init__(self, context, on_skip, on_postpone, glade_file, style_sheet_path):
+    def __init__(self, context, on_skip, on_postpone, style_sheet_path):
         self.context = context
         self.count_labels = []
         self.display = Display()
         self.enable_postpone = False
         self.enable_shortcut = False
-        self.glade_file = glade_file
         self.is_pretified = False
         self.keycode_shortcut_postpone = 65
         self.keycode_shortcut_skip = 9
@@ -149,7 +151,7 @@ class BreakScreen(object):
             y = monitor_gemoetry.y
 
             builder = Gtk.Builder()
-            builder.add_from_file(self.glade_file)
+            builder.add_from_file(BREAK_SCREEN_GLADE)
             builder.connect_signals(self)
 
             window = builder.get_object("window_main")

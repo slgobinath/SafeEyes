@@ -20,11 +20,15 @@
 This module creates the AboutDialog which shows the version and license.
 """
 
+import os
+
 import gi
 from gi.repository import Gtk
+from safeeyes import Utility
 
 gi.require_version('Gtk', '3.0')
 
+ABOUT_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
 class AboutDialog(object):
     """
@@ -32,14 +36,14 @@ class AboutDialog(object):
     It shows the application name with version, a small description, license and the GitHub url.
     """
 
-    def __init__(self, glade_file, version):
+    def __init__(self, version):
         builder = Gtk.Builder()
-        builder.add_from_file(glade_file)
+        builder.set_translation_domain('safeeyes')
+        builder.add_from_file(ABOUT_DIALOG_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('window_about')
         builder.get_object('lbl_decription').set_label(_('description'))
         builder.get_object('lbl_license').set_label(_('License') + ':')
-        builder.get_object('btn_close').set_label(_('Close'))
 
         # Set the version at the runtime
         builder.get_object('lbl_app_name').set_label('Safe Eyes ' + version)

@@ -109,7 +109,8 @@ class SafeEyesCore(object):
             # Stop the break thread
             self.waiting_condition.acquire()
             self.running = False
-            self.context['state'] = State.STOPPED
+            if self.context['state'] != State.QUIT:
+                self.context['state'] = State.STOPPED
             self.waiting_condition.notify_all()
             self.waiting_condition.release()
 

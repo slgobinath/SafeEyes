@@ -36,6 +36,7 @@ from gi.repository import Gtk
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
+from safeeyes.model import State
 from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.SettingsDialog import SettingsDialog
@@ -43,11 +44,6 @@ from safeeyes.SettingsDialog import SettingsDialog
 gi.require_version('Gtk', '3.0')
 
 gettext.install('safeeyes', 'safeeyes/config/locale')
-
-# Define necessary paths
-BREAK_SCREEN_GLADE = os.path.join(Utility.bin_directory, "glade/break_screen.glade")
-SETTINGS_DIALOG_GLADE = os.path.join(Utility.bin_directory, "glade/settings_dialog.glade")
-ABOUT_DIALOG_GLADE = os.path.join(Utility.bin_directory, "glade/about_dialog.glade")
 
 SAFE_EYES_VERSION = "2.0.0"
 
@@ -77,7 +73,7 @@ class SafeEyes(object):
         self.context['api']['disable_safeeyes'] = self.disable_safeeyes
         self.context['api']['on_quit'] = self.on_quit
 
-        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, BREAK_SCREEN_GLADE, Utility.style_sheet_path)
+        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, Utility.style_sheet_path)
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager(self.context, self.config)
         self.safe_eyes_core = SafeEyesCore(self.context)
@@ -94,6 +90,7 @@ class SafeEyes(object):
         """
         Start Safe Eyes
         """
+        self.context['state'] = State.START
         self.plugins_manager.start()		# Call the start method of all plugins
         self.safe_eyes_core.start()
         self.handle_system_suspend()
@@ -103,7 +100,7 @@ class SafeEyes(object):
         Listen to tray icon Settings action and send the signal to Settings dialog.
         """
         logging.info("Show Settings dialog")
-        settings_dialog = SettingsDialog(self.config, self.save_settings, SETTINGS_DIALOG_GLADE)
+        settings_dialog = SettingsDialog(self.config, self.save_settings)
         settings_dialog.show()
 
 
@@ -112,7 +109,7 @@ class SafeEyes(object):
         Listen to tray icon About action and send the signal to About dialog.
         """
         logging.info("Show About dialog")
-        about_dialog = AboutDialog(ABOUT_DIALOG_GLADE, SAFE_EYES_VERSION)
+        about_dialog = AboutDialog(SAFE_EYES_VERSION)
         about_dialog.show()
 
 
@@ -121,6 +118,7 @@ class SafeEyes(object):
         Listen to the tray menu quit action and stop the core, notification and the app itself.
         """
         logging.info("Quit Safe Eyes")
+        self.context['state'] = State.QUIT
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
         Gtk.main_quit()
@@ -181,6 +179,7 @@ class SafeEyes(object):
 
         # Stop the Safe Eyes core
         if self.active:
+            self.plugins_manager.stop()
             self.safe_eyes_core.stop()
 
         # Write the configuration to file
@@ -190,11 +189,14 @@ class SafeEyes(object):
         logging.info("Initialize SafeEyesCore with modified settings")
 
         # Restart the core and intialize the components
+        self.config = config
         self.safe_eyes_core.initialize(config)
         self.break_screen.initialize(config)
+        self.plugins_manager.init(self.context, self.config)
         if self.active:
             # 1 sec delay is required to give enough time for core to be stopped
             Timer(1.0, self.safe_eyes_core.start).start()
+            self.plugins_manager.start()
 
 
     def enable_safeeyes(self):
@@ -280,7 +282,7 @@ def main():
     logging.info("Starting Safe Eyes")
 
     if not running():
-        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale()])
+        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'])
         system_locale.install()
         # locale.bindtextdomain is required for Glade files
         locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)

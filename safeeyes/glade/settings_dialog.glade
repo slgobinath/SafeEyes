@@ -81,9 +81,6 @@
       <object class="GtkNotebook" id="notebook">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
-        <property name="margin_left">5</property>
-        <property name="margin_right">5</property>
-        <property name="margin_bottom">5</property>
         <property name="show_border">False</property>
         <child>
           <object class="GtkBox" id="box_settings">

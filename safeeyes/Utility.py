@@ -37,18 +37,18 @@ from gi.repository import GLib
 
 gi.require_version('Gdk', '3.0')
 
-bin_directory = os.path.dirname(os.path.realpath(__file__))
+BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 home_directory = os.path.expanduser('~')
-system_language_directory = os.path.join(bin_directory, 'config/lang')
+system_language_directory = os.path.join(BIN_DIRECTORY, 'config/lang')
 config_directory = os.path.join(home_directory, '.config/safeeyes')
 config_file_path = os.path.join(config_directory, 'safeeyes.json')
 style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
-system_config_file_path = os.path.join(bin_directory, "config/safeeyes.json")
-system_style_sheet_path = os.path.join(bin_directory, "config/style/safeeyes_style.css")
+system_config_file_path = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
+system_style_sheet_path = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
 log_file_path = os.path.join(config_directory, 'safeeyes.log')
-SYSTEM_PLUGINS_DIR = os.path.join(bin_directory, 'plugins')
+SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(config_directory, 'plugins')
-LOCALE_PATH = os.path.join(bin_directory, 'config/locale')
+LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 
 def get_resource_path(resource_name):
     """

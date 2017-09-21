@@ -95,6 +95,13 @@ msgstr "மீள ஆரம்பிக்கும் வரை"
 msgid "Quit"
 msgstr "நிறுத்து"
 
+# plugin/notification
+msgid "Ready for a short break in %s seconds"
+msgstr "%s விநாடிகளில் குறுகிய இடைவேளைக்கு தயாராகுங்கள்"
+
+msgid "Ready for a long break in %s seconds"
+msgstr "{} விநாடிகளில் நீண்ட இடைவேளைக்கு தயாராகுங்கள்"
+
 # AboutDialog
 msgid "Close"
 msgstr "மூடு"

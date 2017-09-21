@@ -95,6 +95,13 @@ msgstr "Until restart"
 msgid "Quit"
 msgstr "Quit"
 
+# plugin/notification
+msgid "Ready for a short break in %s seconds"
+msgstr "Ready for a short break in %s seconds"
+
+msgid "Ready for a long break in %s seconds"
+msgstr "Ready for a long break in %s seconds"
+
 # AboutDialog
 msgid "Close"
 msgstr "Close"

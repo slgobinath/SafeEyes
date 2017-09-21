@@ -62,10 +62,12 @@ class State(Enum):
     """
     Possible states of Safe Eyes.
     """
-    WAITING = 0,
-    PRE_BREAK = 1
-    BREAK = 2,
-    STOPPED = 3
+    START = 0,
+    WAITING = 1,
+    PRE_BREAK = 2,
+    BREAK = 3,
+    STOPPED = 4,
+    QUIT = 5
 
 class EventHook(object):
     """
