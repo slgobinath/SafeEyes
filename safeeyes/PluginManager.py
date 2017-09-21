@@ -41,6 +41,7 @@ class PluginManager(object):
 
     def __init__(self, context, config):
         logging.info('Load all the plugins')
+        self.__plugins = {}
         self.__plugins_on_init = []
         self.__plugins_on_start = []
         self.__plugins_on_stop = []
@@ -52,17 +53,18 @@ class PluginManager(object):
         self.__widget_plugins = []
         self.horizontal_line = '─' * HORIZONTAL_LINE_LENGTH
 
+    def init(self, context, config):
+        """
+        Initialize all the plugins with init(context, safeeyes_config, plugin_config) function.
+        """
+        # Load the plugins
         for plugin in config['plugins']:
             try:
                 self.__load_plugin(plugin, context)
             except BaseException:
                 logging.error('Error in loading the plugin: %s', plugin['id'])
                 continue
-
-    def init(self, context, config):
-        """
-        Initialize all the plugins with init(context, safeeyes_config, plugin_config) function.
-        """
+        # Initialize the plugins
         for plugin in self.__plugins_on_init:
             plugin['module'].init(context, config, plugin['config'])
         return True
@@ -158,6 +160,33 @@ class PluginManager(object):
         """
         Load the given plugin.
         """
+        if plugin['id'] in self.__plugins:
+            # Already loaded
+            if not plugin['enabled']:
+                # Disabled after first initialization
+                plugin_obj = self.__plugins[plugin['id']]
+                del self.__plugins[plugin['id']]
+                if plugin_obj in self.__plugins_on_init:
+                    self.__plugins_on_init.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_start:
+                    self.__plugins_on_start.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_stop:
+                    self.__plugins_on_stop.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_pre_break:
+                    self.__plugins_on_pre_break.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_start_break:
+                    self.__plugins_on_start_break.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_stop_break:
+                    self.__plugins_on_stop_break.remove(plugin_obj)
+                if plugin_obj in self.__plugins_on_countdown:
+                    self.__plugins_on_countdown.remove(plugin_obj)
+                if plugin_obj in self.__plugins_update_next_break:
+                    self.__plugins_update_next_break.remove(plugin_obj)
+                if plugin_obj in self.__widget_plugins:
+                    self.__widget_plugins.remove(plugin_obj)
+                logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
+            return
+
         if plugin['enabled']:
             # Look for plugin.py
             plugin_dir = None
@@ -202,7 +231,8 @@ class PluginManager(object):
             # Load the plugin module
             module = importlib.import_module((plugin['id'] + '.plugin'))
             logging.info("Successfully loaded %s", str(module))
-            plugin_obj = {'module': module, 'config': plugin.get('settings', {}), 'location': None}
+            plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get('settings', {}), 'location': None}
+            self.__plugins[plugin['id']] = plugin_obj
             if self.__has_method(module, 'init', 3):
                 self.__plugins_on_init.append(plugin_obj)
             if self.__has_method(module, 'on_start'):

@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "Notification",
-        "description": "Show a system notification brefore breaks",
+        "description": "Show a system notification before breaks",
         "version": "0.0.1"
     },
     "dependencies": {

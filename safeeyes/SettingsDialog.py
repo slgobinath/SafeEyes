@@ -35,6 +35,7 @@ class SettingsDialog(object):
     def __init__(self, config, on_save_settings):
         self.config = config
         self.on_save_settings = on_save_settings
+        self.plugin_switches = {}
 
         builder = Gtk.Builder()
         builder.set_translation_domain('safeeyes')
@@ -50,7 +51,7 @@ class SettingsDialog(object):
         for long_break in config['long_breaks']:
             box_long_breaks.pack_start(self.__create_break_item(_(long_break['name'])), False, False, 0)
         
-        for plugin_config in Utility.load_plugins_config(Utility.SYSTEM_PLUGINS_DIR):
+        for plugin_config in Utility.load_plugins_config_gobi(config):
             box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
         
         self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
@@ -99,6 +100,9 @@ class SettingsDialog(object):
         builder.add_from_file(SETTINGS_PLUGIN_ITEM_GLADE)
         builder.get_object('lbl_plugin_name').set_label(plugin_config['meta']['name'])
         builder.get_object('lbl_plugin_description').set_label(plugin_config['meta']['description'])
+        switch_enable = builder.get_object('switch_enable')
+        switch_enable.set_active(plugin_config['enabled'])
+        self.plugin_switches[plugin_config['id']] = switch_enable
         if plugin_config['icon']:
             builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
         box = builder.get_object('box')
@@ -141,6 +145,9 @@ class SettingsDialog(object):
         self.config['shortcut_disable_time'] = self.spin_disable_keyboard_shortcut.get_value_as_int()
         self.config['strict_break'] = self.switch_strict_break.get_active()
         self.config['allow_postpone'] = self.switch_postpone.get_active()
+        for plugin in self.config['plugins']:
+            if plugin['id'] in self.plugin_switches:
+                plugin['enabled'] = self.plugin_switches[plugin['id']].get_active()
         self.on_save_settings(self.config)    # Call the provided save method
         self.window.destroy()
 

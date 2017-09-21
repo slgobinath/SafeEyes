@@ -38,9 +38,8 @@ from gi.repository import GLib
 gi.require_version('Gdk', '3.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
-home_directory = os.path.expanduser('~')
-system_language_directory = os.path.join(BIN_DIRECTORY, 'config/lang')
-config_directory = os.path.join(home_directory, '.config/safeeyes')
+HOME_DIRECTORY = os.path.expanduser('~')
+config_directory = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
 config_file_path = os.path.join(config_directory, 'safeeyes.json')
 style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
 system_config_file_path = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
@@ -59,7 +58,7 @@ def get_resource_path(resource_name):
         return None
     resource_location = os.path.join(config_directory, 'resource', resource_name)
     if not os.path.isfile(resource_location):
-        resource_location = os.path.join(bin_directory, 'resource', resource_name)
+        resource_location = os.path.join(BIN_DIRECTORY, 'resource', resource_name)
         if not os.path.isfile(resource_location):
             logging.error('Resource not found: ' + resource_name)
             resource_location = None
@@ -131,6 +130,9 @@ def load_plugins_config(plugins_dir):
     for plugin_dir in os.listdir(plugins_dir):
         plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
         plugin_icon_path = os.path.join(plugins_dir, plugin_dir, 'icon.png')
+        plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
+        if not os.path.isfile(plugin_module_path):
+            return
         icon = None
         if os.path.isfile(plugin_icon_path):
             icon = plugin_icon_path
@@ -139,9 +141,71 @@ def load_plugins_config(plugins_dir):
         if os.path.isfile(plugin_config_path):
             with open(plugin_config_path) as config_file:
                 config = json.load(config_file)
+                config['id'] = plugin_dir
                 config['icon'] = icon
+                config['module_path'] = plugin_module_path
                 configs.append(config)
     return configs
+
+def load_plugins_config_gobi(safeeyes_config):
+    """
+    Load all the plugins from the given directory.
+    """
+    configs = []
+    for plugin in safeeyes_config['plugins']:
+        plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
+        if not os.path.isdir(plugin_path):
+            # User plugin
+            plugin_path = os.path.join(USER_PLUGINS_DIR, plugin['id'])
+        plugin_config_path = os.path.join(plugin_path, 'config.json')
+        plugin_icon_path = os.path.join(plugin_path, 'icon.png')
+        plugin_module_path = os.path.join(plugin_path, 'plugin.py')
+        if not os.path.isfile(plugin_module_path):
+            return
+        icon = None
+        if os.path.isfile(plugin_icon_path):
+            icon = plugin_icon_path
+        else:
+            icon = get_resource_path('ic_plugin.png')
+        if os.path.isfile(plugin_config_path):
+            with open(plugin_config_path) as config_file:
+                config = json.load(config_file)
+                config['id'] = plugin['id']
+                config['icon'] = icon
+                config['enabled'] = plugin['enabled']
+                for setting in config['settings']:
+                    setting['default'] = plugin['settings'][setting['id']]
+                configs.append(config)
+    return configs
+
+def merge_plugins_config(safeeyes_config, plugins_dir):
+    """
+    Add the settings related to plugins to the Safe Eyes configuration.
+    """
+    existing_plugins = []
+    # Create a list of existing plugins
+    for plugin in safeeyes_config['plugins']:
+        existing_plugins.append(plugin['id'])
+
+    for plugin_dir in os.listdir(plugins_dir):
+        if plugin_dir in existing_plugins:
+            # Already added to the Safe Eyes config
+            continue
+        plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
+        plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
+        if not os.path.isfile(plugin_config_path) or not os.path.isfile(plugin_module_path):
+            # Either the config.json or plugin.py is not available
+            continue
+        config = {}
+        config['id'] = plugin_dir   # Plugin directory name is the id
+        config['enabled'] = False   # By default plugins are disabled
+        with open(plugin_config_path) as config_file:
+            plugin_config = json.load(config_file)
+            if plugin_config['settings']:
+                config['settings'] = {}
+                for setting in plugin_config['settings']:
+                    config['settings'][setting['id']] = setting['default']
+        safeeyes_config['plugins'].append(config)
 
 def desktop_environment():
     """
@@ -220,15 +284,15 @@ def __initialize_safeeyes():
     """
     logging.info('Copy the config files to ~/.config/safeeyes')
 
-    style_dir_path = os.path.join(home_directory, '.config/safeeyes/style')
-    startup_dir_path = os.path.join(home_directory, '.config/autostart')
+    style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
+    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
 
     # Remove the ~/.config/safeeyes directory
     shutil.rmtree(config_directory, ignore_errors=True)
 
     # Remove the startup file
     try:
-        os.remove(os.path.join(home_directory, os.path.join(startup_dir_path, 'safeeyes.desktop')))
+        os.remove(os.path.join(HOME_DIRECTORY, os.path.join(startup_dir_path, 'safeeyes.desktop')))
     except OSError:
         pass
 

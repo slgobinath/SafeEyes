@@ -19,11 +19,11 @@
 import logging
 
 import gi
-from gi.repository import Notify
 from safeeyes import Utility
 from safeeyes.model import BreakType, State
 
 gi.require_version('Notify', '0.7')
+from gi.repository import Notify
 
 """
 Safe Eyes Notification plugin
@@ -32,6 +32,7 @@ Safe Eyes Notification plugin
 APPINDICATOR_ID = 'safeeyes'
 notification = None
 context = None
+initialized = False
 
 def init(ctx, safeeyes_config, plugin_config):
     """
@@ -46,9 +47,11 @@ def on_start():
     """
     Initialize the native notification.
     """
+    global initialized
     logging.debug('Start Notification plugin')
-    if context['state'] == State.START:
+    if not initialized:
         Notify.init(APPINDICATOR_ID)
+        initialized = True
 
 
 def on_pre_break(break_obj):
@@ -57,6 +60,7 @@ def on_pre_break(break_obj):
     """
     # Construct the message based on the type of the next break
     global notification
+    logging.info('Show the notification')
     message = '\n'
     warning_time = 10
     if break_obj.type == BreakType.SHORT_BREAK:
