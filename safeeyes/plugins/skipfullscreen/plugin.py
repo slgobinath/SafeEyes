@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,18 +16,19 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Skip Fullscreen plugin skips the break if the active window is fullscreen.
+NOTE: Do not remove the unused import 'GdkX11' becuase it is required in Ubuntu 14.04
+"""
 
-import gi
-gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk
 import logging
 import re
 import subprocess
 
+import gi
+from gi.repository import Gdk, GdkX11
 
-"""
-Safe Eyes Skip Full Screen plugin
-"""
+gi.require_version('Gdk', '3.0')
 
 context = None
 skip_break_window_classes = []
@@ -34,53 +36,51 @@ take_break_window_classes = []
 
 
 def is_active_window_skipped(unfullscreen_allowed=False):
-	"""
-	Check for full-screen applications.
-	This method must be executed by the main thread. If not, it will cause to random failure.
-	"""
-	logging.info('Searching for full-screen application')
-	screen = Gdk.Screen.get_default()
+    """
+    Check for full-screen applications.
+    This method must be executed by the main thread. If not, it will cause to random failure.
+    """
+    logging.info('Searching for full-screen application')
+    screen = Gdk.Screen.get_default()
 
-	active_window = screen.get_active_window()
-	if active_window:
-		active_xid = str(active_window.get_xid())
-		cmdlist = ['xprop', '-root', '-notype', '-id', active_xid, 'WM_CLASS', '_NET_WM_STATE']
+    active_window = screen.get_active_window()
+    if active_window:
+        active_xid = str(active_window.get_xid())
+        cmdlist = ['xprop', '-root', '-notype', '-id', active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
-		try:
-			stdout = subprocess.check_output(cmdlist).decode('utf-8')
-		except subprocess.CalledProcessError:
-			logging.warning('Error in finding full-screen application')
-			pass
-		else:
-			if stdout:
-				is_fullscreen = 'FULLSCREEN' in stdout
-				# Extract the process name
-				process_names = re.findall('"(.+?)"', stdout)
-				if process_names:
-					process = process_names[1].lower()
-					if process in skip_break_window_classes:
-						return True
-					elif process in take_break_window_classes:
-						if is_fullscreen and unfullscreen_allowed:
-							try:
-								active_window.unfullscreen()
-							except Exception:
-								logging.error('Error in unfullscreen the window ' + process)
-								pass
-						return False
+        try:
+            stdout = subprocess.check_output(cmdlist).decode('utf-8')
+        except subprocess.CalledProcessError:
+            logging.warning('Error in finding full-screen application')
+        else:
+            if stdout:
+                is_fullscreen = 'FULLSCREEN' in stdout
+                # Extract the process name
+                process_names = re.findall('"(.+?)"', stdout)
+                if process_names:
+                    process = process_names[1].lower()
+                    if process in skip_break_window_classes:
+                        return True
+                    elif process in take_break_window_classes:
+                        if is_fullscreen and unfullscreen_allowed:
+                            try:
+                                active_window.unfullscreen()
+                            except BaseException:
+                                logging.error('Error in unfullscreen the window ' + process)
+                        return False
 
-				return is_fullscreen
+                return is_fullscreen
 
-	return False
+    return False
 
 
 def init(ctx, safeeyes_config, plugin_config):
-	global context
-	logging.debug('Initialize Skip Fullscreen plugin')
-	context = ctx
+    global context
+    logging.debug('Initialize Skip Fullscreen plugin')
+    context = ctx
 
 
 def on_start_break(break_obj):
-	"""
-	"""
-	return is_active_window_skipped()
+    """
+    """
+    return is_active_window_skipped()
