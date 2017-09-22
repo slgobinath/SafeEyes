@@ -22,11 +22,7 @@ This module creates the AboutDialog which shows the version and license.
 
 import os
 
-import gi
-from gi.repository import Gtk
 from safeeyes import Utility
-
-gi.require_version('Gtk', '3.0')
 
 ABOUT_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
@@ -37,9 +33,7 @@ class AboutDialog(object):
     """
 
     def __init__(self, version):
-        builder = Gtk.Builder()
-        builder.set_translation_domain('safeeyes')
-        builder.add_from_file(ABOUT_DIALOG_GLADE)
+        builder = Utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('window_about')
         builder.get_object('lbl_decription').set_label(_('description'))

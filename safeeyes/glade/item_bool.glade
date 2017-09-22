@@ -28,6 +28,7 @@
     <property name="margin_right">5</property>
     <property name="margin_top">5</property>
     <property name="margin_bottom">5</property>
+    <property name="spacing">10</property>
     <child>
       <object class="GtkLabel" id="lbl_name">
         <property name="visible">True</property>
@@ -43,28 +44,18 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton" id="btn_properties">
+      <object class="GtkSwitch" id="switch_value">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
-        <property name="receives_default">True</property>
-        <property name="halign">center</property>
+        <property name="halign">end</property>
         <property name="valign">center</property>
-        <property name="image">img_properties</property>
-        <property name="always_show_image">True</property>
-        <style>
-          <class name="btn_properties"/>
-        </style>
       </object>
       <packing>
         <property name="expand">False</property>
-        <property name="fill">True</property>
+        <property name="fill">False</property>
+        <property name="pack_type">end</property>
         <property name="position">1</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkImage" id="img_properties">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-properties</property>
   </object>
 </interface>

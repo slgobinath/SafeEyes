@@ -33,7 +33,8 @@ from distutils.version import LooseVersion
 
 import babel.dates
 import gi
-from gi.repository import GLib
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk, GLib
 
 gi.require_version('Gdk', '3.0')
 
@@ -174,7 +175,7 @@ def load_plugins_config_gobi(safeeyes_config):
                 config['icon'] = icon
                 config['enabled'] = plugin['enabled']
                 for setting in config['settings']:
-                    setting['default'] = plugin['settings'][setting['id']]
+                    setting['safeeyes_config'] = plugin['settings']
                 configs.append(config)
     return configs
 
@@ -387,3 +388,13 @@ def read_config():
             user_config = new_config
 
     return user_config
+
+
+def create_gtk_builder(glade_file):
+    """
+    Create a Gtk builder and load the glade file.
+    """
+    builder = Gtk.Builder()
+    builder.set_translation_domain('safeeyes')
+    builder.add_from_file(glade_file)
+    return builder

@@ -50,8 +50,9 @@
             "id": "skipfullscreen",
             "enabled": true,
             "settings": {
-                "whitelist": [],
-                "blacklist": []
+                "whitelist": "",
+                "blacklist": "",
+                "unfullscreen": true
             }
         },
         {

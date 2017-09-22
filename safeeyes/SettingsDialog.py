@@ -19,14 +19,19 @@
 import os
 
 import gi
-from gi.repository import Gtk
 from safeeyes import Utility
 
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
+
 
 SETTINGS_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
+SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
 SETTINGS_BREAK_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_break.glade")
 SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_plugin.glade")
+SETTINGS_ITEM_INT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_int.glade")
+SETTINGS_ITEM_TEXT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_text.glade")
+SETTINGS_ITEM_BOOL_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_bool.glade")
 
 class SettingsDialog(object):
     """
@@ -37,9 +42,7 @@ class SettingsDialog(object):
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
 
-        builder = Gtk.Builder()
-        builder.set_translation_domain('safeeyes')
-        builder.add_from_file(SETTINGS_DIALOG_GLADE)
+        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
         builder.connect_signals(self)
 
         self.window = builder.get_object('window_settings')
@@ -85,9 +88,9 @@ class SettingsDialog(object):
 
     def __create_break_item(self, name):
         """
+        Create an entry for break to be listed in the break tab.
         """
-        builder = Gtk.Builder()
-        builder.add_from_file(SETTINGS_BREAK_ITEM_GLADE)
+        builder = Utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
         builder.get_object('lbl_name').set_label(name)
         box = builder.get_object('box')
         box.set_visible(True)
@@ -95,19 +98,32 @@ class SettingsDialog(object):
 
     def __create_plugin_item(self, plugin_config):
         """
+        Create an entry for plugin to be listed in the plugin tab.
         """
-        builder = Gtk.Builder()
-        builder.add_from_file(SETTINGS_PLUGIN_ITEM_GLADE)
+        builder = Utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
         builder.get_object('lbl_plugin_name').set_label(plugin_config['meta']['name'])
         builder.get_object('lbl_plugin_description').set_label(plugin_config['meta']['description'])
         switch_enable = builder.get_object('switch_enable')
+        btn_properties = builder.get_object('btn_properties')
         switch_enable.set_active(plugin_config['enabled'])
         self.plugin_switches[plugin_config['id']] = switch_enable
         if plugin_config['icon']:
             builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
+        if plugin_config['settings']:
+            btn_properties.set_sensitive(True)
+            btn_properties.connect('clicked', lambda button: self.__show_plugins_properties_dialog(plugin_config))
+        else:
+            btn_properties.set_sensitive(False)
         box = builder.get_object('box')
         box.set_visible(True)
         return box
+
+    def __show_plugins_properties_dialog(self, plugin_config):
+        """
+        Show the PluginProperties dialog
+        """
+        dialog = PluginPropertiesDialog(plugin_config)
+        dialog.show()
 
     def show(self):
         """
@@ -151,11 +167,78 @@ class SettingsDialog(object):
         self.on_save_settings(self.config)    # Call the provided save method
         self.window.destroy()
 
-    def __show_message_dialog(self, primary_text, secondary_text):
+
+class PluginPropertiesDialog(object):
+    """
+    Builds a property dialog based on the configuration of a plugin.
+    """
+    def __init__(self, config):
+        self.config = config
+        self.property_controls = []
+
+        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
+        builder.connect_signals(self)
+        self.window = builder.get_object('dialog_settings_plugin')
+        box_settings = builder.get_object('box_settings')
+        for setting in config['settings']:
+            if setting['type'].upper() == 'INT':
+                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+            elif setting['type'].upper() == 'TEXT':
+                box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+            elif setting['type'].upper() == 'BOOL':
+                box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+    
+    def __load_int_item(self, name, key, settings):
         """
-        Show a popup message dialog.
+        Load the UI control for int property.
         """
-        dialog = Gtk.MessageDialog(self.window, 0, Gtk.MessageType.WARNING, Gtk.ButtonsType.OK, primary_text)
-        dialog.format_secondary_text(secondary_text)
-        dialog.run()
-        dialog.destroy()
+        builder = Utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
+        builder.get_object('lbl_name').set_label(name)
+        spin_value = builder.get_object('spin_value')
+        spin_value.set_value(settings[key])
+        box = builder.get_object('box')
+        box.set_visible(True)
+        self.property_controls.append({'key': key, 'settings': settings, 'value': spin_value.get_value})
+        return box
+
+    def __load_text_item(self, name, key, settings):
+        """
+        Load the UI control for text property.
+        """
+        builder = Utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
+        builder.get_object('lbl_name').set_label(name)
+        txt_value = builder.get_object('txt_value')
+        txt_value.set_text(settings[key])
+        box = builder.get_object('box')
+        box.set_visible(True)
+        self.property_controls.append({'key': key, 'settings': settings, 'value': txt_value.get_text})
+        return box
+
+    def __load_bool_item(self, name, key, settings):
+        """
+        Load the UI control for boolean property.
+        """
+        builder = Utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
+        builder.get_object('lbl_name').set_label(name)
+        switch_value = builder.get_object('switch_value')
+        switch_value.set_active(settings[key])
+        box = builder.get_object('box')
+        box.set_visible(True)
+        self.property_controls.append({'key': key, 'settings': settings, 'value': switch_value.get_active})
+        return box
+
+    def on_window_delete(self, *args):
+        """
+        Event handler for Properties dialog close action.
+        """
+        for property_control in self.property_controls:
+            property_control['settings'][property_control['key']] = property_control['value']()
+        self.window.destroy()
+
+    def show(self):
+        """
+        Show the Properties dialog.
+        """
+        self.window.show_all()
+
+

@@ -23,11 +23,11 @@ import threading
 import time
 
 import gi
-from gi.repository import Gdk, GLib, Gtk
 from safeeyes import Utility
 from Xlib.display import Display, X
 
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gdk, GLib, Gtk
 
 BREAK_SCREEN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/break_screen.glade")
 

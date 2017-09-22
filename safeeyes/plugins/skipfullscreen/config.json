@@ -13,15 +13,21 @@
     "settings": [
         {
             "id": "whitelist",
-            "label": "Whitelisted windows",
+            "label": "Whitelisted windows regardless of their state",
             "type": "TEXT",
             "default": ""
         },
         {
             "id": "blacklist",
-            "label": "Blacklisted windows",
+            "label": "Blacklisted windows regardless of their state",
             "type": "TEXT",
             "default": ""
+        },
+        {
+            "id": "unfullscreen",
+            "label": "Unfullscreen whitelisted windows",
+            "type": "BOOL",
+            "default": true
         }
     ],
     "resources": []

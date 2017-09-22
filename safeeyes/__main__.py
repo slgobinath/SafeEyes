@@ -32,7 +32,6 @@ import dbus
 import gi
 import psutil
 from dbus.mainloop.glib import DBusGMainLoop
-from gi.repository import Gtk
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
@@ -42,6 +41,7 @@ from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.SettingsDialog import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 gettext.install('safeeyes', 'safeeyes/config/locale')
 

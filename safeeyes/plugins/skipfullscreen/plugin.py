@@ -33,9 +33,9 @@ gi.require_version('Gdk', '3.0')
 context = None
 skip_break_window_classes = []
 take_break_window_classes = []
+unfullscreen_allowed = True
 
-
-def is_active_window_skipped(unfullscreen_allowed=False):
+def is_active_window_skipped():
     """
     Check for full-screen applications.
     This method must be executed by the main thread. If not, it will cause to random failure.
@@ -76,8 +76,14 @@ def is_active_window_skipped(unfullscreen_allowed=False):
 
 def init(ctx, safeeyes_config, plugin_config):
     global context
+    global skip_break_window_classes
+    global take_break_window_classes
+    global unfullscreen_allowed
     logging.debug('Initialize Skip Fullscreen plugin')
     context = ctx
+    skip_break_window_classes = plugin_config['blacklist'].split()
+    take_break_window_classes = plugin_config['whitelist'].split()
+    unfullscreen_allowed = plugin_config['unfullscreen']
 
 
 def on_start_break(break_obj):
