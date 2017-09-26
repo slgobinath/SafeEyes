@@ -302,7 +302,9 @@ class BreakPropertiesDialog(object):
             chk_button = Gtk.CheckButton(plugin_map[plugin_id])
             self.plugin_check_buttons[plugin_id] = chk_button
             grid_plugins.attach(chk_button, row, col, 1, 1)
-            if plugins_overriden and plugin_id in break_config['plugins']:
+            if plugins_overriden:
+                chk_button.set_active(plugin_id in break_config['plugins'])
+            else:
                 chk_button.set_active(True)
             row += 1
             if row > 2:
