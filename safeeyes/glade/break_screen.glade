@@ -34,25 +34,19 @@
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child>
-      <object class="GtkBox" id="box_parent">
+      <object class="GtkGrid" id="grid1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
-        <property name="orientation">vertical</property>
-        <property name="homogeneous">True</property>
+        <property name="row_homogeneous">True</property>
+        <property name="column_homogeneous">True</property>
         <child>
           <object class="GtkLabel" id="lbl_top">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <style>
-              <class name="lbl_top"/>
-            </style>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
           </packing>
         </child>
         <child>
@@ -60,6 +54,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
+            <property name="spacing">10</property>
             <child>
               <object class="GtkGrid" id="grid_central">
                 <property name="visible">True</property>
@@ -177,26 +172,28 @@
                 <property name="position">0</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkLabel" id="lbl_widget">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Widget</property>
+                <property name="yalign">0.25</property>
+                <style>
+                  <class name="lbl_widget"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="pack_type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="lbl_widget">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">label</property>
-            <style>
-              <class name="lbl_widget"/>
-            </style>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+            <property name="height">2</property>
           </packing>
         </child>
       </object>

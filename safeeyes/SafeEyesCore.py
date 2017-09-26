@@ -295,9 +295,9 @@ class SafeEyesCore(object):
         iteration = 1
         for break_config in break_configs:
             name = _(break_config['name'])
-            break_time = break_config.get('time', default_break_time)
+            break_time = break_config.get('duration', default_break_time)
             image = break_config.get('image')
-            plugins = None # break_config.get('plugins', config['plugins'])
+            plugins = break_config.get('plugins', None)
 
             # Validate time value
             if not isinstance(break_time, int) or break_time <= 0:

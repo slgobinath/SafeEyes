@@ -18,6 +18,27 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 PluginManager loads all enabled plugins and call their lifecycle methods.
+A plugin must have the following directory structure:
+<plugin-id>
+    |- config.json
+    |- plugin.py
+    |- icon.png (Optional)
+
+The plugin.py can have following methods but all are optional:
+ - description()
+    If a custom description has to be displayed, use this function
+ - on_init(context, safeeyes_config, plugin_config)
+    Initialize the plugin. Will be called after loading and after every changes in configuration
+ - on_start()
+    Executes when Safe Eyes is enabled
+ - on_stop()
+    Executes when Safe Eyes is disabled
+ - enable()
+    Executes once the plugin.py is loaded as a module
+ - disable()
+    Executes if the plugin is disabled at the runtime by the user
+ - on_exit()
+    Executes before Safe Eyes exits
 """
 
 import importlib
@@ -45,12 +66,14 @@ class PluginManager(object):
         self.__plugins_on_init = []
         self.__plugins_on_start = []
         self.__plugins_on_stop = []
+        self.__plugins_on_exit = []
         self.__plugins_on_pre_break = []
         self.__plugins_on_start_break = []
         self.__plugins_on_stop_break = []
         self.__plugins_on_countdown = []
         self.__plugins_update_next_break = []
         self.__widget_plugins = []
+        self.last_break = None
         self.horizontal_line = '─' * HORIZONTAL_LINE_LENGTH
 
     def init(self, context, config):
@@ -61,8 +84,9 @@ class PluginManager(object):
         for plugin in config['plugins']:
             try:
                 self.__load_plugin(plugin, context)
-            except BaseException:
-                logging.error('Error in loading the plugin: %s', plugin['id'])
+            except BaseException as e:
+                print(e)
+                logging.error('Error in loading the plugin: %s', plugin['id'], e)
                 continue
         # Initialize the plugins
         for plugin in self.__plugins_on_init:
@@ -85,22 +109,33 @@ class PluginManager(object):
             plugin['module'].on_stop()
         return True
 
+    def exit(self):
+        """
+        Execute the on_exit() function of plugins.
+        """
+        for plugin in self.__plugins_on_exit:
+            plugin['module'].on_exit()
+        return True
+
     def pre_break(self, break_obj):
         """
         Execute the on_pre_break(break_obj) function of plugins.
         """
         for plugin in self.__plugins_on_pre_break:
-            if plugin['module'].on_pre_break(break_obj):
-                return False
+            if break_obj.plugin_enabled(plugin['id']):
+                if plugin['module'].on_pre_break(break_obj):
+                    return False
         return True
 
     def start_break(self, break_obj):
         """
         Execute the start_break(break_obj) function of plugins.
         """
+        self.last_break = break_obj
         for plugin in self.__plugins_on_start_break:
-            if plugin['module'].on_start_break(break_obj):
-                return False
+            if break_obj.plugin_enabled(plugin['id']):
+                if plugin['module'].on_start_break(break_obj):
+                    return False
 
         return True
 
@@ -109,7 +144,8 @@ class PluginManager(object):
         Execute the stop_break() function of plugins.
         """
         for plugin in self.__plugins_on_stop_break:
-            plugin['module'].on_stop_break()
+            if self.last_break.plugin_enabled(plugin['id']):
+                plugin['module'].on_stop_break()
         return True
 
     def countdown(self, countdown, seconds):
@@ -117,7 +153,8 @@ class PluginManager(object):
         Execute the on_countdown(countdown, seconds) function of plugins.
         """
         for plugin in self.__plugins_on_countdown:
-            plugin['module'].on_countdown(countdown, seconds)
+            if self.last_break.plugin_enabled(plugin['id']):
+                plugin['module'].on_countdown(countdown, seconds)
         return True
 
     def update_next_break(self, break_time):
@@ -135,16 +172,17 @@ class PluginManager(object):
         """
         widget = ''
         for plugin in self.__widget_plugins:
-            try:
-                title = plugin['module'].get_widget_title(break_obj).upper().strip()
-                if title == '':
+            if break_obj.plugin_enabled(plugin['id']):
+                try:
+                    title = plugin['module'].get_widget_title(break_obj).upper().strip()
+                    if title == '':
+                        continue
+                    content = plugin['module'].get_widget_content(break_obj)
+                    if content == '':
+                        continue
+                    widget += '<b>{}</b>\n{}\n{}\n\n\n'.format(title, self.horizontal_line, content)
+                except BaseException:
                     continue
-                content = plugin['module'].get_widget_content(break_obj)
-                if content == '':
-                    continue
-                widget += '<b>{}</b>\n{}\n{}\n\n\n'.format(title, self.horizontal_line, content)
-            except BaseException:
-                continue
         return widget.strip()
 
     def __has_method(self, module, method_name, no_of_args=0):
@@ -184,6 +222,8 @@ class PluginManager(object):
                     self.__plugins_update_next_break.remove(plugin_obj)
                 if plugin_obj in self.__widget_plugins:
                     self.__widget_plugins.remove(plugin_obj)
+                if self.__has_method(plugin_obj['module'], 'disable'):
+                    plugin_obj['module'].disable()
                 logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
             return
 
@@ -233,12 +273,16 @@ class PluginManager(object):
             logging.info("Successfully loaded %s", str(module))
             plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get('settings', {}), 'location': None}
             self.__plugins[plugin['id']] = plugin_obj
+            if self.__has_method(module, 'enable'):
+                module.enable()
             if self.__has_method(module, 'init', 3):
                 self.__plugins_on_init.append(plugin_obj)
             if self.__has_method(module, 'on_start'):
                 self.__plugins_on_start.append(plugin_obj)
             if self.__has_method(module, 'on_stop'):
                 self.__plugins_on_stop.append(plugin_obj)
+            if self.__has_method(module, 'on_exit'):
+                self.__plugins_on_exit.append(plugin_obj)
             if self.__has_method(module, 'on_pre_break', 1):
                 self.__plugins_on_pre_break.append(plugin_obj)
             if self.__has_method(module, 'on_start_break', 1):

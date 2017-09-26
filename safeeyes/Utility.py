@@ -183,6 +183,8 @@ def merge_plugins_config(safeeyes_config, plugins_dir):
     """
     Add the settings related to plugins to the Safe Eyes configuration.
     """
+    if not os.path.isdir(plugins_dir):
+        return
     existing_plugins = []
     # Create a list of existing plugins
     for plugin in safeeyes_config['plugins']:
@@ -289,7 +291,10 @@ def __initialize_safeeyes():
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
 
     # Remove the ~/.config/safeeyes directory
-    shutil.rmtree(config_directory, ignore_errors=True)
+    try:
+        os.remove(os.path.join(config_directory, 'safeeyes.json'))
+    except OSError:
+        pass
 
     # Remove the startup file
     try:
@@ -386,6 +391,11 @@ def read_config():
 
             # Update the user_config
             user_config = new_config
+
+    merge_plugins_config(user_config, SYSTEM_PLUGINS_DIR)
+    merge_plugins_config(user_config, USER_PLUGINS_DIR)
+    with open(config_file_path, 'w') as config_file:
+        json.dump(user_config, config_file, indent=4, sort_keys=True)
 
     return user_config
 

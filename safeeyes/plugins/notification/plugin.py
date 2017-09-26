@@ -32,7 +32,8 @@ Safe Eyes Notification plugin
 APPINDICATOR_ID = 'safeeyes'
 notification = None
 context = None
-initialized = False
+
+Notify.init(APPINDICATOR_ID)
 
 def init(ctx, safeeyes_config, plugin_config):
     """
@@ -41,17 +42,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global context
     logging.debug('Initialize Notification plugin')
     context = ctx
-
-
-def on_start():
-    """
-    Initialize the native notification.
-    """
-    global initialized
-    logging.debug('Start Notification plugin')
-    if not initialized:
-        Notify.init(APPINDICATOR_ID)
-        initialized = True
 
 
 def on_pre_break(break_obj):
@@ -90,10 +80,9 @@ def on_start_break(break_obj):
             pass
 
 
-def on_stop():
+def on_exit():
     """
     Uninitialize the registered notificaion.
     """
-    if context['state'] == State.QUIT:
-        logging.debug('Stop Notification plugin')
-        Utility.execute_main_thread(Notify.uninit)
+    logging.debug('Stop Notification plugin')
+    Notify.uninit()

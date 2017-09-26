@@ -51,6 +51,15 @@ class Break(object):
         """
         return self.type == BreakType.SHORT_BREAK
 
+    def plugin_enabled(self, plugin_id):
+        """
+        Check whether this break supports the given plugin.
+        """
+        if self.plugins:
+            return plugin_id in self.plugins
+        else:
+            return True
+
 class BreakType(Enum):
     """
     Type of Safe Eyes breaks.

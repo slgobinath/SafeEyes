@@ -22,11 +22,12 @@ import gi
 from safeeyes import Utility
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GdkPixbuf
 
 
 SETTINGS_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
 SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
+SETTINGS_DIALOG_BREAK_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_break.glade")
 SETTINGS_BREAK_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_break.glade")
 SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_plugin.glade")
 SETTINGS_ITEM_INT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_int.glade")
@@ -41,18 +42,19 @@ class SettingsDialog(object):
         self.config = config
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
+        self.plugin_map = {}
 
         builder = Utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
         builder.connect_signals(self)
 
         self.window = builder.get_object('window_settings')
-        box_short_breaks = builder.get_object('box_short_breaks')
-        box_long_breaks = builder.get_object('box_long_breaks')
+        self.box_short_breaks = builder.get_object('box_short_breaks')
+        self.box_long_breaks = builder.get_object('box_long_breaks')
         box_plugins = builder.get_object('box_plugins')
         for short_break in config['short_breaks']:
-            box_short_breaks.pack_start(self.__create_break_item(_(short_break['name'])), False, False, 0)
+            self.__create_break_item(short_break, True, config)
         for long_break in config['long_breaks']:
-            box_long_breaks.pack_start(self.__create_break_item(_(long_break['name'])), False, False, 0)
+            self.__create_break_item(long_break, False, config)
         
         for plugin_config in Utility.load_plugins_config_gobi(config):
             box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
@@ -86,14 +88,21 @@ class SettingsDialog(object):
             self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
             self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
 
-    def __create_break_item(self, name):
+    def __create_break_item(self, break_config, is_short, parent_config):
         """
         Create an entry for break to be listed in the break tab.
         """
+        parent_box = self.box_long_breaks
+        if is_short:
+            parent_box = self.box_short_breaks
         builder = Utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
-        builder.get_object('lbl_name').set_label(name)
         box = builder.get_object('box')
+        lbl_name = builder.get_object('lbl_name')
+        lbl_name.set_label(_(break_config['name']))
+        btn_properties = builder.get_object('btn_properties')
+        btn_properties.connect('clicked', lambda button: self.__show_break_properties_dialog(break_config, is_short, parent_config, lambda: parent_box.remove(box), lambda cfg: lbl_name.set_label(_(cfg['name'])), lambda is_short, break_config: self.__create_break_item(break_config, is_short, parent_config)))
         box.set_visible(True)
+        parent_box.pack_start(box, False, False, 0)
         return box
 
     def __create_plugin_item(self, plugin_config):
@@ -107,6 +116,7 @@ class SettingsDialog(object):
         btn_properties = builder.get_object('btn_properties')
         switch_enable.set_active(plugin_config['enabled'])
         self.plugin_switches[plugin_config['id']] = switch_enable
+        self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
         if plugin_config['icon']:
             builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
         if plugin_config['settings']:
@@ -123,6 +133,13 @@ class SettingsDialog(object):
         Show the PluginProperties dialog
         """
         dialog = PluginPropertiesDialog(plugin_config)
+        dialog.show()
+
+    def __show_break_properties_dialog(self, break_config, is_short, parent, on_remove, on_close, on_add):
+        """
+        Show the BreakProperties dialog
+        """
+        dialog = BreakPropertiesDialog(break_config, is_short, parent, self.plugin_map, on_remove, on_close, on_add)
         dialog.show()
 
     def show(self):
@@ -164,6 +181,7 @@ class SettingsDialog(object):
         for plugin in self.config['plugins']:
             if plugin['id'] in self.plugin_switches:
                 plugin['enabled'] = self.plugin_switches[plugin['id']].get_active()
+
         self.on_save_settings(self.config)    # Call the provided save method
         self.window.destroy()
 
@@ -233,6 +251,150 @@ class PluginPropertiesDialog(object):
         """
         for property_control in self.property_controls:
             property_control['settings'][property_control['key']] = property_control['value']()
+        self.window.destroy()
+
+    def show(self):
+        """
+        Show the Properties dialog.
+        """
+        self.window.show_all()
+
+
+class BreakPropertiesDialog(object):
+    """
+    Builds a property dialog based on the configuration of a plugin.
+    """
+    def __init__(self, break_config, is_short, parent_config, plugin_map, on_remove, on_close, on_add):
+        self.break_config = break_config
+        self.parent_config = parent_config
+        self.plugin_check_buttons = {}
+        self.on_remove = on_remove
+        self.on_close = on_close
+        self.is_short = is_short
+        self.on_add = on_add
+
+        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
+        builder.connect_signals(self)
+        self.window = builder.get_object('dialog_settings_break')
+        self.txt_break = builder.get_object('txt_break')
+        self.switch_override_duration = builder.get_object('switch_override_duration')
+        self.switch_override_plugins = builder.get_object('switch_override_plugins')
+        self.spin_duration = builder.get_object('spin_duration')
+        self.img_break = builder.get_object('img_break')
+        self.cmb_type = builder.get_object('cmb_type')
+        grid_plugins = builder.get_object('grid_plugins')
+
+        duration_overriden = break_config.get('duration', None) is not None
+        plugins_overriden = break_config.get('plugins', None) is not None
+
+        # Set the values
+        self.txt_break.set_text(break_config['name'])
+        self.switch_override_duration.set_active(duration_overriden)
+        self.switch_override_plugins.set_active(plugins_overriden)
+        self.cmb_type.set_active(0 if is_short else 1)
+        
+
+        if duration_overriden:
+            self.spin_duration.set_value(break_config['duration'])
+        row = 0
+        col = 0
+        for plugin_id in plugin_map.keys():
+            chk_button = Gtk.CheckButton(plugin_map[plugin_id])
+            self.plugin_check_buttons[plugin_id] = chk_button
+            grid_plugins.attach(chk_button, row, col, 1, 1)
+            if plugins_overriden and plugin_id in break_config['plugins']:
+                chk_button.set_active(True)
+            row += 1
+            if row > 2:
+                col += 1
+                row = 0
+        # GtkSwitch state-set signal is available only from 3.14
+        if Gtk.get_minor_version() >= 14:
+            self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
+            self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
+            self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
+            self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+    
+    def on_switch_override_duration_activate(self, switch_button, state):
+        """
+        switch_override_duration state change event handler.
+        """
+        self.spin_duration.set_sensitive(state)
+    
+    def on_switch_override_plugins_activate(self, switch_button, state):
+        """
+        switch_override_plugins state change event handler.
+        """
+        for chk_box in self.plugin_check_buttons.values():
+            chk_box.set_sensitive(state)
+
+    def select_image(self, button):
+        """
+        Show a file chooser dialog and let the user to select an image.
+        """
+        dialog = Gtk.FileChooserDialog("Please select an image", self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+
+        png_filter = Gtk.FileFilter()
+        png_filter.set_name("PNG files")
+        png_filter.add_mime_type("image/png")
+        png_filter.add_pattern("*.png")
+        dialog.add_filter(png_filter)
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            self.break_config['image'] = dialog.get_filename()
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
+            # self.img_break.set_from_file(self.break_config['image'])
+            self.img_break.set_from_pixbuf(pixbuf)
+        elif response == Gtk.ResponseType.CANCEL:
+            self.break_config.pop('image', None)
+            self.img_break.set_from_stock('gtk-missing-image', Gtk.IconSize.BUTTON)
+
+        dialog.destroy()
+
+    def remove_break(self, button):
+        """
+        Remove the break
+        """
+        self.parent_config.remove(self.break_config)
+        self.on_remove()
+        self.window.destroy()
+
+    def on_window_delete(self, *args):
+        """
+        Event handler for Properties dialog close action.
+        """
+        break_name = self.txt_break.get_text().strip()
+        if break_name:
+            self.break_config['name'] = break_name
+        if self.switch_override_duration.get_active():
+            self.break_config['duration'] = self.spin_duration.get_value()
+        else:
+            self.break_config.pop('duration', None)
+        if self.switch_override_plugins.get_active():
+            selected_plugins = []
+            for plugin_id in self.plugin_check_buttons:
+                if self.plugin_check_buttons[plugin_id].get_active():
+                    selected_plugins.append(plugin_id)
+            self.break_config['plugins'] = selected_plugins
+        else:
+            self.break_config.pop('plugins', None)
+
+        if self.is_short and self.cmb_type.get_active() == 1:
+            # Changed from short to long
+            self.parent_config['short_breaks'].remove(self.break_config)
+            self.parent_config['long_breaks'].append(self.break_config)
+            self.on_remove()
+            self.on_add(not self.is_short, self.break_config)
+        elif not self.is_short and self.cmb_type.get_active() == 0:
+            # Changed from long to short
+            self.parent_config['long_breaks'].remove(self.break_config)
+            self.parent_config['short_breaks'].append(self.break_config)
+            self.on_remove()
+            self.on_add(not self.is_short, self.break_config)
+        else:
+            self.on_close(self.break_config)
         self.window.destroy()
 
     def show(self):
