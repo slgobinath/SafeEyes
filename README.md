@@ -23,13 +23,14 @@ For example, a Weather plugin may have the following file structure:
 ~
 └── .config
     └── safeeyes
-        └── weather
-            ├── config.json
-            ├── icon.png
-            └── plugin.py
+        └── plugins
+            └── weather
+                ├── config.json
+                ├── icon.png
+                └── plugin.py
 ```
 
-The icon.png must be `24x24` pixels size. If `icon.png` is not available, the default gear icon <img src="https://github.com/slgobinath/SafeEyes/raw/safeeyes-2.0.0/safeeyes/resource/ic_plugin.png" width="16" height="16"/> will be shown in the Settings dialog.
+The `icon.png` must be `24x24` pixels size. If `icon.png` is not available, the default gear icon <img src="https://github.com/slgobinath/SafeEyes/raw/safeeyes-2.0.0/safeeyes/resource/ic_plugin.png" width="16" height="16"/> will be shown in the Settings dialog.
 
 A sample `config.json` is provided below:
 ```json
@@ -43,7 +44,8 @@ A sample `config.json` is provided below:
         "python_modules": ["pyowm"],
         "shell_commands": [],
         "operating_systems": [],
-        "desktop_environments": []
+        "desktop_environments": [],
+        "resources": []
     },
     "settings": [
         {
@@ -59,14 +61,14 @@ A sample `config.json` is provided below:
             "default": ""
         }
     ],
-    "resources": [],
     "break_override_allowed": true
 }
 ```
 
 The `meta` properties must provide the name of the plugin, a short description and the current version of the plugin.
 
-The `dependencies` property defines various dependency constraints of the plugin. The dependencies can be Python modules, commandline tools or desktop environments. The `operating_systems` property is reserved for operating system dependency but not checked for at the moment.
+The `dependencies` property defines various dependency constraints of the plugin. The dependencies can be Python modules, commandline tools, desktop environments or Safe Eyes resources. The `operating_systems` property is reserved for operating system dependency but not checked for at the moment.
+If a dependency is not available, the Safe Eyes will not load the plugin and show a warning symbol <img src="https://github.com/slgobinath/SafeEyes/raw/safeeyes-2.0.0/safeeyes/resource/ic_warning.png" width="16" height="16"> and show a message to install the missing dependencies. Dependencies are checked in the order of *Desktop Environment*, *Python Modules*, *Commandline Tools* and *Resources*. If a dependency is not available, Safe Eyes will stop looking for the rest.
 
 The configurations related to the plugin must be defined in `settings`. Each setting must have an `id`, `label`, `type` and a default value matching the `type`. Safe Eyes 2.0.0 supports only the following types: `INT`, `TEXT` and `BOOL`. According to the types, Settings dialog will show a *Spin*, *Text Field* or *Switch Button* as the input field.
 ## License

@@ -8,8 +8,8 @@
         "python_modules": [],
         "shell_commands": [],
         "operating_systems": [],
-        "desktop_environments": []
+        "desktop_environments": [],
+        "resources": []
     },
-    "settings": [],
-    "resources": []
+    "settings": []
 }

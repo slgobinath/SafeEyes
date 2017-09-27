@@ -8,9 +8,9 @@
         "python_modules": [],
         "shell_commands": ["aplay"],
         "operating_systems": [],
-        "desktop_environments": []
+        "desktop_environments": [],
+        "resources": ["alert.wav"]
     },
     "settings": [],
-    "resources": ["alert.wav"],
     "break_override_allowed": true
 }

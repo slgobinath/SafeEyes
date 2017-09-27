@@ -142,6 +142,12 @@ def check_plugin_dependencies(plugin_config):
     """
     Check the plugin dependencies.
     """
+    # Check the desktop environment
+    if plugin_config['dependencies']['desktop_environments']:
+        # Plugin has restrictions on desktop environments
+        if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
+            return 'Plugin does not support %s desktop environment' % DESKTOP_ENVIRONMENT
+
     # Check the Python modules
     for module in plugin_config['dependencies']['python_modules']:
         if not module_exist(module):
@@ -151,40 +157,14 @@ def check_plugin_dependencies(plugin_config):
     for command in plugin_config['dependencies']['shell_commands']:
         if not command_exist(command):
             return 'Please install the commandline tool %s' % command
-
-    # Check the desktop environment
-    if plugin_config['dependencies']['desktop_environments']:
-        # Plugin has restrictions on desktop environments
-        if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
-            return 'Plugin does not support %s desktop environment' % DESKTOP_ENVIRONMENT
+    
+    # Check the resources
+    for resource in plugin_config['dependencies']['resources']:
+        if get_resource_path(resource) is None:
+            return 'Please add the resource %s to ~/.config/safeeyes/resource directory' % resource
     
     return None
 
-
-# def load_plugins_config(plugins_dir):
-#     """
-#     Load all the plugins from the given directory.
-#     """
-#     configs = []
-#     for plugin_dir in os.listdir(plugins_dir):
-#         plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
-#         plugin_icon_path = os.path.join(plugins_dir, plugin_dir, 'icon.png')
-#         plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
-#         if not os.path.isfile(plugin_module_path):
-#             return
-#         icon = None
-#         if os.path.isfile(plugin_icon_path):
-#             icon = plugin_icon_path
-#         else:
-#             icon = get_resource_path('ic_plugin.png')
-#         config = load_json(plugin_config_path)
-#         if config is None:
-#             continue
-#         config['id'] = plugin_dir
-#         config['icon'] = icon
-#         config['module_path'] = plugin_module_path
-#         configs.append(config)
-#     return configs
 
 def load_plugins_config(safeeyes_config):
     """
