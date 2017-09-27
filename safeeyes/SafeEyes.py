@@ -36,7 +36,7 @@ from safeeyes.BreakScreen import BreakScreen
 from safeeyes.model import State
 from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
-from safeeyes.SettingsDialog import SettingsDialog
+from safeeyes.settings import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -55,6 +55,7 @@ class SafeEyes(object):
         self.config = None
         self.context = {}
         self.plugins_manager = None
+        self.settings_dialog_active = False
 
         self.config = Utility.read_config()
 
@@ -95,9 +96,11 @@ class SafeEyes(object):
         """
         Listen to tray icon Settings action and send the signal to Settings dialog.
         """
-        logging.info("Show Settings dialog")
-        settings_dialog = SettingsDialog(self.config, self.save_settings)
-        settings_dialog.show()
+        if not self.settings_dialog_active:
+            logging.info("Show Settings dialog")
+            self.settings_dialog_active = True
+            settings_dialog = SettingsDialog(self.config, self.save_settings)
+            settings_dialog.show()
 
 
     def show_about(self):
@@ -171,7 +174,7 @@ class SafeEyes(object):
         """
         Listen to Settings dialog Save action and write to the config file.
         """
-
+        self.settings_dialog_active = False
         logging.info("Saving settings to safeeyes.json")
 
         # Stop the Safe Eyes core

@@ -121,7 +121,7 @@ class PluginManager(object):
         Execute the on_pre_break(break_obj) function of plugins.
         """
         for plugin in self.__plugins_on_pre_break:
-            if break_obj.plugin_enabled(plugin['id']):
+            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
                 if plugin['module'].on_pre_break(break_obj):
                     return False
         return True
@@ -132,7 +132,7 @@ class PluginManager(object):
         """
         self.last_break = break_obj
         for plugin in self.__plugins_on_start_break:
-            if break_obj.plugin_enabled(plugin['id']):
+            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
                 if plugin['module'].on_start_break(break_obj):
                     return False
 
@@ -143,7 +143,7 @@ class PluginManager(object):
         Execute the stop_break() function of plugins.
         """
         for plugin in self.__plugins_on_stop_break:
-            if self.last_break.plugin_enabled(plugin['id']):
+            if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
                 plugin['module'].on_stop_break()
         return True
 
@@ -152,7 +152,7 @@ class PluginManager(object):
         Execute the on_countdown(countdown, seconds) function of plugins.
         """
         for plugin in self.__plugins_on_countdown:
-            if self.last_break.plugin_enabled(plugin['id']):
+            if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
                 plugin['module'].on_countdown(countdown, seconds)
         return True
 
@@ -171,7 +171,7 @@ class PluginManager(object):
         """
         widget = ''
         for plugin in self.__widget_plugins:
-            if break_obj.plugin_enabled(plugin['id']):
+            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
                 try:
                     title = plugin['module'].get_widget_title(break_obj).upper().strip()
                     if title == '':
@@ -197,53 +197,54 @@ class PluginManager(object):
         """
         Load the given plugin.
         """
+        plugin_enabled = plugin['enabled']
         if plugin['id'] in self.__plugins:
             # Already loaded
-            if not plugin['enabled']:
+            if not plugin_enabled:
                 # Disabled after first initialization
                 plugin_obj = self.__plugins[plugin['id']]
                 del self.__plugins[plugin['id']]
-                if plugin_obj in self.__plugins_on_init:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_init:
                     self.__plugins_on_init.remove(plugin_obj)
                 if plugin_obj in self.__plugins_on_start:
                     self.__plugins_on_start.remove(plugin_obj)
                 if plugin_obj in self.__plugins_on_stop:
                     self.__plugins_on_stop.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_pre_break:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_pre_break:
                     self.__plugins_on_pre_break.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_start_break:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_start_break:
                     self.__plugins_on_start_break.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_stop_break:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_stop_break:
                     self.__plugins_on_stop_break.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_countdown:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_countdown:
                     self.__plugins_on_countdown.remove(plugin_obj)
                 if plugin_obj in self.__plugins_update_next_break:
                     self.__plugins_update_next_break.remove(plugin_obj)
-                if plugin_obj in self.__widget_plugins:
+                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__widget_plugins:
                     self.__widget_plugins.remove(plugin_obj)
                 if self.__has_method(plugin_obj['module'], 'disable'):
                     plugin_obj['module'].disable()
                 logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
             return
 
-        if plugin['enabled']:
-            # Look for plugin.py
-            plugin_dir = None
-            if os.path.isfile(os.path.join(Utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-                plugin_dir = Utility.SYSTEM_PLUGINS_DIR
-            elif os.path.isfile(os.path.join(Utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-                plugin_dir = Utility.USER_PLUGINS_DIR
-            else:
-                logging.error('plugin.py not found for the plugin: %s', plugin['id'])
-                return
-            # Look for config.json
-            plugin_config_path = os.path.join(plugin_dir, plugin['id'], 'config.json')
-            if not os.path.isfile(plugin_config_path):
-                logging.error('config.json not found for the plugin: %s', plugin['id'])
-                return
-            with open(plugin_config_path) as config_file:
-                plugin_config = json.load(config_file)
+        # Look for plugin.py
+        plugin_dir = None
+        if os.path.isfile(os.path.join(Utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+            plugin_dir = Utility.SYSTEM_PLUGINS_DIR
+        elif os.path.isfile(os.path.join(Utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+            plugin_dir = Utility.USER_PLUGINS_DIR
+        else:
+            logging.error('plugin.py not found for the plugin: %s', plugin['id'])
+            return
+        # Look for config.json
+        plugin_config_path = os.path.join(plugin_dir, plugin['id'], 'config.json')
+        if not os.path.isfile(plugin_config_path):
+            logging.error('config.json not found for the plugin: %s', plugin['id'])
+            return
+        with open(plugin_config_path) as config_file:
+            plugin_config = json.load(config_file)
 
+        if plugin_enabled or plugin_config.get('break_override_allowed', False):
             # Check for dependencies
             dependencies_satisfied = True
             # Check the Python modules
@@ -270,17 +271,17 @@ class PluginManager(object):
             # Load the plugin module
             module = importlib.import_module((plugin['id'] + '.plugin'))
             logging.info("Successfully loaded %s", str(module))
-            plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get('settings', {}), 'location': None}
+            plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get('settings', {}), 'enabled': plugin_enabled, 'break_override_allowed': plugin_config.get('break_override_allowed', False)}
             self.__plugins[plugin['id']] = plugin_obj
             if self.__has_method(module, 'enable'):
                 module.enable()
             if self.__has_method(module, 'init', 3):
                 self.__plugins_on_init.append(plugin_obj)
-            if self.__has_method(module, 'on_start'):
+            if plugin_enabled and self.__has_method(module, 'on_start'):
                 self.__plugins_on_start.append(plugin_obj)
-            if self.__has_method(module, 'on_stop'):
+            if plugin_enabled and self.__has_method(module, 'on_stop'):
                 self.__plugins_on_stop.append(plugin_obj)
-            if self.__has_method(module, 'on_exit'):
+            if plugin_enabled and self.__has_method(module, 'on_exit'):
                 self.__plugins_on_exit.append(plugin_obj)
             if self.__has_method(module, 'on_pre_break', 1):
                 self.__plugins_on_pre_break.append(plugin_obj)
@@ -290,7 +291,7 @@ class PluginManager(object):
                 self.__plugins_on_stop_break.append(plugin_obj)
             if self.__has_method(module, 'on_countdown', 2):
                 self.__plugins_on_countdown.append(plugin_obj)
-            if self.__has_method(module, 'update_next_break', 1):
+            if plugin_enabled and self.__has_method(module, 'update_next_break', 1):
                 self.__plugins_update_next_break.append(plugin_obj)
             if self.__has_method(module, 'get_widget_title', 1) and self.__has_method(module, 'get_widget_content', 1):
                 self.__widget_plugins.append(plugin_obj)

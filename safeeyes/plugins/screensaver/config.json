@@ -24,5 +24,6 @@
             "default": 3
         }
     ],
-    "resources": []
+    "resources": [],
+    "break_override_allowed": true
 }

@@ -11,5 +11,6 @@
         "desktop_environments": []
     },
     "settings": [],
-    "resources": ["alert.wav"]
+    "resources": ["alert.wav"],
+    "break_override_allowed": true
 }

@@ -116,7 +116,8 @@ class SettingsDialog(object):
         btn_properties = builder.get_object('btn_properties')
         switch_enable.set_active(plugin_config['enabled'])
         self.plugin_switches[plugin_config['id']] = switch_enable
-        self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
+        if plugin_config.get('break_override_allowed', False):
+            self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
         if plugin_config['icon']:
             builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
         if plugin_config['settings']:
@@ -296,6 +297,11 @@ class BreakPropertiesDialog(object):
 
         if duration_overriden:
             self.spin_duration.set_value(break_config['duration'])
+        else:
+            if is_short:
+                self.spin_duration.set_value(parent_config['short_break_duration'])
+            else:
+                self.spin_duration.set_value(parent_config['long_break_duration'])
         row = 0
         col = 0
         for plugin_id in plugin_map.keys():
@@ -371,7 +377,7 @@ class BreakPropertiesDialog(object):
         if break_name:
             self.break_config['name'] = break_name
         if self.switch_override_duration.get_active():
-            self.break_config['duration'] = self.spin_duration.get_value()
+            self.break_config['duration'] = int(self.spin_duration.get_value())
         else:
             self.break_config.pop('duration', None)
         if self.switch_override_plugins.get_active():

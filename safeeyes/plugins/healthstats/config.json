@@ -11,5 +11,6 @@
         "desktop_environments": []
     },
     "settings": [],
-    "resources": []
+    "resources": [],
+    "break_override_allowed": true
 }

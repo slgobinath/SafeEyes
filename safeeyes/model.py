@@ -51,14 +51,14 @@ class Break(object):
         """
         return self.type == BreakType.SHORT_BREAK
 
-    def plugin_enabled(self, plugin_id):
+    def plugin_enabled(self, plugin_id, is_plugin_enabled):
         """
         Check whether this break supports the given plugin.
         """
         if self.plugins:
             return plugin_id in self.plugins
         else:
-            return True
+            return is_plugin_enabled
 
 class BreakType(Enum):
     """

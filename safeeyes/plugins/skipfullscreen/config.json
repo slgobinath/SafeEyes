@@ -30,5 +30,6 @@
             "default": true
         }
     ],
-    "resources": []
+    "resources": [],
+    "break_override_allowed": true
 }
