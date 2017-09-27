@@ -56,7 +56,7 @@ class SettingsDialog(object):
         for long_break in config['long_breaks']:
             self.__create_break_item(long_break, False, config)
         
-        for plugin_config in Utility.load_plugins_config_gobi(config):
+        for plugin_config in Utility.load_plugins_config(config):
             box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
         
         self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
@@ -110,11 +110,19 @@ class SettingsDialog(object):
         Create an entry for plugin to be listed in the plugin tab.
         """
         builder = Utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
-        builder.get_object('lbl_plugin_name').set_label(plugin_config['meta']['name'])
-        builder.get_object('lbl_plugin_description').set_label(plugin_config['meta']['description'])
+        lbl_plugin_name = builder.get_object('lbl_plugin_name')
+        lbl_plugin_description = builder.get_object('lbl_plugin_description')
         switch_enable = builder.get_object('switch_enable')
         btn_properties = builder.get_object('btn_properties')
+        lbl_plugin_name.set_label(plugin_config['meta']['name'])
         switch_enable.set_active(plugin_config['enabled'])
+        if plugin_config['error']:
+            lbl_plugin_description.set_label(plugin_config['meta']['description'])
+            lbl_plugin_name.set_sensitive(False)
+            lbl_plugin_description.set_sensitive(False)
+            switch_enable.set_sensitive(False)
+        else:
+            lbl_plugin_description.set_label(plugin_config['meta']['description'])
         self.plugin_switches[plugin_config['id']] = switch_enable
         if plugin_config.get('break_override_allowed', False):
             self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']

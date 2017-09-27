@@ -49,6 +49,7 @@ log_file_path = os.path.join(config_directory, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(config_directory, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
+DESKTOP_ENVIRONMENT = None
 
 def get_resource_path(resource_name):
     """
@@ -123,32 +124,69 @@ def mkdir(path):
             raise
 
 
-def load_plugins_config(plugins_dir):
+def load_json(json_path):
     """
-    Load all the plugins from the given directory.
+    Load the JSON file from the given path.
     """
-    configs = []
-    for plugin_dir in os.listdir(plugins_dir):
-        plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
-        plugin_icon_path = os.path.join(plugins_dir, plugin_dir, 'icon.png')
-        plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
-        if not os.path.isfile(plugin_module_path):
-            return
-        icon = None
-        if os.path.isfile(plugin_icon_path):
-            icon = plugin_icon_path
-        else:
-            icon = get_resource_path('ic_plugin.png')
-        if os.path.isfile(plugin_config_path):
-            with open(plugin_config_path) as config_file:
-                config = json.load(config_file)
-                config['id'] = plugin_dir
-                config['icon'] = icon
-                config['module_path'] = plugin_module_path
-                configs.append(config)
-    return configs
+    json_obj = None
+    if os.path.isfile(json_path):
+        try:
+            with open(json_path) as config_file:
+                json_obj = json.load(config_file)
+        except BaseException:
+            pass
+    return json_obj
 
-def load_plugins_config_gobi(safeeyes_config):
+
+def check_plugin_dependencies(plugin_config):
+    """
+    Check the plugin dependencies.
+    """
+    # Check the Python modules
+    for module in plugin_config['dependencies']['python_modules']:
+        if not module_exist(module):
+            return 'Please install the Python module %s' % module
+
+    # Check the shell commands
+    for command in plugin_config['dependencies']['shell_commands']:
+        if not command_exist(command):
+            return 'Please install the commandline tool %s' % command
+
+    # Check the desktop environment
+    if plugin_config['dependencies']['desktop_environments']:
+        # Plugin has restrictions on desktop environments
+        if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
+            return 'Plugin does not support %s desktop environment' % DESKTOP_ENVIRONMENT
+    
+    return None
+
+
+# def load_plugins_config(plugins_dir):
+#     """
+#     Load all the plugins from the given directory.
+#     """
+#     configs = []
+#     for plugin_dir in os.listdir(plugins_dir):
+#         plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
+#         plugin_icon_path = os.path.join(plugins_dir, plugin_dir, 'icon.png')
+#         plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
+#         if not os.path.isfile(plugin_module_path):
+#             return
+#         icon = None
+#         if os.path.isfile(plugin_icon_path):
+#             icon = plugin_icon_path
+#         else:
+#             icon = get_resource_path('ic_plugin.png')
+#         config = load_json(plugin_config_path)
+#         if config is None:
+#             continue
+#         config['id'] = plugin_dir
+#         config['icon'] = icon
+#         config['module_path'] = plugin_module_path
+#         configs.append(config)
+#     return configs
+
+def load_plugins_config(safeeyes_config):
     """
     Load all the plugins from the given directory.
     """
@@ -168,15 +206,23 @@ def load_plugins_config_gobi(safeeyes_config):
             icon = plugin_icon_path
         else:
             icon = get_resource_path('ic_plugin.png')
-        if os.path.isfile(plugin_config_path):
-            with open(plugin_config_path) as config_file:
-                config = json.load(config_file)
-                config['id'] = plugin['id']
-                config['icon'] = icon
-                config['enabled'] = plugin['enabled']
-                for setting in config['settings']:
-                    setting['safeeyes_config'] = plugin['settings']
-                configs.append(config)
+        config = load_json(plugin_config_path)
+        if config is None:
+            continue
+        dependency_description = check_plugin_dependencies(config)
+        if dependency_description:
+            plugin['enabled'] = False
+            config['error'] = True
+            config['meta']['description'] = dependency_description
+            icon = get_resource_path('ic_warning.png')
+        else:
+            config['error'] = False
+        config['id'] = plugin['id']
+        config['icon'] = icon
+        config['enabled'] = plugin['enabled']
+        for setting in config['settings']:
+            setting['safeeyes_config'] = plugin['settings']
+        configs.append(config)
     return configs
 
 def merge_plugins_config(safeeyes_config, plugins_dir):
@@ -202,18 +248,20 @@ def merge_plugins_config(safeeyes_config, plugins_dir):
         config = {}
         config['id'] = plugin_dir   # Plugin directory name is the id
         config['enabled'] = False   # By default plugins are disabled
-        with open(plugin_config_path) as config_file:
-            plugin_config = json.load(config_file)
-            if plugin_config['settings']:
-                config['settings'] = {}
-                for setting in plugin_config['settings']:
-                    config['settings'][setting['id']] = setting['default']
+        plugin_config = load_json(plugin_config_path)
+        if plugin_config is None:
+            continue
+        if plugin_config['settings']:
+            config['settings'] = {}
+            for setting in plugin_config['settings']:
+                config['settings'][setting['id']] = setting['default']
         safeeyes_config['plugins'].append(config)
 
 def desktop_environment():
     """
     Detect the desktop environment.
     """
+    global DESKTOP_ENVIRONMENT
     desktop_session = os.environ.get('DESKTOP_SESSION')
     current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
     env = 'unknown'
@@ -231,6 +279,7 @@ def desktop_environment():
             env = 'gnome'
         elif desktop_session.startswith('ubuntu'):
             env = 'unity'
+    DESKTOP_ENVIRONMENT = env
     return env
 
 

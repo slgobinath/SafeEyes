@@ -43,7 +43,6 @@ The plugin.py can have following methods but all are optional:
 
 import importlib
 import inspect
-import json
 import logging
 import os
 import sys
@@ -241,31 +240,13 @@ class PluginManager(object):
         if not os.path.isfile(plugin_config_path):
             logging.error('config.json not found for the plugin: %s', plugin['id'])
             return
-        with open(plugin_config_path) as config_file:
-            plugin_config = json.load(config_file)
+        plugin_config = Utility.load_json(plugin_config_path)
+        if plugin_config is None:
+            return
 
         if plugin_enabled or plugin_config.get('break_override_allowed', False):
             # Check for dependencies
-            dependencies_satisfied = True
-            # Check the Python modules
-            for module in plugin_config['dependencies']['python_modules']:
-                if not Utility.module_exist(module):
-                    dependencies_satisfied = False
-                    break
-
-            # Check the shell commands
-            for command in plugin_config['dependencies']['shell_commands']:
-                if not Utility.command_exist(command):
-                    dependencies_satisfied = False
-                    break
-
-            # Check the desktop environment
-            if plugin_config['dependencies']['desktop_environments']:
-                # Plugin has restrictions on desktop environments
-                if context['desktop'] not in plugin_config['dependencies']['desktop_environments']:
-                    dependencies_satisfied = False
-
-            if not dependencies_satisfied:
+            if Utility.check_plugin_dependencies(plugin_config):
                 return
 
             # Load the plugin module
