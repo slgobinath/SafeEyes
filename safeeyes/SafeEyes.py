@@ -70,7 +70,7 @@ class SafeEyes(object):
         self.context['api']['disable_safeeyes'] = self.disable_safeeyes
         self.context['api']['on_quit'] = self.on_quit
 
-        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, Utility.style_sheet_path)
+        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, Utility.STYLE_SHEET_PATH)
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager(self.context, self.config)
         self.safe_eyes_core = SafeEyesCore(self.context)
@@ -183,7 +183,7 @@ class SafeEyes(object):
             self.safe_eyes_core.stop()
 
         # Write the configuration to file
-        with open(Utility.config_file_path, 'w') as config_file:
+        with open(Utility.CONFIG_FILE_PATH, 'w') as config_file:
             json.dump(config, config_file, indent=4, sort_keys=True)
 
         logging.info("Initialize SafeEyesCore with modified settings")

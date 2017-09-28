@@ -40,14 +40,14 @@ gi.require_version('Gdk', '3.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.path.expanduser('~')
-config_directory = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
-config_file_path = os.path.join(config_directory, 'safeeyes.json')
-style_sheet_path = os.path.join(config_directory, 'style/safeeyes_style.css')
-system_config_file_path = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
-system_style_sheet_path = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
-log_file_path = os.path.join(config_directory, 'safeeyes.log')
+CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
+CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
+STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
+SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
+SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
+LOG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
-USER_PLUGINS_DIR = os.path.join(config_directory, 'plugins')
+USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
 
@@ -58,7 +58,7 @@ def get_resource_path(resource_name):
     """
     if resource_name is None:
         return None
-    resource_location = os.path.join(config_directory, 'resource', resource_name)
+    resource_location = os.path.join(CONFIG_DIRECTORY, 'resource', resource_name)
     if not os.path.isfile(resource_location):
         resource_location = os.path.join(BIN_DIRECTORY, 'resource', resource_name)
         if not os.path.isfile(resource_location):
@@ -321,7 +321,7 @@ def __initialize_safeeyes():
 
     # Remove the ~/.config/safeeyes directory
     try:
-        os.remove(os.path.join(config_directory, 'safeeyes.json'))
+        os.remove(os.path.join(CONFIG_DIRECTORY, 'safeeyes.json'))
     except OSError:
         pass
 
@@ -336,7 +336,7 @@ def __initialize_safeeyes():
     mkdir(startup_dir_path)
 
     # Copy the safeeyes.json
-    shutil.copy2(system_config_file_path, config_file_path)
+    shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
 
     # Copy the new startup file
     try:
@@ -345,8 +345,8 @@ def __initialize_safeeyes():
         pass
 
     # Copy the new style sheet
-    if not os.path.isfile(style_sheet_path):
-        shutil.copy2(system_style_sheet_path, style_sheet_path)
+    if not os.path.isfile(STYLE_SHEET_PATH):
+        shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
 
 def intialize_logging():
@@ -354,9 +354,9 @@ def intialize_logging():
     Initialize the logging framework using the Safe Eyes specific configurations.
     """
     # Create the directory to store log file if not exist
-    if not os.path.exists(config_directory):
+    if not os.path.exists(CONFIG_DIRECTORY):
         try:
-            os.makedirs(config_directory)
+            os.makedirs(CONFIG_DIRECTORY)
         except OSError:
             pass
 
@@ -364,7 +364,7 @@ def intialize_logging():
     log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
     # Apped the logs and overwrite once reached 5MB
-    handler = logging.StreamHandler()  # RotatingFileHandler(log_file_path, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
+    handler = logging.StreamHandler()  # RotatingFileHandler(LOG_FILE_PATH, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
     handler.setFormatter(log_formatter)
     handler.setLevel(logging.DEBUG)
 
@@ -382,15 +382,15 @@ def read_config():
     """
     logging.info('Reading the configuration file')
 
-    if not os.path.isfile(config_file_path):
+    if not os.path.isfile(CONFIG_FILE_PATH):
         logging.info('Safe Eyes configuration file not found')
         __initialize_safeeyes()
 
     # Read the configurations
-    with open(config_file_path) as config_file:
+    with open(CONFIG_FILE_PATH) as config_file:
         user_config = json.load(config_file)
 
-    with open(system_config_file_path) as config_file:
+    with open(SYSTEM_CONFIG_FILE_PATH) as config_file:
         system_config = json.load(config_file)
 
     user_config_version = str(user_config['meta']['config_version'])
@@ -415,15 +415,22 @@ def read_config():
             new_config['meta']['config_version'] = system_config_version
 
             # Write the configuration to file
-            with open(config_file_path, 'w') as config_file:
+            with open(CONFIG_FILE_PATH, 'w') as config_file:
                 json.dump(new_config, config_file, indent=4, sort_keys=True)
 
             # Update the user_config
             user_config = new_config
 
+    # Remove the deleted plugins
+    for plugin in user_config['plugins']:
+        if os.path.isdir(os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])) or os.path.isdir(os.path.join(USER_PLUGINS_DIR, plugin['id'])):
+            # Plugin still exists
+            continue
+        user_config['plugins'].remove(plugin)
+    # Add new plugins
     merge_plugins_config(user_config, SYSTEM_PLUGINS_DIR)
     merge_plugins_config(user_config, USER_PLUGINS_DIR)
-    with open(config_file_path, 'w') as config_file:
+    with open(CONFIG_FILE_PATH, 'w') as config_file:
         json.dump(user_config, config_file, indent=4, sort_keys=True)
 
     return user_config
