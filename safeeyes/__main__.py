@@ -33,7 +33,7 @@ from safeeyes.SafeEyes import SafeEyes
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-gettext.install('safeeyes', 'safeeyes/config/locale')
+gettext.install('safeeyes', Utility.LOCALE_PATH)
 
 SAFE_EYES_VERSION = "2.0.0"
 

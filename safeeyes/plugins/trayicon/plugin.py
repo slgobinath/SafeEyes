@@ -357,11 +357,11 @@ def on_pre_break(break_obj):
     """
     if safeeyes_config['strict_break']:
         tray_icon.lock_menu()
+        threading.Timer(safeeyes_config['pre_break_warning_time'], __unlock_menu).start()
 
 
-def on_start_break(break_obj):
+def __unlock_menu():
     """
-    Enable the menu after the pre_wait time.
+    Unlock the menu
     """
-    if safeeyes_config['strict_break']:
-        tray_icon.unlock_menu()
+    Utility.execute_main_thread(tray_icon.unlock_menu)

@@ -197,33 +197,32 @@ class PluginManager(object):
         Load the given plugin.
         """
         plugin_enabled = plugin['enabled']
-        if plugin['id'] in self.__plugins:
-            # Already loaded
-            if not plugin_enabled:
-                # Disabled after first initialization
-                plugin_obj = self.__plugins[plugin['id']]
+        if plugin['id'] in self.__plugins and not plugin_enabled:
+            # Disabled after first initialization
+            plugin_obj = self.__plugins[plugin['id']]
+            if not plugin_obj['break_override_allowed']:
                 del self.__plugins[plugin['id']]
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_init:
-                    self.__plugins_on_init.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_start:
-                    self.__plugins_on_start.remove(plugin_obj)
-                if plugin_obj in self.__plugins_on_stop:
-                    self.__plugins_on_stop.remove(plugin_obj)
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_pre_break:
-                    self.__plugins_on_pre_break.remove(plugin_obj)
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_start_break:
-                    self.__plugins_on_start_break.remove(plugin_obj)
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_stop_break:
-                    self.__plugins_on_stop_break.remove(plugin_obj)
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_countdown:
-                    self.__plugins_on_countdown.remove(plugin_obj)
-                if plugin_obj in self.__plugins_update_next_break:
-                    self.__plugins_update_next_break.remove(plugin_obj)
-                if not plugin_obj['break_override_allowed'] and plugin_obj in self.__widget_plugins:
-                    self.__widget_plugins.remove(plugin_obj)
-                if self.__has_method(plugin_obj['module'], 'disable'):
-                    plugin_obj['module'].disable()
-                logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_init:
+                self.__plugins_on_init.remove(plugin_obj)
+            if plugin_obj in self.__plugins_on_start:
+                self.__plugins_on_start.remove(plugin_obj)
+            if plugin_obj in self.__plugins_on_stop:
+                self.__plugins_on_stop.remove(plugin_obj)
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_pre_break:
+                self.__plugins_on_pre_break.remove(plugin_obj)
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_start_break:
+                self.__plugins_on_start_break.remove(plugin_obj)
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_stop_break:
+                self.__plugins_on_stop_break.remove(plugin_obj)
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_countdown:
+                self.__plugins_on_countdown.remove(plugin_obj)
+            if plugin_obj in self.__plugins_update_next_break:
+                self.__plugins_update_next_break.remove(plugin_obj)
+            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__widget_plugins:
+                self.__widget_plugins.remove(plugin_obj)
+            if self.__has_method(plugin_obj['module'], 'disable'):
+                plugin_obj['module'].disable()
+            logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
             return
 
         # Look for plugin.py
@@ -244,7 +243,7 @@ class PluginManager(object):
         if plugin_config is None:
             return
 
-        if plugin_enabled or plugin_config.get('break_override_allowed', False):
+        if (plugin_enabled or plugin_config.get('break_override_allowed', False)) and plugin['id'] not in self.__plugins:
             # Check for dependencies
             if Utility.check_plugin_dependencies(plugin_config):
                 return
