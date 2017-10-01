@@ -39,13 +39,14 @@ def init(ctx, safeeyes_config, plugin_config):
     global no_of_cycles
     logging.debug('Initialize Health Stats plugin')
     context = ctx
-    session = context['session']['plugin'].get('healthstats', None)
     if session is None:
-        session = {'no_of_skipped_breaks': 0, 'no_of_breaks': 0, 'no_of_cycles': -1}
-        context['session']['plugin']['healthstats'] = session
-    no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
-    no_of_breaks = session.get('no_of_breaks', 0)
-    no_of_cycles = session.get('no_of_cycles', -1)
+        session = context['session']['plugin'].get('healthstats', None)
+        if session is None:
+            session = {'no_of_skipped_breaks': 0, 'no_of_breaks': 0, 'no_of_cycles': -1}
+            context['session']['plugin']['healthstats'] = session
+        no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
+        no_of_breaks = session.get('no_of_breaks', 0)
+        no_of_cycles = session.get('no_of_cycles', -1)
 
 
 def on_stop_break():
