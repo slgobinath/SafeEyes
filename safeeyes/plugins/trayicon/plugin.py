@@ -182,7 +182,7 @@ class TrayIcon(object):
             else:
                 self.item_info.set_label(_('Disabled until restart'))
 
-        self.item_manual_break.set_label(_('Take the break now'))
+        self.item_manual_break.set_label(_('Take a break now'))
         self.item_settings.set_label(_('Settings'))
         self.item_about.set_label(_('About'))
         self.item_quit.set_label(_('Quit'))

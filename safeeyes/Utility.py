@@ -62,7 +62,7 @@ def get_resource_path(resource_name):
     if not os.path.isfile(resource_location):
         resource_location = os.path.join(BIN_DIRECTORY, 'resource', resource_name)
         if not os.path.isfile(resource_location):
-            logging.error('Resource not found: ' + resource_name)
+            # Resource not found
             resource_location = None
 
     return resource_location
@@ -146,22 +146,22 @@ def check_plugin_dependencies(plugin_config):
     if plugin_config['dependencies']['desktop_environments']:
         # Plugin has restrictions on desktop environments
         if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
-            return 'Plugin does not support %s desktop environment' % DESKTOP_ENVIRONMENT
+            return _('Plugin does not support %s desktop environment') % DESKTOP_ENVIRONMENT
 
     # Check the Python modules
     for module in plugin_config['dependencies']['python_modules']:
         if not module_exist(module):
-            return 'Please install the Python module %s' % module
+            return _("Please install the Python module '%s'") % module
 
     # Check the shell commands
     for command in plugin_config['dependencies']['shell_commands']:
         if not command_exist(command):
-            return 'Please install the commandline tool %s' % command
+            return _("Please install the command-line tool '%s'") % command
     
     # Check the resources
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
-            return 'Please add the resource %s to ~/.config/safeeyes/resource directory' % resource
+            return _('Please add the resource %s to % directory') % (resource, '~/.config/safeeyes/resource')
     
     return None
 
@@ -443,4 +443,14 @@ def create_gtk_builder(glade_file):
     builder = Gtk.Builder()
     builder.set_translation_domain('safeeyes')
     builder.add_from_file(glade_file)
+    # Tranlslate all sub components
+    for obj in builder.get_objects():
+        if (not isinstance(obj, Gtk.SeparatorMenuItem)) and hasattr(obj, "get_label"):
+            label = obj.get_label()
+            if label is not None:
+                obj.set_label(_(label))
+        elif hasattr(obj, "get_title"):
+            title = obj.get_title()
+            if title is not None:
+                obj.set_title(_(title))
     return builder

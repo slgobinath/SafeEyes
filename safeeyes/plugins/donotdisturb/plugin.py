@@ -81,8 +81,8 @@ def init(ctx, safeeyes_config, plugin_config):
     global unfullscreen_allowed
     logging.debug('Initialize Skip Fullscreen plugin')
     context = ctx
-    skip_break_window_classes = plugin_config['blacklist'].split()
-    take_break_window_classes = plugin_config['whitelist'].split()
+    skip_break_window_classes = plugin_config['skip_break_windows'].split()
+    take_break_window_classes = plugin_config['take_break_windows'].split()
     unfullscreen_allowed = plugin_config['unfullscreen']
 
 

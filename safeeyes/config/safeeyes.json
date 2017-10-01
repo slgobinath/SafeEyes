@@ -47,11 +47,11 @@
     ],
     "plugins": [
         {
-            "id": "skipfullscreen",
+            "id": "donotdisturb",
             "enabled": true,
             "settings": {
-                "whitelist": "",
-                "blacklist": "",
+                "skip_break_windows": "",
+                "take_break_windows": "",
                 "unfullscreen": true
             }
         },

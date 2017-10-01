@@ -1,7 +1,7 @@
 {
     "meta": {
-        "name": "Screen saver",
-        "description": "Lock the screen after long breaks",
+        "name": "Screensaver",
+        "description": "Lock the screen after long breaks by starting screensaver",
         "version": "0.0.1"
     },
     "dependencies": {

@@ -199,26 +199,26 @@ class PluginManager(object):
         plugin_enabled = plugin['enabled']
         if plugin['id'] in self.__plugins and not plugin_enabled:
             # Disabled after first initialization
+            # It removes the break_override_allowed plugins as well. But they will be loaded again
             plugin_obj = self.__plugins[plugin['id']]
-            if not plugin_obj['break_override_allowed']:
-                del self.__plugins[plugin['id']]
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_init:
+            del self.__plugins[plugin['id']]
+            if plugin_obj in self.__plugins_on_init:
                 self.__plugins_on_init.remove(plugin_obj)
             if plugin_obj in self.__plugins_on_start:
                 self.__plugins_on_start.remove(plugin_obj)
             if plugin_obj in self.__plugins_on_stop:
                 self.__plugins_on_stop.remove(plugin_obj)
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_pre_break:
+            if plugin_obj in self.__plugins_on_pre_break:
                 self.__plugins_on_pre_break.remove(plugin_obj)
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_start_break:
+            if plugin_obj in self.__plugins_on_start_break:
                 self.__plugins_on_start_break.remove(plugin_obj)
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_stop_break:
+            if plugin_obj in self.__plugins_on_stop_break:
                 self.__plugins_on_stop_break.remove(plugin_obj)
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__plugins_on_countdown:
+            if plugin_obj in self.__plugins_on_countdown:
                 self.__plugins_on_countdown.remove(plugin_obj)
             if plugin_obj in self.__plugins_update_next_break:
                 self.__plugins_update_next_break.remove(plugin_obj)
-            if not plugin_obj['break_override_allowed'] and plugin_obj in self.__widget_plugins:
+            if plugin_obj in self.__widget_plugins:
                 self.__widget_plugins.remove(plugin_obj)
             if self.__has_method(plugin_obj['module'], 'disable'):
                 plugin_obj['module'].disable()

@@ -114,15 +114,15 @@ class SettingsDialog(object):
         lbl_plugin_description = builder.get_object('lbl_plugin_description')
         switch_enable = builder.get_object('switch_enable')
         btn_properties = builder.get_object('btn_properties')
-        lbl_plugin_name.set_label(plugin_config['meta']['name'])
+        lbl_plugin_name.set_label(_(plugin_config['meta']['name']))
         switch_enable.set_active(plugin_config['enabled'])
         if plugin_config['error']:
-            lbl_plugin_description.set_label(plugin_config['meta']['description'])
+            lbl_plugin_description.set_label(_(plugin_config['meta']['description']))
             lbl_plugin_name.set_sensitive(False)
             lbl_plugin_description.set_sensitive(False)
             switch_enable.set_sensitive(False)
         else:
-            lbl_plugin_description.set_label(plugin_config['meta']['description'])
+            lbl_plugin_description.set_label(_(plugin_config['meta']['description']))
         self.plugin_switches[plugin_config['id']] = switch_enable
         if plugin_config.get('break_override_allowed', False):
             self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
@@ -141,14 +141,14 @@ class SettingsDialog(object):
         """
         Show the PluginProperties dialog
         """
-        dialog = PluginPropertiesDialog(plugin_config)
+        dialog = PluginSettingsDialog(plugin_config)
         dialog.show()
 
     def __show_break_properties_dialog(self, break_config, is_short, parent, on_remove, on_close, on_add):
         """
         Show the BreakProperties dialog
         """
-        dialog = BreakPropertiesDialog(break_config, is_short, parent, self.plugin_map, on_remove, on_close, on_add)
+        dialog = BreakSettingsDialog(break_config, is_short, parent, self.plugin_map, on_remove, on_close, on_add)
         dialog.show()
 
     def show(self):
@@ -195,9 +195,9 @@ class SettingsDialog(object):
         self.window.destroy()
 
 
-class PluginPropertiesDialog(object):
+class PluginSettingsDialog(object):
     """
-    Builds a property dialog based on the configuration of a plugin.
+    Builds a settings dialog based on the configuration of a plugin.
     """
     def __init__(self, config):
         self.config = config
@@ -207,6 +207,7 @@ class PluginPropertiesDialog(object):
         builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_plugin')
         box_settings = builder.get_object('box_settings')
+        self.window.set_title(_('Plugin Settings'))
         for setting in config['settings']:
             if setting['type'].upper() == 'INT':
                 box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
@@ -220,7 +221,7 @@ class PluginPropertiesDialog(object):
         Load the UI control for int property.
         """
         builder = Utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
-        builder.get_object('lbl_name').set_label(name)
+        builder.get_object('lbl_name').set_label(_(name))
         spin_value = builder.get_object('spin_value')
         spin_value.set_value(settings[key])
         box = builder.get_object('box')
@@ -233,7 +234,7 @@ class PluginPropertiesDialog(object):
         Load the UI control for text property.
         """
         builder = Utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
-        builder.get_object('lbl_name').set_label(name)
+        builder.get_object('lbl_name').set_label(_(name))
         txt_value = builder.get_object('txt_value')
         txt_value.set_text(settings[key])
         box = builder.get_object('box')
@@ -246,7 +247,7 @@ class PluginPropertiesDialog(object):
         Load the UI control for boolean property.
         """
         builder = Utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
-        builder.get_object('lbl_name').set_label(name)
+        builder.get_object('lbl_name').set_label(_(name))
         switch_value = builder.get_object('switch_value')
         switch_value.set_active(settings[key])
         box = builder.get_object('box')
@@ -269,9 +270,9 @@ class PluginPropertiesDialog(object):
         self.window.show_all()
 
 
-class BreakPropertiesDialog(object):
+class BreakSettingsDialog(object):
     """
-    Builds a property dialog based on the configuration of a plugin.
+    Builds a settings dialog based on the configuration of a plugin.
     """
     def __init__(self, break_config, is_short, parent_config, plugin_map, on_remove, on_close, on_add):
         self.break_config = break_config
@@ -291,17 +292,21 @@ class BreakPropertiesDialog(object):
         self.spin_duration = builder.get_object('spin_duration')
         self.img_break = builder.get_object('img_break')
         self.cmb_type = builder.get_object('cmb_type')
+
         grid_plugins = builder.get_object('grid_plugins')
+        list_types = builder.get_object('lst_break_types')
 
         duration_overriden = break_config.get('duration', None) is not None
         plugins_overriden = break_config.get('plugins', None) is not None
 
         # Set the values
-        self.txt_break.set_text(break_config['name'])
+        self.window.set_title(_('Break Settings'))
+        self.txt_break.set_text(_(break_config['name']))
         self.switch_override_duration.set_active(duration_overriden)
         self.switch_override_plugins.set_active(plugins_overriden)
         self.cmb_type.set_active(0 if is_short else 1)
-        
+        list_types[0][0] = _(list_types[0][0])
+        list_types[1][0] = _(list_types[1][0])
 
         if duration_overriden:
             self.spin_duration.set_value(break_config['duration'])
@@ -313,7 +318,7 @@ class BreakPropertiesDialog(object):
         row = 0
         col = 0
         for plugin_id in plugin_map.keys():
-            chk_button = Gtk.CheckButton(plugin_map[plugin_id])
+            chk_button = Gtk.CheckButton(_(plugin_map[plugin_id]))
             self.plugin_check_buttons[plugin_id] = chk_button
             grid_plugins.attach(chk_button, row, col, 1, 1)
             if plugins_overriden:
@@ -348,7 +353,7 @@ class BreakPropertiesDialog(object):
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog("Please select an image", self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
              Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
 
         png_filter = Gtk.FileFilter()
@@ -361,7 +366,6 @@ class BreakPropertiesDialog(object):
         if response == Gtk.ResponseType.OK:
             self.break_config['image'] = dialog.get_filename()
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
-            # self.img_break.set_from_file(self.break_config['image'])
             self.img_break.set_from_pixbuf(pixbuf)
         elif response == Gtk.ResponseType.CANCEL:
             self.break_config.pop('image', None)

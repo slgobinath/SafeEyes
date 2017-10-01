@@ -53,7 +53,7 @@ def get_widget_title(break_obj):
     no_of_breaks += 1
     if context['new_cycle']:
         no_of_cycles += 1
-    return 'Health Statistics'
+    return _('Health Statistics')
 
 def get_widget_content(break_obj):
     """

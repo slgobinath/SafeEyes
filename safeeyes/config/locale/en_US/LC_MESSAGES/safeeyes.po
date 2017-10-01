@@ -46,62 +46,6 @@ msgstr "Walk for a while"
 msgid  "Lean back at your seat and relax"
 msgstr "Lean back at your seat and relax"
 
-#: plugins/trayicon
-msgid "Show a tray icon in the notification area"
-msgstr "Show a tray icon in the notification area"
-
-msgid "About"
-msgstr "About"
-
-msgid "Disable Safe Eyes"
-msgstr "Disable Safe Eyes"
-
-msgid "Disabled until %s"
-msgstr "Disabled until %s"
-
-msgid "Disabled until restart"
-msgstr "Disabled until restart"
-
-msgid "Enable Safe Eyes"
-msgstr "Enable Safe Eyes"
-
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "For %d Hour"
-msgstr[1] "For %d Hours"
-
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "For %d Minute"
-msgstr[1] "For %d Minutes"
-
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "For %d Second"
-msgstr[1] "For %d Seconds"
-
-msgid "Next break at %s"
-msgstr "Next break at %s"
-
-msgid "Settings"
-msgstr "Settings"
-
-msgid "Take the break now"
-msgstr "Take the break now"
-
-msgid "Until restart"
-msgstr "Until restart"
-
-msgid "Quit"
-msgstr "Quit"
-
-# plugin/notification
-msgid "Ready for a short break in %s seconds"
-msgstr "Ready for a short break in %s seconds"
-
-msgid "Ready for a long break in %s seconds"
-msgstr "Ready for a long break in %s seconds"
-
 # AboutDialog
 msgid "Close"
 msgstr "Close"
@@ -153,8 +97,177 @@ msgstr "Short Breaks"
 msgid "Long Breaks"
 msgstr "Long Breaks"
 
+msgid "Break"
+msgstr "Break"
+
 msgid "Breaks"
 msgstr "Breaks"
 
 msgid "Plugins"
 msgstr "Plugins"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Short"
+msgstr "Short"
+
+msgid "Long"
+msgstr "Long"
+
+msgid "Image"
+msgstr "Image"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "Please select an image"
+msgstr "Please select an image"
+
+msgid "Duration"
+msgstr "Duration"
+
+msgid "Override"
+msgstr "Override"
+
+msgid "Time (in seconds)"
+msgstr "Time (in seconds)"
+
+msgid "Break Settings"
+msgstr "Break Settings"
+
+msgid "Plugin Settings"
+msgstr "Plugin Settings"
+
+msgid "Plugin does not support %s desktop environment"
+msgstr "Plugin does not support %s desktop environment"
+
+msgid "Please install the Python module '%s'"
+msgstr "Please install the Python module '%s'"
+
+msgid "Please install the command-line tool '%s'"
+msgstr "Please install the command-line tool '%s'"
+
+msgid "Please add the resource %s to % directory"
+msgstr "Please add the resource %s to % directory"
+
+# plugin/audiblealert
+msgid "Audible Alert"
+msgstr "Audible Alert"
+
+msgid "Play an audible alert at the end of breaks"
+msgstr "Play an audible alert at the end of breaks"
+
+# plugin/donotdisturb
+msgid "Do Not Disturb"
+msgstr "Do Not Disturb"
+
+msgid "Skip the break if the active window is in fullscreen mode"
+msgstr "Skip the break if the active window is in fullscreen mode"
+
+msgid "Do not interrupt these windows anytime"
+msgstr "Do not interrupt these windows anytime"
+
+msgid "Interrupt these windows regardless of their state"
+msgstr "Interrupt these windows regardless of their state"
+
+msgid "Switch the interruptible windows to normal mode"
+msgstr "Switch the interruptible windows to normal mode"
+
+# plugin/healthstats
+msgid "Health Statistics"
+msgstr "Health Statistics"
+
+msgid "Show statistics based on how you use Safe Eyes"
+msgstr "Show statistics based on how you use Safe Eyes"
+
+# plugin/notification
+msgid "Notification"
+msgstr "Notification"
+
+msgid "Show a system notification before breaks"
+msgstr "Show a system notification before breaks"
+
+msgid "Ready for a short break in %s seconds"
+msgstr "Ready for a short break in %s seconds"
+
+msgid "Ready for a long break in %s seconds"
+msgstr "Ready for a long break in %s seconds"
+
+# plugin/screensaver
+msgid "Screensaver"
+msgstr "Screensaver"
+
+msgid "Lock the screen after long breaks by starting screensaver"
+msgstr "Lock the screen after long breaks by starting screensaver"
+
+msgid "Custom screensaver command"
+msgstr "Custom screensaver command"
+
+msgid "Minimum seconds to skip without screensaver"
+msgstr "Minimum seconds to skip without screensaver"
+
+# plugin/smartpause
+msgid "Smart Pause"
+msgstr "Smart Pause"
+
+msgid "Pause Safe Eyes if the system is idle"
+msgstr "Pause Safe Eyes if the system is idle"
+
+msgid "Minimum idle time to pause Safe Eyes"
+msgstr "Minimum idle time to pause Safe Eyes"
+
+#: plugins/trayicon
+msgid "Tray Icon"
+msgstr "Tray Icon"
+
+msgid "Show a tray icon in the notification area"
+msgstr "Show a tray icon in the notification area"
+
+msgid "Show next break time in tray icon"
+msgstr "Show next break time in tray icon"
+
+msgid "About"
+msgstr "About"
+
+msgid "Disable Safe Eyes"
+msgstr "Disable Safe Eyes"
+
+msgid "Disabled until %s"
+msgstr "Disabled until %s"
+
+msgid "Disabled until restart"
+msgstr "Disabled until restart"
+
+msgid "Enable Safe Eyes"
+msgstr "Enable Safe Eyes"
+
+msgid "For %d Hour"
+msgid_plural "For %d Hours"
+msgstr[0] "For %d Hour"
+msgstr[1] "For %d Hours"
+
+msgid "For %d Minute"
+msgid_plural "For %d Minutes"
+msgstr[0] "For %d Minute"
+msgstr[1] "For %d Minutes"
+
+msgid "For %d Second"
+msgid_plural "For %d Seconds"
+msgstr[0] "For %d Second"
+msgstr[1] "For %d Seconds"
+
+msgid "Next break at %s"
+msgstr "Next break at %s"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Take a break now"
+msgstr "Take a break now"
+
+msgid "Until restart"
+msgstr "Until restart"
+
+msgid "Quit"
+msgstr "Quit"

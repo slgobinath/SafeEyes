@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "Audible Alert",
-        "description": "Play an audible alert after breaks",
+        "description": "Play an audible alert at the end of breaks",
         "version": "0.0.1"
     },
     "dependencies": {
