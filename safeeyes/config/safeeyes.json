@@ -8,7 +8,7 @@
     "no_of_short_breaks_per_long_break": 5,
     "pre_break_warning_time": 10,
     "short_break_duration": 15,
-    "persist_state": true,
+    "persist_state": false,
     "postpone_duration": 5,
     "shortcut_disable_time": 2,
     "shortcut_skip": 9,

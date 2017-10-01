@@ -69,6 +69,7 @@ class SettingsDialog(object):
         self.spin_disable_keyboard_shortcut = builder.get_object('spin_disable_keyboard_shortcut')
         self.switch_strict_break = builder.get_object('switch_strict_break')
         self.switch_postpone = builder.get_object('switch_postpone')
+        self.switch_persist = builder.get_object('switch_persist')
 
         # Set the current values of input fields
         self.spin_short_break_duration.set_value(config['short_break_duration'])
@@ -80,6 +81,7 @@ class SettingsDialog(object):
         self.spin_disable_keyboard_shortcut.set_value(config['shortcut_disable_time'])
         self.switch_strict_break.set_active(config['strict_break'])
         self.switch_postpone.set_active(config['allow_postpone'] and not config['strict_break'])
+        self.switch_persist.set_active(config['persist_state'])
 
         # Update relative states
         # GtkSwitch state-set signal is available only from 3.14
@@ -195,6 +197,7 @@ class SettingsDialog(object):
         self.config['shortcut_disable_time'] = self.spin_disable_keyboard_shortcut.get_value_as_int()
         self.config['strict_break'] = self.switch_strict_break.get_active()
         self.config['allow_postpone'] = self.switch_postpone.get_active()
+        self.config['persist_state'] = self.switch_persist.get_active()
         for plugin in self.config['plugins']:
             if plugin['id'] in self.plugin_switches:
                 plugin['enabled'] = self.plugin_switches[plugin['id']].get_active()

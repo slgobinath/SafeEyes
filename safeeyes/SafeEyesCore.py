@@ -42,7 +42,7 @@ class SafeEyesCore(object):
         self.break_interval = 0
         self.breaks = None
         self.long_break_duration = 0
-        self.next_break_index = 0
+        self.next_break_index = context['session'].get('next_break_index', 0)
         self.postpone_duration = 0
         self.pre_break_warning_time = 0
         self.running = False
@@ -80,6 +80,8 @@ class SafeEyesCore(object):
         self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], config['no_of_short_breaks_per_long_break'])
         self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], config['no_of_short_breaks_per_long_break'])
         self.break_count = len(self.breaks)
+        self.next_break_index = (self.next_break_index) % self.break_count
+        self.context['session']['next_break_index'] = self.next_break_index
 
     def start(self):
         """
@@ -259,6 +261,7 @@ class SafeEyesCore(object):
         Select the next break.
         """
         self.next_break_index = (self.next_break_index + 1) % self.break_count
+        self.context['session']['next_break_index'] = self.next_break_index
 
     def __is_long_break(self):
         """

@@ -91,6 +91,9 @@ msgstr "Strict break (No way to skip breaks)"
 msgid "Allow postponing breaks"
 msgstr "Allow postponing breaks"
 
+msgid "Persist the internal state"
+msgstr "Persist the internal state"
+
 msgid "Short Breaks"
 msgstr "Short Breaks"
 

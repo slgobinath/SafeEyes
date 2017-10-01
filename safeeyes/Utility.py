@@ -42,6 +42,7 @@ BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.path.expanduser('~')
 CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
+SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
 STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
 SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
@@ -137,6 +138,24 @@ def load_json(json_path):
             pass
     return json_obj
 
+def write_json(json_path, json_obj):
+    """
+    Write the JSON object at the given path
+    """
+    try:
+        with open(json_path, 'w') as json_file:
+            json.dump(json_obj, json_file, indent=4, sort_keys=True)
+    except BaseException:
+        pass
+
+def delete(file_path):
+    """
+    Delete the given file or directory
+    """
+    try:
+        os.remove(file_path)
+    except OSError:
+        pass
 
 def check_plugin_dependencies(plugin_config):
     """
@@ -320,16 +339,10 @@ def __initialize_safeeyes():
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
 
     # Remove the ~/.config/safeeyes directory
-    try:
-        os.remove(os.path.join(CONFIG_DIRECTORY, 'safeeyes.json'))
-    except OSError:
-        pass
+    delete(os.path.join(CONFIG_DIRECTORY, 'safeeyes.json'))
 
     # Remove the startup file
-    try:
-        os.remove(os.path.join(HOME_DIRECTORY, os.path.join(startup_dir_path, 'safeeyes.desktop')))
-    except OSError:
-        pass
+    delete(os.path.join(HOME_DIRECTORY, os.path.join(startup_dir_path, 'safeeyes.desktop')))
 
     # Create the ~/.config/safeeyes/style directory
     mkdir(style_dir_path)
@@ -435,6 +448,16 @@ def read_config():
 
     return user_config
 
+def open_session():
+    """
+    Open the last session.
+    """
+    logging.info('Reading the session file')
+
+    session = load_json(SESSION_FILE_PATH)
+    if session is None:
+        session = {'plugin': {}}
+    return session
 
 def create_gtk_builder(glade_file):
     """

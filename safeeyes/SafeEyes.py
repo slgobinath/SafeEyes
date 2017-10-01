@@ -20,15 +20,12 @@
 SafeEyes connects all the individual components and provide the complete application.
 """
 
-import json
+import atexit
 import logging
-import os
-import sys
 from threading import Timer
 
 import dbus
 import gi
-import psutil
 from dbus.mainloop.glib import DBusGMainLoop
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
@@ -69,6 +66,10 @@ class SafeEyes(object):
         self.context['api']['enable_safeeyes'] = self.enable_safeeyes
         self.context['api']['disable_safeeyes'] = self.disable_safeeyes
         self.context['api']['on_quit'] = self.on_quit
+        if self.config['persist_state']:
+            self.context['session'] = Utility.open_session()
+        else:
+            self.context['session'] = {'plugin': {}}
 
         self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, Utility.STYLE_SHEET_PATH)
         self.break_screen.initialize(self.config)
@@ -78,11 +79,12 @@ class SafeEyes(object):
         self.safe_eyes_core.on_start_break += self.start_break
         self.safe_eyes_core.on_count_down += self.countdown
         self.safe_eyes_core.on_stop_break += self.stop_break
-        self.safe_eyes_core.on_update_next_break += self.plugins_manager.update_next_break
+        self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
         self.context['api']['take_break'] = self.safe_eyes_core.take_break
         self.plugins_manager.init(self.context, self.config)
-    
+        atexit.register(self.persist_session)
+
     def start(self):
         """
         Start Safe Eyes
@@ -183,8 +185,8 @@ class SafeEyes(object):
             self.safe_eyes_core.stop()
 
         # Write the configuration to file
-        with open(Utility.CONFIG_FILE_PATH, 'w') as config_file:
-            json.dump(config, config_file, indent=4, sort_keys=True)
+        Utility.write_json(Utility.CONFIG_FILE_PATH, config)
+        self.persist_session()
 
         logging.info("Initialize SafeEyesCore with modified settings")
 
@@ -232,15 +234,30 @@ class SafeEyes(object):
         Pass the countdown to plugins and break screen.
         """
         self.break_screen.show_count_down(countdown, seconds)
-        if not self.plugins_manager.countdown(countdown, seconds):
-            return False
+        self.plugins_manager.countdown(countdown, seconds)
         return True
+
+    def update_next_break(self, break_time):
+        """
+        Update the next break to plugins and save the session.
+        """
+        self.plugins_manager.update_next_break(break_time)
+        if self.config['persist_state']:
+            Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
 
     def stop_break(self):
         """
         Stop the current break.
         """
         self.break_screen.close()
-        if not self.plugins_manager.stop_break():
-            return False
+        self.plugins_manager.stop_break()
         return True
+
+    def persist_session(self):
+        """
+        Save the session object to the session file.
+        """
+        if self.config['persist_state']:
+            Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
+        else:
+            Utility.delete(Utility.SESSION_FILE_PATH)

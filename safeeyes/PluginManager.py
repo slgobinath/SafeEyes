@@ -144,7 +144,6 @@ class PluginManager(object):
         for plugin in self.__plugins_on_stop_break:
             if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
                 plugin['module'].on_stop_break()
-        return True
 
     def countdown(self, countdown, seconds):
         """
@@ -153,7 +152,6 @@ class PluginManager(object):
         for plugin in self.__plugins_on_countdown:
             if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
                 plugin['module'].on_countdown(countdown, seconds)
-        return True
 
     def update_next_break(self, break_time):
         """

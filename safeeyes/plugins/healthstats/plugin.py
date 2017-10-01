@@ -26,14 +26,26 @@ context = None
 no_of_skipped_breaks = 0
 no_of_breaks = 0
 no_of_cycles = -1
+session = None
 
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the plugin.
     """
     global context
+    global session
+    global no_of_skipped_breaks
+    global no_of_breaks
+    global no_of_cycles
     logging.debug('Initialize Health Stats plugin')
     context = ctx
+    session = context['session']['plugin'].get('healthstats', None)
+    if session is None:
+        session = {'no_of_skipped_breaks': 0, 'no_of_breaks': 0, 'no_of_cycles': -1}
+        context['session']['plugin']['healthstats'] = session
+    no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
+    no_of_breaks = session.get('no_of_breaks', 0)
+    no_of_cycles = session.get('no_of_cycles', -1)
 
 
 def on_stop_break():
@@ -43,6 +55,7 @@ def on_stop_break():
     global no_of_skipped_breaks
     if context['skipped']:
         no_of_skipped_breaks += 1
+        session['no_of_skipped_breaks'] = no_of_skipped_breaks
 
 def get_widget_title(break_obj):
     """
@@ -53,6 +66,8 @@ def get_widget_title(break_obj):
     no_of_breaks += 1
     if context['new_cycle']:
         no_of_cycles += 1
+    session['no_of_breaks'] = no_of_breaks
+    session['no_of_cycles'] = no_of_cycles
     return _('Health Statistics')
 
 def get_widget_content(break_obj):
