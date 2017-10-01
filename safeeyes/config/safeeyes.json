@@ -49,6 +49,7 @@
         {
             "id": "donotdisturb",
             "enabled": true,
+            "version": "0.0.1",
             "settings": {
                 "skip_break_windows": "",
                 "take_break_windows": "",
@@ -57,15 +58,18 @@
         },
         {
             "id": "notification",
-            "enabled": true
+            "enabled": true,
+            "version": "0.0.1"
         },
         {
             "id": "audiblealert",
-            "enabled": true
+            "enabled": true,
+            "version": "0.0.1"
         },
         {
             "id": "trayicon",
             "enabled": true,
+            "version": "0.0.1",
             "settings": {
                 "show_time_in_tray": false,
                 "disable_options": [
@@ -91,6 +95,7 @@
         {
             "id": "smartpause",
             "enabled": true,
+            "version": "0.0.1",
             "settings": {
                 "idle_time": 3
             }
@@ -98,6 +103,7 @@
         {
             "id": "screensaver",
             "enabled": true,
+            "version": "0.0.1",
             "settings": {
                 "command": "",
                 "min_seconds": 3
@@ -105,7 +111,8 @@
         },
         {
             "id": "healthstats",
-            "enabled": false
+            "enabled": false,
+            "version": "0.0.1"
         }
     ]
 }

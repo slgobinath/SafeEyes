@@ -224,37 +224,6 @@ def load_plugins_config(safeeyes_config):
         configs.append(config)
     return configs
 
-def merge_plugins_config(safeeyes_config, plugins_dir):
-    """
-    Add the settings related to plugins to the Safe Eyes configuration.
-    """
-    if not os.path.isdir(plugins_dir):
-        return
-    existing_plugins = []
-    # Create a list of existing plugins
-    for plugin in safeeyes_config['plugins']:
-        existing_plugins.append(plugin['id'])
-
-    for plugin_dir in os.listdir(plugins_dir):
-        if plugin_dir in existing_plugins:
-            # Already added to the Safe Eyes config
-            continue
-        plugin_config_path = os.path.join(plugins_dir, plugin_dir, 'config.json')
-        plugin_module_path = os.path.join(plugins_dir, plugin_dir, 'plugin.py')
-        if not os.path.isfile(plugin_config_path) or not os.path.isfile(plugin_module_path):
-            # Either the config.json or plugin.py is not available
-            continue
-        config = {}
-        config['id'] = plugin_dir   # Plugin directory name is the id
-        config['enabled'] = False   # By default plugins are disabled
-        plugin_config = load_json(plugin_config_path)
-        if plugin_config is None:
-            continue
-        if plugin_config['settings']:
-            config['settings'] = {}
-            for setting in plugin_config['settings']:
-                config['settings'][setting['id']] = setting['default']
-        safeeyes_config['plugins'].append(config)
 
 def desktop_environment():
     """
@@ -434,19 +403,107 @@ def read_config():
             # Update the user_config
             user_config = new_config
 
-    # Remove the deleted plugins
-    for plugin in user_config['plugins']:
-        if os.path.isdir(os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])) or os.path.isdir(os.path.join(USER_PLUGINS_DIR, plugin['id'])):
-            # Plugin still exists
-            continue
-        user_config['plugins'].remove(plugin)
-    # Add new plugins
-    merge_plugins_config(user_config, SYSTEM_PLUGINS_DIR)
-    merge_plugins_config(user_config, USER_PLUGINS_DIR)
+    __merge_plugins(user_config)
+
     with open(CONFIG_FILE_PATH, 'w') as config_file:
         json.dump(user_config, config_file, indent=4, sort_keys=True)
 
     return user_config
+
+def __open_plugin_config(plugins_dir, plugin_id):
+    """
+    Open the given plugin's configuration.
+    """
+    plugin_config_path = os.path.join(plugins_dir, plugin_id, 'config.json')
+    plugin_module_path = os.path.join(plugins_dir, plugin_id, 'plugin.py')
+    if not os.path.isfile(plugin_config_path) or not os.path.isfile(plugin_module_path):
+        # Either the config.json or plugin.py is not available
+        return None
+    return load_json(plugin_config_path)
+
+def __update_plugin_config(plugin, plugin_config, config):
+    """
+    Update the plugin configuration.
+    """
+    if plugin_config is None:
+        config['plugins'].remove(plugin)
+    else:
+        if LooseVersion(plugin['version']) < LooseVersion(plugin_config['meta']['version']):
+            # Update the configuration
+            plugin['version'] = plugin_config['meta']['version']
+            setting_ids = []
+            # Add the new settings
+            for setting in plugin_config['settings']:
+                setting_ids.append(setting['id'])
+                if plugin['settings'].get(setting['id'], None) is None:
+                    plugin['settings'][setting['id']] = setting['default']
+            # Remove the removed ids
+            keys_to_remove = []
+            for key in plugin['settings']:
+                if key not in setting_ids:
+                    keys_to_remove.append(key)
+            for key in keys_to_remove:
+                del plugin['settings'][key]
+
+def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
+    """
+    """
+    if plugin_config is None:
+        return
+    config = {}
+    config['id'] = plugin_id
+    config['enabled'] = False   # By default plugins are disabled
+    config['version'] = plugin_config['meta']['version']
+    if plugin_config['settings']:
+        config['settings'] = {}
+        for setting in plugin_config['settings']:
+            config['settings'][setting['id']] = setting['default']
+    safe_eyes_config['plugins'].append(config)
+
+
+def __merge_plugins(config):
+    """
+    Merge plugin configurations with Safe Eyes configuration.
+    """
+    system_plugins = None
+    user_plugins = None
+
+    # Load system plugins id
+    if os.path.isdir(SYSTEM_PLUGINS_DIR):
+        system_plugins = os.listdir(SYSTEM_PLUGINS_DIR)
+    else:
+        system_plugins = []
+
+    # Load user plugins id
+    if os.path.isdir(USER_PLUGINS_DIR):
+        user_plugins = os.listdir(USER_PLUGINS_DIR)
+    else:
+        user_plugins = []
+
+    # Create a list of existing plugins
+    for plugin in config['plugins']:
+        plugin_id = plugin['id']
+        if plugin_id in system_plugins:
+            plugin_config = __open_plugin_config(SYSTEM_PLUGINS_DIR, plugin_id)
+            __update_plugin_config(plugin, plugin_config, config)
+            system_plugins.remove(plugin_id)
+        elif plugin_id in user_plugins:
+            plugin_config = __open_plugin_config(USER_PLUGINS_DIR, plugin_id)
+            __update_plugin_config(plugin, plugin_config, config)
+            user_plugins.remove(plugin_id)
+        else:
+            config['plugins'].remove(plugin)
+
+    # Add all system plugins
+    for plugin_id in system_plugins:
+        plugin_config = __open_plugin_config(SYSTEM_PLUGINS_DIR, plugin_id)
+        __add_plugin_config(plugin_id, plugin_config, config)
+
+    # Add all user plugins
+    for plugin_id in user_plugins:
+        plugin_config = __open_plugin_config(USER_PLUGINS_DIR, plugin_id)
+        __add_plugin_config(plugin_id, plugin_config, config)
+
 
 def open_session():
     """
