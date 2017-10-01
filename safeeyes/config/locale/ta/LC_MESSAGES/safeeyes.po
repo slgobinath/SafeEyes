@@ -1,4 +1,4 @@
-# SAFE EYES ENGLISH TRANSLATION.
+# SAFE EYES TAMIL TRANSLATION.
 # Copyright (C) 2017 Gobinath
 # Gobinath slgobinath@gmail.com, 2017.
 #
@@ -150,6 +150,18 @@ msgstr "தயவுசெய்து '%s' முனைய கட்டளை�
 
 msgid "Please add the resource %s to % directory"
 msgstr "தயவுசெய்து %s வளத்தை %s கோப்புறையில் சேர்க்கவும்"
+
+msgid "New Break"
+msgstr "புதிய இடைவேளை"
+
+msgid "Remove"
+msgstr "அகற்று"
+
+msgid "Discard"
+msgstr "நிராகரி"
+
+msgid "Save"
+msgstr "சேமி"
 
 # plugin/audiblealert
 msgid "Audible Alert"

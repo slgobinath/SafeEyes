@@ -151,6 +151,18 @@ msgstr "Please install the command-line tool '%s'"
 msgid "Please add the resource %s to % directory"
 msgstr "Please add the resource %s to % directory"
 
+msgid "New Break"
+msgstr "New Break"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Discard"
+msgstr "Discard"
+
+msgid "Save"
+msgstr "Save"
+
 # plugin/audiblealert
 msgid "Audible Alert"
 msgstr "Audible Alert"

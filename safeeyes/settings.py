@@ -28,6 +28,7 @@ from gi.repository import Gtk, GdkPixbuf
 SETTINGS_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
 SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
 SETTINGS_DIALOG_BREAK_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_break.glade")
+SETTINGS_DIALOG_NEW_BREAK_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/new_break.glade")
 SETTINGS_BREAK_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_break.glade")
 SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_plugin.glade")
 SETTINGS_ITEM_INT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_int.glade")
@@ -52,9 +53,9 @@ class SettingsDialog(object):
         self.box_long_breaks = builder.get_object('box_long_breaks')
         box_plugins = builder.get_object('box_plugins')
         for short_break in config['short_breaks']:
-            self.__create_break_item(short_break, True, config)
+            self.__create_break_item(short_break, True)
         for long_break in config['long_breaks']:
-            self.__create_break_item(long_break, False, config)
+            self.__create_break_item(long_break, False)
         
         for plugin_config in Utility.load_plugins_config(config):
             box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
@@ -88,7 +89,7 @@ class SettingsDialog(object):
             self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
             self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
 
-    def __create_break_item(self, break_config, is_short, parent_config):
+    def __create_break_item(self, break_config, is_short):
         """
         Create an entry for break to be listed in the break tab.
         """
@@ -100,7 +101,7 @@ class SettingsDialog(object):
         lbl_name = builder.get_object('lbl_name')
         lbl_name.set_label(_(break_config['name']))
         btn_properties = builder.get_object('btn_properties')
-        btn_properties.connect('clicked', lambda button: self.__show_break_properties_dialog(break_config, is_short, parent_config, lambda: parent_box.remove(box), lambda cfg: lbl_name.set_label(_(cfg['name'])), lambda is_short, break_config: self.__create_break_item(break_config, is_short, parent_config)))
+        btn_properties.connect('clicked', lambda button: self.__show_break_properties_dialog(break_config, is_short, self.config, lambda: parent_box.remove(box), lambda cfg: lbl_name.set_label(_(cfg['name'])), lambda is_short, break_config: self.__create_break_item(break_config, is_short)))
         box.set_visible(True)
         parent_box.pack_start(box, False, False, 0)
         return box
@@ -173,6 +174,13 @@ class SettingsDialog(object):
         Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
         """
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
+
+    def add_break(self, button):
+        """
+        Event handler for add break button.
+        """
+        dialog = NewBreakDialog(self.config, lambda is_short, break_config: self.__create_break_item(break_config, is_short))
+        dialog.show()
 
     def on_window_delete(self, *args):
         """
@@ -377,7 +385,10 @@ class BreakSettingsDialog(object):
         """
         Remove the break
         """
-        self.parent_config.remove(self.break_config)
+        if self.is_short:
+            self.parent_config['short_breaks'].remove(self.break_config)
+        else:
+            self.parent_config['long_breaks'].remove(self.break_config)
         self.on_remove()
         self.window.destroy()
 
@@ -423,4 +434,56 @@ class BreakSettingsDialog(object):
         """
         self.window.show_all()
 
+class NewBreakDialog(object):
+    """
+    Builds a new break dialog.
+    """
+    def __init__(self, parent_config, on_add):
+        self.parent_config = parent_config
+        self.on_add = on_add
+
+        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
+        builder.connect_signals(self)
+        self.window = builder.get_object('dialog_new_break')
+        self.txt_break = builder.get_object('txt_break')
+        self.cmb_type = builder.get_object('cmb_type')
+        list_types = builder.get_object('lst_break_types')
+
+        list_types[0][0] = _(list_types[0][0])
+        list_types[1][0] = _(list_types[1][0])
+
+        # Set the values
+        self.window.set_title(_('New Break'))
+
+    def discard(self, button):
+        """
+        Close the dialog.
+        """
+        self.window.destroy()
+
+    def save(self, button):
+        """
+        Event handler for Properties dialog close action.
+        """
+        break_config = {'name': self.txt_break.get_text().strip()}
+
+        if self.cmb_type.get_active() == 0:
+            self.parent_config['short_breaks'].append(break_config)
+            self.on_add(True, break_config)
+        else:
+            self.parent_config['long_breaks'].append(break_config)
+            self.on_add(False, break_config)
+        self.window.destroy()
+    
+    def on_window_delete(self, *args):
+        """
+        Event handler for dialog close action.
+        """
+        self.window.destroy()
+
+    def show(self):
+        """
+        Show the Properties dialog.
+        """
+        self.window.show_all()
 

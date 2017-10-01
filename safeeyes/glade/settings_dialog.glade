@@ -647,6 +647,7 @@
                     <property name="receives_default">True</property>
                     <property name="halign">end</property>
                     <property name="image">img_add</property>
+                    <signal name="clicked" handler="add_break" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">True</property>

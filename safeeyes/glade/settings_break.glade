@@ -455,11 +455,10 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="btn_remove">
-                <property name="label">gtk-remove</property>
+                <property name="label">Remove</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="remove_break" swapped="no"/>
               </object>
               <packing>
