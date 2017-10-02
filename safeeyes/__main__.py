@@ -75,7 +75,7 @@ def main():
     logging.info("Starting Safe Eyes")
 
     if not running():
-        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'])
+        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
         system_locale.install()
         # locale.bindtextdomain is required for Glade files
         locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
