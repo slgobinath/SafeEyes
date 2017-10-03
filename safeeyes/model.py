@@ -117,25 +117,24 @@ class Config(object):
 
         if self.__user_config is None:
             Utility.initialize_safeeyes()
-            Utility.merge_plugins(self.__system_config)
-            self.save()
             self.__user_config = self.__system_config
-
-        system_config_version = self.__system_config['meta']['config_version']
-        meta_obj = self.__user_config.get('meta', None)
-        if meta_obj is None:
-            # Corrupted user config
-            Utility.merge_plugins(self.__system_config)
             self.save()
-            self.__user_config = self.__system_config
         else:
-            user_config_version = str(meta_obj.get('config_version', '0.0.0'))
-            if LooseVersion(user_config_version) != LooseVersion(system_config_version):
-                # Update the user config
-                self.__merge_dictionary(self.__user_config, self.__system_config)
-                Utility.merge_plugins(self.__system_config)
-                self.save()
+            system_config_version = self.__system_config['meta']['config_version']
+            meta_obj = self.__user_config.get('meta', None)
+            if meta_obj is None:
+                # Corrupted user config
                 self.__user_config = self.__system_config
+            else:
+                user_config_version = str(meta_obj.get('config_version', '0.0.0'))
+                if LooseVersion(user_config_version) != LooseVersion(system_config_version):
+                    # Update the user config
+                    self.__merge_dictionary(self.__user_config, self.__system_config)
+                    self.__user_config = self.__system_config
+
+        Utility.merge_plugins(self.__user_config)
+        self.save()
+
 
     def __merge_dictionary(self, old_dict, new_dict):
         """
@@ -159,7 +158,7 @@ class Config(object):
         """
         Save the configuration to file.
         """
-        Utility.write_json(Utility.CONFIG_FILE_PATH, self.__system_config)
+        Utility.write_json(Utility.CONFIG_FILE_PATH, self.__user_config)
 
     def get(self, key, default_value=None):
         """
