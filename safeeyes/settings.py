@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import math
 import os
 
 import gi
@@ -64,8 +65,8 @@ class SettingsDialog(object):
 
         self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
         self.spin_long_break_duration = builder.get_object('spin_long_break_duration')
-        self.spin_interval_between_two_breaks = builder.get_object('spin_interval_between_two_breaks')
-        self.spin_short_between_long = builder.get_object('spin_short_between_long')
+        self.spin_short_break_interval = builder.get_object('spin_short_break_interval')
+        self.spin_long_break_interval = builder.get_object('spin_long_break_interval')
         self.spin_time_to_prepare = builder.get_object('spin_time_to_prepare')
         self.spin_postpone_duration = builder.get_object('spin_postpone_duration')
         self.spin_disable_keyboard_shortcut = builder.get_object('spin_disable_keyboard_shortcut')
@@ -76,8 +77,8 @@ class SettingsDialog(object):
         # Set the current values of input fields
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
-        self.spin_interval_between_two_breaks.set_value(config.get('break_interval'))
-        self.spin_short_between_long.set_value(config.get('no_of_short_breaks_per_long_break'))
+        self.spin_short_break_interval.set_value(config.get('break_interval'))
+        self.spin_long_break_interval.set_value(config.get('no_of_short_breaks_per_long_break') * config.get('break_interval'))
         self.spin_time_to_prepare.set_value(config.get('pre_break_warning_time'))
         self.spin_postpone_duration.set_value(config.get('postpone_duration'))
         self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
@@ -190,6 +191,13 @@ class SettingsDialog(object):
         """
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
 
+    def on_spin_short_break_interval_change(self, spin_button, *value):
+        """
+        Event handler for value change of short break interval.
+        """
+        short_break_interval = self.spin_short_break_interval.get_value_as_int()
+        self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 5)
+
     def add_break(self, button):
         """
         Event handler for add break button.
@@ -203,8 +211,8 @@ class SettingsDialog(object):
         """
         self.config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
         self.config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
-        self.config.set('break_interval', self.spin_interval_between_two_breaks.get_value_as_int())
-        self.config.set('no_of_short_breaks_per_long_break', self.spin_short_between_long.get_value_as_int())
+        self.config.set('break_interval', self.spin_short_break_interval.get_value_as_int())
+        self.config.set('no_of_short_breaks_per_long_break', math.floor(self.spin_long_break_interval.get_value_as_int() / self.spin_short_break_interval.get_value_as_int()))
         self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
         self.config.set('postpone_duration', self.spin_postpone_duration.get_value_as_int())
         self.config.set('shortcut_disable_time', self.spin_disable_keyboard_shortcut.get_value_as_int())

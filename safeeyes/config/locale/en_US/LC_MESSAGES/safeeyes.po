@@ -73,9 +73,6 @@ msgstr "Long break duration (in seconds)"
 msgid "Interval between two breaks (in minutes)"
 msgstr "Interval between two breaks (in minutes)"
 
-msgid "Number of short breaks between two long breaks"
-msgstr "Number of short breaks between two long breaks"
-
 msgid "Time to prepare for a break (in seconds)"
 msgstr "Time to prepare for a break (in seconds)"
 
