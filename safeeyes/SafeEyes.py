@@ -30,7 +30,8 @@ from dbus.mainloop.glib import DBusGMainLoop
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
-from safeeyes.model import State, Config
+from safeeyes.model import State
+from safeeyes.model import Config
 from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.settings import SettingsDialog
@@ -39,6 +40,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 SAFE_EYES_VERSION = "2.0.0"
+
 
 class SafeEyes(object):
     """
@@ -104,7 +106,6 @@ class SafeEyes(object):
             settings_dialog = SettingsDialog(self.config, self.save_settings)
             settings_dialog.show()
 
-
     def show_about(self):
         """
         Listen to tray icon About action and send the signal to About dialog.
@@ -112,7 +113,6 @@ class SafeEyes(object):
         logging.info("Show About dialog")
         about_dialog = AboutDialog(SAFE_EYES_VERSION)
         about_dialog.show()
-
 
     def on_quit(self):
         """
@@ -124,7 +124,6 @@ class SafeEyes(object):
         self.safe_eyes_core.stop()
         self.plugins_manager.exit()
         Gtk.main_quit()
-
 
     def handle_suspend_callback(self, sleeping):
         """
@@ -144,7 +143,6 @@ class SafeEyes(object):
                 self.plugins_manager.start()
                 self.safe_eyes_core.start()
 
-
     def handle_system_suspend(self):
         """
         Setup system suspend listener.
@@ -152,7 +150,6 @@ class SafeEyes(object):
         DBusGMainLoop(set_as_default=True)
         bus = dbus.SystemBus()
         bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
-
 
     def on_skipped(self):
         """
@@ -162,7 +159,6 @@ class SafeEyes(object):
         self.safe_eyes_core.skip()
         self.plugins_manager.stop_break()
 
-
     def on_postponed(self):
         """
         Listen to break screen Postpone action and send the signal to core.
@@ -170,7 +166,6 @@ class SafeEyes(object):
         logging.info("User postponed the break")
         self.safe_eyes_core.postpone()
         self.plugins_manager.stop_break()
-
 
     def save_settings(self, config):
         """
@@ -200,7 +195,6 @@ class SafeEyes(object):
             Timer(1.0, self.safe_eyes_core.start).start()
             self.plugins_manager.start()
 
-
     def enable_safeeyes(self):
         """
         Listen to tray icon enable action and send the signal to core.
@@ -208,7 +202,6 @@ class SafeEyes(object):
         self.active = True
         self.safe_eyes_core.start()
         self.plugins_manager.start()
-
 
     def disable_safeeyes(self):
         """

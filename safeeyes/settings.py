@@ -22,7 +22,8 @@ import gi
 from safeeyes import Utility
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GdkPixbuf
+from gi.repository import Gtk
+from gi.repository import GdkPixbuf
 
 
 SETTINGS_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
@@ -34,6 +35,7 @@ SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_plu
 SETTINGS_ITEM_INT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_int.glade")
 SETTINGS_ITEM_TEXT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_text.glade")
 SETTINGS_ITEM_BOOL_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_bool.glade")
+
 
 class SettingsDialog(object):
     """
@@ -56,10 +58,10 @@ class SettingsDialog(object):
             self.__create_break_item(short_break, True)
         for long_break in config.get('long_breaks'):
             self.__create_break_item(long_break, False)
-        
+
         for plugin_config in Utility.load_plugins_config(config):
             box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
-        
+
         self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
         self.spin_long_break_duration = builder.get_object('spin_long_break_duration')
         self.spin_interval_between_two_breaks = builder.get_object('spin_interval_between_two_breaks')
@@ -103,7 +105,18 @@ class SettingsDialog(object):
         lbl_name = builder.get_object('lbl_name')
         lbl_name.set_label(_(break_config['name']))
         btn_properties = builder.get_object('btn_properties')
-        btn_properties.connect('clicked', lambda button: self.__show_break_properties_dialog(break_config, is_short, self.config, lambda: parent_box.remove(box), lambda cfg: lbl_name.set_label(_(cfg['name'])), lambda is_short, break_config: self.__create_break_item(break_config, is_short)))
+        btn_properties.connect(
+            'clicked',
+            lambda button: self.__show_break_properties_dialog(
+                break_config,
+                is_short,
+                self.config,
+                lambda: parent_box.remove(box),
+                lambda cfg: lbl_name.set_label(_(cfg['name'])),
+                lambda is_short,
+                break_config: self.__create_break_item(break_config, is_short)
+            )
+        )
         box.set_visible(True)
         parent_box.pack_start(box, False, False, 0)
         return box
@@ -226,7 +239,7 @@ class PluginSettingsDialog(object):
                 box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
             elif setting['type'].upper() == 'BOOL':
                 box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
-    
+
     def __load_int_item(self, name, key, settings):
         """
         Load the UI control for int property.
@@ -346,13 +359,13 @@ class BreakSettingsDialog(object):
             self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
             self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
             self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
-    
+
     def on_switch_override_duration_activate(self, switch_button, state):
         """
         switch_override_duration state change event handler.
         """
         self.spin_duration.set_sensitive(state)
-    
+
     def on_switch_override_plugins_activate(self, switch_button, state):
         """
         switch_override_plugins state change event handler.
@@ -365,7 +378,7 @@ class BreakSettingsDialog(object):
         Show a file chooser dialog and let the user to select an image.
         """
         dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-             Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+                                       Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")
@@ -437,6 +450,7 @@ class BreakSettingsDialog(object):
         """
         self.window.show_all()
 
+
 class NewBreakDialog(object):
     """
     Builds a new break dialog.
@@ -477,7 +491,7 @@ class NewBreakDialog(object):
             self.parent_config.get('long_breaks').append(break_config)
             self.on_add(False, break_config)
         self.window.destroy()
-    
+
     def on_window_delete(self, *args):
         """
         Event handler for dialog close action.
@@ -489,4 +503,3 @@ class NewBreakDialog(object):
         Show the Properties dialog.
         """
         self.window.show_all()
-

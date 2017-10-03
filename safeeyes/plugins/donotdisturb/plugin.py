@@ -26,7 +26,7 @@ import re
 import subprocess
 
 import gi
-from gi.repository import Gdk, GdkX11
+from gi.repository import Gdk
 
 gi.require_version('Gdk', '3.0')
 
@@ -34,6 +34,7 @@ context = None
 skip_break_window_classes = []
 take_break_window_classes = []
 unfullscreen_allowed = True
+
 
 def is_active_window_skipped():
     """

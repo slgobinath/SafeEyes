@@ -64,12 +64,14 @@ class Break(object):
         else:
             return is_plugin_enabled
 
+
 class BreakType(Enum):
     """
     Type of Safe Eyes breaks.
     """
     SHORT_BREAK = 1
     LONG_BREAK = 2
+
 
 class State(Enum):
     """
@@ -81,6 +83,7 @@ class State(Enum):
     BREAK = 3,
     STOPPED = 4,
     QUIT = 5
+
 
 class EventHook(object):
     """
@@ -105,6 +108,7 @@ class EventHook(object):
             if not handler(*args, **keywargs):
                 return False
         return True
+
 
 class Config(object):
     """
@@ -135,7 +139,6 @@ class Config(object):
         Utility.merge_plugins(self.__user_config)
         self.save()
 
-
     def __merge_dictionary(self, old_dict, new_dict):
         """
         Merge the dictionaries.
@@ -152,7 +155,6 @@ class Config(object):
                         self.__merge_dictionary(old_value, new_value)
                     else:
                         new_dict[key] = old_value
-
 
     def save(self):
         """

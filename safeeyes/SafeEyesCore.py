@@ -26,7 +26,10 @@ import threading
 import time
 
 from safeeyes import Utility
-from safeeyes.model import Break, BreakType, EventHook, State
+from safeeyes.model import Break
+from safeeyes.model import BreakType
+from safeeyes.model import EventHook
+from safeeyes.model import State
 
 
 class SafeEyesCore(object):
@@ -153,12 +156,11 @@ class SafeEyesCore(object):
             self.running = False
             self.waiting_condition.notify_all()
             self.waiting_condition.release()
-            time.sleep(1)	# Wait for 1 sec to ensure the sceduler is dead
+            time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
             self.running = True
 
         self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_start_break)
-
 
     def __scheduler_job(self):
         """

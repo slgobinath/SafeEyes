@@ -26,6 +26,7 @@ from safeeyes import Utility
 
 ABOUT_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
+
 class AboutDialog(object):
     """
     AboutDialog reads the about_dialog.glade and build the user interface using that file.
