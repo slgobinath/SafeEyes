@@ -30,7 +30,7 @@ from dbus.mainloop.glib import DBusGMainLoop
 from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
-from safeeyes.model import State
+from safeeyes.model import State, Config
 from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.settings import SettingsDialog
@@ -54,7 +54,7 @@ class SafeEyes(object):
         self.plugins_manager = None
         self.settings_dialog_active = False
 
-        self.config = Utility.read_config()
+        self.config = Config()
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
@@ -66,7 +66,7 @@ class SafeEyes(object):
         self.context['api']['enable_safeeyes'] = self.enable_safeeyes
         self.context['api']['disable_safeeyes'] = self.disable_safeeyes
         self.context['api']['on_quit'] = self.on_quit
-        if self.config['persist_state']:
+        if self.config.get('persist_state'):
             self.context['session'] = Utility.open_session()
         else:
             self.context['session'] = {'plugin': {}}
@@ -185,7 +185,7 @@ class SafeEyes(object):
             self.safe_eyes_core.stop()
 
         # Write the configuration to file
-        Utility.write_json(Utility.CONFIG_FILE_PATH, config)
+        config.save()
         self.persist_session()
 
         logging.info("Initialize SafeEyesCore with modified settings")
@@ -242,7 +242,7 @@ class SafeEyes(object):
         Update the next break to plugins and save the session.
         """
         self.plugins_manager.update_next_break(break_time)
-        if self.config['persist_state']:
+        if self.config.get('persist_state'):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
 
     def stop_break(self):
@@ -257,7 +257,7 @@ class SafeEyes(object):
         """
         Save the session object to the session file.
         """
-        if self.config['persist_state']:
+        if self.config.get('persist_state'):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
         else:
             Utility.delete(Utility.SESSION_FILE_PATH)

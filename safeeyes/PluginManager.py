@@ -80,7 +80,7 @@ class PluginManager(object):
         Initialize all the plugins with init(context, safeeyes_config, plugin_config) function.
         """
         # Load the plugins
-        for plugin in config['plugins']:
+        for plugin in config.get('plugins'):
             try:
                 self.__load_plugin(plugin, context)
             except BaseException:

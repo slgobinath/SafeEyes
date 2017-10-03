@@ -71,14 +71,14 @@ class SafeEyesCore(object):
         """
         logging.info("Initialize the core")
         self.breaks = []
-        self.pre_break_warning_time = config['pre_break_warning_time']
-        self.long_break_duration = config['long_break_duration']
-        self.short_break_duration = config['short_break_duration']
-        self.break_interval = config['break_interval']
-        self.postpone_duration = config['postpone_duration']
+        self.pre_break_warning_time = config.get('pre_break_warning_time')
+        self.long_break_duration = config.get('long_break_duration')
+        self.short_break_duration = config.get('short_break_duration')
+        self.break_interval = config.get('break_interval')
+        self.postpone_duration = config.get('postpone_duration')
 
-        self.__init_breaks(BreakType.SHORT_BREAK, config['short_breaks'], config['no_of_short_breaks_per_long_break'])
-        self.__init_breaks(BreakType.LONG_BREAK, config['long_breaks'], config['no_of_short_breaks_per_long_break'])
+        self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
+        self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
         self.break_count = len(self.breaks)
         self.next_break_index = (self.next_break_index) % self.break_count
         self.context['session']['next_break_index'] = self.next_break_index

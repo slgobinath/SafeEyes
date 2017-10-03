@@ -52,9 +52,9 @@ class SettingsDialog(object):
         self.box_short_breaks = builder.get_object('box_short_breaks')
         self.box_long_breaks = builder.get_object('box_long_breaks')
         box_plugins = builder.get_object('box_plugins')
-        for short_break in config['short_breaks']:
+        for short_break in config.get('short_breaks'):
             self.__create_break_item(short_break, True)
-        for long_break in config['long_breaks']:
+        for long_break in config.get('long_breaks'):
             self.__create_break_item(long_break, False)
         
         for plugin_config in Utility.load_plugins_config(config):
@@ -72,16 +72,16 @@ class SettingsDialog(object):
         self.switch_persist = builder.get_object('switch_persist')
 
         # Set the current values of input fields
-        self.spin_short_break_duration.set_value(config['short_break_duration'])
-        self.spin_long_break_duration.set_value(config['long_break_duration'])
-        self.spin_interval_between_two_breaks.set_value(config['break_interval'])
-        self.spin_short_between_long.set_value(config['no_of_short_breaks_per_long_break'])
-        self.spin_time_to_prepare.set_value(config['pre_break_warning_time'])
-        self.spin_postpone_duration.set_value(config['postpone_duration'])
-        self.spin_disable_keyboard_shortcut.set_value(config['shortcut_disable_time'])
-        self.switch_strict_break.set_active(config['strict_break'])
-        self.switch_postpone.set_active(config['allow_postpone'] and not config['strict_break'])
-        self.switch_persist.set_active(config['persist_state'])
+        self.spin_short_break_duration.set_value(config.get('short_break_duration'))
+        self.spin_long_break_duration.set_value(config.get('long_break_duration'))
+        self.spin_interval_between_two_breaks.set_value(config.get('break_interval'))
+        self.spin_short_between_long.set_value(config.get('no_of_short_breaks_per_long_break'))
+        self.spin_time_to_prepare.set_value(config.get('pre_break_warning_time'))
+        self.spin_postpone_duration.set_value(config.get('postpone_duration'))
+        self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
+        self.switch_strict_break.set_active(config.get('strict_break'))
+        self.switch_postpone.set_active(config.get('allow_postpone') and not config.get('strict_break'))
+        self.switch_persist.set_active(config.get('persist_state'))
 
         # Update relative states
         # GtkSwitch state-set signal is available only from 3.14
@@ -188,17 +188,17 @@ class SettingsDialog(object):
         """
         Event handler for Settings dialog close action.
         """
-        self.config['short_break_duration'] = self.spin_short_break_duration.get_value_as_int()
-        self.config['long_break_duration'] = self.spin_long_break_duration.get_value_as_int()
-        self.config['break_interval'] = self.spin_interval_between_two_breaks.get_value_as_int()
-        self.config['no_of_short_breaks_per_long_break'] = self.spin_short_between_long.get_value_as_int()
-        self.config['pre_break_warning_time'] = self.spin_time_to_prepare.get_value_as_int()
-        self.config['postpone_duration'] = self.spin_postpone_duration.get_value_as_int()
-        self.config['shortcut_disable_time'] = self.spin_disable_keyboard_shortcut.get_value_as_int()
-        self.config['strict_break'] = self.switch_strict_break.get_active()
-        self.config['allow_postpone'] = self.switch_postpone.get_active()
-        self.config['persist_state'] = self.switch_persist.get_active()
-        for plugin in self.config['plugins']:
+        self.config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
+        self.config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
+        self.config.set('break_interval', self.spin_interval_between_two_breaks.get_value_as_int())
+        self.config.set('no_of_short_breaks_per_long_break', self.spin_short_between_long.get_value_as_int())
+        self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
+        self.config.set('postpone_duration', self.spin_postpone_duration.get_value_as_int())
+        self.config.set('shortcut_disable_time', self.spin_disable_keyboard_shortcut.get_value_as_int())
+        self.config.set('strict_break', self.switch_strict_break.get_active())
+        self.config.set('allow_postpone', self.switch_postpone.get_active())
+        self.config.set('persist_state', self.switch_persist.get_active())
+        for plugin in self.config.get('plugins'):
             if plugin['id'] in self.plugin_switches:
                 plugin['enabled'] = self.plugin_switches[plugin['id']].get_active()
 
@@ -219,7 +219,7 @@ class PluginSettingsDialog(object):
         self.window = builder.get_object('dialog_settings_plugin')
         box_settings = builder.get_object('box_settings')
         self.window.set_title(_('Plugin Settings'))
-        for setting in config['settings']:
+        for setting in config.get('settings'):
             if setting['type'].upper() == 'INT':
                 box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
             elif setting['type'].upper() == 'TEXT':
@@ -323,9 +323,9 @@ class BreakSettingsDialog(object):
             self.spin_duration.set_value(break_config['duration'])
         else:
             if is_short:
-                self.spin_duration.set_value(parent_config['short_break_duration'])
+                self.spin_duration.set_value(parent_config.get('short_break_duration'))
             else:
-                self.spin_duration.set_value(parent_config['long_break_duration'])
+                self.spin_duration.set_value(parent_config.get('long_break_duration'))
         row = 0
         col = 0
         for plugin_id in plugin_map.keys():
@@ -417,14 +417,14 @@ class BreakSettingsDialog(object):
 
         if self.is_short and self.cmb_type.get_active() == 1:
             # Changed from short to long
-            self.parent_config['short_breaks'].remove(self.break_config)
-            self.parent_config['long_breaks'].append(self.break_config)
+            self.parent_config.get('short_breaks').remove(self.break_config)
+            self.parent_config.get('long_breaks').append(self.break_config)
             self.on_remove()
             self.on_add(not self.is_short, self.break_config)
         elif not self.is_short and self.cmb_type.get_active() == 0:
             # Changed from long to short
-            self.parent_config['long_breaks'].remove(self.break_config)
-            self.parent_config['short_breaks'].append(self.break_config)
+            self.parent_config.get('long_breaks').remove(self.break_config)
+            self.parent_config.get('short_breaks').append(self.break_config)
             self.on_remove()
             self.on_add(not self.is_short, self.break_config)
         else:
@@ -471,10 +471,10 @@ class NewBreakDialog(object):
         break_config = {'name': self.txt_break.get_text().strip()}
 
         if self.cmb_type.get_active() == 0:
-            self.parent_config['short_breaks'].append(break_config)
+            self.parent_config.get('short_breaks').append(break_config)
             self.on_add(True, break_config)
         else:
-            self.parent_config['long_breaks'].append(break_config)
+            self.parent_config.get('long_breaks').append(break_config)
             self.on_add(False, break_config)
         self.window.destroy()
     

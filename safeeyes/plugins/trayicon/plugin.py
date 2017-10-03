@@ -355,9 +355,9 @@ def on_pre_break(break_obj):
     """
     Disable the menu if strict_break is enabled
     """
-    if safeeyes_config['strict_break']:
+    if safeeyes_config.get('strict_break'):
         tray_icon.lock_menu()
-        threading.Timer(safeeyes_config['pre_break_warning_time'], __unlock_menu).start()
+        threading.Timer(safeeyes_config.get('pre_break_warning_time'), __unlock_menu).start()
 
 
 def __unlock_menu():

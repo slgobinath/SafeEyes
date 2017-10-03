@@ -190,7 +190,7 @@ def load_plugins_config(safeeyes_config):
     Load all the plugins from the given directory.
     """
     configs = []
-    for plugin in safeeyes_config['plugins']:
+    for plugin in safeeyes_config.get('plugins'):
         plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
         if not os.path.isdir(plugin_path):
             # User plugin
@@ -298,7 +298,7 @@ def merge_configs(new_config, old_config):
     return new_config
 
 
-def __initialize_safeeyes():
+def initialize_safeeyes():
     """
     Create the config file and style sheet in ~/.config/safeeyes directory.
     """
@@ -354,62 +354,6 @@ def intialize_logging():
     root_logger.setLevel(logging.DEBUG)
     root_logger.addHandler(handler)
 
-
-def read_config():
-    """
-    Read the configuration from the config directory.
-    If does not exist or outdated by major version, copy the system config and
-    startup script to user directory.
-    If the user config is outdated by minor version, update the config by the new values.
-    """
-    logging.info('Reading the configuration file')
-
-    if not os.path.isfile(CONFIG_FILE_PATH):
-        logging.info('Safe Eyes configuration file not found')
-        __initialize_safeeyes()
-
-    # Read the configurations
-    with open(CONFIG_FILE_PATH) as config_file:
-        user_config = json.load(config_file)
-
-    with open(SYSTEM_CONFIG_FILE_PATH) as config_file:
-        system_config = json.load(config_file)
-
-    user_config_version = str(user_config['meta']['config_version'])
-    system_config_version = str(system_config['meta']['config_version'])
-
-    if LooseVersion(user_config_version) < LooseVersion(system_config_version):
-        # Outdated user config
-        logging.info('Update the old config version %s with new config version %s', user_config_version, system_config_version)
-        user_config_major_version = user_config_version.split('.')[0]
-        system_config_major_version = system_config_version.split('.')[0]
-
-        if LooseVersion(user_config_major_version) < LooseVersion(system_config_major_version):
-            # Major version change
-            __initialize_safeeyes()
-            # Update the user_config
-            user_config = system_config
-        else:
-            # Minor version change
-            new_config = system_config.copy()
-            new_config.update(user_config)
-            # Update the version
-            new_config['meta']['config_version'] = system_config_version
-
-            # Write the configuration to file
-            with open(CONFIG_FILE_PATH, 'w') as config_file:
-                json.dump(new_config, config_file, indent=4, sort_keys=True)
-
-            # Update the user_config
-            user_config = new_config
-
-    __merge_plugins(user_config)
-
-    with open(CONFIG_FILE_PATH, 'w') as config_file:
-        json.dump(user_config, config_file, indent=4, sort_keys=True)
-
-    return user_config
-
 def __open_plugin_config(plugins_dir, plugin_id):
     """
     Open the given plugin's configuration.
@@ -461,7 +405,7 @@ def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
     safe_eyes_config['plugins'].append(config)
 
 
-def __merge_plugins(config):
+def merge_plugins(config):
     """
     Merge plugin configurations with Safe Eyes configuration.
     """

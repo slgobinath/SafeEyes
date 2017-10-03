@@ -20,7 +20,11 @@
 This module contains the entity classes used by Safe Eyes and its plugins.
 """
 
+from distutils.version import LooseVersion
 from enum import Enum
+
+from safeeyes import Utility
+
 
 class Break(object):
     """
@@ -101,3 +105,74 @@ class EventHook(object):
             if not handler(*args, **keywargs):
                 return False
         return True
+
+class Config(object):
+    """
+    The configuration of Safe Eyes.
+    """
+    def __init__(self):
+        # Read the config files
+        self.__user_config = Utility.load_json(Utility.CONFIG_FILE_PATH)
+        self.__system_config = Utility.load_json(Utility.SYSTEM_CONFIG_FILE_PATH)
+
+        if self.__user_config is None:
+            Utility.initialize_safeeyes()
+            Utility.merge_plugins(self.__system_config)
+            self.save()
+            self.__user_config = self.__system_config
+
+        system_config_version = self.__system_config['meta']['config_version']
+        meta_obj = self.__user_config.get('meta', None)
+        if meta_obj is None:
+            # Corrupted user config
+            Utility.merge_plugins(self.__system_config)
+            self.save()
+            self.__user_config = self.__system_config
+        else:
+            user_config_version = str(meta_obj.get('config_version', '0.0.0'))
+            if LooseVersion(user_config_version) != LooseVersion(system_config_version):
+                # Update the user config
+                self.__merge_dictionary(self.__user_config, self.__system_config)
+                Utility.merge_plugins(self.__system_config)
+                self.save()
+                self.__user_config = self.__system_config
+
+    def __merge_dictionary(self, old_dict, new_dict):
+        """
+        Merge the dictionaries.
+        """
+        for key in new_dict:
+            if key == "meta":
+                continue
+            if key in old_dict:
+                new_value = new_dict[key]
+                old_value = old_dict[key]
+                if type(new_value) is type(old_value):
+                    # Both properties have same type
+                    if isinstance(new_value, dict):
+                        self.__merge_dictionary(old_value, new_value)
+                    else:
+                        new_dict[key] = old_value
+
+
+    def save(self):
+        """
+        Save the configuration to file.
+        """
+        Utility.write_json(Utility.CONFIG_FILE_PATH, self.__system_config)
+
+    def get(self, key, default_value=None):
+        """
+        Get the value.
+        """
+        value = self.__user_config.get(key, default_value)
+        if value is None:
+            value = self.__system_config.get(key, None)
+        return value
+
+    def set(self, key, value):
+        """
+        Set the value.
+        """
+        self.__user_config[key] = value
+        self.__system_config[key] = value
