@@ -151,8 +151,8 @@ msgstr "தயவுசெய்து '%s' Python தொகுப்பை ந�
 msgid "Please install the command-line tool '%s'"
 msgstr "தயவுசெய்து '%s' முனைய கட்டளையை நிறுவுக"
 
-msgid "Please add the resource %s to % directory"
-msgstr "தயவுசெய்து %s வளத்தை %s கோப்புறையில் சேர்க்கவும்"
+msgid "Please add the resource %(resource)s to %(config_resource)s directory"
+msgstr "தயவுசெய்து %(resource)s வளத்தை %(config_resource)s கோப்புறையில் சேர்க்கவும்"
 
 msgid "New Break"
 msgstr "புதிய இடைவேளை"

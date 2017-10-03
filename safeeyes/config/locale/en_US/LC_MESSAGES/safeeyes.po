@@ -151,8 +151,8 @@ msgstr "Please install the Python module '%s'"
 msgid "Please install the command-line tool '%s'"
 msgstr "Please install the command-line tool '%s'"
 
-msgid "Please add the resource %s to % directory"
-msgstr "Please add the resource %s to % directory"
+msgid "Please add the resource %(resource)s to %(config_resource)s directory"
+msgstr "Please add the resource %(resource)s to %(config_resource)s directory"
 
 msgid "New Break"
 msgstr "New Break"

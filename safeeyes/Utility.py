@@ -186,7 +186,7 @@ def check_plugin_dependencies(plugin_config):
     # Check the resources
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
-            return _('Please add the resource %(resource)s to %(CONFIG_RESOURCE)s directory') % (resource, CONFIG_RESOURCE)
+            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}
 
     return None
 
