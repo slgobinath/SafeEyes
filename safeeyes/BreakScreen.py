@@ -24,12 +24,16 @@ import time
 
 import gi
 from safeeyes import Utility
-from Xlib.display import Display, X
+from Xlib.display import Display
+from Xlib.display import X
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gdk, GLib, Gtk
+from gi.repository import Gdk
+from gi.repository import GLib
+from gi.repository import Gtk
 
 BREAK_SCREEN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/break_screen.glade")
+
 
 class BreakScreen(object):
     """

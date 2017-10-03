@@ -38,7 +38,6 @@ gettext.install('safeeyes', Utility.LOCALE_PATH)
 SAFE_EYES_VERSION = "2.0.0"
 
 
-
 def running():
     """
     Check if SafeEyes is already running.
@@ -64,6 +63,7 @@ def running():
         except (IndexError, psutil.NoSuchProcess):
             pass
     return False
+
 
 def main():
     """

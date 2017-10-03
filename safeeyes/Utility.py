@@ -34,7 +34,8 @@ from distutils.version import LooseVersion
 import babel.dates
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk
+from gi.repository import GLib
 
 gi.require_version('Gdk', '3.0')
 
@@ -42,6 +43,7 @@ BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.path.expanduser('~')
 CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
+CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
 STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
@@ -52,6 +54,7 @@ USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
 
+
 def get_resource_path(resource_name):
     """
     Return the user-defined resource if a system resource is overridden by the user.
@@ -59,7 +62,7 @@ def get_resource_path(resource_name):
     """
     if resource_name is None:
         return None
-    resource_location = os.path.join(CONFIG_DIRECTORY, 'resource', resource_name)
+    resource_location = os.path.join(CONFIG_RESOURCE, resource_name)
     if not os.path.isfile(resource_location):
         resource_location = os.path.join(BIN_DIRECTORY, 'resource', resource_name)
         if not os.path.isfile(resource_location):
@@ -138,6 +141,7 @@ def load_json(json_path):
             pass
     return json_obj
 
+
 def write_json(json_path, json_obj):
     """
     Write the JSON object at the given path
@@ -148,6 +152,7 @@ def write_json(json_path, json_obj):
     except BaseException:
         pass
 
+
 def delete(file_path):
     """
     Delete the given file or directory
@@ -156,6 +161,7 @@ def delete(file_path):
         os.remove(file_path)
     except OSError:
         pass
+
 
 def check_plugin_dependencies(plugin_config):
     """
@@ -176,12 +182,12 @@ def check_plugin_dependencies(plugin_config):
     for command in plugin_config['dependencies']['shell_commands']:
         if not command_exist(command):
             return _("Please install the command-line tool '%s'") % command
-    
+
     # Check the resources
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
-            return _('Please add the resource %s to % directory') % (resource, '~/.config/safeeyes/resource')
-    
+            return _('Please add the resource %(resource)s to %(CONFIG_RESOURCE)s directory') % (resource, CONFIG_RESOURCE)
+
     return None
 
 
@@ -266,7 +272,7 @@ def execute_command(command, args=[]):
         try:
             subprocess.Popen(command_to_execute)
         except BaseException:
-            logging.error('Error in executing the commad' + str(command))
+            logging.error('Error in executing the command ' + str(command))
 
 
 def command_exist(command):
@@ -354,6 +360,7 @@ def intialize_logging():
     root_logger.setLevel(logging.DEBUG)
     root_logger.addHandler(handler)
 
+
 def __open_plugin_config(plugins_dir, plugin_id):
     """
     Open the given plugin's configuration.
@@ -364,6 +371,7 @@ def __open_plugin_config(plugins_dir, plugin_id):
         # Either the config.json or plugin.py is not available
         return None
     return load_json(plugin_config_path)
+
 
 def __update_plugin_config(plugin, plugin_config, config):
     """
@@ -388,6 +396,7 @@ def __update_plugin_config(plugin, plugin_config, config):
                     keys_to_remove.append(key)
             for key in keys_to_remove:
                 del plugin['settings'][key]
+
 
 def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
     """
@@ -459,6 +468,7 @@ def open_session():
     if session is None:
         session = {'plugin': {}}
     return session
+
 
 def create_gtk_builder(glade_file):
     """

@@ -28,6 +28,7 @@ no_of_breaks = 0
 no_of_cycles = -1
 session = None
 
+
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the plugin.
@@ -58,6 +59,7 @@ def on_stop_break():
         no_of_skipped_breaks += 1
         session['no_of_skipped_breaks'] = no_of_skipped_breaks
 
+
 def get_widget_title(break_obj):
     """
     Return the widget title.
@@ -70,6 +72,7 @@ def get_widget_title(break_obj):
     session['no_of_breaks'] = no_of_breaks
     session['no_of_cycles'] = no_of_cycles
     return _('Health Statistics')
+
 
 def get_widget_content(break_obj):
     """

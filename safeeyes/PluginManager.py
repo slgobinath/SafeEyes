@@ -54,6 +54,7 @@ sys.path.append(os.path.abspath(Utility.USER_PLUGINS_DIR))
 
 HORIZONTAL_LINE_LENGTH = 64
 
+
 class PluginManager(object):
     """
     Imports the Safe Eyes plugins and calls the methods defined in those plugins.
@@ -205,7 +206,7 @@ class PluginManager(object):
         if plugin['id'] in self.__plugins and not plugin_enabled:
             # A disabled plugin but that was loaded earlier
             plugin_obj = self.__plugins[plugin['id']]
-            if  plugin_obj['enabled']:
+            if plugin_obj['enabled']:
                 # Previously enabled but now disabled
                 plugin_obj['enabled'] = False
                 self.__remove_if_exists(self.__plugins_on_start, plugin_obj)

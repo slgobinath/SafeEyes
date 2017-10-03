@@ -19,8 +19,7 @@
 import logging
 
 import gi
-from safeeyes import Utility
-from safeeyes.model import BreakType, State
+from safeeyes.model import BreakType
 
 gi.require_version('Notify', '0.7')
 from gi.repository import Notify
@@ -34,6 +33,7 @@ notification = None
 context = None
 
 Notify.init(APPINDICATOR_ID)
+
 
 def init(ctx, safeeyes_config, plugin_config):
     """
