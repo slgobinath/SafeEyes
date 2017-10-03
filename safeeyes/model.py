@@ -174,4 +174,3 @@ class Config(object):
         Set the value.
         """
         self.__user_config[key] = value
-        self.__system_config[key] = value
