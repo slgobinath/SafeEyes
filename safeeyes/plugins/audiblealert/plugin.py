@@ -49,7 +49,7 @@ def on_stop_break():
         path = Utility.get_resource_path('alert.wav')
         if path is None:
             return
-        Utility.execute_command('aplay', [path])
+        Utility.execute_command('aplay', ['-q', path])
 
     except BaseException:
         logging.error('Failed to play audible alert')

@@ -272,7 +272,7 @@ def execute_command(command, args=[]):
         try:
             subprocess.Popen(command_to_execute)
         except BaseException:
-            logging.error('Error in executing the commad' + str(command))
+            logging.error('Error in executing the command ' + str(command))
 
 
 def command_exist(command):
