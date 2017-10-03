@@ -26,9 +26,9 @@ import re
 import subprocess
 
 import gi
-from gi.repository import Gdk
-
 gi.require_version('Gdk', '3.0')
+from gi.repository import Gdk
+from gi.repository import GdkX11
 
 context = None
 skip_break_window_classes = []
