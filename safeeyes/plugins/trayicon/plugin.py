@@ -238,13 +238,13 @@ class TrayIcon(object):
         """
         formatted_time = Utility.format_time(self.dateTime)
         message = _('Next break at %s') % (formatted_time)
+        # Update the menu item label
+        Utility.execute_main_thread(self.item_info.set_label, message)
         # Update the tray icon label
         if self.plugin_config.get('show_time_in_tray', False):
             self.indicator.set_label(formatted_time, '')
         else:
             self.indicator.set_label('', '')
-        # Update the menu item label
-        Utility.execute_main_thread(self.item_info.set_label, message)
 
     def on_manual_break_clicked(self, *args):
         """
