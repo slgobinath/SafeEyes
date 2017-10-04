@@ -47,6 +47,7 @@ class SettingsDialog(object):
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
         self.plugin_map = {}
+        self.last_short_break_interval = config.get('break_interval')
 
         builder = Utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
         builder.connect_signals(self)
@@ -196,7 +197,11 @@ class SettingsDialog(object):
         Event handler for value change of short break interval.
         """
         short_break_interval = self.spin_short_break_interval.get_value_as_int()
-        self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 5)
+        long_break_interval = self.spin_long_break_interval.get_value_as_int()
+        self.spin_long_break_interval.set_range(short_break_interval, 120)
+        self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 2)
+        self.spin_long_break_interval.set_value(short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
+        self.last_short_break_interval = short_break_interval
 
     def add_break(self, button):
         """
