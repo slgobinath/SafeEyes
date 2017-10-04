@@ -64,11 +64,8 @@ msgid "Postpone"
 msgstr "Postpone"
 
 # Settings dialog
-msgid "Short break duration (in seconds)"
-msgstr "Short break duration (in seconds)"
-
-msgid "Long break duration (in seconds)"
-msgstr "Long break duration (in seconds)"
+msgid "Break duration (in seconds)"
+msgstr "Break duration (in seconds)"
 
 msgid "Interval between two breaks (in minutes)"
 msgstr "Interval between two breaks (in minutes)"
@@ -90,6 +87,9 @@ msgstr "Allow postponing breaks"
 
 msgid "Persist the internal state"
 msgstr "Persist the internal state"
+
+msgid "Long break interval must be a multiple of short break interval"
+msgstr "Long break interval must be a multiple of short break interval"
 
 msgid "Options"
 msgstr "Options"

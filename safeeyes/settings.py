@@ -48,6 +48,8 @@ class SettingsDialog(object):
         self.plugin_switches = {}
         self.plugin_map = {}
         self.last_short_break_interval = config.get('break_interval')
+        self.initializing = True
+        self.infobar_long_break_shown = False
 
         builder = Utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
         builder.connect_signals(self)
@@ -74,6 +76,8 @@ class SettingsDialog(object):
         self.switch_strict_break = builder.get_object('switch_strict_break')
         self.switch_postpone = builder.get_object('switch_postpone')
         self.switch_persist = builder.get_object('switch_persist')
+        self.info_bar_long_break = builder.get_object("info_bar_long_break")
+        self.info_bar_long_break.hide()
 
         # Set the current values of input fields
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
@@ -94,6 +98,7 @@ class SettingsDialog(object):
             self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
             self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
             self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+        self.initializing = False
 
     def __create_break_item(self, break_config, is_short):
         """
@@ -180,10 +185,9 @@ class SettingsDialog(object):
         Event handler to the state change of the postpone switch.
         Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
         """
-        strict_break_enable = state    # self.switch_strict_break.get_active()
+        strict_break_enable = state
         self.switch_postpone.set_sensitive(not strict_break_enable)
-        if strict_break_enable:
-            self.switch_postpone.set_active(False)
+        self.spin_disable_keyboard_shortcut.set_sensitive(not strict_break_enable)
 
     def on_switch_postpone_activate(self, switch, state):
         """
@@ -202,6 +206,23 @@ class SettingsDialog(object):
         self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 2)
         self.spin_long_break_interval.set_value(short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
         self.last_short_break_interval = short_break_interval
+        if not self.initializing and not self.infobar_long_break_shown:
+            self.infobar_long_break_shown = True
+            self.info_bar_long_break.show()
+
+    def on_spin_long_break_interval_change(self, spin_button, *value):
+        """
+        Event handler for value change of long break interval.
+        """
+        if not self.initializing and not self.infobar_long_break_shown:
+            self.infobar_long_break_shown = True
+            self.info_bar_long_break.show()
+
+    def on_info_bar_long_break_close(self, infobar, *user_data):
+        """
+        Event handler for info bar close action.
+        """
+        self.info_bar_long_break.hide()
 
     def add_break(self, button):
         """

@@ -88,3 +88,8 @@
 .lbl_plugin_description {
     color: #9B9B9B;
 }
+
+.info_bar_long_break {
+    opacity: 0.9;
+    border-radius: 5px;
+}

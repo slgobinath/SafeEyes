@@ -166,7 +166,7 @@
                               <object class="GtkLabel" id="lbl_short_break_duration">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Short break duration (in seconds)</property>
+                                <property name="label" translatable="yes">Break duration (in seconds)</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -242,6 +242,75 @@
                         <property name="spacing">15</property>
                         <property name="homogeneous">True</property>
                         <child>
+                          <object class="GtkInfoBar" id="info_bar_long_break">
+                            <property name="app_paintable">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="no_show_all">True</property>
+                            <property name="show_close_button">True</property>
+                            <signal name="close" handler="on_info_bar_long_break_close" swapped="no"/>
+                            <signal name="response" handler="on_info_bar_long_break_close" swapped="no"/>
+                            <child internal-child="action_area">
+                              <object class="GtkButtonBox" id="infobar-action_area1">
+                                <property name="can_focus">False</property>
+                                <property name="spacing">6</property>
+                                <property name="layout_style">start</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child internal-child="content_area">
+                              <object class="GtkBox" id="infobar-content_area1">
+                                <property name="can_focus">False</property>
+                                <property name="spacing">16</property>
+                                <child>
+                                  <object class="GtkImage" id="image1">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="stock">gtk-info</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label2">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">Long break interval must be a multiple of short break interval</property>
+                                    <property name="xalign">0</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <style>
+                              <class name="info_bar_long_break"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkBox" id="box8">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
@@ -273,6 +342,7 @@
                                 <property name="wrap">True</property>
                                 <property name="update_policy">if-valid</property>
                                 <property name="value">1</property>
+                                <signal name="value-changed" handler="on_spin_long_break_interval_change" swapped="no"/>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -285,7 +355,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -297,7 +367,7 @@
                               <object class="GtkLabel" id="lbl_long_break_duration">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Long break duration (in seconds)</property>
+                                <property name="label" translatable="yes">Break duration (in seconds)</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -330,7 +400,7 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -418,15 +488,15 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="box5">
+                          <object class="GtkBox" id="box9">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">5</property>
                             <child>
-                              <object class="GtkLabel" id="lbl_shortcuts">
+                              <object class="GtkLabel" id="lbl_strict_break">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Keyboard shortcuts disabled period (in seconds)</property>
+                                <property name="label" translatable="yes">Strict break (No way to skip breaks)</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -435,18 +505,11 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSpinButton" id="spin_disable_keyboard_shortcut">
+                              <object class="GtkSwitch" id="switch_strict_break">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
-                                <property name="text" translatable="yes">1</property>
-                                <property name="input_purpose">number</property>
-                                <property name="adjustment">adjust_disable_keyboard_shortcut_duration</property>
-                                <property name="climb_rate">1</property>
-                                <property name="numeric">True</property>
-                                <property name="update_policy">if-valid</property>
-                                <property name="value">1</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -460,6 +523,44 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box11">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel" id="lbl_allow_postpone">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Allow postponing breaks</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="switch_postpone">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -504,57 +605,19 @@
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkBox" id="box9">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="spacing">5</property>
-                            <child>
-                              <object class="GtkLabel" id="lbl_strict_break">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Strict break (No way to skip breaks)</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                                <property name="position">0</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="switch_strict_break">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="pack_type">end</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
                             <property name="position">3</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="box11">
+                          <object class="GtkBox" id="box5">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="spacing">5</property>
                             <child>
-                              <object class="GtkLabel" id="lbl_allow_postpone">
+                              <object class="GtkLabel" id="lbl_shortcuts">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Allow postponing breaks</property>
+                                <property name="label" translatable="yes">Keyboard shortcuts disabled period (in seconds)</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -563,11 +626,18 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSwitch" id="switch_postpone">
+                              <object class="GtkSpinButton" id="spin_disable_keyboard_shortcut">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
+                                <property name="text" translatable="yes">1</property>
+                                <property name="input_purpose">number</property>
+                                <property name="adjustment">adjust_disable_keyboard_shortcut_duration</property>
+                                <property name="climb_rate">1</property>
+                                <property name="numeric">True</property>
+                                <property name="update_policy">if-valid</property>
+                                <property name="value">1</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
