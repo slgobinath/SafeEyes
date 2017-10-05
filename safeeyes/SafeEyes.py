@@ -48,7 +48,7 @@ class SafeEyes(object):
     """
 
     def __init__(self, system_locale, config):
-        self.active = True
+        self.active = False
         self.break_screen = None
         self.safe_eyes_core = None
         self.config = config
@@ -86,7 +86,7 @@ class SafeEyes(object):
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
-        self.rpc_server = RPCServer(self.config.get('rpc_port'), self)
+        self.rpc_server = RPCServer(self.config.get('rpc_port'), self.context)
         self.rpc_server.start()
 
     def start(self):
@@ -94,6 +94,7 @@ class SafeEyes(object):
         Start Safe Eyes
         """
         if self.safe_eyes_core.has_breaks():
+            self.active = True
             self.context['state'] = State.START
             self.plugins_manager.start()		# Call the start method of all plugins
             self.safe_eyes_core.start()
@@ -203,7 +204,7 @@ class SafeEyes(object):
         """
         Listen to tray icon enable action and send the signal to core.
         """
-        if self.safe_eyes_core.has_breaks():
+        if not self.active and self.safe_eyes_core.has_breaks():
             self.active = True
             self.safe_eyes_core.start()
             self.plugins_manager.start()
@@ -212,9 +213,10 @@ class SafeEyes(object):
         """
         Listen to tray icon disable action and send the signal to core.
         """
-        self.active = False
-        self.plugins_manager.stop()
-        self.safe_eyes_core.stop()
+        if self.active:
+            self.active = False
+            self.plugins_manager.stop()
+            self.safe_eyes_core.stop()
 
     def start_break(self, break_obj):
         """

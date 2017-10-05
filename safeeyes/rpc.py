@@ -30,16 +30,16 @@ class RPCServer(object):
     """
     An aynchronous RPC server.
     """
-    def __init__(self, port, safe_eyes):
+    def __init__(self, port, context):
         self.__running = False
         logging.info('Setting up an RPC server on port %d', port)
-        self.__server = SimpleXMLRPCServer(("localhost", port), allow_none=True)
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.show_settings), 'show_settings')
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.show_about), 'show_about')
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.enable_safeeyes), 'enable_safeeyes')
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.disable_safeeyes), 'disable_safeeyes')
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.take_break), 'take_break')
-        self.__server.register_function(lambda: Utility.execute_main_thread(safe_eyes.quit), 'quit')
+        self.__server = SimpleXMLRPCServer(("localhost", port), logRequests=False, allow_none=True)
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['show_settings']), 'show_settings')
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['show_about']), 'show_about')
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['enable_safeeyes']), 'enable_safeeyes')
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['disable_safeeyes']), 'disable_safeeyes')
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['take_break']), 'take_break')
+        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['quit']), 'quit')
 
     def start(self):
         """

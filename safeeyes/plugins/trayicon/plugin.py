@@ -274,13 +274,7 @@ class TrayIcon(object):
         # active = self.item_enable.get_active()
         if not self.active:
             with self.lock:
-                logging.info('Enable Safe Eyes')
-                self.active = True
-                self.indicator.set_icon("safeeyes_enabled")
-                self.item_info.set_sensitive(True)
-                self.item_enable.set_sensitive(False)
-                self.item_disable.set_sensitive(True)
-                self.item_manual_break.set_sensitive(True)
+                self.enable_ui()
                 self.on_enable()
                 # Notify all schedulers
                 self.idle_condition.acquire()
@@ -294,14 +288,7 @@ class TrayIcon(object):
         """
         # active = self.item_enable.get_active()
         if self.active and len(args) > 1:
-            logging.info('Disable Safe Eyes')
-            self.active = False
-            self.indicator.set_icon("safeeyes_disabled")
-            self.indicator.set_label('', '')
-            self.item_info.set_sensitive(False)
-            self.item_enable.set_sensitive(True)
-            self.item_disable.set_sensitive(False)
-            self.item_manual_break.set_sensitive(False)
+            self.disable_ui()
             self.on_disable()
 
             time_to_wait = args[1]
@@ -326,6 +313,34 @@ class TrayIcon(object):
         """
         if self.active:
             self.menu.set_sensitive(True)
+
+    def disable_ui(self):
+        """
+        Change the UI to disabled state.
+        """
+        if self.active:
+            logging.info('Disable Safe Eyes')
+            self.active = False
+            self.indicator.set_icon("safeeyes_disabled")
+            self.item_info.set_label(_('Disabled until restart'))
+            self.indicator.set_label('', '')
+            self.item_info.set_sensitive(False)
+            self.item_enable.set_sensitive(True)
+            self.item_disable.set_sensitive(False)
+            self.item_manual_break.set_sensitive(False)
+
+    def enable_ui(self):
+        """
+        Change the UI to enabled state.
+        """
+        if not self.active:
+            logging.info('Enable Safe Eyes')
+            self.active = True
+            self.indicator.set_icon("safeeyes_enabled")
+            self.item_info.set_sensitive(True)
+            self.item_enable.set_sensitive(False)
+            self.item_disable.set_sensitive(True)
+            self.item_manual_break.set_sensitive(True)
 
     def __schedule_resume(self, time_minutes):
         """
@@ -377,3 +392,15 @@ def __unlock_menu():
     Unlock the menu
     """
     Utility.execute_main_thread(tray_icon.unlock_menu)
+
+def on_start():
+    """
+    Enable the tray icon.
+    """
+    tray_icon.enable_ui()
+
+def on_stop():
+    """
+    Disable the tray icon.
+    """
+    tray_icon.disable_ui()
