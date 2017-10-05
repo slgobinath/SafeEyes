@@ -120,10 +120,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
               <object class="GtkTextView" id="txt_license">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="valign">start</property>
                 <property name="hexpand">True</property>
-                <property name="vexpand">False</property>
-                <property name="resize_mode">immediate</property>
+                <property name="vexpand">True</property>
                 <property name="editable">False</property>
                 <property name="wrap_mode">word</property>
                 <property name="buffer">text_buffer_license</property>
@@ -140,10 +138,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <property name="label" translatable="yes">http://slgobinath.github.io/SafeEyes</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="halign">center</property>
                 <property name="relief">none</property>
-                <property name="focus_on_click">False</property>
                 <property name="uri">http://slgobinath.github.io/SafeEyes</property>
               </object>
               <packing>
