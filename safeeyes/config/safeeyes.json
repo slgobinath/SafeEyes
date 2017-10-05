@@ -10,6 +10,7 @@
     "short_break_duration": 15,
     "persist_state": false,
     "postpone_duration": 5,
+    "rpc_port": 7200,
     "shortcut_disable_time": 2,
     "shortcut_skip": 9,
     "shortcut_postpone": 65,

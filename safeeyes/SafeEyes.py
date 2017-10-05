@@ -31,7 +31,7 @@ from safeeyes import Utility
 from safeeyes.AboutDialog import AboutDialog
 from safeeyes.BreakScreen import BreakScreen
 from safeeyes.model import State
-from safeeyes.model import Config
+from safeeyes.rpc import RPCServer
 from safeeyes.PluginManager import PluginManager
 from safeeyes.SafeEyesCore import SafeEyesCore
 from safeeyes.settings import SettingsDialog
@@ -47,16 +47,15 @@ class SafeEyes(object):
     This class represents a runnable Safe Eyes instance.
     """
 
-    def __init__(self, system_locale):
+    def __init__(self, system_locale, config):
         self.active = True
         self.break_screen = None
         self.safe_eyes_core = None
-        self.config = None
+        self.config = config
         self.context = {}
         self.plugins_manager = None
         self.settings_dialog_active = False
-
-        self.config = Config()
+        self.rpc_server = None
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
@@ -67,7 +66,7 @@ class SafeEyes(object):
         self.context['api']['show_about'] = self.show_about
         self.context['api']['enable_safeeyes'] = self.enable_safeeyes
         self.context['api']['disable_safeeyes'] = self.disable_safeeyes
-        self.context['api']['on_quit'] = self.on_quit
+        self.context['api']['quit'] = self.quit
         if self.config.get('persist_state'):
             self.context['session'] = Utility.open_session()
         else:
@@ -87,6 +86,8 @@ class SafeEyes(object):
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
+        self.rpc_server = RPCServer(self.config.get('rpc_port'), self)
+        self.rpc_server.start()
 
     def start(self):
         """
@@ -116,7 +117,7 @@ class SafeEyes(object):
         about_dialog = AboutDialog(SAFE_EYES_VERSION)
         about_dialog.show()
 
-    def on_quit(self):
+    def quit(self):
         """
         Listen to the tray menu quit action and stop the core, notification and the app itself.
         """
@@ -125,6 +126,7 @@ class SafeEyes(object):
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
         self.plugins_manager.exit()
+        self.rpc_server.stop()
         Gtk.main_quit()
 
     def handle_suspend_callback(self, sleeping):
@@ -257,3 +259,4 @@ class SafeEyes(object):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
         else:
             Utility.delete(Utility.SESSION_FILE_PATH)
+        

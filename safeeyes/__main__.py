@@ -28,7 +28,9 @@ import sys
 import gi
 import psutil
 from safeeyes import Utility
+from safeeyes.model import Config
 from safeeyes.SafeEyes import SafeEyes
+from safeeyes.rpc import RPCClient
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -74,16 +76,19 @@ def main():
 
     logging.info("Starting Safe Eyes")
 
+    config = Config()
     if not running():
         system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
         system_locale.install()
         # locale.bindtextdomain is required for Glade files
         locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
-        safeeyes = SafeEyes(system_locale)
+        safeeyes = SafeEyes(system_locale, config)
         safeeyes.start()
         Gtk.main()
     else:
-        logging.info('Another instance of safeeyes is already running')
+        logging.info('Another instance of safeeyes is already running. Show the settings dialog')
+        rpc_client = RPCClient(config.get('rpc_port'))
+        rpc_client.show_settings()
         sys.exit(0)
 
 

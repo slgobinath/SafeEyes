@@ -45,13 +45,13 @@ class TrayIcon(object):
         self.context = context
         self.on_show_settings = context['api']['show_settings']
         self.on_show_about = context['api']['show_about']
-        self.on_quite = context['api']['on_quit']
+        self.quit = context['api']['quit']
         self.on_enable = context['api']['enable_safeeyes']
         self.on_disable = context['api']['disable_safeeyes']
         self.take_break = context['api']['take_break']
         self.has_breaks = context['api']['has_breaks']
         self.plugin_config = plugin_config
-        self.dateTime = None
+        self.date_time = None
         self.active = True
         self.wakeup_time = None
         self.idle_condition = threading.Condition()
@@ -175,7 +175,7 @@ class TrayIcon(object):
         breaks_found = self.has_breaks()
         if breaks_found:
             if self.active:
-                if self.dateTime:
+                if self.date_time:
                     self.__set_next_break_info()
                 self.indicator.set_icon("safeeyes_enabled")
             else:
@@ -216,7 +216,7 @@ class TrayIcon(object):
         Handle Quit menu action.
         This action terminates the application.
         """
-        self.on_quite()
+        self.quit()
         with self.lock:
             self.active = True
             # Notify all schedulers
@@ -243,14 +243,14 @@ class TrayIcon(object):
         Update the next break time to be displayed in the menu and optionally in the tray icon.
         """
         logging.info("Update next break information")
-        self.dateTime = dateTime
+        self.date_time = dateTime
         self.__set_next_break_info()
 
     def __set_next_break_info(self):
         """
         A private method to be called within this class to update the next break information using self.dateTime.
         """
-        formatted_time = Utility.format_time(self.dateTime)
+        formatted_time = Utility.format_time(self.date_time)
         message = _('Next break at %s') % (formatted_time)
         # Update the menu item label
         Utility.execute_main_thread(self.item_info.set_label, message)
