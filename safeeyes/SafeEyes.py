@@ -253,6 +253,12 @@ class SafeEyes(object):
         self.plugins_manager.stop_break()
         return True
 
+    def take_break(self):
+        """
+        Take a break now.
+        """
+        self.safe_eyes_core.take_break()
+
     def persist_session(self):
         """
         Save the session object to the session file.

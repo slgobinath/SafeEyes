@@ -19,17 +19,19 @@
 """
 Safe Eyes is a utility to remind you to take break frequently to protect your eyes from eye strain.
 """
-
+import argparse
 import gettext
 import locale
 import logging
 import sys
+from threading import Timer
 
 import gi
 import psutil
 from safeeyes import Utility
 from safeeyes.model import Config
 from safeeyes.SafeEyes import SafeEyes
+from safeeyes.SafeEyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
 
 gi.require_version('Gtk', '3.0')
@@ -37,10 +39,8 @@ from gi.repository import Gtk
 
 gettext.install('safeeyes', Utility.LOCALE_PATH)
 
-SAFE_EYES_VERSION = "2.0.0"
 
-
-def running():
+def __running():
     """
     Check if SafeEyes is already running.
     """
@@ -67,29 +67,69 @@ def running():
     return False
 
 
+def __evaluate_arguments(args, safe_eyes):
+    """
+    Evaluate the arguments and execute the operations.
+    """
+    if args.about:
+        Utility.execute_main_thread(safe_eyes.show_about)
+    elif args.disable:
+        Utility.execute_main_thread(safe_eyes.disable_safeeyes)
+    elif args.enable:
+        Utility.execute_main_thread(safe_eyes.enable_safeeyes)
+    elif args.settings:
+        Utility.execute_main_thread(safe_eyes.show_settings)
+    elif args.take_break:
+        Utility.execute_main_thread(safe_eyes.take_break)
+
 def main():
     """
     Start the Safe Eyes.
     """
+    parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-a', '--about', help='show the about dialog', action='store_true')
+    group.add_argument('-d', '--disable', help='disable the currently running safeeyes instance', action='store_true')
+    group.add_argument('-e', '--enable', help='enable the currently running safeeyes instance', action='store_true')
+    group.add_argument('-q', '--quit', help='quit the running safeeyes instance', action='store_true')
+    group.add_argument('-s', '--settings', help='show the settings dialog', action='store_true')
+    group.add_argument('-t', '--take-break', help='take a break now', action='store_true')
+    parser.add_argument('--debug', help='start safeeyes in debug mode', action='store_true')
+    parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
+    args = parser.parse_args()
+
     # Initialize the logging
-    Utility.intialize_logging()
-
-    logging.info("Starting Safe Eyes")
-
+    Utility.intialize_logging(args.debug)
     config = Config()
-    if not running():
+
+    if __running():
+        rpc_client = RPCClient(config.get('rpc_port'))
+        if args.about:
+            rpc_client.show_about()
+        elif args.disable:
+            rpc_client.disable_safeeyes()
+        elif args.enable:
+            rpc_client.enable_safeeyes()
+        elif args.settings:
+            rpc_client.show_settings()
+        elif args.take_break:
+            rpc_client.take_break()
+        elif args.quit:
+            rpc_client.quit()
+        else:
+            # Default behavior is opening settings
+            rpc_client.show_settings()
+        sys.exit(0)
+    elif not args.quit:
+        logging.info("Starting Safe Eyes")
         system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
         system_locale.install()
         # locale.bindtextdomain is required for Glade files
         locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
         safeeyes = SafeEyes(system_locale, config)
         safeeyes.start()
+        Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
         Gtk.main()
-    else:
-        logging.info('Another instance of safeeyes is already running. Show the settings dialog')
-        rpc_client = RPCClient(config.get('rpc_port'))
-        rpc_client.show_settings()
-        sys.exit(0)
 
 
 if __name__ == '__main__':

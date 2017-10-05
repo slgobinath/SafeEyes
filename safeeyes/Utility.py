@@ -30,6 +30,7 @@ import shutil
 import subprocess
 import threading
 from distutils.version import LooseVersion
+from logging.handlers import RotatingFileHandler
 
 import babel.dates
 import gi
@@ -102,7 +103,6 @@ def system_locale():
         return sys_locale
     except BaseException:
         # Some systems does not return proper locale
-        logging.error('Error in reading system locale')
         return 'en_US.UTF-8'
 
 
@@ -337,7 +337,7 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
 
-def intialize_logging():
+def intialize_logging(debug):
     """
     Initialize the logging framework using the Safe Eyes specific configurations.
     """
@@ -349,16 +349,23 @@ def intialize_logging():
             pass
 
     # Configure logging.
+    root_logger = logging.getLogger()
     log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
-    # Apped the logs and overwrite once reached 5MB
-    handler = logging.StreamHandler()  # RotatingFileHandler(LOG_FILE_PATH, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
-    handler.setFormatter(log_formatter)
-    handler.setLevel(logging.DEBUG)
-
-    root_logger = logging.getLogger()
-    root_logger.setLevel(logging.DEBUG)
-    root_logger.addHandler(handler)
+    # Append the logs and overwrite once reached 5MB
+    file_handler = RotatingFileHandler(LOG_FILE_PATH, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
+    file_handler.setFormatter(log_formatter)
+    
+    if debug:
+        file_handler.setLevel(logging.DEBUG)
+        root_logger.setLevel(logging.DEBUG)
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(log_formatter)
+        root_logger.addHandler(console_handler)
+    else:
+        file_handler.setLevel(logging.INFO)
+        root_logger.setLevel(logging.INFO)
+    root_logger.addHandler(file_handler)
 
 
 def __open_plugin_config(plugins_dir, plugin_id):
