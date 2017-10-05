@@ -83,6 +83,9 @@ class SafeEyesCore(object):
         self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
         self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
         self.break_count = len(self.breaks)
+        if self.break_count == 0:
+            # No breaks found
+            return
         self.next_break_index = (self.next_break_index) % self.break_count
         self.context['session']['next_break_index'] = self.next_break_index
 
@@ -90,6 +93,8 @@ class SafeEyesCore(object):
         """
         Start Safe Eyes is it is not running already.
         """
+        if not self.has_breaks():
+            return
         with self.lock:
             if not self.running:
                 logging.info("Start Safe Eyes core")
@@ -107,7 +112,7 @@ class SafeEyesCore(object):
             logging.info("Stop Safe Eye core")
 
             # Prevent resuming from a long break
-            if self.__is_long_break():
+            if self.has_breaks() and self.__is_long_break():
                 # Next break will be a long break.
                 self.__select_next_break()
 
@@ -135,9 +140,17 @@ class SafeEyesCore(object):
         """
         Calling this method stops the scheduler and show the next break screen
         """
+        if not self.has_breaks():
+            return
         if not self.context['state'] == State.WAITING:
             return
         Utility.start_thread(self.__take_break)
+
+    def has_breaks(self):
+        """
+        Check whether Safe Eyes has breaks or not.
+        """
+        return bool(self.breaks)
 
     def __take_break(self):
         """
@@ -288,14 +301,18 @@ class SafeEyesCore(object):
 
         # Duplicate short breaks to equally distribute the long breaks
         if break_type is BreakType.LONG_BREAK:
-            default_break_time = self.long_break_duration
-            required_short_breaks = short_breaks_per_long_break * len(break_configs)
-            no_of_short_breaks = len(self.breaks)
-            short_break_index = 0
-            while no_of_short_breaks < required_short_breaks:
-                self.breaks.append(self.breaks[short_break_index])
-                short_break_index += 1
-                no_of_short_breaks += 1
+            if self.breaks:
+                default_break_time = self.long_break_duration
+                required_short_breaks = short_breaks_per_long_break * len(break_configs)
+                no_of_short_breaks = len(self.breaks)
+                short_break_index = 0
+                while no_of_short_breaks < required_short_breaks:
+                    self.breaks.append(self.breaks[short_break_index])
+                    short_break_index += 1
+                    no_of_short_breaks += 1
+            else:
+                # If there are no short breaks, extend the break interval according to long break interval
+                self.break_interval = int(self.break_interval * short_breaks_per_long_break)
 
         iteration = 1
         for break_config in break_configs:

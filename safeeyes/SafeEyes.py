@@ -84,6 +84,7 @@ class SafeEyes(object):
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
         self.context['api']['take_break'] = self.safe_eyes_core.take_break
+        self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
 
@@ -91,10 +92,11 @@ class SafeEyes(object):
         """
         Start Safe Eyes
         """
-        self.context['state'] = State.START
-        self.plugins_manager.start()		# Call the start method of all plugins
-        self.safe_eyes_core.start()
-        self.handle_system_suspend()
+        if self.safe_eyes_core.has_breaks():
+            self.context['state'] = State.START
+            self.plugins_manager.start()		# Call the start method of all plugins
+            self.safe_eyes_core.start()
+            self.handle_system_suspend()
 
     def show_settings(self):
         """
@@ -138,7 +140,7 @@ class SafeEyes(object):
                 self.safe_eyes_core.stop()
         else:
             # Resume from sleep
-            if self.active:
+            if self.active and self.safe_eyes_core.has_breaks():
                 logging.info("Resume Safe Eyes after system wakeup")
                 self.plugins_manager.start()
                 self.safe_eyes_core.start()
@@ -190,7 +192,7 @@ class SafeEyes(object):
         self.safe_eyes_core.initialize(config)
         self.break_screen.initialize(config)
         self.plugins_manager.init(self.context, self.config)
-        if self.active:
+        if self.active and self.safe_eyes_core.has_breaks():
             # 1 sec delay is required to give enough time for core to be stopped
             Timer(1.0, self.safe_eyes_core.start).start()
             self.plugins_manager.start()
@@ -199,9 +201,10 @@ class SafeEyes(object):
         """
         Listen to tray icon enable action and send the signal to core.
         """
-        self.active = True
-        self.safe_eyes_core.start()
-        self.plugins_manager.start()
+        if self.safe_eyes_core.has_breaks():
+            self.active = True
+            self.safe_eyes_core.start()
+            self.plugins_manager.start()
 
     def disable_safeeyes(self):
         """

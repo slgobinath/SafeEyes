@@ -350,6 +350,9 @@ class BreakSettingsDialog(object):
         self.spin_duration = builder.get_object('spin_duration')
         self.img_break = builder.get_object('img_break')
         self.cmb_type = builder.get_object('cmb_type')
+        # User cannot remove the last break
+        not_last_break = (len(parent_config.get('short_breaks')) + len(parent_config.get('long_breaks'))) > 1
+        builder.get_object('btn_remove').set_sensitive(not_last_break)
 
         grid_plugins = builder.get_object('grid_plugins')
         list_types = builder.get_object('lst_break_types')
@@ -436,9 +439,9 @@ class BreakSettingsDialog(object):
         Remove the break
         """
         if self.is_short:
-            self.parent_config['short_breaks'].remove(self.break_config)
+            self.parent_config.get('short_breaks').remove(self.break_config)
         else:
-            self.parent_config['long_breaks'].remove(self.break_config)
+            self.parent_config.get('long_breaks').remove(self.break_config)
         self.on_remove()
         self.window.destroy()
 

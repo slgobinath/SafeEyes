@@ -275,6 +275,9 @@ msgstr[1] "%d வினாடிகளுக்கு"
 msgid "Next break at %s"
 msgstr "அடுத்த இடைவேளை %s"
 
+msgid "No Breaks Available"
+msgstr "இடைவேளைகள் வரையறுக்கப்படவில்லை"
+
 msgid "Settings"
 msgstr "அமைப்பு"
 

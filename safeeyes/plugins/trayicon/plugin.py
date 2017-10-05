@@ -49,6 +49,7 @@ class TrayIcon(object):
         self.on_enable = context['api']['enable_safeeyes']
         self.on_disable = context['api']['disable_safeeyes']
         self.take_break = context['api']['take_break']
+        self.has_breaks = context['api']['has_breaks']
         self.plugin_config = plugin_config
         self.dateTime = None
         self.active = True
@@ -152,7 +153,7 @@ class TrayIcon(object):
 
         self.indicator.set_menu(self.menu)
 
-    def initialize(self, context, plugin_config):
+    def initialize(self, plugin_config):
         """
         Initialize the tray icon by setting the config.
         """
@@ -171,14 +172,27 @@ class TrayIcon(object):
         self.item_enable.set_label(_('Enable Safe Eyes'))
         self.item_disable.set_label(_('Disable Safe Eyes'))
 
-        if self.active:
-            if self.dateTime:
-                self.__set_next_break_info()
-        else:
-            if self.wakeup_time:
-                self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
+        breaks_found = self.has_breaks()
+        if breaks_found:
+            if self.active:
+                if self.dateTime:
+                    self.__set_next_break_info()
+                self.indicator.set_icon("safeeyes_enabled")
             else:
-                self.item_info.set_label(_('Disabled until restart'))
+                if self.wakeup_time:
+                    self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
+                else:
+                    self.item_info.set_label(_('Disabled until restart'))
+                self.indicator.set_label('', '')
+                self.indicator.set_icon("safeeyes_disabled")
+        else:
+            self.item_info.set_label(_('No Breaks Available'))
+            self.indicator.set_label('', '')
+            self.indicator.set_icon("safeeyes_disabled")
+        self.item_info.set_sensitive(breaks_found and self.active)
+        self.item_enable.set_sensitive(breaks_found and not self.active)
+        self.item_disable.set_sensitive(breaks_found and self.active)
+        self.item_manual_break.set_sensitive(breaks_found and self.active)
 
         self.item_manual_break.set_label(_('Take a break now'))
         self.item_settings.set_label(_('Settings'))
@@ -339,7 +353,7 @@ def init(ctx, safeeyes_cfg, plugin_config):
     if not tray_icon:
         tray_icon = TrayIcon(context, plugin_config)
     else:
-        tray_icon.initialize(context, plugin_config)
+        tray_icon.initialize(plugin_config)
 
 
 def update_next_break(dateTime):
