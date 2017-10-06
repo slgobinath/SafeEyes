@@ -22,13 +22,13 @@
         "ready_for_a_short_break": "Preparati per una breve pausa tra {} secondi",
         "ready_for_a_long_break": "preparati per una lunga pausa tra {} secondi",
         "disabled_until_restart": "Disabilitato fino al riavvio",
-        "disabled_until_x": "Disabilitato fino a {}",
+        "disabled_until_x": "Disabilitato fino alle {}",
         "next_break_at": "Prossima pausa alle {}",
         "software_required": "Per abilitare quest'impostazione, installa {}"
     },
     "ui_controls": {
         "about": "Informazioni",
-        "allow_postpone": "Consenti il rinvio delle pause",
+        "allow_postpone": "Consenti di posticipare pause",
         "audible_alert": "Notifica audio alla fine della pausa",
         "cancel": "Annulla",
         "close": "Chiudi",
