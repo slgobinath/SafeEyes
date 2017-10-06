@@ -1,1 +1,62 @@
-{}
+{
+    "meta_info": {
+        "language_name": "Italiano",
+        "language_name_en": "Italiano"
+    },
+    "app_info": {
+        "description": "Safe Eyes protegge i tuoi occhi dall'affaticamento (Astenopia) ricordandoti di fare pause quando lavori per lunghi periodi al computer."
+    },
+    "exercises": {
+        "short_break_close_eyes": "Chiudi gli occhi stringendoli",
+        "short_break_roll_eyes": "Ruota gli occhi un po' di volte ad ogni lato",
+        "short_break_rotate_clockwise": "Ruota gli occhi in senso orario",
+        "short_break_rotate_counter_clockwise": "Ruota gli occhi in senso antiorario",
+        "short_break_blink": "Batti gli occhi",
+        "short_break_focus_far_distance": "Focalizza un punto in lontananza",
+        "short_break_drink_water": "Bevi un po' d'acqua",
+        "long_break_walk": "Cammina un po'",
+        "long_break_lean_back": "Appoggiati allo schienale e rilassati"
+    },
+    "messages": {
+        "audible_alert_disabled": "Impossibile abilitare le notifiche audio",
+        "ready_for_a_short_break": "Preparati per una breve pausa tra {} secondi",
+        "ready_for_a_long_break": "preparati per una lunga pausa tra {} secondi",
+        "disabled_until_restart": "Disabilitato fino al riavvio",
+        "disabled_until_x": "Disabilitato fino a {}",
+        "next_break_at": "Prossima pausa alle {}",
+        "software_required": "Per abilitare quest'impostazione, installa {}"
+    },
+    "ui_controls": {
+        "about": "Informazioni",
+        "allow_postpone": "Consenti il rinvio delle pause",
+        "audible_alert": "Notifica audio alla fine della pausa",
+        "cancel": "Annulla",
+        "close": "Chiudi",
+        "disable": "Disabilita Safe Eyes",
+        "disable_keyboard_shortcut": "Disabilita tasti di scelta rapida per evitare di saltare le pause (in secondi)",
+        "enable": "Abilita Safe Eyes",
+        "enable_screen_lock": "Blocca lo schermo dopo ogni pausa lunga",
+        "for_x_hour": "Per {} ora",
+        "for_x_hours": "Per {} ore",
+        "for_x_minutes": "Per {} minuti",
+        "idle_time": "Tempo minimo di inattività per la pausa (in minuti)",
+        "interval_between_two_breaks": "Intervallo tra due pause (in minuti)",
+        "language": "Lingua",
+        "license": "Licenza",
+        "long_break_duration": "Durata pausa lunga (in secondi)",
+        "no_of_short_breaks_between_two_long_breaks": "Numero di pause brevi tra due pause lunghe",
+        "postpone": "Posponi",
+        "postpone_duration": "Durata posticipo (in minuti)",
+        "quit": "Chiudi",
+        "save": "Salva",
+        "settings": "Impostazioni",
+        "short_break_duration": "Durata pausa breve (in secondi)",
+        "show_time_in_tray": "Mostra l'ora della prossima pausa nella barra di sistema",
+        "skip": "Salta",
+        "strict_break": "Pausa severa (Nasconde il bottone salta)",
+        "system_language": "Lingua di sistema",
+        "time_to_prepare_for_break": "Tempo per prepararsi alla pausa (in secondi)",
+        "time_to_screen_lock": "Tempo massimo da saltare, evitando la schermata di blocco (in secondi)",
+        "until_restart": "Fino al riavvio"
+    }
+}
