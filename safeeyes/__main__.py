@@ -86,7 +86,6 @@ def main():
     """
     Start the Safe Eyes.
     """
-    logging.info("Starting Safe Eyes")
     system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
     system_locale.install()
     # locale.bindtextdomain is required for Glade files
@@ -110,6 +109,7 @@ def main():
     config = Config()
 
     if __running():
+        logging.info("Safe Eyes is already running")
         rpc_client = RPCClient(config.get('rpc_port'))
         if args.about:
             rpc_client.show_about()
@@ -128,6 +128,7 @@ def main():
             rpc_client.show_settings()
         sys.exit(0)
     elif not args.quit:
+        logging.info("Starting Safe Eyes")
         safeeyes = SafeEyes(system_locale, config)
         safeeyes.start()
         Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
