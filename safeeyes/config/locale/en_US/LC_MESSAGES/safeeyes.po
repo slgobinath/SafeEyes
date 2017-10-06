@@ -46,6 +46,25 @@ msgstr "Walk for a while"
 msgid  "Lean back at your seat and relax"
 msgstr "Lean back at your seat and relax"
 
+# Commandline Arguments
+msgid "show the about dialog"
+msgstr "show the about dialog"
+
+msgid "disable the currently running safeeyes instance"
+msgstr "disable the currently running safeeyes instance"
+
+msgid "enable the currently running safeeyes instance"
+msgstr "enable the currently running safeeyes instance"
+
+msgid "quit the running safeeyes instance and exit"
+msgstr "quit the running safeeyes instance and exit"
+
+msgid "show the settings dialog"
+msgstr "show the settings dialog"
+
+msgid "start safeeyes in debug mode"
+msgstr "start safeeyes in debug mode"
+
 # AboutDialog
 msgid "Close"
 msgstr "Close"

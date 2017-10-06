@@ -46,6 +46,25 @@ msgstr "சிறிது தூரம் நடவுங்கள்"
 msgid  "Lean back at your seat and relax"
 msgstr "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
 
+# Commandline Arguments
+msgid "show the about dialog"
+msgstr "தகவல் சாளரத்தை காண்பி"
+
+msgid "disable the currently running safeeyes instance"
+msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ முடக்கு"
+
+msgid "enable the currently running safeeyes instance"
+msgstr "முடக்க பட்டிருக்கும் Safe Eyes ஐ செயல்படுத்துக"
+
+msgid "quit the running safeeyes instance and exit"
+msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ நிறுத்துக"
+
+msgid "show the settings dialog"
+msgstr "அமைப்புகள் சாளரத்தை காண்பி"
+
+msgid "start safeeyes in debug mode"
+msgstr "வழு நீக்கும் முறையில் Safe Eyes ஐ ஆரம்பிக்குக"
+
 # AboutDialog
 msgid "Close"
 msgstr "மூடு"

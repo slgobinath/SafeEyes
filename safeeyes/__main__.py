@@ -86,15 +86,22 @@ def main():
     """
     Start the Safe Eyes.
     """
+    logging.info("Starting Safe Eyes")
+    system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
+    system_locale.install()
+    # locale.bindtextdomain is required for Glade files
+    # gettext.bindtextdomain(gettext.textdomain(), Utility.LOCALE_PATH)
+    locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
+
     parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
     group = parser.add_mutually_exclusive_group()
-    group.add_argument('-a', '--about', help='show the about dialog', action='store_true')
-    group.add_argument('-d', '--disable', help='disable the currently running safeeyes instance', action='store_true')
-    group.add_argument('-e', '--enable', help='enable the currently running safeeyes instance', action='store_true')
-    group.add_argument('-q', '--quit', help='quit the running safeeyes instance', action='store_true')
-    group.add_argument('-s', '--settings', help='show the settings dialog', action='store_true')
-    group.add_argument('-t', '--take-break', help='take a break now', action='store_true')
-    parser.add_argument('--debug', help='start safeeyes in debug mode', action='store_true')
+    group.add_argument('-a', '--about', help=_('show the about dialog'), action='store_true')
+    group.add_argument('-d', '--disable', help=_('disable the currently running safeeyes instance'), action='store_true')
+    group.add_argument('-e', '--enable', help=_('enable the currently running safeeyes instance'), action='store_true')
+    group.add_argument('-q', '--quit', help=_('quit the running safeeyes instance and exit'), action='store_true')
+    group.add_argument('-s', '--settings', help=_('show the settings dialog'), action='store_true')
+    group.add_argument('-t', '--take-break', help=_('Take a break now').lower(), action='store_true')
+    parser.add_argument('--debug', help=_('start safeeyes in debug mode'), action='store_true')
     parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
     args = parser.parse_args()
 
@@ -121,11 +128,6 @@ def main():
             rpc_client.show_settings()
         sys.exit(0)
     elif not args.quit:
-        logging.info("Starting Safe Eyes")
-        system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
-        system_locale.install()
-        # locale.bindtextdomain is required for Glade files
-        locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
         safeeyes = SafeEyes(system_locale, config)
         safeeyes.start()
         Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
