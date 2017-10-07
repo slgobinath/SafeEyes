@@ -50,6 +50,7 @@ class SafeEyesCore(object):
         self.pre_break_warning_time = 0
         self.running = False
         self.short_break_duration = 0
+        self.scheduled_next_break_time = -1
         # This event is fired before <time-to-prepare> for a break
         self.on_pre_break = EventHook()
         # This event is fired at the start of a break
@@ -89,7 +90,7 @@ class SafeEyesCore(object):
         self.next_break_index = (self.next_break_index) % self.break_count
         self.context['session']['next_break_index'] = self.next_break_index
 
-    def start(self):
+    def start(self, next_break_time=-1):
         """
         Start Safe Eyes is it is not running already.
         """
@@ -99,6 +100,7 @@ class SafeEyesCore(object):
             if not self.running:
                 logging.info("Start Safe Eyes core")
                 self.running = True
+                self.scheduled_next_break_time = int(next_break_time)
                 Utility.start_thread(self.__scheduler_job)
 
     def stop(self):
@@ -190,7 +192,13 @@ class SafeEyesCore(object):
             time_to_wait = self.postpone_duration
             self.context['postponed'] = False
 
-        next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
+        current_time = datetime.datetime.now()
+        current_timestamp = int(current_time.timestamp())
+        if current_timestamp < self.scheduled_next_break_time:
+            time_to_wait = int((self.scheduled_next_break_time - current_timestamp) / 60)
+            self.scheduled_next_break_time = -1
+
+        next_break_time = current_time + datetime.timedelta(minutes=time_to_wait)
         self.on_update_next_break.fire(next_break_time)
 
         if self.__is_long_break():

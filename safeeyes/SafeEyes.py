@@ -200,13 +200,13 @@ class SafeEyes(object):
             Timer(1.0, self.safe_eyes_core.start).start()
             self.plugins_manager.start()
 
-    def enable_safeeyes(self):
+    def enable_safeeyes(self, scheduled_next_break_time=-1):
         """
         Listen to tray icon enable action and send the signal to core.
         """
         if not self.active and self.safe_eyes_core.has_breaks():
             self.active = True
-            self.safe_eyes_core.start()
+            self.safe_eyes_core.start(scheduled_next_break_time)
             self.plugins_manager.start()
 
     def disable_safeeyes(self):
