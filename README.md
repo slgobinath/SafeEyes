@@ -1,9 +1,4 @@
 # Safe Eyes
-
-[![GitHub version](https://badge.fury.io/gh/slgobinath%2FSafeEyes.svg)](https://badge.fury.io/gh/slgobinath%2FSafeEyes)
-[![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
-[![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
-
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
@@ -17,87 +12,65 @@ Ensure to meet the following dependencies when compiling from source:
 - gir1.2-appindicator3-0.1
 - gir1.2-notify-0.7
 - libappindicator-gtk3
-- python3-pyaudio
 - python3-psutil
 - xprintidle (optional)
 
-## Customizing options
-One of the key advantage of Safe Eyes over other similar products is its highly customizable design. You can change almost everything in Safe Eyes. A detailed documentation is available in the official site: [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize)
+## Writing Plug-in for Safe Eyes
+A plugin is a combination of two files: `plugin.py` and `config.json`. These two files must be placed in a directory: `~/.config/safeeyes/plugins/<plugin-id>`. Optionally a plugin also can have an image file `icon.png` which is used to represent the plugin in the Settings dialog.
 
-## Contribute
-I started this project for my own use and later released it as an open source alternative to EyeLeo and progressively reached to the current state with the great support of open source community. Most of the creative ideas were suggested and implemented by users. You can always add more to Safe Eyes. I have listed some possible ways here: [How to contribute](http://slgobinath.github.io/SafeEyes/#contribute)
+For example, a Weather plugin may have the following file structure:
+```
+~
+└── .config
+    └── safeeyes
+        └── plugins
+            └── weather
+                ├── config.json
+                ├── icon.png
+                └── plugin.py
+```
 
-## Features
+The `icon.png` must be `24x24` pixels size. If `icon.png` is not available, the default gear icon <img src="https://github.com/slgobinath/SafeEyes/raw/safeeyes-2.0.0/safeeyes/resource/ic_plugin.png" width="16" height="16"/> will be shown in the Settings dialog.
 
-General Features:
+A sample `config.json` is provided below:
+```json
+{
+    "meta": {
+        "name": "Weather",
+        "description": "Show the current weather on break screen",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": ["pyowm"],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [
+        {
+            "id": "api",
+            "label": "OpenWeatherMap API Key",
+            "type": "TEXT",
+            "default": ""
+        },
+        {
+            "id": "location",
+            "label": "Location",
+            "type": "TEXT",
+            "default": ""
+        }
+    ],
+    "break_override_allowed": true
+}
+```
 
-- Short breaks with eye exercises
-- Long breaks to change physical position and to warm up
-- Disable the keyboard during break
-- Notifications before every break
-- Do not disturb when working with full-screen applications( Eg: Watching movies)
-- Smart pause and resume based on system idle time (Require `xprintidle`)
-- Multi-monitor support
-- Multi-language support
-- Elegant and customizable design
+The `meta` properties must provide the name of the plugin, a short description and the current version of the plugin.
 
-Optional Features:
+The `dependencies` property defines various dependency constraints of the plugin. The dependencies can be Python modules, commandline tools, desktop environments or Safe Eyes resources. The `operating_systems` property is reserved for operating system dependency but not checked for at the moment.
+If a dependency is not available, the Safe Eyes will not load the plugin. The Settings dialog will show a warning symbol <img src="https://github.com/slgobinath/SafeEyes/raw/safeeyes-2.0.0/safeeyes/resource/ic_warning.png" width="16" height="16"> and a message to install/check the missing dependencies. Dependencies are checked in the order of *Desktop Environment*, *Python Modules*, *Commandline Tools* and *Resources*. If a dependency is not available, Safe Eyes will stop looking for the rest.
 
-- Strict break for those who are addicted to computer
-- Postpone break
-- Skip or take break based on active windows (Regardless of full-screen-mode)
-- Customize individual break time
-- Define your own custom exercise
-- Audible alert at the end of break
-- Turn on/off audible alert for individual breaks
-- Customize disable time period
-- Lock screen after long breaks
-- Add images to breaks
-- Plug-in support to extend Safe Eyes
-
-For more details: [SafeEyes Features](http://slgobinath.github.io/SafeEyes/#features)
-
-## Currently available translations
- * [Català](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ca.json)
- * [Čeština](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/cs.json)
- * [Deutsch](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/de.json)
- * [English](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/en.json)
- * [Español](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/es.json)
- * [فارسی](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fa.json)
- * [Français](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/fr.json)
- * [ქართული](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ge.json)
- * [हिंदी](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hi.json)
- * [Magyar](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/hu.json)
- * [Bahasa Indonesia](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/id.json)
- * [Македонски](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/mk.json)
- * [Polski](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pl.json)
- * [Português](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/pt.json)
- * [Русский](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ru.json)
- * [Slovenský](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/sk.json)
- * [தமிழ்](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/ta.json)
- * [Türkçe](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/tr.json)
- * [Українська](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/uk.json)
- * [Tiếng Việt](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/config/lang/vi.json)
-
-Do you want to see your language here? Please translate Safe Eyes to whatever the languages you know. Visit to **Translate Safe Eyes** in [Customize Safe Eyes](http://slgobinath.github.io/SafeEyes/#customize) to see how to translate.
-
-## Tested Environments
-
-Core functionalities of Safe Eyes are tested by the developer in the following environments:
-
-* Antergos 17.4
-* Elementary OS Loki
-* Fedora 25
-* Kubuntu 17.04
-* Linux Mint 18.1
-* Manjaro 16.10.3
-* Ubuntu 14.04
-* Ubuntu 16.04
-* Ubuntu 16.10
-* Ubuntu Budgie 17.04
-* Ubuntu Mate 16.04
-* Xubuntu 16.10
-
+The configurations related to the plugin must be defined in `settings`. Each setting must have an `id`, `label`, `type` and a default value matching the `type`. Safe Eyes 2.0.0 supports only the following types: `INT`, `TEXT` and `BOOL`. According to the types, Settings dialog will show a *Spin*, *Text Field* or *Switch Button* as the input field.
 ## License
 
 GNU General Public License v3

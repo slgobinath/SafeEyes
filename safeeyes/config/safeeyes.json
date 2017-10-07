@@ -1,85 +1,119 @@
 {
     "meta": {
-            "config_version": "5.0.1"
+            "config_version": "6.0.0"
     },
     "allow_postpone": false,
     "break_interval": 15,
-    "enable_screen_lock": false,
     "long_break_duration": 60,
     "no_of_short_breaks_per_long_break": 5,
     "pre_break_warning_time": 10,
     "short_break_duration": 15,
-    "idle_time": 5,
-    "persist_state": true,
+    "persist_state": false,
     "postpone_duration": 5,
+    "rpc_port": 7200,
     "shortcut_disable_time": 2,
     "shortcut_skip": 9,
     "shortcut_postpone": 65,
-    "show_time_in_tray": false,
     "strict_break": false,
-    "audible_alert": false,
-    "language": "system",
-    "time_to_screen_lock": 5,
-    "lock_screen_command": [],
-    "active_window_class": {
-        "skip_break": [],
-        "take_break": []
-    },
-    "disable_options": [
-        {
-            "label": "for_x_minutes",
-            "time": 30,
-            "unit": "minute"
-        },
-        {
-            "label": "for_x_hour",
-            "time": 1,
-            "unit": "hour"
-        },
-        {
-            "label": "for_x_hours",
-            "time": 2,
-            "unit": "hour"
-        },
-        {
-            "label": "for_x_hours",
-            "time": 3,
-            "unit": "hour"
-        }
-    ],
     "short_breaks": [
         {
-            "name": "short_break_close_eyes"
+            "name": "Tightly close your eyes"
         },
         {
-            "name": "short_break_roll_eyes"
+            "name": "Roll your eyes a few times to each side"
         },
         {
-            "name": "short_break_rotate_clockwise"
+            "name": "Rotate your eyes in clockwise direction"
         },
         {
-            "name": "short_break_rotate_counter_clockwise"
+            "name": "Rotate your eyes in counterclockwise direction"
         },
         {
-            "name": "short_break_blink"
+            "name": "Blink your eyes"
         },
         {
-            "name": "short_break_focus_far_distance"
+            "name": "Focus on a point in the far distance"
         },
         {
-            "name": "short_break_drink_water"
+            "name": "Have some water"
         }
     ],
     "long_breaks": [
         {
-            "name": "long_break_walk"
+            "name": "Walk for a while"
         },
         {
-            "name": "long_break_lean_back"
+            "name": "Lean back at your seat and relax"
         }
     ],
-    "custom_exercises": {
-
-    },
-    "plugins": []
+    "plugins": [
+        {
+            "id": "donotdisturb",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "skip_break_windows": "",
+                "take_break_windows": "",
+                "unfullscreen": true
+            }
+        },
+        {
+            "id": "notification",
+            "enabled": true,
+            "version": "0.0.1"
+        },
+        {
+            "id": "audiblealert",
+            "enabled": true,
+            "version": "0.0.1"
+        },
+        {
+            "id": "trayicon",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "show_time_in_tray": false,
+                "disable_options": [
+                    {
+                        "time": 30,
+                        "unit": "minute"
+                    },
+                    {
+                        "time": 1,
+                        "unit": "hour"
+                    },
+                    {
+                        "time": 2,
+                        "unit": "hour"
+                    },
+                    {
+                        "time": 3,
+                        "unit": "hour"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "smartpause",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "idle_time": 3
+            }
+        },
+        {
+            "id": "screensaver",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "command": "",
+                "min_seconds": 3
+            }
+        },
+        {
+            "id": "healthstats",
+            "enabled": false,
+            "version": "0.0.1"
+        }
+    ]
 }

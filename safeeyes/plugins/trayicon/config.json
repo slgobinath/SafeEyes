@@ -1,0 +1,45 @@
+{
+    "meta": {
+        "name": "Tray Icon",
+        "description": "Show a tray icon in the notification area",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [
+        {
+            "id": "show_time_in_tray",
+            "label": "Show next break time in tray icon",
+            "type": "BOOL",
+            "default": false
+        },
+        {
+            "id": "disable_options",
+            "label": "Disable options",
+            "type": "HIDDEN",
+            "default": [
+                {
+                    "time": 30,
+                    "unit": "minute"
+                },
+                {
+                    "time": 1,
+                    "unit": "hour"
+                },
+                {
+                    "time": 2,
+                    "unit": "hour"
+                },
+                {
+                    "time": 3,
+                    "unit": "hour"
+                }
+            ]
+        }
+    ]
+}

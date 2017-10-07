@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "name": "Audible Alert",
+        "description": "Play an audible alert at the end of breaks",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": ["aplay"],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": ["alert.wav"]
+    },
+    "settings": [],
+    "break_override_allowed": true
+}

@@ -1,0 +1,35 @@
+{
+    "meta": {
+        "name": "Do Not Disturb",
+        "description": "Skip the break if the active window is in fullscreen mode",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": ["xprop"],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [
+        {
+            "id": "skip_break_windows",
+            "label": "Do not interrupt these windows anytime",
+            "type": "TEXT",
+            "default": ""
+        },
+        {
+            "id": "take_break_windows",
+            "label": "Interrupt these windows regardless of their state",
+            "type": "TEXT",
+            "default": ""
+        },
+        {
+            "id": "unfullscreen",
+            "label": "Switch the interruptible windows to normal mode",
+            "type": "BOOL",
+            "default": true
+        }
+    ],
+    "break_override_allowed": true
+}

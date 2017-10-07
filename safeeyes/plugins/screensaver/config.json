@@ -1,0 +1,29 @@
+{
+    "meta": {
+        "name": "Screensaver",
+        "description": "Lock the screen after long breaks by starting screensaver",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [
+        {
+            "id": "command",
+            "label": "Custom screensaver command",
+            "type": "TEXT",
+            "default": ""
+        },
+        {
+            "id": "min_seconds",
+            "label": "Minimum seconds to skip without screensaver",
+            "type": "INT",
+            "default": 3
+        }
+    ],
+    "break_override_allowed": true
+}

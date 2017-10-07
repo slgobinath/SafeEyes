@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "name": "Health Statistics",
+        "description": "Show statistics based on how you use Safe Eyes",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [],
+    "break_override_allowed": true
+}

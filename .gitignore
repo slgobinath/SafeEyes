@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Glade temporary files
+*.glade~
+
 # Distribution / packaging
 .Python
 env/
@@ -92,3 +95,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Visual Studio Code settings
+.vscode/

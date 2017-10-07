@@ -72,8 +72,24 @@
     color: white;
 }
 
-.panel_left {
+.lbl_widget {
+    font-size: 9pt;
+    color: white;
 }
 
-.panel_right {
+.btn_properties {
+    border-radius: 15px;    
+}
+
+.lbl_plugin_name {
+    font-weight: bold;
+}
+
+.lbl_plugin_description {
+    color: #9B9B9B;
+}
+
+.info_bar_long_break {
+    opacity: 0.9;
+    border-radius: 5px;
 }

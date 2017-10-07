@@ -1,4 +1,5 @@
 import os
+import subprocess
 import setuptools
 
 
@@ -7,27 +8,57 @@ requires = [
     'psutil',
     'babel']
 
-extras = {
-    'audible_alert': ['pyaudio']
-}
+_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-
-here = os.path.abspath(os.path.dirname(__file__))
-
-with open(os.path.join(here, 'README.md')) as f:
+with open(os.path.join(_ROOT, 'README.md')) as f:
     long_description = '\n' + f.read()
 
 
+def __compile_po_files():
+    """
+    Compile the *.po trainslation files.
+    """
+    localedir = 'safeeyes/config/locale'
+    po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
+               for l in next(os.walk(localedir))[1]]
+    for po_dir in po_dirs:
+        po_files = [f
+                    for f in next(os.walk(po_dir))[2]
+                    if os.path.splitext(f)[1] == '.po']
+        for po_file in po_files:
+            filename, ext = os.path.splitext(po_file)
+            mo_file = filename + '.mo'
+            msgfmt_cmd = 'msgfmt {} -o {}'.format(po_dir + po_file, po_dir + mo_file)
+            subprocess.call(msgfmt_cmd, shell=True)
+
 def _data_files(path):
+    """
+    Collect the data files.
+    """
     for root, dirs, files in os.walk(path):
         if not files:
             continue
         yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
 
+def __package_files(directory):
+    """
+    Collect the package files.
+    """
+    paths = []
+    for (path, dirs, filenames) in os.walk(directory):
+        for filename in filenames:
+            paths.append(os.path.join('..', path, filename))
+    return paths
+
+__compile_po_files()
+__package_data = ['glade/*.glade', 'resource/*']
+__package_data.extend(__package_files('safeeyes/config'))
+__package_data.extend(__package_files('safeeyes/plugins'))
+__data_files = list(_data_files('share'))
 
 setuptools.setup(
     name="safeeyes",
-    version="1.2.2",
+    version="2.0.0",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
@@ -35,25 +66,9 @@ setuptools.setup(
     url="https://github.com/slgobinath/SafeEyes",
     download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.2.tar.gz",
     packages=setuptools.find_packages(),
-    package_data={'safeeyes': ['config/*.json',
-                               'config/style/*.css',
-                               'config/lang/*.json',
-                               'glade/*.glade',
-                               'resource/*']},
-    data_files=[('/usr/share/applications', ['share/applications/safeeyes.desktop']),
-                ('/usr/share/icons/hicolor/16x16/apps', ['share/icons/hicolor/16x16/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/24x24/apps', ['share/icons/hicolor/24x24/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/48x48/apps', ['share/icons/hicolor/48x48/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/32x32/apps', ['share/icons/hicolor/32x32/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/64x64/apps', ['share/icons/hicolor/64x64/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/128x128/apps', ['share/icons/hicolor/128x128/apps/safeeyes.png']),
-                ('/usr/share/icons/hicolor/48x48/status', ['share/icons/hicolor/48x48/status/safeeyes_enabled.png', 'share/icons/hicolor/48x48/status/safeeyes_disabled.png']),
-                ('/usr/share/icons/hicolor/32x32/status', ['share/icons/hicolor/32x32/status/safeeyes_enabled.png', 'share/icons/hicolor/32x32/status/safeeyes_disabled.png']),
-                ('/usr/share/icons/hicolor/24x24/status', ['share/icons/hicolor/24x24/status/safeeyes_enabled.png', 'share/icons/hicolor/24x24/status/safeeyes_disabled.png', 'share/icons/hicolor/24x24/status/safeeyes_timer.png']),
-                ('/usr/share/icons/hicolor/16x16/status', ['share/icons/hicolor/16x16/status/safeeyes_enabled.png', 'share/icons/hicolor/16x16/status/safeeyes_disabled.png', 'share/icons/hicolor/16x16/status/safeeyes_timer.png'])
-                ],
+    package_data={'safeeyes': __package_data},
+    data_files=__data_files,
     install_requires=requires,
-    extras_require=extras,
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[

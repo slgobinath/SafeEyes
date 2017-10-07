@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -15,338 +16,329 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+SafeEyesCore provides the core functionalities of Safe Eyes.
+"""
 
+import datetime
+import logging
+import threading
+import time
 
-import time, datetime, threading, logging
 from safeeyes import Utility
+from safeeyes.model import Break
+from safeeyes.model import BreakType
+from safeeyes.model import EventHook
+from safeeyes.model import State
 
 
-class SafeEyesCore:
-	"""
-	Core of Safe Eyes which runs the scheduler and notifies the breaks.
-	"""
+class SafeEyesCore(object):
+    """
+    Core of Safe Eyes runs the scheduler and notifies the breaks.
+    """
 
-	def __init__(self, context, show_notification, start_break, end_break, on_countdown, update_next_break_info):
-		# Initialize the variables
-		self.break_count = -1
-		self.long_break_message_index = -1
-		self.short_break_message_index = -1
-		self.active = False
-		self.running = False
-		self.show_notification = show_notification
-		self.start_break = start_break
-		self.end_break = end_break
-		self.on_countdown = on_countdown
-		self.update_next_break_info = update_next_break_info
-		self.notification_condition = threading.Condition()
-		self.idle_condition = threading.Condition()
-		self.lock = threading.Lock()
-		self.context = context
-		self.context['skipped'] = False
-		self.context['postponed'] = False
+    def __init__(self, context):
+        """
+        Create an instance of SafeEyesCore and initialize the variables.
+        """
+        self.break_count = 0
+        self.break_interval = 0
+        self.breaks = None
+        self.long_break_duration = 0
+        self.next_break_index = context['session'].get('next_break_index', 0)
+        self.postpone_duration = 0
+        self.pre_break_warning_time = 0
+        self.running = False
+        self.short_break_duration = 0
+        self.scheduled_next_break_time = -1
+        # This event is fired before <time-to-prepare> for a break
+        self.on_pre_break = EventHook()
+        # This event is fired at the start of a break
+        self.on_start_break = EventHook()
+        # This event is fired during every count down
+        self.on_count_down = EventHook()
+        # This event is fired at the end of a break
+        self.on_stop_break = EventHook()
+        # This event is fired when deciding the next break time
+        self.on_update_next_break = EventHook()
+        self.waiting_condition = threading.Condition()
+        self.lock = threading.Lock()
+        self.context = context
+        self.context['skipped'] = False
+        self.context['postponed'] = False
+        self.context['state'] = State.WAITING
+        self.context['new_cycle'] = False
 
-	def initialize(self, config, language):
-		"""
-		Initialize the internal properties from configuration
-		"""
-		logging.info("Initialize the core")
-		self.short_break_exercises = []    # language['exercises']['short_break_exercises']
-		self.long_break_exercises = []     # language['exercises']['long_break_exercises']
+    def initialize(self, config):
+        """
+        Initialize the internal properties from configuration
+        """
+        logging.info("Initialize the core")
+        self.breaks = []
+        self.pre_break_warning_time = config.get('pre_break_warning_time')
+        self.long_break_duration = config.get('long_break_duration')
+        self.short_break_duration = config.get('short_break_duration')
+        self.break_interval = config.get('break_interval')
+        self.postpone_duration = config.get('postpone_duration')
 
-		self.no_of_short_breaks_per_long_break = config['no_of_short_breaks_per_long_break']
-		self.pre_break_warning_time = config['pre_break_warning_time']
-		self.long_break_duration = config['long_break_duration']
-		self.short_break_duration = config['short_break_duration']
-		self.break_interval = config['break_interval']
-		self.idle_time = config['idle_time']
-		self.postpone_duration = config['postpone_duration']
-		self.skip_break_window_classes = [x.lower() for x in config['active_window_class']['skip_break']]
-		self.take_break_window_classes = [x.lower() for x in config['active_window_class']['take_break']]
-		self.custom_exercises = config['custom_exercises']
-		# Enable idle time pause only if xprintidle is available
-		self.context['idle_pause_enabled'] = Utility.command_exist('xprintidle')
+        self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
+        self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
+        self.break_count = len(self.breaks)
+        if self.break_count == 0:
+            # No breaks found
+            return
+        self.next_break_index = (self.next_break_index) % self.break_count
+        self.context['session']['next_break_index'] = self.next_break_index
 
-		exercises = language['exercises']
-		for short_break_config in config['short_breaks']:
-			exercise_name = short_break_config['name']
-			name = None
+    def start(self, next_break_time=-1):
+        """
+        Start Safe Eyes is it is not running already.
+        """
+        if not self.has_breaks():
+            return
+        with self.lock:
+            if not self.running:
+                logging.info("Start Safe Eyes core")
+                self.running = True
+                self.scheduled_next_break_time = int(next_break_time)
+                Utility.start_thread(self.__scheduler_job)
 
-			if exercise_name in self.custom_exercises:
-				name = self.custom_exercises[exercise_name]
-			else:
-				name = exercises[exercise_name]
+    def stop(self):
+        """
+        Stop Safe Eyes if it is running.
+        """
+        with self.lock:
+            if not self.running:
+                return
 
-			break_time = short_break_config.get('time', self.short_break_duration)
-			audible_alert = short_break_config.get('audible_alert', config['audible_alert'])
-			image = short_break_config.get('image')
+            logging.info("Stop Safe Eye core")
 
-			# Validate time value
-			if not isinstance(break_time, int) or break_time <= 0:
-				logging.error('Invalid time in short break: ' + str(short_break_config))
-				continue
+            # Prevent resuming from a long break
+            if self.has_breaks() and self.__is_long_break():
+                # Next break will be a long break.
+                self.__select_next_break()
 
-			self.short_break_exercises.append([name, break_time, audible_alert, image])
+            # Stop the break thread
+            self.waiting_condition.acquire()
+            self.running = False
+            if self.context['state'] != State.QUIT:
+                self.context['state'] = State.STOPPED
+            self.waiting_condition.notify_all()
+            self.waiting_condition.release()
 
-		for long_break_config in config['long_breaks']:
-			exercise_name = long_break_config['name']
-			name = None
+    def skip(self):
+        """
+        User skipped the break using Skip button
+        """
+        self.context['skipped'] = True
 
-			if exercise_name in self.custom_exercises:
-				name = self.custom_exercises[exercise_name]
-			else:
-				name = exercises[exercise_name]
+    def postpone(self):
+        """
+        User postponed the break using Postpone button
+        """
+        self.context['postponed'] = True
 
-			break_time = long_break_config.get('time', self.long_break_duration)
-			audible_alert = long_break_config.get('audible_alert', config['audible_alert'])
-			image = long_break_config.get('image')
+    def take_break(self):
+        """
+        Calling this method stops the scheduler and show the next break screen
+        """
+        if not self.has_breaks():
+            return
+        if not self.context['state'] == State.WAITING:
+            return
+        Utility.start_thread(self.__take_break)
 
-			# Validate time value
-			if not isinstance(break_time, int) or break_time <= 0:
-				logging.error('Invalid time in long break: ' + str(long_break_config))
-				continue
+    def has_breaks(self):
+        """
+        Check whether Safe Eyes has breaks or not.
+        """
+        return bool(self.breaks)
 
-			self.long_break_exercises.append([name, break_time, audible_alert, image])
+    def __take_break(self):
+        """
+        Show the next break screen
+        """
+        logging.info('Take a break due to external request')
 
-	def start(self):
-		"""
-		Start Safe Eyes is it is not running already.
-		"""
-		with self.lock:
-			if not self.active:
-				logging.info("Scheduling next break")
-				self.active = True
-				self.running = True
-				Utility.start_thread(self.__scheduler_job)
-				if self.context['idle_pause_enabled']:
-					Utility.start_thread(self.__start_idle_monitor)
+        with self.lock:
+            if not self.running:
+                return
 
-	def stop(self):
-		"""
-		Stop Safe Eyes if it is running.
-		"""
-		with self.lock:
-			if self.active:
-				logging.info("Stop the core")
+            logging.info("Stop the scheduler")
 
-				# Prevent resuming from a long break
-				current_break_count = self.break_count = 0
-				self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
-				if self.__is_long_break():
-					# Next break will be a long break. Leave the increment so that next break will be short break after the long
-					pass
-				else:
-					# Reset to the current state
-					self.break_count = current_break_count
+            # Stop the break thread
+            self.waiting_condition.acquire()
+            self.running = False
+            self.waiting_condition.notify_all()
+            self.waiting_condition.release()
+            time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
+            self.running = True
 
-				# Stop the break thread
-				self.notification_condition.acquire()
-				self.active = False
-				self.running = False
-				self.notification_condition.notify_all()
-				self.notification_condition.release()
+        self.context['new_cycle'] = self.next_break_index == 0
+        Utility.execute_main_thread(self.__fire_start_break)
 
-				# Stop the idle monitor
-				self.idle_condition.acquire()
-				self.idle_condition.notify_all()
-				self.idle_condition.release()
+    def __scheduler_job(self):
+        """
+        Scheduler task to execute during every interval
+        """
+        if not self.running:
+            return
 
-	def pause(self):
-		"""
-		Pause Safe Eyes if it is running.
-		"""
-		with self.lock:
-			if self.active and self.running:
-				self.notification_condition.acquire()
-				self.running = False
-				self.notification_condition.notify_all()
-				self.notification_condition.release()
+        self.context['state'] = State.WAITING
+        time_to_wait = self.break_interval    # In minutes
 
-	def resume(self):
-		"""
-		Resume Safe Eyes if it is not running.
-		"""
-		with self.lock:
-			if self.active and not self.running:
-				self.running = True
-				Utility.start_thread(self.__scheduler_job)
+        if self.context['postponed']:
+            # Wait until the postpone time
+            time_to_wait = self.postpone_duration
+            self.context['postponed'] = False
 
-	def skip_break(self):
-		"""
-		User skipped the break using Skip button
-		"""
-		self.context['skipped'] = True
+        current_time = datetime.datetime.now()
+        current_timestamp = int(current_time.timestamp())
+        if current_timestamp < self.scheduled_next_break_time:
+            time_to_wait = int((self.scheduled_next_break_time - current_timestamp) / 60)
+            self.scheduled_next_break_time = -1
 
-	def postpone_break(self):
-		"""
-		User postponed the break using Postpone button
-		"""
-		self.context['postponed'] = True
+        next_break_time = current_time + datetime.timedelta(minutes=time_to_wait)
+        self.on_update_next_break.fire(next_break_time)
 
-	def __scheduler_job(self):
-		"""
-		Scheduler task to execute during every interval
-		"""
-		if not self.__is_running():
-			return
+        if self.__is_long_break():
+            self.context['break_type'] = 'long'
+        else:
+            self.context['break_type'] = 'short'
 
-		time_to_wait = self.break_interval    # In minutes
+        # Wait for the pre break warning period
+        logging.info("Waiting for %s minutes until next break", time_to_wait)
+        self.__wait_for(time_to_wait * 60)    # Convert to seconds
 
-		if self.context['postponed']:
-			# Reduce the break count by 1 to show the same break again
-			if self.break_count == 0:
-				self.break_count = -1
-			else:
-				self.break_count = ((self.break_count - 1) % self.no_of_short_breaks_per_long_break)
-			if self.__is_long_break():
-				self.long_break_message_index = (self.long_break_message_index - 1) % len(self.long_break_exercises)
-			else:
-				self.short_break_message_index = (self.short_break_message_index - 1) % len(self.short_break_exercises)
+        logging.info("Pre-break waiting is over")
 
-			# Wait until the postpone time
-			time_to_wait = self.postpone_duration
-			self.context['postponed'] = False
+        if not self.running:
+            return
 
-		next_break_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
-		self.update_next_break_info(next_break_time)
+        self.context['new_cycle'] = self.next_break_index == 0
+        Utility.execute_main_thread(self.__fire_pre_break)
 
-		self.break_count = ((self.break_count + 1) % self.no_of_short_breaks_per_long_break)
-		if self.__is_long_break():
-			self.context['break_type'] = 'long'
-		else:
-			self.context['break_type'] = 'short'
+    def __fire_pre_break(self):
+        """
+        Show the notification and start the break after the notification.
+        """
+        self.context['state'] = State.PRE_BREAK
+        if not self.on_pre_break.fire(self.breaks[self.next_break_index]):
+            # Plugins wanted to ignore this break
+            self.__start_next_break()
+            return
+        Utility.start_thread(self.__wait_until_prepare)
 
-		# Wait for the pre break warning period
-		logging.info("Pre-break waiting for {} minutes".format(time_to_wait))
-		self.notification_condition.acquire()
-		self.notification_condition.wait(time_to_wait * 60)    # Convert to seconds
-		self.notification_condition.release()
+    def __wait_until_prepare(self):
+        logging.info("Wait for %d seconds before the break", self.pre_break_warning_time)
+        # Wait for the pre break warning period
+        self.__wait_for(self.pre_break_warning_time)
+        if not self.running:
+            return
+        Utility.execute_main_thread(self.__fire_start_break)
 
-		logging.info("Pre-break waiting is over")
+    def __fire_start_break(self):
+        # Show the break screen
+        if not self.on_start_break.fire(self.breaks[self.next_break_index]):
+            # Plugins wanted to ignore this break
+            self.__start_next_break()
+            return
+        Utility.start_thread(self.__start_break)
 
-		if not self.__is_running():
-			return
+    def __start_break(self):
+        """
+        Start the break screen.
+        """
+        self.context['state'] = State.BREAK
+        break_obj = self.breaks[self.next_break_index]
+        countdown = break_obj.time
+        total_break_time = countdown
 
-		logging.info("Ready to show the break")
+        while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
+            seconds = total_break_time - countdown
+            self.on_count_down.fire(countdown, seconds)
+            time.sleep(1)    # Sleep for 1 second
+            countdown -= 1
+        Utility.execute_main_thread(self.__fire_stop_break)
 
-		self.is_before_break = False
-		Utility.execute_main_thread(self.__check_active_window)
+    def __fire_stop_break(self):
+        # Loop terminated because of timeout (not skipped) -> Close the break alert
+        if not self.context['skipped'] and not self.context['postponed']:
+            logging.info("Break is terminated automatically")
+            self.on_stop_break.fire()
 
-	def __show_notification(self):
-		"""
-		Show the notification and start the break after the notification.
-		"""
-		# Show the notification
-		self.show_notification()
+        # Reset the skipped flag
+        self.context['skipped'] = False
+        self.__start_next_break()
 
-		logging.info("Wait for {} seconds which is the time to prepare".format(self.pre_break_warning_time))
-		# Wait for the pre break warning period
-		self.notification_condition.acquire()
-		self.notification_condition.wait(self.pre_break_warning_time)
-		self.notification_condition.release()
+    def __wait_for(self, duration):
+        """
+        Wait until someone wake up or the timeout happens.
+        """
+        self.waiting_condition.acquire()
+        self.waiting_condition.wait(duration)
+        self.waiting_condition.release()
 
-		self.is_before_break = True
-		Utility.execute_main_thread(self.__check_active_window)
+    def __select_next_break(self):
+        """
+        Select the next break.
+        """
+        self.next_break_index = (self.next_break_index + 1) % self.break_count
+        self.context['session']['next_break_index'] = self.next_break_index
 
-	def __check_active_window(self):
-		"""
-		Check the active window for full-screen and user defined exceptions.
-		"""
-		# Check the active window again. (User might changed the window)
-		if self.__is_running() and Utility.is_active_window_skipped(self.skip_break_window_classes, self.take_break_window_classes, self.is_before_break):
-			# If full screen app found, do not show break screen
-			logging.info("Found a skip_break or full-screen window. Skip the break")
-			if self.__is_running():
-				# Schedule the break again
-				Utility.start_thread(self.__scheduler_job)
-			return
+    def __is_long_break(self):
+        """
+        Check if the next break is long break.
+        """
+        return self.breaks[self.next_break_index].type is BreakType.LONG_BREAK
 
-		# Execute the post-operation
-		if self.is_before_break:
-			Utility.start_thread(self.__start_break)
-		else:
-			Utility.start_thread(self.__show_notification)
+    def __start_next_break(self):
+        if not self.context['postponed']:
+            self.__select_next_break()
 
-	def __start_break(self):
-		"""
-		Start the break screen.
-		"""
-		# User can disable SafeEyes during notification
-		if self.__is_running():
-			message = ""
-			image = None
-			seconds = 0
-			audible_alert = None
-			if self.__is_long_break():
-				logging.info("Count is {}; get a long beak message".format(self.break_count))
-				self.long_break_message_index = (self.long_break_message_index + 1) % len(self.long_break_exercises)
-				message = self.long_break_exercises[self.long_break_message_index][0]
-				seconds = self.long_break_exercises[self.long_break_message_index][1]
-				audible_alert = self.long_break_exercises[self.long_break_message_index][2]
-				image = self.long_break_exercises[self.long_break_message_index][3]
-			else:
-				logging.info("Count is {}; get a short beak message".format(self.break_count))
-				self.short_break_message_index = (self.short_break_message_index + 1) % len(self.short_break_exercises)
-				message = self.short_break_exercises[self.short_break_message_index][0]
-				seconds = self.short_break_exercises[self.short_break_message_index][1]
-				audible_alert = self.short_break_exercises[self.short_break_message_index][2]
-				image = self.short_break_exercises[self.short_break_message_index][3]
+        if self.running:
+            # Schedule the break again
+            Utility.start_thread(self.__scheduler_job)
 
-			self.context['break_length'] = seconds
-			self.context['audible_alert'] = audible_alert
-			total_break_time = seconds
+    def __init_breaks(self, break_type, break_configs, short_breaks_per_long_break=0):
+        """
+        Fill the self.breaks using short and local breaks.
+        """
+        # Defin the default break time
+        default_break_time = self.short_break_duration
 
-			# Show the break screen
-			self.start_break(message, image)
+        # Duplicate short breaks to equally distribute the long breaks
+        if break_type is BreakType.LONG_BREAK:
+            if self.breaks:
+                default_break_time = self.long_break_duration
+                required_short_breaks = short_breaks_per_long_break * len(break_configs)
+                no_of_short_breaks = len(self.breaks)
+                short_break_index = 0
+                while no_of_short_breaks < required_short_breaks:
+                    self.breaks.append(self.breaks[short_break_index])
+                    short_break_index += 1
+                    no_of_short_breaks += 1
+            else:
+                # If there are no short breaks, extend the break interval according to long break interval
+                self.break_interval = int(self.break_interval * short_breaks_per_long_break)
 
-			# Use self.active instead of self.__is_running to avoid idle pause interrupting the break
-			while seconds and self.active and not self.context['skipped'] and not self.context['postponed']:
-				count_down = total_break_time - seconds
-				self.context['count_down'] = count_down
-				self.on_countdown(count_down, seconds)
-				time.sleep(1)    # Sleep for 1 second
-				seconds -= 1
+        iteration = 1
+        for break_config in break_configs:
+            name = _(break_config['name'])
+            break_time = break_config.get('duration', default_break_time)
+            image = break_config.get('image')
+            plugins = break_config.get('plugins', None)
 
-			# Loop terminated because of timeout (not skipped) -> Close the break alert
-			if not self.context['skipped'] and not self.context['postponed']:
-				logging.info("Break is terminated automatically")
-				self.end_break(audible_alert)
+            # Validate time value
+            if not isinstance(break_time, int) or break_time <= 0:
+                logging.error('Invalid time in break: ' + str(break_config))
+                continue
 
-			# Reset the skipped flag
-			self.context['skipped'] = False
-
-			# Resume
-			if self.__is_running():
-				# Schedule the break again
-				Utility.start_thread(self.__scheduler_job)
-
-	def __is_running(self):
-		"""
-		Tells whether Safe Eyes is running or not.
-		"""
-		return self.active and self.running
-
-	def __is_long_break(self):
-		"""
-		Check if the current break is long break or short current
-		"""
-		return self.break_count == self.no_of_short_breaks_per_long_break - 1
-
-	def __start_idle_monitor(self):
-		"""
-		Continuously check the system idle time and pause/resume Safe Eyes based on it.
-		"""
-		while self.active:
-			# Wait for 2 seconds
-			self.idle_condition.acquire()
-			self.idle_condition.wait(2)
-			self.idle_condition.release()
-
-			if self.active:
-				# Get the system idle time
-				system_idle_time = Utility.system_idle_time()
-				if system_idle_time >= self.idle_time and self.running:
-					logging.info('Pause Safe Eyes due to system idle')
-					self.pause()
-				elif system_idle_time < self.idle_time and not self.running:
-					logging.info('Resume Safe Eyes due to user activity')
-					self.resume()
+            break_obj = Break(break_type, name, break_time, image, plugins)
+            if break_type is BreakType.SHORT_BREAK:
+                self.breaks.append(break_obj)
+            else:
+                # Long break
+                index = iteration * (short_breaks_per_long_break + 1) - 1
+                self.breaks.insert(index, break_obj)
+                iteration += 1
