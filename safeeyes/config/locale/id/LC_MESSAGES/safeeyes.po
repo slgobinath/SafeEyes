@@ -1,0 +1,306 @@
+# SAFE EYES ENGLISH TRANSLATION.
+# Copyright (C) 2017 Gobinath
+# Gobinath slgobinath@gmail.com, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: id\n"
+
+# Short Breaks
+msgid "Tightly close your eyes"
+msgstr ""
+
+msgid "Roll your eyes a few times to each side"
+msgstr ""
+
+msgid "Rotate your eyes in clockwise direction"
+msgstr ""
+
+msgid "Rotate your eyes in counterclockwise direction"
+msgstr ""
+
+msgid "Blink your eyes"
+msgstr ""
+
+msgid "Focus on a point in the far distance"
+msgstr ""
+
+msgid "Have some water"
+msgstr ""
+
+# Long Breaks
+msgid "Walk for a while"
+msgstr ""
+
+msgid "Lean back at your seat and relax"
+msgstr ""
+
+# Commandline Arguments
+msgid "show the about dialog"
+msgstr ""
+
+msgid "disable the currently running safeeyes instance"
+msgstr ""
+
+msgid "enable the currently running safeeyes instance"
+msgstr ""
+
+msgid "quit the running safeeyes instance and exit"
+msgstr ""
+
+msgid "show the settings dialog"
+msgstr ""
+
+msgid "start safeeyes in debug mode"
+msgstr ""
+
+# AboutDialog
+msgid "Close"
+msgstr ""
+
+msgid "description"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+# BreakScreen
+msgid "Skip"
+msgstr ""
+
+msgid "Postpone"
+msgstr ""
+
+# Settings dialog
+msgid "Break duration (in seconds)"
+msgstr ""
+
+msgid "Interval between two breaks (in minutes)"
+msgstr ""
+
+msgid "Time to prepare for a break (in seconds)"
+msgstr ""
+
+msgid "Keyboard shortcuts disabled period (in seconds)"
+msgstr ""
+
+msgid "Postpone duration (in minutes)"
+msgstr ""
+
+msgid "Strict break (No way to skip breaks)"
+msgstr ""
+
+msgid "Allow postponing breaks"
+msgstr ""
+
+msgid "Persist the internal state"
+msgstr ""
+
+msgid "Long break interval must be a multiple of short break interval"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Short Breaks"
+msgstr ""
+
+msgid "Long Breaks"
+msgstr ""
+
+msgid "Break"
+msgstr ""
+
+msgid "Breaks"
+msgstr ""
+
+msgid "Plugins"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Short"
+msgstr ""
+
+msgid "Long"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Please select an image"
+msgstr ""
+
+msgid "Duration"
+msgstr ""
+
+msgid "Override"
+msgstr ""
+
+msgid "Time (in seconds)"
+msgstr ""
+
+msgid "Break Settings"
+msgstr ""
+
+msgid "Plugin Settings"
+msgstr ""
+
+msgid "Plugin does not support %s desktop environment"
+msgstr ""
+
+msgid "Please install the Python module '%s'"
+msgstr ""
+
+msgid "Please install the command-line tool '%s'"
+msgstr ""
+
+msgid "Please add the resource %(resource)s to %(config_resource)s directory"
+msgstr ""
+
+msgid "New Break"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Discard"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Audible Alert"
+msgstr ""
+
+msgid "Play an audible alert at the end of breaks"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Do Not Disturb"
+msgstr ""
+
+msgid "Skip the break if the active window is in fullscreen mode"
+msgstr ""
+
+msgid "Do not interrupt these windows anytime"
+msgstr ""
+
+msgid "Interrupt these windows regardless of their state"
+msgstr ""
+
+msgid "Switch the interruptible windows to normal mode"
+msgstr ""
+
+# plugin/healthstats
+msgid "Health Statistics"
+msgstr ""
+
+msgid "Show statistics based on how you use Safe Eyes"
+msgstr ""
+
+# plugin/notification
+msgid "Notification"
+msgstr ""
+
+msgid "Show a system notification before breaks"
+msgstr ""
+
+msgid "Ready for a short break in %s seconds"
+msgstr ""
+
+msgid "Ready for a long break in %s seconds"
+msgstr ""
+
+# plugin/screensaver
+msgid "Screensaver"
+msgstr ""
+
+msgid "Lock the screen after long breaks by starting screensaver"
+msgstr ""
+
+msgid "Custom screensaver command"
+msgstr ""
+
+msgid "Minimum seconds to skip without screensaver"
+msgstr ""
+
+# plugin/smartpause
+msgid "Smart Pause"
+msgstr ""
+
+msgid "Pause Safe Eyes if the system is idle"
+msgstr ""
+
+msgid "Minimum idle time to pause Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Tray Icon"
+msgstr ""
+
+msgid "Show a tray icon in the notification area"
+msgstr ""
+
+msgid "Show next break time in tray icon"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Disable Safe Eyes"
+msgstr ""
+
+msgid "Disabled until %s"
+msgstr ""
+
+msgid "Disabled until restart"
+msgstr ""
+
+msgid "Enable Safe Eyes"
+msgstr ""
+
+msgid "For %d Hour"
+msgid_plural "For %d Hours"
+msgstr[0] ""
+
+msgid "For %d Minute"
+msgid_plural "For %d Minutes"
+msgstr[0] ""
+
+msgid "For %d Second"
+msgid_plural "For %d Seconds"
+msgstr[0] ""
+
+msgid "Next break at %s"
+msgstr ""
+
+msgid "No Breaks Available"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Take a break now"
+msgstr ""
+
+msgid "Until restart"
+msgstr ""
+
+msgid "Quit"
+msgstr ""
