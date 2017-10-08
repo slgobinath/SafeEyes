@@ -18,70 +18,86 @@ msgstr ""
 "X-Generator: Weblate 2.17-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
-# Short Breaks
+# Short break
 msgid "Tightly close your eyes"
 msgstr "உங்கள் கண்களை இறுக்கமாக மூடுங்கள்"
 
+# Short break
 msgid "Roll your eyes a few times to each side"
 msgstr "உங்கள் கண்களை இடம் வலமாக உருட்டுங்கள்"
 
+# Short break
 msgid "Rotate your eyes in clockwise direction"
 msgstr "உங்கள் கண்களை வலஞ்சுழியாக சுழற்றுங்கள்"
 
+# Short break
 msgid "Rotate your eyes in counterclockwise direction"
 msgstr "உங்கள் கண்களை இடஞ்சுழியாக சுழற்றுங்கள்"
 
+# Short break
 msgid "Blink your eyes"
 msgstr "உங்கள் கண்களை சிமிட்டுங்கள்"
 
+# Short break
 msgid "Focus on a point in the far distance"
 msgstr "தூரத்தில் உள்ள ஒரு பொருளை பாருங்கள்"
 
+# Short break
 msgid "Have some water"
 msgstr "கொஞ்சம் தண்ணீர் குடியுங்கள்"
 
-# Long Breaks
+# Long break
 msgid "Walk for a while"
 msgstr "சிறிது தூரம் நடவுங்கள்"
 
+# Long break
 msgid "Lean back at your seat and relax"
 msgstr "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
 
-# Commandline Arguments
+# Commandline arg description
 msgid "show the about dialog"
 msgstr "தகவல் சாளரத்தை காண்பி"
 
+# Commandline arg description
 msgid "disable the currently running safeeyes instance"
 msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ முடக்கு"
 
+# Commandline arg description
 msgid "enable the currently running safeeyes instance"
 msgstr "முடக்க பட்டிருக்கும் Safe Eyes ஐ செயல்படுத்துக"
 
+# Commandline arg description
 msgid "quit the running safeeyes instance and exit"
 msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ நிறுத்துக"
 
+# Commandline arg description
 msgid "show the settings dialog"
 msgstr "அமைப்புகள் சாளரத்தை காண்பி"
 
+# Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "வழு நீக்கும் முறையில் Safe Eyes ஐ ஆரம்பிக்குக"
 
-# AboutDialog
+# About dialog
 msgid "Close"
 msgstr "மூடு"
 
+# Description in about dialog
+# Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
 "அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் "
 "பணியாற்றுவதால் ஏற்படும் கண் சோர்வை தடுக்கிறது"
 
+# About dialog
 msgid "License"
 msgstr "மென்பொருள் உரிமம்"
 
-# BreakScreen
+# Break screen
 msgid "Skip"
 msgstr "தவிர்"
 
+# Break screen
 msgid "Postpone"
 msgstr "ஒத்தி வை"
 
@@ -89,102 +105,135 @@ msgstr "ஒத்தி வை"
 msgid "Break duration (in seconds)"
 msgstr "இடைவேளையின் கால அளவு (விநாடிகளில்)"
 
+# Settings dialog
 msgid "Interval between two breaks (in minutes)"
 msgstr "இரண்டு இடைவேளைகளுக்கிடையிலான இடைவெளி (நிமிடங்களில்)"
 
+# Settings dialog
 msgid "Time to prepare for a break (in seconds)"
 msgstr "இடைவேளைக்கு தயாராக தேவைப்படும் நேரம் (விநாடிகளில்)"
 
+# Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "விசைப்பலகை குறுக்குவழிகள் முடக்கப்பட்டிருக்கும் காலம் (விநாடிகளில்)"
 
+# Settings dialog
 msgid "Postpone duration (in minutes)"
 msgstr "இடைவேளையை ஒத்தி வைக்கும் காலம் (நிமிடங்களில்)"
 
+# Settings dialog
 msgid "Strict break (No way to skip breaks)"
 msgstr "கட்டாய இடைவேளை (இடைவேளையை தவிர்க்க முடியாது)"
 
+# Settings dialog
 msgid "Allow postponing breaks"
 msgstr "இடைவேளையை ஒத்திவைக்க அனுமதிக்கவும்"
 
+# Settings dialog
 msgid "Persist the internal state"
 msgstr "உள்ளக நிலையை தக்கவைத்து கொள்ளவும்"
 
+# Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr "நீண்ட இடைவேளைகளுக்கிடையிலான நேரம் குறுகிய இடைவேளைகளுக்கிடையிலான நேரத்தின் மடங்காக இருக்க வேண்டும்"
 
+# Settings dialog
 msgid "Options"
 msgstr "தேர்வுகள்"
 
+# Settings dialog
 msgid "Short Breaks"
 msgstr "குறுகிய இடைவேளைகள்"
 
+# Settings dialog
 msgid "Long Breaks"
 msgstr "நீண்ட இடைவேளைகள்"
 
+# Settings dialog
 msgid "Break"
 msgstr "இடைவேளை"
 
+# Settings dialog
 msgid "Breaks"
 msgstr "இடைவேளைகள்"
 
+# Settings dialog
 msgid "Plugins"
 msgstr "நீட்சிகள்"
 
+# Settings dialog
 msgid "Type"
 msgstr "வகை"
 
+# Settings dialog
 msgid "Short"
 msgstr "குறுகியது"
 
+# Settings dialog
 msgid "Long"
 msgstr "நீண்டது"
 
+# Settings dialog
 msgid "Image"
 msgstr "படம்"
 
+# Settings dialog
 msgid "Select"
 msgstr "தேர்ந்தெடு"
 
+# Settings dialog
 msgid "Please select an image"
 msgstr "ஒரு படத்தைத் தேர்ந்தெடுக்கவும்"
 
+# Settings dialog
 msgid "Duration"
 msgstr "கால அளவு"
 
+# Settings dialog
 msgid "Override"
 msgstr "இயல்புநிலை அமைப்புகளை மீறவும்"
 
+# Settings dialog
 msgid "Time (in seconds)"
 msgstr "நேரம் (விநாடிகளில்)"
 
+# Settings dialog
 msgid "Break Settings"
 msgstr "இடைவேளை அமைப்புகள்"
 
+# Settings dialog
 msgid "Plugin Settings"
 msgstr "நீட்சி அமைப்புகள்"
 
+# Settings dialog
 msgid "Plugin does not support %s desktop environment"
 msgstr "இந்த நீட்சி %s முகத்திரை சூழலை ஆதரிக்கவில்லை"
 
+# Settings dialog
 msgid "Please install the Python module '%s'"
 msgstr "தயவுசெய்து '%s' Python தொகுப்பை நிறுவவும்"
 
+# Settings dialog
 msgid "Please install the command-line tool '%s'"
 msgstr "தயவுசெய்து '%s' முனைய கட்டளையை நிறுவுக"
 
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "தயவுசெய்து %(resource)s வளத்தை %(config_resource)s கோப்புறையில் சேர்க்கவும்"
 
+# Settings dialog
 msgid "New Break"
 msgstr "புதிய இடைவேளை"
 
+# Settings dialog
 msgid "Remove"
 msgstr "அகற்று"
 
+# Settings dialog
 msgid "Discard"
 msgstr "நிராகரி"
 
+# Settings dialog
 msgid "Save"
 msgstr "சேமி"
 
@@ -192,6 +241,7 @@ msgstr "சேமி"
 msgid "Audible Alert"
 msgstr "ஒலிச் சமிக்ஞய்"
 
+# plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
 msgstr "இடைவேளைகளின் முடிவில் ஒலிச் சமிக்ஞய்"
 
@@ -199,15 +249,19 @@ msgstr "இடைவேளைகளின் முடிவில் ஒலி�
 msgid "Do Not Disturb"
 msgstr "தொந்தரவு செய்ய வேண்டாம்"
 
+# plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
 msgstr "பாவனையிலுள்ள சாளரம் முழுத்திரையில் இருப்பின் இடைவேளையை தவிர்"
 
+# plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
 msgstr "இந்த சாளரங்கள் எந்த நிலையிலிருந்தாலும் குறுக்கிட வேண்டாம்"
 
+# plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
 msgstr "இந்த சாளரங்களின் நிலையை பொருட்படுத்தாது குறுக்கிடுக"
 
+# plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "குறுக்கீடு செய்யும் போது சாளரங்களை சாதாரண நிலைக்கு மாற்றுக"
 
@@ -215,6 +269,7 @@ msgstr "குறுக்கீடு செய்யும் போது ச
 msgid "Health Statistics"
 msgstr "ஆரோக்கிய புள்ளிவிவரங்கள்"
 
+# plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Safe Eyes பயன்பாடு அடிப்படையிலான ஆரோக்கிய புள்ளிவிவரங்கள்"
 
@@ -222,12 +277,15 @@ msgstr "Safe Eyes பயன்பாடு அடிப்படையிலா�
 msgid "Notification"
 msgstr "முன்னறிவிப்பு"
 
+# plugin/notification
 msgid "Show a system notification before breaks"
 msgstr "இடைவேளைகளின் முன் தயார்படுத்தலுக்கான அறிவிப்பு"
 
+# plugin/notification
 msgid "Ready for a short break in %s seconds"
 msgstr "%s விநாடிகளில் குறுகிய இடைவேளைக்கு தயாராகுங்கள்"
 
+# plugin/notification
 msgid "Ready for a long break in %s seconds"
 msgstr "{} விநாடிகளில் நீண்ட இடைவேளைக்கு தயாராகுங்கள்"
 
@@ -235,12 +293,15 @@ msgstr "{} விநாடிகளில் நீண்ட இடைவேள�
 msgid "Screensaver"
 msgstr "திரைக் காப்பு"
 
+# plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr "நீண்ட இடைவேளைகளின் பின் திரைக்காப்பு மென்பொருள் இயக்கம்"
 
+# plugin/screensaver
 msgid "Custom screensaver command"
 msgstr "மாறுபட்ட திரைக்காப்பு கட்டளை"
 
+# plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
 msgstr "திரைக்காப்பு மென்பொருளை செயற்படுத்தாமல் தவிர்ப்பதற்கான வினாடிகள்"
 
@@ -248,9 +309,11 @@ msgstr "திரைக்காப்பு மென்பொருளை ச�
 msgid "Smart Pause"
 msgstr "நுண்ணறிவு இடைநிறுத்தம்"
 
+# plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
 msgstr "கணினி செயலற்று இருந்தால் Safe Eyesஐ இடைநிறுத்துக"
 
+# plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes"
 msgstr "Safe Eyesஐ இடைநிறுத்துவதற்கான குறைந்தபட்ச செயலற்ற வினாடிகள்"
 
@@ -258,56 +321,72 @@ msgstr "Safe Eyesஐ இடைநிறுத்துவதற்கான க�
 msgid "Tray Icon"
 msgstr "Safe Eyes சின்னம்"
 
+#: plugins/trayicon
 msgid "Show a tray icon in the notification area"
 msgstr "அறிவிப்பு பகுதியில் Safe Eyes சின்னம்"
 
+#: plugins/trayicon
 msgid "Show next break time in tray icon"
 msgstr "அடுத்த இடைவேளை நேரத்தை Safe Eyes சின்னத்திற்கு அருகில் காண்பிக்கவும்"
 
+#: plugins/trayicon
 msgid "About"
 msgstr "Safe Eyes குறித்த தகவல்கள்"
 
+#: plugins/trayicon
 msgid "Disable Safe Eyes"
 msgstr "Safe Eyes ஐ நிறுத்துக"
 
+#: plugins/trayicon
 msgid "Disabled until %s"
 msgstr "%s வரை நிறுத்தி வைக்கப்பட்டுள்ளது"
 
+#: plugins/trayicon
 msgid "Disabled until restart"
 msgstr "மறுதுவக்கம் வரை நிறுத்தி வைக்கப்பட்டுள்ளது"
 
+#: plugins/trayicon
 msgid "Enable Safe Eyes"
 msgstr "Safe Eyes ஐ செயல்படுத்துக"
 
+#: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
 msgstr[0] "%d மணித்தியாலத்திற்கு"
 msgstr[1] "%d மணித்தியாலங்களுக்கு"
 
+#: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
 msgstr[0] "%d நிமிடத்திற்கு"
 msgstr[1] "%d நிமிடங்களுக்கு"
 
+#: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
 msgstr[0] "%d வினாடிக்கு"
 msgstr[1] "%d வினாடிகளுக்கு"
 
+#: plugins/trayicon
 msgid "Next break at %s"
 msgstr "அடுத்த இடைவேளை %s"
 
+#: plugins/trayicon
 msgid "No Breaks Available"
 msgstr "இடைவேளைகள் வரையறுக்கப்படவில்லை"
 
+#: plugins/trayicon
 msgid "Settings"
 msgstr "அமைப்பு"
 
+#: plugins/trayicon
 msgid "Take a break now"
 msgstr "சுயவிருப்பிலான இடைவேளை"
 
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "மீள ஆரம்பிக்கும் வரை"
 
+#: plugins/trayicon
 msgid "Quit"
 msgstr "நிறுத்து"

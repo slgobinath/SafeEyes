@@ -16,36 +16,43 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: vi\n"
 
-# Short Breaks
+# Short break
 msgid "Tightly close your eyes"
 msgstr ""
 
+# Short break
 msgid "Roll your eyes a few times to each side"
 msgstr ""
 
+# Short break
 msgid "Rotate your eyes in clockwise direction"
 msgstr ""
 
+# Short break
 msgid "Rotate your eyes in counterclockwise direction"
 msgstr ""
 
+# Short break
 msgid "Blink your eyes"
 msgstr ""
 
+# Short break
 msgid "Focus on a point in the far distance"
 msgstr ""
 
+# Short break
 msgid "Have some water"
 msgstr ""
 
-# Long Breaks
+# Long break
 msgid "Walk for a while"
 msgstr ""
 
+# Long break
 msgid "Lean back at your seat and relax"
 msgstr ""
 
-# Commandline Arguments
+# Commandline arg description
 msgid "show the about dialog"
 msgstr ""
 
@@ -64,20 +71,24 @@ msgstr ""
 msgid "start safeeyes in debug mode"
 msgstr ""
 
-# AboutDialog
+# About dialog
 msgid "Close"
 msgstr ""
 
+# Description in about dialog
+# Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
 
+# About dialog
 msgid "License"
 msgstr ""
 
-# BreakScreen
+# Break screen
 msgid "Skip"
 msgstr ""
 
+# Break screen
 msgid "Postpone"
 msgstr ""
 
@@ -85,102 +96,135 @@ msgstr ""
 msgid "Break duration (in seconds)"
 msgstr ""
 
+# Settings dialog
 msgid "Interval between two breaks (in minutes)"
 msgstr ""
 
+# Settings dialog
 msgid "Time to prepare for a break (in seconds)"
 msgstr ""
 
+# Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr ""
 
+# Settings dialog
 msgid "Postpone duration (in minutes)"
 msgstr ""
 
+# Settings dialog
 msgid "Strict break (No way to skip breaks)"
 msgstr ""
 
+# Settings dialog
 msgid "Allow postponing breaks"
 msgstr ""
 
+# Settings dialog
 msgid "Persist the internal state"
 msgstr ""
 
+# Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
 
+# Settings dialog
 msgid "Options"
 msgstr ""
 
+# Settings dialog
 msgid "Short Breaks"
 msgstr ""
 
+# Settings dialog
 msgid "Long Breaks"
 msgstr ""
 
+# Settings dialog
 msgid "Break"
 msgstr ""
 
+# Settings dialog
 msgid "Breaks"
 msgstr ""
 
+# Settings dialog
 msgid "Plugins"
 msgstr ""
 
+# Settings dialog
 msgid "Type"
 msgstr ""
 
+# Settings dialog
 msgid "Short"
 msgstr ""
 
+# Settings dialog
 msgid "Long"
 msgstr ""
 
+# Settings dialog
 msgid "Image"
 msgstr ""
 
+# Settings dialog
 msgid "Select"
 msgstr ""
 
+# Settings dialog
 msgid "Please select an image"
 msgstr ""
 
+# Settings dialog
 msgid "Duration"
 msgstr ""
 
+# Settings dialog
 msgid "Override"
 msgstr ""
 
+# Settings dialog
 msgid "Time (in seconds)"
 msgstr ""
 
+# Settings dialog
 msgid "Break Settings"
 msgstr ""
 
+# Settings dialog
 msgid "Plugin Settings"
 msgstr ""
 
+# Settings dialog
 msgid "Plugin does not support %s desktop environment"
 msgstr ""
 
+# Settings dialog
 msgid "Please install the Python module '%s'"
 msgstr ""
 
+# Settings dialog
 msgid "Please install the command-line tool '%s'"
 msgstr ""
 
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 
+# Settings dialog
 msgid "New Break"
 msgstr ""
 
+# Settings dialog
 msgid "Remove"
 msgstr ""
 
+# Settings dialog
 msgid "Discard"
 msgstr ""
 
+# Settings dialog
 msgid "Save"
 msgstr ""
 
@@ -188,6 +232,7 @@ msgstr ""
 msgid "Audible Alert"
 msgstr ""
 
+# plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
 msgstr ""
 
@@ -195,15 +240,19 @@ msgstr ""
 msgid "Do Not Disturb"
 msgstr ""
 
+# plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
 msgstr ""
 
+# plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
 msgstr ""
 
+# plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
 msgstr ""
 
+# plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr ""
 
@@ -211,6 +260,7 @@ msgstr ""
 msgid "Health Statistics"
 msgstr ""
 
+# plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr ""
 
@@ -218,12 +268,15 @@ msgstr ""
 msgid "Notification"
 msgstr ""
 
+# plugin/notification
 msgid "Show a system notification before breaks"
 msgstr ""
 
+# plugin/notification
 msgid "Ready for a short break in %s seconds"
 msgstr ""
 
+# plugin/notification
 msgid "Ready for a long break in %s seconds"
 msgstr ""
 
@@ -231,12 +284,15 @@ msgstr ""
 msgid "Screensaver"
 msgstr ""
 
+# plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
 
+# plugin/screensaver
 msgid "Custom screensaver command"
 msgstr ""
 
+# plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
 msgstr ""
 
@@ -244,9 +300,11 @@ msgstr ""
 msgid "Smart Pause"
 msgstr ""
 
+# plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
 msgstr ""
 
+# plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes"
 msgstr ""
 
@@ -254,53 +312,69 @@ msgstr ""
 msgid "Tray Icon"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Show a tray icon in the notification area"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Show next break time in tray icon"
 msgstr ""
 
+#: plugins/trayicon
 msgid "About"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Disable Safe Eyes"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Disabled until %s"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Disabled until restart"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Enable Safe Eyes"
 msgstr ""
 
+#: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
 msgstr[0] ""
 
+#: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
 msgstr[0] ""
 
+#: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
 msgstr[0] ""
 
+#: plugins/trayicon
 msgid "Next break at %s"
 msgstr ""
 
+#: plugins/trayicon
 msgid "No Breaks Available"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Settings"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Take a break now"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Until restart"
 msgstr ""
 
+#: plugins/trayicon
 msgid "Quit"
 msgstr ""
