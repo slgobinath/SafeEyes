@@ -40,6 +40,17 @@ Ensure to meet the following dependencies when compiling from source:
 - python3-psutil
 - xprintidle (optional)
 
+## Features
+ - Remind you to take breaks
+ - Disable keyboard during breaks
+ - Notification before and after breaks
+ - Smart pause if system is idle
+ - Customizable using plug-ins
+ - Multi-screen support
+ - Customizable user interface
+ - RPC API to control externally
+ - Command-line arguments to control the running instance
+
 ## Writing Safe Eyes plug-in
 A plugin is a combination of two files: `plugin.py` and `config.json`. These two files must be placed in a directory: `~/.config/safeeyes/plugins/<plugin-id>`. Optionally a plugin also can have an image file `icon.png` which is used to represent the plugin in the Settings dialog.
 
@@ -99,7 +110,7 @@ The configurations related to the plugin must be defined in `settings`. Each set
 
 The optional `break_override_allowed` property lets users to override the status of plugins by enable or disable based on break.
 
-The `plugin.py` can have the following **optional** functions:
+The `plugin.py` can have one or more of the following functions:
 
 ```python
 def on_init(context, safeeyes_config, plugin_config):
@@ -180,6 +191,63 @@ def get_widget_content(break_obj):
     """
     return 'Widget Content'
 ```
+
+All the above functions are optional and it is the developer's choice to choose the functions to implement. The `pre_break` and  `start_break` methods can return `True` if they want to skip the specific break. If a plugin skips the break by returning `True`, the corresponding lifecycle method will not be invoked from the upcoming plugins. The execution order of plugins is not predefined so the plugins should not make any assumption about other plugins.
+
+Plugins willing to show an entry in the break screen must implement both `get_widget_title` and `get_widget_content`. They should return a single line string as the output. If either the title or content is an empty string, the message will not be displayed in the break screen. It is added as an option to skip selective breaks depending on the domain.
+
+A sample `plugin.py` is shown below to disaplay the current weather information:
+```python
+import logging
+import pyowm
+
+api = None
+location = None
+owm = None
+weather_details = None
+
+def init(ctx, safeeyes_config, plugin_config):
+    """
+    Initialize the plugin.
+    """
+    logging.debug('Initialize Weather plugin')
+    global api
+    global location
+    global owm
+    api = plugin_config['api']
+    location = plugin_config['location']
+    if api != "" and location != "":
+        owm = pyowm.OWM(api)
+    
+
+def get_widget_title(break_obj):
+    """
+    Return the widget title.
+    """
+    logging.debug('Get the weather information')
+    global weather_details
+    if owm:
+        try:
+            observation = owm.weather_at_place(location)
+            weather = observation.get_weather()
+            temp = weather.get_temperature('celsius').get('temp')
+            humidity = weather.get_humidity()
+            wind_speed = weather.get_wind().get('speed')
+            weather_details = 'Temperature: %s℃\t\tHumidity: %s\tWind Speed: %s' % (temp, humidity, wind_speed)
+        except BaseException:
+            # Can be a network error
+            weather_details = None
+    if weather_details:
+        return 'Weather'
+
+def get_widget_content(break_obj):
+    """
+    Return the weather details.
+    """
+    return weather_details
+```
+To get more ideas, go through the existing plugins available in [system plugins](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/plugins).
+
 ## License
 
 GNU General Public License v3
