@@ -56,18 +56,23 @@ msgstr ""
 msgid "show the about dialog"
 msgstr ""
 
+# Commandline arg description
 msgid "disable the currently running safeeyes instance"
 msgstr ""
 
+# Commandline arg description
 msgid "enable the currently running safeeyes instance"
 msgstr ""
 
+# Commandline arg description
 msgid "quit the running safeeyes instance and exit"
 msgstr ""
 
+# Commandline arg description
 msgid "show the settings dialog"
 msgstr ""
 
+# Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr ""
 
