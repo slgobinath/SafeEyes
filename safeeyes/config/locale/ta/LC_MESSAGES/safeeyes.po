@@ -6,44 +6,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2017-09-17 07:59-0400\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2017-10-08 12:42+0000\n"
+"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/ta/>\n"
+"Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.17-dev\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: ta\n"
 
 # Short Breaks
-msgid  "Tightly close your eyes"
+msgid "Tightly close your eyes"
 msgstr "உங்கள் கண்களை இறுக்கமாக மூடுங்கள்"
 
-msgid  "Roll your eyes a few times to each side"
+msgid "Roll your eyes a few times to each side"
 msgstr "உங்கள் கண்களை இடம் வலமாக உருட்டுங்கள்"
 
-msgid  "Rotate your eyes in clockwise direction"
+msgid "Rotate your eyes in clockwise direction"
 msgstr "உங்கள் கண்களை வலஞ்சுழியாக சுழற்றுங்கள்"
 
-msgid  "Rotate your eyes in counterclockwise direction"
+msgid "Rotate your eyes in counterclockwise direction"
 msgstr "உங்கள் கண்களை இடஞ்சுழியாக சுழற்றுங்கள்"
 
-msgid  "Blink your eyes"
+msgid "Blink your eyes"
 msgstr "உங்கள் கண்களை சிமிட்டுங்கள்"
 
-msgid  "Focus on a point in the far distance"
+msgid "Focus on a point in the far distance"
 msgstr "தூரத்தில் உள்ள ஒரு பொருளை பாருங்கள்"
 
-msgid  "Have some water"
+msgid "Have some water"
 msgstr "கொஞ்சம் தண்ணீர் குடியுங்கள்"
 
 # Long Breaks
-msgid  "Walk for a while"
+msgid "Walk for a while"
 msgstr "சிறிது தூரம் நடவுங்கள்"
 
-msgid  "Lean back at your seat and relax"
+msgid "Lean back at your seat and relax"
 msgstr "கதிைரயில் பின்பக்கமாக சாய்ந்து ஓய்வெடுங்கள்"
 
 # Commandline Arguments
@@ -70,7 +71,9 @@ msgid "Close"
 msgstr "மூடு"
 
 msgid "description"
-msgstr "அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் பணியாற்றுவதால் ஏற்படும் கண் சோர்வை தடுக்கிறது."
+msgstr ""
+"அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் "
+"பணியாற்றுவதால் ஏற்படும் கண் சோர்வை தடுக்கிறது"
 
 msgid "License"
 msgstr "மென்பொருள் உரிமம்"
