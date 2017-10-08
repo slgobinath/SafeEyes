@@ -6,44 +6,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2017-10-08 12:42+0000\n"
+"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/cs/>\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"Language: cs\n"
+"X-Generator: Weblate 2.17-dev\n"
 
 # Short Breaks
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Zavřete oči"
 
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Zakroužete očima (několikrát na každou stranu)"
 
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Zakroužete očima ve směru hodinových ručiček"
 
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Zakroužete očima proti směru hodinových ručiček"
 
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Zamrkejte"
 
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Zaostřete pohled na nějaký vzdálený objekt"
 
 msgid "Have some water"
-msgstr ""
+msgstr "Napijte se vody"
 
 # Long Breaks
 msgid "Walk for a while"
-msgstr ""
+msgstr "Na chvíli se projděte"
 
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Opřete se zády do židle a uvolněte se"
 
 # Commandline Arguments
 msgid "show the about dialog"
@@ -66,20 +67,22 @@ msgstr ""
 
 # AboutDialog
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 msgid "description"
 msgstr ""
+"Safe Eyes chrání vaše oči před následky přetěžování (asthenopie), když "
+"dlouho hledíte do obrazovky počítače, připomínáním potřebných přestávek"
 
 msgid "License"
 msgstr ""
 
 # BreakScreen
 msgid "Skip"
-msgstr ""
+msgstr "Přeskočit"
 
 msgid "Postpone"
-msgstr ""
+msgstr "Odložit"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
