@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-09 16:58+0000\n"
+"PO-Revision-Date: 2017-10-10 17:46+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/it/>\n"
@@ -130,6 +130,7 @@ msgid "Allow postponing breaks"
 msgstr "Consenti di posporre le pause"
 
 # Settings dialog
+#, fuzzy
 msgid "Persist the internal state"
 msgstr "Persistenza dello stato interno"
 
