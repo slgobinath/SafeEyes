@@ -55,27 +55,27 @@ msgstr "Opřete se zády do židle a uvolněte se"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "zobrazit dialog O programu"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "zakázat spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "povolit spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "ukončit spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "zobrazit dialog nastavení"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "spustit safeeyes v módu pro ladění"
 
 # About dialog
 msgid "Close"
@@ -90,7 +90,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licence"
 
 # Break screen
 msgid "Skip"
@@ -102,293 +102,293 @@ msgstr "Odložit"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Délka přestávky (v sekundách)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Interval mezi dvěma přestávkami (v minutách)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Čas pro přípravu na přestávku (v sekundách)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Zakázat klávesové zkratky po dobu (v sekundách)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Odložit trvání (v minutách)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Přísné přestávky (nelze je přeskočit)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Povolit přeskakování přestávek"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Zachovat vnitřní stav"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Dlouhé přestávky musí být násobkem krátkých přestávek"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Možností"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Krátké přestávky"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Dlouhé přestávky"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Přestávka"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Přestávky"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Rozšíření"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Krátká"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Dlouhá"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Obrázek"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Vyberte obrázek"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Trvání"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Převážit"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Čas (v sekundách)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Nastavení přestávek"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Nastavení rozšíření"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Rozšíření nepodporuje pracovní prostředí %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Prosím nainstalujte si modul pro Python '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Prosím nainstalujte si nástroj pro příkazový řádek'%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Prosím přidejte prostředek %(resource)s do adresáře %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Nová přestávka"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Odstranit"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Zahodit"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Zvukové upozornění"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Přehrát na konci přestávek zvukové upozornění"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Nerušit"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Přeskočit přestávku, pokud je spuštěný program přes celou obrazovku"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Tato okna nikdy nepřerušovat"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Přerušovat tato okna nehledě na jejich stav"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Přepnout nepřerušitelná okna do normálního módu"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Statistiky o zdraví"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Zobrazit statistiky o zdraví založené na používání Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Oznámení"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Zobrazit oznámení před přestávkami"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Připravte se na přestávku za %s sekund"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Připravte se na dlouhou přestávku za %s sekund"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Spořič obrazovky"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Zamknout obrazovku spořičem obrazovky po dlouhých přestávkách"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Vlastní spořič obrazovky"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Minimum sekund do zapnutí spořiče"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Chytrá pauza"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pozastavit Safe Eyes když je systém v klidu"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes"
-msgstr ""
+msgstr "Minimální čas v klidu na pozastavení Safe Eyes"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Systémová oblast"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Zobrazit ikonu v systémové oblasti"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Zobrazit čas příští přestávky v systémové oblasti"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "O programu"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Zakázat Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Zakázat do %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Zakázat do restartu"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Povolit Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Na %d hodinu"
+msgstr[1] "Na %d hodiny"
+msgstr[2] "Na %d hodin"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Na %d minutu"
+msgstr[1] "Na %d minuty"
+msgstr[2] "Na %d minut"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Na %d sekundu"
+msgstr[1] "Na %d sekundy"
+msgstr[2] "Na %d sekund"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Příští přestávka v %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Žádné přestávky"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Dát si přestávku"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Do restartu"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Ukončit"
