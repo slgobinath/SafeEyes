@@ -62,11 +62,11 @@ class SafeEyes(object):
         self.context['desktop'] = Utility.desktop_environment()
         self.context['locale'] = system_locale
         self.context['api'] = {}
-        self.context['api']['show_settings'] = self.show_settings
-        self.context['api']['show_about'] = self.show_about
-        self.context['api']['enable_safeeyes'] = self.enable_safeeyes
-        self.context['api']['disable_safeeyes'] = self.disable_safeeyes
-        self.context['api']['quit'] = self.quit
+        self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(self.show_settings)
+        self.context['api']['show_about'] = lambda: Utility.execute_main_thread(self.show_about)
+        self.context['api']['enable_safeeyes'] = lambda next_break_time=-1: Utility.execute_main_thread(self.enable_safeeyes, next_break_time)
+        self.context['api']['disable_safeeyes'] = lambda: Utility.execute_main_thread(self.disable_safeeyes)
+        self.context['api']['quit'] = lambda: Utility.execute_main_thread(self.quit)
         if self.config.get('persist_state'):
             self.context['session'] = Utility.open_session()
         else:
@@ -82,7 +82,7 @@ class SafeEyes(object):
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
-        self.context['api']['take_break'] = self.safe_eyes_core.take_break
+        self.context['api']['take_break'] = lambda: Utility.execute_main_thread(self.safe_eyes_core.take_break)
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)

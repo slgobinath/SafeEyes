@@ -34,12 +34,12 @@ class RPCServer(object):
         self.__running = False
         logging.info('Setting up an RPC server on port %d', port)
         self.__server = SimpleXMLRPCServer(("localhost", port), logRequests=False, allow_none=True)
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['show_settings']), 'show_settings')
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['show_about']), 'show_about')
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['enable_safeeyes']), 'enable_safeeyes')
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['disable_safeeyes']), 'disable_safeeyes')
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['take_break']), 'take_break')
-        self.__server.register_function(lambda: Utility.execute_main_thread(context['api']['quit']), 'quit')
+        self.__server.register_function(context['api']['show_settings'], 'show_settings')
+        self.__server.register_function(context['api']['show_about'], 'show_about')
+        self.__server.register_function(context['api']['enable_safeeyes'], 'enable_safeeyes')
+        self.__server.register_function(context['api']['disable_safeeyes'], 'disable_safeeyes')
+        self.__server.register_function(context['api']['take_break'], 'take_break')
+        self.__server.register_function(context['api']['quit'], 'quit')
 
     def start(self):
         """
