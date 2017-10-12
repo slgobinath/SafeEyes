@@ -64,7 +64,7 @@ setuptools.setup(
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v1.2.2.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.0.0.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': __package_data},
     data_files=__data_files,
@@ -74,7 +74,7 @@ setuptools.setup(
     classifiers=[
         "Operating System :: POSIX :: Linux",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: X11 Applications :: GTK",
         "Intended Audience :: End Users/Desktop",
         "Topic :: Utilities"] + [
