@@ -387,7 +387,7 @@ def __update_plugin_config(plugin, plugin_config, config):
     if plugin_config is None:
         config['plugins'].remove(plugin)
     else:
-        if LooseVersion(plugin['version']) < LooseVersion(plugin_config['meta']['version']):
+        if LooseVersion(plugin.get('version', '0.0.0')) != LooseVersion(plugin_config['meta']['version']):
             # Update the configuration
             plugin['version'] = plugin_config['meta']['version']
             setting_ids = []

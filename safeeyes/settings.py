@@ -268,19 +268,20 @@ class PluginSettingsDialog(object):
         self.window.set_title(_('Plugin Settings'))
         for setting in config.get('settings'):
             if setting['type'].upper() == 'INT':
-                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'], setting.get('min', 0), setting.get('max', 120)), False, False, 0)
             elif setting['type'].upper() == 'TEXT':
                 box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
             elif setting['type'].upper() == 'BOOL':
                 box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
 
-    def __load_int_item(self, name, key, settings):
+    def __load_int_item(self, name, key, settings, min_value, max_value):
         """
         Load the UI control for int property.
         """
         builder = Utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
         builder.get_object('lbl_name').set_label(_(name))
         spin_value = builder.get_object('spin_value')
+        spin_value.set_range(min_value, max_value)
         spin_value.set_value(settings[key])
         box = builder.get_object('box')
         box.set_visible(True)

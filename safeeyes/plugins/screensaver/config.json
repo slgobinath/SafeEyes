@@ -22,7 +22,9 @@
             "id": "min_seconds",
             "label": "Minimum seconds to skip without screensaver",
             "type": "INT",
-            "default": 3
+            "default": 3,
+            "max": 60,
+            "min": 0
         }
     ],
     "break_override_allowed": true
