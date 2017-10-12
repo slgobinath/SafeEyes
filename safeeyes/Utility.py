@@ -398,7 +398,7 @@ def __update_plugin_config(plugin, plugin_config, config):
                     plugin['settings'][setting['id']] = setting['default']
             # Remove the removed ids
             keys_to_remove = []
-            for key in plugin['settings']:
+            for key in plugin.get('settings', []):
                 if key not in setting_ids:
                     keys_to_remove.append(key)
             for key in keys_to_remove:
