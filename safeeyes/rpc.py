@@ -66,46 +66,40 @@ class RPCClient(object):
     """
     def __init__(self, port):
         self.port = port
+        self.proxy = ServerProxy('http://localhost:%d/' % self.port, allow_none=True)
 
     def show_settings(self):
         """
         Show the settings dialog.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            proxy.show_settings()
+        self.proxy.show_settings()
 
     def show_about(self):
         """
         Show the about dialog.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            return proxy.show_about()
-
+        self.proxy.show_about()
 
     def enable_safeeyes(self):
         """
         Enable Safe Eyes.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            return proxy.enable_safeeyes()
+        self.proxy.enable_safeeyes()
 
     def disable_safeeyes(self):
         """
         Disable Safe Eyes.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            return proxy.disable_safeeyes()
+        self.proxy.disable_safeeyes()
 
     def take_break(self):
         """
         Take a break now.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            return proxy.take_break()
+        self.proxy.take_break()
 
     def quit(self):
         """
         Quit Safe Eyes.
         """
-        with ServerProxy('http://localhost:%d/' % self.port, allow_none=True) as proxy:
-            return proxy.quit()
+        self.proxy.quit()
