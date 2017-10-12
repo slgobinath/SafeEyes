@@ -50,10 +50,16 @@ def __package_files(directory):
             paths.append(os.path.join('..', path, filename))
     return paths
 
-__compile_po_files()
-__package_data = ['glade/*.glade', 'resource/*']
-__package_data.extend(__package_files('safeeyes/config'))
-__package_data.extend(__package_files('safeeyes/plugins'))
+def __package_data():
+    """
+    Return a list of package data.
+    """
+    __compile_po_files()
+    data = ['glade/*.glade', 'resource/*']
+    data.extend(__package_files('safeeyes/config'))
+    data.extend(__package_files('safeeyes/plugins'))
+    return data
+
 __data_files = list(_data_files('share'))
 
 setuptools.setup(
@@ -66,7 +72,7 @@ setuptools.setup(
     url="https://github.com/slgobinath/SafeEyes",
     download_url="https://github.com/slgobinath/SafeEyes/archive/v2.0.0.tar.gz",
     packages=setuptools.find_packages(),
-    package_data={'safeeyes': __package_data},
+    package_data={'safeeyes': __package_data()},
     data_files=__data_files,
     install_requires=requires,
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
