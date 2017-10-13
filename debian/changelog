@@ -1,4 +1,6 @@
-safeeyes (1.2.2-1) xenial; urgency=low
+safeeyes (2.0.0-1) xenial; urgency=low
+
+  * Completely rededesigned architecture and user interface
 
   * Show next break time in tray icon in supported environments
 
