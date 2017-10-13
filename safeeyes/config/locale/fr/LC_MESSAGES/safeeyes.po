@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 13:05+0000\n"
+"PO-Revision-Date: 2017-10-13 17:40+0000\n"
 "Last-Translator: French Coordinator <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/fr/>\n"
@@ -23,7 +23,7 @@ msgstr "Fermez bien vos yeux"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Regardez quelques fois de droite à gauche"
+msgstr "Regardez plusieurs fois de droite à gauche"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
@@ -55,27 +55,27 @@ msgstr "Adossez-vous à votre siège et détendez-vous"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "Afficher la boîte de dialogue À propos"
+msgstr "afficher la boîte de dialogue À propos"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Désactiver l’instance de safeyes en cours de fonctionnement"
+msgstr "désactiver l’instance de safeyes en cours de fonctionnement"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Activer l’instance de safeyes en cours de fonctionnement"
+msgstr "activer l’instance de safeyes en cours de fonctionnement"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Quitter l’instance de safeyes en cours de fonctionnement"
+msgstr "quitter l’instance de safeyes en cours de fonctionnement et sortir"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "Afficher la boîte de dialogue des paramètres"
+msgstr "afficher la boîte de dialogue des paramètres"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "Démarrer safeeyes en mode de débogage"
+msgstr "démarrer safeeyes en mode de débogage"
 
 # About dialog
 msgid "Close"
@@ -84,7 +84,7 @@ msgstr "Fermer"
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr "Description"
+msgstr "description"
 
 # About dialog
 msgid "License"
@@ -206,7 +206,7 @@ msgstr "Paramètres du greffon"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "Le greffon ne prend pas en charge l’environnement de %s"
+msgstr "Le greffon ne prend pas en charge l’environnement de bureau %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
@@ -296,11 +296,12 @@ msgstr "Économiseur d'écran"
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
-"Verrouiller l’écran après les poses longues en activant l’économiseur d’écran"
+"Verrouiller l’écran après les pauses longues en activant l’économiseur "
+"d’écran"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Comment personnalisée d’économiseur d’écran"
+msgstr "Commande personnalisée d’économiseur d’écran"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -340,11 +341,11 @@ msgstr "Désactiver Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Désactivé jusqu'à %s"
+msgstr "Désactivée jusqu'à %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Désactiver jusqu’au redémarrage"
+msgstr "Désactivée jusqu’au redémarrage"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
