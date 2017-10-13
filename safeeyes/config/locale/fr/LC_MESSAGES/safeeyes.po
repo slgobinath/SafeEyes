@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:40+0000\n"
-"Last-Translator: French Coordinator <french.coordinator@rbox.me>\n"
+"PO-Revision-Date: 2017-10-13 17:55+0000\n"
+"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/fr/>\n"
 "Language: fr\n"
@@ -84,7 +84,10 @@ msgstr "Fermer"
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr "description"
+msgstr ""
+"Safe Eyes protège vos yeux contre la fatigue de l'œil (asthénopie) en vous "
+"rappelant de prendre des pauses lors de vos longues heures de travail sur un "
+"ordinateur"
 
 # About dialog
 msgid "License"
