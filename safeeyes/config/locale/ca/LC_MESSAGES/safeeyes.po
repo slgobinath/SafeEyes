@@ -107,11 +107,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Interval entre dues pauses (en minuts)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Temps per preparar-se per a una pausa (en segons)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -127,7 +127,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Permet posposar les pauses"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -235,7 +235,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Desa"
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -243,7 +243,7 @@ msgstr ""
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Alerta sonora en finalitzar una pausa"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -331,29 +331,29 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Quant a"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Desactiva Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Inhabilitat fins %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Inhabilita fins que es reinicïi"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Activa Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Durant %d hora"
+msgstr[1] "Durant %d hores"
 
 #: plugins/trayicon
 msgid "For %d Minute"
@@ -369,7 +369,7 @@ msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Propera pausa a les %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
@@ -377,7 +377,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Configuració"
 
 #: plugins/trayicon
 msgid "Take a break now"
@@ -385,8 +385,8 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Fins que es reinicïi"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Tanca"

@@ -19,39 +19,39 @@ msgstr ""
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Schließen Sie die Augen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Rollen Sie mit den Augen"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Rotieren Sie mit den Augen im Uhrzeigersinn"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Rotieren Sie mit den Augen gegen den Uhrzeigersinn"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Blinzeln Sie"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Fokussieren Sie sich auf einen Punkt in weiter Ferne"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Trinken Sie ein wenig Wasser"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Gehen Sie ein wenig"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Lehnen Sie sich zurück und entspannen Sie sich"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -79,7 +79,7 @@ msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -90,15 +90,15 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Lizenz"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Überspringen"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Verzögernn"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -106,11 +106,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Intervall zwischen zwei Pausen (in Minuten)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Zeit zur Vorbereitung für die Pause (in Sekunden)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -118,7 +118,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Verzögerungsdauer (in Minuten)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -126,7 +126,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Erlaube Verschieben von Pausen"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -234,7 +234,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Speichern"
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -242,7 +242,7 @@ msgstr ""
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Akustisches Signal am Ende der Pause"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -330,29 +330,29 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes deaktivieren"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Deaktiviert bis %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Deaktiviert bis zum Neustart"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes aktivieren"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Für %d Stunde"
+msgstr[1] "Für %d Stunden"
 
 #: plugins/trayicon
 msgid "For %d Minute"
@@ -368,7 +368,7 @@ msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Nächste Pause um %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
@@ -376,7 +376,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: plugins/trayicon
 msgid "Take a break now"
@@ -384,8 +384,8 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Bis zum Neustart"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Schließen"
