@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 16:47+0000\n"
+"PO-Revision-Date: 2017-10-13 17:55+0000\n"
 "Last-Translator: Duncan <duncan@fromru.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/ru/>\n"
@@ -117,7 +117,7 @@ msgstr "Период блокировки горячих клавиш (в сек
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Время откладывания (в минутах)"
+msgstr "Длительность откладывания (в минутах)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
