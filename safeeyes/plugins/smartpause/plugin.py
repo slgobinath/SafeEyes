@@ -39,6 +39,7 @@ smart_pause_activated = False
 idle_start_time = None
 next_break_time = None
 break_interval = 0
+waiting_time = 2
 
 def __system_idle_time():
     """
@@ -46,7 +47,7 @@ def __system_idle_time():
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
-        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 60000    # Convert to minutes
+        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000    # Convert to seconds
     except BaseException:
         return 0
 
@@ -79,12 +80,14 @@ def init(ctx, safeeyes_config, plugin_config):
     global disable_safe_eyes
     global idle_time
     global break_interval
+    global waiting_time
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
     disable_safe_eyes = context['api']['disable_safeeyes']
     idle_time = plugin_config['idle_time']
-    break_interval = safeeyes_config.get('break_interval') * 60
+    break_interval = safeeyes_config.get('break_interval') * 60 # Convert to seconds
+    waiting_time = min(2, idle_time)    # If idle time is 1 sec, wait only 1 sec
 
 
 def __start_idle_monitor():
@@ -94,9 +97,9 @@ def __start_idle_monitor():
     global smart_pause_activated
     global idle_start_time
     while __is_active():
-        # Wait for 2 seconds
+        # Wait for waiting_time seconds
         idle_condition.acquire()
-        idle_condition.wait(2)
+        idle_condition.wait(waiting_time)
         idle_condition.release()
 
         if __is_active():

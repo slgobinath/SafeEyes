@@ -313,7 +313,7 @@ msgid "Pause Safe Eyes if the system is idle"
 msgstr ""
 
 # plugin/smartpause
-msgid "Minimum idle time to pause Safe Eyes"
+msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
 
 #: plugins/trayicon
