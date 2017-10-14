@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-14 02:10+0000\n"
+"PO-Revision-Date: 2017-10-14 02:28+0000\n"
 "Last-Translator: Julio González <jgonzalez@rembox.cl>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/es/>\n"
@@ -110,11 +110,11 @@ msgstr "Tiempo entre dos pausas (en minutos)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Tiempo para prepararse antes de un descanso (en segundos)"
+msgstr "Tiempo para prepararse a un descanso (en segundos)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Período de inactividad de los atajos de teclado (en segundos)"
+msgstr "Período de desactivación de los atajos de teclado (en segundos)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
