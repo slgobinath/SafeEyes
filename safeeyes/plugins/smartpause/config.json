@@ -14,11 +14,11 @@
     "settings": [
         {
             "id": "idle_time",
-            "label": "Minimum idle time to pause Safe Eyes",
+            "label": "Minimum idle time to pause Safe Eyes (in seconds)",
             "type": "INT",
-            "default": 3,
-            "max": 60,
-            "min": 1
+            "default": 180,
+            "max": 3600,
+            "min": 5
         }
     ]
 }
