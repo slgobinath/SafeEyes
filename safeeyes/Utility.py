@@ -41,8 +41,8 @@ from gi.repository import GLib
 gi.require_version('Gdk', '3.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
-HOME_DIRECTORY = os.path.expanduser('~')
-CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, '.config/safeeyes')
+HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
+CONFIG_DIRECTORY = os.path.join(os.environ.get('XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
 CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
@@ -54,7 +54,6 @@ SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
-
 
 def get_resource_path(resource_name):
     """
