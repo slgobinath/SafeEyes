@@ -23,6 +23,7 @@ import argparse
 import gettext
 import locale
 import logging
+import signal
 import sys
 from threading import Timer
 
@@ -136,4 +137,5 @@ def main():
 
 
 if __name__ == '__main__':
+    signal.signal(signal.SIGINT, signal.SIG_DFL)    # Handle Ctrl + C
     main()
