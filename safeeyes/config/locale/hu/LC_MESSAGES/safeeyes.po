@@ -6,383 +6,385 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2017-10-16 11:08+0000\n"
+"Last-Translator: András Soltész <soltesz.andras@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/hu/>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.17\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Szorosan csukd be a szemed"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Mindkét irányba forgasd meg a szemed néhányszor"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Forgasd a szemed óramutató szerint"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Forgasd a szemed az óramutató ellenében"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Pislogj"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Fókuszálj egy pontra a távolban"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Igyál egy kis vizet"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Sétálj egy keveset"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Dőlj hátra a székedben és relaxálj egy keveset"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "a Névjegy ablak megjelenítése"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "a jelenleg futó SafeEyes példány letiltása"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "a jelenleg futó SafeEyes példány engedélyezése"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "kilépés a futó SafeEyes példányból"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "mutasd a beállítások dialógust"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Indítsd a SafeEyes-t debug módban"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Bezárás"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "leírás"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licensz"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Kihagyás"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Elhalaszt"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Pihenő hossza (másodpercben)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Időszak hossza két pihenő között (percben)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Felkészülési idő a pihenő előtt (másodpercben)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Gyorsbillentyűk letiltásának hossza (másodpercben)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Elhalasztás időtartama (percben)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Szigorú pihenő (nincs mód kihagyásra)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Engedi a pihenők elhalasztását"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Belső állapot elmentése"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Hosszú pihenő fel kell legyen bontva több kicsire"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Opciók"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Rövid Pihenők"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Hosszú Pihenők"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pihenő"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pihenők"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Bővítmények"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Rövid"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Hosszú"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Válassz"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Válasszon ki egy képet"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Időtartam"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Felülbírál"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Idő (másodpercben)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Pihenő Beállítások"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Bővítmény Beállítások"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "A Bővítmény nem támogatja a(z) %s asztali környezetet"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Kérem telepítse a '%s' Python modul-t"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Kérem telepítse a '%s' parancssori eszközt"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
+"Kérem adja hozzá a(z) %(resource) erőforrást a %(config_resource) könyvtárhoz"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Új Pihenő"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Eltávolítás"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Eldobás"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Hang Figyelmeztetés"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Hangos figyelmeztetés a pihenők végénél"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Ne Zavarj"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Pihenő kihagyása ha az aktív ablak teljes-képernyős módban van"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Soha ne szakítsd meg ezeket az ablakokat"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Szakítsd meg ezeket az ablakokat az állapotuktól függetlenül"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "A megszakítható ablakokat váltsd át normál módba"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Egészség Statisztikák"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Mutass statisztikákat arról, ahogy a Safe Eyes-t használod"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Értesítés"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Mutass Rendszer Értesítést a pihenők előtt"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Pihenő következik %s másodperc múlva"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Hosszú pihenő következik %s másodperc múlva"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Képernyővédő"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Zárold a képernyőt hosszú pihenők után a képernyővédő indításával"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Egyedi képernyővédő indító parancs"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Minimum időtartam (mp) a képernyővédő előtt"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Okos Felfüggesztés"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Safe Eyes felfüggesztése ha a rendszer üresjáratban van"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Minimális üresjárati idő a Safe Eyes felfüggesztéséhez (mp)"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Tálca Ikon"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Mutasd a tálca ikont az értesítési területen"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Mutasd a következő pihenőt a tálca ikonon"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Névjegy"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes Letiltása"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Letiltás eddig: %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Letiltás újraindításig"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes Engedélyezése"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Órára"
+msgstr[1] "%d Órára"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Percre"
+msgstr[1] "%d Percre"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Másodpercre"
+msgstr[1] "%d Másodpercre"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Következő pihenő %s-kor"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Nincs Pihenő Rögzítve"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Kezdd meg a pihenőt most"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Újraindításig"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Kilépés"
