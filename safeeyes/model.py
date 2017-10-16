@@ -118,6 +118,7 @@ class Config(object):
         # Read the config files
         self.__user_config = Utility.load_json(Utility.CONFIG_FILE_PATH)
         self.__system_config = Utility.load_json(Utility.SYSTEM_CONFIG_FILE_PATH)
+        self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if self.__user_config is None:
             Utility.initialize_safeeyes()
@@ -144,7 +145,7 @@ class Config(object):
         Merge the dictionaries.
         """
         for key in new_dict:
-            if key == "meta":
+            if key == "meta" or key in self.__force_upgrade:
                 continue
             if key in old_dict:
                 new_value = new_dict[key]
