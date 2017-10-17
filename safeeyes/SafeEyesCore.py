@@ -78,8 +78,8 @@ class SafeEyesCore(object):
         self.pre_break_warning_time = config.get('pre_break_warning_time')
         self.long_break_duration = config.get('long_break_duration')
         self.short_break_duration = config.get('short_break_duration')
-        self.break_interval = config.get('break_interval')
-        self.postpone_duration = config.get('postpone_duration')
+        self.break_interval = config.get('break_interval') * 60   # Convert to seconds
+        self.postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
 
         self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
         self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
@@ -185,7 +185,7 @@ class SafeEyesCore(object):
             return
 
         self.context['state'] = State.WAITING
-        time_to_wait = self.break_interval    # In minutes
+        time_to_wait = self.break_interval
 
         if self.context['postponed']:
             # Wait until the postpone time
@@ -193,12 +193,12 @@ class SafeEyesCore(object):
             self.context['postponed'] = False
 
         current_time = datetime.datetime.now()
-        current_timestamp = int(current_time.timestamp())
+        current_timestamp = current_time.timestamp()
         if current_timestamp < self.scheduled_next_break_time:
-            time_to_wait = int((self.scheduled_next_break_time - current_timestamp) / 60)
+            time_to_wait = round(self.scheduled_next_break_time - current_timestamp)
             self.scheduled_next_break_time = -1
 
-        next_break_time = current_time + datetime.timedelta(minutes=time_to_wait)
+        next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
         self.on_update_next_break.fire(next_break_time)
 
         if self.__is_long_break():
@@ -207,8 +207,8 @@ class SafeEyesCore(object):
             self.context['break_type'] = 'short'
 
         # Wait for the pre break warning period
-        logging.info("Waiting for %s minutes until next break", time_to_wait)
-        self.__wait_for(time_to_wait * 60)    # Convert to seconds
+        logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
+        self.__wait_for(time_to_wait)
 
         logging.info("Pre-break waiting is over")
 
