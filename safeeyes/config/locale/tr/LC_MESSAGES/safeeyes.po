@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-17 19:37+0000\n"
+"PO-Revision-Date: 2017-10-17 21:48+0000\n"
 "Last-Translator: Musa Serdar ARSLAN <msarslan@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/tr/>\n"
@@ -321,6 +321,8 @@ msgstr ""
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Sıradaki mola süresine eşit miktarda boşta zaman geçtiyse bunu mola olarak "
+"değerlendir"
 
 #: plugins/trayicon
 msgid "Tray Icon"
