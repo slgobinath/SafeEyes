@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-08 12:42+0000\n"
 "Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects"
-"/safe-eyes/translations/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,9 @@ msgstr "关闭"
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr "当您持续使用电脑办公太长时间时，Safe Eyes 会提醒您休息一下，通过这种方式来保护您的眼睛，使您远离视疲劳"
+msgstr ""
+"当您持续使用电脑办公太长时间时，Safe Eyes 会提醒您休息一下，通过这种方式来保"
+"护您的眼睛，使您远离视疲劳"
 
 # About dialog
 msgid "License"
@@ -312,6 +314,10 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
+msgstr ""
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
 
 #: plugins/trayicon

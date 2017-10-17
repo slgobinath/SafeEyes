@@ -199,7 +199,7 @@ class SafeEyesCore(object):
             self.scheduled_next_break_time = -1
 
         next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
-        self.on_update_next_break.fire(next_break_time)
+        Utility.execute_main_thread(self.__fire_on_update_next_break, next_break_time)
 
         if self.__is_long_break():
             self.context['break_type'] = 'long'
@@ -217,6 +217,12 @@ class SafeEyesCore(object):
 
         self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_pre_break)
+
+    def __fire_on_update_next_break(self, next_break_time):
+        """
+        Pass the next break information to the registered listeners.
+        """
+        self.on_update_next_break.fire(self.breaks[self.next_break_index], next_break_time)
 
     def __fire_pre_break(self):
         """

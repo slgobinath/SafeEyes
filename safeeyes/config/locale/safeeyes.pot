@@ -4,54 +4,42 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-08 12:42+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/ca/>\n"
-"Language: ca\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Tanqueu fortament els ulls"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Moveu els ulls a banda i banda"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Gireu els ulls en sentit horari"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Gireu els ulls en sentit antihorari"
+msgstr ""
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Parpallegeu"
+msgstr ""
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "Fixeu la mirada en un punt llunyà"
+msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr "Bebeu una mica d'aigua"
+msgstr ""
 
 # Long break
 msgid "Walk for a while"
-msgstr "Camineu una estona"
+msgstr ""
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Reclineu-vos sobre la cadira i relaxeu-vos"
+msgstr ""
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -79,27 +67,24 @@ msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr "Tanca"
+msgstr ""
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
-"Safe Eyes protegeix els vostres ulls de la fatiga visual (astenopia) "
-"recordant-vos que feu petits descansos mentre esteu treballant amb "
-"l'ordinador"
 
 # About dialog
 msgid "License"
-msgstr "Llicència"
+msgstr ""
 
 # Break screen
 msgid "Skip"
-msgstr "Omet"
+msgstr ""
 
 # Break screen
 msgid "Postpone"
-msgstr "Posposa"
+msgstr ""
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -107,11 +92,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "Interval entre dues pauses (en minuts)"
+msgstr ""
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Temps per preparar-se per a una pausa (en segons)"
+msgstr ""
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -119,7 +104,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Durada d'una posposició (en minuts)"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -127,7 +112,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "Permet posposar les pauses"
+msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -235,7 +220,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Save"
-msgstr "Desa"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -243,7 +228,7 @@ msgstr ""
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr "Alerta sonora en finalitzar una pausa"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -335,29 +320,29 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr "Quant a"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "Desactiva Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Inhabilitat fins %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Inhabilita fins que es reinicïi"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Activa Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Durant %d hora"
-msgstr[1] "Durant %d hores"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 msgid "For %d Minute"
@@ -373,7 +358,7 @@ msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "Propera pausa a les %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "No Breaks Available"
@@ -381,7 +366,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr "Configuració"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Take a break now"
@@ -389,8 +374,8 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr "Fins que es reinicïi"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "Tanca"
+msgstr ""

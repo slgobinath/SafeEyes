@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: hi\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -311,6 +311,10 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
+msgstr ""
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
 
 #: plugins/trayicon

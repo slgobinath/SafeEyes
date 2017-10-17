@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-16 11:08+0000\n"
 "Last-Translator: András Soltész <soltesz.andras@gmail.com>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/hu/>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -314,6 +314,10 @@ msgstr "Safe Eyes felfüggesztése ha a rendszer üresjáratban van"
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Minimális üresjárati idő a Safe Eyes felfüggesztéséhez (mp)"
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"

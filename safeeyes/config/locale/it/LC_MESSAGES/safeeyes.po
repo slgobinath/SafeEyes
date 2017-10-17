@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-10 17:46+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,7 +115,8 @@ msgstr "Tempo prima di una pausa (in secondi)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Durata della disattivazione per le scorciatoie da tastiera (in secondi)"
+msgstr ""
+"Durata della disattivazione per le scorciatoie da tastiera (in secondi)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
@@ -320,6 +321,10 @@ msgstr "Sospendi Safe Eyes quando il sistema è inattivo"
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Tempo minimo di inattività per mettere in pausa Safe Eyes (in secondi)"
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"

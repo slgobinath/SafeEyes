@@ -143,7 +143,7 @@ def disable():
     """
     pass
 
-def update_next_break(date_time):
+def update_next_break(break_obj, next_break_time):
     """
     Update the next break time.
     """

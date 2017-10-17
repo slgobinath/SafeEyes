@@ -237,11 +237,11 @@ class SafeEyes(object):
         self.plugins_manager.countdown(countdown, seconds)
         return True
 
-    def update_next_break(self, break_time):
+    def update_next_break(self, break_obj, break_time):
         """
         Update the next break to plugins and save the session.
         """
-        self.plugins_manager.update_next_break(break_time)
+        self.plugins_manager.update_next_break(break_obj, break_time)
         if self.config.get('persist_state'):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
 

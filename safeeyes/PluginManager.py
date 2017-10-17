@@ -154,12 +154,12 @@ class PluginManager(object):
             if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
                 plugin['module'].on_countdown(countdown, seconds)
 
-    def update_next_break(self, break_time):
+    def update_next_break(self, break_obj, break_time):
         """
         Execute the update_next_break(break_time) function of plugins.
         """
         for plugin in self.__plugins_update_next_break:
-            plugin['module'].update_next_break(break_time)
+            plugin['module'].update_next_break(break_obj, break_time)
         return True
 
     def get_break_screen_widgets(self, break_obj):
@@ -266,7 +266,7 @@ class PluginManager(object):
                         self.__plugins_on_stop.append(plugin_obj)
                     if self.__has_method(module, 'on_exit'):
                         self.__plugins_on_exit.append(plugin_obj)
-                    if self.__has_method(module, 'update_next_break', 1):
+                    if self.__has_method(module, 'update_next_break', 2):
                         self.__plugins_update_next_break.append(plugin_obj)
             else:
                 # This is the first time to load the plugin
@@ -288,7 +288,7 @@ class PluginManager(object):
                         self.__plugins_on_stop.append(plugin_obj)
                     if self.__has_method(module, 'on_exit'):
                         self.__plugins_on_exit.append(plugin_obj)
-                    if self.__has_method(module, 'update_next_break', 1):
+                    if self.__has_method(module, 'update_next_break', 2):
                         self.__plugins_update_next_break.append(plugin_obj)
                 if self.__has_method(module, 'init', 3):
                     self.__plugins_on_init.append(plugin_obj)

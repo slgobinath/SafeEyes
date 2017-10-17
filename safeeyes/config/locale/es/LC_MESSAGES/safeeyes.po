@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-14 02:28+0000\n"
 "Last-Translator: Julio González <jgonzalez@rembox.cl>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -314,6 +314,10 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
+msgstr ""
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
 
 #: plugins/trayicon
