@@ -29,10 +29,41 @@ optional arguments:
 ```
 
 ## Installation guide
-Safe Eyes is available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3. To see how to install Safe Eyes, visit [Getting Started](http://slgobinath.github.io/SafeEyes/#introduction)
+Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
 
-### Compile from source
-Ensure to meet the following dependencies when compiling from source:
+### Ubuntu, Linux Mint and other Ubuntu Derivatives
+```
+sudo add-apt-repository ppa:slgobinath/safeeyes
+sudo apt update
+sudo apt install safeeyes
+```
+
+### Arch
+```
+yaourt -S safeeyes
+```
+
+### Gentoo
+```
+sudo emerge -av x11-misc/safeeyes
+```
+
+### Debian
+```
+sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle
+sudo pip3 install safeeyes
+sudo update-icon-caches /usr/share/icons/hicolor
+```
+
+### Fedora
+```
+sudo dnf install libappindicator-gtk3 python3-psutil
+sudo pip3 install safeeyes
+sudo gtk-update-icon-cache /usr/share/icons/hicolor
+```
+
+### Other Linux & Run from source
+Ensure to meet the following dependencies:
 
 - gir1.2-appindicator3-0.1
 - gir1.2-notify-0.7
@@ -40,213 +71,33 @@ Ensure to meet the following dependencies when compiling from source:
 - python3-psutil
 - xprintidle (optional)
 
+**To install Safe Eyes:**
+```
+sudo pip3 install safeeyes
+```
+After installation, restart your system to update the icons,
+
+**To run from source:**
+```
+git clone https://github.com/slgobinath/SafeEyes.git
+cd SafeEyes
+python3 -m safeeyes
+```
+Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
+
 ## Features
- - Remind you to take breaks
+ - Remind you to take breaks with exercises to reduce RSI
  - Disable keyboard during breaks
  - Notification before and after breaks
  - Smart pause if system is idle
- - Customizable using plug-ins
  - Multi-screen support
  - Customizable user interface
  - RPC API to control externally
  - Command-line arguments to control the running instance
+ - Customizable using plug-ins
 
-## Writing Safe Eyes plug-in
-A plugin is a combination of two files: `plugin.py` and `config.json`. These two files must be placed in a directory: `~/.config/safeeyes/plugins/<plugin-id>`. Optionally a plugin also can have an image file `icon.png` which is used to represent the plugin in the Settings dialog.
-
-For example, a Weather plugin may have the following file structure:
-```
-~
-└── .config
-    └── safeeyes
-        └── plugins
-            └── weather
-                ├── config.json
-                ├── icon.png
-                └── plugin.py
-```
-
-The `icon.png` must be `24x24` pixels size. If `icon.png` is not available, the default gear icon <img src="https://github.com/slgobinath/SafeEyes/raw/master/safeeyes/resource/ic_plugin.png" width="16" height="16"/> will be shown in the Settings dialog.
-
-A sample `config.json` is provided below:
-```json
-{
-    "meta": {
-        "name": "Weather",
-        "description": "Show the current weather on break screen",
-        "version": "0.0.1"
-    },
-    "dependencies": {
-        "python_modules": ["pyowm"],
-        "shell_commands": [],
-        "operating_systems": [],
-        "desktop_environments": [],
-        "resources": []
-    },
-    "settings": [
-        {
-            "id": "api",
-            "label": "OpenWeatherMap API Key",
-            "type": "TEXT",
-            "default": ""
-        },
-        {
-            "id": "location",
-            "label": "Location",
-            "type": "TEXT",
-            "default": ""
-        }
-    ],
-    "break_override_allowed": true
-}
-```
-
-The `meta` properties must provide the name of the plugin, a short description and the current version of the plugin.
-
-The `dependencies` property defines various dependency constraints of the plugin. The dependencies can be Python modules, commandline tools, desktop environments or Safe Eyes resources. The `operating_systems` property is reserved for operating system dependency but not checked for at the moment.
-If a dependency is not available, the Safe Eyes will not load the plugin. The Settings dialog will show a warning symbol <img src="https://github.com/slgobinath/SafeEyes/raw/master/safeeyes/resource/ic_warning.png" width="16" height="16"> and a message to install/check the missing dependencies. Dependencies are checked in the order of *Desktop Environment*, *Python Modules*, *Commandline Tools* and *Resources*. If a dependency is not available, Safe Eyes will stop looking for the rest.
-
-The configurations related to the plugin must be defined in `settings`. Each setting must have an `id`, `label`, `type` and a default value matching the `type`. Safe Eyes 2.0.0 supports only the following types: `INT`, `TEXT` and `BOOL`. According to the types, Settings dialog will show a *Spin*, *Text Field* or *Switch Button* as the input field.
-
-The optional `break_override_allowed` property lets users to override the status of plugins by enable or disable based on break.
-
-The `plugin.py` can have one or more of the following functions:
-
-```python
-def on_init(context, safeeyes_config, plugin_config):
-    """
-    Executes after loading the plugin for the first time and after every changes in configuration.
-    """
-    pass
-
-def on_start():
-    """
-    Executes when Safe Eyes is enabled.
-    """
-    pass
-
-def on_stop():
-    """
-    Executes when Safe Eyes is disabled.
-    """
-    pass
-
-def enable():
-    """
-    Executes after plugin.py is loaded as a module.
-    """
-    pass
-
-def disable():
-    """
-    Executes after disabling the plugin at the runtime.
-    """
-    pass
-
-def update_next_break(break_obj, next_break_time):
-    """
-    Update the next break time.
-    """
-    pass
-
-def on_pre_break(break_obj):
-    """
-    Executes before on_start_break break.
-    """
-    pass
-
-def on_start_break(break_obj):
-    """
-    Executes when starting a break.
-    """
-    pass
-
-def on_countdown(countdown, seconds):
-    """
-    Keep track of seconds passed from the beginning of break.
-    """
-    pass
-
-def on_stop_break():
-    """
-    Executes at the end of breaks.
-    """
-    pass
-
-def on_exit():
-    """
-    Executes before Safe Eyes exits
-    """
-    pass
-
-def get_widget_title(break_obj):
-    """
-    Return the widget title.
-    """
-    return 'Widget Title'
-
-def get_widget_content(break_obj):
-    """
-    Return the widget content.
-    """
-    return 'Widget Content'
-```
-
-All the above functions are optional and it is the developer's choice to choose the functions to implement. The `pre_break` and  `start_break` methods can return `True` if they want to skip the specific break. If a plugin skips the break by returning `True`, the corresponding lifecycle method will not be invoked from the upcoming plugins. The execution order of plugins is not predefined so the plugins should not make any assumption about other plugins.
-
-Plugins willing to show an entry in the break screen must implement both `get_widget_title` and `get_widget_content`. They should return a single line string as the output. If either the title or content is an empty string, the message will not be displayed in the break screen. It is added as an option to skip selective breaks depending on the domain.
-
-A sample `plugin.py` is shown below to disaplay the current weather information:
-```python
-import logging
-import pyowm
-
-api = None
-location = None
-owm = None
-weather_details = None
-
-def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
-    logging.debug('Initialize Weather plugin')
-    global api
-    global location
-    global owm
-    api = plugin_config['api']
-    location = plugin_config['location']
-    if api != "" and location != "":
-        owm = pyowm.OWM(api)
-    
-
-def get_widget_title(break_obj):
-    """
-    Return the widget title.
-    """
-    logging.debug('Get the weather information')
-    global weather_details
-    if owm:
-        try:
-            observation = owm.weather_at_place(location)
-            weather = observation.get_weather()
-            temp = weather.get_temperature('celsius').get('temp')
-            humidity = weather.get_humidity()
-            wind_speed = weather.get_wind().get('speed')
-            weather_details = 'Temperature: %s℃\t\tHumidity: %s\tWind Speed: %s' % (temp, humidity, wind_speed)
-        except BaseException:
-            # Can be a network error
-            weather_details = None
-    if weather_details:
-        return 'Weather'
-
-def get_widget_content(break_obj):
-    """
-    Return the weather details.
-    """
-    return weather_details
-```
-To get more ideas, go through the existing plugins available in [system plugins](https://github.com/slgobinath/SafeEyes/tree/master/safeeyes/plugins).
+## Third-party Plugins
+Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
 
 ## License
 
