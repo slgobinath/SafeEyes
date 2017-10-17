@@ -321,7 +321,7 @@ msgstr "Safe Eyesஐ இடைநிறுத்துவதற்கான க�
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "அடுத்த இடைவேளையின் காலத்திற்கு சமனான செயலற்ற நேரத்தை இடைவேளையாக கருதுக"
 
 #: plugins/trayicon
 msgid "Tray Icon"

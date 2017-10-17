@@ -319,7 +319,7 @@ msgstr "Minimum idle time to pause Safe Eyes (in seconds)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "Interpret idle time equivalent to upcoming break duration as a break"
 
 #: plugins/trayicon
 msgid "Tray Icon"
