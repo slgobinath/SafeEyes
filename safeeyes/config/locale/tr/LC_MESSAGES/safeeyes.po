@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/tr/>\n"
+"PO-Revision-Date: 2017-10-17 19:37+0000\n"
+"Last-Translator: Musa Serdar ARSLAN <msarslan@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,67 +19,67 @@ msgstr ""
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Gözlerinizi sıkıca kapatın"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Gözlerinizi her iki yönde de birkaç defa döndürün"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Gözlerinizi saat yönünde döndürün"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Gözlerinizi saat yönünün tersine döndürün"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Gözkapaklarınızı kapatıp açın"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Gözünüzü uzakta bir noktaya odaklayın"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Gidip biraz su için"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Biraz yürüyün"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Arkanıza yaslanın ve biraz gevşeyin"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "hakkında penceresini göster"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "Şu anda çalışmakta olan safeeyes kopyasını etkisizleştir"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "Şu anda çalışmakta olan safeeyes kopyasını etkinleştir"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "Şu anda çalışmakta olan safeeyese kopyasını sonlandır ve çık"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "ayarlar penceresini göster"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "safeeyes'ı hata ayıklama kipinde başlat"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -91,231 +91,232 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Lisans"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Geç"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Ertele"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Mola süresi (saniye)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "İki mola arası süre (dakika)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Molaya hazırlık için süre (saniye)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Klavye kısayollarının etkisiz kalma süresi (saniye)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Erteleme müddeti (dakika)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Kesin mola (Molayı geçmek için hiçbir yol yoktur)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Molaları ertelemeye izin ver"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "İç durum kalıcı olsun"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Uzun mola aralığı, kısa mola aralığının katı olmalıdır"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Seçenekler"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Kısa Molalar"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Uzun Molalar"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Mola"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Molalar"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Eklentiler"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Tip"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Kısa"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Uzun"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Resim"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Seç"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Lütfen bir resim seçiniz"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Süre"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Geçersizleştir"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Zaman (saniye)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Mola Ayarları"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Eklenti Ayarları"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Bu eklenti %s masaüstü ortamını desteklemiyor"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Lütfen '%s' Python modülünü kurun"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Lütfen '%s' komut satırı aracını kurunuz"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Lütfen %(resource)s kaynağını %(config_resource)s klasörüne ekleyiniz"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Yeni Mola"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Kaldır"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Vazgeç"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Kaydet"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Duyulabilir İkaz"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Molaların sonunda sesli bir ikaz ver"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Rahatsız etme"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Geçerli pencere tam ekran kipinde ise molayı geç"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Bu pencereleri hiçbir zaman engelleme"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Bu pencerelerin durumuna bakmaksızın engelle"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Engellenebilir pencereleri normal kipe geçir"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Sağlık İstatistikleri"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes kullanımınıza ait istatistikleri göster"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Bildirim"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Molalardan önce bir sistem bildirimi göster"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "%s Saniye sonra verilecek bir kısa mola için hazır olun"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "%s Saniye sonra verilecek bir uzun mola için hazır olun"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Ekran Koruyucu"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Uzun molalardan sonra ekran koruyucuyu başlatarak ekranı kilitle"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Özel ekran koruyucu komutu"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Ekran koruyucusuz geçecek minimum saniye"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Akıllı Duraklama"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Eğer sistem boşta ise Safe Eyes'ı duraklat"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
+"Safe Eyes'ı duraklatmak için boşta geçmesi gereken minimum süre (saniye)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -323,74 +324,74 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Tepsi simgesi"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Bildirim alanında bir simge göster"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Sonraki mola zamanını tepsi simgesinde göster"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes'ı pasifleştir"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "%s'e kadar pasif"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Tekrar çalıştırılana kadar pasif"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes'ı etkinleştir"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Saat Boyunca"
+msgstr[1] "%d Saat"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Dakika Boyunca"
+msgstr[1] "%d Dakika"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d Saniye Boyunca"
+msgstr[1] "%d Saniye"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Sonraki mola %s'de"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Hiç Mola Yok"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Şimdi mola ver"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Tekrar başlatılana kadar"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Çıkış"
