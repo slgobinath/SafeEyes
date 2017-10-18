@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-18 11:38+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2017-10-19 14:46+0000\n"
+"Last-Translator: French Coordinator <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/fr/>\n"
 "Language: fr\n"
@@ -23,7 +23,7 @@ msgstr "Fermez bien vos yeux"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Regardez plusieurs fois de droite à gauche"
+msgstr "Regardez de droite à gauche en alternance"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
