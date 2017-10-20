@@ -38,8 +38,10 @@ disable_safe_eyes = None
 smart_pause_activated = False
 idle_start_time = None
 next_break_time = None
+next_break_duration = 0
 break_interval = 0
 waiting_time = 2
+interpret_idle_as_break = False
 
 def __system_idle_time():
     """
@@ -81,11 +83,13 @@ def init(ctx, safeeyes_config, plugin_config):
     global idle_time
     global break_interval
     global waiting_time
+    global interpret_idle_as_break
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
     disable_safe_eyes = context['api']['disable_safeeyes']
     idle_time = plugin_config['idle_time']
+    interpret_idle_as_break = plugin_config['interpret_idle_as_break']
     break_interval = safeeyes_config.get('break_interval') * 60 # Convert to seconds
     waiting_time = min(2, idle_time)    # If idle time is 1 sec, wait only 1 sec
 
@@ -114,10 +118,16 @@ def __start_idle_monitor():
                 logging.info('Resume Safe Eyes due to user activity')
                 smart_pause_activated = False
                 idle_period = (datetime.datetime.now() - idle_start_time)
-                if idle_period.total_seconds() < break_interval:
+                idle_seconds = idle_period.total_seconds()
+                if interpret_idle_as_break and idle_seconds >= next_break_duration:
+                    # User is idle for break duration and wants to consider it as a break
+                    enable_safe_eyes()
+                elif idle_seconds < break_interval:
+                    # Credit back the idle time
                     next_break = next_break_time + idle_period
                     enable_safe_eyes(next_break.timestamp())
                 else:
+                    # User is idle for more than the time between two breaks
                     enable_safe_eyes()
 
 
@@ -149,9 +159,11 @@ def on_stop():
     idle_condition.notify_all()
     idle_condition.release()
 
-def update_next_break(dateTime):
+def update_next_break(break_obj, dateTime):
     """
     Update the next break time.
     """
     global next_break_time
+    global next_break_duration
     next_break_time = dateTime
+    next_break_duration = break_obj.time

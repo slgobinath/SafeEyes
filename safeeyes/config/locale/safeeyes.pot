@@ -4,398 +4,378 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-18 07:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/cs/>\n"
-"Language: cs\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Zavřete oči"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Zakroužete očima (několikrát na každou stranu)"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Zakroužete očima ve směru hodinových ručiček"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Zakroužete očima proti směru hodinových ručiček"
+msgstr ""
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Zamrkejte"
+msgstr ""
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "Zaostřete pohled na nějaký vzdálený objekt"
+msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr "Napijte se vody"
+msgstr ""
 
 # Long break
 msgid "Walk for a while"
-msgstr "Na chvíli se projděte"
+msgstr ""
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Opřete se zády do židle a uvolněte se"
+msgstr ""
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "zobrazit dialog O programu"
+msgstr ""
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "zakázat spuštěnou instanci safeeyes"
+msgstr ""
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "povolit spuštěnou instanci safeeyes"
+msgstr ""
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "ukončit spuštěnou instanci safeeyes"
+msgstr ""
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "zobrazit dialog nastavení"
+msgstr ""
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "spustit safeeyes v módu pro ladění"
+msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr "Zavřít"
+msgstr ""
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
-"Safe Eyes chrání vaše oči před následky přetěžování (asthenopie), když "
-"dlouho hledíte do obrazovky počítače, připomínáním potřebných přestávek"
 
 # About dialog
 msgid "License"
-msgstr "Licence"
+msgstr ""
 
 # Break screen
 msgid "Skip"
-msgstr "Přeskočit"
+msgstr ""
 
 # Break screen
 msgid "Postpone"
-msgstr "Odložit"
+msgstr ""
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr "Délka přestávky (v sekundách)"
+msgstr ""
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "Interval mezi dvěma přestávkami (v minutách)"
+msgstr ""
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Čas pro přípravu na přestávku (v sekundách)"
+msgstr ""
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Zakázat klávesové zkratky po dobu (v sekundách)"
+msgstr ""
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Odložit trvání (v minutách)"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "Přísné přestávky (nelze je přeskočit)"
+msgstr ""
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "Povolit přeskakování přestávek"
+msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "Zachovat vnitřní stav"
+msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "Dlouhé přestávky musí být násobkem krátkých přestávek"
+msgstr ""
 
 # Settings dialog
 msgid "Options"
-msgstr "Možností"
+msgstr ""
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "Krátké přestávky"
+msgstr ""
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "Dlouhé přestávky"
+msgstr ""
 
 # Settings dialog
 msgid "Break"
-msgstr "Přestávka"
+msgstr ""
 
 # Settings dialog
 msgid "Breaks"
-msgstr "Přestávky"
+msgstr ""
 
 # Settings dialog
 msgid "Plugins"
-msgstr "Rozšíření"
+msgstr ""
 
 # Settings dialog
 msgid "Type"
-msgstr "Typ"
+msgstr ""
 
 # Settings dialog
 msgid "Short"
-msgstr "Krátká"
+msgstr ""
 
 # Settings dialog
 msgid "Long"
-msgstr "Dlouhá"
+msgstr ""
 
 # Settings dialog
 msgid "Image"
-msgstr "Obrázek"
+msgstr ""
 
 # Settings dialog
 msgid "Select"
-msgstr "Vybrat"
+msgstr ""
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Vyberte obrázek"
+msgstr ""
 
 # Settings dialog
 msgid "Duration"
-msgstr "Trvání"
+msgstr ""
 
 # Settings dialog
 msgid "Override"
-msgstr "Převážit"
+msgstr ""
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr "Čas (v sekundách)"
+msgstr ""
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "Nastavení přestávek"
+msgstr ""
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "Nastavení rozšíření"
+msgstr ""
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "Rozšíření nepodporuje pracovní prostředí %s"
+msgstr ""
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Prosím nainstalujte si modul pro Python '%s'"
+msgstr ""
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Prosím nainstalujte si nástroj pro příkazový řádek'%s'"
+msgstr ""
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Prosím přidejte prostředek %(resource)s do adresáře %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr "Nová přestávka"
+msgstr ""
 
 # Settings dialog
 msgid "Remove"
-msgstr "Odstranit"
+msgstr ""
 
 # Settings dialog
 msgid "Discard"
-msgstr "Zahodit"
+msgstr ""
 
 # Settings dialog
 msgid "Save"
-msgstr "Uložit"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "Zvukové upozornění"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr "Přehrát na konci přestávek zvukové upozornění"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr "Nerušit"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr "Přeskočit přestávku, pokud je spuštěný program přes celou obrazovku"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "Tato okna nikdy nepřerušovat"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "Přerušovat tato okna nehledě na jejich stav"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "Přepnout nepřerušitelná okna do normálního módu"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr "Statistiky o zdraví"
+msgstr ""
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Zobrazit statistiky o zdraví založené na používání Safe Eyes"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
-msgstr "Oznámení"
+msgstr ""
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Zobrazit oznámení před přestávkami"
+msgstr ""
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "Připravte se na přestávku za %s sekund"
+msgstr ""
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr "Připravte se na dlouhou přestávku za %s sekund"
+msgstr ""
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr "Spořič obrazovky"
+msgstr ""
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Zamknout obrazovku spořičem obrazovky po dlouhých přestávkách"
+msgstr ""
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Vlastní spořič obrazovky"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "Minimum sekund do zapnutí spořiče"
+msgstr ""
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "Chytrá pauza"
+msgstr ""
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "Pozastavit Safe Eyes když je systém v klidu"
+msgstr ""
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "Minimální čas v klidu na pozastavení Safe Eyes (v sekundách)"
+msgstr ""
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
-"Považovat čas nečinnosti trvající stejně, jako nadcházející přestávka, za "
-"přestávku"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "Systémová oblast"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "Zobrazit ikonu v systémové oblasti"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "Zobrazit čas příští přestávky v systémové oblasti"
+msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr "O programu"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "Zakázat Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Zakázat do %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Zakázat do restartu"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Povolit Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Na %d hodinu"
-msgstr[1] "Na %d hodiny"
-msgstr[2] "Na %d hodin"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Na %d minutu"
-msgstr[1] "Na %d minuty"
-msgstr[2] "Na %d minut"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Na %d sekundu"
-msgstr[1] "Na %d sekundy"
-msgstr[2] "Na %d sekund"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "Příští přestávka v %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "Žádné přestávky"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr "Nastavení"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "Dát si přestávku"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr "Do restartu"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "Ukončit"
+msgstr ""

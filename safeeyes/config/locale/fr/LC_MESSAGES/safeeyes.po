@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2017-10-19 14:46+0000\n"
+"Last-Translator: French Coordinator <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/fr/>\n"
 "Language: fr\n"
@@ -23,7 +23,7 @@ msgstr "Fermez bien vos yeux"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Regardez plusieurs fois de droite à gauche"
+msgstr "Regardez de droite à gauche en alternance"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
@@ -320,7 +320,14 @@ msgstr "Mettre Safe Eyes en pause si le système est inactif"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "Durée d'inactivité minimale pour mettre Safe Eyes en pause (en secondes)"
+msgstr ""
+"Durée d'inactivité minimale pour mettre Safe Eyes en pause (en secondes)"
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
+msgstr ""
+"Interpréter le temps d’inactivité équivalent à la pause à venir comme une "
+"pause"
 
 #: plugins/trayicon
 msgid "Tray Icon"

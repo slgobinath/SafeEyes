@@ -371,11 +371,11 @@ def init(ctx, safeeyes_cfg, plugin_config):
         tray_icon.initialize(plugin_config)
 
 
-def update_next_break(dateTime):
+def update_next_break(break_obj, next_break_time):
     """
     Update the next break time.
     """
-    tray_icon.next_break_time(dateTime)
+    tray_icon.next_break_time(next_break_time)
 
 
 def on_pre_break(break_obj):

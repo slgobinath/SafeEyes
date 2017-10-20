@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
 "PO-Revision-Date: 2017-10-08 12:42+0000\n"
 "Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Tamil <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/ta/>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -86,8 +86,8 @@ msgstr "மூடு"
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
-"அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் "
-"பணியாற்றுவதால் ஏற்படும் கண் சோர்வை தடுக்கிறது"
+"அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் பணியாற்றுவதால் "
+"ஏற்படும் கண் சோர்வை தடுக்கிறது"
 
 # About dialog
 msgid "License"
@@ -135,7 +135,9 @@ msgstr "உள்ளக நிலையை தக்கவைத்து கொ
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "நீண்ட இடைவேளைகளுக்கிடையிலான நேரம் குறுகிய இடைவேளைகளுக்கிடையிலான நேரத்தின் மடங்காக இருக்க வேண்டும்"
+msgstr ""
+"நீண்ட இடைவேளைகளுக்கிடையிலான நேரம் குறுகிய இடைவேளைகளுக்கிடையிலான நேரத்தின் மடங்காக "
+"இருக்க வேண்டும்"
 
 # Settings dialog
 msgid "Options"
@@ -316,6 +318,10 @@ msgstr "கணினி செயலற்று இருந்தால் Saf
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Safe Eyesஐ இடைநிறுத்துவதற்கான குறைந்தபட்ச செயலற்ற நேரம் (விநாடிகளில்)"
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
+msgstr "அடுத்த இடைவேளையின் காலத்திற்கு சமனான செயலற்ற நேரத்தை இடைவேளையாக கருதுக"
 
 #: plugins/trayicon
 msgid "Tray Icon"
