@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-08 12:42+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"safe-eyes/translations/zh_Hans/>\n"
+"PO-Revision-Date: 2017-10-23 09:44+0000\n"
+"Last-Translator: 庞伟浩 <pangzaiyu77@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects"
+"/safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 2.17\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -55,27 +55,27 @@ msgstr "靠在椅背上休息一会"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "显示“关于”对话框"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "禁用当前正在运行的Safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "启用当前正在运行的Safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "退出正在运行的Safeeyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "显示“设置”对话框"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "以调试模式运行Safeeyes"
 
 # About dialog
 msgid "Close"
@@ -90,7 +90,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "许可证"
 
 # Break screen
 msgid "Skip"
@@ -102,111 +102,111 @@ msgstr "推迟休息"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "休息时长（秒）"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "相邻休息之间的时间间隔（分钟）"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "休息之前的准备时间（秒）"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "禁用键盘快捷键的时长（秒）"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "推迟休息时长（分钟）"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "严格休息（无法跳过休息）"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "允许推迟休息"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "维持内部状态"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "长休息时间间隔必须是短休息间隔的倍数"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "短休息"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "长休息"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "休息"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "休息"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "插件"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "短"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "长"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "图片"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "选择"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "请选择一张图片"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "时长"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "覆盖"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "时间（秒）"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "休息设置"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "插件设置"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "插件暂不支持%s桌面环境"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
