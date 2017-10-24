@@ -1,0 +1,15 @@
+i {
+    color: #424242;
+    position: absolute;
+    font-size: 32pt;
+    float: left;
+    line-height: 20pt;
+}
+
+h3 {
+    margin-left: 50px;
+}
+
+p {
+    text-align: justify;
+}

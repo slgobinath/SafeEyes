@@ -1,0 +1,29 @@
+h1 {
+    font-family: Roboto;
+    font-size: 36pt;
+}
+
+p {
+    font-size: 18pt;
+    margin-top: 30px;
+    text-align: justify;
+    font-family: "Raleway",Arial,sans-serif;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.row > [class*='col-'] img {
+    align-self: center;
+}

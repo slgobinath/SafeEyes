@@ -1,0 +1,8 @@
+<a name="features"><h2>Features</h2></a>
+
+<div class="col-sm-12" *ngFor="let row of features">
+    <div class="col-sm-4" *ngFor="let feature of row">
+            <div><i class="fa {{ feature.icon }}" aria-hidden="true"> </i><h3>{{ feature.title }}</h3></div>
+        <p>{{ feature.description }}</p>
+    </div>
+</div>

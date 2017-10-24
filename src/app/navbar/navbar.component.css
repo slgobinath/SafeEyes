@@ -1,0 +1,31 @@
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+  background: black;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+  background: black;
+}
+
+.navbar-default {
+    background: black;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background: black;
+    font-weight: bold;
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #d8d8d8;
+}
+
+.navbar-default .navbar-brand {
+    font-weight: bold;
+    color: white;
+    font-size: 18pt;
+}
