@@ -3,6 +3,7 @@
 [![GitHub version](https://badge.fury.io/gh/slgobinath%2FSafeEyes.svg)](https://badge.fury.io/gh/slgobinath%2FSafeEyes)
 [![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
 [![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
+[![Badge](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 
 
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
@@ -53,6 +54,10 @@ sudo emerge -av x11-misc/safeeyes
 sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle
 sudo pip3 install safeeyes
 sudo update-icon-caches /usr/share/icons/hicolor
+```
+People using unstable/testing Debian can install Safe Eyes froms the official repository using the following command:
+```
+sudo apt-get install safeeyes
 ```
 
 ### Fedora
