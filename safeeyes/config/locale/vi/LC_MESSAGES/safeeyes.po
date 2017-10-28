@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/vi/>\n"
+"PO-Revision-Date: 2017-10-28 07:14+0000\n"
+"Last-Translator: giappi <giappaig@gmail.com>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,67 +19,67 @@ msgstr ""
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Nhắm chặt mắt lại"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Đảo đi đảo lại đôi mắt của bạn cho mỗi bên"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Xoay mắt theo chiều kim đồng hồ"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Xoay mắt theo chiều ngược chiều kim đồng hồ"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Chớp chớp mắt"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Nhìn ra xa"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Uống một ít nước"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Đứng dậy và đi lại một lúc"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Tựa lưng vào ghế và thư giãn"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "Hiện hộp thoại giới thiệu"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "vô hiệu hóa thể hiện safeeyes đăng chạy"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "kích hoạt thể hiện safeeyes đang chạy"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "bỏ thể hiện safeeyes đang chạy và thoát"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "Hiện hộp thoại cài đặt"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Chạy Safe Eyes trong chế độ gỡ rối"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -90,303 +90,306 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Giấy phép"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Bỏ qua"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Tạm hoãn"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Thời gian nghỉ (bằng giây)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Khoảng thời gian giữa hai lần nghỉ ngơi (bằng phút)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Thời gian để chuẩn bị nghỉ ngơi (bằng giây)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr ""
+"Th.gian khóa phím tắt để tránh tắt nhầm Nhắc nhở khi nó hiện lên (bằng giây)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Thời gian tạm hoãn (bằng phút)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Nghỉ ngơi nghiêm túc (Không cho phép bỏ qua)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Cho phép tạm hoãn nghỉ ngơi"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Persist the internal state"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Thời gian nghỉ dài phải là bội số của thời gian nghỉ ngắn"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Tùy chọn"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Nghỉ ngơi ngắn"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Nghỉ ngơi dài"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Nghỉ ngơi"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Nghỉ ngơi"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Plugins"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Kiểu"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Ngắn"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Dài"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Hình ảnh"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Chọn"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Vui lòng chọn một hình ảnh"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Thời gian"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Ghi đè"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Thời gian (bằng giây)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Cài đặt nghỉ ngơi"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Cài đặt plugin"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Plugin không hỗ trợ Môi trường destop %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Vui lòng cài đặt Python module '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Vui lòng cài đặt công cụ dòng lệnh (command-line tool) '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Vui lòng thêm tài nguyên %(resource) vào thư mục %(config_resource)"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Giờ nghỉ mới"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Xóa bỏ"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Hủy bỏ"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Lưu"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Thông báo âm thanh"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Phát âm báo ở cuối mỗi lần nghỉ"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Không Làm Phiền"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Bỏ qua lần nghỉ nếu như cửa sổ hiện tại đang trong chế độ toàn màn hình"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Không lầm gián đoạn những cửa sổ này bất cứ lúc nào"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Tạm ngắt những cửa sổ này bất kể trạng thái của nó"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Chuyển các cửa sổ có thể ngắt được sang chế độ bình thường"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Thống kê sức khoẻ"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Hiện thống kê dựa trên việc bạn sử dụng Safe Eyes như thế nào"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Thông báo"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Hiện một thông báo hệ thống trước khi nghỉ"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Chuẩn bị cho giờ nghỉ ngắn trong %s giây nữa"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Chuẩn bị cho giờ nghỉ dài trong %s giây nữa"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Màn hình chờ"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Khóa màn hình sau khi giờ nghỉ dài bằng màn hình chờ"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Lệnh màn hình chờ tùy chỉnh"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Số giây thối thiểu để bỏ qua mà không có màn hình chờ"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Tạm dừng thông minh"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Tạm dừng Safe Eyes nếu hệ thống đang rỗi"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Thời gian rỗi nhỏ nhất để tạm dừng Safe Eyes (bằng giây)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Diễn tả thời gian rỗi tương đương với thời gian nghỉ sắp tới như là một giờ "
+"nghỉ"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Biểu tượng khay"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Hiện biểu tượng ở khu vực thông báo"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Hiện thời gian nghỉ tiếp theo ở biểu tượng khay"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Giới thiệu"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Tắt Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Tắt cho đến %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Tắt cho đến khi khởi động lại"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Bật Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
+msgstr[0] "Khoảng %d giờ"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
+msgstr[0] "Khoảng %d phút"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
+msgstr[0] "Khoảng %d giây"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Lần nghỉ tiếp theo là %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Không Có Giờ Nghỉ"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Cài đặt"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Nghỉ ngay bây giờ"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Cho đến khi khởi động lại"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Thoát"
