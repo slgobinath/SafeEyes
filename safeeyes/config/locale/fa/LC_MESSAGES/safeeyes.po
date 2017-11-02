@@ -6,84 +6,83 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/fa/>\n"
+"PO-Revision-Date: 2017-11-03 06:48+0000\n"
+"Last-Translator: Misagh <misaghlb@gmail.com>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "محکم چشمانتان را ببندید"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "چندبار چشمانتان را به اطراف بچرخانید"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "]چشم هایتان را در جهت عقربه های ساعت بچرخانید"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "چشم هایتان را در خلاف جهت عقربه های ساعت بچرخانید"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "پلک بزنید"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "روی یک نقطه در دور دست تمرکز کنید"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "مقداری آب بنوشید"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "مدتی قدم بزنید"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "به صندلی تکیه داده و راحت باشید"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "نشان دادن پنجره درباره"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "غیرفعال کردن نمونه safeeyes درحال اجرا"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "فعال کردن نمونه safeeyes درحال اجرا"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "بستن و خروج از safeeyes در حال اجرا"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "نشان دادن پنجره تنظیمات"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "اجرا کردن safeeyes در حالت دیباگ"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-#, fuzzy
 msgid "description"
 msgstr ""
 "Safe Eyes  .با یاد آوری شما برای استراحت کردن، وقتی ساعت های طولانی را در "
@@ -91,11 +90,11 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "لایسنس"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "رد کردن"
 
 # Break screen
 msgid "Postpone"
