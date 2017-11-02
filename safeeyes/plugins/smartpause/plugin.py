@@ -43,6 +43,7 @@ break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 
+
 def __system_idle_time():
     """
     Get system idle time in minutes.
@@ -90,7 +91,7 @@ def init(ctx, safeeyes_config, plugin_config):
     disable_safe_eyes = context['api']['disable_safeeyes']
     idle_time = plugin_config['idle_time']
     interpret_idle_as_break = plugin_config['interpret_idle_as_break']
-    break_interval = safeeyes_config.get('break_interval') * 60 # Convert to seconds
+    break_interval = safeeyes_config.get('break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)    # If idle time is 1 sec, wait only 1 sec
 
 
@@ -158,6 +159,7 @@ def on_stop():
     idle_condition.acquire()
     idle_condition.notify_all()
     idle_condition.release()
+
 
 def update_next_break(break_obj, dateTime):
     """

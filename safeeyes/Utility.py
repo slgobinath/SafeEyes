@@ -55,6 +55,7 @@ USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
 
+
 def get_resource_path(resource_name):
     """
     Return the user-defined resource if a system resource is overridden by the user.
@@ -354,7 +355,7 @@ def intialize_logging(debug):
     # Append the logs and overwrite once reached 5MB
     file_handler = RotatingFileHandler(LOG_FILE_PATH, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
     file_handler.setFormatter(log_formatter)
-    
+
     if debug:
         file_handler.setLevel(logging.DEBUG)
         root_logger.setLevel(logging.DEBUG)

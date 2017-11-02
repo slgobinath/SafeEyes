@@ -22,9 +22,9 @@ RPC server and client implementation.
 
 import logging
 from threading import Thread
-from safeeyes import Utility
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.client import ServerProxy
+
 
 class RPCServer(object):
     """
@@ -59,6 +59,7 @@ class RPCServer(object):
             logging.info('Stop the RPC server')
             self.__running = False
             self.__server.shutdown()
+
 
 class RPCClient(object):
     """
