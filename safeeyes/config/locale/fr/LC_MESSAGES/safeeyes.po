@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-19 14:46+0000\n"
+"PO-Revision-Date: 2017-11-05 11:46+0000\n"
 "Last-Translator: French Coordinator <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -27,11 +27,11 @@ msgstr "Regardez de droite à gauche en alternance"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Faites rouler vos yeux dans le sens horaire"
+msgstr "Roulez vos yeux dans le sens horaire"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Faites rouler vos yeux dans le sens antihoraire"
+msgstr "Roulez vos yeux dans le sens antihoraire"
 
 # Short break
 msgid "Blink your eyes"
