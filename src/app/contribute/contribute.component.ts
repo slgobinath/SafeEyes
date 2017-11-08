@@ -23,7 +23,7 @@ export class ContributeComponent implements OnInit {
         {
           icon: 'fa-github',
           title: 'Issues',
-          description: 'If you are having issues with Safe Eyes, feel free to open issues in the <a href="">Safe Eyes Github Issues</a> page as necessary.'
+          description: 'If you are having issues with Safe Eyes, feel free to open issues in the <a href="https://github.com/slgobinath/SafeEyes/issues">Safe Eyes Github Issues</a> page as necessary.'
         }
       ];
       this.contributions = this._utilService.distribute(contributions, 2);
