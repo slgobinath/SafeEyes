@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-18 07:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2017-11-10 06:45+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/cs/>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -55,15 +55,15 @@ msgstr "Opřete se zády do židle a uvolněte se"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "zobrazit dialog O programu"
+msgstr "zobrazit dialog O aplikaci"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "zakázat spuštěnou instanci safeeyes"
+msgstr "zablokovat spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "povolit spuštěnou instanci safeeyes"
+msgstr "odblokovat spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
@@ -71,11 +71,11 @@ msgstr "ukončit spuštěnou instanci safeeyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "zobrazit dialog nastavení"
+msgstr "zobrazit nastavovací dialog"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "spustit safeeyes v módu pro ladění"
+msgstr "spustit safeeyes v režimu pro ladění"
 
 # About dialog
 msgid "Close"
@@ -86,7 +86,7 @@ msgstr "Zavřít"
 msgid "description"
 msgstr ""
 "Safe Eyes chrání vaše oči před následky přetěžování (asthenopie), když "
-"dlouho hledíte do obrazovky počítače, připomínáním potřebných přestávek"
+"dlouho hledíte do obrazovky počítače – připomínáním potřebných přestávek"
 
 # About dialog
 msgid "License"
@@ -114,7 +114,7 @@ msgstr "Čas pro přípravu na přestávku (v sekundách)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Zakázat klávesové zkratky po dobu (v sekundách)"
+msgstr "Vypnout klávesové zkratky po dobu (v sekundách)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
@@ -126,7 +126,7 @@ msgstr "Přísné přestávky (nelze je přeskočit)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "Povolit přeskakování přestávek"
+msgstr "Umožnit přeskakování přestávek"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -134,11 +134,11 @@ msgstr "Zachovat vnitřní stav"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "Dlouhé přestávky musí být násobkem krátkých přestávek"
+msgstr "Je třeba, aby dlouhé přestávky byly násobkem krátkých přestávek"
 
 # Settings dialog
 msgid "Options"
-msgstr "Možností"
+msgstr "Možnosti"
 
 # Settings dialog
 msgid "Short Breaks"
@@ -190,7 +190,7 @@ msgstr "Trvání"
 
 # Settings dialog
 msgid "Override"
-msgstr "Převážit"
+msgstr "Přepsat"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -206,20 +206,19 @@ msgstr "Nastavení rozšíření"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "Rozšíření nepodporuje pracovní prostředí %s"
+msgstr "Rozšíření nepodporuje pracovní (desktop) prostředí %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Prosím nainstalujte si modul pro Python '%s'"
+msgstr "Nainstalujte si modul pro Python „%s“"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Prosím nainstalujte si nástroj pro příkazový řádek'%s'"
+msgstr "Nainstalujte si nástroj pro příkazový řádek „%s“"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
-"Prosím přidejte prostředek %(resource)s do adresáře %(config_resource)s"
+msgstr "Přidejte prostředek %(resource)s do složky %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -251,7 +250,8 @@ msgstr "Nerušit"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr "Přeskočit přestávku, pokud je spuštěný program přes celou obrazovku"
+msgstr ""
+"Přeskočit přestávku, pokud je nějaká aplikace spuštěná přes celou obrazovku"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -263,15 +263,15 @@ msgstr "Přerušovat tato okna nehledě na jejich stav"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "Přepnout nepřerušitelná okna do normálního módu"
+msgstr "Přepnout nepřerušitelná okna do normálního režimu"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr "Statistiky o zdraví"
+msgstr "Zdravotní statistiky"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Zobrazit statistiky o zdraví založené na používání Safe Eyes"
+msgstr "Zobrazit zdravotní statistiky založené na používání Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
@@ -279,7 +279,7 @@ msgstr "Oznámení"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Zobrazit oznámení před přestávkami"
+msgstr "Zobrazovat oznámení před přestávkami"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
@@ -299,7 +299,7 @@ msgstr "Zamknout obrazovku spořičem obrazovky po dlouhých přestávkách"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Vlastní spořič obrazovky"
+msgstr "Vlastní spořič obrazovky (příkaz)"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -307,15 +307,15 @@ msgstr "Minimum sekund do zapnutí spořiče"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "Chytrá pauza"
+msgstr "Chytré pozastavení"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "Pozastavit Safe Eyes když je systém v klidu"
+msgstr "Pozastavit odpočet v Safe Eyes při nečinnosti uživatele"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "Minimální čas v klidu na pozastavení Safe Eyes (v sekundách)"
+msgstr "Po jak dlouhé nečinnosti pozastavit Safe Eyes (v sekundách)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -325,11 +325,11 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "Systémová oblast"
+msgstr "Oznamovací oblast"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "Zobrazit ikonu v systémové oblasti"
+msgstr "Zobrazovat ikonu v systémové oblasti"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
@@ -337,23 +337,23 @@ msgstr "Zobrazit čas příští přestávky v systémové oblasti"
 
 #: plugins/trayicon
 msgid "About"
-msgstr "O programu"
+msgstr "O aplikaci"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "Zakázat Safe Eyes"
+msgstr "Zablokovat Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Zakázat do %s"
+msgstr "Zablokovat do %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Zakázat do restartu"
+msgstr "Zablokovat do restartu"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Povolit Safe Eyes"
+msgstr "Odblokovat Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
@@ -390,7 +390,7 @@ msgstr "Nastavení"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "Dát si přestávku"
+msgstr "Udělat si přestávku"
 
 #: plugins/trayicon
 msgid "Until restart"
