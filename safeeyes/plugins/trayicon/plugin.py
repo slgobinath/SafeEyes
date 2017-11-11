@@ -393,11 +393,13 @@ def __unlock_menu():
     """
     Utility.execute_main_thread(tray_icon.unlock_menu)
 
+
 def on_start():
     """
     Enable the tray icon.
     """
     tray_icon.enable_ui()
+
 
 def on_stop():
     """
