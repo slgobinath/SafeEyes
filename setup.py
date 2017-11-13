@@ -4,9 +4,12 @@ import setuptools
 
 
 requires = [
-    'python-xlib',
+    'babel',
+    'dbus',
+    'gi',
     'psutil',
-    'babel']
+    'python-xlib'
+]
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
