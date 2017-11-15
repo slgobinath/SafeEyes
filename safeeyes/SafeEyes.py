@@ -267,4 +267,3 @@ class SafeEyes(object):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
         else:
             Utility.delete(Utility.SESSION_FILE_PATH)
-        

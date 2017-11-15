@@ -4,9 +4,12 @@ import setuptools
 
 
 requires = [
-    'python-xlib',
+    'babel',
+    'dbus',
+    'gi',
     'psutil',
-    'babel']
+    'python-xlib'
+]
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,6 +34,7 @@ def __compile_po_files():
             msgfmt_cmd = 'msgfmt {} -o {}'.format(po_dir + po_file, po_dir + mo_file)
             subprocess.call(msgfmt_cmd, shell=True)
 
+
 def _data_files(path):
     """
     Collect the data files.
@@ -39,6 +43,7 @@ def _data_files(path):
         if not files:
             continue
         yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
+
 
 def __package_files(directory):
     """
@@ -50,6 +55,7 @@ def __package_files(directory):
             paths.append(os.path.join('..', path, filename))
     return paths
 
+
 def __package_data():
     """
     Return a list of package data.
@@ -59,6 +65,7 @@ def __package_data():
     data.extend(__package_files('safeeyes/config'))
     data.extend(__package_files('safeeyes/plugins'))
     return data
+
 
 __data_files = list(_data_files('share'))
 

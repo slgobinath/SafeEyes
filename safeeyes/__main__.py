@@ -83,6 +83,7 @@ def __evaluate_arguments(args, safe_eyes):
     elif args.take_break:
         Utility.execute_main_thread(safe_eyes.take_break)
 
+
 def main():
     """
     Start the Safe Eyes.

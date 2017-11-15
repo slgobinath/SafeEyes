@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2017-11-11 16:21+0200\n"
+"Last-Translator: Anari Jalakas <anari.jalakas@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,71 +15,71 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Poedit 2.0.4\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Sulge silmad"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Vaata vasakule ja paremale"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Liiguta silmi päripäeva"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Liiguta silmi vastupäeva"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Pilguta silmi"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Vaata kaugusesse"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Joo vett"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Jaluta ringi"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Toetu seljatoele ja lõõgastu"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "kuva infoaken"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "peatab programmi töö"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "lubab programmi töö"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "peatab programmi töö ja väljub"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "kuva seadete aken"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "käivita veatuvastuse režiimis"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -90,306 +90,308 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Litsents"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Jäta vahele"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Lükka edasi"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Pausi kestvus (sekundites)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Kahe pausi vaheline aeg (minutites)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Pausist etteteatamise aeg (sekundites)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Klaviatuurikäskude eiramise aeg (sekundit)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Edasilükkamise aeg (minutites)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Range paus (ei ole võimalik vahele jätta)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Pauside edasilükkamine lubatud"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Sisemise seisundi säilitamine"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Pika pausi intervall peab olema lühikese pausi pikkuse kordne"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Valikud"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Lühikesed pausid"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Pikad pausid"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Paus"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pausid"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Pluginad"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Tüüp"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Lühike"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Pikk"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Pilt"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Vali"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Palun vali pilt"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Kestvus"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Muuda vaikimisi seadeid"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Kestvus (sekundites)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Pausi seaded"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Plugina seaded"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Plugin ei toeta aknahaldurit %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Palun paigalda järgnev Pythoni moodul: '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Palun paigalda järgnev käsurea tööriist: '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Palun lisa ressurss %(resource)s kataloogi %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Uus paus"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Eemalda"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Tühista"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Salvesta"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Helisignaal"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Pausi lõpus mängitakse helisignaali"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Mitte segada"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Täisekraani vaates jäetakse paus vahele"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Ära mitte kunagi sega neid aknaid"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Nende akende puhul seisundit ei kontrollita"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Lülita katkestatavad aknad tavarežiimi"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Statistika"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Programmikasutuse statistika kuvamine"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Teavitus"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Süsteemiteavituste kuvamine enne pausi"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Lühike paus %s sekundi pärast"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Pikk paus %s sekundi pärast"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Ekraanisäästja"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Ekraani lukustamine pika pausi lõpus "
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Kohandatud ekraanisäästja käsk"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
 msgstr ""
+"Kui mitme sekundi jooksul saab ekraanisäästja käivitamist vahele jätta"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Tark paus"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Süsteemi jõudeoleku ajal programmi peatamine"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
+"Minimaalne süsteemi jõudeoleku aeg programmi peatamiseks (sekundites)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "Arvesta järgmise pausi aja sisse sellele eelnenud puhkeaeg"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Paneeliikoon"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Paneeliikooni näitamine teavitusalas"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Näita järgmise pausi aega paneeliikooni kõrval"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Programmist"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Peata Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Peatatud kuni %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Peatatud taaskäivituseni"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Käivita Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d-ks tunniks"
+msgstr[1] "%d-ks tunniks"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d-ks minutiks"
+msgstr[1] "%d-ks minutiks"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d-ks sekundiks"
+msgstr[1] "%d-ks sekundiks"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Järgmine paus %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Pausid puuduvad"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Seaded"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Tee nüüd paus"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Taaskäivitumiseni"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Välju"
