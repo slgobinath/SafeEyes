@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-23 09:44+0000\n"
+"PO-Revision-Date: 2017-11-15 08:59+0000\n"
 "Last-Translator: 庞伟浩 <pangzaiyu77@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects"
 "/safe-eyes/translations/zh_Hans/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.18-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -210,183 +210,183 @@ msgstr "插件暂不支持%s桌面环境"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "请安装Python模块“%s\""
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "请安装命令行工具”%s“"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "请把资源%(resource)添加到%(config_resource)文件夹"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "新休息"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "放弃"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "声音提示"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "在休息结束时播放声音提示"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "免打扰"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "当前活跃窗口是全屏时跳过休息"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "任何时候都不要中断这些窗口"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "中断这些窗口无视其状态"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "将可中断窗口切换到正常模式"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "健康统计"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "基于你如何使用 Safe Eyes 展示统计数据"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "通知"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "在休息之前显示一个系统通知"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "%s 秒后将进入一个短休息"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "%s 秒后将进入一个长休息"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "屏幕保护程序"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "在长休息之后通过开启屏幕保护程序来锁定屏幕"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "自定义屏幕保护程序命令"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "在没有屏保的情况下允许跳过的最短时间（秒）"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "智能暂停"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "当系统空闲时暂停 Safe Eyes"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "暂停 Safe Eyes 的最短时间（秒）"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "将系统空闲时间作为下次休息时长来对待"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "托盘图标"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "在通知区域显示一个托盘图标"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "在托盘图标上显示下次休息的时间"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "禁用 Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "禁用软件直到 %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "禁用软件直到重新启动"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "启用 Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
+msgstr[0] "%d 小时"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
+msgstr[0] "%d 分钟"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
+msgstr[0] "%d 秒"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "下次休息在 %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "没有可用的休息"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "立即休息"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "直到重启"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "退出"
