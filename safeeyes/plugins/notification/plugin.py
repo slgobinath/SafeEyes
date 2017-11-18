@@ -31,6 +31,7 @@ Safe Eyes Notification plugin
 APPINDICATOR_ID = 'safeeyes'
 notification = None
 context = None
+warning_time = 10
 
 Notify.init(APPINDICATOR_ID)
 
@@ -40,8 +41,10 @@ def init(ctx, safeeyes_config, plugin_config):
     Initialize the plugin.
     """
     global context
+    global warning_time
     logging.debug('Initialize Notification plugin')
     context = ctx
+    warning_time = safeeyes_config.get('pre_break_warning_time')
 
 
 def on_pre_break(break_obj):
@@ -52,7 +55,6 @@ def on_pre_break(break_obj):
     global notification
     logging.info('Show the notification')
     message = '\n'
-    warning_time = 10
     if break_obj.type == BreakType.SHORT_BREAK:
         message += (_('Ready for a short break in %s seconds') % warning_time)
     else:
