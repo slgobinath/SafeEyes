@@ -49,7 +49,7 @@ SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
 STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
 SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
-LOG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.log')
+LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
@@ -341,31 +341,24 @@ def intialize_logging(debug):
     """
     Initialize the logging framework using the Safe Eyes specific configurations.
     """
-    # Create the directory to store log file if not exist
-    if not os.path.exists(CONFIG_DIRECTORY):
-        try:
-            os.makedirs(CONFIG_DIRECTORY)
-        except OSError:
-            pass
-
     # Configure logging.
     root_logger = logging.getLogger()
     log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
-    # Append the logs and overwrite once reached 5MB
-    file_handler = RotatingFileHandler(LOG_FILE_PATH, mode='a', maxBytes=5 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
-    file_handler.setFormatter(log_formatter)
-
+    # Append the logs and overwrite once reached 1MB
     if debug:
-        file_handler.setLevel(logging.DEBUG)
-        root_logger.setLevel(logging.DEBUG)
+        # Log to file
+        file_handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0)
+        file_handler.setFormatter(log_formatter)
+        # Log to console
         console_handler = logging.StreamHandler()
         console_handler.setFormatter(log_formatter)
+
+        root_logger.setLevel(logging.DEBUG)
         root_logger.addHandler(console_handler)
+        root_logger.addHandler(file_handler)
     else:
-        file_handler.setLevel(logging.INFO)
-        root_logger.setLevel(logging.INFO)
-    root_logger.addHandler(file_handler)
+        root_logger.propagate = False
 
 
 def __open_plugin_config(plugins_dir, plugin_id):
