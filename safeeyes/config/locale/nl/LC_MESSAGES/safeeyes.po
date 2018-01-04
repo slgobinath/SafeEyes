@@ -6,391 +6,394 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-13 17:55+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/nl/>\n"
+"PO-Revision-Date: 2018-01-04 11:46+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Sluit uw ogen goed"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Rol uw oogballen een paar keer heen en weer"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Draai uw ogen met de klok mee"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Draai uw ogen tegen de klok in"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Knipper met uw ogen"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Focus op een punt, ergens in de verte"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Drink wat water"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Maak een wandelingetje"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Leun achterover in uw stoel en rust uit"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "het over-dialoogvenster weergeven"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "het momenteel draaiende safeeyes-proces uitschakelen"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "het momenteel draaiende safeeyes-proces inschakelen"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "het draaiende safeeyes-proces beëindigen en afsluiten"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "het instellingen-dialoogvenster weergeven"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "safeeyes opstart in foutopsporingsmodus"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
-"Safe Eyes beschermt uw ogen tegen vermoeidheid (asthenopie) door je eraan te "
-"herinneren tijdig een pauze in te lassen wanneer je langere tijd aan de "
+"Safe Eyes beschermt uw ogen tegen vermoeidheid (asthenopie) door u eraan te "
+"herinneren tijdig een pauze in te lassen wanneer u langere tijd aan de "
 "computer werkt"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licentie"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Overslaan"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Uitstellen"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Pauzeduur (in seconden)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Tussenpoos tussen twee pauzes (in minuten)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Voorbereidingstijd voor een pauze (in seconden)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Tijd dat sneltoetsen uitgeschakeld zijn (in seconden)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Uitstelduur (in minuten)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Verplichte pauze (geen mogelijkheid tot overslaan)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Overslaan van pauzes toestaan"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Interne status aanhouden"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"De tussenpoos van een lange pauze moet een vermenigvuldiging zijn van de "
+"korte"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Opties"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Korte pauzes"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Lange pauzes"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pauze"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pauzes"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Plug-ins"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Soort"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Kort"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Lang"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Afbeelding"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Selecteren"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Selecteer een afbeelding"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Duur"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Overschrijven"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Tijd (in seconden)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Pauze-instellingen"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Plug-in-instellingen"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "De plug-in heeft geen ondersteuning voor de %s-bureaubladomgeving"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Installeer de Python-module '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Installeer het terminalprogramma '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Voeg de bron %(resource)s toe aan de %(config_resource)s-map"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Nieuwe pauze"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Verwijderen"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Verwerpen"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Hoorbare waarschuwing"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Speel een hoorbare waarschuwing af aan het einde van pauzes"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Niet storen"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
 msgstr ""
+"Pauze overslaan als het actieve venster zich bevindt in volledig scherm-modus"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Deze vensters nooit storen"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Deze vensters storen, ongeacht hun status"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Stoorbare vensters overschakelen naar normale modus"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Gezondheidsstatistieken"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Statistieken weergeven, gebaseerd op uw gebruik van Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Melding"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Systeemmelding weergeven voorafgaand aan pauzes"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Bereidt u voor op een korte pauze over %s seconden"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Bereidt u voor op een lange pauze over %s seconden"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Schermbeveiliging"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Scherm vergrendelen d.m.v. schermbeveiliging na lange pauzes"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Aangepaste schermbeveiligingsopdracht"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Minimaal aantal seconden om over te slaan zonder schermbeveiliging"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Slimme pauze"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Safe Eyes pauzeren als het systeem inactief is"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Minimale tijd dat systeem inactief moet zijn (in seconden)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "Inactief opvatten als aankomende pauzeduur"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Systeemvakpictogram"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Systeemvakpictogram weergeven in meldingsgebied"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Volgende pauzetijd weergeven op systeemvakpictogram"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes uitschakelen"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Uitgeschakeld tot %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Uitgeschakeld tot volgende herstart"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes inschakelen"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Voor %d uur"
+msgstr[1] "Voor %d uur"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Voor %d minuut"
+msgstr[1] "Voor %d minuten"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Voor %d seconde"
+msgstr[1] "Voor %d seconden"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Volgende pauze over %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Geen beschikbare pauzes"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Neem nu een pauze"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Tot herstart"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Afsluiten"
