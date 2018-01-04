@@ -197,10 +197,15 @@ class BreakScreen(object):
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
+            # In Unity, move the window before present
+            if self.context['desktop'] == 'unity':
+                window.move(x, y)
             window.stick()
             window.set_keep_above(True)
             window.present()
-            window.move(x, y)
+            # In other desktop environments, move the window after present
+            if self.context['desktop'] != 'unity':
+                window.move(x, y)
             window.fullscreen()
 
     def __update_count_down(self, count):
