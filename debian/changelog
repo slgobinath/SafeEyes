@@ -1,4 +1,4 @@
-safeeyes (2.0.2-1) xenial; urgency=low
+safeeyes (2.0.2-3) artful; urgency=high
 
   * Fix multi-display issue
 
