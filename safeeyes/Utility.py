@@ -91,13 +91,13 @@ def execute_main_thread(target_function, args=None):
         GLib.idle_add(target_function)
 
 
-def system_locale():
+def system_locale(category=locale.LC_MESSAGES):
     """
     Return the system locale. If not available, return en_US.UTF-8.
     """
     try:
         locale.setlocale(locale.LC_ALL, '')
-        sys_locale = locale.getlocale(locale.LC_TIME)[0]
+        sys_locale = locale.getlocale(category)[0]
         if not sys_locale:
             sys_locale = 'en_US.UTF-8'
         return sys_locale
@@ -110,7 +110,7 @@ def format_time(time):
     """
     Format time based on the system time.
     """
-    sys_locale = system_locale()
+    sys_locale = system_locale(locale.LC_TIME)
     return babel.dates.format_time(time, format='short', locale=sys_locale)
 
 
