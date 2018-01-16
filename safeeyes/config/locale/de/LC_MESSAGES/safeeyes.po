@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-05 21:37+0000\n"
+"PO-Revision-Date: 2018-01-16 23:40+0000\n"
 "Last-Translator: Sebastian Pipping <sebastian@pipping.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/de/>\n"
@@ -19,11 +19,11 @@ msgstr ""
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Schließen Sie die Augen"
+msgstr "Schließen Sie fest die Augen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Rollen Sie mit den Augen"
+msgstr "Bewegen Sie die Augen mehrere Male von links nach rechts und zurück"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
@@ -59,15 +59,15 @@ msgstr "Info-Dialog anzeigen"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Laufende Instanz von SafeEyes deaktivieren"
+msgstr "Laufende Instanz von Safe Eyes deaktivieren"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Laufende Instanz von SafeEyes aktivieren"
+msgstr "Laufende Instanz von Safe Eyes aktivieren"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Laufende Instanz von SafeEyes schließen und dann selbst beenden"
+msgstr "Laufende Instanz von Safe Eyes schließen und dann selbst beenden"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -98,7 +98,7 @@ msgstr "Überspringen"
 
 # Break screen
 msgid "Postpone"
-msgstr "Verzögernn"
+msgstr "Verzögern"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -198,7 +198,7 @@ msgstr "Zeit (in Sekunden)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "Einstelllungen"
+msgstr "Einstelllungen Pause"
 
 # Settings dialog
 msgid "Plugin Settings"
@@ -295,7 +295,7 @@ msgstr "Bildschirmschoner"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Nach langen Pause Bildschirm mit Bildschirmschoner sperren"
+msgstr "Nach langer Pause Bildschirm mit Bildschirmschoner sperren"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
