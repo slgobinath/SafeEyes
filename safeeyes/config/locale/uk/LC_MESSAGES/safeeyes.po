@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-22 21:16+0000\n"
-"Last-Translator: anonymous <>\n"
+"PO-Revision-Date: 2018-01-24 12:34+0000\n"
+"Last-Translator: Марс Ямбар <mjambarmeta@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/uk/>\n"
 "Language: uk\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Міцно заплющіть очі"
+msgstr "Щільно заплющіть очі"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -307,7 +307,7 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Розумна пауза"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
@@ -335,7 +335,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Про"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
@@ -347,7 +347,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Вимкнуто до перезавантаження"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
@@ -384,16 +384,16 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Налаштування"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Зробити перерву в даний час"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "До перезавантаження"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Вийти"
