@@ -94,7 +94,6 @@ class BreakScreen(object):
         Window close event handler.
         """
         logging.info("Closing the break screen")
-        self.__release_keyboard()
         self.close()
 
     def on_skip_clicked(self, button):
