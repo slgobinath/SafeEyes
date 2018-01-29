@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-13 17:55+0000\n"
 "Last-Translator: Radek Sprta <mail@radeksprta.eu>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/sk/>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,14 @@ msgstr "zobraziť dialog nastavenie"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "spustiť safeeyes v móde pre ladenie"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"

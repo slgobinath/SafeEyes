@@ -289,16 +289,19 @@ class TrayIcon(object):
         # active = self.item_enable.get_active()
         if self.active and len(args) > 1:
             self.disable_ui()
-            self.on_disable()
 
             time_to_wait = args[1]
             if time_to_wait <= 0:
+                info = _('Disabled until restart')
+                self.on_disable(info)
                 self.wakeup_time = None
-                self.item_info.set_label(_('Disabled until restart'))
+                self.item_info.set_label(info)
             else:
                 self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
+                info = _('Disabled until %s') % Utility.format_time(self.wakeup_time)
+                self.on_disable(info)
+                self.item_info.set_label(info)
                 Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
-                self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
 
     def lock_menu(self):
         """

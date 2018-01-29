@@ -58,7 +58,6 @@ msgid "show the about dialog"
 msgstr "vis \"Om\"-dialogvinduet"
 
 # Commandline arg description
-#, fuzzy
 msgid "disable the currently running safeeyes instance"
 msgstr "skru av det kjørende Øyetrygg-programmet"
 
@@ -77,6 +76,14 @@ msgstr "vis innstillingsdialogvinduet"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "start Øyetrygg i feilrettingsmodus"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"
@@ -112,7 +119,6 @@ msgid "Time to prepare for a break (in seconds)"
 msgstr "Tid til forberedelse av pause (i sekunder)"
 
 # Settings dialog
-#, fuzzy
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Tastatursnarveier avskrudd i periode (i sekunder)"
 
@@ -129,7 +135,6 @@ msgid "Allow postponing breaks"
 msgstr "Tillat utsettelse av pauser"
 
 # Settings dialog
-#, fuzzy
 msgid "Persist the internal state"
 msgstr "Fortsett i inngangstilstand"
 
@@ -254,7 +259,6 @@ msgid "Skip the break if the active window is in fullscreen mode"
 msgstr "Hopp over pause hvis det aktive vinduet er i fullskjermsmodus"
 
 # plugin/donotdisturb
-#, fuzzy
 msgid "Do not interrupt these windows anytime"
 msgstr "Ikke forstyrr disse vinduene noensinne"
 
@@ -315,7 +319,6 @@ msgid "Pause Safe Eyes if the system is idle"
 msgstr "Sett Øyetrygg på pause hvis systemet er ledig"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Minimal lediggang å pause Øyetrygg etter (i sekunder)"
 

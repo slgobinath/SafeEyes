@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-28 07:15+0000\n"
 "Last-Translator: Romulo do Vale <dovale.am@gmail.com>\n"
-"Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/pt/>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,14 @@ msgstr "mostrar a janela de configuração"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "iniciar o safeeyes em modo de debug"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"
@@ -219,7 +227,6 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Por favor instale a ferramenta de linha de comando '%s'"
 
 # Settings dialog
-#, fuzzy
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Por favor, adicione o recurso %(resource)s para %(config_resources)s pasta"

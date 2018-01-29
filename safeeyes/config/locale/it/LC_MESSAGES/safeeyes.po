@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-18 08:44+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,14 @@ msgstr "mostra la finestra delle preferenze"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "avvia Safe Eyes in modalità debug"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"

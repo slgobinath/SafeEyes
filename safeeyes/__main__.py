@@ -103,6 +103,7 @@ def main():
     group.add_argument('-s', '--settings', help=_('show the settings dialog'), action='store_true')
     group.add_argument('-t', '--take-break', help=_('Take a break now').lower(), action='store_true')
     parser.add_argument('--debug', help=_('start safeeyes in debug mode'), action='store_true')
+    parser.add_argument('--status', help=_('print the status of running safeeyes instance and exit'), action='store_true')
     parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
     args = parser.parse_args()
 
@@ -123,18 +124,24 @@ def main():
             rpc_client.show_settings()
         elif args.take_break:
             rpc_client.take_break()
+        elif args.status:
+            print(rpc_client.status())
         elif args.quit:
             rpc_client.quit()
         else:
             # Default behavior is opening settings
             rpc_client.show_settings()
         sys.exit(0)
-    elif not args.quit:
-        logging.info("Starting Safe Eyes")
-        safeeyes = SafeEyes(system_locale, config)
-        safeeyes.start()
-        Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
-        Gtk.main()
+    else:
+        if args.status:
+            print(_('Safe Eyes is not running'))
+            sys.exit(0)
+        elif not args.quit:
+            logging.info("Starting Safe Eyes")
+            safeeyes = SafeEyes(system_locale, config)
+            safeeyes.start()
+            Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
+            Gtk.main()
 
 
 if __name__ == '__main__':

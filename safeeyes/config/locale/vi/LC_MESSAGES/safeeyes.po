@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2017-10-28 07:14+0000\n"
 "Last-Translator: giappi <giappaig@gmail.com>\n"
-"Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/vi/>\n"
+"Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,14 @@ msgstr "Hiện hộp thoại cài đặt"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "Chạy Safe Eyes trong chế độ gỡ rối"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"
@@ -251,7 +259,8 @@ msgstr "Không Làm Phiền"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr "Bỏ qua lần nghỉ nếu như cửa sổ hiện tại đang trong chế độ toàn màn hình"
+msgstr ""
+"Bỏ qua lần nghỉ nếu như cửa sổ hiện tại đang trong chế độ toàn màn hình"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"

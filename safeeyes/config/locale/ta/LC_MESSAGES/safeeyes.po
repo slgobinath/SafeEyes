@@ -78,6 +78,14 @@ msgstr "அமைப்புகள் சாளரத்தை காண்ப�
 msgid "start safeeyes in debug mode"
 msgstr "வழு நீக்கும் முறையில் Safe Eyes ஐ ஆரம்பிக்குக"
 
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr "இயங்கும் Safe Eyes நிலையை காண்பித்து வெளியேறுக"
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr "Safe Eyes தற்போது இயங்கவில்லை"
+
 # About dialog
 msgid "Close"
 msgstr "மூடு"

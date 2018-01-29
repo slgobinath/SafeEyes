@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-01-04 11:46+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -76,6 +76,14 @@ msgstr "het instellingen-dialoogvenster weergeven"
 # Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "safeeyes opstart in foutopsporingsmodus"
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
 
 # About dialog
 msgid "Close"

@@ -56,6 +56,7 @@ class SafeEyes(object):
         self.plugins_manager = None
         self.settings_dialog_active = False
         self.rpc_server = None
+        self._status = ''
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
@@ -65,7 +66,8 @@ class SafeEyes(object):
         self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(self.show_settings)
         self.context['api']['show_about'] = lambda: Utility.execute_main_thread(self.show_about)
         self.context['api']['enable_safeeyes'] = lambda next_break_time=-1: Utility.execute_main_thread(self.enable_safeeyes, next_break_time)
-        self.context['api']['disable_safeeyes'] = lambda: Utility.execute_main_thread(self.disable_safeeyes)
+        self.context['api']['disable_safeeyes'] = lambda status: Utility.execute_main_thread(self.disable_safeeyes, status)
+        self.context['api']['status'] = self.status
         self.context['api']['quit'] = lambda: Utility.execute_main_thread(self.quit)
         if self.config.get('persist_state'):
             self.context['session'] = Utility.open_session()
@@ -209,7 +211,7 @@ class SafeEyes(object):
             self.safe_eyes_core.start(scheduled_next_break_time)
             self.plugins_manager.start()
 
-    def disable_safeeyes(self):
+    def disable_safeeyes(self, status=None):
         """
         Listen to tray icon disable action and send the signal to core.
         """
@@ -217,6 +219,9 @@ class SafeEyes(object):
             self.active = False
             self.plugins_manager.stop()
             self.safe_eyes_core.stop()
+            if status is None:
+                status = _('Disabled until restart')
+            self._status = status
 
     def start_break(self, break_obj):
         """
@@ -242,6 +247,7 @@ class SafeEyes(object):
         Update the next break to plugins and save the session.
         """
         self.plugins_manager.update_next_break(break_obj, break_time)
+        self._status = _('Next break at %s') % (Utility.format_time(break_time))
         if self.config.get('persist_state'):
             Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
 
@@ -259,6 +265,12 @@ class SafeEyes(object):
         """
         self.safe_eyes_core.take_break()
 
+    def status(self):
+        """
+        Return the status of Safe Eyes.
+        """
+        return self._status
+   
     def persist_session(self):
         """
         Save the session object to the session file.

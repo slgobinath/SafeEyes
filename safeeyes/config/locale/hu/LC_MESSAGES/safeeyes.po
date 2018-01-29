@@ -77,6 +77,14 @@ msgstr "mutasd a beállítások dialógust"
 msgid "start safeeyes in debug mode"
 msgstr "Indítsd a SafeEyes-t debug módban"
 
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "Bezárás"

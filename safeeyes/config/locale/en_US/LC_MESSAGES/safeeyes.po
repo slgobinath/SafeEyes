@@ -78,6 +78,14 @@ msgstr "show the settings dialog"
 msgid "start safeeyes in debug mode"
 msgstr "start safeeyes in debug mode"
 
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr "print the status of running safeeyes instance and exit"
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr "Safe Eyes is not running"
+
 # About dialog
 msgid "Close"
 msgstr "Close"
