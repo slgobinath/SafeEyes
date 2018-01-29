@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-29 09:39+0000\n"
+"PO-Revision-Date: 2018-01-30 11:12+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/it/>\n"
@@ -79,7 +79,7 @@ msgstr "avvia Safe Eyes in modalità debug"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "stampa lo stato di esecuzione di safeeyes ed esci"
+msgstr "stampa lo stato di esecuzione di Safe Eyes ed esci"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -370,19 +370,19 @@ msgstr "Abilita Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Per un'ora"
+msgstr[0] "Per %d ora"
 msgstr[1] "Per %d ore"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Per un minuto"
+msgstr[0] "Per %d minuto"
 msgstr[1] "Per %d minuti"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Per un secondo"
+msgstr[0] "Per %d secondo"
 msgstr[1] "Per %d secondi"
 
 #: plugins/trayicon
