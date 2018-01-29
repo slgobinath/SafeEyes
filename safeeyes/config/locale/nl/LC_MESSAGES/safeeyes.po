@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-04 11:46+0000\n"
+"PO-Revision-Date: 2018-01-29 09:57+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,11 +79,11 @@ msgstr "safeeyes opstart in foutopsporingsmodus"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "de status van de draaiende safeeyes-instantie printen en afsluiten"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes draait niet"
 
 # About dialog
 msgid "Close"
