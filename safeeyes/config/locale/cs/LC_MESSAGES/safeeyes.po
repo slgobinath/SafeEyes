@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-11-10 06:45+0000\n"
+"PO-Revision-Date: 2018-01-29 06:30+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
-"Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/cs/>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -79,11 +79,11 @@ msgstr "spustit safeeyes v režimu pro ladění"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "Popis argumentu příkazového řádku"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Stavová zpráva"
 
 # About dialog
 msgid "Close"
