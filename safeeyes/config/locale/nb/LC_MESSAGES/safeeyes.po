@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-16 23:40+0000\n"
+"PO-Revision-Date: 2018-01-30 03:38+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/nb/>\n"
@@ -78,12 +78,13 @@ msgid "start safeeyes in debug mode"
 msgstr "start Øyetrygg i feilrettingsmodus"
 
 # Commandline arg description
+#, fuzzy
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "skriv ut status for kjørende Øyetrygg-instans og avslutt"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Øyetrygg kjører ikke"
 
 # About dialog
 msgid "Close"
