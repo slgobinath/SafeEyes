@@ -26,6 +26,7 @@ optional arguments:
   -s, --settings    show the settings dialog
   -t, --take-break  take a break now
   --debug           start safeeyes in debug mode
+  --status          print the status of running safeeyes instance and exit
   --version         show program's version number and exit
 ```
 
