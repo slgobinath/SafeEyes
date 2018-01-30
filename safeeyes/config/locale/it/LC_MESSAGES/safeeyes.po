@@ -370,19 +370,19 @@ msgstr "Abilita Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Per un'ora"
+msgstr[0] "Per %d ora"
 msgstr[1] "Per %d ore"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Per un minuto"
+msgstr[0] "Per %d minuto"
 msgstr[1] "Per %d minuti"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Per un secondo"
+msgstr[0] "Per %d secondo"
 msgstr[1] "Per %d secondi"
 
 #: plugins/trayicon
