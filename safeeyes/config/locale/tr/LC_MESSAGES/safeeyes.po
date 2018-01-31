@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-29 09:04+0000\n"
-"Last-Translator: monolifed <monolifed@gmail.com>\n"
+"PO-Revision-Date: 2018-01-31 17:50+0000\n"
+"Last-Translator: Koray Biçer <solayagim@gmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-"
 "eyes/translations/tr/>\n"
 "Language: tr\n"
@@ -35,7 +35,7 @@ msgstr "Gözlerinizi saat yönünün tersine döndürün"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Gözkapaklarınızı kapatıp açın"
+msgstr "Gözlerinizi kırpın"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -43,7 +43,7 @@ msgstr "Gözünüzü uzakta bir noktaya odaklayın"
 
 # Short break
 msgid "Have some water"
-msgstr "Gidip biraz su için"
+msgstr "Biraz su için"
 
 # Long break
 msgid "Walk for a while"
@@ -51,7 +51,7 @@ msgstr "Biraz yürüyün"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Arkanıza yaslanın ve biraz gevşeyin"
+msgstr "Arkanıza yaslanın ve gevşeyin"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -59,15 +59,15 @@ msgstr "hakkında penceresini göster"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Şu anda çalışmakta olan safeeyes kopyasını etkisizleştir"
+msgstr "çalışmakta olan safeeyes kopyasını etkisizleştir"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Şu anda çalışmakta olan safeeyes kopyasını etkinleştir"
+msgstr "çalışmakta olan safeeyes kopyasını etkinleştir"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Şu anda çalışmakta olan safeeyese kopyasını sonlandır ve çık"
+msgstr "çalışmakta olan safeeyese kopyasını sonlandır ve çık"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -127,7 +127,7 @@ msgstr "Klavye kısayollarının etkisiz kalma süresi (saniye)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Erteleme müddeti (dakika)"
+msgstr "Erteleme süresi (dakika)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -279,7 +279,7 @@ msgstr "Sağlık İstatistikleri"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Safe Eyes kullanımınıza ait istatistikleri göster"
+msgstr "Safe Eyes kullanımınıza ait istatistikler"
 
 # plugin/notification
 msgid "Notification"
