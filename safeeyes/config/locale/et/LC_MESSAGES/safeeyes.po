@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-11-20 20:46+0000\n"
+"PO-Revision-Date: 2018-02-03 07:53+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
-"translations/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 2.19-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -79,11 +79,11 @@ msgstr "käivita veatuvastuse režiimis"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "väljasta hetkel töötava safeeyes instantsi staatus ja välju"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes ei tööta hetkel"
 
 # About dialog
 msgid "Close"
