@@ -70,7 +70,7 @@ __data_files = list(_data_files('share'))
 
 setuptools.setup(
     name="safeeyes",
-    version="2.0.3",
+    version="2.0.4",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     author="Gobinath Loganathan",
