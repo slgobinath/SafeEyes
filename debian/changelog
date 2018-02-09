@@ -1,10 +1,14 @@
-safeeyes (2.0.2-3) artful; urgency=high
+safeeyes (2.0.3-3) artful; urgency=high
+
+  * Fix issues with locales
+
+  * Add new command line option: --status
 
   * Fix multi-display issue
 
   * Fix hard coded time in notification
   
-  * Completely rededesigned architecture and user interface
+  * Completely redesigned architecture and user interface
 
   * Show next break time in tray icon in supported environments
 
