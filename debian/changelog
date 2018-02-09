@@ -1,4 +1,4 @@
-safeeyes (2.0.3-3) artful; urgency=high
+safeeyes (2.0.3-1) xenial; urgency=high
 
   * Fix issues with locales
 
