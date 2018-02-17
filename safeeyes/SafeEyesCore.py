@@ -113,11 +113,6 @@ class SafeEyesCore(object):
 
             logging.info("Stop Safe Eye core")
 
-            # Prevent resuming from a long break
-            if self.has_breaks() and self.__is_long_break():
-                # Next break will be a long break.
-                self.__select_next_break()
-
             # Stop the break thread
             self.waiting_condition.acquire()
             self.running = False
