@@ -1,47 +1,49 @@
-<a name="installation"><h2>Installation</h2></a>
+<a name="installation">
+    <h2>Installation</h2>
+</a>
 <mat-tab-group>
-  <mat-tab label="Arch">
-    <pre><code>
+    <mat-tab label="Arch">
+        <pre><code>
       yaourt -S safeeyes
     </code></pre>
-    <pre><code>
+        <pre><code>
       packer -S safeeyes
     </code></pre>
-  </mat-tab>
-  <mat-tab label="Debian">
-      <pre><code>
+    </mat-tab>
+    <mat-tab label="Debian">
+        <pre><code>
           sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle
           sudo pip3 install safeeyes
           sudo update-icon-caches /usr/share/icons/hicolor
       </code></pre>
-  </mat-tab>
-  <mat-tab label="Fedora">
-      <pre><code>
+    </mat-tab>
+    <mat-tab label="Fedora">
+        Install the latest xprintidle from: <a href="https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/">alonid/xprintidle</a>
+        <pre><code>
           sudo dnf install libappindicator-gtk3 python3-psutil
           sudo pip3 install safeeyes
           sudo gtk-update-icon-cache /usr/share/icons/hicolor
       </code></pre>
-  </mat-tab>
-  <mat-tab label="Gentoo">
-      <pre><code>
+    </mat-tab>
+    <mat-tab label="Gentoo">
+        <pre><code>
           sudo emerge -av x11-misc/safeeyes
       </code></pre>
-  </mat-tab>
-  <mat-tab label="Ubuntu &amp; Linux Mint">
-      <pre><code>
+    </mat-tab>
+    <mat-tab label="Ubuntu &amp; Linux Mint">
+        <pre><code>
           sudo add-apt-repository ppa:slgobinath/safeeyes
           sudo apt update
           sudo apt install safeeyes
       </code></pre>
-  </mat-tab>
-  <mat-tab label="Other Linux">
-    Install the following dependencies:
-    <pre><code>
+    </mat-tab>
+    <mat-tab label="Other Linux">
+        Install the following dependencies:
+        <pre><code>
         gir1.2-appindicator3-0.1 gir1.2-notify-0.7 libappindicator-gtk3 python3-psutil xprintidle
-    </code></pre>
-    Install Safe Eyes:
-    <pre><code>
+    </code></pre> Install Safe Eyes:
+        <pre><code>
         sudo pip3 install safeeyes
     </code></pre>
-  </mat-tab>
+    </mat-tab>
 </mat-tab-group>
