@@ -1,17 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-
-.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+.mat-sidenav-container,
+.mat-sidenav-content,
+.mat-tab-body-content {
     transform: none !important;
 }
-
 
 h2 {
     overflow: hidden;
     text-align: center;
     text-transform: uppercase;
-    font-family: "Raleway",Arial,sans-serif !important;
+    font-family: "Raleway", Arial, sans-serif !important;
     font-size: 16pt !important;
 }
 
@@ -37,10 +38,11 @@ h2:after {
 }
 
 .h2 {
-    font-family: "Raleway",Arial,sans-serif !important;
+    font-family: "Raleway", Arial, sans-serif !important;
     font-size: 12pt !important;
 }
 
 .row {
+    margin-top: 30px;
     margin-bottom: 30px;
 }

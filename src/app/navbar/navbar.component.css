@@ -1,20 +1,22 @@
 .navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-  background: black;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    background: black;
 }
 
 .navbar .navbar-collapse {
-  text-align: center;
-  background: black;
+    text-align: center;
+    background: black;
 }
 
 .navbar-default {
     background: black;
 }
 
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:focus,
+.navbar-default .navbar-nav>.active>a:hover {
     background: black;
     font-weight: bold;
     color: white;

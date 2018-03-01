@@ -1,8 +1,12 @@
-<a name="contribute"><h2>Contribute</h2></a>
+<a name="contribute">
+    <h2>Contribute</h2>
+</a>
 
-<div class="col-sm-12" *ngFor="let row of contributions">
+<div class="row" *ngFor="let row of contributions">
     <div class="col-sm-6" *ngFor="let contribution of row">
-            <div><i class="fa {{ contribution.icon }}" aria-hidden="true"> </i><h3>{{ contribution.title }}</h3></div>
-            <p [innerHTML]="contribution.description"></p>
+        <div><i class="fa {{ contribution.icon }}" aria-hidden="true"> </i>
+            <h3>{{ contribution.title }}</h3>
+        </div>
+        <p [innerHTML]="contribution.description"></p>
     </div>
 </div>

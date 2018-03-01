@@ -1,3 +1,19 @@
-.mat-tab-group, .mat-tab-label, .mat-tab-link {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+.mat-tab-group,
+.mat-tab-label,
+.mat-tab-link {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

@@ -18,7 +18,7 @@ export class ScreenshotsComponent implements OnInit {
     this.galleryOptions = [
       {
         width: '100%',
-        height: '500px',
+        height: '600px',
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
         imageAutoPlay: true,
@@ -29,7 +29,7 @@ export class ScreenshotsComponent implements OnInit {
       {
         breakpoint: 800,
         width: '100%',
-        height: '600px',
+        height: '500px',
         imagePercent: 80,
       },
       // max-width 400
