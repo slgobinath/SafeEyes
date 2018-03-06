@@ -6,398 +6,407 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2018-03-06 00:52+0000\n"
+"Last-Translator: Moo <hazap@hotmail.com>\n"
+"Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/lt/>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
+"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 2.20-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Stipriai užsimerkite"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Kelis kartus pasukite akis į kiekvieną šoną"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Pasukite akis pagal laikrodžio rodyklę"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Pasukite akis prieš laikrodžio rodyklę"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Pamirksėkite"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Susitelkite į tolumoje esantį objektą"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Atsigerkite vandens"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Pavaikščiokite"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Atsiloškite į kėdę ir atsipalaiduokite"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "rodyti dialogą apie programą"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "išjungti šiuo metu paleistą safeeyes egzempliorių"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "įjungti šiuo metu paleistą safeeyes egzempliorių"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "baigti paleisto safeeyes egzemplioriaus darbą ir išeiti"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "rodyti nustatymų dialogą"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "paleisti safeeyes derinimo veiksenoje"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "išvesti paleisto safeeyes egzemplioriaus būseną ir išeiti"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes nėra paleista"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Užverti"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
+"Programa Safe Eyes, primindama jums apie pertraukas, apsaugo jūsų akis nuo "
+"akių nuovargio (astenopijos)"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licencija"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Praleisti"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Atidėti"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Pertraukos trukmė (sekundėmis)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Laikotarpis tarp dviejų pertraukų (minutėmis)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Laikas, skirtas pasiruošti pertraukai (sekundėmis)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Išjungtų klaviatūros trumpinių laikotarpis (sekundėmis)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Atidėjimo trukmė (minutėmis)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Griežta pertrauka (Neįmanoma praleisti pertraukų)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Leisti atidėti pertraukas"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Išlaikyti vidinę būseną"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"Ilgos pertraukos laikotarpis turi būti sudarytas iš kelių trumpų pertraukų"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Parametrai"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Trumpos pertraukos"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Ilgos pertraukos"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pertrauka"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pertraukos"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Įskiepiai"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Tipas"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Trumpa"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Ilga"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Paveikslas"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Pasirinkti"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Pasirinkite paveikslą"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Trukmė"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Nustelbti"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Laikas (sekundėmis)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Pertraukos nustatymai"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Įskiepio nustatymai"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Įskiepis nepalaiko %s darbalaukio aplinkos"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Įdiekite Python modulį \"%s\""
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Įdiekite komandų eilutės įrankį \"%s\""
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Pridėkite išteklių %(resource)s į %(config_resource)s katalogą"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Nauja pertrauka"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Šalinti"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Atmesti"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Įrašyti"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Garsinis signalas"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Pertraukų pabaigoje groti garsinį signalą"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Netrukdyti"
 
 # plugin/donotdisturb
 msgid "Skip the break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Praleisti pertrauką, jei aktyvus langas yra viso ekrano veiksenoje"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Jokiu metu nepertraukti šių langų"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Pertraukti šiuos langus nepriklausomai nuo jų būsenos"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Perjungti nepertraukiamus langus į normalią veikseną"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Sveikatos statistika"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Rodyti statistiką pagal tai, kaip naudojate Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Pranešimas"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Prieš pertraukas rodyti sistemos pranešimą"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Pasiruoškite trumpai pertraukai po %s sekundžių"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Pasiruoškite ilgai pertraukai po %s sekundžių"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Ekrano užsklanda"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Užrakinti ekraną po ilgų pertraukų, paleidžiant ekrano užsklandą"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Pasirinktinė ekrano užsklandos komanda"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Mažiausiai sekundžių, kad būtų praleista be ekrano užsklandos"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Išmanusis pristabdymas"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pristabdyti Safe Eyes, jei sistema yra neveikli"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
+"Mažiausias neveiklumo laikas, kad Safe Eyes būtų pristabdyta (sekundėmis)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Laikyti neveiklumo laiką, kuris lygus būsimos pertraukos trukmei, kaip "
+"pertrauką"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Dėklo piktograma"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Rodyti dėklo piktogramą pranešimų srityje"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Rodyti dėklo piktogramoje kitos pertraukos laiką"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Apie"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Išjungti Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Išjungta iki %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Išjungta iki paleidimo iš naujo"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Įjungti Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d valandai"
+msgstr[1] "%d valandoms"
+msgstr[2] "%d valandų"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d minutei"
+msgstr[1] "%d minutėms"
+msgstr[2] "%d minučių"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d sekundei"
+msgstr[1] "%d sekundėms"
+msgstr[2] "%d sekundžių"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Kita pertrauka ties %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Nėra prieinamų pertraukų"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Nustatymai"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Padaryti pertrauką"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Iki paleidimo iš naujo"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Išeiti"
