@@ -6,152 +6,154 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2018-03-14 07:40+0000\n"
+"Last-Translator: Gagandeep Singh <lll2yu@protonmail.com>\n"
+"Language-Team: Hindi <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.20-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "कसकर अपनी आँखें बंद करें"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "प्रत्येक तरफ अपनी आँखें कुछ बार घुमाएं"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "अपनी आँखें दक्षिणावर्त दिशा में घुमाएं"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "अपनी आंखों को वामावर्त दिशा में घुमाएं"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "अपनी आँखें झपकाएं"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "दूर की दूरी पर एक बिंदु पर ध्यान केन्द्रित करें"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "थोड़ा जल ग्रहण करें"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "थोड़ी देर चहलकदमी करें"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "अपनी सीट पर वापस झुक जाओ और आराम करो"
 
 # Commandline arg description
+#, fuzzy
 msgid "show the about dialog"
-msgstr ""
+msgstr "बारे में दिखाएं"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "वर्तमान में चलने वाले सेफ आईज दृष्टांत को अक्षम करें"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "वर्तमान में चलने वाली सेफ आईज दृष्टांत को सक्षम करें"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "चलने वाले सेफ आईज दृष्टांत को बंद करें और बाहर निकलें"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "सेटिंग्स दिखाएं"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "डीबग मोड में सेफ आईज शुरू करें"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "सेफ आईज दृष्टांत स्थिति को मुद्रित करें और बाहर निकलें"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "सेफ आईज नहीं चल रहा है"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "बंद करें"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "विवरण"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "लाइसेंस"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "छोड़ें"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "टाल दें"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "ब्रेक अवधि (सेकंड में)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "दो ब्रेक के बीच अंतराल (मिनटों में)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "ब्रेक के लिए तैयार करने का समय (सेकंड में)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "कीबोर्ड शॉर्टकट अक्षम अवधि (सेकंड में)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "पोस्टपोन अवधि (मिनटों में)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "सख्त ब्रेक (ब्रेक को छोड़ने का कोई तरीका नहीं)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "ब्रेक स्थगित करने की अनुमति दें"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "आंतरिक अवस्था को जारी रखें"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "लम्बी ब्रेक अंतराल लघु ब्रेक अंतराल के एक बहुमान होना चाहिए"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "विकल्प"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "छोटे अंतराल"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "लंबे अंतराल"
 
 # Settings dialog
 msgid "Break"
