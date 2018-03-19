@@ -144,9 +144,9 @@ class BreakScreen(object):
         thread = threading.Thread(target=self.__lock_keyboard)
         thread.start()
 
-        logging.info("Show break screens in all displays")
         screen = Gtk.Window().get_screen()
         no_of_monitors = screen.get_n_monitors()
+        logging.info("Show break screens in %d display(s)", no_of_monitors)
 
         for monitor in range(no_of_monitors):
             monitor_gemoetry = screen.get_monitor_geometry(monitor)
@@ -197,14 +197,15 @@ class BreakScreen(object):
                 window.set_opacity(0.9)
 
             # In Unity, move the window before present
-            if self.context['desktop'] == 'unity':
-                window.move(x, y)
+            # if self.context['desktop'] == 'unity':
+            window.move(x, y)
             window.stick()
             window.set_keep_above(True)
             window.present()
             # In other desktop environments, move the window after present
-            if self.context['desktop'] != 'unity':
-                window.move(x, y)
+            # if self.context['desktop'] != 'unity':
+            window.move(x, y)
+            logging.info("Moved break screen to Display[%d, %d]", x, y)
             window.fullscreen()
 
     def __update_count_down(self, count):
