@@ -1,4 +1,6 @@
-safeeyes (2.0.4-1) xenial; urgency=high
+safeeyes (2.0.5-1) xenial; urgency=high
+
+  * Fix no long breaks
 
   * Fix issues with locales
 
