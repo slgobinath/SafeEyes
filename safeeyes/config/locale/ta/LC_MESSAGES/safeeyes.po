@@ -260,7 +260,7 @@ msgid "Do Not Disturb"
 msgstr "தொந்தரவு செய்ய வேண்டாம்"
 
 # plugin/donotdisturb
-msgid "Skip the break if the active window is in fullscreen mode"
+msgid "Skip break if the active window is in fullscreen mode"
 msgstr "பாவனையிலுள்ள சாளரம் முழுத்திரையில் இருப்பின் இடைவேளையை தவிர்"
 
 # plugin/donotdisturb

@@ -261,7 +261,7 @@ msgid "Do Not Disturb"
 msgstr "Non disturbare"
 
 # plugin/donotdisturb
-msgid "Skip the break if the active window is in fullscreen mode"
+msgid "Skip break if the active window is in fullscreen mode"
 msgstr "Salta la pausa se la finestra attiva è a schermo intero"
 
 # plugin/donotdisturb

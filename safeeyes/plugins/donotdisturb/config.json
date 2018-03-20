@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "Do Not Disturb",
-        "description": "Skip the break if the active window is in fullscreen mode",
+        "description": "Skip break if the active window is in fullscreen mode",
         "version": "0.0.1"
     },
     "dependencies": {
@@ -11,8 +11,7 @@
         "desktop_environments": [],
         "resources": []
     },
-    "settings": [
-        {
+    "settings": [{
             "id": "skip_break_windows",
             "label": "Do not interrupt these windows anytime",
             "type": "TEXT",

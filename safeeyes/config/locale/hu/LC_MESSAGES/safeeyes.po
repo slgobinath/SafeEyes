@@ -256,7 +256,7 @@ msgid "Do Not Disturb"
 msgstr "Ne Zavarj"
 
 # plugin/donotdisturb
-msgid "Skip the break if the active window is in fullscreen mode"
+msgid "Skip break if the active window is in fullscreen mode"
 msgstr "Pihenő kihagyása ha az aktív ablak teljes-képernyős módban van"
 
 # plugin/donotdisturb
