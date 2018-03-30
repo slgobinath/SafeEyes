@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-03-30 22:22+0000\n"
+"PO-Revision-Date: 2018-03-30 22:35+0000\n"
 "Last-Translator: Andriy Prokopenko <andprk@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
@@ -248,71 +248,72 @@ msgstr "Зберегти"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "Звукове сповіщення"
+msgstr "Звукове попередження"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr "Відтворювати звукове сповіщення в кінці перерви"
+msgstr "Відтворювати звукове попередження в кінці перерви"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Не турбувати"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
 msgstr ""
+"Пропускати перерву, якщо активне вікно знаходиться в повноекранному режимі"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Не переривати ці вікна в будь якому разі"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Переривати ці вікна незалежно від їх стану"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Перемикати ці недоступні для переривання вікна в нормальний режим"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Статистика здоров'я"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Показувати статистику на основі використання вами програми Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Сповіщення"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Показувати сповіщення системи перед перервою"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Приготуйтесь до короткої перерви за %sс"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Приготуйтесь до довгої переви за %sс"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Заставка"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Блокувати екран після довгих перерв шляхом запуску заставки"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Команда власної заставки"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Мінімум секунд для пропуску без заставки"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -320,54 +321,56 @@ msgstr "Розумна пауза"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Зупиняти роботу Safe Eyes під час бездіяльності системи"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Мінімальний час бездіяльності до припинення роботи Safe Eyes (сек)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Інтерпретувати час простою, що дорівнює часу до найближчої перерви, як "
+"перерву"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Значок в лотку"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Показувати значок в панелі завдань в області сповіщень"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Показувати час наступної перерви на значку"
 
 #: plugins/trayicon
 msgid "About"
-msgstr "Про"
+msgstr "Про програму"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Вимкнути Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Вимкнено до %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Вимкнуто до перезавантаження"
+msgstr "Вимкнено до перезавантаження"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Увімкнути Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Протягом %d години"
+msgstr[1] "Протягом %d годин"
+msgstr[2] "Протягом %d годин"
 
 #: plugins/trayicon
 msgid "For %d Minute"
