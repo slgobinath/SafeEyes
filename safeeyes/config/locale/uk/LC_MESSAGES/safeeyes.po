@@ -382,9 +382,9 @@ msgstr[2] "Протягом %d хвилин"
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Протягом %d секунди"
+msgstr[1] "Протягом %d секунд"
+msgstr[2] "Протягом %d секунд"
 
 #: plugins/trayicon
 msgid "Next break at %s"
