@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-03-30 22:15+0000\n"
+"PO-Revision-Date: 2018-03-30 22:22+0000\n"
 "Last-Translator: Andriy Prokopenko <andprk@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
@@ -127,7 +127,7 @@ msgstr "Період вимикання комбінацій клавіш (се�
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Тривалість відкладання (хв)"
+msgstr "Тривалість перенесення (хв)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -139,119 +139,120 @@ msgstr "Дозволити перенесення перерв"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Утримувати внутрішній стан"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"Довгий інтервал перерви повинен бути кратним короткому інтервалу перерви"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Параметри"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Короткі перерви"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Довгі перерви"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Перерва"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Перерви"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Плагіни"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Коротка"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Довга"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Зображення"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Вибір"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Будь ласка, виберіть зображення"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Тривалість"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Перевизначити"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Час (сек)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Налаштування перерви"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Налаштування плагінів"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Плагін не підтримує стільничне середовище %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Будь ласка, встановіть модуль Python «%s»"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Будь ласка, встановіть засіб командного рядка «%s»"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Будь ласка, додайте ресурс %(resource)s до каталогу %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Нова перерва"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Вилучити"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Скинути"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Зберегти"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Звукове сповіщення"
 
 # plugin/audiblealert
 msgid "Play an audible alert at the end of breaks"
-msgstr ""
+msgstr "Відтворювати звукове сповіщення в кінці перерви"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
