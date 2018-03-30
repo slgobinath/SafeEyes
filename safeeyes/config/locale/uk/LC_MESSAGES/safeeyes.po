@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-03-30 22:36+0000\n"
+"PO-Revision-Date: 2018-03-30 22:37+0000\n"
 "Last-Translator: Andriy Prokopenko <andprk@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
@@ -388,11 +388,11 @@ msgstr[2] "Протягом %d секунд"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Наступна перерва о %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Жодних перерв"
 
 #: plugins/trayicon
 msgid "Settings"
