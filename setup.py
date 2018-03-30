@@ -13,7 +13,7 @@ requires = [
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(_ROOT, 'README.md')) as f:
-    long_description = '\n' + f.read()
+    long_description = f.read()
 
 
 def __compile_po_files():
@@ -28,9 +28,10 @@ def __compile_po_files():
                     for f in next(os.walk(po_dir))[2]
                     if os.path.splitext(f)[1] == '.po']
         for po_file in po_files:
-            filename, ext = os.path.splitext(po_file)
+            filename, _ = os.path.splitext(po_file)
             mo_file = filename + '.mo'
-            msgfmt_cmd = 'msgfmt {} -o {}'.format(po_dir + po_file, po_dir + mo_file)
+            msgfmt_cmd = 'msgfmt {} -o {}'.format(
+                po_dir + po_file, po_dir + mo_file)
             subprocess.call(msgfmt_cmd, shell=True)
 
 
@@ -38,7 +39,7 @@ def _data_files(path):
     """
     Collect the data files.
     """
-    for root, dirs, files in os.walk(path):
+    for root, _, files in os.walk(path):
         if not files:
             continue
         yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
@@ -49,7 +50,7 @@ def __package_files(directory):
     Collect the package files.
     """
     paths = []
-    for (path, dirs, filenames) in os.walk(directory):
+    for (path, _, filenames) in os.walk(directory):
         for filename in filenames:
             paths.append(os.path.join('..', path, filename))
     return paths
@@ -73,6 +74,7 @@ setuptools.setup(
     version="2.0.5",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
@@ -81,6 +83,7 @@ setuptools.setup(
     package_data={'safeeyes': __package_data()},
     data_files=__data_files,
     install_requires=requires,
+    setup_requires=['setuptools>=38.6.0'],
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[
@@ -89,7 +92,5 @@ setuptools.setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: X11 Applications :: GTK",
         "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities"] + [
-        ('Programming Language :: Python :: %s' % x) for x in
-        '3 3.4 3.5 3.6'.split()]
+        "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in '3 3.4 3.5 3.6'.split()]
 )

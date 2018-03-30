@@ -5,13 +5,13 @@
 [![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
 [![Badge](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 
-
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
 
 Visit to the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 
 ## Safe Eyes command-line arguements
-```
+
+```text
 usage: safeeyes [-h] [-a | -d | -e | -q | -s | -t] [--debug] [--version]
 
 Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to
@@ -31,44 +31,53 @@ optional arguments:
 ```
 
 ## Installation guide
+
 Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
-```
+
+```bash
 sudo add-apt-repository ppa:slgobinath/safeeyes
 sudo apt update
 sudo apt install safeeyes
 ```
 
 ### Arch
-```
+
+```bash
 yaourt -S safeeyes
 ```
 
 ### Gentoo
-```
+
+```bash
 sudo emerge -av x11-misc/safeeyes
 ```
 
 ### Debian
-```
+
+```bash
 sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle
 sudo pip3 install safeeyes
 sudo update-icon-caches /usr/share/icons/hicolor
 ```
+
 People using unstable/testing Debian can install Safe Eyes froms the official repository using the following command:
-```
+
+```bash
 sudo apt-get install safeeyes
 ```
 
 ### Fedora
-```
+
+```bash
 sudo dnf install libappindicator-gtk3 python3-psutil
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
 
 ### Other Linux & Run from source
+
 Ensure to meet the following dependencies:
 
 - gir1.2-appindicator3-0.1
@@ -78,20 +87,25 @@ Ensure to meet the following dependencies:
 - xprintidle (optional)
 
 **To install Safe Eyes:**
-```
+
+```bash
 sudo pip3 install safeeyes
 ```
+
 After installation, restart your system to update the icons,
 
 **To run from source:**
-```
+
+```bash
 git clone https://github.com/slgobinath/SafeEyes.git
 cd SafeEyes
 python3 -m safeeyes
 ```
+
 Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
 
 ## Features
+
  - Remind you to take breaks with exercises to reduce RSI
  - Disable keyboard during breaks
  - Notification before and after breaks
@@ -103,6 +117,7 @@ Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. W
  - Customizable using plug-ins
 
 ## Third-party Plugins
+
 Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
 
 ## License
