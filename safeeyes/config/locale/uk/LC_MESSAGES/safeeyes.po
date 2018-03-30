@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-03-30 22:15+0000\n"
-"Last-Translator: anonymous <>\n"
+"Last-Translator: Andriy Prokopenko <andprk@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
 "Language: uk\n"
@@ -44,51 +44,51 @@ msgstr "Сфокусуйте погляд на віддаленій точці"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Випийте склянку води"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Трохи походіть"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Відкинтесь на спинку стільця та відпочиньте"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "показ діалогового вікна про програму"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "вимикання поточного виконуваного екземпляру програми safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "вмикання поточного виконуваного екземпляру програми safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "вихід з поточного виконуваного екземпляру програми safeeyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "показ діалогового вікна налаштувань"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "запуск safeeyes в режимі зневадження"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "виведення стану виконання safeeyes та вихід"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes не працює"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -99,43 +99,43 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Ліцензія"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Пропустити"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Відкласти"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Тривалість перерви (сек)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Інтервал між двома перервами (хв)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Час для підготовки до перерви (сек)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Період вимикання комбінацій клавіш (сек)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Тривалість відкладання (хв)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Сувора перерва (немає можливості пропускати перерви)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Дозволити перенесення перерв"
 
 # Settings dialog
 msgid "Persist the internal state"
