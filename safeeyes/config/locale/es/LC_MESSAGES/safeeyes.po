@@ -258,7 +258,7 @@ msgstr "No molestar"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Saltar descanso si la ventana activa está en modo de pantalla completa"
+msgstr "Saltar descanso si la ventana activa está en modo pantalla completa"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -384,7 +384,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "No hay pausas disponibles"
 
 #: plugins/trayicon
 msgid "Settings"
@@ -396,7 +396,7 @@ msgstr "Tomar un descanso ahora"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Hasta el reinicio"
 
 #: plugins/trayicon
 msgid "Quit"
