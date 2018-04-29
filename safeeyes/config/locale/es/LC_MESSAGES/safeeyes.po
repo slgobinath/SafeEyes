@@ -83,7 +83,7 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes no se está ejecutando"
 
 # About dialog
 msgid "Close"
@@ -146,11 +146,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Opciones"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Descansos cortos"
 
 # Settings dialog
 msgid "Long Breaks"
@@ -170,31 +170,31 @@ msgstr ""
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Corto"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Largo"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Seleccionar"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Por favor seleccione una imagen"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Duracion"
 
 # Settings dialog
 msgid "Override"
@@ -210,7 +210,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Ajustes de plugins"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
@@ -230,7 +230,7 @@ msgstr ""
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Nueva pausa"
 
 # Settings dialog
 msgid "Remove"
@@ -238,11 +238,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Descartar"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Guardar"
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -254,11 +254,11 @@ msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "No molestar"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Saltar descanso si la ventana activa está en modo pantalla completa"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -274,27 +274,27 @@ msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Estadísticas de salud"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Mostrar estadísticas basadas en cómo usa Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Notificacion"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Mostrar una notificacion del sistema antes de los descansos"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Listo para un breve descanso en %s segundos"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Listo para un largo descanso en %s segundos"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -314,15 +314,15 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Pausa inteligente"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pausa Safe Eyes si el sistema está inactivo"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Tiempo minimo inactivo para pausar Safe Eyes (en segundos)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -334,7 +334,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Mostrar un icono de bandeja en el área de notificacion"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
@@ -342,11 +342,11 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Deshabilitar Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
@@ -358,7 +358,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Habilitar Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
@@ -384,19 +384,19 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "No hay pausas disponibles"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Ajustes"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Tomar un descanso ahora"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Hasta el reinicio"
 
 #: plugins/trayicon
 msgid "Quit"
