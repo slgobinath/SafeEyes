@@ -36,7 +36,7 @@ take_break_window_classes = []
 unfullscreen_allowed = True
 
 
-def is_active_window_skipped():
+def is_active_window_skipped(pre_break):
     """
     Check for full-screen applications.
     This method must be executed by the main thread. If not, it will cause to random failure.
@@ -63,7 +63,7 @@ def is_active_window_skipped():
                     if process in skip_break_window_classes:
                         return True
                     elif process in take_break_window_classes:
-                        if is_fullscreen and unfullscreen_allowed:
+                        if is_fullscreen and unfullscreen_allowed and not pre_break:
                             try:
                                 active_window.unfullscreen()
                             except BaseException:
@@ -87,7 +87,13 @@ def init(ctx, safeeyes_config, plugin_config):
     unfullscreen_allowed = plugin_config['unfullscreen']
 
 
+def on_pre_break(break_obj):
+    """
+    """
+    return is_active_window_skipped(True)
+
+
 def on_start_break(break_obj):
     """
     """
-    return is_active_window_skipped()
+    return is_active_window_skipped(False)
