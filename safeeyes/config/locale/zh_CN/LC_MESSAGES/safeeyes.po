@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-11-15 08:59+0000\n"
-"Last-Translator: 庞伟浩 <pangzaiyu77@gmail.com>\n"
+"PO-Revision-Date: 2018-05-08 12:35+0000\n"
+"Last-Translator: gensitu <pstew892@protonmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 3.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -23,7 +23,7 @@ msgstr "闭上您的眼睛休息一会"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "左右滚动一下您的眼珠"
+msgstr "左右滚动您的眼珠"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
