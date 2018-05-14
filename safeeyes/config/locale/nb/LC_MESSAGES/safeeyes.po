@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-30 03:38+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/nb/>\n"
+"PO-Revision-Date: 2018-05-14 19:53+0000\n"
+"Last-Translator: Håkon Solbjørg <hlsolbjorg@gmail.com>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"safe-eyes/translations/nb/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -35,7 +35,7 @@ msgstr "Roter øyene mot klokka"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Blink"
+msgstr "Blunk"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -59,7 +59,7 @@ msgstr "vis \"Om\"-dialogvinduet"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "skru av det kjørende Øyetrygg-programmet"
+msgstr "avslutt det kjørende Øyetrygg-programmet"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
@@ -78,7 +78,6 @@ msgid "start safeeyes in debug mode"
 msgstr "start Øyetrygg i feilrettingsmodus"
 
 # Commandline arg description
-#, fuzzy
 msgid "print the status of running safeeyes instance and exit"
 msgstr "skriv ut status for kjørende Øyetrygg-instans og avslutt"
 
@@ -88,7 +87,7 @@ msgstr "Øyetrygg kjører ikke"
 
 # About dialog
 msgid "Close"
-msgstr "Luk"
+msgstr "Lukk"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -217,7 +216,7 @@ msgstr "Programtillegget støtter ikke %s-skrivebordsmiljøet"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Installert Python-modulen \"%s\""
+msgstr "Installer Python-modulen \"%s\""
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
@@ -289,7 +288,7 @@ msgstr "Vis en systemmerknad før pauser"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "Klar for en kort pause om %s sekudner"
+msgstr "Klar for en kort pause om %s sekunder"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
@@ -317,7 +316,7 @@ msgstr "Smart pause"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "Sett Øyetrygg på pause hvis systemet er ledig"
+msgstr "Sett Øyetrygg på pause hvis systemet ikke er i bruk"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
