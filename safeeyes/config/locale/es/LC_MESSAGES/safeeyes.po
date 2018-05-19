@@ -166,7 +166,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Complementos"
 
 # Settings dialog
 msgid "Type"
@@ -202,7 +202,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Tiempo (en segundos)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -214,15 +214,15 @@ msgstr "Ajustes de plugins"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "El complemento no es compatible %s con el entorno de escritorio"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Por favor instale el módulo de Python '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Por favor, instale la herramienta línea de comandos '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -234,7 +234,7 @@ msgstr "Nueva pausa"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Eliminar"
 
 # Settings dialog
 msgid "Discard"
@@ -298,7 +298,7 @@ msgstr "Listo para un largo descanso en %s segundos"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Salvapantallas"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
@@ -330,7 +330,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Icono de bandeja"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
@@ -350,11 +350,11 @@ msgstr "Deshabilitar Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Deshabilitado hasta"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Deshabilitado hasta reiniciar"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
@@ -380,7 +380,7 @@ msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Siguiente descanso en"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
@@ -400,4 +400,4 @@ msgstr "Hasta el reinicio"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Salir"
