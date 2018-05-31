@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2018-06-01 11:36+0000\n"
+"Last-Translator: Sølvi Goard <soren.goard@gmail.com>\n"
+"Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/da/>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -34,7 +35,7 @@ msgstr ""
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Blinke dine øjne"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -42,7 +43,7 @@ msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Drik noget vand"
 
 # Long break
 msgid "Walk for a while"
@@ -82,11 +83,11 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes kører ikke"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Luk"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -95,7 +96,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licens"
 
 # Break screen
 msgid "Skip"
