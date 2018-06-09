@@ -6,15 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2018-06-10 07:34+0000\n"
+"Last-Translator: Usama Akkad <os@uakkad.com>\n"
+"Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/ar/>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
-"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Weblate 3.0.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -22,39 +24,39 @@ msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "انظر يمينا وشمالا عدة مرات"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "أدر عيناك باتجاه عقارب الساعة"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "أدر عيناك بعكس اتجاه عقارب الساعة"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "اغمز بعينيك"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "انظر إلى غرض بعيد"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "اشرب قليلا من الماء"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "تمشى قليلا"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "تمدد إلى الخلف على كرسيك واسترح"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "أظهر نافذة عن البرنامج"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
@@ -70,11 +72,11 @@ msgstr ""
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "أظهر مربع الإعدادات"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "ابدأ عيون سليمة في وضع التنقيح"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
@@ -82,56 +84,56 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "عيون سليمة غير مشغل"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "أغلق"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "الوصف"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "الرخصة"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "تجاوز"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "أخّر"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "مدة الاستراحة (ثوان)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "المدة بين استراحتين (دقائق)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "مدة التجهيز لاستراحة (ثوان)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "مدة تعطيل اختصارات لوحة المفاتيح (ثوان)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "مدة التأخير (دقائق)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "استراحة إجبارية (لا يمكن تجاوزها)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "مكّن تأخير الاستراحات"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -139,59 +141,59 @@ msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "الاستراحات الطويلة يجب أن تكون من مضاعفات مدة الاستراحات القصيرة"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "خيارات"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "استراحات قصيرة"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "استراحات طويلة"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "استراحة"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "استراحات"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "إضافات"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "نوع"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "قصير"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "طويل"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "صورة"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "حدد"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "يرجى تحديد صورة"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "المدة"
 
 # Settings dialog
 msgid "Override"
@@ -199,19 +201,19 @@ msgstr ""
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "الزمن (ثوان)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "إعدادات الاستراحة"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "إعدادات الإضافة"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "لا تدعم الإضافة بيئة سطح المكتب %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
