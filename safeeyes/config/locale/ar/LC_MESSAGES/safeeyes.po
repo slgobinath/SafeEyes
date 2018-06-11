@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-10 07:34+0000\n"
-"Last-Translator: Usama Akkad <os@uakkad.com>\n"
+"PO-Revision-Date: 2018-06-12 10:34+0000\n"
+"Last-Translator: Takai Eddine Kennouche <takai.kenn@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.0.1-dev\n"
+"X-Generator: Weblate 3.0.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "أغلق عينيك بشدّة"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "انظر يمينا وشمالا عدة مرات"
+msgstr "حرّك عينيك إلى اليمين و اليسار عدّة مرّات"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "أدر عيناك باتجاه عقارب الساعة"
+msgstr "أدر عينيك باتّجاه عقارب السّاعة"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "أدر عيناك بعكس اتجاه عقارب الساعة"
+msgstr "أدر عينيك بعكس اتّجاه عقارب السّاعة"
 
 # Short break
 msgid "Blink your eyes"
@@ -40,7 +40,7 @@ msgstr "اغمز بعينيك"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "انظر إلى غرض بعيد"
+msgstr "ركّز على نقطة في المدى البعيد"
 
 # Short break
 msgid "Have some water"
@@ -48,7 +48,7 @@ msgstr "اشرب قليلا من الماء"
 
 # Long break
 msgid "Walk for a while"
-msgstr "تمشى قليلا"
+msgstr "إمشي قليلا"
 
 # Long break
 msgid "Lean back at your seat and relax"
@@ -60,15 +60,15 @@ msgstr "أظهر نافذة عن البرنامج"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "عطّل برنامج safeeyes المشتغل حاليّا"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "فعّل برنامج safeeyes المشتغل حاليّا"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "غادر برنامج safeeyes المشتغل حاليّا"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -80,11 +80,11 @@ msgstr "ابدأ عيون سليمة في وضع التنقيح"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "أظهر حالة برنامج safeeyes المشتغل حاليا و أخرج"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "عيون سليمة غير مشغل"
+msgstr "SafeEyes غير مشغل"
 
 # About dialog
 msgid "Close"
@@ -137,7 +137,7 @@ msgstr "مكّن تأخير الاستراحات"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "ثبّت الحالة الداخلية"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -197,7 +197,7 @@ msgstr "المدة"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "تجاوز"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -217,19 +217,19 @@ msgstr "لا تدعم الإضافة بيئة سطح المكتب %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "من فضلك ثبّت وحدة Python '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "رجاءا ثبّت أداة سطر الأوامر '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "رجاءا أضف المورد %(resource)s إلى دليل %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "استراحة جديدة"
 
 # Settings dialog
 msgid "Remove"
