@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-12-06 19:48+0000\n"
-"Last-Translator: Wojciech <bolo92+weblate@gmail.com>\n"
+"PO-Revision-Date: 2018-06-19 11:42+0000\n"
+"Last-Translator: Daniel Lewan <vision360.daniel@gmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pl/>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 3.0.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -84,7 +84,7 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes nie jest uruchomiony"
 
 # About dialog
 msgid "Close"
