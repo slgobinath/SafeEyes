@@ -21,6 +21,7 @@ Skip Fullscreen plugin skips the break if the active window is fullscreen.
 NOTE: Do not remove the unused import 'GdkX11' becuase it is required in Ubuntu 14.04
 """
 
+import os
 import logging
 import re
 import subprocess
@@ -39,7 +40,7 @@ unfullscreen_allowed = True
 def is_active_window_skipped(pre_break):
     """
     Check for full-screen applications.
-    This method must be executed by the main thread. If not, it will cause to random failure.
+    This method must be executed by the main thread. If not, it will cause random failure.
     """
     logging.info('Searching for full-screen application')
     screen = Gdk.Screen.get_default()
@@ -47,7 +48,8 @@ def is_active_window_skipped(pre_break):
     active_window = screen.get_active_window()
     if active_window:
         active_xid = str(active_window.get_xid())
-        cmdlist = ['xprop', '-root', '-notype', '-id', active_xid, 'WM_CLASS', '_NET_WM_STATE']
+        cmdlist = ['xprop', '-root', '-notype', '-id',
+                   active_xid, 'WM_CLASS', '_NET_WM_STATE']
 
         try:
             stdout = subprocess.check_output(cmdlist).decode('utf-8')
@@ -67,7 +69,8 @@ def is_active_window_skipped(pre_break):
                             try:
                                 active_window.unfullscreen()
                             except BaseException:
-                                logging.error('Error in unfullscreen the window ' + process)
+                                logging.error(
+                                    'Error in unfullscreen the window ' + process)
                         return False
 
                 return is_fullscreen
@@ -75,25 +78,59 @@ def is_active_window_skipped(pre_break):
     return False
 
 
+def is_on_battery():
+    """
+    Check if the computer is running on battery.
+    """
+    charging = True
+    available_power_sources = os.listdir('/sys/class/power_supply')
+    for power_source in available_power_sources:
+        if 'BAT' in power_source:
+            # Found battery
+            battery_status = os.path.join(
+                '/sys/class/power_supply', power_source, 'status')
+            if os.path.isfile(battery_status):
+                # Additional check to confirm that the status file exists
+                try:
+                    with open(battery_status, 'r') as status_file:
+                        status = status_file.read()
+                        if status:
+                            charging = 'charging' in status.lower()
+                except BaseException:
+                    logging.error('Failed to read %s' % battery_status)
+            break
+    return not charging
+
+
 def init(ctx, safeeyes_config, plugin_config):
     global context
     global skip_break_window_classes
     global take_break_window_classes
     global unfullscreen_allowed
+    global dnd_while_on_battery
     logging.debug('Initialize Skip Fullscreen plugin')
     context = ctx
     skip_break_window_classes = plugin_config['skip_break_windows'].split()
     take_break_window_classes = plugin_config['take_break_windows'].split()
     unfullscreen_allowed = plugin_config['unfullscreen']
+    dnd_while_on_battery = plugin_config['while_on_battery']
 
 
 def on_pre_break(break_obj):
     """
+    Lifecycle method executes before the pre-break period.
     """
-    return is_active_window_skipped(True)
+    skip_break = is_active_window_skipped(True)
+    if dnd_while_on_battery and not skip_break:
+        skip_break = is_on_battery()
+    return skip_break
 
 
 def on_start_break(break_obj):
     """
+    Lifecycle method executes just before the break.
     """
-    return is_active_window_skipped(False)
+    skip_break = is_active_window_skipped(False)
+    if dnd_while_on_battery and not skip_break:
+        skip_break = is_on_battery()
+    return skip_break

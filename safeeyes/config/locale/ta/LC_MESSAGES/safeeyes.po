@@ -275,6 +275,10 @@ msgstr "இந்த சாளரங்களின் நிலையை பொ
 msgid "Switch the interruptible windows to normal mode"
 msgstr "குறுக்கீடு செய்யும் போது சாளரங்களை சாதாரண நிலைக்கு மாற்றுக"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr "மின்கலத்தில் இயங்கும் போது குறுக்கீடு செய்ய வேண்டாம்"
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "ஆரோக்கிய புள்ளிவிவரங்கள்"

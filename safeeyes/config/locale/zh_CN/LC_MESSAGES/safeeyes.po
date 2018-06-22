@@ -272,6 +272,10 @@ msgstr "中断这些窗口无视其状态"
 msgid "Switch the interruptible windows to normal mode"
 msgstr "将可中断窗口切换到正常模式"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "健康统计"

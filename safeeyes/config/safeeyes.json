@@ -50,11 +50,12 @@
         {
             "id": "donotdisturb",
             "enabled": true,
-            "version": "0.0.1",
+            "version": "0.0.2",
             "settings": {
                 "skip_break_windows": "",
                 "take_break_windows": "",
-                "unfullscreen": true
+                "unfullscreen": true,
+                "while_on_battery": false
             }
         },
         {

@@ -2,7 +2,7 @@
     "meta": {
         "name": "Do Not Disturb",
         "description": "Skip break if the active window is in fullscreen mode",
-        "version": "0.0.1"
+        "version": "0.0.2"
     },
     "dependencies": {
         "python_modules": [],
@@ -28,6 +28,12 @@
             "label": "Switch the interruptible windows to normal mode",
             "type": "BOOL",
             "default": true
+        },
+        {
+            "id": "while_on_battery",
+            "label": "Do not disturb while on battery",
+            "type": "BOOL",
+            "default": false
         }
     ],
     "break_override_allowed": true

@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.20-dev\n"
 
 # Short break
@@ -228,7 +228,8 @@ msgstr "Будь ласка, встановіть засіб командног�
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Будь ласка, додайте ресурс %(resource)s до каталогу %(config_resource)s"
+msgstr ""
+"Будь ласка, додайте ресурс %(resource)s до каталогу %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -274,6 +275,10 @@ msgstr "Переривати ці вікна незалежно від їх ст
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Перемикати ці недоступні для переривання вікна в нормальний режим"
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"

@@ -273,6 +273,10 @@ msgstr "Przerywaj okna niezależnie od ich stanu"
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Przełącz przerwane okna do trybu normalnego"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "Statystyki Zdrowotne"

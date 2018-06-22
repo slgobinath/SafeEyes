@@ -274,6 +274,10 @@ msgstr "Tạm ngắt những cửa sổ này bất kể trạng thái của nó"
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Chuyển các cửa sổ có thể ngắt được sang chế độ bình thường"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "Thống kê sức khoẻ"

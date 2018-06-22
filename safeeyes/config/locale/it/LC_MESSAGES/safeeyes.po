@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-02-01 00:38+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/it/>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,6 +275,10 @@ msgstr "Interrompe le finestre in oggetto in base al loro stato"
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Passa le finestre interrompibili a modalità normale"
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"

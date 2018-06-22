@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-02-03 07:53+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
-"Language-Team: Estonian <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/et/>\n"
+"Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,6 +271,10 @@ msgstr "Nende akende puhul seisundit ei kontrollita"
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Lülita katkestatavad aknad tavarežiimi"
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"

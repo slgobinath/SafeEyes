@@ -271,6 +271,10 @@ msgstr "Szakítsd meg ezeket az ablakokat az állapotuktól függetlenül"
 msgid "Switch the interruptible windows to normal mode"
 msgstr "A megszakítható ablakokat váltsd át normál módba"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "Egészség Statisztikák"

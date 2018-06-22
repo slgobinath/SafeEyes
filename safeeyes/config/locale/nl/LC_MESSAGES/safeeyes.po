@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-01-29 09:57+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
-"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/nl/>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -275,6 +275,10 @@ msgstr "Deze vensters storen, ongeacht hun status"
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Stoorbare vensters overschakelen naar normale modus"
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"

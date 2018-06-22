@@ -99,6 +99,6 @@ ENV/
 # Visual Studio Code settings
 .vscode/
 
-*.safeeyes.po~
+safeeyes/config/locale/*/LC_MESSAGES/safeeyes.po~
 
 node_modules/

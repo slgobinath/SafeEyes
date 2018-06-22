@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2018-02-01 11:34+0000\n"
 "Last-Translator: Joan Montané <joan@montane.cat>\n"
-"Language-Team: Catalan <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/ca/>\n"
+"Language-Team: Catalan <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -271,6 +271,10 @@ msgstr ""
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
 msgstr ""
 
 # plugin/healthstats

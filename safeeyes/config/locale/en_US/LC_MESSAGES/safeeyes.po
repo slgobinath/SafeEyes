@@ -273,6 +273,10 @@ msgstr "Interrupt these windows regardless of their state"
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Switch the interruptible windows to normal mode"
 
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr "Do not disturb while on battery"
+
 # plugin/healthstats
 msgid "Health Statistics"
 msgstr "Health Statistics"
