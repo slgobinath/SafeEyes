@@ -35,7 +35,7 @@ context = None
 skip_break_window_classes = []
 take_break_window_classes = []
 unfullscreen_allowed = True
-
+dnd_while_on_battery = False
 
 def is_active_window_skipped(pre_break):
     """

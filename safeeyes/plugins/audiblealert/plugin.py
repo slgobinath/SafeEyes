@@ -24,6 +24,25 @@ import logging
 from safeeyes import Utility
 
 context = None
+pre_break_alert = False
+
+
+def play_sound(resource_name):
+    """Play the audio resource.
+
+    Arguments:
+        resource_name {string} -- name of the wav file resource
+    """
+    logging.info('Playing audible alert %s', resource_name)
+    try:
+        # Open the sound file
+        path = Utility.get_resource_path(resource_name)
+        if path is None:
+            return
+        Utility.execute_command('aplay', ['-q', path])
+
+    except BaseException:
+        logging.error('Failed to play audible alert %s', resource_name)
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -31,8 +50,20 @@ def init(ctx, safeeyes_config, plugin_config):
     Initialize the plugin.
     """
     global context
+    global pre_break_alert
     logging.debug('Initialize Audible Alert plugin')
     context = ctx
+    pre_break_alert = plugin_config['pre_break_alert']
+
+
+def on_pre_break(break_obj):
+    """Play the pre_break sound if the option is enabled.
+
+    Arguments:
+        break_obj {safeeyes.model.Break} -- the break object
+    """
+    if pre_break_alert:
+        play_sound('on_pre_break.wav')
 
 
 def on_stop_break():
@@ -42,14 +73,4 @@ def on_stop_break():
     # Do not play if the break is skipped or postponed
     if context['skipped'] or context['postponed']:
         return
-
-    logging.info('Playing audible alert')
-    try:
-        # Open the sound file
-        path = Utility.get_resource_path('alert.wav')
-        if path is None:
-            return
-        Utility.execute_command('aplay', ['-q', path])
-
-    except BaseException:
-        logging.error('Failed to play audible alert')
+    play_sound('on_stop_break.wav')

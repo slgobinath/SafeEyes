@@ -54,7 +54,6 @@ msgid "Lean back at your seat and relax"
 msgstr "अपनी सीट पर वापस झुक जाओ और आराम करो"
 
 # Commandline arg description
-#, fuzzy
 msgid "show the about dialog"
 msgstr "बारे में दिखाएं"
 
@@ -248,7 +247,11 @@ msgid "Audible Alert"
 msgstr ""
 
 # plugin/audiblealert
-msgid "Play an audible alert at the end of breaks"
+msgid "Play audible alert before and after breaks"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Play audible alert before breaks"
 msgstr ""
 
 # plugin/donotdisturb

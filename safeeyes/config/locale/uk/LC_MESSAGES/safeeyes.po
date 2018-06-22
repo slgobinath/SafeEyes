@@ -252,8 +252,12 @@ msgid "Audible Alert"
 msgstr "Звукове попередження"
 
 # plugin/audiblealert
-msgid "Play an audible alert at the end of breaks"
-msgstr "Відтворювати звукове попередження в кінці перерви"
+msgid "Play audible alert before and after breaks"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Play audible alert before breaks"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"

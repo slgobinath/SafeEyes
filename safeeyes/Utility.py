@@ -42,13 +42,15 @@ gi.require_version('Gdk', '3.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
-CONFIG_DIRECTORY = os.path.join(os.environ.get('XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
+CONFIG_DIRECTORY = os.path.join(os.environ.get(
+    'XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
 CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
 STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
-SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
+SYSTEM_STYLE_SHEET_PATH = os.path.join(
+    BIN_DIRECTORY, "config/style/safeeyes_style.css")
 LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
@@ -65,7 +67,8 @@ def get_resource_path(resource_name):
         return None
     resource_location = os.path.join(CONFIG_RESOURCE, resource_name)
     if not os.path.isfile(resource_location):
-        resource_location = os.path.join(BIN_DIRECTORY, 'resource', resource_name)
+        resource_location = os.path.join(
+            BIN_DIRECTORY, 'resource', resource_name)
         if not os.path.isfile(resource_location):
             # Resource not found
             resource_location = None
@@ -317,7 +320,8 @@ def initialize_safeeyes():
     delete(os.path.join(CONFIG_DIRECTORY, 'safeeyes.json'))
 
     # Remove the startup file
-    delete(os.path.join(HOME_DIRECTORY, os.path.join(startup_dir_path, 'safeeyes.desktop')))
+    delete(os.path.join(HOME_DIRECTORY, os.path.join(
+        startup_dir_path, 'safeeyes.desktop')))
 
     # Create the ~/.config/safeeyes/style directory
     mkdir(style_dir_path)
@@ -328,7 +332,8 @@ def initialize_safeeyes():
 
     # Copy the new startup file
     try:
-        os.symlink("/usr/share/applications/safeeyes.desktop", os.path.join(startup_dir_path, 'safeeyes.desktop'))
+        os.symlink("/usr/share/applications/safeeyes.desktop",
+                   os.path.join(startup_dir_path, 'safeeyes.desktop'))
     except OSError:
         pass
 
@@ -343,12 +348,14 @@ def intialize_logging(debug):
     """
     # Configure logging.
     root_logger = logging.getLogger()
-    log_formatter = logging.Formatter('%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
+    log_formatter = logging.Formatter(
+        '%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
 
     # Append the logs and overwrite once reached 1MB
     if debug:
         # Log to file
-        file_handler = RotatingFileHandler(LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0)
+        file_handler = RotatingFileHandler(
+            LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0)
         file_handler.setFormatter(log_formatter)
         # Log to console
         console_handler = logging.StreamHandler()
@@ -387,6 +394,8 @@ def __update_plugin_config(plugin, plugin_config, config):
             # Add the new settings
             for setting in plugin_config['settings']:
                 setting_ids.append(setting['id'])
+                if 'settings' not in plugin:
+                    plugin['settings'] = {}
                 if plugin['settings'].get(setting['id'], None) is None:
                     plugin['settings'][setting['id']] = setting['default']
             # Remove the removed ids

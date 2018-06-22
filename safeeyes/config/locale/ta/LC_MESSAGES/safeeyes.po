@@ -252,8 +252,13 @@ msgid "Audible Alert"
 msgstr "ஒலிச் சமிக்ஞய்"
 
 # plugin/audiblealert
-msgid "Play an audible alert at the end of breaks"
-msgstr "இடைவேளைகளின் முடிவில் ஒலிச் சமிக்ஞய்"
+msgid "Play audible alert before and after breaks"
+msgstr "இடைவேளைகளின் ஆரம்பத்திலும் முடிவிலும் ஒலிச் சமிக்ஞய்"
+
+# plugin/audiblealert
+#, fuzzy
+msgid "Play audible alert before breaks"
+msgstr "இடைவேளைகளின் தொடக்கத்தில் ஒலிச் சமிக்ஞய்"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"

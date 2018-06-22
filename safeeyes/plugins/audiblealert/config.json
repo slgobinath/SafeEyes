@@ -1,16 +1,21 @@
 {
     "meta": {
         "name": "Audible Alert",
-        "description": "Play an audible alert at the end of breaks",
-        "version": "0.0.1"
+        "description": "Play audible alert before and after breaks",
+        "version": "0.0.2"
     },
     "dependencies": {
         "python_modules": [],
         "shell_commands": ["aplay"],
         "operating_systems": [],
         "desktop_environments": [],
-        "resources": ["alert.wav"]
+        "resources": ["on_pre_break.wav", "on_stop_break.wav"]
     },
-    "settings": [],
+    "settings": [{
+        "id": "pre_break_alert",
+        "label": "Play audible alert before breaks",
+        "type": "BOOL",
+        "default": true
+    }],
     "break_override_allowed": true
 }

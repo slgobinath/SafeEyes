@@ -1,6 +1,6 @@
 {
     "meta": {
-            "config_version": "6.0.0"
+        "config_version": "6.0.0"
     },
     "allow_postpone": false,
     "break_interval": 15,
@@ -15,8 +15,7 @@
     "shortcut_skip": 9,
     "shortcut_postpone": 65,
     "strict_break": false,
-    "short_breaks": [
-        {
+    "short_breaks": [{
             "name": "Tightly close your eyes"
         },
         {
@@ -38,16 +37,14 @@
             "name": "Have some water"
         }
     ],
-    "long_breaks": [
-        {
+    "long_breaks": [{
             "name": "Walk for a while"
         },
         {
             "name": "Lean back at your seat and relax"
         }
     ],
-    "plugins": [
-        {
+    "plugins": [{
             "id": "donotdisturb",
             "enabled": true,
             "version": "0.0.2",
@@ -66,7 +63,10 @@
         {
             "id": "audiblealert",
             "enabled": true,
-            "version": "0.0.1"
+            "version": "0.0.2",
+            "settings": {
+                "pre_break_alert": true
+            }
         },
         {
             "id": "trayicon",
@@ -74,8 +74,7 @@
             "version": "0.0.1",
             "settings": {
                 "show_time_in_tray": false,
-                "disable_options": [
-                    {
+                "disable_options": [{
                         "time": 30,
                         "unit": "minute"
                     },
