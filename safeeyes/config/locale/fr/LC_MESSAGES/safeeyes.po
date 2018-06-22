@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-29 14:24+0000\n"
-"Last-Translator: French Coordinator OTF/LocLab <french.coordinator@rbox.me>\n"
+"PO-Revision-Date: 2018-06-22 19:46+0000\n"
+"Last-Translator: LocLab fr <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
 "Language: fr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -278,7 +278,7 @@ msgstr "Passer les fenêtres interruptibles en mode normal"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Ne pas déranger sur batterie"
 
 # plugin/healthstats
 msgid "Health Statistics"
