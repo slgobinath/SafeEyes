@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-05-14 19:53+0000\n"
-"Last-Translator: Håkon Solbjørg <hlsolbjorg@gmail.com>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/safe-"
-"eyes/translations/nb/>\n"
+"PO-Revision-Date: 2018-06-22 23:16+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
+"safe-eyes/translations/nb/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -248,11 +248,11 @@ msgstr "Hørbar alarm"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Spill lydvarsel før og etter pauser"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Lydvarsel før pauser"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -276,7 +276,7 @@ msgstr "Bytt avbruddsfritt vindu til normalt modus"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Ikke forstyrr ved batteridrift"
 
 # plugin/healthstats
 msgid "Health Statistics"
