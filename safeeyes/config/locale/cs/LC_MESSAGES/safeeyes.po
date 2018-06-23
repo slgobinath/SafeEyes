@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-29 06:30+0000\n"
+"PO-Revision-Date: 2018-06-23 06:49+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -250,11 +250,11 @@ msgstr "Zvukové upozornění"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Přehrát zvukové upozornění před a po přestávkách"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Přehrát zvukové upozornění před přestávkami"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -279,7 +279,7 @@ msgstr "Přepnout nepřerušitelná okna do normálního režimu"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Nevyrušovat při provozu z akumulátoru"
 
 # plugin/healthstats
 msgid "Health Statistics"
