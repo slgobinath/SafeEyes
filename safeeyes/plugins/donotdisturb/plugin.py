@@ -37,6 +37,7 @@ take_break_window_classes = []
 unfullscreen_allowed = True
 dnd_while_on_battery = False
 
+
 def is_active_window_skipped(pre_break):
     """
     Check for full-screen applications.
@@ -84,6 +85,8 @@ def is_on_battery():
     """
     charging = True
     available_power_sources = os.listdir('/sys/class/power_supply')
+    logging.info('Looking for battery status in available power sources: %s' % str(
+        available_power_sources))
     for power_source in available_power_sources:
         if 'BAT' in power_source:
             # Found battery
