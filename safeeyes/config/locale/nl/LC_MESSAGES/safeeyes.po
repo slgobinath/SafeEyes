@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-29 09:57+0000\n"
+"PO-Revision-Date: 2018-06-23 08:57+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/nl/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -253,11 +253,11 @@ msgstr "Hoorbare waarschuwing"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Audiomelding afspelen vóór en ná pauzes"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Audiomelding afspelen vóór pauzes"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -282,7 +282,7 @@ msgstr "Stoorbare vensters overschakelen naar normale modus"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Niet storen tijdens werken op batterij"
 
 # plugin/healthstats
 msgid "Health Statistics"
