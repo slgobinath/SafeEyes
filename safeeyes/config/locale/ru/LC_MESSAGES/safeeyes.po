@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-23 00:12+0000\n"
+"PO-Revision-Date: 2018-06-24 00:45+0000\n"
 "Last-Translator: Anton Bolshakov <blshkv@pentoo.ch>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
@@ -76,7 +76,7 @@ msgstr "Настройки"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "Запустить Safe Eyes  в режиме отладки"
+msgstr "Запустить Safe Eyes в режиме отладки"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
