@@ -83,7 +83,7 @@ def is_on_battery():
     """
     Check if the computer is running on battery.
     """
-    charging = True
+    on_battery = False
     available_power_sources = os.listdir('/sys/class/power_supply')
     logging.info('Looking for battery status in available power sources: %s' % str(
         available_power_sources))
@@ -98,11 +98,11 @@ def is_on_battery():
                     with open(battery_status, 'r') as status_file:
                         status = status_file.read()
                         if status:
-                            charging = 'charging' in status.lower()
+                            on_battery = 'discharging' in status.lower()
                 except BaseException:
                     logging.error('Failed to read %s' % battery_status)
             break
-    return not charging
+    return on_battery
 
 
 def init(ctx, safeeyes_config, plugin_config):
