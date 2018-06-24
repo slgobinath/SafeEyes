@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-02-03 07:53+0000\n"
-"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
+"PO-Revision-Date: 2018-06-25 09:37+0000\n"
+"Last-Translator: Jalakas <anari.jalakas@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -27,11 +27,11 @@ msgstr "Vaata vasakule ja paremale"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Liiguta silmi päripäeva"
+msgstr "Liiguta silmi kellaosuti suunas"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Liiguta silmi vastupäeva"
+msgstr "Liiguta silmi kellaosutile vastupidiselt"
 
 # Short break
 msgid "Blink your eyes"
@@ -250,11 +250,11 @@ msgstr "Helisignaal"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Mängi helisignaali enne ja pärast pausi"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Mängi helisignaali enne pausi"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -278,7 +278,7 @@ msgstr "Lülita katkestatavad aknad tavarežiimi"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Akutoitel olles mitte segada"
 
 # plugin/healthstats
 msgid "Health Statistics"
