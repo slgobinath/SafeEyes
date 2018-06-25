@@ -51,6 +51,7 @@ class SafeEyesCore(object):
         self.running = False
         self.short_break_duration = 0
         self.scheduled_next_break_time = -1
+        self.paused_time = -1
         # This event is fired before <time-to-prepare> for a break
         self.on_pre_break = EventHook()
         # This event is fired at the start of a break
@@ -112,7 +113,7 @@ class SafeEyesCore(object):
                 return
 
             logging.info("Stop Safe Eye core")
-
+            self.paused_time = datetime.datetime.now().timestamp()
             # Stop the break thread
             self.waiting_condition.acquire()
             self.running = False
@@ -181,14 +182,24 @@ class SafeEyesCore(object):
 
         self.context['state'] = State.WAITING
         time_to_wait = self.break_interval
+        current_time = datetime.datetime.now()
+        current_timestamp = current_time.timestamp()
 
         if self.context['postponed']:
-            # Wait until the postpone time
+            # Previous break was postponed
+            logging.info('Prepare for postponed break')
             time_to_wait = self.postpone_duration
             self.context['postponed'] = False
 
-        current_time = datetime.datetime.now()
-        current_timestamp = current_time.timestamp()
+        elif self.paused_time > -1 and self.__is_long_break():
+            # Safe Eyes was paused earlier and next break is long
+            paused_duration = int(current_timestamp - self.paused_time)
+            self.paused_time = -1
+            if paused_duration > self.breaks[self.next_break_index].time:
+                logging.info('Skip next long break due to the pause longer than break duration')
+                # Skip the next long break
+                self.__select_next_break()
+       
         if current_timestamp < self.scheduled_next_break_time:
             time_to_wait = round(self.scheduled_next_break_time - current_timestamp)
             self.scheduled_next_break_time = -1
