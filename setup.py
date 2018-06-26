@@ -83,7 +83,6 @@ setuptools.setup(
     package_data={'safeeyes': __package_data()},
     data_files=__data_files,
     install_requires=requires,
-    setup_requires=['setuptools>=38.6.0'],
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[

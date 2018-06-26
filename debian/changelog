@@ -1,4 +1,4 @@
-safeeyes (2.0.6-2) xenial; urgency=high
+safeeyes (2.0.6-3) xenial; urgency=high
   * Audible alert break before and DND while on battery
 
   * Fix no long breaks
