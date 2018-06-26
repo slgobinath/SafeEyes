@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-22 19:46+0000\n"
+"PO-Revision-Date: 2018-06-26 11:35+0000\n"
 "Last-Translator: LocLab fr <french.coordinator@rbox.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -254,11 +254,11 @@ msgstr "Alerte audible"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Jouer une alerte sonore avant et après les pauses"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Jouer une alerte sonore avant les pauses"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
