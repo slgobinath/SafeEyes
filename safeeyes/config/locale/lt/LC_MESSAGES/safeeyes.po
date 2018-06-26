@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-03-06 00:52+0000\n"
+"PO-Revision-Date: 2018-06-26 20:15+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 2.20-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -253,11 +253,11 @@ msgstr "Garsinis signalas"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Groti garsinį signalą prieš pertraukas ir po jų"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Groti garsinį signalą prieš pertraukas"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -281,7 +281,7 @@ msgstr "Perjungti nepertraukiamus langus į normalią veikseną"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Netrukdyti, naudojant bateriją"
 
 # plugin/healthstats
 msgid "Health Statistics"
