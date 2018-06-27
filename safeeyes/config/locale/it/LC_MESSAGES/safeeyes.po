@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-02-01 00:38+0000\n"
+"PO-Revision-Date: 2018-06-27 07:55+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -254,11 +254,11 @@ msgstr "Avviso sonoro"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Emetti un avviso sonoro prima e dopo una pausa"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Emetti un avviso sonoro dopo una pausa"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -282,7 +282,7 @@ msgstr "Passa le finestre interrompibili a modalità normale"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Non disturbare quando si passa alla modalità batteria"
 
 # plugin/healthstats
 msgid "Health Statistics"
