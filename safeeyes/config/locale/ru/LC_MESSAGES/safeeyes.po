@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-24 00:45+0000\n"
+"PO-Revision-Date: 2018-06-28 01:42+0000\n"
 "Last-Translator: Anton Bolshakov <blshkv@pentoo.ch>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
@@ -117,7 +117,7 @@ msgstr "Интервал между двумя перерывами (в мину
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Время подготовки в перерыву (в секундах)"
+msgstr "Время подготовки к перерыву (в секундах)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
