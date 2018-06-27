@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-27 07:55+0000\n"
+"PO-Revision-Date: 2018-06-28 08:39+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -67,7 +67,7 @@ msgstr "abilità l'istanza corrente di Safe Eyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "chiude l'istanza corrente di Safe Eyes ed esce"
+msgstr "chiudi l'istanza corrente di Safe Eyes ed esci"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -254,11 +254,11 @@ msgstr "Avviso sonoro"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr "Emetti un avviso sonoro prima e dopo una pausa"
+msgstr "Emetti un avviso sonoro prima e dopo le pause"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "Emetti un avviso sonoro dopo una pausa"
+msgstr "Emetti un avviso sonoro dopo le pause"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -290,7 +290,7 @@ msgstr "Statistiche"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Mostra le statistiche basate su come viene usato Safe Eyes"
+msgstr "Mostra le statistiche basate sull'uso di Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
@@ -298,7 +298,7 @@ msgstr "Notifiche"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Mostra una notifica di sistema prima della pausa"
+msgstr "Mostra una notifica di sistema prima delle pause"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
@@ -314,7 +314,7 @@ msgstr "Salvaschermo"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Blocca lo schermo dopo una pausa lunga avviando il salvaschermo"
+msgstr "Blocca lo schermo dopo le pause lunghe avviando il salvaschermo"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
