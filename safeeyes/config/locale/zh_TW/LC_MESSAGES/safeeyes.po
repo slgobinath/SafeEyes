@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-05-08 12:35+0000\n"
-"Last-Translator: gensitu <pstew892@protonmail.com>\n"
+"PO-Revision-Date: 2018-07-02 15:36+0000\n"
+"Last-Translator: ezjerry liao <ezjerry@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.0-dev\n"
+"X-Generator: Weblate 3.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -27,43 +27,43 @@ msgstr "左右滾動您的眼珠"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "順時針方向旋轉您的眼睛"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "以逆時針方向旋轉您的眼睛"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "眨您的眼睛"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "聚焦於遠處的一個點"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "喝點水"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "起來走一會"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "向後靠在椅背放鬆一下"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "顯示關於對話方塊"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "停用目前正在執行的 safeeyes 事例"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "啟用目前正在執行的 safeeyes 事例"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
