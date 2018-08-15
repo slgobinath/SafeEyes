@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-01 11:36+0000\n"
-"Last-Translator: Sølvi Goard <soren.goard@gmail.com>\n"
+"PO-Revision-Date: 2018-08-16 17:35+0000\n"
+"Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
 "Language: da\n"
@@ -15,31 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.0\n"
+"X-Generator: Weblate 3.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Luk øjnene tæt"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Rul med øjnene et par gange til hver side"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Rotere øjnene med uret"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Rotere øjnene mod uret"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Blinke dine øjne"
+msgstr "Blink med øjnene"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Fokusér på et punkt i det fjerne"
 
 # Short break
 msgid "Have some water"
@@ -47,39 +47,40 @@ msgstr "Drik noget vand"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Gå for en stund"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Læn tilbage i sædet og slap af"
 
 # Commandline arg description
+#, fuzzy
 msgid "show the about dialog"
-msgstr ""
+msgstr "Om programmet"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "deaktivere den aktuelt kørende Safe Eyes instans"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "aktivere den aktuelt kørende Safe Eyes instans"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "afslut den kørende Safe Eyes instans og afslut"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "Indstillinger"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Start Safe Eyes i debug-tilstand"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "print status for at køre Safe Eyes instans og afslut"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -91,8 +92,9 @@ msgstr "Luk"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
+#, fuzzy
 msgid "description"
-msgstr ""
+msgstr "beskrivelse"
 
 # About dialog
 msgid "License"
@@ -100,310 +102,326 @@ msgstr "Licens"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Spring over"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Udsæt"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Pauselængde (i sekunder)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Interval mellem to pauser (i minutter)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Tid til at forberede en pause (i sekunder)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Tastaturgenveje deaktiveret tidsrum (i sekunder)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Udskyd varighed (i minutter)"
 
 # Settings dialog
+#, fuzzy
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Fast pause (ingen måde at springe over)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Tillad at udskyde pauser"
 
 # Settings dialog
+#, fuzzy
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Fortsætter i interntilstand"
 
 # Settings dialog
+#, fuzzy
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"Tiden for en lang pause skal være et multiplum af tiden for en kort pause"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Indstillinger"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Korte pauser"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Lange pauser"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pause"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pauser"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Udvidelser"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Kort"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Lang"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Billede"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Vælg et billede"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Varighed"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Tilsidesæt"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Tid (i sekunder)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Pauseindstillinger"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Udvidelsesindstillinger"
 
 # Settings dialog
+#, fuzzy
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Udvidelse understøtter ikke %s skrivebordsmiljø"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Installer Python-modul '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Installer kommandolinjeværktøjet '%s'"
 
 # Settings dialog
+#, fuzzy
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Tilføj ressource %(ressource)s til %(config_resource)s bibliotek"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Ny pause"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Kassér"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Gem"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Akustisk alarm"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Afspil lydvarsling før og efter pauser"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Afspil lydvarsling før pauser"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Forstyr ikke"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Spring pausen over, hvis det aktive vindue er i fuldskærmstilstand"
 
 # plugin/donotdisturb
+#, fuzzy
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Afbryd ikke disse vinduer nogensinde"
 
 # plugin/donotdisturb
+#, fuzzy
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Afbryde disse vinduer uanset deres tilstand"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr ""
 
 # plugin/donotdisturb
+#, fuzzy
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Forstyr ikke ved batteridrift"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Sundhedsstatistikker"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Vis statistikker baseret på brug af Safe Eyes"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Meddelelse"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Vis en systemmeddelelse før pauser"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Klar til en kort pause om %s sekunder"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Klar til en lang pause om %s sekunder"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Pauseskærm"
 
 # plugin/screensaver
+#, fuzzy
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Lås skærmen efter lange pauser ved at starte pauseskærmen"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Brugerdefineret pauseskærmkommando"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Mindste antal sekunder for at springe over uden pauseskærm"
 
 # plugin/smartpause
+#, fuzzy
 msgid "Smart Pause"
-msgstr ""
+msgstr "Smart Pause"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pause Safe Eyes, hvis systemet er inaktivt"
 
 # plugin/smartpause
+#, fuzzy
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Mindste tomgangstid for at pause Safe Eyes (i sekunder)"
 
 # plugin/smartpause
+#, fuzzy
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "Fortolk inaktiv tid svarende til kommende pause varighed som en pause"
 
 #: plugins/trayicon
+#, fuzzy
 msgid "Tray Icon"
-msgstr ""
+msgstr "Bakkeikon"
 
 #: plugins/trayicon
+#, fuzzy
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Vise en ikon i meddelelsesområdet"
 
 #: plugins/trayicon
+#, fuzzy
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Vis næste pausetid i bakkeikon"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Deaktiver Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Deaktiveret indtil %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Deaktiveret indtil genstart"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Aktivér  Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "i %d time"
+msgstr[1] "i %d timer"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "i %d minut"
+msgstr[1] "i %d minutter"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "i %d sekund"
+msgstr[1] "i %d sekunder"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Næste pause %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Ingen pauser til rådighed"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Indstillinger"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Hold pause nu"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Indtil genstart"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Afslut"
