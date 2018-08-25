@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-28 07:14+0000\n"
-"Last-Translator: giappi <giappaig@gmail.com>\n"
+"PO-Revision-Date: 2018-08-26 03:45+0000\n"
+"Last-Translator: Hoàng Trần <hoangtk102@gmail.com>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/vi/>\n"
 "Language: vi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 3.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -83,7 +83,7 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes không hoạt động"
 
 # About dialog
 msgid "Close"
