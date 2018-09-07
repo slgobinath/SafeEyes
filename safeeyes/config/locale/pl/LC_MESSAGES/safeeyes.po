@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-19 11:42+0000\n"
-"Last-Translator: Daniel Lewan <vision360.daniel@gmail.com>\n"
+"PO-Revision-Date: 2018-09-08 20:23+0000\n"
+"Last-Translator: WaldiS <admin@sto.ugu.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pl/>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -48,7 +48,7 @@ msgstr "Napij się trochę wody"
 
 # Long break
 msgid "Walk for a while"
-msgstr "Pójdź na krótki spacer"
+msgstr "Przejdź się"
 
 # Long break
 msgid "Lean back at your seat and relax"
@@ -60,15 +60,15 @@ msgstr "pokaż okno \"O programie\""
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Wyłącz aktualnie uruchomioną instancję safeeyes"
+msgstr "Wyłącz instancję safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Włącz aktualnie uruchomioną instancję safeeyes"
+msgstr "Włącz instancję safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Zamknij i wyjdź z aktualnej instancji safeeyes"
+msgstr "Wyłącz instancję i wyjdź"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -80,7 +80,7 @@ msgstr "uruchom safeeyes w trybie debugowania"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "wydrukuj status uruchomionej instancji safeeyes i zakończ"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -139,7 +139,7 @@ msgstr "Pozwól na przełożenie przerw"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Utrzymaj stan wewnętrzny"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -251,11 +251,11 @@ msgstr "Powiadomienie Dźwiękowe"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Graj dźwiękowy alert przed i po przerwach"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Odtwórz dźwięk przed przerwami"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -279,7 +279,7 @@ msgstr "Przełącz przerwane okna do trybu normalnego"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Nie przeszkadzaj na baterii"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -336,6 +336,8 @@ msgstr "Minimalny czas bezczynności (w sekundach)"
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Interpretuj czas bezczynności odpowiadający zbliżonemu czasowi trwania "
+"przerwy jako przerwę"
 
 #: plugins/trayicon
 msgid "Tray Icon"
