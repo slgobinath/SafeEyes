@@ -67,44 +67,44 @@ msgstr "啟用目前正在執行的 safeeyes 事例"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "離開目前正在執行的 safeeyes 事例"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "顯示設定視窗"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "以除錯模式開啓 safeeyes"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes 沒有正在執行"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "關閉"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "描述"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "授權"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "跳過"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "延遲"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
