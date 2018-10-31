@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-08-16 17:35+0000\n"
+"PO-Revision-Date: 2018-11-01 15:24+0000\n"
 "Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.2-dev\n"
+"X-Generator: Weblate 3.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -281,8 +281,9 @@ msgid "Interrupt these windows regardless of their state"
 msgstr "Afbryde disse vinduer uanset deres tilstand"
 
 # plugin/donotdisturb
+#, fuzzy
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Skift de afbrydelige vinduer til normal funktionstilstand"
 
 # plugin/donotdisturb
 #, fuzzy
@@ -350,8 +351,9 @@ msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr "Fortolk inaktiv tid svarende til kommende pause varighed som en pause"
 
 # plugin/smartpause
+#, fuzzy
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Udskyd den næste pause, indtil systemet bliver ledig"
 
 #: plugins/trayicon
 #, fuzzy
