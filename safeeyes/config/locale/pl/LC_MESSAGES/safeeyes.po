@@ -339,6 +339,10 @@ msgstr ""
 "Interpretuj czas bezczynności odpowiadający zbliżonemu czasowi trwania "
 "przerwy jako przerwę"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Ikona w zasobniku"

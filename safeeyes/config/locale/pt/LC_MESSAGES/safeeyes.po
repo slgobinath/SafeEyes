@@ -341,6 +341,10 @@ msgstr ""
 "Interprete o tempo ocioso equivalente à duração da próxima parada como uma "
 "parada"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Ícone de bandeja"

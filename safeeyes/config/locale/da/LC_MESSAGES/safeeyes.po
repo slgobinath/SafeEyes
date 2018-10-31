@@ -349,6 +349,10 @@ msgstr "Mindste tomgangstid for at pause Safe Eyes (i sekunder)"
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr "Fortolk inaktiv tid svarende til kommende pause varighed som en pause"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 #, fuzzy
 msgid "Tray Icon"

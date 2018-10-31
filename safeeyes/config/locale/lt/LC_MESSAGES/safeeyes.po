@@ -342,6 +342,10 @@ msgstr ""
 "Laikyti neveiklumo laiką, kuris lygus būsimos pertraukos trukmei, kaip "
 "pertrauką"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Dėklo piktograma"

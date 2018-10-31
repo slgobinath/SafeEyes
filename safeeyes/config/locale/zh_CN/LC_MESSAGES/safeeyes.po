@@ -336,6 +336,10 @@ msgstr "暂停 Safe Eyes 的最短时间（秒）"
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr "将系统空闲时间作为下次休息时长来对待"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "托盘图标"

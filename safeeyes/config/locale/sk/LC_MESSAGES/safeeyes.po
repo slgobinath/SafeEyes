@@ -336,6 +336,10 @@ msgstr "Pozastaviť Safe Eyes pri nečinnost dlhšej ako (v sekundách)"
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr "Započítaj čas, kedy počítač nie je používaný, do prestávky"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Ikona na paneli"

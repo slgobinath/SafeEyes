@@ -47,15 +47,19 @@ class SafeEyesCore(object):
         self.long_break_duration = 0
         self.next_break_index = context['session'].get('next_break_index', 0)
         self.postpone_duration = 0
+        self.default_postpone_duration = 0
         self.pre_break_warning_time = 0
         self.running = False
         self.short_break_duration = 0
-        self.scheduled_next_break_time = -1
+        self.scheduled_next_break_timestamp = -1
+        self.scheduled_next_break_time = None
         self.paused_time = -1
         # This event is fired before <time-to-prepare> for a break
         self.on_pre_break = EventHook()
-        # This event is fired at the start of a break
+        # This event is fired just before the start of a break
         self.on_start_break = EventHook()
+        # This event is fired at the start of a break
+        self.start_break = EventHook()
         # This event is fired during every count down
         self.on_count_down = EventHook()
         # This event is fired at the end of a break
@@ -79,8 +83,9 @@ class SafeEyesCore(object):
         self.pre_break_warning_time = config.get('pre_break_warning_time')
         self.long_break_duration = config.get('long_break_duration')
         self.short_break_duration = config.get('short_break_duration')
-        self.break_interval = config.get('break_interval') * 60   # Convert to seconds
-        self.postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
+        self.break_interval = config.get('break_interval') * 60  # Convert to seconds
+        self.default_postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
+        self.postpone_duration = self.default_postpone_duration
 
         self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
         self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
@@ -101,7 +106,7 @@ class SafeEyesCore(object):
             if not self.running:
                 logging.info("Start Safe Eyes core")
                 self.running = True
-                self.scheduled_next_break_time = int(next_break_time)
+                self.scheduled_next_break_timestamp = int(next_break_time)
                 Utility.start_thread(self.__scheduler_job)
 
     def stop(self):
@@ -128,10 +133,15 @@ class SafeEyesCore(object):
         """
         self.context['skipped'] = True
 
-    def postpone(self):
+    def postpone(self, duration=-1):
         """
         User postponed the break using Postpone button
         """
+        if duration > 0:
+            self.postpone_duration = duration
+        else:
+            self.postpone_duration = self.default_postpone_duration
+        logging.debug("Postpone the break for %d seconds", self.postpone_duration)
         self.context['postponed'] = True
 
     def take_break(self):
@@ -199,13 +209,13 @@ class SafeEyesCore(object):
                 logging.info('Skip next long break due to the pause longer than break duration')
                 # Skip the next long break
                 self.__select_next_break()
-       
-        if current_timestamp < self.scheduled_next_break_time:
-            time_to_wait = round(self.scheduled_next_break_time - current_timestamp)
-            self.scheduled_next_break_time = -1
 
-        next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
-        Utility.execute_main_thread(self.__fire_on_update_next_break, next_break_time)
+        if current_timestamp < self.scheduled_next_break_timestamp:
+            time_to_wait = round(self.scheduled_next_break_timestamp - current_timestamp)
+            self.scheduled_next_break_timestamp = -1
+
+        self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
+        Utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
 
         if self.__is_long_break():
             self.context['break_type'] = 'long'
@@ -249,13 +259,27 @@ class SafeEyesCore(object):
             return
         Utility.execute_main_thread(self.__fire_start_break)
 
+    def __postpone_break(self):
+        self.__wait_for(self.postpone_duration)
+        Utility.execute_main_thread(self.__fire_start_break)
+
     def __fire_start_break(self):
         # Show the break screen
         if not self.on_start_break.fire(self.breaks[self.next_break_index]):
-            # Plugins wanted to ignore this break
+            # Plugins want to ignore this break
             self.__start_next_break()
             return
-        Utility.start_thread(self.__start_break)
+        if self.context['postponed']:
+            # Plugins want to postpone this break
+            self.context['postponed'] = False
+            # Update the next break time
+            self.scheduled_next_break_time = self.scheduled_next_break_time + datetime.timedelta(seconds=self.postpone_duration)
+            self.__fire_on_update_next_break(self.scheduled_next_break_time)
+            # Wait in user thread
+            Utility.start_thread(self.__postpone_break)
+        else:
+            self.start_break.fire(self.breaks[self.next_break_index])
+            Utility.start_thread(self.__start_break)
 
     def __start_break(self):
         """

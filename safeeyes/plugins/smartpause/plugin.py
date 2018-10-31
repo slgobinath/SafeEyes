@@ -50,7 +50,7 @@ def __system_idle_time():
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
-        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000    # Convert to seconds
+        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000  # Convert to seconds
     except BaseException:
         return 0
 
@@ -81,18 +81,22 @@ def init(ctx, safeeyes_config, plugin_config):
     global context
     global enable_safe_eyes
     global disable_safe_eyes
+    global postpone
     global idle_time
     global break_interval
     global waiting_time
     global interpret_idle_as_break
+    global postpone_if_active
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
     disable_safe_eyes = context['api']['disable_safeeyes']
+    postpone = context['api']['postpone']
     idle_time = plugin_config['idle_time']
     interpret_idle_as_break = plugin_config['interpret_idle_as_break']
+    postpone_if_active = plugin_config['postpone_if_active']
     break_interval = safeeyes_config.get('break_interval') * 60  # Convert to seconds
-    waiting_time = min(2, idle_time)    # If idle time is 1 sec, wait only 1 sec
+    waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
 
 
 def __start_idle_monitor():
@@ -169,3 +173,14 @@ def update_next_break(break_obj, dateTime):
     global next_break_duration
     next_break_time = dateTime
     next_break_duration = break_obj.time
+
+
+def on_start_break(break_obj):
+    """
+    Lifecycle method executes just before the break.
+    """
+    if postpone_if_active:
+        # Postpone this break if the user is active
+        system_idle_time = __system_idle_time()
+        if system_idle_time < 2:
+            postpone(2)  # Postpone for 2 seconds

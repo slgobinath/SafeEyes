@@ -345,6 +345,10 @@ msgstr ""
 "Interpréter le temps d’inactivité équivalent à la pause à venir comme une "
 "pause"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Icône de notification"

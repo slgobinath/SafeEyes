@@ -2,7 +2,7 @@
     "meta": {
         "name": "Smart Pause",
         "description": "Pause Safe Eyes if the system is idle",
-        "version": "0.0.2"
+        "version": "0.0.3"
     },
     "dependencies": {
         "python_modules": [],
@@ -23,6 +23,12 @@
         {
             "id": "interpret_idle_as_break",
             "label": "Interpret idle time equivalent to upcoming break duration as a break",
+            "type": "BOOL",
+            "default": false
+        },
+        {
+            "id": "postpone_if_active",
+            "label": "Postpone the next break until the system becomes idle",
             "type": "BOOL",
             "default": false
         }

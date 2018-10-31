@@ -79,13 +79,15 @@ class SafeEyes(object):
         self.plugins_manager = PluginManager(self.context, self.config)
         self.safe_eyes_core = SafeEyesCore(self.context)
         self.safe_eyes_core.on_pre_break += self.plugins_manager.pre_break
-        self.safe_eyes_core.on_start_break += self.start_break
+        self.safe_eyes_core.on_start_break += self.on_start_break
+        self.safe_eyes_core.start_break += self.start_break
         self.safe_eyes_core.on_count_down += self.countdown
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
         self.context['api']['take_break'] = lambda: Utility.execute_main_thread(self.safe_eyes_core.take_break)
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
+        self.context['api']['postpone'] = self.safe_eyes_core.postpone
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
         self.rpc_server = RPCServer(self.config.get('rpc_port'), self.context)
@@ -223,16 +225,21 @@ class SafeEyes(object):
                 status = _('Disabled until restart')
             self._status = status
 
-    def start_break(self, break_obj):
+    def on_start_break(self, break_obj):
         """
-        Pass the break information to plugins and break screen.
+        Pass the break information to plugins.
         """
         if not self.plugins_manager.start_break(break_obj):
             return False
+        return True
+
+    def start_break(self, break_obj):
+        """
+        Pass the break information to break screen.
+        """
         # Get the HTML widgets content from plugins
         widget = self.plugins_manager.get_break_screen_widgets(break_obj)
         self.break_screen.show_message(break_obj, widget)
-        return True
 
     def countdown(self, countdown, seconds):
         """
@@ -270,7 +277,7 @@ class SafeEyes(object):
         Return the status of Safe Eyes.
         """
         return self._status
-   
+
     def persist_session(self):
         """
         Save the session object to the session file.

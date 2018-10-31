@@ -340,6 +340,10 @@ msgstr ""
 "Diễn tả thời gian rỗi tương đương với thời gian nghỉ sắp tới như là một giờ "
 "nghỉ"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Biểu tượng khay"

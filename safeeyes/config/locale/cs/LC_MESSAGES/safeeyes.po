@@ -339,6 +339,10 @@ msgstr ""
 "Považovat čas nečinnosti trvající stejně, jako nadcházející přestávka, za "
 "přestávku"
 
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
 #: plugins/trayicon
 msgid "Tray Icon"
 msgstr "Oznamovací oblast"
