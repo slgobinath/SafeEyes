@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-28 08:39+0000\n"
+"PO-Revision-Date: 2018-11-03 13:24+0000\n"
 "Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1-dev\n"
+"X-Generator: Weblate 3.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -344,7 +344,7 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Pospone la pausa successiva finché il sistema non diventa inattivo"
 
 #: plugins/trayicon
 msgid "Tray Icon"
