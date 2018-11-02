@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-29 07:46+0000\n"
-"Last-Translator: Andriy Prokopenko <andprk@gmail.com>\n"
+"PO-Revision-Date: 2018-11-03 13:24+0000\n"
+"Last-Translator: ___ <o.kravtsov@ukr.net>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.1-dev\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -44,7 +44,7 @@ msgstr "Сфокусуйте погляд на віддаленій точці"
 
 # Short break
 msgid "Have some water"
-msgstr "Випийте склянку води"
+msgstr "Випийте води"
 
 # Long break
 msgid "Walk for a while"
@@ -344,7 +344,7 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Відкласти наступну перерву до переходу системи в режим очікування"
 
 #: plugins/trayicon
 msgid "Tray Icon"
