@@ -21,11 +21,13 @@ import logging
 import os
 import threading
 import time
+import pprint
 
 import gi
 from safeeyes import Utility
 from Xlib.display import Display
 from Xlib.display import X
+from Xlib.display import ext
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gdk
@@ -54,7 +56,18 @@ class BreakScreen(object):
         self.on_skip = on_skip
         self.shortcut_disable_time = 2
         self.strict_break = False
+        self.lock_keyboard = False
         self.windows = []
+
+        self.media_keys = [
+            {"event_detail": 121, "description": "Media_Mute"},
+            {"event_detail": 122, "description": "Media_VolDown"},
+            {"event_detail": 123, "description": "Media_VolUp"},
+            {"event_detail": 171, "description": "Media_Next"}
+            {"event_detail": 172, "description": "Media_Play/Pause"},
+            {"event_detail": 173, "description": "Media_Prev"},
+            {"event_detail": 174, "description": "Media_Stop"},
+        ]
 
         # Initialize the theme
         css_provider = Gtk.CssProvider()
@@ -130,10 +143,12 @@ class BreakScreen(object):
         """
         Hide the break screen from active window and destroy all other windows
         """
-        logging.info("Close the break screen(s)")
+        logging.info("Releasing the keyboard")
         self.__release_keyboard()
+        self.lock_keyboard = False
 
         # Destroy other windows if exists
+        logging.info("Close the break screen(s)")
         GLib.idle_add(lambda: self.__destroy_all_screens())
 
     def __show_break_screen(self, message, image_path, widget):
@@ -215,42 +230,76 @@ class BreakScreen(object):
         for label in self.count_labels:
             label.set_text(count)
 
-    def __lock_keyboard(self):
+    def __is_media_key(self, event):
         """
-        Lock the keyboard to prevent the user from using keyboard shortcuts
+        Check if event is a media_key key_press or not
         """
-        logging.info("Lock the keyboard")
-        self.lock_keyboard = True
+        logging.debug('event: %s', pprint.pformat(event))
 
-        # Grab the keyboard
+        if event.type != X.KeyPress:
+            return False
+
+        logging.debug('event.detail: %s', event.detail)
+        if event.detail in [x['event_detail'] for x in self.media_keys]:
+            logging.debug('Event is a media key: %s',
+                          next((x['description'] for x in self.media_keys
+                                if x['event_detail'] == event.detail), False))
+
+            return True
+
+        return False
+
+    def __grab_keyboard(self):
+        """
+        Grab the keyboard
+        """
+        logging.info("Grab the keyboard")
+
         root = self.display.screen().root
         root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
         root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
-        # Consume keyboard events
-        while self.lock_keyboard:
-            if self.display.pending_events() > 0:
-                # Avoid waiting for next event by checking pending events
-                event = self.display.next_event()
-                if self.enable_shortcut and event.type == X.KeyPress:
-                    if event.detail == self.keycode_shortcut_skip:
-                        self.skip_break()
-                        break
-                    elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
-                        self.postpone_break()
-                        break
-            else:
-                # Reduce the CPU usage by sleeping for a second
-                time.sleep(1)
+        return True
 
     def __release_keyboard(self):
         """
         Release the locked keyboard.
         """
         logging.info("Unlock the keyboard")
-        self.lock_keyboard = False
         self.display.ungrab_keyboard(X.CurrentTime)
         self.display.flush()
+
+    def __lock_keyboard(self):
+        """
+        Lock the keyboard to prevent the user from using keyboard shortcuts
+        """
+        logging.info("Locking the keyboard for the break")
+
+        # Grab the keyboard
+        self.lock_keyboard = self.__grab_keyboard()
+
+        # Consume keyboard events
+        while self.lock_keyboard:
+            if self.display.pending_events() > 0:
+                # Avoid waiting for next event by checking pending events
+                event = self.display.next_event()
+                if event.type == X.KeyPress:
+                    if self.__is_media_key(event):
+                        self.__release_keyboard()
+                        ext.xtest.fake_input(self.display, X.KeyPress, event.detail)
+                        ext.xtest.fake_input(self.display, X.KeyRelease, event.detail)
+                        self.__grab_keyboard()
+                    if self.enable_shortcut:
+                        if event.detail == self.keycode_shortcut_skip:
+                            self.skip_break()
+                            break
+                        elif (self.enable_postpone and
+                              event.detail == self.keycode_shortcut_postpone):
+                            self.postpone_break()
+                            break
+            else:
+                # Reduce the CPU usage by sleeping for half a second
+                time.sleep(0.5)
 
     def __destroy_all_screens(self):
         """
