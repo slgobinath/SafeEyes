@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-25 09:37+0000\n"
-"Last-Translator: Jalakas <anari.jalakas@gmail.com>\n"
+"PO-Revision-Date: 2018-11-23 19:08+0000\n"
+"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.1-dev\n"
+"X-Generator: Weblate 3.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -338,7 +338,7 @@ msgstr "Arvesta järgmise pausi aja sisse sellele eelnenud puhkeaeg"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Lükka paus edasi süsteemi järgmise jõudeolekuni"
 
 #: plugins/trayicon
 msgid "Tray Icon"
