@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-05-08 12:35+0000\n"
-"Last-Translator: gensitu <pstew892@protonmail.com>\n"
+"PO-Revision-Date: 2018-12-30 03:09+0000\n"
+"Last-Translator: Galley Meng <galley.meng@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.0-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -79,11 +79,11 @@ msgstr "以调试模式运行Safeeyes"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "打印Safeeyes运行状态后退出"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "SafeEyes还未启动"
 
 # About dialog
 msgid "Close"
@@ -250,11 +250,11 @@ msgstr "声音提示"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "休息前后播放声音"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "休息前播放声音"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -278,7 +278,7 @@ msgstr "将可中断窗口切换到正常模式"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "使用电池时免打扰"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -338,7 +338,7 @@ msgstr "将系统空闲时间作为下次休息时长来对待"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "推迟下一次休息直到系统进入空闲"
 
 #: plugins/trayicon
 msgid "Tray Icon"
