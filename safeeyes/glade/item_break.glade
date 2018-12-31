@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
+<!-- Generated with glade 3.22.1 -->
 <!--
 ~ Safe Eyes is a utility to remind you to take break frequently
 ~ to protect your eyes from eye strain.
@@ -21,6 +21,16 @@
 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
+  <object class="GtkImage" id="img_properties">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-properties</property>
+  </object>
+  <object class="GtkImage" id="img_delete">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-delete</property>
+  </object>
   <object class="GtkBox" id="box">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -28,6 +38,7 @@
     <property name="margin_right">5</property>
     <property name="margin_top">5</property>
     <property name="margin_bottom">5</property>
+    <property name="spacing">3</property>
     <child>
       <object class="GtkLabel" id="lbl_name">
         <property name="visible">True</property>
@@ -52,7 +63,7 @@
         <property name="image">img_properties</property>
         <property name="always_show_image">True</property>
         <style>
-          <class name="btn_properties"/>
+          <class name="btn_break_controls"/>
         </style>
       </object>
       <packing>
@@ -61,10 +72,24 @@
         <property name="position">1</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkImage" id="img_properties">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-properties</property>
+    <child>
+      <object class="GtkButton" id="btn_delete">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="image">img_delete</property>
+        <property name="always_show_image">True</property>
+        <style>
+          <class name="btn_break_controls"/>
+        </style>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
   </object>
 </interface>

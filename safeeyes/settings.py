@@ -42,6 +42,7 @@ class SettingsDialog(object):
     """
         Create and initialize SettingsDialog instance.
     """
+
     def __init__(self, config, on_save_settings):
         self.config = config
         self.on_save_settings = on_save_settings
@@ -118,15 +119,47 @@ class SettingsDialog(object):
                 break_config,
                 is_short,
                 self.config,
-                lambda: parent_box.remove(box),
                 lambda cfg: lbl_name.set_label(_(cfg['name'])),
                 lambda is_short,
                 break_config: self.__create_break_item(break_config, is_short)
             )
         )
+        btn_delete = builder.get_object('btn_delete')
+        btn_delete.connect(
+            'clicked',
+            lambda button: self.__delete_break(
+                break_config,
+                is_short,
+                lambda: parent_box.remove(box),
+            )
+        )
         box.set_visible(True)
         parent_box.pack_start(box, False, False, 0)
         return box
+
+    def __delete_break(self, break_config, is_short, on_remove):
+        """
+        Remove the break after a confirmation.
+        """
+
+        def __confirmation_dialog_response(widget, response_id):
+            if response_id == Gtk.ResponseType.OK:
+                if is_short:
+                    self.config.get('short_breaks').remove(break_config)
+                else:
+                    self.config.get('long_breaks').remove(break_config)
+                on_remove()
+            widget.destroy()
+
+        messagedialog = Gtk.MessageDialog(parent=self.window,
+                                          flags=Gtk.DialogFlags.MODAL,
+                                          type=Gtk.MessageType.WARNING,
+                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                                   _("Delete"), Gtk.ResponseType.OK),
+                                          message_format=_("Are you sure you want to delete this break?"))
+        messagedialog.connect("response", __confirmation_dialog_response)
+        messagedialog.format_secondary_text(_("You can't undo this action."))
+        messagedialog.show()
 
     def __create_plugin_item(self, plugin_config):
         """
@@ -167,11 +200,11 @@ class SettingsDialog(object):
         dialog = PluginSettingsDialog(plugin_config)
         dialog.show()
 
-    def __show_break_properties_dialog(self, break_config, is_short, parent, on_remove, on_close, on_add):
+    def __show_break_properties_dialog(self, break_config, is_short, parent, on_close, on_add):
         """
         Show the BreakProperties dialog
         """
-        dialog = BreakSettingsDialog(break_config, is_short, parent, self.plugin_map, on_remove, on_close, on_add)
+        dialog = BreakSettingsDialog(break_config, is_short, parent, self.plugin_map, on_close, on_add)
         dialog.show()
 
     def show(self):
@@ -257,6 +290,7 @@ class PluginSettingsDialog(object):
     """
     Builds a settings dialog based on the configuration of a plugin.
     """
+
     def __init__(self, config):
         self.config = config
         self.property_controls = []
@@ -333,11 +367,11 @@ class BreakSettingsDialog(object):
     """
     Builds a settings dialog based on the configuration of a plugin.
     """
-    def __init__(self, break_config, is_short, parent_config, plugin_map, on_remove, on_close, on_add):
+
+    def __init__(self, break_config, is_short, parent_config, plugin_map, on_close, on_add):
         self.break_config = break_config
         self.parent_config = parent_config
         self.plugin_check_buttons = {}
-        self.on_remove = on_remove
         self.on_close = on_close
         self.is_short = is_short
         self.on_add = on_add
@@ -351,9 +385,6 @@ class BreakSettingsDialog(object):
         self.spin_duration = builder.get_object('spin_duration')
         self.img_break = builder.get_object('img_break')
         self.cmb_type = builder.get_object('cmb_type')
-        # User cannot remove the last break
-        not_last_break = (len(parent_config.get('short_breaks')) + len(parent_config.get('long_breaks'))) > 1
-        builder.get_object('btn_remove').set_sensitive(not_last_break)
 
         grid_plugins = builder.get_object('grid_plugins')
         list_types = builder.get_object('lst_break_types')
@@ -415,8 +446,7 @@ class BreakSettingsDialog(object):
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                       Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")
@@ -434,17 +464,6 @@ class BreakSettingsDialog(object):
             self.img_break.set_from_stock('gtk-missing-image', Gtk.IconSize.BUTTON)
 
         dialog.destroy()
-
-    def remove_break(self, button):
-        """
-        Remove the break
-        """
-        if self.is_short:
-            self.parent_config.get('short_breaks').remove(self.break_config)
-        else:
-            self.parent_config.get('long_breaks').remove(self.break_config)
-        self.on_remove()
-        self.window.destroy()
 
     def on_window_delete(self, *args):
         """
@@ -493,6 +512,7 @@ class NewBreakDialog(object):
     """
     Builds a new break dialog.
     """
+
     def __init__(self, parent_config, on_add):
         self.parent_config = parent_config
         self.on_add = on_add

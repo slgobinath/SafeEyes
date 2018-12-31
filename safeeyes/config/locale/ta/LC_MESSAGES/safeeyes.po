@@ -160,6 +160,18 @@ msgid "Long Breaks"
 msgstr "நீண்ட இடைவேளைகள்"
 
 # Settings dialog
+msgid "Delete"
+msgstr "நீக்கு"
+
+# Settings dialog
+msgid "Are you sure you want to delete this break?"
+msgstr "இந்த இடைவேளையை நிச்சயமாக நீக்க விரும்புகிறீர்களா?"
+
+# Settings dialog
+msgid "You can't undo this action."
+msgstr "நீங்கள் பின்னர் இதை மீட்டெடுக்க முடியாது"
+
+# Settings dialog
 msgid "Break"
 msgstr "இடைவேளை"
 

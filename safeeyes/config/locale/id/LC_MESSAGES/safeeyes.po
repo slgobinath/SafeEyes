@@ -154,6 +154,18 @@ msgid "Long Breaks"
 msgstr ""
 
 # Settings dialog
+msgid "Delete"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to delete this break?"
+msgstr ""
+
+# Settings dialog
+msgid "You can't undo this action."
+msgstr ""
+
+# Settings dialog
 msgid "Break"
 msgstr ""
 
