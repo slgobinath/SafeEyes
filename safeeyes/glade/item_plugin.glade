@@ -126,7 +126,7 @@
             <property name="image">img_properties</property>
             <property name="always_show_image">True</property>
             <style>
-              <class name="btn_properties"/>
+              <class name="btn_circle"/>
             </style>
           </object>
           <packing>
