@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-03 13:24+0000\n"
+"PO-Revision-Date: 2019-01-03 17:07+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 3.3-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -161,15 +161,15 @@ msgstr "Ilgos pertraukos"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Ištrinti"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Ar tikrai norite ištrinti šią pertrauką?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Šio veiksmo nebegalėsite atšaukti."
 
 # Settings dialog
 msgid "Break"
