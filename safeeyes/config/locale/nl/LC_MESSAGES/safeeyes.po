@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-01 15:24+0000\n"
+"PO-Revision-Date: 2019-01-03 17:07+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/nl/>\n"
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Sluit uw ogen goed"
+msgstr "Sluit je ogen goed"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Rol uw oogballen een paar keer heen en weer"
+msgstr "Rol je oogballen een paar keer heen en weer"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Draai uw ogen met de klok mee"
+msgstr "Draai je ogen met de klok mee"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Draai uw ogen tegen de klok in"
+msgstr "Draai je ogen tegen de klok in"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Knipper met uw ogen"
+msgstr "Knipper met je ogen"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -51,11 +51,11 @@ msgstr "Maak een wandelingetje"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Leun achterover in uw stoel en rust uit"
+msgstr "Leun achterover in je stoel en rust uit"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "het over-dialoogvenster weergeven"
+msgstr "het over-dialoogvenster tonen"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
@@ -71,11 +71,11 @@ msgstr "het draaiende safeeyes-proces beëindigen en afsluiten"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "het instellingen-dialoogvenster weergeven"
+msgstr "het instellingen-dialoogvenster tonen"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "safeeyes opstart in foutopsporingsmodus"
+msgstr "safeeyes opstarten in foutopsporingsmodus"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
@@ -115,7 +115,7 @@ msgstr "Pauzeduur (in seconden)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "Tussenpoos tussen twee pauzes (in minuten)"
+msgstr "Tijd tussen twee pauzes (in minuten)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
@@ -161,15 +161,15 @@ msgstr "Lange pauzes"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Weet je zeker dat je deze pauze wilt verwijderen?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Je kunt dit niet ongedaan maken."
 
 # Settings dialog
 msgid "Break"
@@ -201,11 +201,11 @@ msgstr "Afbeelding"
 
 # Settings dialog
 msgid "Select"
-msgstr "Selecteren"
+msgstr "Kiezen"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Selecteer een afbeelding"
+msgstr "Kies een afbeelding"
 
 # Settings dialog
 msgid "Duration"
@@ -229,7 +229,7 @@ msgstr "Plug-in-instellingen"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "De plug-in heeft geen ondersteuning voor de %s-bureaubladomgeving"
+msgstr "De plug-in biedt geen ondersteuning voor de %s-bureaubladomgeving"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
@@ -277,24 +277,23 @@ msgstr "Niet storen"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
-"Pauze overslaan als het actieve venster zich bevindt in volledig scherm-modus"
+msgstr "Pauze overslaan als het actieve venster draait in volledig scherm-modus"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "Deze vensters nooit storen"
+msgstr "Deze vensters nooit onderbreken"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "Deze vensters storen, ongeacht hun status"
+msgstr "Deze vensters onderbreken, ongeacht hun status"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "Stoorbare vensters overschakelen naar normale modus"
+msgstr "Onderbreekbare vensters overschakelen naar normale modus"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Niet storen tijdens werken op batterij"
+msgstr "Niet storen tijdens werken op accu"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -302,7 +301,7 @@ msgstr "Gezondheidsstatistieken"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Statistieken weergeven, gebaseerd op uw gebruik van Safe Eyes"
+msgstr "Toon statistieken, gebaseerd op hoe je Safe Eyes gebruikt"
 
 # plugin/notification
 msgid "Notification"
@@ -310,15 +309,15 @@ msgstr "Melding"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Systeemmelding weergeven voorafgaand aan pauzes"
+msgstr "Systeemmelding tonen voorafgaand aan pauzes"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "Bereidt u voor op een korte pauze over %s seconden"
+msgstr "Bereid je voor op een korte pauze over %s seconden"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr "Bereidt u voor op een lange pauze over %s seconden"
+msgstr "Bereid je voor op een lange pauze over %s seconden"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -362,11 +361,11 @@ msgstr "Systeemvakpictogram"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "Systeemvakpictogram weergeven in meldingsgebied"
+msgstr "Pictogram tonen in systeemvak"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "Volgende pauzetijd weergeven op systeemvakpictogram"
+msgstr "Volgende pauzetijd tonen op systeemvakpictogram"
 
 #: plugins/trayicon
 msgid "About"
