@@ -48,7 +48,7 @@ class SettingsDialog(object):
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
         self.plugin_map = {}
-        self.last_short_break_interval = config.get('break_interval')
+        self.last_short_break_interval = config.get('short_break_interval')
         self.initializing = True
         self.infobar_long_break_shown = False
 
@@ -83,8 +83,8 @@ class SettingsDialog(object):
         # Set the current values of input fields
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
-        self.spin_short_break_interval.set_value(config.get('break_interval'))
-        self.spin_long_break_interval.set_value(config.get('no_of_short_breaks_per_long_break') * config.get('break_interval'))
+        self.spin_short_break_interval.set_value(config.get('short_break_interval'))
+        self.spin_long_break_interval.set_value(config.get('long_break_interval'))
         self.spin_time_to_prepare.set_value(config.get('pre_break_warning_time'))
         self.spin_postpone_duration.set_value(config.get('postpone_duration'))
         self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
@@ -270,8 +270,8 @@ class SettingsDialog(object):
         """
         self.config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
         self.config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
-        self.config.set('break_interval', self.spin_short_break_interval.get_value_as_int())
-        self.config.set('no_of_short_breaks_per_long_break', math.floor(self.spin_long_break_interval.get_value_as_int() / self.spin_short_break_interval.get_value_as_int()))
+        self.config.set('short_break_interval', self.spin_short_break_interval.get_value_as_int())
+        self.config.set('long_break_interval', self.spin_long_break_interval.get_value_as_int())
         self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
         self.config.set('postpone_duration', self.spin_postpone_duration.get_value_as_int())
         self.config.set('shortcut_disable_time', self.spin_disable_keyboard_shortcut.get_value_as_int())

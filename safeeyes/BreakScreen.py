@@ -141,8 +141,7 @@ class BreakScreen(object):
         Show an empty break screen on all screens.
         """
         # Lock the keyboard
-        thread = threading.Thread(target=self.__lock_keyboard)
-        thread.start()
+        Utility.start_thread(self.__lock_keyboard)
 
         screen = Gtk.Window().get_screen()
         no_of_monitors = screen.get_n_monitors()

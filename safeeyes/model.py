@@ -22,7 +22,7 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 
 from distutils.version import LooseVersion
 from enum import Enum
-
+import logging
 from safeeyes import Utility
 
 
@@ -30,15 +30,18 @@ class Break(object):
     """
     An entity class which represents a break.
     """
-    def __init__(self, break_type, name, time, image, plugins):
+
+    def __init__(self, break_type, name, time, duration, image, plugins):
         self.type = break_type
         self.name = name
-        self.time = time
+        self.duration = duration
         self.image = image
         self.plugins = plugins
+        self.time = time
+        self.next = None
 
     def __str__(self):
-        return 'Break: {{name: "{}", type: {}, time: {}}}\n'.format(self.name, self.type, self.time)
+        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(self.name, self.type, self.duration)
 
     def __repr__(self):
         return str(self)
@@ -71,6 +74,116 @@ class BreakType(Enum):
     """
     SHORT_BREAK = 1
     LONG_BREAK = 2
+
+
+class BreakQueue(object):
+
+    def __init__(self, config, context):
+        self.context = context
+        self.__current_break = None
+        self.__first_break = None
+        self.__short_break_time = config.get('short_break_interval')
+        self.__long_break_time = config.get('long_break_interval')
+        self.__short_pointer = self.__build_queue(BreakType.SHORT_BREAK,
+                                                  config.get('short_breaks'),
+                                                  self.__short_break_time,
+                                                  config.get('short_break_duration'))
+        self.__long_pointer = self.__build_queue(BreakType.LONG_BREAK,
+                                                 config.get('long_breaks'),
+                                                 self.__long_break_time,
+                                                 config.get('long_break_duration'))
+        # if not self.is_empty():
+        #     last_type = context['session'].get('break_type')
+        #     last_break = context['session'].get('break_name')
+        #     if last_type is not None:
+        #         if last_type == 'short':
+        #             pointer = self.__short_pointer.next
+        #             while(last_break != self.__short_pointer.name and head != )
+        #     self.next_break_index = context['session'].get('next_break_index', 0) % self.size()
+        #     context['session']['next_break_index'] = self.next_break_index
+
+    def get_break(self):
+        if self.__current_break is None:
+            self.__current_break = self.next()
+        return self.__current_break
+
+    def is_long_break(self):
+        return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
+
+    def next(self):
+        if self.is_empty():
+            return None
+        break_obj = None
+        if self.__short_pointer is None:
+            # No short breaks
+            break_obj = self.__long_pointer
+            self.context['break_type'] = 'long'
+            # Update the pointer to next
+            self.__long_pointer = self.__long_pointer.next
+        elif self.__long_pointer is None:
+            # No long breaks
+            break_obj = self.__short_pointer
+            self.context['break_type'] = 'short'
+            # Update the pointer to next
+            self.__short_pointer = self.__short_pointer.next
+        elif self.__long_pointer.time <= self.__short_pointer.time:
+            # Time for a long break
+            break_obj = self.__long_pointer
+            self.context['break_type'] = 'long'
+            # Update the pointer to next
+            self.__long_pointer = self.__long_pointer.next
+        else:
+            # Time for a short break
+            break_obj = self.__short_pointer
+            self.context['break_type'] = 'short'
+            # Reduce the break time from the next long break
+            self.__long_pointer.time -= self.__short_pointer.time
+            # Update the pointer to next
+            self.__short_pointer = self.__short_pointer.next
+
+        if self.__first_break is None:
+            self.__first_break = break_obj
+        self.context['new_cycle'] = self.__first_break == break_obj
+        if self.__current_break is not None:
+            # Reset the time of long breaks
+            if self.__current_break.type == BreakType.LONG_BREAK:
+                self.__current_break.time = self.__long_break_time
+        self.__current_break = break_obj
+
+        return break_obj
+
+    def is_empty(self):
+        return self.__short_pointer is None and self.__long_pointer is None
+
+    def __build_queue(self, break_type, break_configs, break_time, break_duration):
+        """
+        Build a circular queue of breaks.
+        """
+        head = None
+        tail = None
+        for break_config in break_configs:
+            name = _(break_config['name'])
+            duration = break_config.get('duration', break_duration)
+            image = break_config.get('image')
+            plugins = break_config.get('plugins', None)
+
+            # Validate time value
+            if not isinstance(duration, int) or duration <= 0:
+                logging.error('Invalid break duration in: ' + str(break_config))
+                continue
+
+            break_obj = Break(break_type, name, break_time, duration, image, plugins)
+            if head is None:
+                head = break_obj
+                tail = break_obj
+            else:
+                tail.next = break_obj
+                tail = break_obj
+
+        # Connect the tail to the head
+        if tail is not None:
+            tail.next = head
+        return head
 
 
 class State(Enum):

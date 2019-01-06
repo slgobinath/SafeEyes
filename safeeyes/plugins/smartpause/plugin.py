@@ -95,7 +95,7 @@ def init(ctx, safeeyes_config, plugin_config):
     idle_time = plugin_config['idle_time']
     interpret_idle_as_break = plugin_config['interpret_idle_as_break']
     postpone_if_active = plugin_config['postpone_if_active']
-    break_interval = safeeyes_config.get('break_interval') * 60  # Convert to seconds
+    break_interval = safeeyes_config.get('short_break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
 
 
@@ -172,7 +172,7 @@ def update_next_break(break_obj, dateTime):
     global next_break_time
     global next_break_duration
     next_break_time = dateTime
-    next_break_duration = break_obj.time
+    next_break_duration = break_obj.duration
 
 
 def on_start_break(break_obj):

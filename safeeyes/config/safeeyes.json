@@ -1,11 +1,11 @@
 {
     "meta": {
-        "config_version": "6.0.0"
+        "config_version": "6.0.1"
     },
     "allow_postpone": false,
-    "break_interval": 15,
+    "short_break_interval": 15,
+    "long_break_interval": 75,
     "long_break_duration": 60,
-    "no_of_short_breaks_per_long_break": 5,
     "pre_break_warning_time": 10,
     "short_break_duration": 15,
     "persist_state": false,

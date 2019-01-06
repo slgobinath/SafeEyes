@@ -57,7 +57,6 @@ USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
 
-
 def get_resource_path(resource_name):
     """
     Return the user-defined resource if a system resource is overridden by the user.
@@ -80,7 +79,7 @@ def start_thread(target_function, **args):
     """
     Execute the function in a separate thread.
     """
-    thread = threading.Thread(target=target_function, kwargs=args)
+    thread = threading.Thread(target=target_function, name="WorkThread", kwargs=args)
     thread.start()
 
 
