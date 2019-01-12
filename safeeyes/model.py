@@ -92,15 +92,15 @@ class BreakQueue(object):
                                                  config.get('long_breaks'),
                                                  self.__long_break_time,
                                                  config.get('long_break_duration'))
-        # if not self.is_empty():
-        #     last_type = context['session'].get('break_type')
-        #     last_break = context['session'].get('break_name')
-        #     if last_type is not None:
-        #         if last_type == 'short':
-        #             pointer = self.__short_pointer.next
-        #             while(last_break != self.__short_pointer.name and head != )
-        #     self.next_break_index = context['session'].get('next_break_index', 0) % self.size()
-        #     context['session']['next_break_index'] = self.next_break_index
+        # Restore the last break from session
+        if not self.is_empty():
+            last_break = context['session'].get('break')
+            if last_break is not None:
+                current_break = self.get_break()
+                if last_break != current_break.name:
+                    pointer = self.next()
+                    while(pointer != current_break and pointer.name != last_break):
+                        pointer = self.next()
 
     def get_break(self):
         if self.__current_break is None:
@@ -148,7 +148,9 @@ class BreakQueue(object):
             # Reset the time of long breaks
             if self.__current_break.type == BreakType.LONG_BREAK:
                 self.__current_break.time = self.__long_break_time
+
         self.__current_break = break_obj
+        self.context['session']['break'] = self.__current_break.name
 
         return break_obj
 
@@ -202,6 +204,7 @@ class EventHook(object):
     """
     Hook to attach and detach listeners to system events.
     """
+
     def __init__(self):
         self.__handlers = []
 
@@ -227,6 +230,7 @@ class Config(object):
     """
     The configuration of Safe Eyes.
     """
+
     def __init__(self):
         # Read the config files
         self.__user_config = Utility.load_json(Utility.CONFIG_FILE_PATH)
