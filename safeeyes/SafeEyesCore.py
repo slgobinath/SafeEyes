@@ -28,6 +28,7 @@ import time
 from safeeyes import Utility
 from safeeyes.model import Break
 from safeeyes.model import BreakType
+from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook
 from safeeyes.model import State
 
@@ -41,16 +42,11 @@ class SafeEyesCore(object):
         """
         Create an instance of SafeEyesCore and initialize the variables.
         """
-        self.break_count = 0
-        self.break_interval = 0
-        self.breaks = None
-        self.long_break_duration = 0
-        self.next_break_index = context['session'].get('next_break_index', 0)
+        self.break_queue = None
         self.postpone_duration = 0
         self.default_postpone_duration = 0
         self.pre_break_warning_time = 0
         self.running = False
-        self.short_break_duration = 0
         self.scheduled_next_break_timestamp = -1
         self.scheduled_next_break_time = None
         self.paused_time = -1
@@ -72,35 +68,22 @@ class SafeEyesCore(object):
         self.context['skipped'] = False
         self.context['postponed'] = False
         self.context['state'] = State.WAITING
-        self.context['new_cycle'] = False
 
     def initialize(self, config):
         """
         Initialize the internal properties from configuration
         """
         logging.info("Initialize the core")
-        self.breaks = []
         self.pre_break_warning_time = config.get('pre_break_warning_time')
-        self.long_break_duration = config.get('long_break_duration')
-        self.short_break_duration = config.get('short_break_duration')
-        self.break_interval = config.get('break_interval') * 60  # Convert to seconds
+        self.break_queue = BreakQueue(config, self.context)
         self.default_postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
         self.postpone_duration = self.default_postpone_duration
-
-        self.__init_breaks(BreakType.SHORT_BREAK, config.get('short_breaks'), config.get('no_of_short_breaks_per_long_break'))
-        self.__init_breaks(BreakType.LONG_BREAK, config.get('long_breaks'), config.get('no_of_short_breaks_per_long_break'))
-        self.break_count = len(self.breaks)
-        if self.break_count == 0:
-            # No breaks found
-            return
-        self.next_break_index = (self.next_break_index) % self.break_count
-        self.context['session']['next_break_index'] = self.next_break_index
 
     def start(self, next_break_time=-1):
         """
         Start Safe Eyes is it is not running already.
         """
-        if not self.has_breaks():
+        if self.break_queue.is_empty():
             return
         with self.lock:
             if not self.running:
@@ -148,7 +131,7 @@ class SafeEyesCore(object):
         """
         Calling this method stops the scheduler and show the next break screen
         """
-        if not self.has_breaks():
+        if self.break_queue.is_empty():
             return
         if not self.context['state'] == State.WAITING:
             return
@@ -158,7 +141,7 @@ class SafeEyesCore(object):
         """
         Check whether Safe Eyes has breaks or not.
         """
-        return bool(self.breaks)
+        return not self.break_queue.is_empty()
 
     def __take_break(self):
         """
@@ -180,7 +163,6 @@ class SafeEyesCore(object):
             time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
             self.running = True
 
-        self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_start_break)
 
     def __scheduler_job(self):
@@ -191,7 +173,8 @@ class SafeEyesCore(object):
             return
 
         self.context['state'] = State.WAITING
-        time_to_wait = self.break_interval
+        # Convert to seconds
+        time_to_wait = self.break_queue.get_break().time * 60
         current_time = datetime.datetime.now()
         current_timestamp = current_time.timestamp()
 
@@ -201,14 +184,14 @@ class SafeEyesCore(object):
             time_to_wait = self.postpone_duration
             self.context['postponed'] = False
 
-        elif self.paused_time > -1 and self.__is_long_break():
+        elif self.paused_time > -1 and self.break_queue.is_long_break():
             # Safe Eyes was paused earlier and next break is long
             paused_duration = int(current_timestamp - self.paused_time)
             self.paused_time = -1
-            if paused_duration > self.breaks[self.next_break_index].time:
+            if paused_duration > self.break_queue.get_break().duration:
                 logging.info('Skip next long break due to the pause longer than break duration')
                 # Skip the next long break
-                self.__select_next_break()
+                self.break_queue.next()
 
         if current_timestamp < self.scheduled_next_break_timestamp:
             time_to_wait = round(self.scheduled_next_break_timestamp - current_timestamp)
@@ -216,11 +199,6 @@ class SafeEyesCore(object):
 
         self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
         Utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
-
-        if self.__is_long_break():
-            self.context['break_type'] = 'long'
-        else:
-            self.context['break_type'] = 'short'
 
         # Wait for the pre break warning period
         logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
@@ -230,22 +208,20 @@ class SafeEyesCore(object):
 
         if not self.running:
             return
-
-        self.context['new_cycle'] = self.next_break_index == 0
         Utility.execute_main_thread(self.__fire_pre_break)
 
     def __fire_on_update_next_break(self, next_break_time):
         """
         Pass the next break information to the registered listeners.
         """
-        self.on_update_next_break.fire(self.breaks[self.next_break_index], next_break_time)
+        self.on_update_next_break.fire(self.break_queue.get_break(), next_break_time)
 
     def __fire_pre_break(self):
         """
         Show the notification and start the break after the notification.
         """
         self.context['state'] = State.PRE_BREAK
-        if not self.on_pre_break.fire(self.breaks[self.next_break_index]):
+        if not self.on_pre_break.fire(self.break_queue.get_break()):
             # Plugins wanted to ignore this break
             self.__start_next_break()
             return
@@ -265,7 +241,7 @@ class SafeEyesCore(object):
 
     def __fire_start_break(self):
         # Show the break screen
-        if not self.on_start_break.fire(self.breaks[self.next_break_index]):
+        if not self.on_start_break.fire(self.break_queue.get_break()):
             # Plugins want to ignore this break
             self.__start_next_break()
             return
@@ -278,7 +254,7 @@ class SafeEyesCore(object):
             # Wait in user thread
             Utility.start_thread(self.__postpone_break)
         else:
-            self.start_break.fire(self.breaks[self.next_break_index])
+            self.start_break.fire(self.break_queue.get_break())
             Utility.start_thread(self.__start_break)
 
     def __start_break(self):
@@ -286,8 +262,8 @@ class SafeEyesCore(object):
         Start the break screen.
         """
         self.context['state'] = State.BREAK
-        break_obj = self.breaks[self.next_break_index]
-        countdown = break_obj.time
+        break_obj = self.break_queue.get_break()
+        countdown = break_obj.duration
         total_break_time = countdown
 
         while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
@@ -315,66 +291,10 @@ class SafeEyesCore(object):
         self.waiting_condition.wait(duration)
         self.waiting_condition.release()
 
-    def __select_next_break(self):
-        """
-        Select the next break.
-        """
-        self.next_break_index = (self.next_break_index + 1) % self.break_count
-        self.context['session']['next_break_index'] = self.next_break_index
-
-    def __is_long_break(self):
-        """
-        Check if the next break is long break.
-        """
-        return self.breaks[self.next_break_index].type is BreakType.LONG_BREAK
-
     def __start_next_break(self):
         if not self.context['postponed']:
-            self.__select_next_break()
+            self.break_queue.next()
 
         if self.running:
             # Schedule the break again
             Utility.start_thread(self.__scheduler_job)
-
-    def __init_breaks(self, break_type, break_configs, short_breaks_per_long_break=0):
-        """
-        Fill the self.breaks using short and local breaks.
-        """
-        # Defin the default break time
-        default_break_time = self.short_break_duration
-
-        # Duplicate short breaks to equally distribute the long breaks
-        if break_type is BreakType.LONG_BREAK:
-            if self.breaks:
-                default_break_time = self.long_break_duration
-                required_short_breaks = short_breaks_per_long_break * len(break_configs)
-                no_of_short_breaks = len(self.breaks)
-                short_break_index = 0
-                while no_of_short_breaks < required_short_breaks:
-                    self.breaks.append(self.breaks[short_break_index])
-                    short_break_index += 1
-                    no_of_short_breaks += 1
-            else:
-                # If there are no short breaks, extend the break interval according to long break interval
-                self.break_interval = int(self.break_interval * short_breaks_per_long_break)
-
-        iteration = 1
-        for break_config in break_configs:
-            name = _(break_config['name'])
-            break_time = break_config.get('duration', default_break_time)
-            image = break_config.get('image')
-            plugins = break_config.get('plugins', None)
-
-            # Validate time value
-            if not isinstance(break_time, int) or break_time <= 0:
-                logging.error('Invalid time in break: ' + str(break_config))
-                continue
-
-            break_obj = Break(break_type, name, break_time, image, plugins)
-            if break_type is BreakType.SHORT_BREAK:
-                self.breaks.append(break_obj)
-            else:
-                # Long break
-                index = iteration * (short_breaks_per_long_break + 1) - 1
-                self.breaks.insert(index, break_obj)
-                iteration += 1

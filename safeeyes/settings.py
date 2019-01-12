@@ -48,7 +48,7 @@ class SettingsDialog(object):
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
         self.plugin_map = {}
-        self.last_short_break_interval = config.get('break_interval')
+        self.last_short_break_interval = config.get('short_break_interval')
         self.initializing = True
         self.infobar_long_break_shown = False
 
@@ -83,8 +83,8 @@ class SettingsDialog(object):
         # Set the current values of input fields
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
-        self.spin_short_break_interval.set_value(config.get('break_interval'))
-        self.spin_long_break_interval.set_value(config.get('no_of_short_breaks_per_long_break') * config.get('break_interval'))
+        self.spin_short_break_interval.set_value(config.get('short_break_interval'))
+        self.spin_long_break_interval.set_value(config.get('long_break_interval'))
         self.spin_time_to_prepare.set_value(config.get('pre_break_warning_time'))
         self.spin_postpone_duration.set_value(config.get('postpone_duration'))
         self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
@@ -270,8 +270,8 @@ class SettingsDialog(object):
         """
         self.config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
         self.config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
-        self.config.set('break_interval', self.spin_short_break_interval.get_value_as_int())
-        self.config.set('no_of_short_breaks_per_long_break', math.floor(self.spin_long_break_interval.get_value_as_int() / self.spin_short_break_interval.get_value_as_int()))
+        self.config.set('short_break_interval', self.spin_short_break_interval.get_value_as_int())
+        self.config.set('long_break_interval', self.spin_long_break_interval.get_value_as_int())
         self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
         self.config.set('postpone_duration', self.spin_postpone_duration.get_value_as_int())
         self.config.set('shortcut_disable_time', self.spin_disable_keyboard_shortcut.get_value_as_int())
@@ -380,8 +380,10 @@ class BreakSettingsDialog(object):
         builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_break')
         self.txt_break = builder.get_object('txt_break')
+        self.switch_override_interval = builder.get_object('switch_override_interval')
         self.switch_override_duration = builder.get_object('switch_override_duration')
         self.switch_override_plugins = builder.get_object('switch_override_plugins')
+        self.spin_interval = builder.get_object('spin_interval')
         self.spin_duration = builder.get_object('spin_duration')
         self.img_break = builder.get_object('img_break')
         self.cmb_type = builder.get_object('cmb_type')
@@ -389,17 +391,27 @@ class BreakSettingsDialog(object):
         grid_plugins = builder.get_object('grid_plugins')
         list_types = builder.get_object('lst_break_types')
 
+        interval_overriden = break_config.get('interval', None) is not None
         duration_overriden = break_config.get('duration', None) is not None
         plugins_overriden = break_config.get('plugins', None) is not None
 
         # Set the values
         self.window.set_title(_('Break Settings'))
         self.txt_break.set_text(_(break_config['name']))
+        self.switch_override_interval.set_active(interval_overriden)
         self.switch_override_duration.set_active(duration_overriden)
         self.switch_override_plugins.set_active(plugins_overriden)
         self.cmb_type.set_active(0 if is_short else 1)
         list_types[0][0] = _(list_types[0][0])
         list_types[1][0] = _(list_types[1][0])
+
+        if interval_overriden:
+            self.spin_interval.set_value(break_config['interval'])
+        else:
+            if is_short:
+                self.spin_interval.set_value(parent_config.get('short_break_interval'))
+            else:
+                self.spin_interval.set_value(parent_config.get('long_break_interval'))
 
         if duration_overriden:
             self.spin_duration.set_value(break_config['duration'])
@@ -424,10 +436,18 @@ class BreakSettingsDialog(object):
                 row = 0
         # GtkSwitch state-set signal is available only from 3.14
         if Gtk.get_minor_version() >= 14:
+            self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
             self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
             self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
+            self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
             self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
             self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+
+    def on_switch_override_interval_activate(self, switch_button, state):
+        """
+        switch_override_interval state change event handler.
+        """
+        self.spin_interval.set_sensitive(state)
 
     def on_switch_override_duration_activate(self, switch_button, state):
         """
@@ -472,6 +492,10 @@ class BreakSettingsDialog(object):
         break_name = self.txt_break.get_text().strip()
         if break_name:
             self.break_config['name'] = break_name
+        if self.switch_override_interval.get_active():
+            self.break_config['interval'] = int(self.spin_interval.get_value())
+        else:
+            self.break_config.pop('interval', None)
         if self.switch_override_duration.get_active():
             self.break_config['duration'] = int(self.spin_duration.get_value())
         else:

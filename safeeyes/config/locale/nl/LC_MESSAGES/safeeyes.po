@@ -212,12 +212,20 @@ msgid "Duration"
 msgstr "Duur"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Overschrijven"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Tijd (in seconden)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Tijd (in minuten)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -277,7 +285,8 @@ msgstr "Niet storen"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Pauze overslaan als het actieve venster draait in volledig scherm-modus"
+msgstr ""
+"Pauze overslaan als het actieve venster draait in volledig scherm-modus"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"

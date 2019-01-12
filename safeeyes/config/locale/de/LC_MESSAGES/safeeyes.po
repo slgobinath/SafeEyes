@@ -209,12 +209,20 @@ msgid "Duration"
 msgstr "Dauer"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Überschreiben"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Zeit (in Sekunden)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Zeit (in Minuten)"
 
 # Settings dialog
 msgid "Break Settings"
