@@ -168,13 +168,14 @@ class BreakQueue(object):
             duration = break_config.get('duration', break_duration)
             image = break_config.get('image')
             plugins = break_config.get('plugins', None)
+            interval = break_config.get('interval', break_time)
 
             # Validate time value
             if not isinstance(duration, int) or duration <= 0:
                 logging.error('Invalid break duration in: ' + str(break_config))
                 continue
 
-            break_obj = Break(break_type, name, break_time, duration, image, plugins)
+            break_obj = Break(break_type, name, interval, duration, image, plugins)
             if head is None:
                 head = break_obj
                 tail = break_obj

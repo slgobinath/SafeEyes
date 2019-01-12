@@ -211,12 +211,20 @@ msgid "Duration"
 msgstr "Тривалість"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Перевизначити"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Час (сек)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Час (хв)"
 
 # Settings dialog
 msgid "Break Settings"

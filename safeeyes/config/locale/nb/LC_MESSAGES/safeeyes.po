@@ -8,8 +8,8 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2019-01-03 17:07+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
-"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
-"safe-eyes/translations/nb_NO/>\n"
+"Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/safe-"
+"eyes/translations/nb_NO/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -159,12 +159,10 @@ msgid "Delete"
 msgstr "Slett"
 
 # Settings dialog
-#, fuzzy
 msgid "Are you sure you want to delete this break?"
 msgstr "Er du sikker på at du ønsker å slette denne pausen?"
 
 # Settings dialog
-#, fuzzy
 msgid "You can't undo this action."
 msgstr "Dette kan ikke angres."
 
@@ -209,12 +207,20 @@ msgid "Duration"
 msgstr "Varighet"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Overstyr"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Tid (i sekunder)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Tid (i minutter)"
 
 # Settings dialog
 msgid "Break Settings"

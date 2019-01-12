@@ -210,12 +210,20 @@ msgid "Duration"
 msgstr "Süre"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Geçersizleştir"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Zaman (saniye)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Zaman (dakika)"
 
 # Settings dialog
 msgid "Break Settings"

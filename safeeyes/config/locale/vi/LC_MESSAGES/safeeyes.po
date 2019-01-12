@@ -210,12 +210,20 @@ msgid "Duration"
 msgstr "Thời gian"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Ghi đè"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Thời gian (bằng giây)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Thời gian (bằng phút)"
 
 # Settings dialog
 msgid "Break Settings"

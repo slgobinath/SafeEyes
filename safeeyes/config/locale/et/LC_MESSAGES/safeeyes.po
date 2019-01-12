@@ -209,12 +209,20 @@ msgid "Duration"
 msgstr "Kestvus"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Muuda vaikimisi seadeid"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Kestvus (sekundites)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Kestvus (minutites)"
 
 # Settings dialog
 msgid "Break Settings"

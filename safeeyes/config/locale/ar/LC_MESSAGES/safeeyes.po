@@ -208,12 +208,20 @@ msgid "Duration"
 msgstr "المدة"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "تجاوز"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "الزمن (ثوان)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr ""
 
 # Settings dialog
 msgid "Break Settings"

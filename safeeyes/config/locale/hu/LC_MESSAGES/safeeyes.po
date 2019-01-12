@@ -207,12 +207,20 @@ msgid "Duration"
 msgstr "Időtartam"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Felülbírál"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Idő (másodpercben)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Idő (percben)"
 
 # Settings dialog
 msgid "Break Settings"

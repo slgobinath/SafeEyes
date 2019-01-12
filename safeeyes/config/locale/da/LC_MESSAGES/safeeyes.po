@@ -54,7 +54,6 @@ msgid "Lean back at your seat and relax"
 msgstr "Læn tilbage i sædet og slap af"
 
 # Commandline arg description
-#, fuzzy
 msgid "show the about dialog"
 msgstr "Om programmet"
 
@@ -92,7 +91,6 @@ msgstr "Luk"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-#, fuzzy
 msgid "description"
 msgstr "beskrivelse"
 
@@ -129,7 +127,6 @@ msgid "Postpone duration (in minutes)"
 msgstr "Udskyd varighed (i minutter)"
 
 # Settings dialog
-#, fuzzy
 msgid "Strict break (No way to skip breaks)"
 msgstr "Fast pause (ingen måde at springe over)"
 
@@ -138,12 +135,10 @@ msgid "Allow postponing breaks"
 msgstr "Tillad at udskyde pauser"
 
 # Settings dialog
-#, fuzzy
 msgid "Persist the internal state"
 msgstr "Fortsætter i interntilstand"
 
 # Settings dialog
-#, fuzzy
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
 "Tiden for en lang pause skal være et multiplum af tiden for en kort pause"
@@ -213,12 +208,20 @@ msgid "Duration"
 msgstr "Varighed"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Tilsidesæt"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Tid (i sekunder)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Tid (i minutter)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -229,7 +232,6 @@ msgid "Plugin Settings"
 msgstr "Udvidelsesindstillinger"
 
 # Settings dialog
-#, fuzzy
 msgid "Plugin does not support %s desktop environment"
 msgstr "Udvidelse understøtter ikke %s skrivebordsmiljø"
 
@@ -242,7 +244,6 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Installer kommandolinjeværktøjet '%s'"
 
 # Settings dialog
-#, fuzzy
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Tilføj ressource %(ressource)s til %(config_resource)s bibliotek"
 
@@ -283,22 +284,18 @@ msgid "Skip break if the active window is in fullscreen mode"
 msgstr "Spring pausen over, hvis det aktive vindue er i fuldskærmstilstand"
 
 # plugin/donotdisturb
-#, fuzzy
 msgid "Do not interrupt these windows anytime"
 msgstr "Afbryd ikke disse vinduer nogensinde"
 
 # plugin/donotdisturb
-#, fuzzy
 msgid "Interrupt these windows regardless of their state"
 msgstr "Afbryde disse vinduer uanset deres tilstand"
 
 # plugin/donotdisturb
-#, fuzzy
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Skift de afbrydelige vinduer til normal funktionstilstand"
 
 # plugin/donotdisturb
-#, fuzzy
 msgid "Do not disturb while on battery"
 msgstr "Forstyr ikke ved batteridrift"
 
@@ -331,7 +328,6 @@ msgid "Screensaver"
 msgstr "Pauseskærm"
 
 # plugin/screensaver
-#, fuzzy
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr "Lås skærmen efter lange pauser ved at starte pauseskærmen"
 
@@ -344,7 +340,6 @@ msgid "Minimum seconds to skip without screensaver"
 msgstr "Mindste antal sekunder for at springe over uden pauseskærm"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Smart Pause"
 msgstr "Smart Pause"
 
@@ -353,32 +348,26 @@ msgid "Pause Safe Eyes if the system is idle"
 msgstr "Pause Safe Eyes, hvis systemet er inaktivt"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Mindste tomgangstid for at pause Safe Eyes (i sekunder)"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr "Fortolk inaktiv tid svarende til kommende pause varighed som en pause"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Postpone the next break until the system becomes idle"
 msgstr "Udskyd den næste pause, indtil systemet bliver ledig"
 
 #: plugins/trayicon
-#, fuzzy
 msgid "Tray Icon"
 msgstr "Bakkeikon"
 
 #: plugins/trayicon
-#, fuzzy
 msgid "Show a tray icon in the notification area"
 msgstr "Vise en ikon i meddelelsesområdet"
 
 #: plugins/trayicon
-#, fuzzy
 msgid "Show next break time in tray icon"
 msgstr "Vis næste pausetid i bakkeikon"
 

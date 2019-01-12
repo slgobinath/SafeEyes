@@ -212,12 +212,20 @@ msgid "Duration"
 msgstr "கால அளவு"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "இயல்புநிலை அமைப்புகளை மீறவும்"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "நேரம் (விநாடிகளில்)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "நேரம் (நிமிடங்களில்)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -268,7 +276,6 @@ msgid "Play audible alert before and after breaks"
 msgstr "இடைவேளைகளின் ஆரம்பத்திலும் முடிவிலும் ஒலிச் சமிக்ஞய்"
 
 # plugin/audiblealert
-#, fuzzy
 msgid "Play audible alert before breaks"
 msgstr "இடைவேளைகளின் தொடக்கத்தில் ஒலிச் சமிக்ஞய்"
 

@@ -212,12 +212,20 @@ msgid "Duration"
 msgstr "Trukmė"
 
 # Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
 msgid "Override"
 msgstr "Nustelbti"
 
 # Settings dialog
 msgid "Time (in seconds)"
 msgstr "Laikas (sekundėmis)"
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr "Laikas (minutėmis)"
 
 # Settings dialog
 msgid "Break Settings"
