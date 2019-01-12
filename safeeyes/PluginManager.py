@@ -190,7 +190,9 @@ class PluginManager(object):
         actions = []
         for plugin in self.__tray_actions_plugins:
             if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
-                actions.append(plugin['module'].get_tray_action(break_obj))
+                action = plugin['module'].get_tray_action(break_obj)
+                if action:
+                    actions.append(action)
 
         return actions
 
