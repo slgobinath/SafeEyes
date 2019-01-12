@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-03 17:07+0000\n"
+"PO-Revision-Date: 2019-01-12 21:13+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -210,7 +210,7 @@ msgstr "Trvání"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Doba po kterou čekat"
 
 # Settings dialog
 msgid "Override"
