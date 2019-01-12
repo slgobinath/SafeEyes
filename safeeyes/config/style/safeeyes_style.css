@@ -93,3 +93,8 @@
     opacity: 0.9;
     border-radius: 5px;
 }
+
+.toolbar {
+    background: black;
+    opacity: 0.9;
+}

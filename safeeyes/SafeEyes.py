@@ -239,7 +239,8 @@ class SafeEyes(object):
         """
         # Get the HTML widgets content from plugins
         widget = self.plugins_manager.get_break_screen_widgets(break_obj)
-        self.break_screen.show_message(break_obj, widget)
+        actions = self.plugins_manager.get_break_screen_tray_actions(break_obj)
+        self.break_screen.show_message(break_obj, widget, actions)
 
     def countdown(self, countdown, seconds):
         """

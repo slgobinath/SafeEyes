@@ -73,6 +73,7 @@ class PluginManager(object):
         self.__plugins_on_countdown = []
         self.__plugins_update_next_break = []
         self.__widget_plugins = []
+        self.__tray_actions_plugins = []
         self.last_break = None
         self.horizontal_line = '─' * HORIZONTAL_LINE_LENGTH
 
@@ -182,6 +183,17 @@ class PluginManager(object):
                     continue
         return widget.strip()
 
+    def get_break_screen_tray_actions(self, break_obj):
+        """
+        Return Tray Actions.
+        """
+        actions = []
+        for plugin in self.__tray_actions_plugins:
+            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
+                actions.append(plugin['module'].get_tray_action(break_obj))
+
+        return actions
+
     def __has_method(self, module, method_name, no_of_args=0):
         """
         Check whether the given function is defined in the module or not.
@@ -226,6 +238,7 @@ class PluginManager(object):
                 self.__remove_if_exists(self.__plugins_on_stop_break, plugin_obj)
                 self.__remove_if_exists(self.__plugins_on_countdown, plugin_obj)
                 self.__remove_if_exists(self.__widget_plugins, plugin_obj)
+                self.__remove_if_exists(self.__tray_actions_plugins, plugin_obj)
                 del self.__plugins[plugin['id']]
             return
 
@@ -277,7 +290,8 @@ class PluginManager(object):
                 # Load the plugin module
                 module = importlib.import_module((plugin['id'] + '.plugin'))
                 logging.info("Successfully loaded %s", str(module))
-                plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get('settings', {}), 'enabled': plugin_enabled, 'break_override_allowed': plugin_config.get('break_override_allowed', False)}
+                plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get(
+                    'settings', {}), 'enabled': plugin_enabled, 'break_override_allowed': plugin_config.get('break_override_allowed', False)}
                 self.__plugins[plugin['id']] = plugin_obj
                 if self.__has_method(module, 'enable'):
                     module.enable()
@@ -302,3 +316,5 @@ class PluginManager(object):
                     self.__plugins_on_countdown.append(plugin_obj)
                 if self.__has_method(module, 'get_widget_title', 1) and self.__has_method(module, 'get_widget_content', 1):
                     self.__widget_plugins.append(plugin_obj)
+                if self.__has_method(module, 'get_tray_action', 1):
+                    self.__tray_actions_plugins.append(plugin_obj)
