@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-12 21:13+0000\n"
+"PO-Revision-Date: 2019-01-14 17:20+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/nl/>\n"
@@ -346,7 +346,7 @@ msgstr "Minimaal aantal seconden om over te slaan zonder schermbeveiliging"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Vergrendelscherm"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -444,12 +444,12 @@ msgstr "Afsluiten"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Mediabediening"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Mediaspelers pauzeren via het pauzescherm"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Media pauzeren"
