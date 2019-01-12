@@ -343,6 +343,10 @@ msgstr "Comando para proteção de tela personalizada"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Segundos mínimos para pular sem a proteção de tela"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Pausa Inteligente"

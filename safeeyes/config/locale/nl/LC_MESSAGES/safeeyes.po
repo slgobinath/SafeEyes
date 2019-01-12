@@ -344,6 +344,10 @@ msgstr "Aangepaste schermbeveiligingsopdracht"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Minimaal aantal seconden om over te slaan zonder schermbeveiliging"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Slimme pauze"

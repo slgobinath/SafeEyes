@@ -340,6 +340,10 @@ msgstr "Kohandatud ekraanisäästja käsk"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Kui mitme sekundi jooksul saab ekraanisäästja käivitamist vahele jätta"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Tark paus"

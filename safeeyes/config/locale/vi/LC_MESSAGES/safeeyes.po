@@ -342,6 +342,10 @@ msgstr "Lệnh màn hình chờ tùy chỉnh"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Số giây thối thiểu để bỏ qua mà không có màn hình chờ"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Tạm dừng thông minh"

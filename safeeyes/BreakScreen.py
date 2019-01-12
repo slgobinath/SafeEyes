@@ -136,13 +136,13 @@ class BreakScreen(object):
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
 
-    def __toolbar_action(self, button, action):
+    def __tray_action(self, button, tray_action):
         """
-        Toolbar action handler.
+        Tray action handler.
         Hides the toolbar button and call the action provided by the plugin.
         """
         button.hide()
-        action()
+        tray_action.action()
 
     def __show_break_screen(self, message, image_path, widget, tray_actions):
         """
@@ -179,7 +179,7 @@ class BreakScreen(object):
 
             for tray_action in tray_actions:
                 toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.icon)
-                toolbar_button.connect("clicked", lambda button: self.__toolbar_action(button, tray_action.action))
+                toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
                 toolbar_button.set_tooltip_text(_(tray_action.tooltip))
                 toolbar.add(toolbar_button)
                 toolbar_button.show()

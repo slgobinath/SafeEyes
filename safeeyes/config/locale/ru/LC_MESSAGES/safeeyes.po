@@ -339,6 +339,10 @@ msgstr "Настроить команду запуска хранителя эк
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Минимальное время (в секундах) для пропуска активации хранителя экрана"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Умная пауза"

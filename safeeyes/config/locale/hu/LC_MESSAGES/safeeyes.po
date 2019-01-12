@@ -339,6 +339,10 @@ msgstr "Egyedi képernyővédő indító parancs"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Minimum időtartam (mp) a képernyővédő előtt"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Okos Felfüggesztés"

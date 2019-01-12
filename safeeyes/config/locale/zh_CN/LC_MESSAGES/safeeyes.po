@@ -340,6 +340,10 @@ msgstr "自定义屏幕保护程序命令"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "在没有屏保的情况下允许跳过的最短时间（秒）"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "智能暂停"

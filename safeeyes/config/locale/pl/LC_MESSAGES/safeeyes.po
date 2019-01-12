@@ -341,6 +341,10 @@ msgstr "Niestandardowa komenda wygaszacza ekranu"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Minimalna ilość sekund do pominięcia wygaszacza ekranu"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Inteligentna Pauza"

@@ -340,6 +340,10 @@ msgstr "Vlastný šetrič obrazovky"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Čas v sekundách na preskočenie šetriča"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Chytrá pauza"

@@ -341,6 +341,10 @@ msgstr "Vlastní spořič obrazovky (příkaz)"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Minimum sekund do zapnutí spořiče"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Chytré pozastavení"

@@ -2,7 +2,7 @@
     "meta": {
         "name": "Screensaver",
         "description": "Lock the screen after long breaks by starting screensaver",
-        "version": "0.0.1"
+        "version": "0.0.2"
     },
     "dependencies": {
         "python_modules": [],

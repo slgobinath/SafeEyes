@@ -104,7 +104,7 @@
         {
             "id": "screensaver",
             "enabled": true,
-            "version": "0.0.1",
+            "version": "0.0.2",
             "settings": {
                 "command": "",
                 "min_seconds": 3

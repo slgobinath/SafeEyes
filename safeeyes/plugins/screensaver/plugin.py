@@ -20,10 +20,14 @@
 Screensaver plugin locks the desktop using native screensaver application, after long breaks.
 """
 
+import gi
 import logging
 import os
 
 from safeeyes import Utility
+from safeeyes.model import TrayAction
+gi.require_version('Gtk', '3.0')
+from gi.repository import Gtk
 
 context = None
 lock_screen = False
@@ -111,3 +115,7 @@ def on_stop_break():
     """
     if lock_screen and seconds_passed >= min_seconds:
         Utility.execute_command(lock_screen_command)
+
+
+def get_tray_action(break_obj):
+    return TrayAction("Lock screen", Gtk.STOCK_DIALOG_AUTHENTICATION, lambda: Utility.execute_command(lock_screen_command))

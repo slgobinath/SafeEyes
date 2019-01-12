@@ -339,6 +339,10 @@ msgstr "Brugerdefineret pauseskærmkommando"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Mindste antal sekunder for at springe over uden pauseskærm"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Smart Pause"

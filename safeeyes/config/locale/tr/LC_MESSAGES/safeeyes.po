@@ -341,6 +341,10 @@ msgstr "Özel ekran koruyucu komutu"
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Ekran koruyucusuz geçecek minimum saniye"
 
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
 # plugin/smartpause
 msgid "Smart Pause"
 msgstr "Akıllı Duraklama"
