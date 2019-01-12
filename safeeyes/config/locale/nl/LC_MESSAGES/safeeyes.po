@@ -437,3 +437,15 @@ msgstr "Tot herstart"
 #: plugins/trayicon
 msgid "Quit"
 msgstr "Afsluiten"
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr ""

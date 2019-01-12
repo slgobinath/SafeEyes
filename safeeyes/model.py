@@ -295,3 +295,14 @@ class Config(object):
         Set the value.
         """
         self.__user_config[key] = value
+
+
+class TrayAction(object):
+    """
+    Data object wrapping tooltip, icon and action.
+    """
+
+    def __init__(self, tooltip, icon, action):
+        self.tooltip = tooltip
+        self.icon = icon
+        self.action = action

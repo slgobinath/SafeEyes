@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "name": "Media Control",
+        "description": "Pause media players from the break screen",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": ["dbus"],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [],
+    "break_override_allowed": true
+}

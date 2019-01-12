@@ -437,3 +437,15 @@ msgstr "До перезапуска"
 #: plugins/trayicon
 msgid "Quit"
 msgstr "Выход"
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr ""

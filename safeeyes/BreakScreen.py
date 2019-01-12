@@ -117,14 +117,14 @@ class BreakScreen(object):
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
         GLib.idle_add(lambda: self.__update_count_down(timeformat))
 
-    def show_message(self, break_obj, widget):
+    def show_message(self, break_obj, widget, tray_actions=[]):
         """
         Show the break screen with the given message on all displays.
         """
         message = break_obj.name
         image_path = break_obj.image
         self.enable_shortcut = not self.strict_break and self.shortcut_disable_time <= 0
-        GLib.idle_add(lambda: self.__show_break_screen(message, image_path, widget))
+        GLib.idle_add(lambda: self.__show_break_screen(message, image_path, widget, tray_actions))
 
     def close(self):
         """
@@ -136,7 +136,15 @@ class BreakScreen(object):
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
 
-    def __show_break_screen(self, message, image_path, widget):
+    def __toolbar_action(self, button, action):
+        """
+        Toolbar action handler.
+        Hides the toolbar button and call the action provided by the plugin.
+        """
+        button.hide()
+        action()
+
+    def __show_break_screen(self, message, image_path, widget, tray_actions):
         """
         Show an empty break screen on all screens.
         """
@@ -162,6 +170,19 @@ class BreakScreen(object):
             lbl_widget = builder.get_object("lbl_widget")
             img_break = builder.get_object("img_break")
             box_buttons = builder.get_object("box_buttons")
+            toolbar = builder.get_object("toolbar")
+
+            separator = Gtk.SeparatorToolItem()
+            toolbar.add(separator)
+            toolbar.child_set(separator, expand=True)
+            separator.show()
+
+            for tray_action in tray_actions:
+                toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.icon)
+                toolbar_button.connect("clicked", lambda button: self.__toolbar_action(button, tray_action.action))
+                toolbar_button.set_tooltip_text(_(tray_action.tooltip))
+                toolbar.add(toolbar_button)
+                toolbar_button.show()
 
             # Add the buttons
             if not self.strict_break:

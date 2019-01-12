@@ -436,3 +436,15 @@ msgstr "மீள ஆரம்பிக்கும் வரை"
 #: plugins/trayicon
 msgid "Quit"
 msgstr "நிறுத்து"
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr "பல்லூடக கட்டுப்பாடு"
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr "இடைவேளை திரையில் இருந்து பல்லூடக செயலிகளை இடைநிறுத்து"
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr "பல்லூடகத்தை இடைநிறுத்து"

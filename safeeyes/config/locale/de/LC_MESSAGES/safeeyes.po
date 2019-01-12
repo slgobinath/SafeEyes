@@ -434,3 +434,15 @@ msgstr "Bis zum Neustart"
 #: plugins/trayicon
 msgid "Quit"
 msgstr "Schließen"
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr ""

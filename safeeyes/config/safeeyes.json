@@ -114,6 +114,11 @@
             "id": "healthstats",
             "enabled": false,
             "version": "0.0.1"
+        },
+        {
+            "id": "mediacontrol",
+            "enabled": true,
+            "version": "0.0.1"
         }
     ]
 }

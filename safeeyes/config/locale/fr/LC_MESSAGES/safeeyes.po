@@ -442,3 +442,15 @@ msgstr "Jusqu’au redémarrage"
 #: plugins/trayicon
 msgid "Quit"
 msgstr "Quitter"
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr ""
