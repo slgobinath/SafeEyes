@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-12 21:13+0000\n"
+"PO-Revision-Date: 2019-01-14 17:20+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -343,7 +343,7 @@ msgstr "Minimum sekund do zapnutí spořiče"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "zásuvný modul / šetřič obrazovky"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -446,12 +446,12 @@ msgstr "Ukončit"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "zásuvný modul / ovládání médií"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pozastavit přehrávače médií z obrazovky přestávky"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pozastavit média"
