@@ -178,9 +178,13 @@ class BreakScreen(object):
             separator.show()
 
             for tray_action in tray_actions:
-                toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.icon)
+                toolbar_button = None
+                if isinstance(tray_action.icon, str):
+                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.icon)
+                else:
+                    toolbar_button = Gtk.ToolButton.new(tray_action.icon, tray_action.name)
                 toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
-                toolbar_button.set_tooltip_text(_(tray_action.tooltip))
+                toolbar_button.set_tooltip_text(_(tray_action.name))
                 toolbar.add(toolbar_button)
                 toolbar_button.show()
 

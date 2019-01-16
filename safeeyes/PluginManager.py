@@ -292,8 +292,10 @@ class PluginManager(object):
                 # Load the plugin module
                 module = importlib.import_module((plugin['id'] + '.plugin'))
                 logging.info("Successfully loaded %s", str(module))
-                plugin_obj = {'id': plugin['id'], 'module': module, 'config': plugin.get(
-                    'settings', {}), 'enabled': plugin_enabled, 'break_override_allowed': plugin_config.get('break_override_allowed', False)}
+                plugin_obj = {'id': plugin['id'], 'module': module, 'config': dict(plugin.get(
+                    'settings', {})), 'enabled': plugin_enabled, 'break_override_allowed': plugin_config.get('break_override_allowed', False)}
+                # Inject the plugin directory into the config
+                plugin_obj['config']['path'] = os.path.join(plugin_dir, plugin['id'])
                 self.__plugins[plugin['id']] = plugin_obj
                 if self.__has_method(module, 'enable'):
                     module.enable()

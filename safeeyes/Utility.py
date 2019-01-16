@@ -37,6 +37,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GLib
+from gi.repository import GdkPixbuf
 
 gi.require_version('Gdk', '3.0')
 
@@ -56,6 +57,7 @@ SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
+
 
 def get_resource_path(resource_name):
     """
@@ -496,3 +498,15 @@ def create_gtk_builder(glade_file):
             if title is not None:
                 obj.set_title(_(title))
     return builder
+
+
+def load_and_scale_image(path, width, height):
+    if not os.path.isfile(path):
+        return None
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+        filename=path,
+        width=width,
+        height=height,
+        preserve_aspect_ratio=True)
+    image = Gtk.Image.new_from_pixbuf(pixbuf)
+    return image

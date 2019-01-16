@@ -299,10 +299,19 @@ class Config(object):
 
 class TrayAction(object):
     """
-    Data object wrapping tooltip, icon and action.
+    Data object wrapping name, icon and action.
     """
 
-    def __init__(self, tooltip, icon, action):
-        self.tooltip = tooltip
+    def __init__(self, name, icon, action):
+        self.name = name
         self.icon = icon
         self.action = action
+
+    @classmethod
+    def build(cls, name, icon_path, icon_id, action):
+        image = Utility.load_and_scale_image(icon_path, 12, 12)
+        if image is None:
+            return TrayAction(name, icon_id, action)
+        else:
+            image.show()
+            return TrayAction(name, image, action)

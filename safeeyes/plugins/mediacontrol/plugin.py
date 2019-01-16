@@ -29,6 +29,8 @@ from safeeyes.model import TrayAction
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
+tray_icon_path = None
+
 
 def __active_players():
     """
@@ -60,7 +62,8 @@ def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the screensaver plugin.
     """
-    pass
+    global tray_icon_path
+    tray_icon_path = os.path.join(plugin_config['path'], "resource/pause.png")
 
 
 def get_tray_action(break_obj):
@@ -69,4 +72,7 @@ def get_tray_action(break_obj):
     """
     players = __active_players()
     if players:
-        return TrayAction("Pause media", Gtk.STOCK_MEDIA_PAUSE, lambda: __pause_players(players))
+        return TrayAction.build("Pause media",
+                                tray_icon_path,
+                                Gtk.STOCK_MEDIA_PAUSE,
+                                lambda: __pause_players(players))
