@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-01 15:24+0000\n"
+"PO-Revision-Date: 2019-01-17 10:21+0000\n"
 "Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -157,15 +157,15 @@ msgstr "Lange pauser"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Slet"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Bekræft sletning af pausen?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Handling kan ikke fortrydes."
 
 # Settings dialog
 msgid "Break"
@@ -209,7 +209,7 @@ msgstr "Varighed"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Ventetid"
 
 # Settings dialog
 msgid "Override"
@@ -340,8 +340,9 @@ msgid "Minimum seconds to skip without screensaver"
 msgstr "Mindste antal sekunder for at springe over uden pauseskærm"
 
 # plugin/screensaver
+#, fuzzy
 msgid "Lock screen"
-msgstr ""
+msgstr "Lås skærm"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -439,12 +440,12 @@ msgstr "Afslut"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Mediekontrol"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pause multimedieafspillere fra pause skærm"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pause medier"
