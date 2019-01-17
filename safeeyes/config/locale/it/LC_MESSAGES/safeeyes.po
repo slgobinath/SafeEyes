@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-11-03 13:24+0000\n"
-"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
+"PO-Revision-Date: 2019-01-19 13:21+0000\n"
+"Last-Translator: Alessandro Badii <ale.badii@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3-dev\n"
+"X-Generator: Weblate 3.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Serra gli occhi"
+msgstr "Strizza gli occhi"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Muovi a piccoli intervalli gli occhi ruotandoli verso ogni lato"
+msgstr "Muovi alcune volte gli occhi in ogni direzione"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
@@ -47,23 +47,23 @@ msgstr "Bevi dell'acqua"
 
 # Long break
 msgid "Walk for a while"
-msgstr "Cammina per un pò"
+msgstr "Cammina per un po'"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Torna a sederti e rilassati"
+msgstr "Appoggiati alla sedia e rilassati"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "Mostra la finestra Informazioni"
+msgstr "mostra la finestra Informazioni"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "interrompe l'istanza corrente di Safe Eyes"
+msgstr "disabilita l'istanza corrente di Safe Eyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "abilità l'istanza corrente di Safe Eyes"
+msgstr "abilita l'istanza corrente di Safe Eyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
@@ -87,7 +87,7 @@ msgstr "Safe Eyes non è avviato"
 
 # About dialog
 msgid "Close"
-msgstr "Esci"
+msgstr "Chiudi"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -118,7 +118,7 @@ msgstr "Intervallo fra due pause (in minuti)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Tempo prima di una pausa (in secondi)"
+msgstr "Tempo di preparazione per una pausa (in secondi)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -127,7 +127,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Posponi durata (in minuti)"
+msgstr "Durata del rinvio (in minuti)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -161,15 +161,15 @@ msgstr "Pause lunghe"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Cancella"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Sei sicuro di voler cancellare questo break?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Questa azione non è reversibile."
 
 # Settings dialog
 msgid "Break"
@@ -213,7 +213,7 @@ msgstr "Durata"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Tempo di attesa"
 
 # Settings dialog
 msgid "Override"
@@ -346,7 +346,7 @@ msgstr "Tempo minimo per il salto senza salvaschermo (in secondi)"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Lock screen"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -446,12 +446,12 @@ msgstr "Esci"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Media Control"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Metti in pausa i media dallo schermo di break"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Metti in pausa i media"
