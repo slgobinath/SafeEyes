@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-12 21:13+0000\n"
+"PO-Revision-Date: 2019-01-19 13:21+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -342,7 +342,7 @@ msgstr "Kui mitme sekundi jooksul saab ekraanisäästja käivitamist vahele jät
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Lukusta kuva"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -440,12 +440,12 @@ msgstr "Välju"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Meediajuhtimine"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Peata meediapleiereid pausikuvalt"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Peata meedia"
