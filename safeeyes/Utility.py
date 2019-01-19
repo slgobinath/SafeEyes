@@ -343,6 +343,14 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
 
+def replace_style_sheet():
+    """
+    Replace the user style sheet by system style sheet.
+    """
+    delete(STYLE_SHEET_PATH)
+    shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
+
+
 def intialize_logging(debug):
     """
     Initialize the logging framework using the Safe Eyes specific configurations.
