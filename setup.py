@@ -79,7 +79,7 @@ setuptools.setup(
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.0.6.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.0.7.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': __package_data()},
     data_files=__data_files,
