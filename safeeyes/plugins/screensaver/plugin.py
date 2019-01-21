@@ -31,6 +31,7 @@ from gi.repository import Gtk
 
 context = None
 lock_screen = False
+user_locked_screen = False
 lock_screen_command = None
 min_seconds = 0
 seconds_passed = 0
@@ -75,6 +76,11 @@ def __lock_screen_command():
     return None
 
 
+def __lock_screen():
+    global user_locked_screen
+    user_locked_screen = True
+
+
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the screensaver plugin.
@@ -99,6 +105,8 @@ def on_start_break(break_obj):
     """
     global lock_screen
     global seconds_passed
+    global user_locked_screen
+    user_locked_screen = False
     seconds_passed = 0
     if lock_screen_command:
         lock_screen = break_obj.is_long_break()
@@ -116,7 +124,7 @@ def on_stop_break():
     """
     Lock the screen after a long break if the user has not skipped within min_seconds.
     """
-    if lock_screen and seconds_passed >= min_seconds:
+    if user_locked_screen or (lock_screen and seconds_passed >= min_seconds):
         Utility.execute_command(lock_screen_command)
 
 
@@ -124,4 +132,4 @@ def get_tray_action(break_obj):
     return TrayAction.build("Lock screen",
                             tray_icon_path,
                             Gtk.STOCK_DIALOG_AUTHENTICATION,
-                            lambda: Utility.execute_command(lock_screen_command))
+                            __lock_screen)
