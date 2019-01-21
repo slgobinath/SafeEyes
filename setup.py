@@ -5,6 +5,7 @@ import setuptools
 
 requires = [
     'babel',
+    'dbus-python',
     'psutil',
     'PyGObject',
     'python-xlib'
