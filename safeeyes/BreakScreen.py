@@ -172,11 +172,6 @@ class BreakScreen(object):
             box_buttons = builder.get_object("box_buttons")
             toolbar = builder.get_object("toolbar")
 
-            separator = Gtk.SeparatorToolItem()
-            separator.set_expand(True)
-            separator.show()
-            toolbar.add(separator)
-
             for tray_action in tray_actions:
                 toolbar_button = None
                 if isinstance(tray_action.icon, str):
