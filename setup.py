@@ -72,7 +72,7 @@ __data_files = list(_data_files('share'))
 
 setuptools.setup(
     name="safeeyes",
-    version="2.0.6",
+    version="2.0.7",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -92,5 +92,5 @@ setuptools.setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: X11 Applications :: GTK",
         "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in '3 3.4 3.5 3.6'.split()]
+        "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in '3 3.4 3.5 3.6 3.7'.split()]
 )

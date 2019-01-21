@@ -1,4 +1,8 @@
-safeeyes (2.0.6-3) xenial; urgency=high
+safeeyes (2.0.7-1) xenial; urgency=high
+  * Add tray action buttons to the break screen
+
+  * Allow long short breaks for promodo mode
+
   * Audible alert break before and DND while on battery
 
   * Fix no long breaks
