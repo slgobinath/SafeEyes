@@ -195,24 +195,15 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkViewport">
-                <property name="name">top_viewport</property>
+              <object class="GtkToolbar" id="toolbar">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkToolbar" id="toolbar">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="toolbar_style">icons</property>
-                    <property name="icon_size">2</property>
-                    <style>
-                      <class name="toolbar"/>
-                    </style>
-                  </object>
-                </child>
+                <property name="halign">end</property>
+                <property name="valign">start</property>
+                <property name="toolbar_style">icons</property>
+                <property name="icon_size">2</property>
                 <style>
-                  <class name="top_viewport"/>
+                  <class name="toolbar"/>
                 </style>
               </object>
               <packing>

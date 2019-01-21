@@ -95,8 +95,7 @@
     border-radius: 5px;
 }
 
-.toolbar,
-.top_viewport {
+.toolbar {
     background: black;
     opacity: 0.9;
     border-color: transparent;
