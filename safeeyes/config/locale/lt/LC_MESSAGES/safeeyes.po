@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-03 17:07+0000\n"
+"PO-Revision-Date: 2019-01-22 14:06+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.4\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -213,7 +213,7 @@ msgstr "Trukmė"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Kiek laiko laukti"
 
 # Settings dialog
 msgid "Override"
@@ -345,7 +345,7 @@ msgstr "Mažiausiai sekundžių, kad būtų praleista be ekrano užsklandos"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Užrakinti ekraną"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -449,12 +449,12 @@ msgstr "Išeiti"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Medijos valdymas"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pristabdyti medijos leistuves iš pertraukos ekrano"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pristabdyti mediją"
