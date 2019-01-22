@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-14 17:20+0000\n"
+"PO-Revision-Date: 2019-01-23 15:05+0000\n"
 "Last-Translator: LocLab fr <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.4\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -348,7 +348,7 @@ msgstr "Durée minimale en secondes pour ignorer sans économiseur d’écran"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Verrouiller l’écran"
 
 # plugin/smartpause
 msgid "Smart Pause"
