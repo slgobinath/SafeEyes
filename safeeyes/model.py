@@ -304,16 +304,33 @@ class TrayAction(object):
     Data object wrapping name, icon and action.
     """
 
-    def __init__(self, name, icon, action):
+    def __init__(self, name, icon, action, system_icon):
         self.name = name
-        self.icon = icon
+        self.__icon = icon
         self.action = action
+        self.system_icon = system_icon
+        self.__toolbar_buttons = []
+
+    def get_icon(self):
+        if self.system_icon:
+            return self.__icon
+        else:
+            image = Utility.load_and_scale_image(self.__icon, 16, 16)
+            image.show()
+            return image
+
+    def add_toolbar_button(self, button):
+        self.__toolbar_buttons.append(button)
+
+    def reset(self):
+        for button in self.__toolbar_buttons:
+            button.hide()
+        self.__toolbar_buttons.clear()
 
     @classmethod
     def build(cls, name, icon_path, icon_id, action):
         image = Utility.load_and_scale_image(icon_path, 12, 12)
         if image is None:
-            return TrayAction(name, icon_id, action)
+            return TrayAction(name, icon_id, action, True)
         else:
-            image.show()
-            return TrayAction(name, image, action)
+            return TrayAction(name, icon_path, action, False)

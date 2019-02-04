@@ -139,9 +139,9 @@ class BreakScreen(object):
     def __tray_action(self, button, tray_action):
         """
         Tray action handler.
-        Hides the toolbar button and call the action provided by the plugin.
+        Hides all toolbar buttons for this action and call the action provided by the plugin.
         """
-        button.hide()
+        tray_action.reset()
         tray_action.action()
 
     def __show_break_screen(self, message, image_path, widget, tray_actions):
@@ -174,10 +174,11 @@ class BreakScreen(object):
 
             for tray_action in tray_actions:
                 toolbar_button = None
-                if isinstance(tray_action.icon, str):
-                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.icon)
+                if tray_action.system_icon:
+                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.get_icon())
                 else:
-                    toolbar_button = Gtk.ToolButton.new(tray_action.icon, tray_action.name)
+                    toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
+                tray_action.add_toolbar_button(toolbar_button)
                 toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
                 toolbar_button.set_tooltip_text(_(tray_action.name))
                 toolbar.add(toolbar_button)
@@ -216,7 +217,6 @@ class BreakScreen(object):
                 window.set_opacity(0.9)
 
             # In Unity, move the window before present
-            # if self.context['desktop'] == 'unity':
             window.move(x, y)
             window.stick()
             window.set_keep_above(True)
@@ -224,6 +224,7 @@ class BreakScreen(object):
             # In other desktop environments, move the window after present
             # if self.context['desktop'] != 'unity':
             window.move(x, y)
+            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
             logging.info("Moved break screen to Display[%d, %d]", x, y)
             window.fullscreen()
 
