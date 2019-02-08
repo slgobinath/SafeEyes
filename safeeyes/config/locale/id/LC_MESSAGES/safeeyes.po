@@ -6,128 +6,129 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2019-02-10 11:10+0000\n"
+"Last-Translator: Imam Ali Mustofa <d.darkterminal@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Tutup rapat matamu"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Mata anda perlu melihat sekitar untuk sejenak"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Putar mata Anda searah jarum jam"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Putar mata Anda ke arah berlawanan arah jarum jam"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Kedipkan mata anda"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Fokus pada titik yang berada di kejauhan"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Minumlah sedikit air minenal"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Berjalanlah sejenak, hindari duduk terlalu lama"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Bersandarlah di tempat duduk anda dan istirahatlah sejenak"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "Tampilkan dialog about"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "nonaktifkan instance safeeyes yang sedang berjalan"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "aktifkan instance safeeyes yang sedang berjalan"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "keluar dari instance safeeyes yang sedang berjalan dan keluar"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "tampilkan dialog pengaturan"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "mulai amankan dalam mode debug"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "cetak status menjalankan instance safeeyes dan keluar"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes tidak berjalan"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "Deskripsi"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Lisensi"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Lewati"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Menunda"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Istirahat durasi (dalam detik)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Interval antara dua istirahat (dalam menit)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Saatnya bersiap untuk istirahat (dalam detik)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Pintasan keyboard dinonaktifkan periode (dalam detik)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Menunda durasi (dalam beberapa menit)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Istirahat ketat (Tidak ada cara untuk melewati istirahat)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
