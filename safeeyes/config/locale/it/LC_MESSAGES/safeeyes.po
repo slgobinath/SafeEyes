@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2019-02-12 11:27+0000\n"
-"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
+"Last-Translator: Alessandro Badii <ale.badii@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -358,7 +358,7 @@ msgstr "Tempo minimo per il salto senza salvaschermo (in secondi)"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr "Lock screen"
+msgstr "Schermo bloccato"
 
 # plugin/smartpause
 msgid "Smart Pause"
