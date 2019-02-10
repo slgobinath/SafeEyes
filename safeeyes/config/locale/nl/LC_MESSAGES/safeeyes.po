@@ -148,6 +148,14 @@ msgstr ""
 "korte"
 
 # Settings dialog
+msgid "Reset"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr ""
+
+# Settings dialog
 msgid "Options"
 msgstr "Opties"
 

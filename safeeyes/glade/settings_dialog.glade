@@ -20,7 +20,7 @@
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <interface>
-  <requires lib="gtk+" version="3.10"/>
+  <requires lib="gtk+" version="3.12"/>
   <object class="GtkAdjustment" id="adjust_disable_keyboard_shortcut_duration">
     <property name="upper">15</property>
     <property name="step_increment">1</property>
@@ -66,28 +66,116 @@
     <property name="can_focus">False</property>
     <property name="stock">gtk-add</property>
   </object>
-  <object class="GtkWindow" id="window_settings">
+  <object class="GtkPopover" id="popover">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Safe Eyes</property>
+    <child>
+      <object class="GtkBox">
+        <property name="width_request">128</property>
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">Reset</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="on_reset_menu_clicked" swapped="no"/>
+            <style>
+              <class name="btn_menu"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkApplicationWindow" id="window_settings">
+    <property name="can_focus">False</property>
     <property name="window_position">center</property>
     <property name="default_width">450</property>
     <property name="default_height">600</property>
     <property name="icon_name">safeeyes</property>
+    <property name="title" translatable="yes">Safe Eyes</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
-    <child>
-      <object class="GtkNotebook" id="notebook">
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="show_border">False</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">91</property>
+        <property name="title" translatable="yes">Safe Eyes</property>
+        <property name="show_close_button">True</property>
+        <property name="decoration_layout">menu:close</property>
+        <child>
+          <object class="GtkMenuButton">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <property name="popover">popover</property>
+            <child>
+              <object class="GtkImage" id="img_icon">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="icon_name">safeeyes</property>
+                <property name="icon_size">1</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child type="title">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">5</property>
+                <property name="label" translatable="yes">Safe Eyes</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkStackSwitcher">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stack">stack</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="interpolate_size">True</property>
         <child>
           <object class="GtkBox" id="box_settings">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">10</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">10</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
             <property name="orientation">vertical</property>
             <property name="spacing">15</property>
             <child>
@@ -250,7 +338,7 @@
                             <signal name="close" handler="on_info_bar_long_break_close" swapped="no"/>
                             <signal name="response" handler="on_info_bar_long_break_close" swapped="no"/>
                             <child internal-child="action_area">
-                              <object class="GtkButtonBox" id="infobar-action_area1">
+                              <object class="GtkButtonBox">
                                 <property name="can_focus">False</property>
                                 <property name="spacing">6</property>
                                 <property name="layout_style">start</property>
@@ -265,7 +353,7 @@
                               </packing>
                             </child>
                             <child internal-child="content_area">
-                              <object class="GtkBox" id="infobar-content_area1">
+                              <object class="GtkBox">
                                 <property name="can_focus">False</property>
                                 <property name="spacing">16</property>
                                 <child>
@@ -299,6 +387,9 @@
                                 <property name="fill">False</property>
                                 <property name="position">0</property>
                               </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
                             </child>
                             <style>
                               <class name="info_bar_long_break"/>
@@ -711,25 +802,16 @@
             </child>
           </object>
           <packing>
-            <property name="tab_expand">True</property>
-          </packing>
-        </child>
-        <child type="tab">
-          <object class="GtkLabel" id="lbl_settings">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Settings</property>
-          </object>
-          <packing>
-            <property name="menu_label">lbl_settings</property>
-            <property name="tab_expand">True</property>
-            <property name="tab_fill">False</property>
+            <property name="name">Settings</property>
+            <property name="title" translatable="yes">Settings</property>
           </packing>
         </child>
         <child>
           <object class="GtkBox" id="box_break">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">5</property>
+            <property name="margin_right">5</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow_breaks">
@@ -745,8 +827,6 @@
                       <object class="GtkBox" id="box_breaks">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_left">10</property>
-                        <property name="margin_right">10</property>
                         <property name="margin_top">10</property>
                         <property name="margin_bottom">10</property>
                         <property name="orientation">vertical</property>
@@ -860,8 +940,6 @@
               <object class="GtkButtonBox" id="buttonbox1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
-                <property name="margin_right">5</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
                 <property name="layout_style">end</property>
@@ -902,20 +980,9 @@
             </child>
           </object>
           <packing>
+            <property name="name">page1</property>
+            <property name="title" translatable="yes">Breaks</property>
             <property name="position">1</property>
-            <property name="tab_expand">True</property>
-          </packing>
-        </child>
-        <child type="tab">
-          <object class="GtkLabel" id="lbl_breaks">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Breaks</property>
-          </object>
-          <packing>
-            <property name="position">1</property>
-            <property name="tab_expand">True</property>
-            <property name="tab_fill">False</property>
           </packing>
         </child>
         <child>
@@ -932,8 +999,6 @@
                   <object class="GtkBox" id="box_plugins">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">10</property>
-                    <property name="margin_right">10</property>
                     <property name="margin_top">10</property>
                     <property name="margin_bottom">10</property>
                     <property name="orientation">vertical</property>
@@ -959,20 +1024,9 @@
             </child>
           </object>
           <packing>
+            <property name="name">page2</property>
+            <property name="title" translatable="yes">Plugins</property>
             <property name="position">2</property>
-            <property name="tab_expand">True</property>
-          </packing>
-        </child>
-        <child type="tab">
-          <object class="GtkLabel" id="lbl_plugins">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Plugins</property>
-          </object>
-          <packing>
-            <property name="position">2</property>
-            <property name="tab_expand">True</property>
-            <property name="tab_fill">False</property>
           </packing>
         </child>
       </object>

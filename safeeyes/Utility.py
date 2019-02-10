@@ -317,8 +317,8 @@ def initialize_safeeyes():
     style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
 
-    # Remove the ~/.config/safeeyes directory
-    delete(os.path.join(CONFIG_DIRECTORY, 'safeeyes.json'))
+    # Remove the ~/.config/safeeyes/safeeyes.json file
+    delete(CONFIG_FILE_PATH)
 
     # Remove the startup file
     delete(os.path.join(HOME_DIRECTORY, os.path.join(
@@ -342,6 +342,15 @@ def initialize_safeeyes():
     if not os.path.isfile(STYLE_SHEET_PATH):
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
+
+def reset_config():
+    # Remove the ~/.config/safeeyes/safeeyes.json and safeeyes_style.css
+    delete(CONFIG_FILE_PATH)
+    delete(STYLE_SHEET_PATH)
+
+    # Copy the safeeyes.json and safeeyes_style.css
+    shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
+    shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
 def replace_style_sheet():
     """

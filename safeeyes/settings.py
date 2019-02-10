@@ -21,6 +21,7 @@ import os
 
 import gi
 from safeeyes import Utility
+from safeeyes.model import Config
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -58,14 +59,8 @@ class SettingsDialog(object):
         self.window = builder.get_object('window_settings')
         self.box_short_breaks = builder.get_object('box_short_breaks')
         self.box_long_breaks = builder.get_object('box_long_breaks')
-        box_plugins = builder.get_object('box_plugins')
-        for short_break in config.get('short_breaks'):
-            self.__create_break_item(short_break, True)
-        for long_break in config.get('long_breaks'):
-            self.__create_break_item(long_break, False)
-
-        for plugin_config in Utility.load_plugins_config(config):
-            box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
+        self.box_plugins = builder.get_object('box_plugins')
+        self.popover = builder.get_object('popover')
 
         self.spin_short_break_duration = builder.get_object('spin_short_break_duration')
         self.spin_long_break_duration = builder.get_object('spin_long_break_duration')
@@ -81,6 +76,28 @@ class SettingsDialog(object):
         self.info_bar_long_break.hide()
 
         # Set the current values of input fields
+        self.__initialize(config)
+
+        # Update relative states
+        # GtkSwitch state-set signal is available only from 3.14
+        if Gtk.get_minor_version() >= 14:
+            self.switch_strict_break.connect('state-set', self.on_switch_strict_break_activate)
+            self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
+            self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
+            self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+        self.initializing = False
+
+    def __initialize(self, config):
+        # Don't show infobar for changes made internally
+        self.infobar_long_break_shown = True
+        for short_break in config.get('short_breaks'):
+            self.__create_break_item(short_break, True)
+        for long_break in config.get('long_breaks'):
+            self.__create_break_item(long_break, False)
+
+        for plugin_config in Utility.load_plugins_config(config):
+            self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
+            
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
         self.spin_short_break_interval.set_value(config.get('short_break_interval'))
@@ -91,15 +108,7 @@ class SettingsDialog(object):
         self.switch_strict_break.set_active(config.get('strict_break'))
         self.switch_postpone.set_active(config.get('allow_postpone') and not config.get('strict_break'))
         self.switch_persist.set_active(config.get('persist_state'))
-
-        # Update relative states
-        # GtkSwitch state-set signal is available only from 3.14
-        if Gtk.get_minor_version() >= 14:
-            self.switch_strict_break.connect('state-set', self.on_switch_strict_break_activate)
-            self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
-            self.on_switch_strict_break_activate(self.switch_strict_break, self.switch_strict_break.get_active())
-            self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
-        self.initializing = False
+        self.infobar_long_break_shown = False
 
     def __create_break_item(self, break_config, is_short):
         """
@@ -136,6 +145,25 @@ class SettingsDialog(object):
         box.set_visible(True)
         parent_box.pack_start(box, False, False, 0)
         return box
+
+    def on_reset_menu_clicked(self, button):
+        self.popover.hide()
+        def __confirmation_dialog_response(widget, response_id):
+            if response_id == Gtk.ResponseType.OK:
+                Utility.reset_config()
+                self.config = Config()
+                self.__initialize(self.config)
+            widget.destroy()
+
+        messagedialog = Gtk.MessageDialog(parent=self.window,
+                                          flags=Gtk.DialogFlags.MODAL,
+                                          type=Gtk.MessageType.WARNING,
+                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                                   _("Reset"), Gtk.ResponseType.OK),
+                                          message_format=_("Are you sure you want to reset all settings to default?"))
+        messagedialog.connect("response", __confirmation_dialog_response)
+        messagedialog.format_secondary_text(_("You can't undo this action."))
+        messagedialog.show()
 
     def __delete_break(self, break_config, is_short, on_remove):
         """

@@ -146,6 +146,14 @@ msgid "Long break interval must be a multiple of short break interval"
 msgstr "Long break interval must be a multiple of short break interval"
 
 # Settings dialog
+msgid "Reset"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr "Are you sure you want to delete this break?"
+
+# Settings dialog
 msgid "Options"
 msgstr "Options"
 

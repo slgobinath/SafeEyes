@@ -148,6 +148,14 @@ msgstr ""
 "இருக்க வேண்டும்"
 
 # Settings dialog
+msgid "Reset"
+msgstr "மீளமை"
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr "எல்லா அமைப்புகளையும் இயல்புநிலைக்கு நிச்சயமாக மாற்ற வேண்டுமா?"
+
+# Settings dialog
 msgid "Options"
 msgstr "தேர்வுகள்"
 

@@ -100,3 +100,19 @@
     opacity: 0.9;
     border-color: transparent;
 }
+
+.btn_menu {
+    border-width: 0px;
+    border-radius: 0px;
+    border-image: None;
+    background: white;
+    border-color: transparent;
+}
+
+.btn_menu:hover {
+    border-width: 0px;
+    border-radius: 0px;
+    border-image: None;
+    background: whitesmoke;
+    border-color: transparent;
+}

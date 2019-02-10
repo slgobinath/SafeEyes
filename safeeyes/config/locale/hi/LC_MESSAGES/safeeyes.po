@@ -143,6 +143,14 @@ msgid "Long break interval must be a multiple of short break interval"
 msgstr "लम्बी ब्रेक अंतराल लघु ब्रेक अंतराल के एक बहुमान होना चाहिए"
 
 # Settings dialog
+msgid "Reset"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr ""
+
+# Settings dialog
 msgid "Options"
 msgstr "विकल्प"
 

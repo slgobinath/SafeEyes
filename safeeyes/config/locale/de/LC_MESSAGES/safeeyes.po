@@ -145,6 +145,14 @@ msgid "Long break interval must be a multiple of short break interval"
 msgstr "Lange Pausen müssen ein Vielfaches von kurzen Pausen lang dauern"
 
 # Settings dialog
+msgid "Reset"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr ""
+
+# Settings dialog
 msgid "Options"
 msgstr "Einstellungen"
 
