@@ -129,8 +129,8 @@ class SettingsDialog(object):
                 is_short,
                 self.config,
                 lambda cfg: lbl_name.set_label(_(cfg['name'])),
-                lambda is_short,
-                break_config: self.__create_break_item(break_config, is_short)
+                lambda is_short, break_config: self.__create_break_item(break_config, is_short),
+                lambda: parent_box.remove(box)
             )
         )
         btn_delete = builder.get_object('btn_delete')
@@ -234,11 +234,11 @@ class SettingsDialog(object):
         dialog = PluginSettingsDialog(plugin_config)
         dialog.show()
 
-    def __show_break_properties_dialog(self, break_config, is_short, parent, on_close, on_add):
+    def __show_break_properties_dialog(self, break_config, is_short, parent, on_close, on_add, on_remove):
         """
         Show the BreakProperties dialog
         """
-        dialog = BreakSettingsDialog(break_config, is_short, parent, self.plugin_map, on_close, on_add)
+        dialog = BreakSettingsDialog(break_config, is_short, parent, self.plugin_map, on_close, on_add, on_remove)
         dialog.show()
 
     def show(self):
@@ -402,13 +402,14 @@ class BreakSettingsDialog(object):
     Builds a settings dialog based on the configuration of a plugin.
     """
 
-    def __init__(self, break_config, is_short, parent_config, plugin_map, on_close, on_add):
+    def __init__(self, break_config, is_short, parent_config, plugin_map, on_close, on_add, on_remove):
         self.break_config = break_config
         self.parent_config = parent_config
         self.plugin_check_buttons = {}
         self.on_close = on_close
         self.is_short = is_short
         self.on_add = on_add
+        self.on_remove = on_remove
 
         builder = Utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
         builder.connect_signals(self)
