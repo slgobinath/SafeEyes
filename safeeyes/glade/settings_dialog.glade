@@ -102,6 +102,7 @@
     <property name="default_width">450</property>
     <property name="default_height">600</property>
     <property name="icon_name">safeeyes</property>
+    <property name="title" translatable="yes">Safe Eyes</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child type="titlebar">
@@ -109,6 +110,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="spacing">91</property>
+        <property name="title" translatable="yes">Safe Eyes</property>
         <property name="show_close_button">True</property>
         <property name="decoration_layout">menu:close</property>
         <child>
