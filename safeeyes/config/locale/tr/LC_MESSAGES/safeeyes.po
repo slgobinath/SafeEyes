@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-01-31 17:50+0000\n"
-"Last-Translator: Koray Biçer <solayagim@gmail.com>\n"
+"PO-Revision-Date: 2019-02-08 06:10+0000\n"
+"Last-Translator: Kemal Oktay Aktoğan <oktay454@disroot.org>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/tr/>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -167,15 +167,15 @@ msgstr "Uzun Molalar"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Bu arayı silmek istediğinize emin misiniz?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Bu işlemi geri alamazsınız."
 
 # Settings dialog
 msgid "Break"
@@ -219,7 +219,7 @@ msgstr "Süre"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Bekleme zamanı"
 
 # Settings dialog
 msgid "Override"
@@ -279,11 +279,11 @@ msgstr "Duyulabilir İkaz"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Aralardan önce ve sonra sesli uyarıyı çal"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Ara vermeden önce sesli uyarı çal"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -307,7 +307,7 @@ msgstr "Engellenebilir pencereleri normal kipe geçir"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Pilde iken rahatsız etmeyin"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -351,7 +351,7 @@ msgstr "Ekran koruyucusuz geçecek minimum saniye"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Ekranı kilitle"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -374,7 +374,7 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Sistem boşta kalıncaya kadar bir sonraki arayı ertele"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -452,12 +452,12 @@ msgstr "Çıkış"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Ortam Denetimi"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Ortam oynatıcıları ara ekrandan duraklat"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Ortamı duraklat"
