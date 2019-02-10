@@ -282,6 +282,10 @@ msgstr "Spill lydvarsel før og etter pauser"
 msgid "Play audible alert before breaks"
 msgstr "Lydvarsel før pauser"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Ikke forstyrr"

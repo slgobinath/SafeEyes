@@ -288,6 +288,10 @@ msgstr "Jouer une alerte sonore avant et après les pauses"
 msgid "Play audible alert before breaks"
 msgstr "Jouer une alerte sonore avant les pauses"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Ne pas déranger"

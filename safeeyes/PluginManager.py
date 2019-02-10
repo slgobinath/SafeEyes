@@ -267,6 +267,11 @@ class PluginManager(object):
                 # The plugin is already enabled or partially loaded due to break_override_allowed
                 # Use the existing plugin object
                 plugin_obj = self.__plugins[plugin['id']]
+                
+                # Update the config
+                plugin_obj['config'] = dict(plugin.get('settings', {}))
+                plugin_obj['config']['path'] = os.path.join(plugin_dir, plugin['id'])
+
                 if plugin_obj['enabled']:
                     # Already loaded completely
                     return

@@ -283,6 +283,10 @@ msgstr "Подавать звуковой сигнал до и после пер
 msgid "Play audible alert before breaks"
 msgstr "Подавать звуковой сигнал перед перерывом"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Не беспокоить"

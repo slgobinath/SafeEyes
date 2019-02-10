@@ -284,6 +284,10 @@ msgstr "Přehrát zvukové upozornění před a po přestávkách"
 msgid "Play audible alert before breaks"
 msgstr "Přehrát zvukové upozornění před přestávkami"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Nerušit"

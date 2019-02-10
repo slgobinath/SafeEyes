@@ -285,6 +285,10 @@ msgstr "Play audible alert before and after breaks"
 msgid "Play audible alert before breaks"
 msgstr "Play audible alert before breaks"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr "Play audible alert after breaks"
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Do Not Disturb"

@@ -284,6 +284,10 @@ msgstr "休息前后播放声音"
 msgid "Play audible alert before breaks"
 msgstr "休息前播放声音"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "免打扰"

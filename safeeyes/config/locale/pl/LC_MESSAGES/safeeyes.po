@@ -285,6 +285,10 @@ msgstr "Graj dźwiękowy alert przed i po przerwach"
 msgid "Play audible alert before breaks"
 msgstr "Odtwórz dźwięk przed przerwami"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Nie Przeszkadzać"

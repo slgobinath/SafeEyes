@@ -285,6 +285,10 @@ msgstr "Aralardan önce ve sonra sesli uyarıyı çal"
 msgid "Play audible alert before breaks"
 msgstr "Ara vermeden önce sesli uyarı çal"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Rahatsız etme"

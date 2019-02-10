@@ -152,6 +152,12 @@ class SettingsDialog(object):
             if response_id == Gtk.ResponseType.OK:
                 Utility.reset_config()
                 self.config = Config()
+                # Remove breaks from the container
+                self.box_short_breaks.foreach(lambda element: self.box_short_breaks.remove(element))
+                self.box_long_breaks.foreach(lambda element: self.box_long_breaks.remove(element))
+                # Remove plugins from the container
+                self.box_plugins.foreach(lambda element: self.box_plugins.remove(element))
+                # Initialize again
                 self.__initialize(self.config)
             widget.destroy()
 

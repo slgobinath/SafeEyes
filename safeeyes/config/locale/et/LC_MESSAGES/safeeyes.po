@@ -284,6 +284,10 @@ msgstr "Mängi helisignaali enne ja pärast pausi"
 msgid "Play audible alert before breaks"
 msgstr "Mängi helisignaali enne pausi"
 
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
 # plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Mitte segada"
