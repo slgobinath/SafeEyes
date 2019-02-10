@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-17 10:21+0000\n"
+"PO-Revision-Date: 2019-02-10 16:11+0000\n"
 "Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -145,11 +145,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Nulstil"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Bekræft nulstilling af alle indstillinger til standard?"
 
 # Settings dialog
 msgid "Options"
