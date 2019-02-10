@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-19 13:21+0000\n"
-"Last-Translator: Alessandro Badii <ale.badii@gmail.com>\n"
+"PO-Revision-Date: 2019-02-12 11:27+0000\n"
+"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -149,11 +149,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Reimposta"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Le impostazioni saranno resettate ai valori di default vuoi procedere?"
 
 # Settings dialog
 msgid "Options"
@@ -290,7 +290,7 @@ msgstr "Emetti un avviso sonoro dopo le pause"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Emetti un avviso sonoro dopo l'interruzione"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
