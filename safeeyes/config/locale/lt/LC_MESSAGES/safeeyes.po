@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-22 14:06+0000\n"
+"PO-Revision-Date: 2019-02-12 11:27+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 3.4\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -149,11 +149,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Atstatyti"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Ar tikrai norite atstatyti visus nustatymus į numatytuosius?"
 
 # Settings dialog
 msgid "Options"
@@ -289,7 +289,7 @@ msgstr "Groti garsinį signalą prieš pertraukas"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Groti garsinį signalą po pertraukų"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"

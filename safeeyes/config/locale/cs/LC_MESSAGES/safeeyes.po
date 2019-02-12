@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-14 17:20+0000\n"
+"PO-Revision-Date: 2019-02-12 11:27+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -146,11 +146,11 @@ msgstr "Je třeba, aby dlouhé přestávky byly násobkem krátkých přestávek
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Vrátit na výchozí"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Opravdu chcete vrátit veškerá nastavení do výchozího stavu?"
 
 # Settings dialog
 msgid "Options"
@@ -286,7 +286,7 @@ msgstr "Přehrát zvukové upozornění před přestávkami"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Po skončení přestávek přehrávat zvukové upozornění"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
