@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-06-12 10:34+0000\n"
-"Last-Translator: Takai Eddine Kennouche <takai.kenn@gmail.com>\n"
+"PO-Revision-Date: 2019-02-13 16:11+0000\n"
+"Last-Translator: Hatem Ghouthi <hatemghouthi@yahoo.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.0.1\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -145,11 +145,12 @@ msgstr "الاستراحات الطويلة يجب أن تكون من مضاعف
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "إعادة تعيين"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
+"هل أنت متأكد من أنك تريد إعادة تعيين كافة الإعدادات إلى الإعدادات الافتراضية؟"
 
 # Settings dialog
 msgid "Options"
@@ -165,15 +166,15 @@ msgstr "استراحات طويلة"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "هل أنت متأكد أنك تريد حذف هذا الانفصال؟"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "لا يمكنك التراجع عن هذا الإجراء."
 
 # Settings dialog
 msgid "Break"
@@ -217,7 +218,7 @@ msgstr "المدة"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "وقت الانتظار"
 
 # Settings dialog
 msgid "Override"
@@ -229,7 +230,7 @@ msgstr "الزمن (ثوان)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "الوقت (بالدقائق)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -261,75 +262,75 @@ msgstr "استراحة جديدة"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "إزالة"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "إلغاء"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "حفظ"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "تنبيه"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "تشغيل تنبيه مسموع قبل وبعد الراحة"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "تشغيل تنبيه مسموع قبل فواصل"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "تشغيل تنبيه مسموع بعد الراحة"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "عدم الإزعاج"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "تجاهل الراحة إذا كان الإطار النشط في وضع ملء الشاشة"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "لا تقم بإيقاف هذه الإطارات في أي وقت"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "مقاطعة هذه النوافذ بغض النظر عن حالتها"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "تبديل النوافذ المقاطعة إلى الوضع العادي"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "عدم الإزعاج بينما على البطارية"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "الإحصاءات الصحية"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "وتظهر الإحصاءات استناداً إلى كيفية استخدام \"safe eyes\""
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "الإشعارات"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "اظهار اشعار النظام قبل الراحة"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "استعداد لاستراحة قصيرة في %s ثانية"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
