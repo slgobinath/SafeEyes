@@ -172,10 +172,12 @@ class BreakQueue(object):
 
             # Validate time value
             if not isinstance(duration, int) or duration <= 0:
-                logging.error('Invalid break duration in: ' + str(break_config))
+                logging.error('Invalid break duration in: ' +
+                              str(break_config))
                 continue
 
-            break_obj = Break(break_type, name, interval, duration, image, plugins)
+            break_obj = Break(break_type, name, interval,
+                              duration, image, plugins)
             if head is None:
                 head = break_obj
                 tail = break_obj
@@ -232,33 +234,37 @@ class Config(object):
     The configuration of Safe Eyes.
     """
 
-    def __init__(self):
+    def __init__(self, init=True):
         # Read the config files
         self.__user_config = Utility.load_json(Utility.CONFIG_FILE_PATH)
-        self.__system_config = Utility.load_json(Utility.SYSTEM_CONFIG_FILE_PATH)
+        self.__system_config = Utility.load_json(
+            Utility.SYSTEM_CONFIG_FILE_PATH)
         self.__force_upgrade = ['long_breaks', 'short_breaks']
 
-        if self.__user_config is None:
-            Utility.initialize_safeeyes()
-            self.__user_config = self.__system_config
-            self.save()
-        else:
-            system_config_version = self.__system_config['meta']['config_version']
-            meta_obj = self.__user_config.get('meta', None)
-            if meta_obj is None:
-                # Corrupted user config
+        if init:
+            if self.__user_config is None:
+                Utility.initialize_safeeyes()
                 self.__user_config = self.__system_config
+                self.save()
             else:
-                user_config_version = str(meta_obj.get('config_version', '0.0.0'))
-                if LooseVersion(user_config_version) != LooseVersion(system_config_version):
-                    # Update the user config
-                    self.__merge_dictionary(self.__user_config, self.__system_config)
+                system_config_version = self.__system_config['meta']['config_version']
+                meta_obj = self.__user_config.get('meta', None)
+                if meta_obj is None:
+                    # Corrupted user config
                     self.__user_config = self.__system_config
-                    # Update the style sheet
-                    Utility.replace_style_sheet()
+                else:
+                    user_config_version = str(
+                        meta_obj.get('config_version', '0.0.0'))
+                    if LooseVersion(user_config_version) != LooseVersion(system_config_version):
+                        # Update the user config
+                        self.__merge_dictionary(
+                            self.__user_config, self.__system_config)
+                        self.__user_config = self.__system_config
+                        # Update the style sheet
+                        Utility.replace_style_sheet()
 
-        Utility.merge_plugins(self.__user_config)
-        self.save()
+            Utility.merge_plugins(self.__user_config)
+            self.save()
 
     def __merge_dictionary(self, old_dict, new_dict):
         """
@@ -276,6 +282,10 @@ class Config(object):
                         self.__merge_dictionary(old_value, new_value)
                     else:
                         new_dict[key] = old_value
+
+    def clone(self):
+        config = Config(init=False)
+        return config
 
     def save(self):
         """
@@ -297,6 +307,12 @@ class Config(object):
         Set the value.
         """
         self.__user_config[key] = value
+
+    def __eq__(self, config):
+        return self.__user_config == config.__user_config
+
+    def __ne__(self, config):
+        return self.__user_config != config.__user_config
 
 
 class TrayAction(object):

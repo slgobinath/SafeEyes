@@ -63,18 +63,24 @@ class SafeEyes(object):
         self.context['desktop'] = Utility.desktop_environment()
         self.context['locale'] = system_locale
         self.context['api'] = {}
-        self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(self.show_settings)
-        self.context['api']['show_about'] = lambda: Utility.execute_main_thread(self.show_about)
-        self.context['api']['enable_safeeyes'] = lambda next_break_time=-1: Utility.execute_main_thread(self.enable_safeeyes, next_break_time)
-        self.context['api']['disable_safeeyes'] = lambda status: Utility.execute_main_thread(self.disable_safeeyes, status)
+        self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(
+            self.show_settings)
+        self.context['api']['show_about'] = lambda: Utility.execute_main_thread(
+            self.show_about)
+        self.context['api']['enable_safeeyes'] = lambda next_break_time=- \
+            1: Utility.execute_main_thread(self.enable_safeeyes, next_break_time)
+        self.context['api']['disable_safeeyes'] = lambda status: Utility.execute_main_thread(
+            self.disable_safeeyes, status)
         self.context['api']['status'] = self.status
-        self.context['api']['quit'] = lambda: Utility.execute_main_thread(self.quit)
+        self.context['api']['quit'] = lambda: Utility.execute_main_thread(
+            self.quit)
         if self.config.get('persist_state'):
             self.context['session'] = Utility.open_session()
         else:
             self.context['session'] = {'plugin': {}}
 
-        self.break_screen = BreakScreen(self.context, self.on_skipped, self.on_postponed, Utility.STYLE_SHEET_PATH)
+        self.break_screen = BreakScreen(
+            self.context, self.on_skipped, self.on_postponed, Utility.STYLE_SHEET_PATH)
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager(self.context, self.config)
         self.safe_eyes_core = SafeEyesCore(self.context)
@@ -85,7 +91,8 @@ class SafeEyes(object):
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
-        self.context['api']['take_break'] = lambda: Utility.execute_main_thread(self.safe_eyes_core.take_break)
+        self.context['api']['take_break'] = lambda: Utility.execute_main_thread(
+            self.safe_eyes_core.take_break)
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
         self.plugins_manager.init(self.context, self.config)
@@ -111,7 +118,8 @@ class SafeEyes(object):
         if not self.settings_dialog_active:
             logging.info("Show Settings dialog")
             self.settings_dialog_active = True
-            settings_dialog = SettingsDialog(self.config, self.save_settings)
+            settings_dialog = SettingsDialog(
+                self.config.clone(), self.save_settings)
             settings_dialog.show()
 
     def show_about(self):
@@ -158,7 +166,8 @@ class SafeEyes(object):
         """
         DBusGMainLoop(set_as_default=True)
         bus = dbus.SystemBus()
-        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep', 'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep',
+                                'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
 
     def on_skipped(self):
         """
@@ -181,8 +190,12 @@ class SafeEyes(object):
         Listen to Settings dialog Save action and write to the config file.
         """
         self.settings_dialog_active = False
-        logging.info("Saving settings to safeeyes.json")
 
+        if self.config == config:
+            # Config is not modified
+            return
+
+        logging.info("Saving settings to safeeyes.json")
         # Stop the Safe Eyes core
         if self.active:
             self.plugins_manager.stop()
@@ -255,9 +268,11 @@ class SafeEyes(object):
         Update the next break to plugins and save the session.
         """
         self.plugins_manager.update_next_break(break_obj, break_time)
-        self._status = _('Next break at %s') % (Utility.format_time(break_time))
+        self._status = _('Next break at %s') % (
+            Utility.format_time(break_time))
         if self.config.get('persist_state'):
-            Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
+            Utility.write_json(Utility.SESSION_FILE_PATH,
+                               self.context['session'])
 
     def stop_break(self):
         """
@@ -284,6 +299,7 @@ class SafeEyes(object):
         Save the session object to the session file.
         """
         if self.config.get('persist_state'):
-            Utility.write_json(Utility.SESSION_FILE_PATH, self.context['session'])
+            Utility.write_json(Utility.SESSION_FILE_PATH,
+                               self.context['session'])
         else:
             Utility.delete(Utility.SESSION_FILE_PATH)
