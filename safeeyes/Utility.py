@@ -81,7 +81,7 @@ def start_thread(target_function, **args):
     """
     Execute the function in a separate thread.
     """
-    thread = threading.Thread(target=target_function, name="WorkThread", kwargs=args)
+    thread = threading.Thread(target=target_function, name="WorkThread", daemon=False, kwargs=args)
     thread.start()
 
 

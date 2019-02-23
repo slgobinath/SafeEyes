@@ -216,13 +216,13 @@ class TrayIcon(object):
         Handle Quit menu action.
         This action terminates the application.
         """
-        self.quit()
         with self.lock:
             self.active = True
             # Notify all schedulers
             self.idle_condition.acquire()
             self.idle_condition.notify_all()
             self.idle_condition.release()
+        self.quit()
 
     def show_settings(self, *args):
         """

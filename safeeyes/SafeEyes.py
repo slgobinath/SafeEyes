@@ -22,6 +22,7 @@ SafeEyes connects all the individual components and provide the complete applica
 
 import atexit
 import logging
+import os
 from threading import Timer
 
 import dbus
@@ -141,6 +142,8 @@ class SafeEyes(object):
         self.plugins_manager.exit()
         self.rpc_server.stop()
         Gtk.main_quit()
+        # Exit all threads
+        os._exit(0)
 
     def handle_suspend_callback(self, sleeping):
         """
