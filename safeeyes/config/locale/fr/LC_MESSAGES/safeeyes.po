@@ -400,6 +400,10 @@ msgid "Show next break time in tray icon"
 msgstr "Afficher l’heure de la prochaine pause dans l’icône de notification"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "À propos"
 

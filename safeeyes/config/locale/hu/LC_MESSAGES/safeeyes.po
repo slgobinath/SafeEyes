@@ -388,6 +388,10 @@ msgid "Show next break time in tray icon"
 msgstr "Mutasd a következő pihenőt a tálca ikonon"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Névjegy"
 

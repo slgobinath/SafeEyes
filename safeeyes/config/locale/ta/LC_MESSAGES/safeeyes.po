@@ -392,6 +392,10 @@ msgid "Show next break time in tray icon"
 msgstr "அடுத்த இடைவேளை நேரத்தை Safe Eyes சின்னத்திற்கு அருகில் காண்பிக்கவும்"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr "Safe Eyes ஐ செயல்நீக்க அனுமதிக்கவும்"
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Safe Eyes குறித்த தகவல்கள்"
 

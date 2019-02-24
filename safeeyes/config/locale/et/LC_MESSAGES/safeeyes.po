@@ -389,6 +389,10 @@ msgid "Show next break time in tray icon"
 msgstr "Näita järgmise pausi aega paneeliikooni kõrval"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Programmist"
 

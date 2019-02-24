@@ -390,6 +390,10 @@ msgid "Show next break time in tray icon"
 msgstr "Показывать время до следующего перерыва на иконке в трее"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "О программе"
 

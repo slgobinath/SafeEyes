@@ -395,6 +395,10 @@ msgid "Show next break time in tray icon"
 msgstr "Rodyti dėklo piktogramoje kitos pertraukos laiką"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Apie"
 

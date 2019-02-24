@@ -393,6 +393,10 @@ msgid "Show next break time in tray icon"
 msgstr "Sonraki mola zamanını tepsi simgesinde göster"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Hakkında"
 

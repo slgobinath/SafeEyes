@@ -63,17 +63,19 @@
         {
             "id": "audiblealert",
             "enabled": true,
-            "version": "0.0.2",
+            "version": "0.0.3",
             "settings": {
-                "pre_break_alert": true
+                "pre_break_alert": true,
+                "post_break_alert": true
             }
         },
         {
             "id": "trayicon",
             "enabled": true,
-            "version": "0.0.1",
+            "version": "0.0.3",
             "settings": {
                 "show_time_in_tray": false,
+                "allow_disabling": true,
                 "disable_options": [{
                         "time": 30,
                         "unit": "minute"
@@ -96,9 +98,11 @@
         {
             "id": "smartpause",
             "enabled": true,
-            "version": "0.0.1",
+            "version": "0.0.3",
             "settings": {
-                "idle_time": 3
+                "idle_time": 5,
+                "interpret_idle_as_break": false,
+                "postpone_if_active": false
             }
         },
         {

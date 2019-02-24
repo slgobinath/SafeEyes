@@ -393,6 +393,10 @@ msgid "Show next break time in tray icon"
 msgstr "Hiện thời gian nghỉ tiếp theo ở biểu tượng khay"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "Giới thiệu"
 

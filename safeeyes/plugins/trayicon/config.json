@@ -2,7 +2,7 @@
     "meta": {
         "name": "Tray Icon",
         "description": "Show a tray icon in the notification area",
-        "version": "0.0.1"
+        "version": "0.0.3"
     },
     "dependencies": {
         "python_modules": [],
@@ -17,6 +17,12 @@
             "label": "Show next break time in tray icon",
             "type": "BOOL",
             "default": false
+        },
+        {
+            "id": "allow_disabling",
+            "label": "Allow disabling Safe Eyes",
+            "type": "BOOL",
+            "default": true
         },
         {
             "id": "disable_options",

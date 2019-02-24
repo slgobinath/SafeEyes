@@ -56,6 +56,7 @@ class TrayIcon(object):
         self.wakeup_time = None
         self.idle_condition = threading.Condition()
         self.lock = threading.Lock()
+        self.allow_disabling = plugin_config['allow_disabling']
 
         # Construct the tray icon
         self.indicator = appindicator.Indicator.new(
@@ -151,6 +152,11 @@ class TrayIcon(object):
         self.menu.append(self.item_quit)
         self.menu.show_all()
 
+        self.item_enable.set_visible(self.allow_disabling)
+        self.item_disable.set_visible(self.allow_disabling)
+        self.item_quit.set_visible(self.allow_disabling)
+        self.item_quit.set_visible(self.allow_disabling)
+
         self.indicator.set_menu(self.menu)
 
     def initialize(self, plugin_config):
@@ -159,6 +165,11 @@ class TrayIcon(object):
         """
         self.plugin_config = plugin_config
         self.set_labels()
+        self.allow_disabling = plugin_config['allow_disabling']
+        self.item_enable.set_visible(self.allow_disabling)
+        self.item_disable.set_visible(self.allow_disabling)
+        self.item_quit.set_visible(self.allow_disabling)
+        self.item_quit.set_visible(self.allow_disabling)
 
     def set_labels(self):
         """

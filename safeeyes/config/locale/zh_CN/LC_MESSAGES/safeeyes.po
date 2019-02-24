@@ -389,6 +389,10 @@ msgid "Show next break time in tray icon"
 msgstr "在托盘图标上显示下次休息的时间"
 
 #: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
 msgid "About"
 msgstr "关于"
 

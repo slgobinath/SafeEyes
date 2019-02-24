@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: uz@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: uz@latin\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -383,6 +383,10 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
 msgstr ""
 
 #: plugins/trayicon
