@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-10 16:11+0000\n"
-"Last-Translator: jan madsen <jsm@janz.dk>\n"
+"PO-Revision-Date: 2019-02-26 19:18+0000\n"
+"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
 "Language: da\n"
@@ -409,7 +409,7 @@ msgstr "Deaktiveret indtil genstart"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Aktivér  Safe Eyes"
+msgstr "Aktivér Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
