@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:27+0000\n"
-"Last-Translator: Alessandro Badii <ale.badii@gmail.com>\n"
+"PO-Revision-Date: 2019-02-26 19:18+0000\n"
+"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -396,7 +396,7 @@ msgstr "Mostra la prossima pausa accanto all'icona"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Consenti la disattivazione di Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
