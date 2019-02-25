@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2019-02-26 19:18+0000\n"
-"Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
+"Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
 "Language: da\n"
@@ -284,8 +284,9 @@ msgid "Play audible alert before breaks"
 msgstr "Afspil lydvarsling før pauser"
 
 # plugin/audiblealert
+#, fuzzy
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Afspil lydvarsling efter pauser"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -388,8 +389,9 @@ msgid "Show next break time in tray icon"
 msgstr "Vis næste pausetid i bakkeikon"
 
 #: plugins/trayicon
+#, fuzzy
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Tillad deaktivering af Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
