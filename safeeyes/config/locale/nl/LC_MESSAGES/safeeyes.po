@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:27+0000\n"
+"PO-Revision-Date: 2019-02-26 19:18+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/nl/>\n"
@@ -396,7 +396,7 @@ msgstr "Volgende pauzetijd tonen op systeemvakpictogram"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Uitschakelen van Safe Eyes toestaan"
 
 #: plugins/trayicon
 msgid "About"

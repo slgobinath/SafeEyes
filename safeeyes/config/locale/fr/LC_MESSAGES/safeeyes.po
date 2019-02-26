@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:27+0000\n"
+"PO-Revision-Date: 2019-02-26 19:18+0000\n"
 "Last-Translator: LocLab fr <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -401,7 +401,7 @@ msgstr "Afficher l’heure de la prochaine pause dans l’icône de notification
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Permettre de désactiver Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"

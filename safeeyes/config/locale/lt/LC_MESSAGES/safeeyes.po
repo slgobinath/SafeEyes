@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:27+0000\n"
+"PO-Revision-Date: 2019-02-26 19:18+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -396,7 +396,7 @@ msgstr "Rodyti dėklo piktogramoje kitos pertraukos laiką"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Leisti išjungti Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
