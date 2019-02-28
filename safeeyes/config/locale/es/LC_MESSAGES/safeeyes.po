@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-10-14 02:28+0000\n"
-"Last-Translator: Julio González <jgonzalez@rembox.cl>\n"
+"PO-Revision-Date: 2019-02-28 11:53+0000\n"
+"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17\n"
+"X-Generator: Weblate 3.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -432,7 +432,7 @@ msgstr[1] ""
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "Siguiente descanso en"
+msgstr "El siguiente descanso será en %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
