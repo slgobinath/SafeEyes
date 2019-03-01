@@ -137,8 +137,6 @@ def __start_idle_monitor():
                 else:
                     # User is idle for more than the time between two breaks
                     enable_safe_eyes()
-                # Reset the idle_period in case if Smart Pause is disabled by the user
-                context['idle_period'] = 0
 
 
 def on_start():
@@ -189,3 +187,11 @@ def on_start_break(break_obj):
         system_idle_time = __system_idle_time()
         if system_idle_time < 2:
             postpone(2)  # Postpone for 2 seconds
+
+
+def disable():
+    """
+    SmartPause plugin was active earlier but now user has disabled it.
+    """
+    # Remove the idle_period
+    context.pop('idle_period', None)
