@@ -119,7 +119,7 @@
             "enabled": false,
             "version": "0.0.2",
             "settings": {
-                "screen_time_reset_interval": 24
+                "statistics_reset_interval": 24
             }
         },
         {

@@ -12,8 +12,8 @@
         "resources": []
     },
     "settings": [{
-        "id": "screen_time_reset_interval",
-        "label": "Interval to reset screen time (in hours)",
+        "id": "statistics_reset_interval",
+        "label": "Interval to reset statistics (in hours)",
         "type": "INT",
         "default": 24,
         "max": 168,
