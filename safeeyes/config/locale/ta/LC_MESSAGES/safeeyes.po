@@ -323,6 +323,10 @@ msgstr "ஆரோக்கிய புள்ளிவிவரங்கள்"
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Safe Eyes பயன்பாடு அடிப்படையிலான ஆரோக்கிய புள்ளிவிவரங்கள்"
 
+# plugin/healthstats
+msgid "Interval to reset screen time (in hours)"
+msgstr "திரை நேரத்தை  மீட்டமைப்பதற்கான  இடைவேளை (மணித்தியாலங்களில்)"
+
 # plugin/notification
 msgid "Notification"
 msgstr "முன்னறிவிப்பு"

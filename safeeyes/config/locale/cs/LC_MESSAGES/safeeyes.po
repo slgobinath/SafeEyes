@@ -321,6 +321,10 @@ msgstr "Zdravotní statistiky"
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Zobrazit zdravotní statistiky založené na používání Safe Eyes"
 
+# plugin/healthstats
+msgid "Interval to reset screen time (in hours)"
+msgstr ""
+
 # plugin/notification
 msgid "Notification"
 msgstr "Oznámení"

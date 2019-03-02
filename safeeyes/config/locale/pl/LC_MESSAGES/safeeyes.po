@@ -321,6 +321,10 @@ msgstr "Statystyki Zdrowotne"
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Pokaż statystyki oparte o Safe Eyes"
 
+# plugin/healthstats
+msgid "Interval to reset screen time (in hours)"
+msgstr ""
+
 # plugin/notification
 msgid "Notification"
 msgstr "Powiadomienia"

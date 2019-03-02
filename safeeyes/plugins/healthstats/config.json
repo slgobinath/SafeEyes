@@ -2,7 +2,7 @@
     "meta": {
         "name": "Health Statistics",
         "description": "Show statistics based on how you use Safe Eyes",
-        "version": "0.0.1"
+        "version": "0.0.2"
     },
     "dependencies": {
         "python_modules": [],
@@ -11,6 +11,13 @@
         "desktop_environments": [],
         "resources": []
     },
-    "settings": [],
+    "settings": [{
+        "id": "screen_time_reset_interval",
+        "label": "Interval to reset screen time (in hours)",
+        "type": "INT",
+        "default": 24,
+        "max": 168,
+        "min": 1
+    }],
     "break_override_allowed": true
 }

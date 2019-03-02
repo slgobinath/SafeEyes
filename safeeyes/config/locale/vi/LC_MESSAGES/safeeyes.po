@@ -322,6 +322,10 @@ msgstr "Thống kê sức khoẻ"
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Hiện thống kê dựa trên việc bạn sử dụng Safe Eyes như thế nào"
 
+# plugin/healthstats
+msgid "Interval to reset screen time (in hours)"
+msgstr ""
+
 # plugin/notification
 msgid "Notification"
 msgstr "Thông báo"

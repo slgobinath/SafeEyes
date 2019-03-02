@@ -30,6 +30,7 @@ no_of_cycles = -1
 session = None
 safe_eyes_start_time = datetime.datetime.now()
 total_idle_time = 0
+reset_interval = 86400  # 24 hours in seconds
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -41,6 +42,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global no_of_skipped_breaks
     global no_of_breaks
     global no_of_cycles
+    global reset_interval
     logging.debug('Initialize Health Stats plugin')
     context = ctx
     if session is None:
@@ -52,6 +54,7 @@ def init(ctx, safeeyes_config, plugin_config):
         no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
         no_of_breaks = session.get('no_of_breaks', 0)
         no_of_cycles = session.get('no_of_cycles', -1)
+        reset_interval = session.get('screen_time_reset_interval', 24) * 3600
 
 
 def on_stop_break():
@@ -78,11 +81,24 @@ def get_widget_title(break_obj):
     return _('Health Statistics')
 
 
+def _reset_screen_time():
+    global safe_eyes_start_time
+    global total_idle_time
+    current_time = datetime.datetime.now()
+    total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
+    if total_duration_sec >= reset_interval:
+        total_duration_sec -= reset_interval
+        safe_eyes_start_time = current_time - datetime.timedelta(seconds=total_duration_sec)
+        total_idle_time = 0
+    return total_duration_sec
+
+
 def get_widget_content(break_obj):
     """
     Return the statistics.
     """
-    screen_time = round(((datetime.datetime.now() - safe_eyes_start_time).total_seconds() - total_idle_time) / 60)
+    total_duration_sec = _reset_screen_time()
+    screen_time = round((total_duration_sec - total_idle_time) / 60)
     hours, minutes = divmod(screen_time, 60)
     time_format = '{:02d}:{:02d}'.format(hours, minutes)
     if hours > 6 or round((no_of_skipped_breaks / no_of_breaks), 1) >= 0.2:
@@ -98,6 +114,7 @@ def on_start():
     """
     Add the idle period to the total idle time.
     """
+    _reset_screen_time()
     global total_idle_time
     # idle_period is provided by Smart Pause plugin
     total_idle_time += context.get('idle_period', 0)

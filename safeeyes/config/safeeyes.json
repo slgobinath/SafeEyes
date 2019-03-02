@@ -117,7 +117,10 @@
         {
             "id": "healthstats",
             "enabled": false,
-            "version": "0.0.1"
+            "version": "0.0.2",
+            "settings": {
+                "screen_time_reset_interval": 24
+            }
         },
         {
             "id": "mediacontrol",
