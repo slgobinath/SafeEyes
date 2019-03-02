@@ -141,6 +141,7 @@ class SafeEyes(object):
         self.safe_eyes_core.stop()
         self.plugins_manager.exit()
         self.rpc_server.stop()
+        self.persist_session()
         Gtk.main_quit()
         # Exit all threads
         os._exit(0)
