@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2017-10-08 12:42+0000\n"
+"PO-Revision-Date: 2019-03-04 09:58+0000\n"
 "Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ta/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 3.5\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -177,7 +177,7 @@ msgstr "இந்த இடைவேளையை நிச்சயமாக ந
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "நீங்கள் பின்னர் இதை மீட்டெடுக்க முடியாது"
+msgstr "நீங்கள் பின்னர் இதை மீட்டெடுக்க முடியாது."
 
 # Settings dialog
 msgid "Break"
@@ -221,7 +221,7 @@ msgstr "கால அளவு"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "காத்திருக்க வேண்டிய நேரம்"
 
 # Settings dialog
 msgid "Override"
