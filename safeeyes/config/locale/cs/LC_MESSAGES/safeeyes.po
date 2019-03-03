@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-12 11:27+0000\n"
+"PO-Revision-Date: 2019-03-04 09:58+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -323,7 +323,7 @@ msgstr "Zobrazit zdravotní statistiky založené na používání Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Interval pro resetování statistik (v hodinách)"
 
 # plugin/notification
 msgid "Notification"
@@ -397,7 +397,7 @@ msgstr "Zobrazit čas příští přestávky v systémové oblasti"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Umožnit vypnutí Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
