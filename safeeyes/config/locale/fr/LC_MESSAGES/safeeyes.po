@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-26 19:18+0000\n"
+"PO-Revision-Date: 2019-03-06 09:58+0000\n"
 "Last-Translator: LocLab fr <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -328,7 +328,7 @@ msgstr "Afficher des statistiques basées sur votre utilisation de Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Fréquence de réinitialisation (en heures)"
 
 # plugin/notification
 msgid "Notification"
