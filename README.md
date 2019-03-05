@@ -124,3 +124,9 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 ## License
 
 GNU General Public License v3
+
+## IDE Support
+
+<p align="center">Thanks to JetBrains for offering IDE support to develop this Open Source project.</p>
+
+<p align="center"><a href="https://www.jetbrains.com/?from=SafeEyes"><img src="https://raw.githubusercontent.com/JetBrains/logos/master/web/jetbrains/jetbrains.svg?sanitize=true" width="64" align="center"></a></p>
