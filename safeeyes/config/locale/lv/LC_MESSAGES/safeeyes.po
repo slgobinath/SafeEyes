@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-03-11 16:13+0000\n"
+"PO-Revision-Date: 2019-03-11 23:09+0000\n"
 "Last-Translator: Reinis Danne <rei4dan@gmail.com>\n"
 "Language-Team: Latvian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lv/>\n"
@@ -120,7 +120,7 @@ msgstr "Laiks, lai sagatavotos pārtraukumam (sekundēs)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "īsinājumtaustiņu atspējošanas laiks (sekundēs)"
+msgstr "Īsinājumtaustiņu atspējošanas laiks (sekundēs)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
@@ -144,7 +144,7 @@ msgstr "Garā pārtraukuma laikam jādalās ar īsā pārtraukuma laiku"
 
 # Settings dialog
 msgid "Reset"
-msgstr "Atriezt"
+msgstr "Atgriezt"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
