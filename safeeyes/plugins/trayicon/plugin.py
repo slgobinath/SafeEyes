@@ -25,6 +25,7 @@ from gi.repository import Gtk
 import logging
 from safeeyes import Utility
 import threading
+import time
 
 """
 Safe Eyes tray icon plugin
@@ -57,6 +58,7 @@ class TrayIcon(object):
         self.idle_condition = threading.Condition()
         self.lock = threading.Lock()
         self.allow_disabling = plugin_config['allow_disabling']
+        self.animate = False
 
         # Construct the tray icon
         self.indicator = appindicator.Indicator.new(
@@ -368,6 +370,23 @@ class TrayIcon(object):
             if not self.active:
                 Utility.execute_main_thread(self.item_enable.activate)
 
+    def start_animation(self):
+        if not self.active or not self.animate:
+            return
+        Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+        time.sleep(0.5)
+        Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        if self.animate and self.active:
+            time.sleep(0.5)
+            if self.animate and self.active:
+                Utility.start_thread(self.start_animation)
+
+    def stop_animation(self):
+        self.animate = False
+        if self.active:
+            Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        else:
+            Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """
@@ -399,7 +418,12 @@ def on_pre_break(break_obj):
     if safeeyes_config.get('strict_break'):
         tray_icon.lock_menu()
         threading.Timer(safeeyes_config.get('pre_break_warning_time'), __unlock_menu).start()
+    tray_icon.animate = True
+    tray_icon.start_animation()
 
+
+def on_start_break(break_obj):
+    tray_icon.stop_animation()
 
 def __unlock_menu():
     """
