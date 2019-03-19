@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-03-14 07:40+0000\n"
-"Last-Translator: Gagandeep Singh <lll2yu@protonmail.com>\n"
+"PO-Revision-Date: 2019-03-20 10:04+0000\n"
+"Last-Translator: Dev Verma <devvermatheone@gmail.com>\n"
 "Language-Team: Hindi <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/hi/>\n"
 "Language: hi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.20-dev\n"
+"X-Generator: Weblate 3.6-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -144,11 +144,11 @@ msgstr "लम्बी ब्रेक अंतराल लघु ब्र�
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "रीसेट"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "क्या आप वाकई सभी सेटिंग्स को डिफ़ॉल्ट रूप से रीसेट करना चाहते हैं?"
 
 # Settings dialog
 msgid "Options"
@@ -164,19 +164,19 @@ msgstr "लंबे अंतराल"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "हटाना"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "क्या आप वाकई इस अंतराल को हटाना चाहते हैं?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "आप इस क्रिया को पूर्ववत नहीं कर सकते।"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "अंतराल"
 
 # Settings dialog
 msgid "Breaks"
