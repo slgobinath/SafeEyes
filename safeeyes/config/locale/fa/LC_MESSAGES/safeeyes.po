@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-11-03 06:48+0000\n"
-"Last-Translator: Misagh <misaghlb@gmail.com>\n"
+"PO-Revision-Date: 2019-04-09 20:05+0000\n"
+"Last-Translator: Ruhollah <nos.ruh@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
 "Language: fa\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.18-dev\n"
+"X-Generator: Weblate 3.6-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -83,7 +83,7 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "محافظ چشم در حال اجرا نیست"
 
 # About dialog
 msgid "Close"
@@ -106,15 +106,15 @@ msgstr "رد کردن"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "بعدا"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "زمان استراحت (به ثانیه)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "بازه بین دو استراحت (به دقیقه)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
