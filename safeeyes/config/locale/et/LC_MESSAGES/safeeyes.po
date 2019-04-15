@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-01-19 13:21+0000\n"
+"PO-Revision-Date: 2019-04-16 19:06+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.4-dev\n"
+"X-Generator: Weblate 3.6-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -146,11 +146,11 @@ msgstr "Pika pausi intervall peab olema lühikese pausi pikkuse kordne"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Lähtesta"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Kas sa oled kõigi seadete lähtestamises kindel?"
 
 # Settings dialog
 msgid "Options"
@@ -286,7 +286,7 @@ msgstr "Mängi helisignaali enne pausi"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Mängi pauside järel kuuldavad märguanded"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -322,7 +322,7 @@ msgstr "Programmikasutuse statistika kuvamine"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Statistika lähtestamise intervall (tundides)"
 
 # plugin/notification
 msgid "Notification"
@@ -394,7 +394,7 @@ msgstr "Näita järgmise pausi aega paneeliikooni kõrval"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Luba Safe Eyes keelamine"
 
 #: plugins/trayicon
 msgid "About"
