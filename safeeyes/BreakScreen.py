@@ -185,15 +185,15 @@ class BreakScreen(object):
                 toolbar_button.show()
 
             # Add the buttons
-            if not self.strict_break:
+            if self.enable_postpone:
                 # Add postpone button
-                if self.enable_postpone:
-                    btn_postpone = Gtk.Button(_('Postpone'))
-                    btn_postpone.get_style_context().add_class('btn_postpone')
-                    btn_postpone.connect('clicked', self.on_postpone_clicked)
-                    btn_postpone.set_visible(True)
-                    box_buttons.pack_start(btn_postpone, True, True, 0)
+                btn_postpone = Gtk.Button(_('Postpone'))
+                btn_postpone.get_style_context().add_class('btn_postpone')
+                btn_postpone.connect('clicked', self.on_postpone_clicked)
+                btn_postpone.set_visible(True)
+                box_buttons.pack_start(btn_postpone, True, True, 0)
 
+            if not self.strict_break:
                 # Add the skip button
                 btn_skip = Gtk.Button(_('Skip'))
                 btn_skip.get_style_context().add_class('btn_skip')

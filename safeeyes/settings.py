@@ -106,7 +106,7 @@ class SettingsDialog(object):
         self.spin_postpone_duration.set_value(config.get('postpone_duration'))
         self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
         self.switch_strict_break.set_active(config.get('strict_break'))
-        self.switch_postpone.set_active(config.get('allow_postpone') and not config.get('strict_break'))
+        self.switch_postpone.set_active(config.get('allow_postpone'))
         self.switch_persist.set_active(config.get('persist_state'))
         self.infobar_long_break_shown = False
 
