@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-06-18 19:04+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2019-07-01 12:01+0000\n"
+"Last-Translator: mjmoreira <migueljmmoreira@hotmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7\n"
+"X-Generator: Weblate 3.7.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Feche bem forte seus olhos"
+msgstr "Feche firmemente os seus olhos"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -98,7 +98,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr "Lecença"
+msgstr "Licença"
 
 # Break screen
 msgid "Skip"
