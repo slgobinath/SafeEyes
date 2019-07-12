@@ -65,20 +65,6 @@ def is_wayland():
         return bool(re.search(b'wayland', output, re.IGNORECASE))
 
 
-def is_gnome():
-    """
-    Determine if Gnome is running.
-    https://unix.stackexchange.com/a/366055/222290
-    """
-    try:
-        desktop = os.environ["XDG_CURRENT_DESKTOP"]
-    except KeyError:
-        logging.info("Unable to determine if Gnome is running. Assuming no.")
-        return False
-    else:
-        return bool(re.search('gnome', desktop, re.IGNORECASE))
-
-
 def __gnome_wayland_idle_time():
     """
     Determine system idle time in seconds, specifically for gnome with wayland.
@@ -106,7 +92,7 @@ def __system_idle_time():
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
-        if is_wayland() and is_gnome():
+        if is_wayland() and Utility.DESKTOP_ENVIRONMENT == 'gnome':
             return __gnome_wayland_idle_time()
         # Convert to seconds
         return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
