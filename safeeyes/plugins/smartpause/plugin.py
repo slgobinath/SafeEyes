@@ -20,6 +20,8 @@ import datetime
 import logging
 import subprocess
 import threading
+import re
+import os
 
 from safeeyes import Utility
 from safeeyes.model import State
@@ -44,12 +46,54 @@ waiting_time = 2
 interpret_idle_as_break = False
 
 
+def is_wayland():
+    """
+    Determine if Wayland is running
+    https://unix.stackexchange.com/a/325972/222290
+    """
+    try:
+        output = subprocess.check_output(['loginctl'])
+        second_line = output.split(b'\n')[1]
+        session_id = re.search(rb'^ *?(\d+)', second_line).group(1)
+        output = subprocess.check_output(
+            ['loginctl', 'show-session', session_id, '-p', 'Type']
+        )
+    except BaseException:
+        logging.info('Unable to determine if wayland is running. Assuming no.')
+        return False
+    else:
+        return bool(re.search(b'wayland', output, re.IGNORECASE))
+
+
+def __gnome_wayland_idle_time():
+    """
+    Determine system idle time in seconds, specifically for gnome with wayland.
+    If there's a failure, return 0.
+    https://unix.stackexchange.com/a/492328/222290
+    """
+    try:
+        output = subprocess.check_output([
+            'dbus-send',
+            '--print-reply',
+            '--dest=org.gnome.Mutter.IdleMonitor',
+            '/org/gnome/Mutter/IdleMonitor/Core',
+            'org.gnome.Mutter.IdleMonitor.GetIdletime'
+        ])
+        return int(re.search(rb'\d+$', output).group(0)) / 1000
+    except BaseException as e:
+        logging.warning("Failed to get system idle time for gnome/wayland.")
+        logging.warning(str(e))
+        return 0
+
+
 def __system_idle_time():
     """
     Get system idle time in minutes.
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
+        if is_wayland() and Utility.DESKTOP_ENVIRONMENT == 'gnome':
+            return __gnome_wayland_idle_time()
         # Convert to seconds
         return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
     except BaseException:
