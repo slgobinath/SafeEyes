@@ -62,6 +62,7 @@ class SafeEyes(object):
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
         self.context['desktop'] = Utility.desktop_environment()
+        self.context['is_wayland'] = Utility.is_wayland()
         self.context['locale'] = system_locale
         self.context['api'] = {}
         self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(

@@ -6,7 +6,7 @@
     },
     "dependencies": {
         "python_modules": [],
-        "shell_commands": ["xprintidle"],
+        "shell_commands": [],
         "operating_systems": [],
         "desktop_environments": [],
         "resources": []

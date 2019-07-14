@@ -22,10 +22,12 @@ This module contains utility functions for Safe Eyes and its plugins.
 
 import errno
 import imp
+import importlib
 import json
 import locale
 import logging
 import os
+import re
 import shutil
 import subprocess
 import threading
@@ -57,6 +59,7 @@ SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
 DESKTOP_ENVIRONMENT = None
+IS_WAYLAND = False
 
 
 def get_resource_path(resource_name):
@@ -167,7 +170,7 @@ def delete(file_path):
         pass
 
 
-def check_plugin_dependencies(plugin_config):
+def check_plugin_dependencies(plugin_id, plugin_config, plugin_path):
     """
     Check the plugin dependencies.
     """
@@ -191,6 +194,12 @@ def check_plugin_dependencies(plugin_config):
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
             return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}
+
+    plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
+    if os.path.isfile(plugin_dependency_checker):
+        dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
+        if dependency_checker and hasattr(dependency_checker, "validate"):
+            return dependency_checker.validate(plugin_config)
 
     return None
 
@@ -218,7 +227,7 @@ def load_plugins_config(safeeyes_config):
         config = load_json(plugin_config_path)
         if config is None:
             continue
-        dependency_description = check_plugin_dependencies(config)
+        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin_path)
         if dependency_description:
             plugin['enabled'] = False
             config['error'] = True
@@ -259,6 +268,24 @@ def desktop_environment():
             env = 'unity'
     DESKTOP_ENVIRONMENT = env
     return env
+
+def is_wayland():
+    """
+    Determine if Wayland is running
+    https://unix.stackexchange.com/a/325972/222290
+    """
+    global IS_WAYLAND
+    try:
+        session_id = subprocess.check_output(['loginctl']).split(b'\n')[1].split()[0]
+        output = subprocess.check_output(
+            ['loginctl', 'show-session', session_id, '-p', 'Type']
+        )
+    except BaseException:
+        logging.warning('Unable to determine if wayland is running. Assuming no.')
+        IS_WAYLAND = False
+    else:
+        IS_WAYLAND = bool(re.search(b'wayland', output, re.IGNORECASE))
+    return IS_WAYLAND
 
 
 def execute_command(command, args=[]):

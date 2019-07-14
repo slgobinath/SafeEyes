@@ -44,25 +44,7 @@ next_break_duration = 0
 break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
-
-
-def is_wayland():
-    """
-    Determine if Wayland is running
-    https://unix.stackexchange.com/a/325972/222290
-    """
-    try:
-        output = subprocess.check_output(['loginctl'])
-        second_line = output.split(b'\n')[1]
-        session_id = re.search(rb'^ *?(\d+)', second_line).group(1)
-        output = subprocess.check_output(
-            ['loginctl', 'show-session', session_id, '-p', 'Type']
-        )
-    except BaseException:
-        logging.info('Unable to determine if wayland is running. Assuming no.')
-        return False
-    else:
-        return bool(re.search(b'wayland', output, re.IGNORECASE))
+is_wayland_and_gnome = False
 
 
 def __gnome_wayland_idle_time():
@@ -92,7 +74,7 @@ def __system_idle_time():
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
-        if is_wayland() and Utility.DESKTOP_ENVIRONMENT == 'gnome':
+        if is_wayland_and_gnome:
             return __gnome_wayland_idle_time()
         # Convert to seconds
         return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
@@ -132,6 +114,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global waiting_time
     global interpret_idle_as_break
     global postpone_if_active
+    global is_wayland_and_gnome
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -143,6 +126,7 @@ def init(ctx, safeeyes_config, plugin_config):
     break_interval = safeeyes_config.get(
         'short_break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
+    is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
 
 def __start_idle_monitor():

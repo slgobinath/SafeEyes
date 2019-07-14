@@ -254,7 +254,8 @@ class PluginManager(object):
             logging.error('plugin.py not found for the plugin: %s', plugin['id'])
             return
         # Look for config.json
-        plugin_config_path = os.path.join(plugin_dir, plugin['id'], 'config.json')
+        plugin_path = os.path.join(plugin_dir, plugin['id'])
+        plugin_config_path = os.path.join(plugin_path, 'config.json')
         if not os.path.isfile(plugin_config_path):
             logging.error('config.json not found for the plugin: %s', plugin['id'])
             return
@@ -291,7 +292,7 @@ class PluginManager(object):
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                if Utility.check_plugin_dependencies(plugin_config):
+                if Utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin_path):
                     return
 
                 # Load the plugin module
