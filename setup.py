@@ -1,4 +1,4 @@
-import os
+import os, sys, site
 import subprocess
 import setuptools
 
@@ -42,7 +42,7 @@ def _data_files(path):
     for root, _, files in os.walk(path):
         if not files:
             continue
-        yield (os.path.join('/usr', root), [os.path.join(root, f) for f in files])
+        yield (os.path.join(site.USER_BASE or sys.prefix, root), [os.path.join(root, f) for f in files])
 
 
 def __package_files(directory):
