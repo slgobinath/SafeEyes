@@ -245,10 +245,15 @@ class BreakScreen(object):
     def __lock_keyboard(self):
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts
+        Dispatch the call to the X method if the display is X11
         """
         logging.info("Lock the keyboard")
         self.lock_keyboard = True
 
+        if not self.context['is_wayland']:
+            self.__lock_keyboard_X()
+
+    def __lock_keyboard_X(self):
         # Grab the keyboard
         root = self.display.screen().root
         root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
@@ -276,8 +281,9 @@ class BreakScreen(object):
         """
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
-        self.display.ungrab_keyboard(X.CurrentTime)
-        self.display.flush()
+        if not self.context['is_wayland']:
+            self.display.ungrab_keyboard(X.CurrentTime)
+            self.display.flush()
 
     def __destroy_all_screens(self):
         """
