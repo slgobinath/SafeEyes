@@ -26,6 +26,7 @@ import gi
 from safeeyes import Utility
 from Xlib.display import Display
 from Xlib.display import X
+from Xlib.error import DisplayNameError
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gdk
@@ -43,8 +44,14 @@ class BreakScreen(object):
 
     def __init__(self, context, on_skip, on_postpone, style_sheet_path):
         self.context = context
+
+        try:
+            self.display = Display()
+        except DisplayNameError:
+            self.display = None
+            self.context['is_wayland'] = True
+
         self.count_labels = []
-        self.display = Display()
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
