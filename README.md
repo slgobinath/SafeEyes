@@ -72,7 +72,7 @@ sudo apt-get install safeeyes
 ### Fedora
 
 ```bash
-sudo dnf install libappindicator-gtk3 python3-psutil
+sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
