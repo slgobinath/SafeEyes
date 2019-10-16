@@ -6,300 +6,301 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2019-10-17 18:52+0000\n"
+"Last-Translator: Mattias Münster <mattiasmun@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.9.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Stäng ögonen tätt"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Rulla ögonen några gånger åt varje sida"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Vrid ögonen i medurs riktning"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Vrid ögonen i moturs riktning"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Blinka med ögonen"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Fokusera på en punkt på långt avstånd"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Drick lite vatten"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Promenera en stund"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Luta dig tillbaka på din plats och slappna av"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "visa dialogrutan om"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "inaktivera den för närvarande körande safeeyes-instansen"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "aktivera den för närvarande körande safeeyes-instansen"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "avbryt den körande safeeyes-instansen och avsluta"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "visa dialogrutan inställningar"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "starta safeeyes i felsökningsläge"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "skriv ut status för körning av safeeyes-instansen och avsluta"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes körs inte"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "beskrivning"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Licens"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Hoppa över"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Skjut upp"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Avbrottslängd (i sekunder)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Intervall mellan två raster (i minuter)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Dags att förbereda sig för en paus (i sekunder)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Kortkommandon inaktiverad period (i sekunder)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Uppskjutningsvaraktighet (i minuter)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Strikt paus (inget sätt att hoppa över pauser)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Tillåt att skjuta upp pauser"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Bevara det interna tillståndet"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Lång paus intervall måste vara en multipel av kort paus intervall"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Återställ"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Är du säker på att du vill återställa alla inställningar till standard?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Alternativ"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Korta pauser"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Långa pauser"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Radera"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort denna paus?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Du kan inte ångra den här åtgärden."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Rast"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Raster"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Insticksmoduler"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Kort"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Lång"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Bild"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Välj"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Välj en bild"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Varaktighet"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Tid att vänta"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Åsidosätt"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Tid (i sekunder)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "Tid (i minuter)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Rast inställningar"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Tilläggsinställningar"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Insticksmodul stöder inte %s skrivbordsmiljö"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Installera Python-modulen '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Installera kommandoradsverktyget '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Lägg till resursen %(resource)s till %(config_resource)s katalog"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Ny Paus"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Förkasta"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Spara"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Hörbar varning"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Spela hörbar varning före och efter pauser"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Spela hörbar varning före pauser"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Spela hörbar varning efter pauser"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Stör ej"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Hoppa över paus om det aktiva fönstret är i fullskärmsläge"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Avbryt helst inte dessa fönster"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Avbryta dessa fönster oavsett tillstånd"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
