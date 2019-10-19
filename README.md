@@ -6,7 +6,7 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/slgobinath)
 <!-- [![Badge](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes) -->
 
-Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder. A Free and Open Source Linux alternative to EyeLeo.
+Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder.
 
 Visit the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 
@@ -46,7 +46,7 @@ sudo apt install safeeyes
 ### Arch
 
 ```bash
-yaourt -S safeeyes
+yay -S safeeyes
 ```
 
 ### Gentoo
@@ -104,6 +104,38 @@ python3 -m safeeyes
 ```
 
 Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
+
+
+### Install in Virtual Environment
+
+Some Linux systems like Cent OS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python Virtual Environment. The following instruction was tested on Cent OS 7.
+
+1. Install the necessary dependencies
+
+    ```
+    sudo yum install dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel
+    ```
+
+2. Create a virtual environment in your home folder
+
+    ```
+    mkdir ~/safeeyes
+    cd ~/safeeyes/
+
+    pip3 install virtualenv --user
+    virtualenv --no-site-packages venv
+    source venv/bin/activate
+    pip3 install dbus-python safeeyes
+    ```
+
+3. Start Safe Eyes from terminal
+
+    ```
+    cd ~/safeeyes & source venv/bin/activate
+    python3 -m safeeyes
+    ```
+
+For more details, please check the issue: [#329](https://github.com/slgobinath/SafeEyes/issues/329)
 
 ## Features
 
