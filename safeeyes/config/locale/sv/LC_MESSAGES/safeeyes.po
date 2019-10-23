@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-17 18:52+0000\n"
+"PO-Revision-Date: 2019-10-24 16:53+0000\n"
 "Last-Translator: Mattias Münster <mattiasmun@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sv/>\n"
@@ -304,166 +304,167 @@ msgstr "Avbryta dessa fönster oavsett tillstånd"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Växla de avbrytbara fönstren till normalt läge"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Stör ej vid batteridrift"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Hälsostatistik"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Visa statistik baserat på hur du använder Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Intervall för att återställa statistik (i timmar)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Avisering"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Visa ett systemmeddelande före pauser"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Redo för en kort paus på %s sekunder"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Redo för en lång paus på %s sekunder"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Skärmsläckare"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Lås skärmen efter långa pauser genom att starta skärmsläckaren"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Anpassat skärmsläckarkommando"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Minsta sekunder för att hoppa över utan skärmsläckare"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Låsskärm"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Smart paus"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pausa Safe Eyes om systemet är inaktivt"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Minsta inaktivitetstid för att pausa Safe Eyes (i sekunder)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Tolka inaktiv tid som motsvarar kommande avbrottsvaraktighet som en paus"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Skjut upp nästa paus tills systemet blir inaktivt"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Aktivitetsfältsikon"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Visa en aktivitetsfältsikon i meddelandefältet"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Visa nästa paustid i aktivitetsikonen"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Tillåt inaktivering av Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Om"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Inaktivera Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Inaktiverad tills %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Inaktiverad tills omstart"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Aktivera Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "För %d timme"
+msgstr[1] "För %d timmar"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "För %d minut"
+msgstr[1] "För %d minuter"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "För %d sekund"
+msgstr[1] "För %d sekunder"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Nästa paus vid %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Inga pauser tillgängliga"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Ta en paus nu"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Tills omstart"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Avsluta"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Mediekontroll"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pausa mediespelare från avbrottsskärmen"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pausa media"
