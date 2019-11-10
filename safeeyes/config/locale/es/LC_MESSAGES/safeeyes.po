@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-28 11:53+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2019-11-11 11:04+0000\n"
+"Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.10-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -79,7 +79,7 @@ msgstr "iniciar safeeyes en modo de depuración"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "mostrar el estado de la instancia de safeeyes en ejecución y salir"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -138,19 +138,23 @@ msgstr "Permitir posponer los descansos"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Preservar el estado interno"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"El intervalo de descanso largo debe ser un múltiplo del intervalo de "
+"descanso corto"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Restablecer"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
+"¿Seguro que quieres restablecer todos los ajustes a sus valores "
+"predeterminados?"
 
 # Settings dialog
 msgid "Options"
@@ -162,27 +166,27 @@ msgstr "Descansos cortos"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Pausas Largas"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "¿Seguro que quieres eliminar esta pausa?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "No puedes deshacer esta acción."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pausa"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Descansos"
 
 # Settings dialog
 msgid "Plugins"
@@ -218,11 +222,11 @@ msgstr "Duracion"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Tiempo de espera"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Sobreescribir"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -234,7 +238,7 @@ msgstr "Tiempo (en minutos)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Ajustes de Descansos"
 
 # Settings dialog
 msgid "Plugin Settings"
@@ -255,10 +259,11 @@ msgstr "Por favor, instale la herramienta línea de comandos '%s'"
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
+"Por favor, añade el recurso %(resource)s al directorio %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr "Nueva pausa"
+msgstr "Nueva Pausa"
 
 # Settings dialog
 msgid "Remove"
@@ -274,19 +279,19 @@ msgstr "Guardar"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Alerta Audible"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Reproducir una alerta audible antes y después de los descansos"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Reproducir una alerta audible antes de los descansos"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Reproducir una alerta audible después de descansos"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -298,19 +303,19 @@ msgstr "Saltar descanso si la ventana activa está en modo pantalla completa"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Nunca interrumpir estas ventanas"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Interrumpir estas ventanas sin importar su estado"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Cambiar las ventanas interrumplibles al modo normal"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "No molestar mientras se usa la batería"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -322,7 +327,7 @@ msgstr "Mostrar estadísticas basadas en cómo usa Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Intervalo para restablecer estadísticas (en horas)"
 
 # plugin/notification
 msgid "Notification"
@@ -347,22 +352,24 @@ msgstr "Salvapantallas"
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
+"Bloquear la pantalla después de descansos largos iniciando el protector de "
+"pantalla"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Comando personalizado del protector de pantalla"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Mínimo de segundos para saltar sin el protector de pantalla"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Bloquear pantalla"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "Pausa inteligente"
+msgstr "Pausa Inteligente"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
@@ -375,10 +382,12 @@ msgstr "Tiempo minimo inactivo para pausar Safe Eyes (en segundos)"
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Interpretar como un descanso el tiempo de inactividad equivalente a la "
+"duración del próximo descanso"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Posponer el siguiente descanso hasta que el sistema quede inactivo"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -390,11 +399,11 @@ msgstr "Mostrar un icono de bandeja en el área de notificacion"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Mostrar el tiempo del siguiente descanso en la barra de tareas"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Permitir deshabilitar Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -419,20 +428,20 @@ msgstr "Habilitar Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Durante %d Hora"
+msgstr[1] "Durante %d Horas"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Durante %d Minuto"
+msgstr[1] "Durante %d Minutos"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Durante %d Segundo"
+msgstr[1] "Durante %d Segundos"
 
 #: plugins/trayicon
 msgid "Next break at %s"
@@ -460,12 +469,12 @@ msgstr "Salir"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Control Multimedia"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pausar los reproductores multimedia desde la pantalla de descanso"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pausar multimedia"
