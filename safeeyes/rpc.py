@@ -108,6 +108,6 @@ class RPCClient(object):
 
     def quit(self):
         """
-        Quit Safe Eyes.
+        Quit Safe Eyes. korish added me :D
         """
         self.proxy.quit()
