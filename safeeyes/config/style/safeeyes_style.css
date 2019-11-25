@@ -95,6 +95,11 @@
     border-radius: 5px;
 }
 
+.warn_bar_rpc_server {
+    opacity: 0.9;
+    border-radius: 5px;
+}
+
 .toolbar {
     background: black;
     opacity: 0.9;

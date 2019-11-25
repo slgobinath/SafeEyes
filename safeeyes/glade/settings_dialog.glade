@@ -98,19 +98,19 @@
   </object>
   <object class="GtkApplicationWindow" id="window_settings">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Safe Eyes</property>
     <property name="window_position">center</property>
     <property name="default_width">450</property>
     <property name="default_height">600</property>
     <property name="icon_name">safeeyes</property>
-    <property name="title" translatable="yes">Safe Eyes</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="spacing">91</property>
         <property name="title" translatable="yes">Safe Eyes</property>
+        <property name="spacing">91</property>
         <property name="show_close_button">True</property>
         <property name="decoration_layout">menu:close</property>
         <child>
@@ -780,6 +780,120 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkInfoBar" id="warn_bar_rpc_server">
+                            <property name="app_paintable">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="no_show_all">True</property>
+                            <property name="message_type">warning</property>
+                            <property name="show_close_button">True</property>
+                            <signal name="close" handler="on_warn_bar_rpc_server_close" swapped="no"/>
+                            <signal name="response" handler="on_warn_bar_rpc_server_close" swapped="no"/>
+                            <child internal-child="action_area">
+                              <object class="GtkButtonBox">
+                                <property name="can_focus">False</property>
+                                <property name="spacing">6</property>
+                                <property name="layout_style">start</property>
+                                <child>
+                                  <placeholder/>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child internal-child="content_area">
+                              <object class="GtkBox">
+                                <property name="can_focus">False</property>
+                                <property name="spacing">16</property>
+                                <child>
+                                  <object class="GtkImage" id="image2">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="stock">gtk-dialog-warning</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label3">
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">False</property>
+                                    <property name="label" translatable="yes">Without the RPC server, command-line commands may not work</property>
+                                    <property name="xalign">0</property>
+                                    <style>
+                                      <class name="warn_bar_rpc_server"/>
+                                    </style>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <style>
+                              <class name="warn_bar_rpc_server"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkBox" id="box15">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">5</property>
+                            <child>
+                              <object class="GtkLabel" id="lbl_toggle_rpc_server">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Use RPC server to receive runtime commands</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkSwitch" id="switch_rpc_server">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="pack_type">end</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">7</property>
                           </packing>
                         </child>
                       </object>

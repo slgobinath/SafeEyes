@@ -99,13 +99,14 @@ class SafeEyes(object):
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
-        self.rpc_server = RPCServer(self.config.get('rpc_port'), self.context)
-        self.rpc_server.start()
 
     def start(self):
         """
         Start Safe Eyes
         """
+        if self.config.get('use_rpc_server', True):
+            self.__start_rpc_server()
+
         if self.safe_eyes_core.has_breaks():
             self.active = True
             self.context['state'] = State.START
@@ -141,7 +142,7 @@ class SafeEyes(object):
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
         self.plugins_manager.exit()
-        self.rpc_server.stop()
+        self.__stop_rpc_server()
         self.persist_session()
         Gtk.main_quit()
         # Exit all threads
@@ -211,6 +212,13 @@ class SafeEyes(object):
         self.persist_session()
 
         logging.info("Initialize SafeEyesCore with modified settings")
+
+        if self.rpc_server is None and config.get('use_rpc_server'):
+            # RPC server wasn't running but now enabled
+            self.__start_rpc_server()
+        elif self.rpc_server is not None and not config.get('use_rpc_server'):
+            # RPC server was running but now disabled
+            self.__stop_rpc_server()
 
         # Restart the core and intialize the components
         self.config = config
@@ -308,3 +316,13 @@ class SafeEyes(object):
                                self.context['session'])
         else:
             Utility.delete(Utility.SESSION_FILE_PATH)
+
+    def __start_rpc_server(self):
+        if self.rpc_server is None:
+            self.rpc_server = RPCServer(self.config.get('rpc_port'), self.context)
+            self.rpc_server.start()
+
+    def __stop_rpc_server(self):
+        if self.rpc_server is not None:
+            self.rpc_server.stop()
+            self.rpc_server = None
