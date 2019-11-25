@@ -85,6 +85,12 @@ msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes 沒有正在執行"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "關閉"
@@ -136,6 +142,14 @@ msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
+msgstr ""
+
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
 
 # Settings dialog

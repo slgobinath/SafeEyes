@@ -85,6 +85,12 @@ msgstr ""
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes no s'està executant"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "Tanca"
@@ -139,6 +145,14 @@ msgstr "Permet posposar les pauses"
 
 # Settings dialog
 msgid "Persist the internal state"
+msgstr ""
+
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
 
 # Settings dialog

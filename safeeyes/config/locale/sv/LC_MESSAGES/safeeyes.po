@@ -85,6 +85,12 @@ msgstr "skriv ut status för körning av safeeyes-instansen och avsluta"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes körs inte"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "Stäng"
@@ -139,6 +145,14 @@ msgid "Persist the internal state"
 msgstr "Bevara det interna tillståndet"
 
 # Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
+msgstr ""
+
+# Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr "Lång paus intervall måste vara en multipel av kort paus intervall"
 
@@ -148,7 +162,8 @@ msgstr "Återställ"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "Är du säker på att du vill återställa alla inställningar till standard?"
+msgstr ""
+"Är du säker på att du vill återställa alla inställningar till standard?"
 
 # Settings dialog
 msgid "Options"

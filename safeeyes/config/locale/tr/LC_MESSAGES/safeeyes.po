@@ -85,6 +85,12 @@ msgstr "çalışan Safe Eyes örneğinin durumunu yaz ve çık"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes çalışmıyor"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "Kapat"
@@ -140,6 +146,14 @@ msgstr "Molaları ertelemeye izin ver"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "İç durum kalıcı olsun"
+
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
+msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

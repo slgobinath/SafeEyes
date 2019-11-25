@@ -19,370 +19,293 @@ msgstr ""
 "19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
 "X-Generator: Poedit 2.2\n"
 
-#. Short break
 msgid "Tightly close your eyes"
 msgstr "Cieši aizver acis"
 
-#. Short break
 msgid "Roll your eyes a few times to each side"
 msgstr "Apļo acis dažas reizes uz katru pusi"
 
-#. Short break
 msgid "Rotate your eyes in clockwise direction"
 msgstr "Apļo acis pulksteņrādītāja virzienā"
 
-#. Short break
 msgid "Rotate your eyes in counterclockwise direction"
 msgstr "Apļo acis pretēji pulksteņrādītāja virzienam"
 
-#. Short break
 msgid "Blink your eyes"
 msgstr "Mirkšķini acis"
 
-#. Short break
 msgid "Focus on a point in the far distance"
 msgstr "Fokusējies uz punktu lielā attālumā"
 
-#. Short break
 msgid "Have some water"
 msgstr "Padzeries ūdeni"
 
-#. Long break
 msgid "Walk for a while"
 msgstr "Pastaigājies kādu brīdi"
 
-#. Long break
 msgid "Lean back at your seat and relax"
 msgstr "Atlaidies krēslā un atslābinies"
 
-#. Commandline arg description
 msgid "show the about dialog"
 msgstr "rādīt apraksta dialogu"
 
-#. Commandline arg description
 msgid "disable the currently running safeeyes instance"
 msgstr "atspējot pašlaik darbojošos safeeyes instanci"
 
-#. Commandline arg description
 msgid "enable the currently running safeeyes instance"
 msgstr "iespējot pašlaik darbojošos safeeyes instanci"
 
-#. Commandline arg description
 msgid "quit the running safeeyes instance and exit"
 msgstr "izslēgt darbojošos safeeyes instanci un iziet"
 
-#. Commandline arg description
 msgid "show the settings dialog"
 msgstr "rādīt iestatījumu dialogu"
 
-#. Commandline arg description
 msgid "start safeeyes in debug mode"
 msgstr "palaist safeeyes atkļūdošanas režīmā"
 
-#. Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
 msgstr "drukāt darbojošās safeeyes instances statusu un iziet"
 
-#. Status message
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nav palaists"
 
-#. About dialog
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 msgid "Close"
 msgstr "Aizvērt"
 
-#. Description in about dialog
-#. Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
 msgstr ""
 "Safe Eyes aizsargā Jūsu acis no redzes pārslodzes (asthenopia), atgādinot "
 "ņemt pārtraukumus, kamēr strādājat garas stundas pie datora."
 
-#. About dialog
 msgid "License"
 msgstr "Licence"
 
-#. Break screen
 msgid "Skip"
 msgstr "Izlaist"
 
-#. Break screen
 msgid "Postpone"
 msgstr "Atlikt"
 
-#. Settings dialog
 msgid "Break duration (in seconds)"
 msgstr "Pārtraukuma ilgums (sekundēs)"
 
-#. Settings dialog
 msgid "Interval between two breaks (in minutes)"
 msgstr "Intervāls starp diviem pārtraukumiem (minūtēs)"
 
-#. Settings dialog
 msgid "Time to prepare for a break (in seconds)"
 msgstr "Laiks, lai sagatavotos pārtraukumam (sekundēs)"
 
-#. Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Īsinājumtaustiņu atspējošanas laiks (sekundēs)"
 
-#. Settings dialog
 msgid "Postpone duration (in minutes)"
 msgstr "Atlikšanas laiks (minūtēs)"
 
-#. Settings dialog
 msgid "Strict break (No way to skip breaks)"
 msgstr "Striktie pārtraukumi (nav iespējas izlaist pārtraukumus)"
 
-#. Settings dialog
 msgid "Allow postponing breaks"
 msgstr "Ļaut atlikt pārtraukumus"
 
-#. Settings dialog
 msgid "Persist the internal state"
 msgstr "Saglabāt iekšējo stāvokli"
 
-#. Settings dialog
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
+msgstr ""
+
 msgid "Long break interval must be a multiple of short break interval"
 msgstr "Garā pārtraukuma laikam jādalās ar īsā pārtraukuma laiku"
 
-#. Settings dialog
 msgid "Reset"
 msgstr "Atgriezt"
 
-#. Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
 "Vai esat pārliecināts, ka vēlaties atgriezt visus iestatījumus uz to "
 "noklusētajām vērtībām?"
 
-#. Settings dialog
 msgid "Options"
 msgstr "Iestatījumi"
 
-#. Settings dialog
 msgid "Short Breaks"
 msgstr "Īsie pārtraukumi"
 
-#. Settings dialog
 msgid "Long Breaks"
 msgstr "Garie pārtraukumi"
 
-#. Settings dialog
 msgid "Delete"
 msgstr "Dzēst"
 
-#. Settings dialog
 msgid "Are you sure you want to delete this break?"
 msgstr "Vai esat pārliecināts, ka vēlaties dzēst šo pārtraukumu?"
 
-#. Settings dialog
 msgid "You can't undo this action."
 msgstr "Šo darbību nevar atdarīt."
 
-#. Settings dialog
 msgid "Break"
 msgstr "Pārtraukums"
 
-#. Settings dialog
 msgid "Breaks"
 msgstr "Pārtraukumi"
 
-#. Settings dialog
 msgid "Plugins"
 msgstr "Spraudņi"
 
-#. Settings dialog
 msgid "Type"
 msgstr "Tips"
 
-#. Settings dialog
 msgid "Short"
 msgstr "Īsais"
 
-#. Settings dialog
 msgid "Long"
 msgstr "Garais"
 
-#. Settings dialog
 msgid "Image"
 msgstr "Attēls"
 
-#. Settings dialog
 msgid "Select"
 msgstr "Izvēlēties"
 
-#. Settings dialog
 msgid "Please select an image"
 msgstr "Lūdzu izvēlieties attēlu"
 
-#. Settings dialog
 msgid "Duration"
 msgstr "Ilgums"
 
-#. Settings dialog
 msgid "Time to wait"
 msgstr "Gaidīšanas laiks"
 
-#. Settings dialog
 msgid "Override"
 msgstr "Mainīt"
 
-#. Settings dialog
 msgid "Time (in seconds)"
 msgstr "Laiks (sekundēs)"
 
-#. Settings dialog
 msgid "Time (in minutes)"
 msgstr "Laiks (minūtēs)"
 
-#. Settings dialog
 msgid "Break Settings"
 msgstr "Pārtraukuma iestatījumi"
 
-#. Settings dialog
 msgid "Plugin Settings"
 msgstr "Spraudņu iestatījumi"
 
-#. Settings dialog
 msgid "Plugin does not support %s desktop environment"
 msgstr "Spraudnis neatbalsta %s darbvirsmas vidi"
 
-#. Settings dialog
 msgid "Please install the Python module '%s'"
 msgstr "Lūdzu instalējiet Python moduli '%s'"
 
-#. Settings dialog
 msgid "Please install the command-line tool '%s'"
 msgstr "Lūdzu instalējiet komandrindas rīku '%s'"
 
-#. Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lūdzu ievietojiet artefaktu %(resource)s mapē %(config_resource)s"
 
-#. Settings dialog
 msgid "New Break"
 msgstr "Jauns pārtraukums"
 
-#. Settings dialog
 msgid "Remove"
 msgstr "Noņemt"
 
-#. Settings dialog
 msgid "Discard"
 msgstr "Atmest"
 
-#. Settings dialog
 msgid "Save"
 msgstr "Saglabāt"
 
-#. plugin/audiblealert
 msgid "Audible Alert"
 msgstr "Skaņas signāls"
 
-#. plugin/audiblealert
 msgid "Play audible alert before and after breaks"
 msgstr "Spēlēt skaņas signālu pirms un pēc pārtraukuma"
 
-#. plugin/audiblealert
 msgid "Play audible alert before breaks"
 msgstr "Spēlēt skaņas signālu pirms pārtraukumiem"
 
-#. plugin/audiblealert
 msgid "Play audible alert after breaks"
 msgstr "Spēlēt skaņas signālu pēc pārtraukumiem"
 
-#. plugin/donotdisturb
 msgid "Do Not Disturb"
 msgstr "Netraucēt"
 
-#. plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
 msgstr "Izlaist pārtraukumu, ja aktīvais logs ir pilnekrāna režīmā"
 
-#. plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
 msgstr "Nekad nepārtraukt šos logus"
 
-#. plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
 msgstr "Pārtraukt šos logus neatkarīgi no to režīma"
 
-#. plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
 msgstr "Pārslēgt pārtraucamos logus uz normālo režīmu"
 
-#. plugin/donotdisturb
 msgid "Do not disturb while on battery"
 msgstr "Netraucēt, ja darbojas uz baterijas"
 
-#. plugin/healthstats
 msgid "Health Statistics"
 msgstr "Veselības statistika"
 
-#. plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Rādīt statistiku pamatojoties uz Safe Eyes lietošanas vēsturi"
 
-#. plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
 msgstr "Statistikas atstatīšanas intervāls (stundās)"
 
-#. plugin/notification
 msgid "Notification"
 msgstr "Paziņojumi"
 
-#. plugin/notification
 msgid "Show a system notification before breaks"
 msgstr "Rādīt sistēmas paziņojumus pirms pārtraukumiem"
 
-#. plugin/notification
 msgid "Ready for a short break in %s seconds"
 msgstr "Gatavojies īsam pārtraukumam pēc %s sekundēm"
 
-#. plugin/notification
 msgid "Ready for a long break in %s seconds"
 msgstr "Gatavojies garam pārtraukumam pēc %s sekundēm"
 
-#. plugin/screensaver
 msgid "Screensaver"
 msgstr "Ekrāna saudzētājs"
 
-#. plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr "Slēgt ekrānu (ar ekrāna saudzētāju) pēc garajiem pārtraukumiem"
 
-#. plugin/screensaver
 msgid "Custom screensaver command"
 msgstr "Pielāgota ekrāna saudzētāja komanda"
 
-#. plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Mazākais laiks (s), ko izlaist bez ekrāna saudzētāja"
 
-#. plugin/screensaver
 msgid "Lock screen"
 msgstr "Aizslēgt ekrānu"
 
-#. plugin/smartpause
 msgid "Smart Pause"
 msgstr "Viedā pauze"
 
-#. plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
 msgstr "Apturēt Safe Eyes, ja sistēma ir dīkstāvē"
 
-#. plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Minimālais dīkstāves laiks, lai apturētu Safe Eyes (sekundēs)"
 
-#. plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
 "Dīkstāves laiku, kas ekvivalents nākamajam pārtraukumam, interpretēt kā "
 "pārtraukumu"
 
-#. plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
 msgstr "Atlikt nākamo pārtraukumu līdz sistēma ir dīkstāvē"
 
@@ -467,14 +390,11 @@ msgstr "Līdz restartam"
 msgid "Quit"
 msgstr "Iziet"
 
-#. plugin/mediacontrol
 msgid "Media Control"
 msgstr "Multivides kontroles"
 
-#. plugin/mediacontrol
 msgid "Pause media players from the break screen"
 msgstr "Pauzēt multivides atskaņotājus no pārtraukuma ekrāna"
 
-#. plugin/mediacontrol
 msgid "Pause media"
 msgstr "Apturēt atskaņošanu"

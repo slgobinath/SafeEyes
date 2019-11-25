@@ -85,6 +85,12 @@ msgstr "väljasta hetkel töötava safeeyes instantsi staatus ja välju"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes ei tööta hetkel"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "Sulge"
@@ -139,6 +145,14 @@ msgstr "Pauside edasilükkamine lubatud"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Sisemise seisundi säilitamine"
+
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
+msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

@@ -85,6 +85,12 @@ msgstr "打印Safe Eyes运行状态后退出"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes尚未运行"
 
+# RPC not enabled message
+msgid ""
+"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"command-line arguments."
+msgstr ""
+
 # About dialog
 msgid "Close"
 msgstr "关闭"
@@ -92,7 +98,9 @@ msgstr "关闭"
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr "长时间使用电脑办公时，Safe Eyes 会适时提醒您休息一下，以便帮助您保护好眼睛、远离视疲劳"
+msgstr ""
+"长时间使用电脑办公时，Safe Eyes 会适时提醒您休息一下，以便帮助您保护好眼睛、"
+"远离视疲劳"
 
 # About dialog
 msgid "License"
@@ -137,6 +145,14 @@ msgstr "允许推迟休息"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "维持内部状态"
+
+# Settings dialog
+msgid "Use RPC server to receive runtime commands"
+msgstr ""
+
+# Settings dialog
+msgid "Without the RPC server, command-line commands may not work"
+msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
