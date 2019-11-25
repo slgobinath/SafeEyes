@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-26 19:18+0000\n"
+"PO-Revision-Date: 2019-11-26 16:05+0000\n"
 "Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 3.10-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes kører med RPC-server deaktiveret. Aktivér RPC-serveren for at "
+"bruge kommandolinjeargumenter."
 
 # About dialog
 msgid "Close"
@@ -146,11 +148,11 @@ msgstr "Fortsætter i interntilstand"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Brug RPC-server til at modtage runtime-kommandoer"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Uden RPC-serveren fungerer kommandolinjekommandoer muligvis ikke"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -336,7 +338,7 @@ msgstr "Vis statistikker baseret på brug af Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Interval for nulstilling af statistik (i timer)"
 
 # plugin/notification
 msgid "Notification"
@@ -407,9 +409,8 @@ msgid "Show next break time in tray icon"
 msgstr "Vis næste pausetid i bakkeikon"
 
 #: plugins/trayicon
-#, fuzzy
 msgid "Allow disabling Safe Eyes"
-msgstr "Tillad deaktivering af Safe Eyes"
+msgstr "Tillad at deaktivere Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
