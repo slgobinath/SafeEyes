@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-03-06 09:58+0000\n"
+"PO-Revision-Date: 2019-11-26 16:05+0000\n"
 "Last-Translator: LocLab fr <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5\n"
+"X-Generator: Weblate 3.10-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes fonctionne alors que le serveur RPC est désactivé. Activez le "
+"serveur RPC afin d’utiliser des arguments en ligne de commande."
 
 # About dialog
 msgid "Close"
@@ -149,11 +151,13 @@ msgstr "Conserver l’état interne"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Utiliser le serveur RPC pour recevoir des commandes d’exécution"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
+"Sans le serveur RPC, les commandes en ligne de commande pourraient ne pas "
+"fonctionner"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
