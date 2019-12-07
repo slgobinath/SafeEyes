@@ -13,6 +13,7 @@
     "use_rpc_server": true,
     "rpc_port": 7200,
     "shortcut_disable_time": 2,
+    "full_unlock_shortcuts": true,
     "shortcut_skip": 9,
     "shortcut_postpone": 65,
     "strict_break": false,

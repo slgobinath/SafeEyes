@@ -53,6 +53,7 @@ class BreakScreen(object):
         self.on_postpone = on_postpone
         self.on_skip = on_skip
         self.shortcut_disable_time = 2
+        self.full_unlock_shortcuts = True
         self.strict_break = False
         self.windows = []
 
@@ -70,6 +71,7 @@ class BreakScreen(object):
         self.keycode_shortcut_postpone = config.get('shortcut_postpone', 65)
         self.keycode_shortcut_skip = config.get('shortcut_skip', 9)
         self.shortcut_disable_time = config.get('shortcut_disable_time', 2)
+        self.full_unlock_shortcuts = config.get('full_unlock_shortcuts', True)
         self.strict_break = config.get('strict_break', False)
 
     def skip_break(self):
@@ -113,6 +115,8 @@ class BreakScreen(object):
         Show/update the count down on all screens.
         """
         self.enable_shortcut = self.shortcut_disable_time <= seconds
+        if self.enable_shortcut and self.full_unlock_shortcuts:
+            self.__release_keyboard()
         mins, secs = divmod(countdown, 60)
         timeformat = '{:02d}:{:02d}'.format(mins, secs)
         GLib.idle_add(lambda: self.__update_count_down(timeformat))
