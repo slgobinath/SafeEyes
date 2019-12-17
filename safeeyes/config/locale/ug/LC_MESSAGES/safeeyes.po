@@ -86,7 +86,7 @@ msgstr ""
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running with RPC Server disabled. Enable the RPC server to use "
+"Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
 
