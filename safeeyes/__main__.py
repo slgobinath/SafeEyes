@@ -115,7 +115,7 @@ def main():
         logging.info("Safe Eyes is already running")
         if not config.get("use_rpc_server", True):
             # RPC sever is disabled
-            print(_('Safe Eyes is running with RPC Server disabled. Enable the RPC server to use command-line arguments.'))
+            print(_('Safe Eyes is running without an RPC server. Turn it on to use command-line arguments.'))
             sys.exit(0)
             return
         rpc_client = RPCClient(config.get('rpc_port'))
