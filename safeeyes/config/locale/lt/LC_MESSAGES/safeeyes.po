@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-03-06 09:58+0000\n"
+"PO-Revision-Date: 2020-01-31 22:50+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
 "19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
 "1 : 2);\n"
-"X-Generator: Weblate 3.5\n"
+"X-Generator: Weblate 3.11-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -92,6 +92,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes veikia be RPC serverio. Įjunkite jį norėdami naudoti komandų "
+"eilutės argumentus."
 
 # About dialog
 msgid "Close"
@@ -150,11 +152,11 @@ msgstr "Išlaikyti vidinę būseną"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Naudoti RPC serverį, siekiant gauti vykdymo aplinkos komandas"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Be RPC serverio, komandų eilutės komandos gali neveikti"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
