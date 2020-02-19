@@ -6,474 +6,475 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-02-20 05:33+0000\n"
+"Last-Translator: Lee Yunseok <ironyunseok@protonmail.com>\n"
+"Language-Team: Korean <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/ko/>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: ko\n"
+"X-Generator: Weblate 3.11\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "눈을 꼭 감으세요"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "눈동자를 양끝으로 번갈아 움직여보세요"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "시계 방향으로 눈동자를 굴려보세요"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "시계 반대 방향으로 눈동자를 굴려보세요"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "눈을 깜빡이세요"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "잠시 먼 곳을 바라보세요"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "물을 좀 마실까요"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "잠시 걸어보세요"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "자리에 기대 잠깐 쉬세요"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "정보 대화 상자 표시"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "실행 중인 세이프아이즈 객체 비활성화"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "실행 중인 세이브아이즈 객체 활성화"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "실행 중인 세이프아이즈 객체를 끝내고 종료"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "설정 대화 상자 표시"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "디버그 모드에서 세이브아이즈 시작"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "실행 중인 세이프아이즈 객체를 종료하고 상태 출력"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "세이프 아이즈가 실행 중이 아닙니다"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
-msgstr ""
+msgstr "세이프 아이즈가 RPC 서버없이 실행 중입니다. 명령줄 인수를 사용하려면 켜주세요."
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "설명"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "라이선스"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "넘기기"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "미루기"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "휴식 시간 (초)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "두 번의 휴식 사이의 간격 (분)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "휴식 준비 시간 (초)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "자판 단축키 비활성 기간 (초)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "미루는 시간 (분)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "강제 휴식 (넘길 수 없음)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "휴식 미루기 허용"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "내부 상태 유지"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "RPC 서버를 사용해 런타임 명령 수신"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "RPC 서버가 없으면 명령줄 명령이 작동하지 않을 수 있습니다"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "긴 휴식 기간은 짧은 휴식 기간의 배수여야 합니다"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "초기화"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "모든 설정을 초기화하시겠습니까?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "선택사항"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "짧은 휴식"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "긴 휴식"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "제거"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "이 휴식을 제거하시겠습니까?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "이 행동은 돌이킬 수 없습니다."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "휴식"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "휴식설정"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "부가기능"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "짧게"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "길게"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "그림"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "고르기"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "그림을 골라주세요"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "기간"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "대기 시간"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "재정의"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "시간 (초)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "시간 (분)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "휴식 설정"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "부가기능 설정"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "부가기능이 %s 데스크톱 환경을 지원하지 않습니다"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "'%s' 파이썬 모듈을 설치해주세요"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "'%s' 명령줄 도구를 설치해주세요"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "%(resource)s를 %(config_resource)s 디렉토리에 추가해주세요"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "새 휴식 만들기"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "제거"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "취소"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "알림음"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "휴식 전후로 알림음 재생"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "휴식 전 알림음 재생"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "휴식 후 알림음 재생"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "방해 금지"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "활성 창이 전체 화면이면 휴식 넘기기"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "이 창은 중단하지 않기"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "상태에 관계없이 이러한 창은 중단"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "중단 가능한 창을 일반으로 전환"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "배터리를 사용하는 동안은 방해 금지"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "건강 통계"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "세이프 아이즈 사용에 기반한 통계 표시"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "통계 초기화 간격 (시)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "알림"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "휴식 전 시스템 알림 표시"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "%s초 안에 짧은 휴식 준비"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "%s초 안에 긴 휴식 준비"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "화면 보호기"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "화면 보호기 시작으로 긴 휴식 후 화면 잠금"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "화면 보호기 명령 정의"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "화면 보호기 없이 넘길 최소 초단위 시간"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "화면 잠금"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "스마트 일시 중지"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "시스템이 유휴 상태일 때 세이프 아이즈 일시 중지"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "세이프 아이즈를 일시 중지하는 최소 유휴 시간 (초)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "다음 휴식 기간에 해당하는 유휴 시간을 휴식으로 해석"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "시스템이 유휴 상태가 될 때까지 다음 휴식 미루기"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "트레이 아이콘"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "알림 영역에 트레이 아이콘 표시"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "트레이 아이콘에 다음 휴식 시간 표시"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "세이프 아이즈 비활성화 허용"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "정보"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "세이프 아이즈 비활성화"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "%s까지 비활성화됨"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "다시 시작할 때까지 비활성화됨"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "세이프 아이즈 활성화"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
+msgstr[0] "%d시간"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
+msgstr[0] "%d분"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
+msgstr[0] "%d초"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "%s에 다음 휴식"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "사용 가능한 휴식 없음"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "지금 휴식"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "다시 시작할 때까지"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "종료"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "미디어 제어"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "휴식 상태일 때 미디어 플레이어 일시 정지"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "미디어 일시 정지"
