@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-02-17 01:10+0000\n"
+"PO-Revision-Date: 2020-02-23 11:33+0000\n"
 "Last-Translator: riesp <riesp@pm.me>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.11-dev\n"
+"X-Generator: Weblate 4.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -150,7 +150,7 @@ msgstr "Preservar el estado interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Usar el servidor RPC para recibir comandos en tiempo de ejecución"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
