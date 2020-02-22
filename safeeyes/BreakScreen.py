@@ -26,6 +26,7 @@ import gi
 from safeeyes import Utility
 from Xlib.display import Display
 from Xlib.display import X
+from Xlib.error import DisplayNameError
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gdk
@@ -43,8 +44,14 @@ class BreakScreen(object):
 
     def __init__(self, context, on_skip, on_postpone, style_sheet_path):
         self.context = context
+
+        try:
+            self.display = Display()
+        except DisplayNameError:
+            self.display = None
+            self.context['is_wayland'] = True
+
         self.count_labels = []
-        self.display = Display()
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
@@ -238,10 +245,15 @@ class BreakScreen(object):
     def __lock_keyboard(self):
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts
+        Dispatch the call to the X method if the display is X11
         """
         logging.info("Lock the keyboard")
         self.lock_keyboard = True
 
+        if not self.context['is_wayland']:
+            self.__lock_keyboard_X()
+
+    def __lock_keyboard_X(self):
         # Grab the keyboard
         root = self.display.screen().root
         root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
@@ -269,8 +281,9 @@ class BreakScreen(object):
         """
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
-        self.display.ungrab_keyboard(X.CurrentTime)
-        self.display.flush()
+        if not self.context['is_wayland']:
+            self.display.ungrab_keyboard(X.CurrentTime)
+            self.display.flush()
 
     def __destroy_all_screens(self):
         """
