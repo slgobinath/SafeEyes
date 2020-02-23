@@ -52,8 +52,8 @@ break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 postpone_if_active = False
-timer: Optional[int] = None
 idle_checker: Optional[IdleTimeInterface] = None
+_timer_event_id: Optional[int] = None
 
 
 class GnomeWaylandIdleTime(IdleTimeInterface):
@@ -210,7 +210,7 @@ def on_start():
     Begin polling to check user idle time.
     """
     global idle_checker
-    global timer
+    global _timer_event_id
 
     if __is_active():
         # If SmartPause is already started, do not start it again
@@ -222,7 +222,7 @@ def on_start():
     __set_active(True)
 
     # FIXME: need to make sure that this gets updated if the waiting_time config changes
-    timer = GLib.timeout_add_seconds(waiting_time, __idle_monitor)
+    _timer_event_id = GLib.timeout_add_seconds(waiting_time, __idle_monitor)
 
 
 def on_stop():
@@ -230,7 +230,7 @@ def on_stop():
     Stop polling to check user idle time.
     """
     global smart_pause_activated
-    global timer
+    global _timer_event_id
     global idle_checker
 
     if smart_pause_activated:
@@ -239,8 +239,8 @@ def on_stop():
         return
     logging.debug('Stop Smart Pause plugin')
     __set_active(False)
-    GLib.source_remove(timer)
-    timer = None
+    GLib.source_remove(_timer_event_id)
+    _timer_event_id = None
     if idle_checker is not None:
         idle_checker.destroy()
         idle_checker = None
