@@ -22,7 +22,7 @@ import subprocess
 import threading
 import re
 import os
-from typing import Optional
+from typing import Optional, Callable
 
 import xcffib
 import xcffib.xproto
@@ -35,16 +35,16 @@ from safeeyes.model import State
 Safe Eyes smart pause plugin
 """
 
-context = None
 idle_condition = threading.Condition()
 lock = threading.Lock()
+context: Optional[dict] = None
 active = False
 idle_time = 0
-enable_safe_eyes = None
-disable_safe_eyes = None
+enable_safe_eyes: Optional[Callable[[Optional[int]], None]] = None
+disable_safe_eyes: Optional[Callable[[Optional[str]], None]] = None
 smart_pause_activated = False
-idle_start_time = None
-next_break_time = None
+idle_start_time: Optional[datetime.datetime] = None
+next_break_time: Optional[datetime.datetime] = None
 next_break_duration = 0
 break_interval = 0
 waiting_time = 2
