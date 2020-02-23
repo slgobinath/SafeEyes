@@ -52,7 +52,6 @@ break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 postpone_if_active = False
-is_wayland_and_gnome = False
 timer: Optional[int] = None
 xcb_connection: Optional[xcffib.Connection] = None
 idle_checker: Optional[IdleTimeInterface] = None
@@ -155,7 +154,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global waiting_time
     global interpret_idle_as_break
     global postpone_if_active
-    global is_wayland_and_gnome
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -167,7 +165,6 @@ def init(ctx, safeeyes_config, plugin_config):
     break_interval = safeeyes_config.get(
         'short_break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
-    is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
 
 def __idle_monitor():
