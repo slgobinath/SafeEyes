@@ -41,6 +41,7 @@ active = False
 idle_time = 0
 enable_safe_eyes: Optional[Callable[[Optional[int]], None]] = None
 disable_safe_eyes: Optional[Callable[[Optional[str]], None]] = None
+postpone: Optional[Callable[[Optional[int]], None]] = None
 smart_pause_activated = False
 idle_start_time: Optional[datetime.datetime] = None
 next_break_time: Optional[datetime.datetime] = None
@@ -48,6 +49,7 @@ next_break_duration = 0
 break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
+postpone_if_active = False
 is_wayland_and_gnome = False
 timer: Optional[int] = None
 xcb_connection: Optional[xcffib.Connection] = None
@@ -59,6 +61,7 @@ def __gnome_wayland_idle_time():
     If there's a failure, return 0.
     https://unix.stackexchange.com/a/492328/222290
     """
+    # noinspection PyBroadException
     try:
         output = subprocess.check_output([
             'dbus-send',
@@ -68,14 +71,14 @@ def __gnome_wayland_idle_time():
             'org.gnome.Mutter.IdleMonitor.GetIdletime'
         ])
         return int(re.search(rb'\d+$', output).group(0)) / 1000
-    except BaseException as e:
-        logging.warning("Failed to get system idle time for gnome/wayland.")
-        logging.warning(str(e))
+    except Exception:
+        logging.warning("Failed to get system idle time for gnome/wayland.", exc_info=True)
         return 0
 
 
 def __x11_idle_time():
     assert xcb_connection is not None
+    # noinspection PyBroadException
     try:
         ext = xcb_connection(xcffib.screensaver.key)
         root_window = xcb_connection.get_setup().roots[0].root
@@ -217,17 +220,17 @@ def on_stop():
         xcb_connection = None
 
 
-def update_next_break(break_obj, dateTime):
+def update_next_break(break_obj, break_time):
     """
     Update the next break time.
     """
     global next_break_time
     global next_break_duration
-    next_break_time = dateTime
+    next_break_time = break_time
     next_break_duration = break_obj.duration
 
 
-def on_start_break(break_obj):
+def on_start_break(_break_obj):
     """
     Lifecycle method executes just before the break.
     """
