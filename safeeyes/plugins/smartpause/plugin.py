@@ -29,7 +29,9 @@ import xcffib
 import xcffib.xproto
 import xcffib.screensaver
 
+from safeeyes import Utility
 from safeeyes.model import State
+from .interface import IdleTimeInterface
 
 import gi
 gi.require_version('Gtk', '3.0')
@@ -53,52 +55,76 @@ postpone_if_active = False
 is_wayland_and_gnome = False
 timer: Optional[int] = None
 xcb_connection: Optional[xcffib.Connection] = None
+idle_checker: Optional[IdleTimeInterface] = None
 
 
-def __gnome_wayland_idle_time():
+class GnomeWaylandIdleTime(IdleTimeInterface):
     """
     Determine system idle time in seconds, specifically for gnome with wayland.
-    If there's a failure, return 0.
     https://unix.stackexchange.com/a/492328/222290
     """
-    # noinspection PyBroadException
-    try:
-        output = subprocess.check_output([
-            'dbus-send',
-            '--print-reply',
-            '--dest=org.gnome.Mutter.IdleMonitor',
-            '/org/gnome/Mutter/IdleMonitor/Core',
-            'org.gnome.Mutter.IdleMonitor.GetIdletime'
-        ])
-        return int(re.search(rb'\d+$', output).group(0)) / 1000
-    except Exception:
-        logging.warning("Failed to get system idle time for gnome/wayland.", exc_info=True)
-        return 0
+
+    @classmethod
+    def is_applicable(cls, ctx) -> bool:
+        if ctx['desktop'] == 'gnome' and ctx['is_wayland']:
+            # ? Might work in all Gnome environments running Mutter whether they're Wayland or X?
+            return Utility.command_exist("dbus-send")
+
+        return False
+
+    def idle_seconds(self):
+        # noinspection PyBroadException
+        try:
+            output = subprocess.check_output([
+                'dbus-send',
+                '--print-reply',
+                '--dest=org.gnome.Mutter.IdleMonitor',
+                '/org/gnome/Mutter/IdleMonitor/Core',
+                'org.gnome.Mutter.IdleMonitor.GetIdletime'
+            ])
+            return int(re.search(rb'\d+$', output).group(0)) / 1000
+        except Exception:
+            logging.warning("Failed to get system idle time for gnome/wayland.", exc_info=True)
+            return 0
+
+    def destroy(self) -> None:
+        pass
 
 
-def __x11_idle_time():
-    assert xcb_connection is not None
-    # noinspection PyBroadException
-    try:
-        ext = xcb_connection(xcffib.screensaver.key)
-        root_window = xcb_connection.get_setup().roots[0].root
-        query = ext.QueryInfo(root_window)
-        info = query.reply()
-        # Convert to seconds
-        return info.ms_since_user_input / 1000
-    except Exception:
-        logging.warning("Failed to get system idle time from XScreenSaver API", exc_info=True)
-        return 0
+class X11IdleTime(IdleTimeInterface):
+
+    @classmethod
+    def is_applicable(cls, _context) -> bool:
+        return True
+
+    def idle_seconds(self):
+        # noinspection PyBroadException
+        try:
+            ext = xcb_connection(xcffib.screensaver.key)
+            root_window = xcb_connection.get_setup().roots[0].root
+            query = ext.QueryInfo(root_window)
+            info = query.reply()
+            # Convert to seconds
+            return info.ms_since_user_input / 1000
+        except Exception:
+            logging.warning("Failed to get system idle time from XScreenSaver API", exc_info=True)
+            return 0
+
+    def destroy(self) -> None:
+        pass
 
 
-def __system_idle_time():
-    """
-    Get system idle time in seconds.
-    """
-    if is_wayland_and_gnome:
-        return __gnome_wayland_idle_time()
-    else:
-        return __x11_idle_time()
+_idle_checkers = [
+    GnomeWaylandIdleTime,
+    X11IdleTime
+]
+
+
+def idle_checker_for_platform():
+    for cls in _idle_checkers:
+        if cls.is_applicable(context):
+            return cls()
+    return None
 
 
 def __is_active():
@@ -130,7 +156,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global interpret_idle_as_break
     global postpone_if_active
     global is_wayland_and_gnome
-    global xcb_connection
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -155,7 +180,7 @@ def __idle_monitor():
     if not __is_active():
         return False  # stop the timeout handler.
 
-    system_idle_time = __system_idle_time()
+    system_idle_time = idle_checker.idle_seconds()
     if system_idle_time >= idle_time and context['state'] == State.WAITING:
         smart_pause_activated = True
         idle_start_time = datetime.datetime.now()
@@ -185,6 +210,7 @@ def on_start():
     """
     Begin polling to check user idle time.
     """
+    global idle_checker
     global xcb_connection
     global timer
 
@@ -193,6 +219,8 @@ def on_start():
         return
 
     logging.debug('Start Smart Pause plugin')
+    idle_checker = idle_checker_for_platform()
+
     __set_active(True)
     xcb_connection = xcffib.connect()  # TODO: whether we need this depends on the monitor method
 
@@ -206,6 +234,7 @@ def on_stop():
     """
     global smart_pause_activated
     global timer
+    global idle_checker
     global xcb_connection
     if smart_pause_activated:
         # Safe Eyes is stopped due to system idle
@@ -215,6 +244,8 @@ def on_stop():
     __set_active(False)
     GLib.source_remove(timer)
     timer = None
+    idle_checker.destroy()
+    idle_checker = None
     if xcb_connection is not None:
         xcb_connection.disconnect()
         xcb_connection = None
@@ -236,7 +267,7 @@ def on_start_break(_break_obj):
     """
     if postpone_if_active:
         # Postpone this break if the user is active
-        system_idle_time = __system_idle_time()
+        system_idle_time = idle_checker.idle_seconds()
         if system_idle_time < 2:
             postpone(2)  # Postpone for 2 seconds
 
