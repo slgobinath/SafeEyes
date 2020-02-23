@@ -15,6 +15,9 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""
+Safe Eyes smart pause plugin
+"""
 
 import datetime
 import logging
@@ -32,9 +35,6 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import GLib
 
-"""
-Safe Eyes smart pause plugin
-"""
 
 context: Optional[dict] = None
 active = False
