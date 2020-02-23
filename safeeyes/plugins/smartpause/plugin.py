@@ -68,6 +68,11 @@ def __gnome_wayland_idle_time():
         return 0
 
 
+def __x11_idle_time():
+    # Convert to seconds
+    return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
+
+
 def __system_idle_time():
     """
     Get system idle time in minutes.
@@ -76,8 +81,8 @@ def __system_idle_time():
     try:
         if is_wayland_and_gnome:
             return __gnome_wayland_idle_time()
-        # Convert to seconds
-        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
+        else:
+            return __x11_idle_time()
     except BaseException:
         return 0
 
