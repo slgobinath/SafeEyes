@@ -53,7 +53,6 @@ waiting_time = 2
 interpret_idle_as_break = False
 postpone_if_active = False
 timer: Optional[int] = None
-xcb_connection: Optional[xcffib.Connection] = None
 idle_checker: Optional[IdleTimeInterface] = None
 
 
@@ -92,6 +91,10 @@ class GnomeWaylandIdleTime(IdleTimeInterface):
 
 class X11IdleTime(IdleTimeInterface):
 
+    def __init__(self):
+        self.connection = xcffib.connect()
+        self.screensaver_ext = self.connection(xcffib.screensaver.key)
+
     @classmethod
     def is_applicable(cls, _context) -> bool:
         return True
@@ -99,9 +102,8 @@ class X11IdleTime(IdleTimeInterface):
     def idle_seconds(self):
         # noinspection PyBroadException
         try:
-            ext = xcb_connection(xcffib.screensaver.key)
-            root_window = xcb_connection.get_setup().roots[0].root
-            query = ext.QueryInfo(root_window)
+            root_window = self.connection.get_setup().roots[0].root
+            query = self.screensaver_ext.QueryInfo(root_window)
             info = query.reply()
             # Convert to seconds
             return info.ms_since_user_input / 1000
@@ -110,7 +112,7 @@ class X11IdleTime(IdleTimeInterface):
             return 0
 
     def destroy(self) -> None:
-        pass
+        self.connection.disconnect()
 
 
 _idle_checkers = [
@@ -208,7 +210,6 @@ def on_start():
     Begin polling to check user idle time.
     """
     global idle_checker
-    global xcb_connection
     global timer
 
     if __is_active():
@@ -219,7 +220,6 @@ def on_start():
     idle_checker = idle_checker_for_platform()
 
     __set_active(True)
-    xcb_connection = xcffib.connect()  # TODO: whether we need this depends on the monitor method
 
     # FIXME: need to make sure that this gets updated if the waiting_time config changes
     timer = GLib.timeout_add_seconds(waiting_time, __idle_monitor)
@@ -232,7 +232,7 @@ def on_stop():
     global smart_pause_activated
     global timer
     global idle_checker
-    global xcb_connection
+
     if smart_pause_activated:
         # Safe Eyes is stopped due to system idle
         smart_pause_activated = False
@@ -241,11 +241,9 @@ def on_stop():
     __set_active(False)
     GLib.source_remove(timer)
     timer = None
-    idle_checker.destroy()
-    idle_checker = None
-    if xcb_connection is not None:
-        xcb_connection.disconnect()
-        xcb_connection = None
+    if idle_checker is not None:
+        idle_checker.destroy()
+        idle_checker = None
 
 
 def update_next_break(break_obj, break_time):
