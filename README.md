@@ -58,7 +58,7 @@ sudo emerge -av x11-misc/safeeyes
 ### Debian
 
 ```bash
-sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle python3-pip
+sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib python3-xcffib python3-pip
 sudo pip3 install safeeyes
 sudo update-icon-caches /usr/share/icons/hicolor
 ```
@@ -72,7 +72,7 @@ sudo apt-get install safeeyes
 ### Fedora
 
 ```bash
-sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
+sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel python-xcffib
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
@@ -85,7 +85,7 @@ Ensure to meet the following dependencies:
 - gir1.2-notify-0.7
 - libappindicator-gtk3
 - python3-psutil
-- xprintidle (optional)
+- python3-xcffib
 
 **To install Safe Eyes:**
 
@@ -113,7 +113,7 @@ Some Linux systems like Cent OS do not have matching dependencies available in t
 1. Install the necessary dependencies
 
     ```
-    sudo yum install dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel
+    sudo yum install dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel libxcb-devel
     ```
 
 2. Create a virtual environment in your home folder
