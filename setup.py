@@ -7,7 +7,8 @@ requires = [
     'babel',
     'psutil',
     'PyGObject',
-    'python-xlib'
+    'python-xlib',
+    'xcffib'
 ]
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
