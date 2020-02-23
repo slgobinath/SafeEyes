@@ -121,10 +121,17 @@ _idle_checkers = [
 ]
 
 
-def idle_checker_for_platform():
+def idle_checker_for_platform(ctx) -> Optional[IdleTimeInterface]:
+    """
+    Create the appropriate idle checker for this context.
+    """
     for cls in _idle_checkers:
-        if cls.is_applicable(context):
-            return cls()
+        if cls.is_applicable(ctx):
+            checker = cls()
+            logging.debug("Using idle checker %s", checker)
+            return checker
+
+    logging.warning("Could not find any appropriate idle checker.")
     return None
 
 
@@ -217,7 +224,7 @@ def on_start():
         return
 
     logging.debug('Start Smart Pause plugin')
-    idle_checker = idle_checker_for_platform()
+    idle_checker = idle_checker_for_platform(context)
 
     __set_active(True)
 
