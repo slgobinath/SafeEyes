@@ -20,12 +20,9 @@ from safeeyes import Utility
 
 
 def validate(plugin_config):
-    command = None
     if Utility.DESKTOP_ENVIRONMENT == "gnome" and Utility.IS_WAYLAND:
         command = "dbus-send"
-    else:
-        command = "xprintidle"
-    if not Utility.command_exist(command):
-        return _("Please install the command-line tool '%s'") % command
-    else:
-        return None
+        if not Utility.command_exist(command):
+            return _("Please install the command-line tool '%s'") % command
+
+    return None

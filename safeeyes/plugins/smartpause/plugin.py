@@ -22,6 +22,11 @@ import subprocess
 import threading
 import re
 import os
+from typing import Optional
+
+import xcffib
+import xcffib.xproto
+import xcffib.screensaver
 
 from safeeyes import Utility
 from safeeyes.model import State
@@ -45,6 +50,7 @@ break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 is_wayland_and_gnome = False
+xcb_connection: Optional[xcffib.Connection] = None
 
 
 def __gnome_wayland_idle_time():
@@ -69,14 +75,22 @@ def __gnome_wayland_idle_time():
 
 
 def __x11_idle_time():
-    # Convert to seconds
-    return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
+    assert xcb_connection is not None
+    try:
+        ext = xcb_connection(xcffib.screensaver.key)
+        root_window = xcb_connection.get_setup().roots[0].root
+        query = ext.QueryInfo(root_window)
+        info = query.reply()
+        # Convert to seconds
+        return info.ms_since_user_input / 1000
+    except Exception:
+        logging.warning("Failed to get system idle time from XScreenSaver API", exc_info=True)
+        return 0
 
 
 def __system_idle_time():
     """
-    Get system idle time in minutes.
-    Return the idle time if xprintidle is available, otherwise return 0.
+    Get system idle time in seconds.
     """
     try:
         if is_wayland_and_gnome:
@@ -120,6 +134,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global interpret_idle_as_break
     global postpone_if_active
     global is_wayland_and_gnome
+    global xcb_connection
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -176,7 +191,8 @@ def on_start():
     """
     Start a thread to continuously call xprintidle.
     """
-    global active
+    global xcb_connection
+    xcb_connection = xcffib.connect()
     if not __is_active():
         # If SmartPause is already started, do not start it again
         logging.debug('Start Smart Pause plugin')
@@ -190,6 +206,10 @@ def on_stop():
     """
     global active
     global smart_pause_activated
+    global xcb_connection
+    if xcb_connection is not None:
+        xcb_connection.disconnect()
+        xcb_connection = None
     if smart_pause_activated:
         # Safe Eyes is stopped due to system idle
         smart_pause_activated = False
