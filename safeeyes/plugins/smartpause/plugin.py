@@ -19,24 +19,23 @@
 import datetime
 import logging
 import subprocess
-import threading
 import re
-import os
 from typing import Optional, Callable
 
 import xcffib
 import xcffib.xproto
 import xcffib.screensaver
 
-from safeeyes import Utility
 from safeeyes.model import State
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib
 
 """
 Safe Eyes smart pause plugin
 """
 
-idle_condition = threading.Condition()
-lock = threading.Lock()
 context: Optional[dict] = None
 active = False
 idle_time = 0
@@ -50,6 +49,7 @@ break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 is_wayland_and_gnome = False
+timer: Optional[int] = None
 xcb_connection: Optional[xcffib.Connection] = None
 
 
@@ -92,32 +92,25 @@ def __system_idle_time():
     """
     Get system idle time in seconds.
     """
-    try:
-        if is_wayland_and_gnome:
-            return __gnome_wayland_idle_time()
-        else:
-            return __x11_idle_time()
-    except BaseException:
-        return 0
+    if is_wayland_and_gnome:
+        return __gnome_wayland_idle_time()
+    else:
+        return __x11_idle_time()
 
 
 def __is_active():
     """
-    Thread safe function to see if this plugin is active or not.
+    Function to see if this plugin is active or not.
     """
-    is_active = False
-    with lock:
-        is_active = active
-    return is_active
+    return active
 
 
 def __set_active(is_active):
     """
-    Thread safe function to change the state of the plugin.
+    Function to change the state of the plugin.
     """
     global active
-    with lock:
-        active = is_active
+    active = is_active
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -149,76 +142,79 @@ def init(ctx, safeeyes_config, plugin_config):
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
 
-def __start_idle_monitor():
+def __idle_monitor():
     """
-    Continuously check the system idle time and pause/resume Safe Eyes based on it.
+    Check the system idle time and pause/resume Safe Eyes based on it.
     """
     global smart_pause_activated
     global idle_start_time
-    while __is_active():
-        # Wait for waiting_time seconds
-        idle_condition.acquire()
-        idle_condition.wait(waiting_time)
-        idle_condition.release()
 
-        if __is_active():
-            # Get the system idle time
-            system_idle_time = __system_idle_time()
-            if system_idle_time >= idle_time and context['state'] == State.WAITING:
-                smart_pause_activated = True
-                idle_start_time = datetime.datetime.now()
-                logging.info('Pause Safe Eyes due to system idle')
-                disable_safe_eyes(None)
-            elif system_idle_time < idle_time and context['state'] == State.STOPPED:
-                logging.info('Resume Safe Eyes due to user activity')
-                smart_pause_activated = False
-                idle_period = (datetime.datetime.now() - idle_start_time)
-                idle_seconds = idle_period.total_seconds()
-                context['idle_period'] = idle_seconds
-                if interpret_idle_as_break and idle_seconds >= next_break_duration:
-                    # User is idle for break duration and wants to consider it as a break
-                    enable_safe_eyes()
-                elif idle_seconds < break_interval:
-                    # Credit back the idle time
-                    next_break = next_break_time + idle_period
-                    enable_safe_eyes(next_break.timestamp())
-                else:
-                    # User is idle for more than the time between two breaks
-                    enable_safe_eyes()
+    if not __is_active():
+        return False  # stop the timeout handler.
+
+    system_idle_time = __system_idle_time()
+    if system_idle_time >= idle_time and context['state'] == State.WAITING:
+        smart_pause_activated = True
+        idle_start_time = datetime.datetime.now()
+        logging.info('Pause Safe Eyes due to system idle')
+        disable_safe_eyes(None)
+    elif system_idle_time < idle_time and context['state'] == State.STOPPED:
+        logging.info('Resume Safe Eyes due to user activity')
+        smart_pause_activated = False
+        idle_period = (datetime.datetime.now() - idle_start_time)
+        idle_seconds = idle_period.total_seconds()
+        context['idle_period'] = idle_seconds
+        if interpret_idle_as_break and idle_seconds >= next_break_duration:
+            # User is idle for break duration and wants to consider it as a break
+            enable_safe_eyes()
+        elif idle_seconds < break_interval:
+            # Credit back the idle time
+            next_break = next_break_time + idle_period
+            enable_safe_eyes(next_break.timestamp())
+        else:
+            # User is idle for more than the time between two breaks
+            enable_safe_eyes()
+
+    return True  # keep this timeout handler registered.
 
 
 def on_start():
     """
-    Start a thread to continuously call xprintidle.
+    Begin polling to check user idle time.
     """
     global xcb_connection
-    xcb_connection = xcffib.connect()
-    if not __is_active():
+    global timer
+
+    if __is_active():
         # If SmartPause is already started, do not start it again
-        logging.debug('Start Smart Pause plugin')
-        __set_active(True)
-        Utility.start_thread(__start_idle_monitor)
+        return
+
+    logging.debug('Start Smart Pause plugin')
+    __set_active(True)
+    xcb_connection = xcffib.connect()  # TODO: whether we need this depends on the monitor method
+
+    # FIXME: need to make sure that this gets updated if the waiting_time config changes
+    timer = GLib.timeout_add_seconds(waiting_time, __idle_monitor)
 
 
 def on_stop():
     """
-    Stop the thread from continuously calling xprintidle.
+    Stop polling to check user idle time.
     """
-    global active
     global smart_pause_activated
+    global timer
     global xcb_connection
-    if xcb_connection is not None:
-        xcb_connection.disconnect()
-        xcb_connection = None
     if smart_pause_activated:
         # Safe Eyes is stopped due to system idle
         smart_pause_activated = False
         return
     logging.debug('Stop Smart Pause plugin')
     __set_active(False)
-    idle_condition.acquire()
-    idle_condition.notify_all()
-    idle_condition.release()
+    GLib.source_remove(timer)
+    timer = None
+    if xcb_connection is not None:
+        xcb_connection.disconnect()
+        xcb_connection = None
 
 
 def update_next_break(break_obj, dateTime):
