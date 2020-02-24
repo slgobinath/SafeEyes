@@ -15,90 +15,139 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-import datetime
-import logging
-import subprocess
-import threading
-import re
-import os
-
-from safeeyes import Utility
-from safeeyes.model import State
-
 """
 Safe Eyes smart pause plugin
 """
 
-context = None
-idle_condition = threading.Condition()
-lock = threading.Lock()
+import datetime
+import logging
+import subprocess
+import re
+from typing import Optional, Callable
+
+import xcffib
+import xcffib.xproto
+import xcffib.screensaver
+
+from safeeyes import Utility
+from safeeyes.model import State
+from .interface import IdleTimeInterface
+
+import gi
+gi.require_version('Gtk', '3.0')
+from gi.repository import GLib
+
+
+context: Optional[dict] = None
 active = False
 idle_time = 0
-enable_safe_eyes = None
-disable_safe_eyes = None
+enable_safe_eyes: Optional[Callable[[Optional[int]], None]] = None
+disable_safe_eyes: Optional[Callable[[Optional[str]], None]] = None
+postpone: Optional[Callable[[Optional[int]], None]] = None
 smart_pause_activated = False
-idle_start_time = None
-next_break_time = None
+idle_start_time: Optional[datetime.datetime] = None
+next_break_time: Optional[datetime.datetime] = None
 next_break_duration = 0
 break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
-is_wayland_and_gnome = False
+postpone_if_active = False
+idle_checker: Optional[IdleTimeInterface] = None
+_timer_event_id: Optional[int] = None
 
 
-def __gnome_wayland_idle_time():
+class GnomeWaylandIdleTime(IdleTimeInterface):
     """
     Determine system idle time in seconds, specifically for gnome with wayland.
-    If there's a failure, return 0.
     https://unix.stackexchange.com/a/492328/222290
     """
-    try:
-        output = subprocess.check_output([
-            'dbus-send',
-            '--print-reply',
-            '--dest=org.gnome.Mutter.IdleMonitor',
-            '/org/gnome/Mutter/IdleMonitor/Core',
-            'org.gnome.Mutter.IdleMonitor.GetIdletime'
-        ])
-        return int(re.search(rb'\d+$', output).group(0)) / 1000
-    except BaseException as e:
-        logging.warning("Failed to get system idle time for gnome/wayland.")
-        logging.warning(str(e))
-        return 0
+
+    @classmethod
+    def is_applicable(cls, ctx) -> bool:
+        if ctx['desktop'] == 'gnome' and ctx['is_wayland']:
+            # ? Might work in all Gnome environments running Mutter whether they're Wayland or X?
+            return Utility.command_exist("dbus-send")
+
+        return False
+
+    def idle_seconds(self):
+        # noinspection PyBroadException
+        try:
+            output = subprocess.check_output([
+                'dbus-send',
+                '--print-reply',
+                '--dest=org.gnome.Mutter.IdleMonitor',
+                '/org/gnome/Mutter/IdleMonitor/Core',
+                'org.gnome.Mutter.IdleMonitor.GetIdletime'
+            ])
+            return int(re.search(rb'\d+$', output).group(0)) / 1000
+        except Exception:
+            logging.warning("Failed to get system idle time for gnome/wayland.", exc_info=True)
+            return 0
+
+    def destroy(self) -> None:
+        pass
 
 
-def __system_idle_time():
+class X11IdleTime(IdleTimeInterface):
+
+    def __init__(self):
+        self.connection = xcffib.connect()
+        self.screensaver_ext = self.connection(xcffib.screensaver.key)
+
+    @classmethod
+    def is_applicable(cls, _context) -> bool:
+        return True
+
+    def idle_seconds(self):
+        # noinspection PyBroadException
+        try:
+            root_window = self.connection.get_setup().roots[0].root
+            query = self.screensaver_ext.QueryInfo(root_window)
+            info = query.reply()
+            # Convert to seconds
+            return info.ms_since_user_input / 1000
+        except Exception:
+            logging.warning("Failed to get system idle time from XScreenSaver API", exc_info=True)
+            return 0
+
+    def destroy(self) -> None:
+        self.connection.disconnect()
+
+
+_idle_checkers = [
+    GnomeWaylandIdleTime,
+    X11IdleTime
+]
+
+
+def idle_checker_for_platform(ctx) -> Optional[IdleTimeInterface]:
     """
-    Get system idle time in minutes.
-    Return the idle time if xprintidle is available, otherwise return 0.
+    Create the appropriate idle checker for this context.
     """
-    try:
-        if is_wayland_and_gnome:
-            return __gnome_wayland_idle_time()
-        # Convert to seconds
-        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
-    except BaseException:
-        return 0
+    for cls in _idle_checkers:
+        if cls.is_applicable(ctx):
+            checker = cls()
+            logging.debug("Using idle checker %s", checker)
+            return checker
+
+    logging.warning("Could not find any appropriate idle checker.")
+    return None
 
 
 def __is_active():
     """
-    Thread safe function to see if this plugin is active or not.
+    Function to see if this plugin is active or not.
     """
-    is_active = False
-    with lock:
-        is_active = active
-    return is_active
+    return active
 
 
 def __set_active(is_active):
     """
-    Thread safe function to change the state of the plugin.
+    Function to change the state of the plugin.
     """
     global active
-    with lock:
-        active = is_active
+    active = is_active
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -114,7 +163,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global waiting_time
     global interpret_idle_as_break
     global postpone_if_active
-    global is_wayland_and_gnome
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -126,93 +174,102 @@ def init(ctx, safeeyes_config, plugin_config):
     break_interval = safeeyes_config.get(
         'short_break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
-    is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
 
-def __start_idle_monitor():
+def __idle_monitor():
     """
-    Continuously check the system idle time and pause/resume Safe Eyes based on it.
+    Check the system idle time and pause/resume Safe Eyes based on it.
     """
     global smart_pause_activated
     global idle_start_time
-    while __is_active():
-        # Wait for waiting_time seconds
-        idle_condition.acquire()
-        idle_condition.wait(waiting_time)
-        idle_condition.release()
 
-        if __is_active():
-            # Get the system idle time
-            system_idle_time = __system_idle_time()
-            if system_idle_time >= idle_time and context['state'] == State.WAITING:
-                smart_pause_activated = True
-                idle_start_time = datetime.datetime.now()
-                logging.info('Pause Safe Eyes due to system idle')
-                disable_safe_eyes(None)
-            elif system_idle_time < idle_time and context['state'] == State.STOPPED:
-                logging.info('Resume Safe Eyes due to user activity')
-                smart_pause_activated = False
-                idle_period = (datetime.datetime.now() - idle_start_time)
-                idle_seconds = idle_period.total_seconds()
-                context['idle_period'] = idle_seconds
-                if interpret_idle_as_break and idle_seconds >= next_break_duration:
-                    # User is idle for break duration and wants to consider it as a break
-                    enable_safe_eyes()
-                elif idle_seconds < break_interval:
-                    # Credit back the idle time
-                    next_break = next_break_time + idle_period
-                    enable_safe_eyes(next_break.timestamp())
-                else:
-                    # User is idle for more than the time between two breaks
-                    enable_safe_eyes()
+    if not __is_active():
+        return False  # stop the timeout handler.
+
+    system_idle_time = idle_checker.idle_seconds()
+    if system_idle_time >= idle_time and context['state'] == State.WAITING:
+        smart_pause_activated = True
+        idle_start_time = datetime.datetime.now()
+        logging.info('Pause Safe Eyes due to system idle')
+        disable_safe_eyes(None)
+    elif system_idle_time < idle_time and context['state'] == State.STOPPED:
+        logging.info('Resume Safe Eyes due to user activity')
+        smart_pause_activated = False
+        idle_period = (datetime.datetime.now() - idle_start_time)
+        idle_seconds = idle_period.total_seconds()
+        context['idle_period'] = idle_seconds
+        if interpret_idle_as_break and idle_seconds >= next_break_duration:
+            # User is idle for break duration and wants to consider it as a break
+            enable_safe_eyes()
+        elif idle_seconds < break_interval:
+            # Credit back the idle time
+            next_break = next_break_time + idle_period
+            enable_safe_eyes(next_break.timestamp())
+        else:
+            # User is idle for more than the time between two breaks
+            enable_safe_eyes()
+
+    return True  # keep this timeout handler registered.
 
 
 def on_start():
     """
-    Start a thread to continuously call xprintidle.
+    Begin polling to check user idle time.
     """
-    global active
-    if not __is_active():
+    global idle_checker
+    global _timer_event_id
+
+    if __is_active():
         # If SmartPause is already started, do not start it again
-        logging.debug('Start Smart Pause plugin')
-        __set_active(True)
-        Utility.start_thread(__start_idle_monitor)
+        return
+
+    logging.debug('Start Smart Pause plugin')
+    idle_checker = idle_checker_for_platform(context)
+
+    __set_active(True)
+
+    # FIXME: need to make sure that this gets updated if the waiting_time config changes
+    _timer_event_id = GLib.timeout_add_seconds(waiting_time, __idle_monitor)
 
 
 def on_stop():
     """
-    Stop the thread from continuously calling xprintidle.
+    Stop polling to check user idle time.
     """
-    global active
     global smart_pause_activated
+    global _timer_event_id
+    global idle_checker
+
     if smart_pause_activated:
         # Safe Eyes is stopped due to system idle
         smart_pause_activated = False
         return
     logging.debug('Stop Smart Pause plugin')
     __set_active(False)
-    idle_condition.acquire()
-    idle_condition.notify_all()
-    idle_condition.release()
+    GLib.source_remove(_timer_event_id)
+    _timer_event_id = None
+    if idle_checker is not None:
+        idle_checker.destroy()
+        idle_checker = None
 
 
-def update_next_break(break_obj, dateTime):
+def update_next_break(break_obj, break_time):
     """
     Update the next break time.
     """
     global next_break_time
     global next_break_duration
-    next_break_time = dateTime
+    next_break_time = break_time
     next_break_duration = break_obj.duration
 
 
-def on_start_break(break_obj):
+def on_start_break(_break_obj):
     """
     Lifecycle method executes just before the break.
     """
     if postpone_if_active:
         # Postpone this break if the user is active
-        system_idle_time = __system_idle_time()
+        system_idle_time = idle_checker.idle_seconds()
         if system_idle_time < 2:
             postpone(2)  # Postpone for 2 seconds
 
