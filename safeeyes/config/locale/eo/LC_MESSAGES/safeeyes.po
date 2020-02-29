@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2019-12-31 17:21+0000\n"
+"PO-Revision-Date: 2020-03-01 23:33+0000\n"
 "Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eo/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.0-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -24,15 +24,15 @@ msgstr "Streĉe malfermu viajn okulojn"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Movu viajn okulojn kelkfoje al ĉiu flanko"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Turnu viajn okulojn horloĝdirekte"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Turnu viajn okulojn kontraŭhorloĝdirekte"
 
 # Short break
 msgid "Blink your eyes"
@@ -40,7 +40,7 @@ msgstr "Palpebrumu"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "Fokusu malfermegan punkton."
+msgstr "Fokusu malfermegan punkton"
 
 # Short break
 msgid "Have some water"
@@ -52,43 +52,45 @@ msgstr "Promenu dum mallonga tempo"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Klinu vin malantaŭen en via seĝo kaj malstreĉu"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "montri la pri-dialogon"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "malebligi la nunan rulantan aperon de safeeyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "ebligi la nunan rulantan aperon de safeeyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "ĉesi la rulantan aperon de safeeyes kaj eliri"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "montri la dialogon de agordoj"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "komenci safeeyes-on en sencimiga reĝimo"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "montri la staton de la rulanta apero de safeeyes kaj eliri"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes nun ne rulas"
 
 # RPC not enabled message
 msgid "Safe Eyes is running without an RPC server. Turn it on to use command-line arguments."
 msgstr ""
+"Safe Eyes estas rulanta sen RPC-servilo. Ŝaltu ĝin por uzi komandliniajn "
+"argumentojn."
 
 # About dialog
 msgid "Close"
@@ -117,43 +119,43 @@ msgstr "Daŭro de paŭzo (en sekundoj)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Intertempo inter du paŭzoj (en minutoj)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Tempo por prepari por paŭzon (en sekundoj)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Daŭro de malebligo de fulmoklavoj (en sekundoj)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "Daŭro de prokrasto (en minutoj)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Severa paŭzo (Ne eblas preterpasi paŭzojn)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Lasi prokrasti paŭzojn"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Daŭri la internan staton"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Uzi RPC-servilon por ricevi rultempajn komandojn"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Sen la RPC-servilo, komandliniaj komandoj eble ne funkcias"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Longa paŭza intertempo devas esti oblo de mallonga paŭza intertempo"
 
 # Settings dialog
 msgid "Reset"
@@ -161,7 +163,7 @@ msgstr "Restartigi"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Ĉu vi certe volas restarigi ĉiujn agordojn al defaŭlta?"
 
 # Settings dialog
 msgid "Options"
@@ -253,7 +255,7 @@ msgstr "Kromaĵaj Agordoj"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Kromaĵo ne subtenas %s-fenestrilon"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
@@ -265,7 +267,7 @@ msgstr "Bonvolu instali la ilo de komanda linio '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Bonvolu aldoni la rimedon %(resource)s al %(config_resource)s-dosierujo"
 
 # Settings dialog
 msgid "New Break"
@@ -277,7 +279,7 @@ msgstr "Forigi"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Forĵeti"
 
 # Settings dialog
 msgid "Save"
@@ -285,19 +287,19 @@ msgstr "Konservi"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Aŭdebla Alarmo"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Ludi aŭdeblan alarmon antaŭ kaj post paŭzoj"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Ludi aŭdeblan alarmon antaŭ paŭzoj"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Ludi aŭdeblan alarmon post paŭzoj"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -305,23 +307,23 @@ msgstr "Ne Interrompi"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Preterpasi paŭzon, se la aktiva fenestro estas en plenekrana reĝimo"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Ne interrompi ĉi tiujn fenestrojn iutempe"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Interrompi ĉi tiujn fenestrojn senrespekte al ilia stato"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Komuti la interrompeblan fenestron al normala reĝimo"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Ne ĝeni dum bateria reĝimo"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -333,7 +335,7 @@ msgstr "Montri statistikojn bazita sur kiel vi uzas Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Intertempo por restarigi statistikojn (en horoj)"
 
 # plugin/notification
 msgid "Notification"
@@ -341,15 +343,15 @@ msgstr "Sciigo"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Montri sisteman sciigon antaŭ paŭzoj"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Preta por mallonga paŭzo en %s sekundoj"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Preta por longa paŭzo en %s sekundoj"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -357,15 +359,15 @@ msgstr "Ekrankurteno"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "Bloki la ekranon post longaj paŭzoj ekigante ekrankurtenon"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Propra ekrankurtena komando"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Minimumaj sekundoj por preterpasi sen ekrankurteno"
 
 # plugin/screensaver
 msgid "Lock screen"
@@ -381,15 +383,16 @@ msgstr "Paŭzi je Safe Eyes, se la sistemo estas senokupa"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Minimuma senokupa tempo por paŭzi je Safe Eyes (en sekundoj)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Interpreti senokupan tempon ekvivalentan al venonta daŭro de paŭzo kiel paŭzo"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Prokrasti la sekvan paŭzon ĝis la sistemo iĝas senokupa"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -400,9 +403,8 @@ msgid "Show a tray icon in the notification area"
 msgstr "Montri travan bildsimbolon en la sciiga zono"
 
 #: plugins/trayicon
-#, fuzzy
 msgid "Show next break time in tray icon"
-msgstr "Montri sekvan "
+msgstr "Montri sekvan tempon de paŭzo en pleta bildeto"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
@@ -476,7 +478,7 @@ msgstr "Aŭdovidaĵa Stiro"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "Paŭzi plurmediajn ludilojn en la "
+msgstr "Paŭzi plurmediajn ludilojn ene de la paŭza ekrano"
 
 # plugin/mediacontrol
 msgid "Pause media"
