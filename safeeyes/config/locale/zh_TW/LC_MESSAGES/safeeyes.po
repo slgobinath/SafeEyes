@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-07-02 15:36+0000\n"
-"Last-Translator: ezjerry liao <ezjerry@gmail.com>\n"
+"PO-Revision-Date: 2020-03-03 03:33+0000\n"
+"Last-Translator: 649756477994 <nbkefskepk34@opayq.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.1-dev\n"
+"X-Generator: Weblate 4.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -83,7 +83,7 @@ msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes 沒有正在執行"
+msgstr "Safe Eyes 未啟動"
 
 # RPC not enabled message
 msgid ""
@@ -114,15 +114,15 @@ msgstr "延遲"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "休息時長（秒）"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "休息間隔（分鐘）"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "休息前準備時間（秒）"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -130,15 +130,15 @@ msgstr ""
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "推遲休息時長（分鐘）"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "強制休息（無法跳過）"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "允許推遲休息"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -154,35 +154,35 @@ msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "長休息間隔須為短休息間隔的倍數"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "重設"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "確定重設為預設設定？"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "選項"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "短休息"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "長休息"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "確定刪除此休息？"
 
 # Settings dialog
 msgid "You can't undo this action."
@@ -190,11 +190,11 @@ msgstr ""
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "休息"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "休息"
 
 # Settings dialog
 msgid "Plugins"
@@ -202,15 +202,15 @@ msgstr ""
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "類型"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "短"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "長"
 
 # Settings dialog
 msgid "Image"
