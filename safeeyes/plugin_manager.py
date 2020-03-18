@@ -47,15 +47,15 @@ import logging
 import os
 import sys
 
-from safeeyes import Utility
+from safeeyes import utility
 
-sys.path.append(os.path.abspath(Utility.SYSTEM_PLUGINS_DIR))
-sys.path.append(os.path.abspath(Utility.USER_PLUGINS_DIR))
+sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
+sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
 
 HORIZONTAL_LINE_LENGTH = 64
 
 
-class PluginManager(object):
+class PluginManager:
     """
     Imports the Safe Eyes plugins and calls the methods defined in those plugins.
     """
@@ -246,10 +246,10 @@ class PluginManager(object):
 
         # Look for plugin.py
         plugin_dir = None
-        if os.path.isfile(os.path.join(Utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-            plugin_dir = Utility.SYSTEM_PLUGINS_DIR
-        elif os.path.isfile(os.path.join(Utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
-            plugin_dir = Utility.USER_PLUGINS_DIR
+        if os.path.isfile(os.path.join(utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+            plugin_dir = utility.SYSTEM_PLUGINS_DIR
+        elif os.path.isfile(os.path.join(utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+            plugin_dir = utility.USER_PLUGINS_DIR
         else:
             logging.error('plugin.py not found for the plugin: %s', plugin['id'])
             return
@@ -259,7 +259,7 @@ class PluginManager(object):
         if not os.path.isfile(plugin_config_path):
             logging.error('config.json not found for the plugin: %s', plugin['id'])
             return
-        plugin_config = Utility.load_json(plugin_config_path)
+        plugin_config = utility.load_json(plugin_config_path)
         if plugin_config is None:
             return
 
@@ -292,7 +292,7 @@ class PluginManager(object):
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                if Utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin_path):
+                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin_path):
                     return
 
                 # Load the plugin module

@@ -16,16 +16,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from safeeyes import Utility
+from safeeyes import utility
 
 
 def validate(plugin_config):
     command = None
-    if Utility.DESKTOP_ENVIRONMENT == "gnome" and Utility.IS_WAYLAND:
+    if utility.DESKTOP_ENVIRONMENT == "gnome" and utility.IS_WAYLAND:
         command = "dbus-send"
     else:
         command = "xprintidle"
-    if not Utility.command_exist(command):
+    if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:
         return None

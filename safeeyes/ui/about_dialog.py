@@ -22,19 +22,19 @@ This module creates the AboutDialog which shows the version and license.
 
 import os
 
-from safeeyes import Utility
+from safeeyes import utility
 
-ABOUT_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/about_dialog.glade")
+ABOUT_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
 
-class AboutDialog(object):
+class AboutDialog:
     """
     AboutDialog reads the about_dialog.glade and build the user interface using that file.
     It shows the application name with version, a small description, license and the GitHub url.
     """
 
     def __init__(self, version):
-        builder = Utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
+        builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('window_about')
         builder.get_object('lbl_decription').set_label(_('description'))

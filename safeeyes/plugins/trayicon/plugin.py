@@ -23,7 +23,7 @@ gi.require_version('AppIndicator3', '0.1')
 from gi.repository import AppIndicator3 as appindicator
 from gi.repository import Gtk
 import logging
-from safeeyes import Utility
+from safeeyes import utility
 import threading
 import time
 
@@ -37,7 +37,7 @@ tray_icon = None
 safeeyes_config = None
 
 
-class TrayIcon(object):
+class TrayIcon:
     """
     Create and show the tray icon along with the tray menu.
     """
@@ -193,7 +193,7 @@ class TrayIcon(object):
                 self.indicator.set_icon("safeeyes_enabled")
             else:
                 if self.wakeup_time:
-                    self.item_info.set_label(_('Disabled until %s') % Utility.format_time(self.wakeup_time))
+                    self.item_info.set_label(_('Disabled until %s') % utility.format_time(self.wakeup_time))
                 else:
                     self.item_info.set_label(_('Disabled until restart'))
                 self.indicator.set_label('', '')
@@ -263,10 +263,10 @@ class TrayIcon(object):
         """
         A private method to be called within this class to update the next break information using self.dateTime.
         """
-        formatted_time = Utility.format_time(self.date_time)
+        formatted_time = utility.format_time(self.date_time)
         message = _('Next break at %s') % (formatted_time)
         # Update the menu item label
-        Utility.execute_main_thread(self.item_info.set_label, message)
+        utility.execute_main_thread(self.item_info.set_label, message)
         # Update the tray icon label
         if self.plugin_config.get('show_time_in_tray', False):
             self.indicator.set_label(formatted_time, '')
@@ -311,10 +311,10 @@ class TrayIcon(object):
                 self.item_info.set_label(info)
             else:
                 self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
-                info = _('Disabled until %s') % Utility.format_time(self.wakeup_time)
+                info = _('Disabled until %s') % utility.format_time(self.wakeup_time)
                 self.on_disable(info)
                 self.item_info.set_label(info)
-                Utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
+                utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
 
     def lock_menu(self):
         """
@@ -368,25 +368,25 @@ class TrayIcon(object):
 
         with self.lock:
             if not self.active:
-                Utility.execute_main_thread(self.item_enable.activate)
+                utility.execute_main_thread(self.item_enable.activate)
 
     def start_animation(self):
         if not self.active or not self.animate:
             return
-        Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
         time.sleep(0.5)
-        Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
         if self.animate and self.active:
             time.sleep(0.5)
             if self.animate and self.active:
-                Utility.start_thread(self.start_animation)
+                utility.start_thread(self.start_animation)
 
     def stop_animation(self):
         self.animate = False
         if self.active:
-            Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
         else:
-            Utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """
@@ -429,7 +429,7 @@ def __unlock_menu():
     """
     Unlock the menu
     """
-    Utility.execute_main_thread(tray_icon.unlock_menu)
+    utility.execute_main_thread(tray_icon.unlock_menu)
 
 
 def on_start():

@@ -26,7 +26,7 @@ from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.client import ServerProxy
 
 
-class RPCServer(object):
+class RPCServer:
     """
     An aynchronous RPC server.
     """
@@ -62,7 +62,7 @@ class RPCServer(object):
             self.__server.shutdown()
 
 
-class RPCClient(object):
+class RPCClient:
     """
     An RPC client to communicate with the RPC server.
     """

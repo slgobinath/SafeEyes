@@ -28,14 +28,14 @@ from threading import Timer
 import dbus
 import gi
 from dbus.mainloop.glib import DBusGMainLoop
-from safeeyes import Utility
-from safeeyes.AboutDialog import AboutDialog
-from safeeyes.BreakScreen import BreakScreen
+from safeeyes import utility
+from safeeyes.ui.about_dialog import AboutDialog
+from safeeyes.ui.break_screen import BreakScreen
 from safeeyes.model import State
 from safeeyes.rpc import RPCServer
-from safeeyes.PluginManager import PluginManager
-from safeeyes.SafeEyesCore import SafeEyesCore
-from safeeyes.settings import SettingsDialog
+from safeeyes.plugin_manager import PluginManager
+from safeeyes.core import SafeEyesCore
+from safeeyes.ui.settings_dialog import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -43,7 +43,7 @@ from gi.repository import Gtk
 SAFE_EYES_VERSION = "2.0.9"
 
 
-class SafeEyes(object):
+class SafeEyes:
     """
     This class represents a runnable Safe Eyes instance.
     """
@@ -61,28 +61,28 @@ class SafeEyes(object):
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
-        self.context['desktop'] = Utility.desktop_environment()
-        self.context['is_wayland'] = Utility.is_wayland()
+        self.context['desktop'] = utility.desktop_environment()
+        self.context['is_wayland'] = utility.is_wayland()
         self.context['locale'] = system_locale
         self.context['api'] = {}
-        self.context['api']['show_settings'] = lambda: Utility.execute_main_thread(
+        self.context['api']['show_settings'] = lambda: utility.execute_main_thread(
             self.show_settings)
-        self.context['api']['show_about'] = lambda: Utility.execute_main_thread(
+        self.context['api']['show_about'] = lambda: utility.execute_main_thread(
             self.show_about)
         self.context['api']['enable_safeeyes'] = lambda next_break_time=- \
-            1: Utility.execute_main_thread(self.enable_safeeyes, next_break_time)
-        self.context['api']['disable_safeeyes'] = lambda status: Utility.execute_main_thread(
+            1: utility.execute_main_thread(self.enable_safeeyes, next_break_time)
+        self.context['api']['disable_safeeyes'] = lambda status: utility.execute_main_thread(
             self.disable_safeeyes, status)
         self.context['api']['status'] = self.status
-        self.context['api']['quit'] = lambda: Utility.execute_main_thread(
+        self.context['api']['quit'] = lambda: utility.execute_main_thread(
             self.quit)
         if self.config.get('persist_state'):
-            self.context['session'] = Utility.open_session()
+            self.context['session'] = utility.open_session()
         else:
             self.context['session'] = {'plugin': {}}
 
         self.break_screen = BreakScreen(
-            self.context, self.on_skipped, self.on_postponed, Utility.STYLE_SHEET_PATH)
+            self.context, self.on_skipped, self.on_postponed, utility.STYLE_SHEET_PATH)
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager(self.context, self.config)
         self.safe_eyes_core = SafeEyesCore(self.context)
@@ -93,7 +93,7 @@ class SafeEyes(object):
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
-        self.context['api']['take_break'] = lambda: Utility.execute_main_thread(
+        self.context['api']['take_break'] = lambda: utility.execute_main_thread(
             self.safe_eyes_core.take_break)
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
@@ -282,9 +282,9 @@ class SafeEyes(object):
         """
         self.plugins_manager.update_next_break(break_obj, break_time)
         self._status = _('Next break at %s') % (
-            Utility.format_time(break_time))
+            utility.format_time(break_time))
         if self.config.get('persist_state'):
-            Utility.write_json(Utility.SESSION_FILE_PATH,
+            utility.write_json(utility.SESSION_FILE_PATH,
                                self.context['session'])
 
     def stop_break(self):
@@ -312,10 +312,10 @@ class SafeEyes(object):
         Save the session object to the session file.
         """
         if self.config.get('persist_state'):
-            Utility.write_json(Utility.SESSION_FILE_PATH,
+            utility.write_json(utility.SESSION_FILE_PATH,
                                self.context['session'])
         else:
-            Utility.delete(Utility.SESSION_FILE_PATH)
+            utility.delete(utility.SESSION_FILE_PATH)
 
     def __start_rpc_server(self):
         if self.rpc_server is None:

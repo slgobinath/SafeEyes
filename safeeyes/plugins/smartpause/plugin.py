@@ -23,7 +23,7 @@ import threading
 import re
 import os
 
-from safeeyes import Utility
+from safeeyes import utility
 from safeeyes.model import State
 
 """
@@ -176,7 +176,7 @@ def on_start():
         # If SmartPause is already started, do not start it again
         logging.debug('Start Smart Pause plugin')
         __set_active(True)
-        Utility.start_thread(__start_idle_monitor)
+        utility.start_thread(__start_idle_monitor)
 
 
 def on_stop():

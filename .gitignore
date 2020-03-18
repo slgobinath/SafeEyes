@@ -102,3 +102,6 @@ ENV/
 safeeyes/config/locale/*/LC_MESSAGES/safeeyes.po~
 
 node_modules/
+
+# PyCharm
+.idea

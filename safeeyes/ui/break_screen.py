@@ -23,7 +23,7 @@ import threading
 import time
 
 import gi
-from safeeyes import Utility
+from safeeyes import utility
 from Xlib.display import Display
 from Xlib.display import X
 
@@ -32,10 +32,10 @@ from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
 
-BREAK_SCREEN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/break_screen.glade")
+BREAK_SCREEN_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/break_screen.glade")
 
 
-class BreakScreen(object):
+class BreakScreen:
     """
     The fullscreen window which prevents users from using the computer.
     This class reads the break_screen.glade and build the user interface.
@@ -149,7 +149,7 @@ class BreakScreen(object):
         Show an empty break screen on all screens.
         """
         # Lock the keyboard
-        Utility.start_thread(self.__lock_keyboard)
+        utility.start_thread(self.__lock_keyboard)
 
         screen = Gtk.Window().get_screen()
         no_of_monitors = screen.get_n_monitors()

@@ -29,16 +29,16 @@ from threading import Timer
 
 import gi
 import psutil
-from safeeyes import Utility
+from safeeyes import utility
 from safeeyes.model import Config
-from safeeyes.SafeEyes import SafeEyes
-from safeeyes.SafeEyes import SAFE_EYES_VERSION
+from safeeyes.safeeyes import SafeEyes
+from safeeyes.safeeyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-gettext.install('safeeyes', Utility.LOCALE_PATH)
+gettext.install('safeeyes', utility.LOCALE_PATH)
 
 
 def __running():
@@ -73,26 +73,26 @@ def __evaluate_arguments(args, safe_eyes):
     Evaluate the arguments and execute the operations.
     """
     if args.about:
-        Utility.execute_main_thread(safe_eyes.show_about)
+        utility.execute_main_thread(safe_eyes.show_about)
     elif args.disable:
-        Utility.execute_main_thread(safe_eyes.disable_safeeyes)
+        utility.execute_main_thread(safe_eyes.disable_safeeyes)
     elif args.enable:
-        Utility.execute_main_thread(safe_eyes.enable_safeeyes)
+        utility.execute_main_thread(safe_eyes.enable_safeeyes)
     elif args.settings:
-        Utility.execute_main_thread(safe_eyes.show_settings)
+        utility.execute_main_thread(safe_eyes.show_settings)
     elif args.take_break:
-        Utility.execute_main_thread(safe_eyes.take_break)
+        utility.execute_main_thread(safe_eyes.take_break)
 
 
 def main():
     """
     Start the Safe Eyes.
     """
-    system_locale = gettext.translation('safeeyes', localedir=Utility.LOCALE_PATH, languages=[Utility.system_locale(), 'en_US'], fallback=True)
+    system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH, languages=[utility.system_locale(), 'en_US'], fallback=True)
     system_locale.install()
     # locale.bindtextdomain is required for Glade files
     # gettext.bindtextdomain(gettext.textdomain(), Utility.LOCALE_PATH)
-    locale.bindtextdomain('safeeyes', Utility.LOCALE_PATH)
+    locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
 
     parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
     group = parser.add_mutually_exclusive_group()
@@ -108,7 +108,7 @@ def main():
     args = parser.parse_args()
 
     # Initialize the logging
-    Utility.intialize_logging(args.debug)
+    utility.intialize_logging(args.debug)
     config = Config()
 
     if __running():
@@ -143,9 +143,9 @@ def main():
             sys.exit(0)
         elif not args.quit:
             logging.info("Starting Safe Eyes")
-            safeeyes = SafeEyes(system_locale, config)
-            safeeyes.start()
-            Timer(1.0, lambda: __evaluate_arguments(args, safeeyes)).start()
+            safe_eyes = SafeEyes(system_locale, config)
+            safe_eyes.start()
+            Timer(1.0, lambda: __evaluate_arguments(args, safe_eyes)).start()
             Gtk.main()
 
 

@@ -23,10 +23,10 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 from distutils.version import LooseVersion
 from enum import Enum
 import logging
-from safeeyes import Utility
+from safeeyes import utility
 
 
-class Break(object):
+class Break:
     """
     An entity class which represents a break.
     """
@@ -76,7 +76,7 @@ class BreakType(Enum):
     LONG_BREAK = 2
 
 
-class BreakQueue(object):
+class BreakQueue:
 
     def __init__(self, config, context):
         self.context = context
@@ -203,7 +203,7 @@ class State(Enum):
     QUIT = 5
 
 
-class EventHook(object):
+class EventHook:
     """
     Hook to attach and detach listeners to system events.
     """
@@ -229,21 +229,21 @@ class EventHook(object):
         return True
 
 
-class Config(object):
+class Config:
     """
     The configuration of Safe Eyes.
     """
 
     def __init__(self, init=True):
         # Read the config files
-        self.__user_config = Utility.load_json(Utility.CONFIG_FILE_PATH)
-        self.__system_config = Utility.load_json(
-            Utility.SYSTEM_CONFIG_FILE_PATH)
+        self.__user_config = utility.load_json(utility.CONFIG_FILE_PATH)
+        self.__system_config = utility.load_json(
+            utility.SYSTEM_CONFIG_FILE_PATH)
         self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if init:
             if self.__user_config is None:
-                Utility.initialize_safeeyes()
+                utility.initialize_safeeyes()
                 self.__user_config = self.__system_config
                 self.save()
             else:
@@ -261,9 +261,9 @@ class Config(object):
                             self.__user_config, self.__system_config)
                         self.__user_config = self.__system_config
                         # Update the style sheet
-                        Utility.replace_style_sheet()
+                        utility.replace_style_sheet()
 
-            Utility.merge_plugins(self.__user_config)
+            utility.merge_plugins(self.__user_config)
             self.save()
 
     def __merge_dictionary(self, old_dict, new_dict):
@@ -291,7 +291,7 @@ class Config(object):
         """
         Save the configuration to file.
         """
-        Utility.write_json(Utility.CONFIG_FILE_PATH, self.__user_config)
+        utility.write_json(utility.CONFIG_FILE_PATH, self.__user_config)
 
     def get(self, key, default_value=None):
         """
@@ -315,7 +315,7 @@ class Config(object):
         return self.__user_config != config.__user_config
 
 
-class TrayAction(object):
+class TrayAction:
     """
     Data object wrapping name, icon and action.
     """
@@ -331,7 +331,7 @@ class TrayAction(object):
         if self.system_icon:
             return self.__icon
         else:
-            image = Utility.load_and_scale_image(self.__icon, 16, 16)
+            image = utility.load_and_scale_image(self.__icon, 16, 16)
             image.show()
             return image
 
@@ -345,7 +345,7 @@ class TrayAction(object):
 
     @classmethod
     def build(cls, name, icon_path, icon_id, action):
-        image = Utility.load_and_scale_image(icon_path, 12, 12)
+        image = utility.load_and_scale_image(icon_path, 12, 12)
         if image is None:
             return TrayAction(name, icon_id, action, True)
         else:

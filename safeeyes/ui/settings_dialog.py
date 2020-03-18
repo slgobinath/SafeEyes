@@ -20,7 +20,7 @@ import math
 import os
 
 import gi
-from safeeyes import Utility
+from safeeyes import utility
 from safeeyes.model import Config
 
 gi.require_version('Gtk', '3.0')
@@ -28,18 +28,18 @@ from gi.repository import Gtk
 from gi.repository import GdkPixbuf
 
 
-SETTINGS_DIALOG_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
-SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
-SETTINGS_DIALOG_BREAK_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/settings_break.glade")
-SETTINGS_DIALOG_NEW_BREAK_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/new_break.glade")
-SETTINGS_BREAK_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_break.glade")
-SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_plugin.glade")
-SETTINGS_ITEM_INT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_int.glade")
-SETTINGS_ITEM_TEXT_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_text.glade")
-SETTINGS_ITEM_BOOL_GLADE = os.path.join(Utility.BIN_DIRECTORY, "glade/item_bool.glade")
+SETTINGS_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
+SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
+SETTINGS_DIALOG_BREAK_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_break.glade")
+SETTINGS_DIALOG_NEW_BREAK_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/new_break.glade")
+SETTINGS_BREAK_ITEM_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_break.glade")
+SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_plugin.glade")
+SETTINGS_ITEM_INT_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_int.glade")
+SETTINGS_ITEM_TEXT_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_text.glade")
+SETTINGS_ITEM_BOOL_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_bool.glade")
 
 
-class SettingsDialog(object):
+class SettingsDialog:
     """
         Create and initialize SettingsDialog instance.
     """
@@ -54,7 +54,7 @@ class SettingsDialog(object):
         self.infobar_long_break_shown = False
         self.warn_bar_rpc_server_shown = False
 
-        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
         builder.connect_signals(self)
 
         self.window = builder.get_object('window_settings')
@@ -101,7 +101,7 @@ class SettingsDialog(object):
         for long_break in config.get('long_breaks'):
             self.__create_break_item(long_break, False)
 
-        for plugin_config in Utility.load_plugins_config(config):
+        for plugin_config in utility.load_plugins_config(config):
             self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
             
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
@@ -124,7 +124,7 @@ class SettingsDialog(object):
         parent_box = self.box_long_breaks
         if is_short:
             parent_box = self.box_short_breaks
-        builder = Utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
         box = builder.get_object('box')
         lbl_name = builder.get_object('lbl_name')
         lbl_name.set_label(_(break_config['name']))
@@ -157,7 +157,7 @@ class SettingsDialog(object):
         self.popover.hide()
         def __confirmation_dialog_response(widget, response_id):
             if response_id == Gtk.ResponseType.OK:
-                Utility.reset_config()
+                utility.reset_config()
                 self.config = Config()
                 # Remove breaks from the container
                 self.box_short_breaks.foreach(lambda element: self.box_short_breaks.remove(element))
@@ -206,7 +206,7 @@ class SettingsDialog(object):
         """
         Create an entry for plugin to be listed in the plugin tab.
         """
-        builder = Utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
         lbl_plugin_name = builder.get_object('lbl_plugin_name')
         lbl_plugin_description = builder.get_object('lbl_plugin_description')
         switch_enable = builder.get_object('switch_enable')
@@ -336,7 +336,7 @@ class SettingsDialog(object):
         self.window.destroy()
 
 
-class PluginSettingsDialog(object):
+class PluginSettingsDialog:
     """
     Builds a settings dialog based on the configuration of a plugin.
     """
@@ -345,7 +345,7 @@ class PluginSettingsDialog(object):
         self.config = config
         self.property_controls = []
 
-        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_plugin')
         box_settings = builder.get_object('box_settings')
@@ -362,7 +362,7 @@ class PluginSettingsDialog(object):
         """
         Load the UI control for int property.
         """
-        builder = Utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
         builder.get_object('lbl_name').set_label(_(name))
         spin_value = builder.get_object('spin_value')
         spin_value.set_range(min_value, max_value)
@@ -376,7 +376,7 @@ class PluginSettingsDialog(object):
         """
         Load the UI control for text property.
         """
-        builder = Utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
         builder.get_object('lbl_name').set_label(_(name))
         txt_value = builder.get_object('txt_value')
         txt_value.set_text(settings[key])
@@ -389,7 +389,7 @@ class PluginSettingsDialog(object):
         """
         Load the UI control for boolean property.
         """
-        builder = Utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
         builder.get_object('lbl_name').set_label(_(name))
         switch_value = builder.get_object('switch_value')
         switch_value.set_active(settings[key])
@@ -413,7 +413,7 @@ class PluginSettingsDialog(object):
         self.window.show_all()
 
 
-class BreakSettingsDialog(object):
+class BreakSettingsDialog:
     """
     Builds a settings dialog based on the configuration of a plugin.
     """
@@ -427,7 +427,7 @@ class BreakSettingsDialog(object):
         self.on_add = on_add
         self.on_remove = on_remove
 
-        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_break')
         self.txt_break = builder.get_object('txt_break')
@@ -583,7 +583,7 @@ class BreakSettingsDialog(object):
         self.window.show_all()
 
 
-class NewBreakDialog(object):
+class NewBreakDialog:
     """
     Builds a new break dialog.
     """
@@ -592,7 +592,7 @@ class NewBreakDialog(object):
         self.parent_config = parent_config
         self.on_add = on_add
 
-        builder = Utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
+        builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('dialog_new_break')
         self.txt_break = builder.get_object('txt_break')

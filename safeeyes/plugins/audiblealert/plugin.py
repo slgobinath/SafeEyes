@@ -21,7 +21,7 @@ Audible Alert plugin plays a sound after each breaks to notify the user that the
 """
 
 import logging
-from safeeyes import Utility
+from safeeyes import utility
 
 context = None
 pre_break_alert = False
@@ -37,10 +37,10 @@ def play_sound(resource_name):
     logging.info('Playing audible alert %s', resource_name)
     try:
         # Open the sound file
-        path = Utility.get_resource_path(resource_name)
+        path = utility.get_resource_path(resource_name)
         if path is None:
             return
-        Utility.execute_command('aplay', ['-q', path])
+        utility.execute_command('aplay', ['-q', path])
 
     except BaseException:
         logging.error('Failed to play audible alert %s', resource_name)

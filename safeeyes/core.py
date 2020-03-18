@@ -25,7 +25,7 @@ import logging
 import threading
 import time
 
-from safeeyes import Utility
+from safeeyes import utility
 from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
@@ -33,7 +33,7 @@ from safeeyes.model import EventHook
 from safeeyes.model import State
 
 
-class SafeEyesCore(object):
+class SafeEyesCore:
     """
     Core of Safe Eyes runs the scheduler and notifies the breaks.
     """
@@ -90,7 +90,7 @@ class SafeEyesCore(object):
                 logging.info("Start Safe Eyes core")
                 self.running = True
                 self.scheduled_next_break_timestamp = int(next_break_time)
-                Utility.start_thread(self.__scheduler_job)
+                utility.start_thread(self.__scheduler_job)
 
     def stop(self):
         """
@@ -135,7 +135,7 @@ class SafeEyesCore(object):
             return
         if not self.context['state'] == State.WAITING:
             return
-        Utility.start_thread(self.__take_break)
+        utility.start_thread(self.__take_break)
 
     def has_breaks(self):
         """
@@ -163,7 +163,7 @@ class SafeEyesCore(object):
             time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
             self.running = True
 
-        Utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__fire_start_break)
 
     def __scheduler_job(self):
         """
@@ -198,7 +198,7 @@ class SafeEyesCore(object):
             self.scheduled_next_break_timestamp = -1
 
         self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
-        Utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
+        utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
 
         # Wait for the pre break warning period
         logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
@@ -208,7 +208,7 @@ class SafeEyesCore(object):
 
         if not self.running:
             return
-        Utility.execute_main_thread(self.__fire_pre_break)
+        utility.execute_main_thread(self.__fire_pre_break)
 
     def __fire_on_update_next_break(self, next_break_time):
         """
@@ -225,7 +225,7 @@ class SafeEyesCore(object):
             # Plugins wanted to ignore this break
             self.__start_next_break()
             return
-        Utility.start_thread(self.__wait_until_prepare)
+        utility.start_thread(self.__wait_until_prepare)
 
     def __wait_until_prepare(self):
         logging.info("Wait for %d seconds before the break", self.pre_break_warning_time)
@@ -233,11 +233,11 @@ class SafeEyesCore(object):
         self.__wait_for(self.pre_break_warning_time)
         if not self.running:
             return
-        Utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__fire_start_break)
 
     def __postpone_break(self):
         self.__wait_for(self.postpone_duration)
-        Utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__fire_start_break)
 
     def __fire_start_break(self):
         # Show the break screen
@@ -252,10 +252,10 @@ class SafeEyesCore(object):
             self.scheduled_next_break_time = self.scheduled_next_break_time + datetime.timedelta(seconds=self.postpone_duration)
             self.__fire_on_update_next_break(self.scheduled_next_break_time)
             # Wait in user thread
-            Utility.start_thread(self.__postpone_break)
+            utility.start_thread(self.__postpone_break)
         else:
             self.start_break.fire(self.break_queue.get_break())
-            Utility.start_thread(self.__start_break)
+            utility.start_thread(self.__start_break)
 
     def __start_break(self):
         """
@@ -271,7 +271,7 @@ class SafeEyesCore(object):
             self.on_count_down.fire(countdown, seconds)
             time.sleep(1)    # Sleep for 1 second
             countdown -= 1
-        Utility.execute_main_thread(self.__fire_stop_break)
+        utility.execute_main_thread(self.__fire_stop_break)
 
     def __fire_stop_break(self):
         # Loop terminated because of timeout (not skipped) -> Close the break alert
@@ -297,4 +297,4 @@ class SafeEyesCore(object):
 
         if self.running:
             # Schedule the break again
-            Utility.start_thread(self.__scheduler_job)
+            utility.start_thread(self.__scheduler_job)
