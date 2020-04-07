@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-04-07 14:36+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2020-04-07 17:14+0000\n"
+"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -83,9 +83,7 @@ msgstr "mostrar o estado de execução do Safe Eyes e sair"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
-"\n"
-"Safe Eyes não está em execução"
+msgstr "Safe Eyes não está em execução"
 
 # RPC not enabled message
 msgid ""
@@ -486,12 +484,12 @@ msgstr "Sair"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr "Controle de Mídia"
+msgstr "Controle de Multimédia"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "Pausar leitores de multimédia desde o ecrã de interrupção"
+msgstr "Pausar leitores de multimédia do ecrã de pausa"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr "Pausar mídia"
+msgstr "Pausar mutimédia"
