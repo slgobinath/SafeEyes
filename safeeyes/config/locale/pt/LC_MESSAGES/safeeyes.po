@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-03-30 15:07+0000\n"
-"Last-Translator: José Vieira <jvieira33@sapo.pt>\n"
+"PO-Revision-Date: 2020-04-07 14:36+0000\n"
+"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -138,11 +138,11 @@ msgstr "Duração do adiamento (em minutos)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "Parada forçada (Não tem como pular a parada)"
+msgstr "Pausa estrita (Não há como ignorar as pausas)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "Permitir quebra de adiamentos"
+msgstr "Permitir pausas de adiamentos"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -150,17 +150,18 @@ msgstr "Persistir o estado interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Utilize o servidor RPC para receber comandos de tempo de execução"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
+"Sem o servidor RPC, os comandos da linha de comandos podem não funcionar"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
-"O intervalo de uma parada longa deve ser um múltiplo do intervalo de uma "
-"parada curta"
+"O intervalo de uma pausa longa deve ser um múltiplo do intervalo de uma "
+"pausa curta"
 
 # Settings dialog
 msgid "Reset"
@@ -169,8 +170,7 @@ msgstr "Reiniciar"
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
-"Você tem certeza de que deseja reiniciar todas as configurações para a "
-"predefinição?"
+"Tem a certeza que deseja reiniciar todas as definições para a predefinição?"
 
 # Settings dialog
 msgid "Options"
@@ -178,35 +178,35 @@ msgstr "Opções"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "Paradas Curtas"
+msgstr "Pausas Curtas"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "Paradas Longas"
+msgstr "Pausas Longas"
 
 # Settings dialog
 msgid "Delete"
-msgstr "Apagar"
+msgstr "Eliminar"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Tem certeza que quer remover essa pausa?"
+msgstr "Tem a certeza que deseja remover esta pausa?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Você não pode desfazer esta ação."
+msgstr "Não pode anular esta ação."
 
 # Settings dialog
 msgid "Break"
-msgstr "Parada"
+msgstr "Pausa"
 
 # Settings dialog
 msgid "Breaks"
-msgstr "Paradas"
+msgstr "Pausas"
 
 # Settings dialog
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Plug-ins"
 
 # Settings dialog
 msgid "Type"
@@ -254,32 +254,33 @@ msgstr "Tempo (em minutos)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "Configurações da Parada"
+msgstr "Definições de Pausa"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "Configurações de Plugins"
+msgstr "Definições de Plug-in"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "Plugin não é suportado no ambiente de trabalho %s"
+msgstr "O plug-in não suporta o ambiente da área de trabalho %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Por favor instale o módulo Pynthon '%s'"
+msgstr "Por favor, instale o módulo '%s' do Pynthon"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Por favor instale a ferramenta de linha de comando '%s'"
+msgstr "Por favor, instale a ferramenta '%s' da linha de comandos"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Por favor, adicione o recurso %(resource)s para %(config_resources)s pasta"
+"Por favor, adicione o recurso %(resource)s para a diretoria "
+"%(config_resources)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr "Nova Parada"
+msgstr "Nova Pausa"
 
 # Settings dialog
 msgid "Remove"
@@ -291,7 +292,7 @@ msgstr "Descartar"
 
 # Settings dialog
 msgid "Save"
-msgstr "Salvar"
+msgstr "Guardar"
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -299,11 +300,11 @@ msgstr "Alerta Sonoro"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr "Tocar alerta audível antes e depois das pausas"
+msgstr "Reproduzir alerta sonoro antes e depois das pausas"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "Tocar alerta audível antes das pausas"
+msgstr "Reproduzir alerta sonoro antes das pausas"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
