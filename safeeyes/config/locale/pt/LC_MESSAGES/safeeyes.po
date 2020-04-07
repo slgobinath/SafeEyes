@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2020-04-07 14:36+0000\n"
-"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
+"Last-Translator: anonymous <noreply@weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -83,7 +83,9 @@ msgstr "mostrar o estado de execução do Safe Eyes e sair"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "O Safe Eyes não está em execução"
+msgstr ""
+"\n"
+"Safe Eyes não está em execução"
 
 # RPC not enabled message
 msgid ""
