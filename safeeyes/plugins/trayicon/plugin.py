@@ -417,7 +417,6 @@ def on_pre_break(break_obj):
     """
     if safeeyes_config.get('strict_break'):
         tray_icon.lock_menu()
-        threading.Timer(safeeyes_config.get('pre_break_warning_time'), __unlock_menu).start()
     tray_icon.animate = True
     tray_icon.start_animation()
 
@@ -425,11 +424,9 @@ def on_pre_break(break_obj):
 def on_start_break(break_obj):
     tray_icon.stop_animation()
 
-def __unlock_menu():
-    """
-    Unlock the menu
-    """
-    utility.execute_main_thread(tray_icon.unlock_menu)
+
+def on_stop_break():
+    tray_icon.unlock_menu()
 
 
 def on_start():
