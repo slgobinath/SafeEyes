@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-04-16 19:06+0000\n"
+"PO-Revision-Date: 2020-04-13 08:11+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6-dev\n"
+"X-Generator: Weblate 4.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes töötab RPC serverita. Käsurea parameetrite kasutamiseks lülita ta "
+"sisse."
 
 # About dialog
 msgid "Close"
@@ -148,11 +150,11 @@ msgstr "Sisemise seisundi säilitamine"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Kasuta RPC serverit käitusaja käskude vastuvõtuks"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Käsurea parameetrid ei pruugi töötada RPC serverita"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
