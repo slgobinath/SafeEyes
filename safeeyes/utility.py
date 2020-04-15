@@ -22,6 +22,7 @@ This module contains utility functions for Safe Eyes and its plugins.
 
 import errno
 import imp
+import inspect
 import importlib
 import json
 import locale
@@ -554,3 +555,21 @@ def load_and_scale_image(path, width, height):
         preserve_aspect_ratio=True)
     image = Gtk.Image.new_from_pixbuf(pixbuf)
     return image
+
+
+def has_method(module, method_name, no_of_args=0):
+    """
+    Check whether the given function is defined in the module or not.
+    """
+    if hasattr(module, method_name):
+        if len(inspect.getargspec(getattr(module, method_name)).args) == no_of_args:
+            return True
+    return False
+
+
+def remove_if_exists(list_of_items, item):
+    """
+    Remove the item from the list_of_items it it exists.
+    """
+    if item in list_of_items:
+        list_of_items.remove(item)

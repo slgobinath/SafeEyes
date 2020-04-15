@@ -84,7 +84,7 @@ class SafeEyes:
         self.break_screen = BreakScreen(
             self.context, self.on_skipped, self.on_postponed, utility.STYLE_SHEET_PATH)
         self.break_screen.initialize(self.config)
-        self.plugins_manager = PluginManager(self.context, self.config)
+        self.plugins_manager = PluginManager()
         self.safe_eyes_core = SafeEyesCore(self.context)
         self.safe_eyes_core.on_pre_break += self.plugins_manager.pre_break
         self.safe_eyes_core.on_start_break += self.on_start_break
