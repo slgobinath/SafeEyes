@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-05-02 09:01+0000\n"
-"Last-Translator: Martin Beer <mv87@dismail.de>\n"
+"PO-Revision-Date: 2020-05-03 09:11+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -343,7 +343,7 @@ msgstr "Gesundheitsstatistik anzeigen"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr "Intervall zum Zurücksetzen der Statistik (in Stunden)"
+msgstr "Zeit bis die Statistik zurückgesetzt wird (in Stunden)"
 
 # plugin/notification
 msgid "Notification"
@@ -415,7 +415,7 @@ msgstr "Nächsten Pausen-Termin im Tray-Symbol anzeigen"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "Deaktivieren von Safe Eyes zulassen"
+msgstr "Erlaube Safe Eyes zu deaktivieren"
 
 #: plugins/trayicon
 msgid "About"
