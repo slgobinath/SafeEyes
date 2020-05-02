@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2020-05-02 09:01+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: Martin Beer <mv87@dismail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -331,7 +331,7 @@ msgstr "Unterbrechbare Fenster in normalen Modus umschalten"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Nicht stören solange das Gerät im Akkubetrieb ist"
+msgstr "Nicht stören, solange das Gerät im Akkubetrieb ist"
 
 # plugin/healthstats
 msgid "Health Statistics"
