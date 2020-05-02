@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2020-05-02 09:01+0000\n"
-"Last-Translator: Martin Beer <mv87@dismail.de>\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -189,11 +189,11 @@ msgstr "Löschen"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Möchten Sie diese Pause wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie diese Pause löschen möchten?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Diese Aktion kann nicht widerrufen werden."
+msgstr "Dies kann nicht rückgängig gemacht werden."
 
 # Settings dialog
 msgid "Break"
@@ -331,7 +331,7 @@ msgstr "Unterbrechbare Fenster in normalen Modus umschalten"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Nicht stören, im Akkumodus des Gerätes"
+msgstr "Nicht stören solange das Gerät im Akkubetrieb ist"
 
 # plugin/healthstats
 msgid "Health Statistics"
