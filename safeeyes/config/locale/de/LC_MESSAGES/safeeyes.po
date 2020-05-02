@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-08-06 17:23+0000\n"
-"Last-Translator: Andreas Kleinert <Andy.Kleinert@gmail.com>\n"
+"PO-Revision-Date: 2020-05-02 09:01+0000\n"
+"Last-Translator: Martin Beer <mv87@dismail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.8-dev\n"
+"X-Generator: Weblate 4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -23,15 +23,15 @@ msgstr "Augen fest schließen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Rollen Sie die Augen ein paar Mal nach jeder Seite"
+msgstr "Rollen Sie die Augen ein paar Mal auf jede Seite"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Rollen Sie Ihre Augen im Uhrzeigersinn"
+msgstr "Lassen Sie Ihre Augen im Uhrzeigersinn kreisen"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Rollen Sie Ihre Augen entgegen dem Uhrzeigersinn"
+msgstr "Lassen Sie Ihre Augen entgegen dem Uhrzeigersinn kreisen"
 
 # Short break
 msgid "Blink your eyes"
@@ -67,7 +67,7 @@ msgstr "Aktuelle Instanz von Safe Eyes aktivieren"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Aktuelle SafeEyes-Instanz beenden und Anwendung schließen"
+msgstr "Aktuelle Instanz von Safe Eyes beenden und Anwendung schließen"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -79,7 +79,8 @@ msgstr "Im Debug-Modus starten"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "Status der laufenden SafeEyes-Instanz ausgeben und Anwendung beenden"
+msgstr ""
+"Status der laufenden Instanz von Safe Eyes ausgeben und Anwendung beenden"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -90,6 +91,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes läuft ohne RPC-Server. Aktivieren Sie ihn, um Kommandozeilen-"
+"Befehle während der Laufzeit nutzen zu können."
 
 # About dialog
 msgid "Close"
@@ -147,10 +150,11 @@ msgstr "Internen Zustand beibehalten"
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
 msgstr ""
+"RPC-Server benutzen, um Befehle während der Laufzeit empfangen zu können"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Ohne RPC-Server werden Kommandozeilen-Befehle nicht funktionieren"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -165,7 +169,7 @@ msgstr "Zurücksetzen"
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
-"Möchten Sie wirklich alle Einstellungen auf die Standardwerte zurücksetzen?"
+"Möchten Sie wirklich alle Einstellungen auf ihre Standardwerte zurücksetzen?"
 
 # Settings dialog
 msgid "Options"
@@ -185,11 +189,11 @@ msgstr "Löschen"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Möchten Sie diese Pause wirklich löschen?"
+msgstr "Sind Sie sicher, dass Sie diese Pause löschen möchten?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Diese Aktion kann nicht widerrufen werden."
+msgstr "Dies kann nicht rückgängig gemacht werden."
 
 # Settings dialog
 msgid "Break"
@@ -261,7 +265,7 @@ msgstr "Das Plugin unterstützt die Desktop-Umgebung %s nicht"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Bitte Python-Module '%s' installieren"
+msgstr "Bitte Python-Modul '%s' installieren"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
@@ -270,7 +274,8 @@ msgstr "Bitte Programm '%s' für die Kommandozeile installieren"
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Bitte in Verzeichnis %(config_resource)s Ressource %(resource)s hinzufügen"
+"Bitte in Verzeichnis %(config_resource)s die Ressource %(resource)s "
+"hinzufügen"
 
 # Settings dialog
 msgid "New Break"
@@ -310,7 +315,7 @@ msgstr "Nicht stören"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Pause überschringen wenn aktives Fenster im Vollbild-Modus"
+msgstr "Pause überspringen wenn sich aktives Fenster im Vollbild-Modus befindet"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -326,15 +331,15 @@ msgstr "Unterbrechbare Fenster in normalen Modus umschalten"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Nicht stören, im Akkumodus des Gerätes"
+msgstr "Nicht stören, solange das Gerät im Akkubetrieb ist"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr "Statistik Gesundheit"
+msgstr "Gesundheitsstatistik"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Statistik Gesundheit anzeigen"
+msgstr "Gesundheitsstatistik anzeigen"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
@@ -366,7 +371,7 @@ msgstr "Nach langer Pause Bildschirm mit Bildschirmschoner sperren"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Benutzerdefinierter Bezehl Bidschirmschoner"
+msgstr "Benutzerdefinierter Bildschirmschoner-Befehl"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -394,7 +399,7 @@ msgstr "Mit Pausendauer gleiche Leerlaufdauer als Pause interpretieren"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "Nächste Pause verschieben, bis das System im Leerlauf ist"
+msgstr "Nächste Pause verschieben, bis sich das System im Leerlauf befindet"
 
 #: plugins/trayicon
 msgid "Tray Icon"
