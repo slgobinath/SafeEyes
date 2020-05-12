@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-03-08 13:32+0000\n"
-"Last-Translator: Riceball LEE <snowyu.lee@gmail.com>\n"
+"PO-Revision-Date: 2020-05-14 00:41+0000\n"
+"Last-Translator: Eric <spice2wolf@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -148,11 +148,11 @@ msgstr "维持内部状态"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "使用RPC服务器接收运行时命令"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "没有RPC服务器，命令行命令可能无法正常工作"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
