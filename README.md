@@ -112,13 +112,13 @@ Some Linux systems like Cent OS do not have matching dependencies available in t
 
 1. Install the necessary dependencies
 
-    ```
-    sudo yum install dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel
+    ```bash
+    sudo yum install python3-devel dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel gobject-introspection-devel cairo-gobject-devel
     ```
 
 2. Create a virtual environment in your home folder
 
-    ```
+    ```bash
     mkdir ~/safeeyes
     cd ~/safeeyes/
 
@@ -130,7 +130,7 @@ Some Linux systems like Cent OS do not have matching dependencies available in t
 
 3. Start Safe Eyes from terminal
 
-    ```
+    ```bash
     cd ~/safeeyes & source venv/bin/activate
     python3 -m safeeyes
     ```
@@ -139,15 +139,15 @@ For more details, please check the issue: [#329](https://github.com/slgobinath/S
 
 ## Features
 
- - Remind you to take breaks with exercises to reduce RSI
- - Disable keyboard during breaks
- - Notification before and after breaks
- - Smart pause if system is idle
- - Multi-screen support
- - Customizable user interface
- - RPC API to control externally
- - Command-line arguments to control the running instance
- - Customizable using plug-ins
+- Remind you to take breaks with exercises to reduce RSI
+- Disable keyboard during breaks
+- Notification before and after breaks
+- Smart pause if system is idle
+- Multi-screen support
+- Customizable user interface
+- RPC API to control externally
+- Command-line arguments to control the running instance
+- Customizable using plug-ins
 
 ## Third-party Plugins
 
