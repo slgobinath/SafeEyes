@@ -218,11 +218,11 @@ class BreakScreen:
 
             # In Unity, move the window before present
             window.move(x, y)
+            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
             window.stick()
             window.set_keep_above(True)
             window.present()
             # In other desktop environments, move the window after present
-            # if self.context['desktop'] != 'unity':
             window.move(x, y)
             window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
             logging.info("Moved break screen to Display[%d, %d]", x, y)
