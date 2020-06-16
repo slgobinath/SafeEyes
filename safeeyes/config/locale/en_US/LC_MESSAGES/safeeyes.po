@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2017-10-08 12:42+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2020-06-17 18:41+0000\n"
+"Last-Translator: Aanand Kainth <akainth015@gmail.com>\n"
 "Language-Team: English (United States) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/en_US/>\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.17-dev\n"
+"X-Generator: Weblate 4.1.1-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -90,7 +90,9 @@ msgstr "Safe Eyes is not running"
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
-msgstr "Safe Eyes is running without an RPC server.\nTurn it on to use command-line arguments."
+msgstr ""
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 
 # About dialog
 msgid "Close"
@@ -161,7 +163,7 @@ msgstr "Long break interval must be a multiple of short break interval"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
@@ -373,7 +375,7 @@ msgstr "Minimum seconds to skip without screensaver"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Lock screen"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -393,7 +395,7 @@ msgstr "Interpret idle time equivalent to upcoming break duration as a break"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Postpone the next break until the system becomes idle"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -475,12 +477,12 @@ msgstr "Quit"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Media Control"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pause media players from the break screen"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pause media"
