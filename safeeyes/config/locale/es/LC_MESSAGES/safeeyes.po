@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-02-23 11:33+0000\n"
-"Last-Translator: riesp <riesp@pm.me>\n"
+"PO-Revision-Date: 2020-06-26 11:41+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,63 +15,63 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Cierra fuertemente tus ojos"
+msgstr "Cierre fuertemente los ojos"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Pon los ojos en blanco hacia cada lado"
+msgstr "Mueva los ojos de lado a lado varias veces"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Mueve tus ojos en círculos en sentido horario"
+msgstr "Gire los ojos en sentido horario"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Mueve tus ojos en círculos en sentido antihorario"
+msgstr "Gire los ojos en sentido antihorario"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Parpadea tus ojos"
+msgstr "Parpadee"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "Enfoca un punto lejano"
+msgstr "Enfóquese en un punto distante"
 
 # Short break
 msgid "Have some water"
-msgstr "Bebe un poco de agua"
+msgstr "Beba un poco de agua"
 
 # Long break
 msgid "Walk for a while"
-msgstr "Vete a andar un rato"
+msgstr "Camine un rato"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Reclínate sobre tu silla y relájate"
+msgstr "Reclínese sobre su silla y relájese"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "mostrar dialogo acerca de safeeyes"
+msgstr "mostrar el cuadro de diálogo Acerca de"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "deshabilitar la instancia actual de safeeyes"
+msgstr "desactivar el ejemplar de safeeyes en ejecución"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "habilitar la instancia actual de safeeyes"
+msgstr "activar el ejemplar de safeeyes en ejecución"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "abandonar la instancia en curso de safeeyes"
+msgstr "abandonar el ejemplar de safeeyes en ejecución y salir"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "muestra dialogo de configuraciones"
+msgstr "mostrar el cuadro de diálogo Configuración"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
@@ -79,7 +79,7 @@ msgstr "iniciar safeeyes en modo de depuración"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "mostrar el estado de la instancia de safeeyes en ejecución y salir"
+msgstr "mostrar el estado del ejemplar de safeeyes en ejecución y salir"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -91,7 +91,7 @@ msgid ""
 "command-line arguments."
 msgstr ""
 "Safe Eyes está funcionando sin un servidor RPC. Actívelo para usar "
-"argumentos de línea de comandos."
+"argumentos de línea de órdenes."
 
 # About dialog
 msgid "Close"
@@ -146,16 +146,16 @@ msgstr "Permitir posponer los descansos"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "Preservar el estado interno"
+msgstr "Estado interno persistente"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "Usar el servidor RPC para recibir comandos en tiempo de ejecución"
+msgstr "Utilizar el servidor RPC para recibir órdenes en tiempo de ejecución"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
-"Sin el servidor RPC, los comandos ejecutados en la terminal pueden no "
+"Sin el servidor RPC, las órdenes ejecutadas en la terminal pueden no "
 "funcionar"
 
 # Settings dialog
@@ -171,7 +171,7 @@ msgstr "Restablecer"
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
-"¿Seguro que quieres restablecer todos los ajustes a sus valores "
+"¿Confirma que quiere restablecer todos los ajustes a sus valores "
 "predeterminados?"
 
 # Settings dialog
@@ -184,7 +184,7 @@ msgstr "Descansos cortos"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "Pausas Largas"
+msgstr "Descansos largos"
 
 # Settings dialog
 msgid "Delete"
@@ -192,15 +192,15 @@ msgstr "Eliminar"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "¿Seguro que quieres eliminar esta pausa?"
+msgstr "¿Confirma que quiere eliminar este descanso?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "No puedes deshacer esta acción."
+msgstr "Esta acción no se puede deshacer."
 
 # Settings dialog
 msgid "Break"
-msgstr "Pausa"
+msgstr "Descanso"
 
 # Settings dialog
 msgid "Breaks"
@@ -232,11 +232,11 @@ msgstr "Seleccionar"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Por favor seleccione una imagen"
+msgstr "Seleccione una imagen"
 
 # Settings dialog
 msgid "Duration"
-msgstr "Duracion"
+msgstr "Duración"
 
 # Settings dialog
 msgid "Time to wait"
@@ -244,7 +244,7 @@ msgstr "Tiempo de espera"
 
 # Settings dialog
 msgid "Override"
-msgstr "Sobreescribir"
+msgstr "Anular"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -256,36 +256,35 @@ msgstr "Tiempo (en minutos)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "Ajustes de Descansos"
+msgstr "Configuración de descansos"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "Ajustes de plugins"
+msgstr "Configuración de complementos"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "El complemento no es compatible %s con el entorno de escritorio"
+msgstr "El complemento no admite el entorno de escritorio %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Por favor instale el módulo de Python '%s'"
+msgstr "Instale el módulo de Python «%s»"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Por favor, instale la herramienta línea de comandos '%s'"
+msgstr "Instale la herramienta de línea de órdenes «%s»"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
-"Por favor, añade el recurso %(resource)s al directorio %(config_resource)s"
+msgstr "Añada el recurso %(resource)s al directorio %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr "Nueva Pausa"
+msgstr "Descanso nuevo"
 
 # Settings dialog
 msgid "Remove"
-msgstr "Eliminar"
+msgstr "Quitar"
 
 # Settings dialog
 msgid "Discard"
@@ -297,7 +296,7 @@ msgstr "Guardar"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "Alerta Audible"
+msgstr "Alerta audible"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
@@ -309,7 +308,7 @@ msgstr "Reproducir una alerta audible antes de los descansos"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "Reproducir una alerta audible después de descansos"
+msgstr "Reproducir una alerta audible después de los descansos"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -370,8 +369,7 @@ msgstr "Salvapantallas"
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
-"Bloquear la pantalla después de descansos largos iniciando el protector de "
-"pantalla"
+"Bloquear la pantalla después de descansos largos iniciando el salvapantallas"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
@@ -387,7 +385,7 @@ msgstr "Bloquear pantalla"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "Pausa Inteligente"
+msgstr "Pausa inteligente"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
@@ -421,7 +419,7 @@ msgstr "Mostrar el tiempo del siguiente descanso en la barra de tareas"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "Permitir deshabilitar Safe Eyes"
+msgstr "Permitir desactivar Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -429,37 +427,37 @@ msgstr "Acerca de"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "Deshabilitar Safe Eyes"
+msgstr "Desactivar Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Deshabilitado hasta"
+msgstr "Desactivado hasta %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Deshabilitado hasta reiniciar"
+msgstr "Desactivado hasta reiniciar"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Habilitar Safe Eyes"
+msgstr "Activar Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Durante %d Hora"
-msgstr[1] "Durante %d Horas"
+msgstr[0] "Por %d hora"
+msgstr[1] "Por %d horas"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Durante %d Minuto"
-msgstr[1] "Durante %d Minutos"
+msgstr[0] "Por %d minuto"
+msgstr[1] "Por %d minutos"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Durante %d Segundo"
-msgstr[1] "Durante %d Segundos"
+msgstr[0] "Por %d segundo"
+msgstr[1] "Por %d segundos"
 
 #: plugins/trayicon
 msgid "Next break at %s"
@@ -471,7 +469,7 @@ msgstr "No hay pausas disponibles"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr "Ajustes"
+msgstr "Configuración"
 
 #: plugins/trayicon
 msgid "Take a break now"
@@ -487,11 +485,11 @@ msgstr "Salir"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr "Control Multimedia"
+msgstr "Control multimedia"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "Pausar los reproductores multimedia desde la pantalla de descanso"
+msgstr "Pausar los reproductores de medios desde la pantalla de descanso"
 
 # plugin/mediacontrol
 msgid "Pause media"
