@@ -160,8 +160,13 @@ def __start_idle_monitor():
                     enable_safe_eyes()
                 elif idle_seconds < break_interval:
                     # Credit back the idle time
-                    next_break = next_break_time + idle_period
-                    enable_safe_eyes(next_break.timestamp())
+                    if next_break is not None:
+                        # This method runs in a thread since the start.
+                        # It may run before next_break is initialized in the update_next_break method
+                        next_break = next_break_time + idle_period
+                        enable_safe_eyes(next_break.timestamp())
+                    else:
+                        enable_safe_eyes()
                 else:
                     # User is idle for more than the time between two breaks
                     enable_safe_eyes()
