@@ -35,6 +35,7 @@ import threading
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
 
+import babel.core
 import babel.dates
 import gi
 gi.require_version('Gtk', '3.0')
@@ -119,7 +120,12 @@ def format_time(time):
     Format time based on the system time.
     """
     sys_locale = system_locale(locale.LC_TIME)
-    return babel.dates.format_time(time, format='short', locale=sys_locale)
+    try:
+        return babel.dates.format_time(time, format='short', locale=sys_locale)
+    except babel.core.UnknownLocaleError:
+        # Some locale types are not supported by the babel library.
+        # Use 'en' locale format if the system locale is not supported.
+        return babel.dates.format_time(time, format='short', locale='en')
 
 
 def mkdir(path):
