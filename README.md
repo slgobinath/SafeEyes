@@ -10,7 +10,7 @@ Protect your eyes from eye strain using this simple and beautiful, yet extensibl
 
 Visit the official site: http://slgobinath.github.io/SafeEyes/ for more details.
 
-## Safe Eyes command-line arguements
+## Safe Eyes command-line arguments
 
 ```text
 usage: safeeyes [-h] [-a | -d | -e | -q | -s | -t] [--debug] [--version]
