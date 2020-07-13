@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-04-07 17:14+0000\n"
-"Last-Translator: Manuela Silva <mmsrs@sky.com>\n"
+"PO-Revision-Date: 2020-07-14 16:41+0000\n"
+"Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -67,7 +67,7 @@ msgstr "habilitar a instância do safeeyes que está em execução"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "fechar a instância atual do do safeeyes e sair"
+msgstr "fechar a instância atual do safeeyes e sair"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -316,7 +316,7 @@ msgstr "Não Perturbe"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Pular a parada se a janela ativa estiver em modo tela cheia"
+msgstr "Pular a parada se a janela ativa estiver em modo ecrã cheio"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -364,19 +364,19 @@ msgstr "Prepare-se para uma parada longa em %s segundos"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr "Proteção de tela"
+msgstr "Protetor de ecrã"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Bloquear a tela após paradas longas iniciando a proteção de tela"
+msgstr "Bloquear o ecrã após paradas longas iniciando a proteção de ecrã"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Comando para proteção de tela personalizada"
+msgstr "Comando para proteção de ecrã personalizada"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "Segundos mínimos para pular sem a proteção de tela"
+msgstr "Segundos mínimos para pular sem a proteção de ecrã"
 
 # plugin/screensaver
 msgid "Lock screen"
