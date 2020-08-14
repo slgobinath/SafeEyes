@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-07-14 16:41+0000\n"
+"PO-Revision-Date: 2020-08-15 06:32+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
@@ -63,7 +63,7 @@ msgstr "desabilitar a instância do safeeyes que está rodando"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "habilitar a instância do safeeyes que está em execução"
+msgstr "ativar a instância do safeeyes que está em execução"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
@@ -438,7 +438,7 @@ msgstr "Desabilitado até reiniciar"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "Habilitar o Safe Eyes"
+msgstr "Ativar o Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
