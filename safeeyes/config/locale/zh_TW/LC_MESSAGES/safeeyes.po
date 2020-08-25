@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-03-03 03:33+0000\n"
-"Last-Translator: 649756477994 <nbkefskepk34@opayq.com>\n"
+"PO-Revision-Date: 2020-08-30 19:37+0000\n"
+"Last-Translator: marklin0913da248e4cdada422a <marklin0913@protonmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.2.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -214,15 +214,15 @@ msgstr "長"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "圖片"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "選擇"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "請選擇一張照片"
 
 # Settings dialog
 msgid "Duration"
@@ -238,15 +238,15 @@ msgstr ""
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "時間（秒）"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "時間（分）"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "休息設定"
 
 # Settings dialog
 msgid "Plugin Settings"
@@ -274,15 +274,15 @@ msgstr ""
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "拋棄"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "儲存"
 
 # plugin/audiblealert
 msgid "Audible Alert"
@@ -302,7 +302,7 @@ msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "勿擾模式"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
@@ -322,11 +322,11 @@ msgstr ""
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "使用電池時不要打擾"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "健康數據"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
@@ -334,15 +334,15 @@ msgstr ""
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "重置數據間隔（時）"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "通知"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "在休息前顯示系統通知"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
@@ -354,7 +354,7 @@ msgstr ""
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "螢幕保護"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
@@ -362,7 +362,7 @@ msgstr ""
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "自訂螢幕保護指令"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -370,19 +370,19 @@ msgstr ""
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "鎖定螢幕"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "智慧暫停"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "暫停Safe Eyes如果系統閒置"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "最短暫停Safe Eyes 的閒置時間（秒）"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -406,42 +406,42 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "允許關閉Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "關於"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "關閉Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "關閉直到 %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "關閉直到重啟"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "開啟Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
+msgstr[0] "%d 小時"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
+msgstr[0] "%d 分鐘"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
+msgstr[0] "%d 秒"
 
 #: plugins/trayicon
 msgid "Next break at %s"
@@ -453,7 +453,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: plugins/trayicon
 msgid "Take a break now"
@@ -461,11 +461,11 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "直到重啟"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 # plugin/mediacontrol
 msgid "Media Control"
