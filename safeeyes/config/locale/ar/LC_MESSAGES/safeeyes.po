@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-13 16:11+0000\n"
-"Last-Translator: Hatem Ghouthi <hatemghouthi@yahoo.com>\n"
+"PO-Revision-Date: 2020-08-30 19:37+0000\n"
+"Last-Translator: mohammadA <mohammadAbdulhadi1@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 4.2.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -48,7 +48,7 @@ msgstr "اشرب قليلا من الماء"
 
 # Long break
 msgid "Walk for a while"
-msgstr "إمشي قليلا"
+msgstr "امش قليلا"
 
 # Long break
 msgid "Lean back at your seat and relax"
@@ -56,7 +56,7 @@ msgstr "تمدد إلى الخلف على كرسيك واسترح"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "أظهر نافذة عن البرنامج"
+msgstr "أظهر نافذة \"عن البرنامج\""
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
@@ -91,6 +91,7 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"يعمل Safe Eyes الآن دون خادوم RPC. شغِّله لكي تستعمل معطيات سطر الأوامر."
 
 # About dialog
 msgid "Close"
@@ -147,11 +148,11 @@ msgstr "ثبّت الحالة الداخلية"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "استعمل خادوم RPC لاستقبال الأوامر في وقت التشغيل"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "قد لا تعمل أوامر سطر الأوامر من غير خادوم RPC"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -159,7 +160,7 @@ msgstr "الاستراحات الطويلة يجب أن تكون من مضاعف
 
 # Settings dialog
 msgid "Reset"
-msgstr "إعادة تعيين"
+msgstr "صفِّر"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
@@ -180,11 +181,11 @@ msgstr "استراحات طويلة"
 
 # Settings dialog
 msgid "Delete"
-msgstr "حذف"
+msgstr "احذف"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "هل أنت متأكد أنك تريد حذف هذا الانفصال؟"
+msgstr "هل أنت متأكد أنك تريد حذف هذه الاستراحة؟"
 
 # Settings dialog
 msgid "You can't undo this action."
@@ -260,15 +261,15 @@ msgstr "لا تدعم الإضافة بيئة سطح المكتب %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "من فضلك ثبّت وحدة Python '%s'"
+msgstr "من فضلك ثبّت وحدة بايثون باسم '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "رجاءا ثبّت أداة سطر الأوامر '%s'"
+msgstr "من فضلك ثبّت أداة سطر الأوامر '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "رجاءا أضف المورد %(resource)s إلى دليل %(config_resource)s"
+msgstr "من فضلك أضف المورد %(resource)s إلى الدليل %(config_resource)"
 
 # Settings dialog
 msgid "New Break"
@@ -280,15 +281,15 @@ msgstr "إزالة"
 
 # Settings dialog
 msgid "Discard"
-msgstr "إلغاء"
+msgstr "اترك"
 
 # Settings dialog
 msgid "Save"
-msgstr "حفظ"
+msgstr "احفظ"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "تنبيه"
+msgstr "تنبيه مسموع"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
@@ -296,11 +297,11 @@ msgstr "تشغيل تنبيه مسموع قبل وبعد الراحة"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "تشغيل تنبيه مسموع قبل فواصل"
+msgstr "شغِّل تنبيها مسموعا قبل الراحة"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "تشغيل تنبيه مسموع بعد الراحة"
+msgstr "شغِّل تنبيها مسموعا بعد الراحة"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -308,23 +309,23 @@ msgstr "عدم الإزعاج"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "تجاهل الراحة إذا كان الإطار النشط في وضع ملء الشاشة"
+msgstr "تجاهل الراحة إذا كانت النافذة النشطة في وضع ملء الشاشة"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "لا تقم بإيقاف هذه الإطارات في أي وقت"
+msgstr "لا تقاطع هذه النوافذ في أي وقت"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "مقاطعة هذه النوافذ بغض النظر عن حالتها"
+msgstr "قاطع هذه النوافذ بغض النظر عن حالتها"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "تبديل النوافذ المقاطعة إلى الوضع العادي"
+msgstr "بدِّل النوافذ المقاطعة إلى الوضع العادي"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "عدم الإزعاج بينما على البطارية"
+msgstr "عدم الإزعاج أثناء شحن البطارية"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -332,11 +333,11 @@ msgstr "الإحصاءات الصحية"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "وتظهر الإحصاءات استناداً إلى كيفية استخدام \"safe eyes\""
+msgstr "أظهر الإحصاءات بناءً على كيفية استخدامك لـ \"Safe Eyes\""
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "مهلة تصفير الإعدادات (ساعات)"
 
 # plugin/notification
 msgid "Notification"
@@ -344,15 +345,15 @@ msgstr "الإشعارات"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "اظهار اشعار النظام قبل الراحة"
+msgstr "أظهر إشعار نظام قبل الراحة"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "استعداد لاستراحة قصيرة في %s ثانية"
+msgstr "استعد لاستراحة قصيرة في %s من الثواني"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "استعد لراحة طويلة بعد %s من الثواني"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -408,27 +409,27 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "اسمح بتعطيل Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "عن البرنامج"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "عطّل Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "معطّل إلى %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "معطّل إلى حين إعادة التشغيل"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "فعِّل Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
