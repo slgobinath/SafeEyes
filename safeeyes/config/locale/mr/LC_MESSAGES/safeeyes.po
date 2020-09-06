@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-07-24 17:41+0000\n"
-"Last-Translator: Prachi Joshi <josprachi@yahoo.com>\n"
+"PO-Revision-Date: 2020-09-07 10:36+0000\n"
+"Last-Translator: Radhika Bhagwan Jadhav <radhikajadhav014@gmail.com>\n"
 "Language-Team: Marathi <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/mr/>\n"
 "Language: mr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -59,41 +59,43 @@ msgstr "बद्दल संवाद दर्शवा"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "सध्या चालू असलेल्या डोळ्यांचा देखावा अक्षम करा"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "सध्या चालू असलेल्या सुरक्षित डोळ्यांचा दृष्टांत सक्षम करा"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "चालू असणार्‍या डोळ्यांची उदाहरणे सोडून बाहेर पडा"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "सेटिंग्ज संवाद दर्शवा"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "डीबग मोडमध्ये सुरक्षित डोळे प्रारंभ करा"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "सुरक्षित डोळ्यांची उदाहरणे चालविण्याची स्थिती प्रिंट करा आणि बाहेर पडा"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "सेफ डोळे चालत नाहीत"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"सेफ डोळे आरपीसी सर्व्हरविना चालू आहेत. कमांड-लाइन वितर्क वापरण्यासाठी ते चालू"
+" करा."
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "बंद"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
