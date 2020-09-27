@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-08-20 16:26+0000\n"
-"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"PO-Revision-Date: 2020-09-28 07:40+0000\n"
+"Last-Translator: Mattias Münster <mattiasmun@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sv/>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2.1-dev\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -91,7 +91,7 @@ msgid ""
 "command-line arguments."
 msgstr ""
 "Safe Eyes kör utan \"RPC\"-server. Slå på den för att kunna använda "
-"kommandoradsargument. "
+"kommandoradsargument."
 
 # About dialog
 msgid "Close"
@@ -148,11 +148,11 @@ msgstr "Bevara det interna tillståndet"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Använd RPC-server för att ta emot runtime-kommandon"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Utan RPC-servern kanske kommandoradskommandon inte fungerar"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
