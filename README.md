@@ -77,6 +77,14 @@ sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
 
+### OpenSUSE Tumbleweed
+
+```bash
+sudo zypper refresh
+sudo zypper install cairo-devel python3-devel python3-pycairo
+sudo zypper install safeeyes
+```
+
 ### Other Linux & Run from source
 
 Ensure to meet the following dependencies:
