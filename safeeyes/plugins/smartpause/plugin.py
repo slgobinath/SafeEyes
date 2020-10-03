@@ -135,6 +135,8 @@ def __start_idle_monitor():
     """
     global smart_pause_activated
     global idle_start_time
+    next_break = None
+
     while __is_active():
         # Wait for waiting_time seconds
         idle_condition.acquire()
