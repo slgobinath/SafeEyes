@@ -6,477 +6,480 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-10-13 15:27+0000\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: Hebrew <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "לעצום עיניים היטב"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "לגלגל את העיניים מספר פעמים לכל צד"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "לסובב את העיניים עם כיוון השעון"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "לסובב את העיניים נגד כיוון השעון"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "למצמץ את העיניים"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "להתמקד על נקודה רחוקה באופק"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "לשתות קצת מים"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "ללכת הליכה קצרה"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "להישען אחורה בכיסא ולהירגע"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "show the about dialog"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "disable the currently running safeeyes instance"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "enable the currently running safeeyes instance"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "quit the running safeeyes instance and exit"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "show the settings dialog"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "start safeeyes in debug mode"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "print the status of running safeeyes instance and exit"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "הגנה על העיניים אינה פעילה"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"הגנה על העיניים מופעלת ללא שרת RPC. יש להפעיל אותו כדי להשתמש במשתנים משורת "
+"הפקודה."
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "סגירה"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "תיאור"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "רישיון"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "מסך הפסקה"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "עיכוב"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "משך הפסקה (בשניות)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "מרווח בין הפסקות (בדקות)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "זמן ההכנה להפסקה (בשניות)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "משך השבתת קיצורי המקלדת (בשניות)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr ""
+msgstr "משך עיכוב (בשניות)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "הפסקה קשיחה (אין דרך לדלג על הפסקות)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "לאפשר לעכב הפסקות"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "לשמור על המצב הפנימי"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "להשתמש בשרת RPC כדי לקבל פקודות זמן ריצה"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "ללא שרת RPC, פקודות שורת פקודה עשויות לא לעבוד"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "הפרש ארוך בין הפסקות חייב להיות מכפלות של הפרש קצר בין הפסקות"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "איפוס"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "לאפס את כל ההגדרות לבררת מחדל?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "אפשרויות"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "הפסקות קצרות"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "הפסקות ארוכות"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "למחוק את ההפסקה הזאת?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "זו פעולה בלתי הפיכה."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "הפסקה"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "הפסקות"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "תוספים"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "סוג"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "קצרה"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "ארוכה"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "תמונה"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "בחירה"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "נא לבחור תמונה"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "משך"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "זמן להמתנה"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "דריסה"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "זמן (בשניות)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "זמן (בדקות)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "הגדרות הפסקה"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "הגדרות תוסף"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "התוסף אינו תומך בסביבת שולחן העבודה %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "נא להתקין את מודול ה־Python‏ ‚%s’"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "נא להתקין את כלי שורת הפקודה ‚%s’"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "נא להוסיף את המשאב %(resource)s לתיקייה %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "הפסקה חדשה"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "הסרה"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "התעלמות"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "שמירה"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "צליל התראה"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "להשמיע צלצול לפני ואחרי הפסקות"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "להשמיע צלצול התראה לפני הפסקות"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "להשמיע צלצול התראה אחרי הפסקות"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "לא להפריע"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "לדלג על הפסקה אם החלון הפעיל הוא על כל המסך"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "לא להפריע לחלונות האלו אף פעם"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "להפריע לחלונות האלו ללא תלות במצבם"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "להחליף את החלונות הבלתי הכרחיים למצב רגיל"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "לא להפריע בעת שימוש בסוללה"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "סטטיסטיקת בריאות"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "להציג סטטיסטיקה על אופן השימוש שלך בהגנה על העיניים"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "הפרש בין איפוסי סטטיסטיקה (בשעות)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "התראה"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "להציג התראות מערכת לפני הפסקות"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "להתכונן להפסקה קצרה בעוד %s שניות"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "להתכונן להפסקה ארוכה בעוד %s שניות"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "שומר מסך"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר המסך"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "פקודת שומר מסך מותאמת אישית"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "כמות שניות מזערית לדילוג בלי שומר מסך"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "נעילת מסך"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "השהיה חכמה"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "להשהות את ההגנה על העיניים אם המערכת בהמתנה"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "זמן חוסר פעילות מזערי להשהיית ההגנה על העיניים (בשניות)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "לפרש את זמן ההמתנה שווה הערך למשך ההפסקה הבאה כהפסקה"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "לעכב את ההפסקה הבאה עד שהמערכת הופכת לבלתי פעילה"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "סמל מערכת"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "להציג סמל מערכת באזור ההתראות"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "להציג את מועד ההתראה הבאה בסמל המערכת"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "לאפשר את השבתת ההגנה על העיניים"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "על אודות"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "השבתת ההגנה על העיניים"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "להשבית עד %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "להשבית עד להפעלה מחדש"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "להפעיל את ההגנה על העיניים"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "למשך שעה"
+msgstr[1] "למשך %s שעות"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "למשך דקה"
+msgstr[1] "למשך %s דקות"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "למשך שנייה"
+msgstr[1] "למשך %s שניות"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "ההפסקה הבאה ב־%s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "אין הפסקות זמינות"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "הגדרות"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "לקחת הפסקה עכשיו"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "עד להפעלה מחדש"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "יציאה"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "בקרת מדיה"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "להשהות נגני מדיה ממסך ההפסקה"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "השהיית מדיה"
