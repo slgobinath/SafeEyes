@@ -41,7 +41,7 @@ smart_pause_activated = False
 idle_start_time = None
 next_break_time = None
 next_break_duration = 0
-break_interval = 0
+short_break_interval = 0
 waiting_time = 2
 interpret_idle_as_break = False
 is_wayland_and_gnome = False
@@ -110,7 +110,8 @@ def init(ctx, safeeyes_config, plugin_config):
     global disable_safe_eyes
     global postpone
     global idle_time
-    global break_interval
+    global short_break_interval
+    global long_break_interval
     global waiting_time
     global interpret_idle_as_break
     global postpone_if_active
@@ -123,8 +124,10 @@ def init(ctx, safeeyes_config, plugin_config):
     idle_time = plugin_config['idle_time']
     interpret_idle_as_break = plugin_config['interpret_idle_as_break']
     postpone_if_active = plugin_config['postpone_if_active']
-    break_interval = safeeyes_config.get(
+    short_break_interval = safeeyes_config.get(
         'short_break_interval') * 60  # Convert to seconds
+    long_break_interval = safeeyes_config.get(
+        'long_break_interval') * 60  # Convert to seconds
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
@@ -151,7 +154,7 @@ def __start_idle_monitor():
                 idle_start_time = datetime.datetime.now()
                 logging.info('Pause Safe Eyes due to system idle')
                 disable_safe_eyes(None)
-            elif system_idle_time < idle_time and context['state'] == State.STOPPED:
+            elif system_idle_time < idle_time and context['state'] == State.STOPPED and idle_start_time is not None:
                 logging.info('Resume Safe Eyes due to user activity')
                 smart_pause_activated = False
                 idle_period = (datetime.datetime.now() - idle_start_time)
@@ -159,8 +162,8 @@ def __start_idle_monitor():
                 context['idle_period'] = idle_seconds
                 if interpret_idle_as_break and idle_seconds >= next_break_duration:
                     # User is idle for break duration and wants to consider it as a break
-                    enable_safe_eyes()
-                elif idle_seconds < break_interval:
+                    enable_safe_eyes(-1, idle_seconds >= long_break_interval)
+                elif idle_seconds < short_break_interval:
                     # Credit back the idle time
                     if next_break is not None:
                         # This method runs in a thread since the start.

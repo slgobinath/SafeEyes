@@ -20,9 +20,10 @@
 This module contains the entity classes used by Safe Eyes and its plugins.
 """
 
+import logging
 from distutils.version import LooseVersion
 from enum import Enum
-import logging
+
 from safeeyes import utility
 
 
@@ -92,6 +93,9 @@ class BreakQueue:
                                                  config.get('long_breaks'),
                                                  self.__long_break_time,
                                                  config.get('long_break_duration'))
+        self.__short_header = self.__short_pointer
+        self.__long_header = self.__long_pointer
+
         # Restore the last break from session
         if not self.is_empty():
             last_break = context['session'].get('break')
@@ -99,7 +103,7 @@ class BreakQueue:
                 current_break = self.get_break()
                 if last_break != current_break.name:
                     pointer = self.next()
-                    while(pointer != current_break and pointer.name != last_break):
+                    while pointer != current_break and pointer.name != last_break:
                         pointer = self.next()
 
     def get_break(self):
@@ -153,6 +157,29 @@ class BreakQueue:
         self.context['session']['break'] = self.__current_break.name
 
         return break_obj
+
+    def reset(self):
+        self.__short_pointer = self.__short_header
+        self.__long_pointer = self.__long_header
+        self.__first_break = None
+        self.__current_break = None
+
+        # Reset all break time
+        short_pointer = self.__short_pointer
+        long_pointer = self.__long_pointer
+        short_pointer.time = self.__short_break_time
+        long_pointer.time = self.__long_break_time
+        short_pointer = short_pointer.next
+        long_pointer = long_pointer.next
+
+        while short_pointer != self.__short_header:
+            short_pointer.time = self.__short_break_time
+            short_pointer = short_pointer.next
+
+        while long_pointer != self.__long_header:
+            long_pointer.time = self.__long_break_time
+            long_pointer = long_pointer.next
+
 
     def is_empty(self):
         return self.__short_pointer is None and self.__long_pointer is None

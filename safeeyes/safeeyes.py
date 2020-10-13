@@ -69,8 +69,8 @@ class SafeEyes:
             self.show_settings)
         self.context['api']['show_about'] = lambda: utility.execute_main_thread(
             self.show_about)
-        self.context['api']['enable_safeeyes'] = lambda next_break_time=- \
-            1: utility.execute_main_thread(self.enable_safeeyes, next_break_time)
+        self.context['api']['enable_safeeyes'] = lambda next_break_time=-1, reset_breaks=False: \
+            utility.execute_main_thread(self.enable_safeeyes, next_break_time, reset_breaks)
         self.context['api']['disable_safeeyes'] = lambda status: utility.execute_main_thread(
             self.disable_safeeyes, status)
         self.context['api']['status'] = self.status
@@ -230,13 +230,13 @@ class SafeEyes:
             Timer(1.0, self.safe_eyes_core.start).start()
             self.plugins_manager.start()
 
-    def enable_safeeyes(self, scheduled_next_break_time=-1):
+    def enable_safeeyes(self, scheduled_next_break_time=-1, reset_breaks=False):
         """
         Listen to tray icon enable action and send the signal to core.
         """
         if not self.active and self.safe_eyes_core.has_breaks():
             self.active = True
-            self.safe_eyes_core.start(scheduled_next_break_time)
+            self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()
 
     def disable_safeeyes(self, status=None):
