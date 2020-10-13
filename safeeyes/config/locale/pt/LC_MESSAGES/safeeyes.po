@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-08-15 06:32+0000\n"
+"PO-Revision-Date: 2020-10-13 15:27+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -430,11 +430,11 @@ msgstr "Desabilitar o Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "Desabilitado até %s"
+msgstr "Desativado até %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "Desabilitado até reiniciar"
+msgstr "Desativado até reiniciar"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
