@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-11-26 16:05+0000\n"
-"Last-Translator: LocLab fr <ao@localizationlab.org>\n"
+"PO-Revision-Date: 2020-10-16 03:26+0000\n"
+"Last-Translator: Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
 "Language: fr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10-dev\n"
+"X-Generator: Weblate 4.3-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -67,7 +67,7 @@ msgstr "activer l’instance de safeyes en cours de fonctionnement"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "quitter l’instance de safeyes en cours de fonctionnement et sortir"
+msgstr "fermer l’instance de safeyes en cours de fonctionnement et sortir"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -79,7 +79,7 @@ msgstr "démarrer safeeyes en mode de débogage"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "imprimer l’état de l’instance safeeyes en cours d’exécution et quitter"
+msgstr "imprimer l’état de l’instance safeeyes en cours d’exécution et sortir"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -485,7 +485,7 @@ msgstr "Jusqu’au redémarrage"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "Quitter"
+msgstr "Fermer"
 
 # plugin/mediacontrol
 msgid "Media Control"
