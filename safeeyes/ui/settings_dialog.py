@@ -267,7 +267,7 @@ class SettingsDialog:
         """
         short_break_interval = self.spin_short_break_interval.get_value_as_int()
         long_break_interval = self.spin_long_break_interval.get_value_as_int()
-        self.spin_long_break_interval.set_range(short_break_interval, 120)
+        self.spin_long_break_interval.set_range(short_break_interval * 2, 120)
         self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 2)
         self.spin_long_break_interval.set_value(short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
         self.last_short_break_interval = short_break_interval

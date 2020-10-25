@@ -79,7 +79,7 @@ class SafeEyesCore:
         self.default_postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
         self.postpone_duration = self.default_postpone_duration
 
-    def start(self, next_break_time=-1):
+    def start(self, next_break_time=-1, reset_breaks=False):
         """
         Start Safe Eyes is it is not running already.
         """
@@ -88,6 +88,10 @@ class SafeEyesCore:
         with self.lock:
             if not self.running:
                 logging.info("Start Safe Eyes core")
+                if reset_breaks:
+                    logging.info("Reset breaks to start from the beginning")
+                    self.break_queue.reset()
+
                 self.running = True
                 self.scheduled_next_break_timestamp = int(next_break_time)
                 utility.start_thread(self.__scheduler_job)
@@ -100,7 +104,7 @@ class SafeEyesCore:
             if not self.running:
                 return
 
-            logging.info("Stop Safe Eye core")
+            logging.info("Stop Safe Eyes core")
             self.paused_time = datetime.datetime.now().timestamp()
             # Stop the break thread
             self.waiting_condition.acquire()

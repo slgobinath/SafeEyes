@@ -90,12 +90,25 @@ def start_thread(target_function, **args):
     thread.start()
 
 
-def execute_main_thread(target_function, args=None):
+# def execute_main_thread(target_function, args=None):
+#     """
+#     Execute the given function in main thread.
+#     """
+#     if args:
+#         GLib.idle_add(lambda: target_function(args))
+#     else:
+#         GLib.idle_add(target_function)
+
+def execute_main_thread(target_function, arg1=None, arg2=None):
     """
     Execute the given function in main thread.
     """
-    if args:
-        GLib.idle_add(lambda: target_function(args))
+    if arg1 is not None and arg2 is not None:
+        GLib.idle_add(lambda: target_function(arg1, arg2))
+    elif arg1 is not None:
+        GLib.idle_add(lambda: target_function(arg1))
+    elif arg2 is not None:
+        GLib.idle_add(lambda: target_function(arg2))
     else:
         GLib.idle_add(target_function)
 
