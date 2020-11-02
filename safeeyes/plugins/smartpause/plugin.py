@@ -111,7 +111,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global postpone
     global idle_time
     global short_break_interval
-    global long_break_interval
+    global long_break_duration
     global waiting_time
     global interpret_idle_as_break
     global postpone_if_active
@@ -126,8 +126,7 @@ def init(ctx, safeeyes_config, plugin_config):
     postpone_if_active = plugin_config['postpone_if_active']
     short_break_interval = safeeyes_config.get(
         'short_break_interval') * 60  # Convert to seconds
-    long_break_interval = safeeyes_config.get(
-        'long_break_interval') * 60  # Convert to seconds
+    long_break_duration = safeeyes_config.get('long_break_duration')
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
 
@@ -162,7 +161,8 @@ def __start_idle_monitor():
                 context['idle_period'] = idle_seconds
                 if interpret_idle_as_break and idle_seconds >= next_break_duration:
                     # User is idle for break duration and wants to consider it as a break
-                    enable_safe_eyes(-1, idle_seconds >= long_break_interval)
+                    logging.debug("Idle for %d seconds, long break %d", idle_seconds, long_break_duration)
+                    enable_safe_eyes(-1, idle_seconds >= long_break_duration)
                 elif idle_seconds < short_break_interval:
                     # Credit back the idle time
                     if next_break is not None:
