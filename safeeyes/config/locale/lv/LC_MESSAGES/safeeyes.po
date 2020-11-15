@@ -72,8 +72,8 @@ msgstr "Safe Eyes nav palaists"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 
 msgid "Close"
@@ -211,6 +211,10 @@ msgstr "Lūdzu instalējiet Python moduli '%s'"
 msgid "Please install the command-line tool '%s'"
 msgstr "Lūdzu instalējiet komandrindas rīku '%s'"
 
+# Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lūdzu ievietojiet artefaktu %(resource)s mapē %(config_resource)s"
 
@@ -262,8 +266,9 @@ msgstr "Veselības statistika"
 msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Rādīt statistiku pamatojoties uz Safe Eyes lietošanas vēsturi"
 
-msgid "Interval to reset statistics (in hours)"
-msgstr "Statistikas atstatīšanas intervāls (stundās)"
+# plugin/healthstats
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 msgid "Notification"
 msgstr "Paziņojumi"
@@ -398,3 +403,6 @@ msgstr "Pauzēt multivides atskaņotājus no pārtraukuma ekrāna"
 
 msgid "Pause media"
 msgstr "Apturēt atskaņošanu"
+
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Statistikas atstatīšanas intervāls (stundās)"

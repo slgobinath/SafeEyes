@@ -87,8 +87,8 @@ msgstr "सेफ आईज नहीं चल रहा है"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 
 # About dialog
@@ -265,6 +265,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr ""
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 
@@ -333,7 +337,7 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr ""
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
+msgid "Time to reset statistics (cron expr)"
 msgstr ""
 
 # plugin/notification

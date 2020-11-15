@@ -16,16 +16,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
 from safeeyes import utility
 
+def _get_next_reset_time(current_time, statistics_reset_cron):
+    import croniter
+    try:
+        cron = croniter.croniter(statistics_reset_cron, current_time)
+        return cron.get_next(datetime.datetime)
+    except:
+        # Error in getting the next reset time
+        return None
 
 def validate(plugin_config, plugin_settings):
-    command = None
-    if utility.DESKTOP_ENVIRONMENT == "gnome" and utility.IS_WAYLAND:
-        command = "dbus-send"
-    else:
-        command = "xprintidle"
-    if not utility.command_exist(command):
-        return _("Please install the command-line tool '%s'") % command
+    if not utility.module_exist("croniter"):
+        return _("Please install the Python module '%s'") % "croniter"
+
+    # Validate the cron expression
+    statistics_reset_cron = plugin_settings.get('statistics_reset_cron', '0 0 * * *')
+    if _get_next_reset_time(datetime.datetime.now(), statistics_reset_cron) is None:
+        return _("Invalid cron expression '%s'") % statistics_reset_cron
     else:
         return None

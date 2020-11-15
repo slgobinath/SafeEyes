@@ -88,9 +88,11 @@ msgstr "Safe Eyes தற்போது இயங்கவில்லை"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
-msgstr "Safe Eyes RPC சேவையகம் இன்றி இயங்குகிறது.\nமுனைய கட்டளைகளைப் பயன்படுத்த RPC சேவையகத்தை இயக்கவும்."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
+msgstr ""
+"Safe Eyes RPC சேவையகம் இன்றி இயங்குகிறது.\n"
+"முனைய கட்டளைகளைப் பயன்படுத்த RPC சேவையகத்தை இயக்கவும்."
 
 # About dialog
 msgid "Close"
@@ -270,6 +272,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "தயவுசெய்து '%s' முனைய கட்டளையை நிறுவுக"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "தயவுசெய்து %(resource)s வளத்தை %(config_resource)s கோப்புறையில் சேர்க்கவும்"
 
@@ -338,8 +344,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Safe Eyes பயன்பாடு அடிப்படையிலான ஆரோக்கிய புள்ளிவிவரங்கள்"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "திரை நேரத்தை  மீட்டமைப்பதற்கான  இடைவேளை (மணித்தியாலங்களில்)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -486,3 +492,7 @@ msgstr "இடைவேளை திரையில் இருந்து ப
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "பல்லூடகத்தை இடைநிறுத்து"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "திரை நேரத்தை  மீட்டமைப்பதற்கான  இடைவேளை (மணித்தியாலங்களில்)"

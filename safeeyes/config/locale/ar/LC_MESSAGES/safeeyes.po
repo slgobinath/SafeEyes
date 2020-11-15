@@ -88,10 +88,9 @@ msgstr "SafeEyes غير مشغل"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
-msgstr ""
-"يعمل Safe Eyes الآن دون خادوم RPC. شغِّله لكي تستعمل معطيات سطر الأوامر."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
+msgstr "يعمل Safe Eyes الآن دون خادوم RPC. شغِّله لكي تستعمل معطيات سطر الأوامر."
 
 # About dialog
 msgid "Close"
@@ -268,6 +267,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "من فضلك ثبّت أداة سطر الأوامر '%s'"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "من فضلك أضف المورد %(resource)s إلى الدليل %(config_resource)"
 
@@ -336,8 +339,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "أظهر الإحصاءات بناءً على كيفية استخدامك لـ \"Safe Eyes\""
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "مهلة تصفير الإعدادات (ساعات)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -496,3 +499,7 @@ msgstr ""
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr ""
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "مهلة تصفير الإعدادات (ساعات)"

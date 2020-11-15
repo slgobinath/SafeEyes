@@ -87,8 +87,8 @@ msgstr "Safe Eyes tidak berjalan"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 
 # About dialog
@@ -267,6 +267,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Silakan lakukan pemasangan alat command-line '%s'"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Silakan tambahkan sumber %(resource)s ke direktori %(config_resource)s"
 
@@ -337,8 +341,8 @@ msgstr ""
 "Eyes"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "Interval untuk mengatur ulang statistik (dalam jam)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -484,3 +488,7 @@ msgstr "Jeda pemutar media dari pengistirahatan layar"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Jeda media"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Interval untuk mengatur ulang statistik (dalam jam)"

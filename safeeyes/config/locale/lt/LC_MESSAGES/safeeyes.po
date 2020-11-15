@@ -89,8 +89,8 @@ msgstr "Safe Eyes nėra paleista"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes veikia be RPC serverio. Įjunkite jį norėdami naudoti komandų "
 "eilutės argumentus."
@@ -272,6 +272,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Įdiekite komandų eilutės įrankį „%s“"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Pridėkite išteklių %(resource)s į %(config_resource)s katalogą"
 
@@ -340,8 +344,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Rodyti statistiką pagal tai, kaip naudojate Safe Eyes"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "Statistikos atstatymo intervalas (valandomis)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -494,3 +498,7 @@ msgstr "Pristabdyti medijos leistuves iš pertraukos ekrano"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pristabdyti mediją"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Statistikos atstatymo intervalas (valandomis)"

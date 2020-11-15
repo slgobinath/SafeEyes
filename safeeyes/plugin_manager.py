@@ -248,6 +248,23 @@ class PluginManager:
         if plugin_enabled or plugin_config.get('break_override_allowed', False):
             if plugin['id'] in self.__plugins:
                 # The plugin is already enabled or partially loaded due to break_override_allowed
+
+                # Validate the dependencies again
+                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path):
+                    plugin_obj['enabled'] = False
+                    utility.remove_if_exists(self.__plugins_on_start, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_stop, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_exit, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_update_next_break, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_init, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_pre_break, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_start_break, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_stop_break, plugin_obj)
+                    utility.remove_if_exists(self.__plugins_on_countdown, plugin_obj)
+                    utility.remove_if_exists(self.__widget_plugins, plugin_obj)
+                    utility.remove_if_exists(self.__tray_actions_plugins, plugin_obj)
+                    del self.__plugins[plugin['id']]
+
                 # Use the existing plugin object
                 plugin_obj = self.__plugins[plugin['id']]
 
@@ -267,7 +284,7 @@ class PluginManager:
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin_path):
+                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path):
                     return
 
                 # Load the plugin module

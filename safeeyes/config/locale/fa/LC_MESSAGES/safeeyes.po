@@ -87,8 +87,8 @@ msgstr "محافظ چشم در حال اجرا نیست"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes بدون سرور RPC در حال اجرا است. برای استفاده از آرگومان های خط "
 "فرمان آن را روشن کنید."
@@ -268,6 +268,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "لطفاً ابزار خط فرمان را نصب کنید '%s'"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "لطفا منبع را اضافه کنید %(resource) در %(config_resource)پوشه ها"
 
@@ -336,8 +340,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "آماری را براساس نحوه استفاده از Safe Eyes نشان دهید"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "فاصله برای تنظیم مجدد آمار (در چند ساعت)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -484,3 +488,7 @@ msgstr "توقف پخش کننده رسانه در توقف صفحه"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "مکث رسانه"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "فاصله برای تنظیم مجدد آمار (در چند ساعت)"

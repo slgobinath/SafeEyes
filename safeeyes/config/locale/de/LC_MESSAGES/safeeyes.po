@@ -88,8 +88,8 @@ msgstr "Safe Eyes wird nicht ausgeführt"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes läuft ohne RPC-Server. Aktivieren Sie ihn, um Kommandozeilen-"
 "Befehle während der Laufzeit nutzen zu können."
@@ -272,6 +272,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Bitte Programm '%s' für die Kommandozeile installieren"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Bitte in Verzeichnis %(config_resource)s die Ressource %(resource)s "
@@ -315,7 +319,8 @@ msgstr "Nicht stören"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Pause überspringen wenn sich aktives Fenster im Vollbild-Modus befindet"
+msgstr ""
+"Pause überspringen wenn sich aktives Fenster im Vollbild-Modus befindet"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -342,8 +347,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Gesundheitsstatistik anzeigen"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "Zeit bis die Statistik zurückgesetzt wird (in Stunden)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -490,3 +495,7 @@ msgstr "Medienwiedergabe im Pausenbildschirm anhalten"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Medien anhalten"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Zeit bis die Statistik zurückgesetzt wird (in Stunden)"

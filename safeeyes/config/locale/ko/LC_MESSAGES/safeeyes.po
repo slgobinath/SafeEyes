@@ -89,7 +89,9 @@ msgstr "세이프 아이즈가 실행 중이 아닙니다"
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
-msgstr "세이프 아이즈가 RPC 서버없이 실행 중입니다. 명령줄 인수를 사용하려면 켜주세요."
+msgstr ""
+"세이프 아이즈가 RPC 서버없이 실행 중입니다. 명령줄 인수를 사용하려면 켜주세"
+"요."
 
 # About dialog
 msgid "Close"
@@ -265,6 +267,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "'%s' 명령줄 도구를 설치해주세요"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "%(resource)s를 %(config_resource)s 디렉토리에 추가해주세요"
 
@@ -333,8 +339,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "세이프 아이즈 사용에 기반한 통계 표시"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "통계 초기화 간격 (시)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -478,3 +484,7 @@ msgstr "휴식 상태일 때 미디어 플레이어 일시 정지"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "미디어 일시 정지"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "통계 초기화 간격 (시)"

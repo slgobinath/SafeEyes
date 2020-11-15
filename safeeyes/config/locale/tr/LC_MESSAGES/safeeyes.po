@@ -87,8 +87,8 @@ msgstr "Safe Eyes çalışmıyor"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes bir RPC sunucusu olmadan çalışıyor. Komut satırı argümanlarını "
 "kullanmak için açın."
@@ -270,6 +270,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Lütfen '%s' komut satırı aracını kurunuz"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lütfen %(resource)s kaynağını %(config_resource)s klasörüne ekleyiniz"
 
@@ -338,8 +342,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Safe Eyes kullanımınıza ait istatistikler"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "İstatistikleri sıfırlama aralığı (saat olarak)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -489,3 +493,7 @@ msgstr "Ortam oynatıcıları ara ekrandan duraklat"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Ortamı duraklat"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "İstatistikleri sıfırlama aralığı (saat olarak)"

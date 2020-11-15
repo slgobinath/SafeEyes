@@ -87,8 +87,8 @@ msgstr "Stavová zpráva"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes je spuštěné s tím, že RPC server je vypnutý. Aby bylo možné "
 "používat argumenty příkazového řádku, je třeba RPC server zapnout."
@@ -269,6 +269,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Nainstalujte si nástroj pro příkazový řádek „%s“"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Přidejte prostředek %(resource)s do složky %(config_resource)s"
 
@@ -338,8 +342,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Zobrazit zdravotní statistiky založené na používání Safe Eyes"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "Interval pro resetování statistik (v hodinách)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -491,3 +495,7 @@ msgstr "Pozastavit přehrávače médií z obrazovky přestávky"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pozastavit média"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Interval pro resetování statistik (v hodinách)"

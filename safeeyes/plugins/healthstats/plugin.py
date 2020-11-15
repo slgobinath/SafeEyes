@@ -20,6 +20,7 @@
 Show health statistics on the break screen.
 """
 
+import croniter
 import datetime
 import logging
 
@@ -31,26 +32,41 @@ session = None
 safe_eyes_start_time = datetime.datetime.now()
 total_idle_time = 0
 last_screen_time = -1
-reset_interval = 86400  # 24 hours in seconds
-
+statistics_reset_cron = '0 0 * * *'  # Every midnight
+time_to_reset_break = datetime.datetime.now()
+next_reset_time = None
+enabled = True
 
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the plugin.
     """
+    global enabled
     global context
     global session
     global no_of_skipped_breaks
     global no_of_breaks
     global no_of_cycles
-    global reset_interval
+    global statistics_reset_cron
     global safe_eyes_start_time
     global total_idle_time
     global last_screen_time
+    global next_reset_time
+
     logging.debug('Initialize Health Stats plugin')
     context = ctx
-    reset_interval = plugin_config.get('statistics_reset_interval', 24) * 3600
+    statistics_reset_cron = plugin_config.get('statistics_reset_cron', '0 0 * * *')
+    # Compute the next reset time
+    next_reset_time = _get_next_reset_time(datetime.datetime.now(), statistics_reset_cron)
+    enabled = next_reset_time is not None
+
+    if not enabled:
+        # There is an error in the cron expression
+        logging.error("Error in parsing the cron expression `" + statistics_reset_cron + "`. Health Stats plugin is disabled.")
+        return
+
     if session is None:
+        # Read the session
         session = context['session']['plugin'].get('healthstats', None)
         if session is None:
             session = {'no_of_skipped_breaks': 0,
@@ -58,7 +74,8 @@ def init(ctx, safeeyes_config, plugin_config):
                        'no_of_cycles': -1,
                        'safe_eyes_start_time': safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S"),
                        'total_idle_time': 0,
-                       'last_screen_time': -1}
+                       'last_screen_time': -1,
+                       'next_reset_time': next_reset_time.strftime("%Y-%m-%d %H:%M:%S")}
             context['session']['plugin']['healthstats'] = session
         no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
         no_of_breaks = session.get('no_of_breaks', 0)
@@ -66,8 +83,12 @@ def init(ctx, safeeyes_config, plugin_config):
         total_idle_time = session.get('total_idle_time', 0)
         last_screen_time = session.get('last_screen_time', -1)
         str_time = session.get('safe_eyes_start_time', None)
+        str_next_reset_time = session.get('next_reset_time', None)
         if str_time:
             safe_eyes_start_time = datetime.datetime.strptime(str_time, "%Y-%m-%d %H:%M:%S")
+        if str_next_reset_time:
+            next_reset_time = datetime.datetime.strptime(str_time, "%Y-%m-%d %H:%M:%S")
+            
     _reset_stats()
 
 
@@ -75,6 +96,10 @@ def on_stop_break():
     """
     After the break, check if it is skipped.
     """
+    # Check if the plugin is enabled
+    if not enabled:
+        return
+
     global no_of_skipped_breaks
     if context['skipped']:
         no_of_skipped_breaks += 1
@@ -85,6 +110,10 @@ def get_widget_title(break_obj):
     """
     Return the widget title.
     """
+    # Check if the plugin is enabled
+    if not enabled:
+        return ""
+
     global no_of_breaks
     global no_of_cycles
     no_of_breaks += 1
@@ -105,12 +134,22 @@ def _reset_stats():
     global total_idle_time
     global no_of_skipped_breaks
     global last_screen_time
+    global next_reset_time
+
+    # Check if the reset time has passed
     current_time = datetime.datetime.now()
     total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
-    if total_duration_sec >= reset_interval:
-        total_duration_sec -= reset_interval
-        safe_eyes_start_time = current_time - \
-            datetime.timedelta(seconds=total_duration_sec)
+    if current_time >= next_reset_time:
+        # Reset statistics
+        if safe_eyes_start_time < next_reset_time:
+            # Safe Eyes is running even before the reset time
+            # Consider the reset time as the new start time
+            safe_eyes_start_time = next_reset_time
+            total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
+
+        # Update the next_reset_time
+        next_reset_time = _get_next_reset_time(current_time, statistics_reset_cron)
+
         last_screen_time = round((total_duration_sec - total_idle_time) / 60)
         total_idle_time = 0
         no_of_breaks = 0
@@ -122,6 +161,7 @@ def _reset_stats():
         session['safe_eyes_start_time'] = safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S")
         session['total_idle_time'] = total_idle_time
         session['last_screen_time'] = last_screen_time
+        session['next_reset_time'] = next_reset_time.strftime("%Y-%m-%d %H:%M:%S")
 
     return total_duration_sec
 
@@ -130,6 +170,10 @@ def get_widget_content(break_obj):
     """
     Return the statistics.
     """
+    # Check if the plugin is enabled
+    if not enabled:
+        return ""
+
     total_duration_sec = _reset_stats()
     screen_time = round((total_duration_sec - total_idle_time) / 60)
     hours, minutes = divmod(screen_time, 60)
@@ -157,8 +201,20 @@ def on_start():
     """
     Add the idle period to the total idle time.
     """
+    # Check if the plugin is enabled
+    if not enabled:
+        return ""
+
     _reset_stats()
     global total_idle_time
     # idle_period is provided by Smart Pause plugin
     total_idle_time += context.get('idle_period', 0)
     session['total_idle_time'] = total_idle_time
+
+def _get_next_reset_time(current_time, statistics_reset_cron):
+    try:
+        cron = croniter.croniter(statistics_reset_cron, current_time)
+        return cron.get_next(datetime.datetime)
+    except:
+        # Error in getting the next reset time
+        return None

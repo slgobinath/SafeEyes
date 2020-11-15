@@ -2,22 +2,20 @@
     "meta": {
         "name": "Health Statistics",
         "description": "Show statistics based on how you use Safe Eyes",
-        "version": "0.0.2"
+        "version": "0.0.3"
     },
     "dependencies": {
-        "python_modules": [],
+        "python_modules": ["croniter"],
         "shell_commands": [],
         "operating_systems": [],
         "desktop_environments": [],
         "resources": []
     },
     "settings": [{
-        "id": "statistics_reset_interval",
-        "label": "Interval to reset statistics (in hours)",
-        "type": "INT",
-        "default": 24,
-        "max": 168,
-        "min": 1
+        "id": "statistics_reset_cron",
+        "label": "Time to reset statistics (cron expr)",
+        "type": "TEXT",
+        "default": "0 0 * * *"
     }],
     "break_override_allowed": true
 }

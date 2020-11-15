@@ -87,7 +87,9 @@ msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nun ne rulas"
 
 # RPC not enabled message
-msgid "Safe Eyes is running without an RPC server. Turn it on to use command-line arguments."
+msgid ""
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "Safe Eyes estas rulanta sen RPC-servilo. Ŝaltu ĝin por uzi komandliniajn "
 "argumentojn."
@@ -266,8 +268,13 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Bonvolu instali la ilo de komanda linio '%s'"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Bonvolu aldoni la rimedon %(resource)s al %(config_resource)s-dosierujo"
+msgstr ""
+"Bonvolu aldoni la rimedon %(resource)s al %(config_resource)s-dosierujo"
 
 # Settings dialog
 msgid "New Break"
@@ -334,8 +341,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Montri statistikojn bazita sur kiel vi uzas Safe Eyes"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "Intertempo por restarigi statistikojn (en horoj)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -483,3 +490,7 @@ msgstr "Paŭzi plurmediajn ludilojn ene de la paŭza ekrano"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Paŭzi aŭdovidaĵon"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Intertempo por restarigi statistikojn (en horoj)"

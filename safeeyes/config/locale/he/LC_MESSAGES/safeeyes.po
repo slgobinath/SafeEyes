@@ -87,8 +87,8 @@ msgstr "הגנה על העיניים אינה פעילה"
 
 # RPC not enabled message
 msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use "
-"command-line arguments."
+"Safe Eyes is running without an RPC server. Turn it on to use command-line "
+"arguments."
 msgstr ""
 "הגנה על העיניים מופעלת ללא שרת RPC. יש להפעיל אותו כדי להשתמש במשתנים משורת "
 "הפקודה."
@@ -267,6 +267,10 @@ msgid "Please install the command-line tool '%s'"
 msgstr "נא להתקין את כלי שורת הפקודה ‚%s’"
 
 # Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "נא להוסיף את המשאב %(resource)s לתיקייה %(config_resource)s"
 
@@ -335,8 +339,8 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "להציג סטטיסטיקה על אופן השימוש שלך בהגנה על העיניים"
 
 # plugin/healthstats
-msgid "Interval to reset statistics (in hours)"
-msgstr "הפרש בין איפוסי סטטיסטיקה (בשעות)"
+msgid "Time to reset statistics (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
@@ -483,3 +487,7 @@ msgstr "להשהות נגני מדיה ממסך ההפסקה"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "השהיית מדיה"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "הפרש בין איפוסי סטטיסטיקה (בשעות)"

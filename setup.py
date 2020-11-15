@@ -6,6 +6,7 @@ import setuptools
 requires = [
     'babel',
     'psutil',
+    'croniter',
     'PyGObject',
     'python-xlib'
 ]

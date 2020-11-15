@@ -190,7 +190,7 @@ def delete(file_path):
         pass
 
 
-def check_plugin_dependencies(plugin_id, plugin_config, plugin_path):
+def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
     """
     Check the plugin dependencies.
     """
@@ -219,7 +219,7 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_path):
     if os.path.isfile(plugin_dependency_checker):
         dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
         if dependency_checker and hasattr(dependency_checker, "validate"):
-            return dependency_checker.validate(plugin_config)
+            return dependency_checker.validate(plugin_config, plugin_settings)
 
     return None
 
@@ -247,7 +247,7 @@ def load_plugins_config(safeeyes_config):
         config = load_json(plugin_config_path)
         if config is None:
             continue
-        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin_path)
+        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}), plugin_path)
         if dependency_description:
             plugin['enabled'] = False
             config['error'] = True
