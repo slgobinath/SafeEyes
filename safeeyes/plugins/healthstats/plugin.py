@@ -140,6 +140,7 @@ def _reset_stats():
     current_time = datetime.datetime.now()
     total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
     if current_time >= next_reset_time:
+        logging.debug("Resetting the health statistics")
         # Reset statistics
         if safe_eyes_start_time < next_reset_time:
             # Safe Eyes is running even before the reset time
@@ -214,7 +215,9 @@ def on_start():
 def _get_next_reset_time(current_time, statistics_reset_cron):
     try:
         cron = croniter.croniter(statistics_reset_cron, current_time)
-        return cron.get_next(datetime.datetime)
+        next_time = cron.get_next(datetime.datetime)
+        logging.debug("Health stats will be reset at " + next_time.strftime("%Y-%m-%d %H:%M:%S"))
+        return next_time
     except:
         # Error in getting the next reset time
         return None
