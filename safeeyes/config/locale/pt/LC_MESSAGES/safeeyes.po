@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-10-13 15:27+0000\n"
+"PO-Revision-Date: 2020-12-10 19:29+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3-dev\n"
+"X-Generator: Weblate 4.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -59,7 +59,7 @@ msgstr "mostrar a janela sobre"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "desabilitar a instância do safeeyes que está rodando"
+msgstr "desativar a instância do safeeyes que está rodando"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
@@ -130,7 +130,7 @@ msgstr "Tempo de preparo para uma parada (em segundos)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Período para desabilitar atalhos de teclado (em segundos)"
+msgstr "Período para desativar atalhos de teclado (em segundos)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
@@ -426,7 +426,7 @@ msgstr "Sobre"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "Desabilitar o Safe Eyes"
+msgstr "Desativar o Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
