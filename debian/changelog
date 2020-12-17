@@ -1,4 +1,6 @@
-safeeyes (2.0.9-1) xenial; urgency=high
+safeeyes (2.1.0-1) xenial; urgency=high
+  * Add Python 3.8 and 3.9 support
+
   * Redesigned settings dialog
 
   * Add tray action buttons to the break screen
