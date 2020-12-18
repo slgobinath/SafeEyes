@@ -377,6 +377,7 @@ def initialize_safeeyes():
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
+    os.chmod(CONFIG_FILE_PATH, 0o777)
 
     # Copy the new startup file
     try:
@@ -388,6 +389,7 @@ def initialize_safeeyes():
     # Copy the new style sheet
     if not os.path.isfile(STYLE_SHEET_PATH):
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
+        os.chmod(STYLE_SHEET_PATH, 0o777)
 
 
 def reset_config():
@@ -398,6 +400,10 @@ def reset_config():
     # Copy the safeeyes.json and safeeyes_style.css
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
+    
+    # Add write permission (e.g. if original file was stored in /nix/store)
+    os.chmod(CONFIG_FILE_PATH, 0o777)
+    os.chmod(STYLE_SHEET_PATH, 0o777)
 
 def replace_style_sheet():
     """
@@ -405,6 +411,7 @@ def replace_style_sheet():
     """
     delete(STYLE_SHEET_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
+    os.chmod(STYLE_SHEET_PATH, 0o777)
 
 
 def intialize_logging(debug):
