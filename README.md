@@ -1,6 +1,6 @@
 # Safe Eyes
 
-[![GitHub version](https://badge.fury.io/gh/slgobinath%2FSafeEyes.svg)](https://badge.fury.io/gh/slgobinath%2FSafeEyes)
+[![Release](https://img.shields.io/github/v/release/slgobinath/SafeEyes)](https://github.com/slgobinath/SafeEyes/releases)
 [![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
 [![Debian](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 [![AUR](https://img.shields.io/aur/version/safeeyes)](https://aur.archlinux.org/packages/safeeyes)
