@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-12-23 11:29+0000\n"
+"Last-Translator: Yogesh <yogesh@karnatakaeducation.org.in>\n"
+"Language-Team: Kannada <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/kn/>\n"
 "Language: kn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -74,11 +75,11 @@ msgstr ""
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "ಡೀಬಗ್ ಮೋಡ್‌ನಲ್ಲಿ ಸೇಫ್ಐಸ್ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "ಚಾಲನೆಯಲ್ಲಿರುವ ಸೇಫ್ಐಸ್ ಸ್ಥಿತಿಯನ್ನು ಮುದ್ರಿಸಿ ಮತ್ತು ನಿರ್ಗಮಿಸಿ"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -89,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"RPC ಸರ್ವರ್ ಇಲ್ಲದೆ ಸೇಫ್ಐಸ್ ಚಾಲನೆಯಲ್ಲಿದೆ. ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ಬಳಸಲು"
+" ಅದನ್ನು ಆನ್ ಮಾಡಿ."
 
 # About dialog
 msgid "Close"
@@ -97,11 +100,11 @@ msgstr ""
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid "description"
-msgstr ""
+msgstr "ವಿವರಣೆ"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "ಪರವಾನಿಗೆ"
 
 # Break screen
 msgid "Skip"
@@ -109,11 +112,11 @@ msgstr ""
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "ಮುಂದೂಡಿ"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "ವಿರಾಮದ ಅವಧಿ (ಸೆಕೆಂಡುಗಳಲ್ಲಿ)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
