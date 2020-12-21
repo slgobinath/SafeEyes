@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-05-28 18:41+0000\n"
+"PO-Revision-Date: 2020-12-23 11:29+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/tr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -271,7 +271,7 @@ msgstr "Lütfen '%s' komut satırı aracını kurunuz"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Geçersiz cron ifadesi '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -343,7 +343,7 @@ msgstr "Safe Eyes kullanımınıza ait istatistikler"
 
 # plugin/healthstats
 msgid "Time to reset statistics (cron expr)"
-msgstr ""
+msgstr "İstatistikleri sıfırlama zamanı (cron ifadesi)"
 
 # plugin/notification
 msgid "Notification"
