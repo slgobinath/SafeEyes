@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2020-03-01 23:33+0000\n"
+"PO-Revision-Date: 2020-12-24 13:29+0000\n"
 "Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eo/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -269,7 +269,7 @@ msgstr "Bonvolu instali la ilo de komanda linio '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Nevalida esprimo de cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -342,7 +342,7 @@ msgstr "Montri statistikojn bazita sur kiel vi uzas Safe Eyes"
 
 # plugin/healthstats
 msgid "Time to reset statistics (cron expr)"
-msgstr ""
+msgstr "Daŭro por restarigi statistikojn (esprimo de cron)"
 
 # plugin/notification
 msgid "Notification"
