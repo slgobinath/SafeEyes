@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-06-26 11:41+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"PO-Revision-Date: 2020-12-24 13:29+0000\n"
+"Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.2-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -276,7 +276,7 @@ msgstr "Instale la herramienta de línea de órdenes «%s»"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Expresión cron inválida '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -348,7 +348,7 @@ msgstr "Mostrar estadísticas basadas en cómo usa Safe Eyes"
 
 # plugin/healthstats
 msgid "Time to reset statistics (cron expr)"
-msgstr ""
+msgstr "Tiempo para restablecer estadísticas (expresión cron)"
 
 # plugin/notification
 msgid "Notification"
