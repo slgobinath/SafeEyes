@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-10-18 07:26+0000\n"
+"PO-Revision-Date: 2020-12-25 17:09+0000\n"
 "Last-Translator: Eric <spice2wolf@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.3.1-dev\n"
+"X-Generator: Weblate 4.4.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -268,7 +268,7 @@ msgstr "请安装命令行工具”%s“"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "无效的 cron 正则表达式 '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -340,7 +340,7 @@ msgstr "统计数据取决于您如何使用Safe Eyes"
 
 # plugin/healthstats
 msgid "Time to reset statistics (cron expr)"
-msgstr ""
+msgstr "重置统计数据的时间 (cron expr)"
 
 # plugin/notification
 msgid "Notification"
