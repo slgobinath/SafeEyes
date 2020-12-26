@@ -1,4 +1,6 @@
-safeeyes (2.1.0-1) xenial; urgency=high
+safeeyes (2.1.1-1) xenial; urgency=high
+  * Create desktop entries from the code
+
   * Add Python 3.8 and 3.9 support
 
   * Redesigned settings dialog

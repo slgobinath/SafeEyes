@@ -109,6 +109,7 @@ def main():
 
     # Initialize the logging
     utility.intialize_logging(args.debug)
+    utility.initialize_platform()
     config = Config()
 
     if __running():
