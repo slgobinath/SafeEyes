@@ -65,10 +65,12 @@ def __package_data():
     data = ['glade/*.glade', 'resource/*']
     data.extend(__package_files('safeeyes/config'))
     data.extend(__package_files('safeeyes/plugins'))
+    data.extend(__package_files('safeeyes/platform'))
     return data
 
 
-__data_files = list(_data_files('share'))
+# __data_files = list(_data_files('share'))
+__data_files = list()
 
 setuptools.setup(
     name="safeeyes",

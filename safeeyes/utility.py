@@ -34,6 +34,7 @@ import subprocess
 import threading
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import babel.core
 import babel.dates
@@ -60,6 +61,8 @@ LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
+SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/safeeyes.desktop")
+SYSTEM_ICONS = os.path.join(BIN_DIRECTORY, "platform/icons")
 DESKTOP_ENVIRONMENT = None
 IS_WAYLAND = False
 
@@ -362,34 +365,76 @@ def initialize_safeeyes():
     logging.info('Copy the config files to ~/.config/safeeyes')
 
     style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
-    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
-
+    
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
-    # Remove the startup file
-    delete(os.path.join(HOME_DIRECTORY, os.path.join(
-        startup_dir_path, 'safeeyes.desktop')))
-
     # Create the ~/.config/safeeyes/style directory
     mkdir(style_dir_path)
-    mkdir(startup_dir_path)
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     os.chmod(CONFIG_FILE_PATH, 0o777)
 
-    # Copy the new startup file
-    try:
-        os.symlink("/usr/share/applications/safeeyes.desktop",
-                   os.path.join(startup_dir_path, 'safeeyes.desktop'))
-    except OSError:
-        pass
-
     # Copy the new style sheet
     if not os.path.isfile(STYLE_SHEET_PATH):
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
+
+    initialize_platform()
+
+
+def initialize_platform():
+    """
+    Copy icons and generate desktop entries.
+    """
+    logging.debug("Initialize the platform")
+
+    applications_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/applications')
+    icons_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/icons')
+    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
+    desktop_entry = os.path.join(applications_dir_path, 'safeeyes.desktop')
+    startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
+
+    # Create the folders if not exist
+    mkdir(applications_dir_path)
+    mkdir(icons_dir_path)
+    mkdir(startup_dir_path)
+
+    # Remove existing files
+    delete(desktop_entry)
+    delete(startup_entry)
+
+    # Create a destop entry
+    try:
+        os.symlink(SYSTEM_DESKTOP_FILE, desktop_entry)
+    except OSError:
+        logging.error("Failed to create desktop entry at %s" % desktop_entry)
+
+    # Create the new startup entry
+    try:
+        os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
+    except OSError:
+        logging.error("Failed to create startup entry at %s" % startup_entry)
+
+    # Add links for all icons
+    for (path, _, filenames) in os.walk(SYSTEM_ICONS):
+        for filename in filenames:
+            system_icon = os.path.join(path, filename)
+            local_icon = os.path.join(icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS))
+            parent_dir = str(Path(local_icon).parent)
+            
+            # Create the directory if not exists
+            mkdir(parent_dir)
+
+            # Remove the link if already exists
+            delete(local_icon)
+
+            # Add a link for the icon
+            try:
+                os.symlink(system_icon, local_icon)
+            except OSError:
+                logging.error("Failed to create icon link at %s" % local_icon)
 
 
 def reset_config():
@@ -404,6 +449,8 @@ def reset_config():
     # Add write permission (e.g. if original file was stored in /nix/store)
     os.chmod(CONFIG_FILE_PATH, 0o777)
     os.chmod(STYLE_SHEET_PATH, 0o777)
+
+    initialize_platform()
 
 def replace_style_sheet():
     """
