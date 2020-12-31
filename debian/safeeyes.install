@@ -1,0 +1,17 @@
+safeeyes/platform/safeeyes.desktop usr/share/applications
+safeeyes/platform/icons/hicolor/128x128/apps/safeeyes.png usr/share/icons/hicolor/128x128/apps
+safeeyes/platform/icons/hicolor/16x16/apps/safeeyes.png usr/share/icons/hicolor/16x16/apps
+safeeyes/platform/icons/hicolor/16x16/status/safeeyes_disabled.png usr/share/icons/hicolor/16x16/status
+safeeyes/platform/icons/hicolor/16x16/status/safeeyes_enabled.png usr/share/icons/hicolor/16x16/status
+safeeyes/platform/icons/hicolor/16x16/status/safeeyes_timer.png usr/share/icons/hicolor/16x16/status
+safeeyes/platform/icons/hicolor/24x24/apps/safeeyes.png usr/share/icons/hicolor/24x24/apps
+safeeyes/platform/icons/hicolor/24x24/status/safeeyes_disabled.png usr/share/icons/hicolor/24x24/status
+safeeyes/platform/icons/hicolor/24x24/status/safeeyes_enabled.png usr/share/icons/hicolor/24x24/status
+safeeyes/platform/icons/hicolor/24x24/status/safeeyes_timer.png usr/share/icons/hicolor/24x24/status
+safeeyes/platform/icons/hicolor/32x32/apps/safeeyes.png usr/share/icons/hicolor/32x32/apps
+safeeyes/platform/icons/hicolor/32x32/status/safeeyes_disabled.png usr/share/icons/hicolor/32x32/status
+safeeyes/platform/icons/hicolor/32x32/status/safeeyes_enabled.png usr/share/icons/hicolor/32x32/status
+safeeyes/platform/icons/hicolor/48x48/apps/safeeyes.png usr/share/icons/hicolor/48x48/apps
+safeeyes/platform/icons/hicolor/48x48/status/safeeyes_disabled.png usr/share/icons/hicolor/48x48/status
+safeeyes/platform/icons/hicolor/48x48/status/safeeyes_enabled.png usr/share/icons/hicolor/48x48/status
+safeeyes/platform/icons/hicolor/64x64/apps/safeeyes.png usr/share/icons/hicolor/64x64/apps

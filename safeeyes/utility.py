@@ -405,7 +405,7 @@ def initialize_platform():
     delete(startup_entry)
 
     # Create a destop entry
-    if not os.path.exists(os.path.join(sys.prefix, "share/applications")):
+    if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
         

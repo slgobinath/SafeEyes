@@ -105,3 +105,12 @@ node_modules/
 
 # PyCharm
 .idea
+
+# Debian Build
+.pybuild/
+debian/safeeyes
+debian/.debhelper
+debian/files
+debian/safeeyes.substvars
+debian/safeeyes.prerm.debhelper
+debian/safeeyes.postinst.debhelper
