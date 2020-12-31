@@ -36,14 +36,22 @@ def __compile_po_files():
             subprocess.call(msgfmt_cmd, shell=True)
 
 
-def _data_files(path):
+def __data_files():
     """
     Collect the data files.
     """
-    for root, _, files in os.walk(path):
-        if not files:
-            continue
-        yield (os.path.join(site.USER_BASE or sys.prefix, root), [os.path.join(root, f) for f in files])
+    root_dir = sys.prefix
+    return [(os.path.join(root_dir, "share/applications"), ["safeeyes/platform/safeeyes.desktop"]),
+    (os.path.join(root_dir, "share/icons/hicolor/24x24/status"), ["safeeyes/platform/icons/hicolor/24x24/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_timer.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"), ["safeeyes/platform/icons/hicolor/24x24/apps/safeeyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/16x16/status"), ["safeeyes/platform/icons/hicolor/16x16/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_timer.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"), ["safeeyes/platform/icons/hicolor/16x16/apps/safeeyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/32x32/status"), ["safeeyes/platform/icons/hicolor/32x32/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/32x32/status/safeeyes_enabled.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"), ["safeeyes/platform/icons/hicolor/32x32/apps/safeeyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"), ["safeeyes/platform/icons/hicolor/64x64/apps/safeeyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"), ["safeeyes/platform/icons/hicolor/128x128/apps/safeeyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/48x48/status"), ["safeeyes/platform/icons/hicolor/48x48/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/48x48/status/safeeyes_enabled.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"), ["safeeyes/platform/icons/hicolor/48x48/apps/safeeyes.png"]),]
 
 
 def __package_files(directory):
@@ -68,10 +76,6 @@ def __package_data():
     data.extend(__package_files('safeeyes/platform'))
     return data
 
-
-# __data_files = list(_data_files('share'))
-__data_files = list()
-
 setuptools.setup(
     name="safeeyes",
     version="2.1.1",
@@ -84,7 +88,7 @@ setuptools.setup(
     download_url="https://github.com/slgobinath/SafeEyes/archive/v2.1.1.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': __package_data()},
-    data_files=__data_files,
+    data_files=__data_files(),
     install_requires=requires,
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',

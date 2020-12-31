@@ -29,6 +29,7 @@ import locale
 import logging
 import os
 import re
+import sys
 import shutil
 import subprocess
 import threading
@@ -381,8 +382,6 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    initialize_platform()
-
 
 def initialize_platform():
     """
@@ -397,19 +396,25 @@ def initialize_platform():
     startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
 
     # Create the folders if not exist
-    mkdir(applications_dir_path)
     mkdir(icons_dir_path)
     mkdir(startup_dir_path)
 
     # Remove existing files
-    delete(desktop_entry)
     delete(startup_entry)
 
     # Create a destop entry
-    try:
-        os.symlink(SYSTEM_DESKTOP_FILE, desktop_entry)
-    except OSError:
-        logging.error("Failed to create desktop entry at %s" % desktop_entry)
+    if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
+        # Create the folder if not exist
+        mkdir(applications_dir_path)
+        
+        # Remove existing file
+        delete(desktop_entry)
+
+        # Create a link
+        try:
+            os.symlink(SYSTEM_DESKTOP_FILE, desktop_entry)
+        except OSError:
+            logging.error("Failed to create desktop entry at %s" % desktop_entry)
 
     # Create the new startup entry
     try:
@@ -422,7 +427,12 @@ def initialize_platform():
         for filename in filenames:
             system_icon = os.path.join(path, filename)
             local_icon = os.path.join(icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS))
+            global_icon = os.path.join(sys.prefix, "share/icons", os.path.relpath(system_icon, SYSTEM_ICONS))
             parent_dir = str(Path(local_icon).parent)
+            
+            if os.path.exists(global_icon):
+                # This icon is already added to the /usr/share/icons/hicolor folder
+                continue
             
             # Create the directory if not exists
             mkdir(parent_dir)
