@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-06 13:14+0000\n"
+"PO-Revision-Date: 2021-01-12 14:32+0000\n"
 "Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -59,15 +59,15 @@ msgstr "afficher la boîte de dialogue À propos"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "désactiver l’instance de safeyes en cours de fonctionnement"
+msgstr "désactiver l’instance de safeyes en cours"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "activer l’instance de safeyes en cours de fonctionnement"
+msgstr "activer l’instance de safeyes en cours"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "fermer l’instance de safeyes en cours de fonctionnement et sortir"
+msgstr "fermer l’instance de safeyes en cours et sortir"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -79,18 +79,18 @@ msgstr "démarrer safeeyes en mode de débogage"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "imprimer l’état de l’instance safeeyes en cours d’exécution et sortir"
+msgstr "imprimer l’état de l’instance safeeyes en cours et sortir"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes n’est pas en cours d’exécution"
+msgstr "Safe Eyes n’est pas en fonction"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"Safe Eyes fonctionne alors que le serveur RPC est désactivé. Activez le "
+"Safe Eyes est en fonction alors que le serveur RPC est désactivé. Activez le "
 "serveur RPC afin d’utiliser des arguments en ligne de commande."
 
 # About dialog
@@ -135,7 +135,7 @@ msgstr "Période de désactivation des raccourcis (en secondes)"
 
 # Settings dialog
 msgid "Postpone duration (in minutes)"
-msgstr "Durée de report (en minutes)"
+msgstr "Durée du report (en minutes)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
