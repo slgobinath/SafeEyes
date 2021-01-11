@@ -341,7 +341,7 @@ msgid "Show statistics based on how you use Safe Eyes"
 msgstr "Montri statistikojn bazita sur kiel vi uzas Safe Eyes"
 
 # plugin/healthstats
-msgid "Time to reset statistics (cron expr)"
+msgid "Statistics reset interval (cron expression)"
 msgstr "Daŭro por restarigi statistikojn (esprimo de cron)"
 
 # plugin/notification

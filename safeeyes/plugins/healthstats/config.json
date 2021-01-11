@@ -13,7 +13,7 @@
     },
     "settings": [{
         "id": "statistics_reset_cron",
-        "label": "Time to reset statistics (cron expr)",
+        "label": "Statistics reset interval (cron expression)",
         "type": "TEXT",
         "default": "0 0 * * *"
     }],

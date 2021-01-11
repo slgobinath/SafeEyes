@@ -344,7 +344,7 @@ msgstr "Vis statistikk basert på din bruk av Øyetrygg"
 
 # plugin/healthstats
 #, fuzzy
-msgid "Time to reset statistics (cron expr)"
+msgid "Statistics reset interval (cron expression)"
 msgstr "Tid for tilbakestilling av statistikk (Cron-uttrykk)"
 
 # plugin/notification
