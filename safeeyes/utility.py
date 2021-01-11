@@ -382,6 +382,28 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
+    create_startup_entry()
+
+
+def create_startup_entry():
+    """
+    Create start up entry.
+    """
+    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
+    startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
+
+    # Create the folder if not exist
+    mkdir(startup_dir_path)
+
+    # Remove existing files
+    delete(startup_entry)
+
+    # Create the new startup entry
+    try:
+        os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
+    except OSError:
+        logging.error("Failed to create startup entry at %s" % startup_entry)
+
 
 def initialize_platform():
     """
@@ -391,18 +413,12 @@ def initialize_platform():
 
     applications_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/applications')
     icons_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/icons')
-    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
     desktop_entry = os.path.join(applications_dir_path, 'safeeyes.desktop')
-    startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
 
-    # Create the folders if not exist
+    # Create the folder if not exist
     mkdir(icons_dir_path)
-    mkdir(startup_dir_path)
 
-    # Remove existing files
-    delete(startup_entry)
-
-    # Create a destop entry
+    # Create a desktop entry
     if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
@@ -415,12 +431,6 @@ def initialize_platform():
             os.symlink(SYSTEM_DESKTOP_FILE, desktop_entry)
         except OSError:
             logging.error("Failed to create desktop entry at %s" % desktop_entry)
-
-    # Create the new startup entry
-    try:
-        os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
-    except OSError:
-        logging.error("Failed to create startup entry at %s" % startup_entry)
 
     # Add links for all icons
     for (path, _, filenames) in os.walk(SYSTEM_ICONS):
@@ -460,7 +470,8 @@ def reset_config():
     os.chmod(CONFIG_FILE_PATH, 0o777)
     os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    initialize_platform()
+    create_startup_entry()
+
 
 def replace_style_sheet():
     """
