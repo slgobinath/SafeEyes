@@ -137,7 +137,6 @@ def __start_idle_monitor():
     """
     global smart_pause_activated
     global idle_start_time
-    next_break = None
 
     while __is_active():
         # Wait for waiting_time seconds
@@ -165,7 +164,7 @@ def __start_idle_monitor():
                     enable_safe_eyes(-1, idle_seconds >= long_break_duration)
                 elif idle_seconds < short_break_interval:
                     # Credit back the idle time
-                    if next_break is not None:
+                    if next_break_time is not None:
                         # This method runs in a thread since the start.
                         # It may run before next_break is initialized in the update_next_break method
                         next_break = next_break_time + idle_period
