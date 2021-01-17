@@ -165,7 +165,7 @@ class BreakScreen:
             builder.connect_signals(self)
 
             window = builder.get_object("window_main")
-            window.set_title("SafeEyes-" + str(monitor));
+            window.set_title("SafeEyes-" + str(monitor))
             lbl_message = builder.get_object("lbl_message")
             lbl_count = builder.get_object("lbl_count")
             lbl_widget = builder.get_object("lbl_widget")
