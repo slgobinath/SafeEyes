@@ -1,7 +1,8 @@
 {
     "meta": {
-        "config_version": "6.0.2"
+        "config_version": "6.0.3"
     },
+    "random_order": true,
     "allow_postpone": false,
     "short_break_interval": 15,
     "long_break_interval": 75,
