@@ -18,7 +18,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Skip Fullscreen plugin skips the break if the active window is fullscreen.
-NOTE: Do not remove the unused import 'GdkX11' becuase it is required in Ubuntu 14.04
+NOTE: Do not remove the unused import 'GdkX11' because it is required in Ubuntu 14.04
 """
 
 import os
