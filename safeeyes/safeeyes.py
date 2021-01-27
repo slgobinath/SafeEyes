@@ -220,7 +220,7 @@ class SafeEyes:
             # RPC server was running but now disabled
             self.__stop_rpc_server()
 
-        # Restart the core and intialize the components
+        # Restart the core and initialize the components
         self.config = config
         self.safe_eyes_core.initialize(config)
         self.break_screen.initialize(config)
