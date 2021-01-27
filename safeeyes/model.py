@@ -85,7 +85,7 @@ class BreakQueue:
         self.__current_break = None
         self.__current_long = 0
         self.__current_short = 0
-        self.__first_break = None
+        self.__shorts_taken = 0
         self.__short_break_time = config.get('short_break_interval')
         self.__long_break_time = config.get('long_break_interval')
         self.__is_random_order = config.get('random_order')
@@ -141,16 +141,11 @@ class BreakQueue:
         else:
             break_obj = self.__next_short()
 
-        if self.__first_break is None:
-            self.__first_break = break_obj
-
-        if not self.__is_random_order:
-            self.context['new_cycle'] = self.__first_break == break_obj
-
-        if self.__current_break is not None:
-            # Reset the time of long breaks
-            if self.__current_break.type == BreakType.LONG_BREAK:
-                self.__current_break.time = self.__long_break_time
+        if self.__shorts_taken == len(self.__short_queue):
+            self.context['new_cycle'] = True
+            self.__shorts_taken = 0
+        else:
+            self.context['new_cycle'] = False
 
         self.__current_break = break_obj
         self.context['session']['break'] = self.__current_break.name
@@ -181,11 +176,13 @@ class BreakQueue:
             self.__current_short = random.randint(0, len(shorts) - 1)
         else:
             self.__current_short = (self.__current_short + 1) % len(shorts)
+        self.__shorts_taken += 1
         return break_obj
 
     def __next_long(self):
         longs  = self.__long_queue
         shorts = self.__short_queue
+        longs[self.__current_long].time = self.__long_break_time
         break_obj = longs[self.__current_long]
         self.context['break_type'] = 'long'
 

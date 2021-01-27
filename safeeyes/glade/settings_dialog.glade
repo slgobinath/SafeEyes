@@ -576,7 +576,7 @@
                                       <object class="GtkLabel" id="lbl_random_order">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="label" translatable="yes">Random breaks order</property>
+                                        <property name="label" translatable="yes">Show breaks in random order</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
