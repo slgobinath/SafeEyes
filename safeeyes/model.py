@@ -136,7 +136,7 @@ class BreakQueue:
         if shorts is None:
             break_obj = self.__next_long()
         elif longs is None:
-            break_obj = self.__next_short(ignore_time=True)
+            break_obj = self.__next_short()
         elif longs[self.__current_long].time <= shorts[self.__current_short].time:
             break_obj = self.__next_long()
         else:
@@ -153,6 +153,11 @@ class BreakQueue:
         else:
             self.context['new_cycle'] = False
 
+        if self.__current_break is not None:
+            # Reset the time of long breaks
+            if self.__current_break.type == BreakType.LONG_BREAK:
+                self.__current_break.time = self.__long_break_time
+
         self.__current_break = break_obj
         self.context['session']['break'] = self.__current_break.name
 
@@ -168,14 +173,13 @@ class BreakQueue:
     def is_empty(self):
         return self.__short_queue is None and self.__long_queue is None
 
-    def __next_short(self, ignore_time=False):
+    def __next_short(self):
         longs  = self.__long_queue
         shorts = self.__short_queue
         break_obj = shorts[self.__current_short]
         self.context['break_type'] = 'short'
         # Reduce the break time from the next long break (default)
-        if not ignore_time:
-            longs[self.__current_long].time -= shorts[self.__current_short].time
+        longs[self.__current_long].time -= shorts[self.__current_short].time
 
         # Update the index to next
         self.__current_short = (self.__current_short + 1) % len(shorts)
@@ -185,7 +189,6 @@ class BreakQueue:
     def __next_long(self):
         longs  = self.__long_queue
         shorts = self.__short_queue
-        longs[self.__current_long].time = self.__long_break_time
         break_obj = longs[self.__current_long]
         self.context['break_type'] = 'long'
 
