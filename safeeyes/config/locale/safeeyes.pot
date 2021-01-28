@@ -119,6 +119,10 @@ msgid "Postpone duration (in minutes)"
 msgstr ""
 
 # Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
+
+# Settings dialog
 msgid "Strict break (No way to skip breaks)"
 msgstr ""
 
