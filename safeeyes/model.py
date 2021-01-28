@@ -79,7 +79,6 @@ class BreakType(Enum):
 
 
 class BreakQueue:
-
     def __init__(self, config, context):
         self.context = context
         self.__current_break = None
@@ -108,13 +107,6 @@ class BreakQueue:
                     brk = self.next()
                     while brk != current_break and brk.name != last_break:
                         brk = self.next()
-
-        # Get next break randomly if enabled
-        if self.__is_random_order: 
-            # Double next() because get_break calls it once normally
-            # Therefore calling self.next() once has no effect
-            self.next()
-            self.next()
 
     def get_break(self):
         if self.__current_break is None:
@@ -172,10 +164,7 @@ class BreakQueue:
             longs[self.__current_long].time -= shorts[self.__current_short].time
 
         # Update the index to next
-        if self.__is_random_order:
-            self.__current_short = random.randint(0, len(shorts) - 1)
-        else:
-            self.__current_short = (self.__current_short + 1) % len(shorts)
+        self.__current_short = (self.__current_short + 1) % len(shorts)
         self.__shorts_taken += 1
         return break_obj
 
@@ -187,10 +176,7 @@ class BreakQueue:
         self.context['break_type'] = 'long'
 
         # Update the index to next
-        if self.__is_random_order:
-            self.__current_long = random.randint(0, len(longs) - 1)
-        else:
-            self.__current_long = (self.__current_long + 1) % len(longs)
+        self.__current_long = (self.__current_long + 1) % len(longs)
         return break_obj
 
     def __build_queue(self, break_type, break_configs, break_time, break_duration):
@@ -203,8 +189,13 @@ class BreakQueue:
             # No breaks
             return None
 
+        if self.__is_random_order:
+            breaks_order = random.sample(break_configs, size)
+        else:
+            breaks_order = break_configs
+
         queue = [None] * size
-        for i, break_config in enumerate(break_configs):
+        for i, break_config in enumerate(breaks_order):
             name = _(break_config['name'])
             duration = break_config.get('duration', break_duration)
             image = break_config.get('image')
