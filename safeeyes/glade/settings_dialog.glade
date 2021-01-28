@@ -530,15 +530,15 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkBox" id="box9">
+                                  <object class="GtkBox" id="box16_random_order">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="spacing">5</property>
                                     <child>
-                                      <object class="GtkLabel" id="lbl_strict_break">
+                                      <object class="GtkLabel" id="lbl_random_order">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="label" translatable="yes">Strict break (No way to skip breaks)</property>
+                                        <property name="label" translatable="yes">Show breaks in random order</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -547,7 +547,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkSwitch" id="switch_strict_break">
+                                      <object class="GtkSwitch" id="switch_random_order">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="halign">end</property>
@@ -568,15 +568,15 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkBox" id="box16_random_order">
+                                  <object class="GtkBox" id="box9">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="spacing">5</property>
                                     <child>
-                                      <object class="GtkLabel" id="lbl_random_order">
+                                      <object class="GtkLabel" id="lbl_strict_break">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="label" translatable="yes">Show breaks in random order</property>
+                                        <property name="label" translatable="yes">Strict break (No way to skip breaks)</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -585,7 +585,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkSwitch" id="switch_random_order">
+                                      <object class="GtkSwitch" id="switch_strict_break">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="halign">end</property>
@@ -780,6 +780,26 @@
                                     <property name="show-close-button">True</property>
                                     <signal name="close" handler="on_warn_bar_rpc_server_close" swapped="no"/>
                                     <signal name="response" handler="on_warn_bar_rpc_server_close" swapped="no"/>
+                                    <child internal-child="action_area">
+                                      <object class="GtkButtonBox">
+                                        <property name="can-focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
+                                    <child internal-child="content_area">
+                                      <object class="GtkBox">
+                                        <property name="can-focus">False</property>
+                                      </object>
+                                      <packing>
+                                        <property name="expand">False</property>
+                                        <property name="fill">False</property>
+                                        <property name="position">0</property>
+                                      </packing>
+                                    </child>
                                     <child>
                                       <placeholder/>
                                     </child>
