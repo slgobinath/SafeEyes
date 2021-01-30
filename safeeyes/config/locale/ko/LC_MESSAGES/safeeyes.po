@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-02-20 05:33+0000\n"
+"PO-Revision-Date: 2021-01-31 14:41+0000\n"
 "Last-Translator: Lee Yunseok <ironyunseok@protonmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ko/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.11\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -268,7 +268,7 @@ msgstr "'%s' 명령줄 도구를 설치해주세요"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "잘못된 크론 표현식 '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -340,7 +340,7 @@ msgstr "세이프 아이즈 사용에 기반한 통계 표시"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "통계 재설정 간격 (크론 표현식)"
 
 # plugin/notification
 msgid "Notification"
