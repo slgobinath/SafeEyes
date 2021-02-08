@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-23 11:29+0000\n"
+"PO-Revision-Date: 2021-02-10 15:50+0000\n"
 "Last-Translator: Oğuz Ersen <oguzersen@protonmail.com>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/tr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -141,7 +141,7 @@ msgstr "Erteleme süresi (dakika)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Molaları rastgele sırayla göster"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
