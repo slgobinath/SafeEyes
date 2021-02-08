@@ -129,7 +129,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Gyorsbillentyűk letiltásának hossza (másodpercben)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Elhalasztás időtartama (percben)"
 
 # Settings dialog

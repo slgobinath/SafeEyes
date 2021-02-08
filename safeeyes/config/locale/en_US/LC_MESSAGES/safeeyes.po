@@ -134,8 +134,8 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Keyboard shortcuts disabled period (in seconds)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
-msgstr "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
+msgstr "Postponement duration (in minutes)"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

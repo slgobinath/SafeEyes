@@ -134,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Période de désactivation des raccourcis (en secondes)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Durée du report (en minutes)"
 
 # Settings dialog

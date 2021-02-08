@@ -132,7 +132,7 @@ msgstr ""
 "Th.gian khóa phím tắt để tránh tắt nhầm Nhắc nhở khi nó hiện lên (bằng giây)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Thời gian tạm hoãn (bằng phút)"
 
 # Settings dialog

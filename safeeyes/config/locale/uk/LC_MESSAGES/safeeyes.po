@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Період вимикання комбінацій клавіш (в секундах)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Тривалість відкладення (в хвилинах)"
 
 # Settings dialog

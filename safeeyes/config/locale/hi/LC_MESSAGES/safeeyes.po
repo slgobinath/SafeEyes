@@ -129,7 +129,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "कीबोर्ड शॉर्टकट अक्षम अवधि (सेकंड में)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "पोस्टपोन अवधि (मिनटों में)"
 
 # Settings dialog

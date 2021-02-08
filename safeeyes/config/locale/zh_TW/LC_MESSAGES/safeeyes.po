@@ -129,7 +129,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "鍵盤快速鍵停用期間(秒)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "推遲休息時長（分鐘）"
 
 # Settings dialog

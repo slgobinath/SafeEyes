@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Период блокировки горячих клавиш (в секундах)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Длительность откладывания (в минутах)"
 
 # Settings dialog

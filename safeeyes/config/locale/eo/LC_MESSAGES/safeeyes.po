@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Daŭro de malebligo de fulmoklavoj (en sekundoj)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Daŭro de prokrasto (en minutoj)"
 
 # Settings dialog

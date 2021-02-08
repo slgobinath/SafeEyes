@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Tastatursnarveier avskrudd i periode (i sekunder)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Utsettelsesvarighet (i minutter)"
 
 # Settings dialog

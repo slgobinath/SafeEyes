@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Dauer mit deaktivierten Tastatur-Kürzeln (in Sekunden)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Aufschubdauer (in Minuten)"
 
 # Settings dialog

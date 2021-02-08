@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Čas, počas ktorého budú zakázané klávesové skratky (v sekundách)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Odložiť o (v minútach)"
 
 # Settings dialog

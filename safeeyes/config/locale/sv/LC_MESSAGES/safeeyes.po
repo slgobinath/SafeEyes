@@ -131,7 +131,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Kortkommandon inaktiverad period (i sekunder)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Uppskjutningsvaraktighet (i minuter)"
 
 # Settings dialog

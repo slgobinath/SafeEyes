@@ -134,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Okres wyłączenia skrótów klawiszowych (w sekundach)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Czas przełożenia (w minutach)"
 
 # Settings dialog

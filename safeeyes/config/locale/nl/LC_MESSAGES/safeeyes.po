@@ -134,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Tijd dat sneltoetsen uitgeschakeld zijn (in seconden)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Uitstelduur (in minuten)"
 
 # Settings dialog

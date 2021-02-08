@@ -131,7 +131,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "자판 단축키 비활성 기간 (초)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "미루는 시간 (분)"
 
 # Settings dialog

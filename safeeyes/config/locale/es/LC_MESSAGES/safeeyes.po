@@ -133,7 +133,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Período de desactivación de los atajos de teclado (en segundos)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Duración de cada posposición (en minutos)"
 
 # Settings dialog

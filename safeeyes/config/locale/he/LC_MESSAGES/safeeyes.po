@@ -131,7 +131,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "משך השבתת קיצורי המקלדת (בשניות)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "משך עיכוב (בשניות)"
 
 # Settings dialog

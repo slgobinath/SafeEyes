@@ -134,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Klavye kısayollarının etkisiz kalma süresi (saniye)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Erteleme süresi (dakika)"
 
 # Settings dialog

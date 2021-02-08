@@ -132,7 +132,7 @@ msgstr ""
 "Durata della disattivazione per le scorciatoie da tastiera (in secondi)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Durata del rinvio (in minuti)"
 
 # Settings dialog

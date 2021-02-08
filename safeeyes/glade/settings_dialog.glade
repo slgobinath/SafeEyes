@@ -674,7 +674,7 @@
                                       <object class="GtkLabel" id="lbl_postpone_duration">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="label" translatable="yes">Postpone duration (in minutes)</property>
+                                        <property name="label" translatable="yes">Postponement duration (in minutes)</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
