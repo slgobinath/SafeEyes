@@ -97,7 +97,9 @@ msgstr "关闭"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr ""
 "长时间使用电脑办公时，Safe Eyes 会适时提醒您休息一下，以便帮助您保护好眼睛、"
 "远离视疲劳"
@@ -133,6 +135,10 @@ msgstr "禁用键盘快捷键的时长（秒）"
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "推迟休息时长（分钟）"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

@@ -90,8 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"RPC ಸರ್ವರ್ ಇಲ್ಲದೆ ಸೇಫ್ಐಸ್ ಚಾಲನೆಯಲ್ಲಿದೆ. ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ಬಳಸಲು"
-" ಅದನ್ನು ಆನ್ ಮಾಡಿ."
+"RPC ಸರ್ವರ್ ಇಲ್ಲದೆ ಸೇಫ್ಐಸ್ ಚಾಲನೆಯಲ್ಲಿದೆ. ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ಬಳಸಲು ಅದನ್ನು ಆನ್ "
+"ಮಾಡಿ."
 
 # About dialog
 msgid "Close"
@@ -99,7 +99,9 @@ msgstr ""
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr "ವಿವರಣೆ"
 
 # About dialog
@@ -132,6 +134,10 @@ msgstr ""
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
+msgstr ""
+
+# Settings dialog
+msgid "Show breaks in random order"
 msgstr ""
 
 # Settings dialog

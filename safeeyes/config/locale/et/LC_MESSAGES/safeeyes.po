@@ -99,7 +99,9 @@ msgstr "Sulge"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes aitab vähendada arvutiga töötamisel silmade väsimust, tuletades "
 "meelde puhkepause"
@@ -135,6 +137,10 @@ msgstr "Klaviatuurikäskude eiramise aeg (sekundit)"
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "Edasilükkamise aeg (minutites)"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

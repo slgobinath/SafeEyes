@@ -99,7 +99,9 @@ msgstr "Cerrar"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes protege tus ojos de la fatiga visual (astenopía), recordándote "
 "tomar descansos cuando estás trabajando muchas horas en el ordenador"
@@ -135,6 +137,10 @@ msgstr "Período de desactivación de los atajos de teclado (en segundos)"
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "Duración de cada posposición (en minutos)"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

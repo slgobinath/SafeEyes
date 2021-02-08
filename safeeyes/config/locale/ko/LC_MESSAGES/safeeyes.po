@@ -99,7 +99,9 @@ msgstr "닫기"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr "설명"
 
 # About dialog
@@ -133,6 +135,10 @@ msgstr "자판 단축키 비활성 기간 (초)"
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "미루는 시간 (분)"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

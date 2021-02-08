@@ -97,7 +97,9 @@ msgstr "Zavrieť"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes vám pripomenie, aby ste si urobili prestávku počas dlhých hodín "
 "stravených za počítačom. Chráni tak vaše oči pred prílišným namáhaním "
@@ -134,6 +136,10 @@ msgstr "Čas, počas ktorého budú zakázané klávesové skratky (v sekundách
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "Odložiť o (v minútach)"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"

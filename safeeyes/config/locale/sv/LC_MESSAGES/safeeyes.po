@@ -99,7 +99,9 @@ msgstr "Stäng"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr "beskrivning"
 
 # About dialog
@@ -133,6 +135,10 @@ msgstr "Kortkommandon inaktiverad period (i sekunder)"
 # Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr "Uppskjutningsvaraktighet (i minuter)"
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
