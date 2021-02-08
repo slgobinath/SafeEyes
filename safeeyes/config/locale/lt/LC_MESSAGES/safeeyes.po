@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-31 14:41+0000\n"
+"PO-Revision-Date: 2021-02-10 15:50+0000\n"
 "Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -141,7 +141,7 @@ msgstr "Atidėjimo trukmė (minutėmis)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Rodyti pertraukas atsitiktine tvarka"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
