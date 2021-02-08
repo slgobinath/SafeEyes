@@ -88,15 +88,11 @@ class BreakQueue:
         self.__short_break_time = config.get('short_break_interval')
         self.__long_break_time = config.get('long_break_interval')
         self.__is_random_order = config.get('random_order')
+        self.__config = config
 
-        self.__short_queue = self.__build_queue(BreakType.SHORT_BREAK,
-                                                  config.get('short_breaks'),
-                                                  self.__short_break_time,
-                                                  config.get('short_break_duration'))
-        self.__long_queue = self.__build_queue(BreakType.LONG_BREAK,
-                                                 config.get('long_breaks'),
-                                                 self.__long_break_time,
-                                                 config.get('long_break_duration'))
+        self.__build_longs()
+        self.__build_shorts()
+
 
         # Interface guarantees that short_interval >= 1
         # And that long_interval is a multiple of short_interval
@@ -183,6 +179,11 @@ class BreakQueue:
 
         # Update the index to next
         self.__current_short = (self.__current_short + 1) % len(shorts)
+
+        # Shuffle queue
+        if self.__current_short == 0 and self.__is_random_order:
+            self.__build_shorts()
+
         self.__shorts_taken += 1
         return break_obj
 
@@ -194,6 +195,11 @@ class BreakQueue:
 
         # Update the index to next
         self.__current_long = (self.__current_long + 1) % len(longs)
+
+        # Shuffle queue
+        if self.__current_long == 0 and self.__is_random_order:
+            self.__build_longs()
+
         return break_obj
 
     def __build_queue(self, break_type, break_configs, break_time, break_duration):
@@ -230,6 +236,19 @@ class BreakQueue:
             queue[i] = break_obj
 
         return queue
+
+    def __build_shorts(self):
+        self.__short_queue = self.__build_queue(BreakType.SHORT_BREAK,
+                                                  self.__config.get('short_breaks'),
+                                                  self.__short_break_time,
+                                                  self.__config.get('short_break_duration'))
+
+    def __build_longs(self):
+        self.__long_queue = self.__build_queue(BreakType.LONG_BREAK,
+                                                 self.__config.get('long_breaks'),
+                                                 self.__long_break_time,
+                                                 self.__config.get('long_break_duration'))
+
 
 
 class State(Enum):
