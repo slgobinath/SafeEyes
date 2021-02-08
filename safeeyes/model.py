@@ -21,6 +21,7 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 """
 
 import logging
+import random
 from distutils.version import LooseVersion
 from enum import Enum
 
@@ -78,23 +79,29 @@ class BreakType(Enum):
 
 
 class BreakQueue:
-
     def __init__(self, config, context):
         self.context = context
         self.__current_break = None
-        self.__first_break = None
+        self.__current_long = 0
+        self.__current_short = 0
+        self.__shorts_taken = 0
         self.__short_break_time = config.get('short_break_interval')
         self.__long_break_time = config.get('long_break_interval')
-        self.__short_pointer = self.__build_queue(BreakType.SHORT_BREAK,
-                                                  config.get('short_breaks'),
-                                                  self.__short_break_time,
-                                                  config.get('short_break_duration'))
-        self.__long_pointer = self.__build_queue(BreakType.LONG_BREAK,
-                                                 config.get('long_breaks'),
-                                                 self.__long_break_time,
-                                                 config.get('long_break_duration'))
-        self.__short_header = self.__short_pointer
-        self.__long_header = self.__long_pointer
+        self.__is_random_order = config.get('random_order')
+        self.__config = config
+
+        self.__build_longs()
+        self.__build_shorts()
+
+
+        # Interface guarantees that short_interval >= 1
+        # And that long_interval is a multiple of short_interval
+        short_interval = config.get('short_break_interval')
+        long_interval  = config.get('long_break_interval')
+        self.__cycle_len = int(long_interval / short_interval)
+        # To count every long break as a cycle in .next() if there are no short breaks
+        if self.__short_queue is None:
+            self.__cycle_len = 1
 
         # Restore the last break from session
         if not self.is_empty():
@@ -102,9 +109,9 @@ class BreakQueue:
             if last_break is not None:
                 current_break = self.get_break()
                 if last_break != current_break.name:
-                    pointer = self.next()
-                    while pointer != current_break and pointer.name != last_break:
-                        pointer = self.next()
+                    brk = self.next()
+                    while brk != current_break and brk.name != last_break:
+                        brk = self.next()
 
     def get_break(self):
         if self.__current_break is None:
@@ -115,39 +122,33 @@ class BreakQueue:
         return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
 
     def next(self):
+        break_obj = None
+        shorts = self.__short_queue
+        longs  = self.__long_queue
+
         if self.is_empty():
             return None
-        break_obj = None
-        if self.__short_pointer is None:
-            # No short breaks
-            break_obj = self.__long_pointer
-            self.context['break_type'] = 'long'
-            # Update the pointer to next
-            self.__long_pointer = self.__long_pointer.next
-        elif self.__long_pointer is None:
-            # No long breaks
-            break_obj = self.__short_pointer
-            self.context['break_type'] = 'short'
-            # Update the pointer to next
-            self.__short_pointer = self.__short_pointer.next
-        elif self.__long_pointer.time <= self.__short_pointer.time:
-            # Time for a long break
-            break_obj = self.__long_pointer
-            self.context['break_type'] = 'long'
-            # Update the pointer to next
-            self.__long_pointer = self.__long_pointer.next
-        else:
-            # Time for a short break
-            break_obj = self.__short_pointer
-            self.context['break_type'] = 'short'
-            # Reduce the break time from the next long break
-            self.__long_pointer.time -= self.__short_pointer.time
-            # Update the pointer to next
-            self.__short_pointer = self.__short_pointer.next
 
-        if self.__first_break is None:
-            self.__first_break = break_obj
-        self.context['new_cycle'] = self.__first_break == break_obj
+        if shorts is None:
+            break_obj = self.__next_long()
+        elif longs is None:
+            break_obj = self.__next_short()
+        elif longs[self.__current_long].time <= shorts[self.__current_short].time:
+            break_obj = self.__next_long()
+        else:
+            break_obj = self.__next_short()
+
+        # Shorts and longs exist -> set cycle on every long
+        if break_obj.type == BreakType.LONG_BREAK:
+            self.context['new_cycle'] = True
+            self.__shorts_taken = 0
+        # Only shorts exist -> set cycle when enough short breaks pass
+        elif self.__shorts_taken  == self.__cycle_len:
+            self.context['new_cycle'] = True
+            self.__shorts_taken = 0
+        else:
+            self.context['new_cycle'] = False
+
         if self.__current_break is not None:
             # Reset the time of long breaks
             if self.__current_break.type == BreakType.LONG_BREAK:
@@ -159,38 +160,65 @@ class BreakQueue:
         return break_obj
 
     def reset(self):
-        self.__short_pointer = self.__short_header
-        self.__long_pointer = self.__long_header
-        self.__first_break = None
-        self.__current_break = None
-
-        # Reset all break time
-        short_pointer = self.__short_pointer
-        long_pointer = self.__long_pointer
-        short_pointer.time = self.__short_break_time
-        long_pointer.time = self.__long_break_time
-        short_pointer = short_pointer.next
-        long_pointer = long_pointer.next
-
-        while short_pointer != self.__short_header:
-            short_pointer.time = self.__short_break_time
-            short_pointer = short_pointer.next
-
-        while long_pointer != self.__long_header:
-            long_pointer.time = self.__long_break_time
-            long_pointer = long_pointer.next
-
+        for break_object in self.__short_queue:
+            break_object.time = self.__short_break_time
+        
+        for break_object in self.__long_queue:
+            break_object.time = self.__long_break_time
 
     def is_empty(self):
-        return self.__short_pointer is None and self.__long_pointer is None
+        return self.__short_queue is None and self.__long_queue is None
+
+    def __next_short(self):
+        longs  = self.__long_queue
+        shorts = self.__short_queue
+        break_obj = shorts[self.__current_short]
+        self.context['break_type'] = 'short'
+        # Reduce the break time from the next long break (default)
+        longs[self.__current_long].time -= shorts[self.__current_short].time
+
+        # Update the index to next
+        self.__current_short = (self.__current_short + 1) % len(shorts)
+
+        # Shuffle queue
+        if self.__current_short == 0 and self.__is_random_order:
+            self.__build_shorts()
+
+        self.__shorts_taken += 1
+        return break_obj
+
+    def __next_long(self):
+        longs  = self.__long_queue
+        shorts = self.__short_queue
+        break_obj = longs[self.__current_long]
+        self.context['break_type'] = 'long'
+
+        # Update the index to next
+        self.__current_long = (self.__current_long + 1) % len(longs)
+
+        # Shuffle queue
+        if self.__current_long == 0 and self.__is_random_order:
+            self.__build_longs()
+
+        return break_obj
 
     def __build_queue(self, break_type, break_configs, break_time, break_duration):
         """
-        Build a circular queue of breaks.
+        Build a queue of breaks.
         """
-        head = None
-        tail = None
-        for break_config in break_configs:
+        size = len(break_configs)
+
+        if 0 == size:
+            # No breaks
+            return None
+
+        if self.__is_random_order:
+            breaks_order = random.sample(break_configs, size)
+        else:
+            breaks_order = break_configs
+
+        queue = [None] * size
+        for i, break_config in enumerate(breaks_order):
             name = _(break_config['name'])
             duration = break_config.get('duration', break_duration)
             image = break_config.get('image')
@@ -205,17 +233,22 @@ class BreakQueue:
 
             break_obj = Break(break_type, name, interval,
                               duration, image, plugins)
-            if head is None:
-                head = break_obj
-                tail = break_obj
-            else:
-                tail.next = break_obj
-                tail = break_obj
+            queue[i] = break_obj
 
-        # Connect the tail to the head
-        if tail is not None:
-            tail.next = head
-        return head
+        return queue
+
+    def __build_shorts(self):
+        self.__short_queue = self.__build_queue(BreakType.SHORT_BREAK,
+                                                  self.__config.get('short_breaks'),
+                                                  self.__short_break_time,
+                                                  self.__config.get('short_break_duration'))
+
+    def __build_longs(self):
+        self.__long_queue = self.__build_queue(BreakType.LONG_BREAK,
+                                                 self.__config.get('long_breaks'),
+                                                 self.__long_break_time,
+                                                 self.__config.get('long_break_duration'))
+
 
 
 class State(Enum):
