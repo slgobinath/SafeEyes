@@ -89,7 +89,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">4</property>
-                <property name="label" translatable="yes">Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer.</property>
+                <property name="label" translatable="yes">Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer</property>
                 <property name="justify">fill</property>
                 <property name="wrap">True</property>
                 <property name="width_chars">60</property>

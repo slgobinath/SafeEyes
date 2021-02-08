@@ -97,7 +97,7 @@ msgstr "Zavrieť"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes vám pripomenie, aby ste si urobili prestávku počas dlhých hodín "
 "stravených za počítačom. Chráni tak vaše oči pred prílišným namáhaním "
