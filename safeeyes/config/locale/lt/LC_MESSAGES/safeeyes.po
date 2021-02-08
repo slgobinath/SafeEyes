@@ -6,18 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-08-30 19:37+0000\n"
-"Last-Translator: openSUSE Lietuviškai <opensuse.lietuviu.kalba@gmail.com>\n"
+"PO-Revision-Date: 2021-01-31 14:41+0000\n"
+"Last-Translator: Moo <hazap@hotmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
-"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
-"1 : 2);\n"
-"X-Generator: Weblate 4.2.1-dev\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -101,7 +100,7 @@ msgstr "Užverti"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Programa Safe Eyes, primindama jums apie pertraukas, apsaugo jūsų akis nuo "
 "akių nuovargio (astenopijos)"
@@ -135,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Išjungtų klaviatūros trumpinių laikotarpis (sekundėmis)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Atidėjimo trukmė (minutėmis)"
 
 # Settings dialog
@@ -273,7 +272,7 @@ msgstr "Įdiekite komandų eilutės įrankį „%s“"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Neteisingas cron reiškinys „%s“"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -345,7 +344,7 @@ msgstr "Rodyti statistiką pagal tai, kaip naudojate Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Statistikos atstatymo intervalas (cron reiškinys)"
 
 # plugin/notification
 msgid "Notification"

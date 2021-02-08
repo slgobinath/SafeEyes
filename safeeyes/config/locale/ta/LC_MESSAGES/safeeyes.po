@@ -100,7 +100,7 @@ msgstr "மூடு"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "அடிக்கடி ஓய்வெடுக்க அறிவுறுத்துவதன் மூலம் Safe Eyes கணனியில் நீண்ட நேரம் பணியாற்றுவதால் "
 "ஏற்படும் கண் சோர்வை தடுக்கிறது"
@@ -134,7 +134,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "விசைப்பலகை குறுக்குவழிகள் முடக்கப்பட்டிருக்கும் காலம் (விநாடிகளில்)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "இடைவேளையை ஒத்தி வைக்கும் காலம் (நிமிடங்களில்)"
 
 # Settings dialog

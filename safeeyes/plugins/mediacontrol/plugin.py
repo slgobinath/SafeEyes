@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-Media Control plugin lets users to pause currntly playing media player from the break screen.
+Media Control plugin lets users to pause currently playing media player from the break screen.
 """
 
 import logging

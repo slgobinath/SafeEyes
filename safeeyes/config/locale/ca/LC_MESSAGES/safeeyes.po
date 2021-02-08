@@ -97,7 +97,7 @@ msgstr "Tanca"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes protegeix els vostres ulls de la fatiga visual (astenopia) "
 "recordant-vos que feu petits descansos mentre esteu treballant amb "
@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr ""
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Durada d'una posposició (en minuts)"
 
 # Settings dialog

@@ -99,7 +99,7 @@ msgstr "סגירה"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr "תיאור"
 
 # About dialog
@@ -131,7 +131,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "משך השבתת קיצורי המקלדת (בשניות)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "משך עיכוב (בשניות)"
 
 # Settings dialog

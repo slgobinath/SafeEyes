@@ -79,7 +79,7 @@ msgstr ""
 msgid "Close"
 msgstr "Aizvērt"
 
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes aizsargā Jūsu acis no redzes pārslodzes (asthenopia), atgādinot "
 "ņemt pārtraukumus, kamēr strādājat garas stundas pie datora."
@@ -105,7 +105,7 @@ msgstr "Laiks, lai sagatavotos pārtraukumam (sekundēs)"
 msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Īsinājumtaustiņu atspējošanas laiks (sekundēs)"
 
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Atlikšanas laiks (minūtēs)"
 
 msgid "Strict break (No way to skip breaks)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-04-13 08:11+0000\n"
+"PO-Revision-Date: 2021-02-08 10:50+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -99,7 +99,7 @@ msgstr "Sulge"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes aitab vähendada arvutiga töötamisel silmade väsimust, tuletades "
 "meelde puhkepause"
@@ -133,7 +133,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Klaviatuurikäskude eiramise aeg (sekundit)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Edasilükkamise aeg (minutites)"
 
 # Settings dialog
@@ -270,7 +270,7 @@ msgstr "Palun paigalda järgnev käsurea tööriist: '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Vigane croni väljend '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -342,7 +342,7 @@ msgstr "Programmikasutuse statistika kuvamine"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Statistika lähtestamise intervall (croni väljend)"
 
 # plugin/notification
 msgid "Notification"

@@ -100,7 +100,7 @@ msgstr "Malfemi"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr "Priskribo"
 
 # About dialog
@@ -132,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Daŭro de malebligo de fulmoklavoj (en sekundoj)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Daŭro de prokrasto (en minutoj)"
 
 # Settings dialog

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-01-22 10:21+0000\n"
-"Last-Translator: Dmitriy Bogdanov <di72nn@gmail.com>\n"
+"PO-Revision-Date: 2021-01-27 09:32+0000\n"
+"Last-Translator: Dmitriy Q <krotesk@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.11-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -91,6 +91,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes работает без RPC-сервера. Включите его, чтобы использовать "
+"аргументы командной строки."
 
 # About dialog
 msgid "Close"
@@ -98,7 +100,7 @@ msgstr "Закрыть"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr "Описание"
 
 # About dialog
@@ -130,7 +132,7 @@ msgid "Keyboard shortcuts disabled period (in seconds)"
 msgstr "Период блокировки горячих клавиш (в секундах)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Длительность откладывания (в минутах)"
 
 # Settings dialog
@@ -147,11 +149,11 @@ msgstr "Сохранять внутреннее состояние"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Используйте RPC-сервер для получения запущенных команд"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Команды из командной строки могут не работать без RPC сервера"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -268,7 +270,7 @@ msgstr "Пожалуйста установите инструмент кома�
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Недопустимое выражение cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -324,7 +326,7 @@ msgstr "Прерывать эти окна независимо от их сос
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "Преключать прерываемые окна в нормальный режим"
+msgstr "Переключать прерываемые окна в нормальный режим"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
@@ -340,7 +342,7 @@ msgstr "Показывать статистику основанную на ис
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Интервал сброса статистики (выражение cron)"
 
 # plugin/notification
 msgid "Notification"
@@ -491,7 +493,7 @@ msgstr "Приостановить воспроизведение медиапл
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Приостановить воспроизведение"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

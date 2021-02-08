@@ -97,7 +97,7 @@ msgstr "Đóng"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes bảo vệ đôi mắt của bạn khỏi sự mệt mỏi (asthenopia) bằng cách nhắc "
 "nhở bạn nghỉ ngơi khi bạn đang làm việc trong một thời gian dài bên máy tính"
@@ -132,7 +132,7 @@ msgstr ""
 "Th.gian khóa phím tắt để tránh tắt nhầm Nhắc nhở khi nó hiện lên (bằng giây)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Thời gian tạm hoãn (bằng phút)"
 
 # Settings dialog

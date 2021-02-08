@@ -97,7 +97,7 @@ msgstr "Chiudi"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "description"
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
 msgstr ""
 "Safe Eyes protegge gli occhi dall'asthenopia ricordandoti di fare una pausa "
 "mentre lavori per ore al computer"
@@ -132,7 +132,7 @@ msgstr ""
 "Durata della disattivazione per le scorciatoie da tastiera (in secondi)"
 
 # Settings dialog
-msgid "Postpone duration (in minutes)"
+msgid "Postponement duration (in minutes)"
 msgstr "Durata del rinvio (in minuti)"
 
 # Settings dialog

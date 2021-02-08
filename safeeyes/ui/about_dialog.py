@@ -37,7 +37,7 @@ class AboutDialog:
         builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
         builder.connect_signals(self)
         self.window = builder.get_object('window_about')
-        builder.get_object('lbl_decription').set_label(_('description'))
+        builder.get_object('lbl_decription').set_label(_("Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"))
         builder.get_object('lbl_license').set_label(_('License') + ':')
 
         # Set the version at the runtime
