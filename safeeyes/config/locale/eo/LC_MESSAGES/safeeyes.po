@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2020-12-24 13:29+0000\n"
+"PO-Revision-Date: 2021-02-10 15:50+0000\n"
 "Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eo/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -139,7 +139,7 @@ msgstr "Daŭro de prokrasto (en minutoj)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Montri paŭzojn en hazarda ordo"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
