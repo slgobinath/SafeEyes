@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-24 13:29+0000\n"
+"PO-Revision-Date: 2021-02-10 15:50+0000\n"
 "Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -140,7 +140,7 @@ msgstr "Duración de cada posposición (en minutos)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Muestra pausas en orden aleatorio"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
