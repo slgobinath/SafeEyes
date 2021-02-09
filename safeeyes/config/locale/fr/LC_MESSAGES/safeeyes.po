@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-12 14:32+0000\n"
+"PO-Revision-Date: 2021-02-10 15:50+0000\n"
 "Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -141,7 +141,7 @@ msgstr "Durée du report (en minutes)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Afficher les pauses en ordre aléatoire"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -199,7 +199,7 @@ msgstr "Supprimer"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Voulez-vous vraiment supprimer cette pause ?"
+msgstr "Voulez-vous vraiment supprimer cette pause ?"
 
 # Settings dialog
 msgid "You can't undo this action."
