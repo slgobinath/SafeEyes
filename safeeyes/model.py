@@ -319,7 +319,6 @@ class Config:
                         # Update the user config
                         self.__merge_dictionary(
                             self.__user_config, self.__system_config)
-                        self.__user_config = self.__system_config
                         # Update the style sheet
                         utility.replace_style_sheet()
 
