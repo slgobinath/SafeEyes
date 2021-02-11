@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-26 19:18+0000\n"
-"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
+"PO-Revision-Date: 2021-02-12 17:50+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes funziona senza un server RPC. Attivalo per utilizzare gli "
+"argomenti della riga di comando."
 
 # About dialog
 msgid "Close"
@@ -139,7 +141,7 @@ msgstr "Durata del rinvio (in minuti)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Mostra interruzioni in ordine casuale"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -155,11 +157,13 @@ msgstr "Persistenza dello stato interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Utilizza il server RPC per ricevere i comandi di runtime"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
+"Senza il server RPC, i comandi della riga di comando potrebbero non "
+"funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -277,7 +281,7 @@ msgstr "Devi installare lo strumento a riga di comando '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Espressione cron non valida '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -350,7 +354,7 @@ msgstr "Mostra le statistiche basate sull'uso di Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Intervallo di ripristino delle statistiche (espressione cron)"
 
 # plugin/notification
 msgid "Notification"
