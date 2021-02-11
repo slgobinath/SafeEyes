@@ -299,7 +299,9 @@ class Config:
         self.__user_config = utility.load_json(utility.CONFIG_FILE_PATH)
         self.__system_config = utility.load_json(
             utility.SYSTEM_CONFIG_FILE_PATH)
-        self.__force_upgrade = ['long_breaks', 'short_breaks']
+        # If there any breaking changes in long_breaks, short_breaks or any other keys, use the __force_upgrade list
+        self.__force_upgrade = []
+        # self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if init:
             if self.__user_config is None:
