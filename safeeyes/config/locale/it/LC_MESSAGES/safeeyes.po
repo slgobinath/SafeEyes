@@ -1,13 +1,13 @@
-# SAFE EYES ENGLISH TRANSLATION.
+# SAFE EYES ITALIAN TRANSLATION.
 # Copyright (C) 2017 Gobinath
 # Gobinath slgobinath@gmail.com, 2017.
-#
+#Albano Battistella <albano_battistella@hotmail.com, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-26 19:18+0000\n"
-"Last-Translator: Guglielmo Wilmup <wilmup67@gmail.com>\n"
+"PO-Revision-Date: 2021-02-11 19:18+0100\n"
+"Last-Translator: albano battistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use "
 "command-line arguments."
 msgstr ""
+"Safe Eyes funziona senza un server RPC. Attivalo per utilizzarlo "
+"della riga di comando."
 
 # About dialog
 msgid "Close"
@@ -149,11 +151,11 @@ msgstr "Persistenza dello stato interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Utilizza il server RPC per ricevere i comandi di runtime"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Senza il server RPC, i comandi della riga di comando potrebbero non funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -340,7 +342,7 @@ msgstr "Mostra le statistiche basate sull'uso di Safe Eyes"
 
 # plugin/healthstats
 msgid "Interval to reset statistics (in hours)"
-msgstr ""
+msgstr "Intervallo per reimpostare le statistiche (in ore)"
 
 # plugin/notification
 msgid "Notification"
