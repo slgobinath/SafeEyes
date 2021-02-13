@@ -1,4 +1,6 @@
-safeeyes (2.1.1-1) xenial; urgency=high
+safeeyes (2.1.2-1) xenial; urgency=high
+  * Fix missing icons and add random order of breaks
+
   * Create desktop entries from the code
 
   * Add Python 3.8 and 3.9 support
