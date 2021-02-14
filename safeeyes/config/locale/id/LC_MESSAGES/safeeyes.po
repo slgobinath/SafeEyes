@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-10-12 09:52+0000\n"
-"Last-Translator: Muhammad Fauzi <fauzi.padlaw@gmail.com>\n"
+"PO-Revision-Date: 2021-02-15 00:50+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/id/>\n"
 "Language: id\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.9-dev\n"
+"X-Generator: Weblate 4.5-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes berjalan tanpa server RPC. Aktifkan untuk menggunakan command-line "
+"arguments."
 
 # About dialog
 msgid "Close"
@@ -136,7 +138,7 @@ msgstr "Menunda durasi (dalam beberapa menit)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Tampilkan jeda dalam urutan acak"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -152,11 +154,11 @@ msgstr "Pertahankan kondisi internal"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Gunakan server RPC untuk menerima perintah runtime"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Tanpa server RPC, perintah command-line mungkin tidak berfungsi"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -274,7 +276,7 @@ msgstr "Silakan lakukan pemasangan alat command-line '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Ekspresi cron tidak valid '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -348,7 +350,7 @@ msgstr ""
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Interval reset statistik (ekspresi cron)"
 
 # plugin/notification
 msgid "Notification"
