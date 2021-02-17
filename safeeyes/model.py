@@ -175,7 +175,8 @@ class BreakQueue:
         break_obj = shorts[self.__current_short]
         self.context['break_type'] = 'short'
         # Reduce the break time from the next long break (default)
-        longs[self.__current_long].time -= shorts[self.__current_short].time
+        if longs:
+            longs[self.__current_long].time -= shorts[self.__current_short].time
 
         # Update the index to next
         self.__current_short = (self.__current_short + 1) % len(shorts)
@@ -189,7 +190,6 @@ class BreakQueue:
 
     def __next_long(self):
         longs  = self.__long_queue
-        shorts = self.__short_queue
         break_obj = longs[self.__current_long]
         self.context['break_type'] = 'long'
 
