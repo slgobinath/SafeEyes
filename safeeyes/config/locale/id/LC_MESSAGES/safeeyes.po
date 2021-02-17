@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-15 00:50+0000\n"
+"PO-Revision-Date: 2021-02-18 00:50+0000\n"
 "Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/id/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -158,7 +158,7 @@ msgstr "Gunakan server RPC untuk menerima perintah runtime"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Tanpa server RPC, perintah command-line mungkin tidak berfungsi"
+msgstr "Tanpa server RPC, perintah command-line mungkin tidak akan berfungsi"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
