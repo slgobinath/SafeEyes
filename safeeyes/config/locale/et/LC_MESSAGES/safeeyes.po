@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-08 10:50+0000\n"
+"PO-Revision-Date: 2021-02-18 00:50+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -140,7 +140,7 @@ msgstr "Edasilükkamise aeg (minutites)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Kuva pausid juhuslikus järjekorras"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
