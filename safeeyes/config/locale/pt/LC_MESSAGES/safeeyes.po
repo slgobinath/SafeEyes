@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-10 19:29+0000\n"
+"PO-Revision-Date: 2021-02-24 07:50+0000\n"
 "Last-Translator: ssantos <ssantos@web.de>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -140,7 +140,7 @@ msgstr "Duração do adiamento (em minutos)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Mostrar pausas em ordem aleatória"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -280,7 +280,7 @@ msgstr "Por favor, instale a ferramenta '%s' da linha de comandos"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "A expressão de cron '%s' é inválida"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -354,7 +354,7 @@ msgstr "Mostrar estatísticas baseadas em como você usa o Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Intervalo de reinicialização da estatística (expressão cron)"
 
 # plugin/notification
 msgid "Notification"
