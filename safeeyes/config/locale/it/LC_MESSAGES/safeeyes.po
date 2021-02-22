@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-12 17:50+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2021-02-24 07:50+0000\n"
+"Last-Translator: bortox <broto777@zoho.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -157,13 +157,11 @@ msgstr "Persistenza dello stato interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "Utilizza il server RPC per ricevere i comandi di runtime"
+msgstr "Utilizza il server RPC per ricevere i comandi"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"Senza il server RPC, i comandi della riga di comando potrebbero non "
-"funzionare"
+msgstr "Senza il server RPC, i comandi a riga di comando non possono funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -470,7 +468,7 @@ msgstr[1] "Per %d secondi"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "Prossima pausa tra %s"
+msgstr "Prossima pausa alle ore %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
