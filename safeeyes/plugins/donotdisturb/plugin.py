@@ -30,6 +30,7 @@ import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk
 from gi.repository import GdkX11  # noqa F401
+from safeeyes import utility
 
 context = None
 skip_break_window_classes = []
@@ -38,7 +39,24 @@ unfullscreen_allowed = True
 dnd_while_on_battery = False
 
 
-def is_active_window_skipped(pre_break):
+def is_active_window_skipped_wayland(pre_break):
+    cmdlist = ['wlrctl', 'toplevel', 'find', 'state:fullscreen']
+    try:
+        process = subprocess.Popen(cmdlist, stdout=subprocess.PIPE)
+        process.communicate()[0]
+        if process.returncode == 0:
+            return True
+        elif process.returncode == 1:
+            return False
+        elif process.returncode == 127:
+            logging.warning('Could not find wlrctl needed to detect fullscreen under wayland')
+            return False
+    except subprocess.CalledProcessError:
+        logging.warning('Error in finding full-screen application')
+    return False
+
+
+def is_active_window_skipped_xorg(pre_break):
     """
     Check for full-screen applications.
     This method must be executed by the main thread. If not, it will cause random failure.
@@ -123,7 +141,10 @@ def on_pre_break(break_obj):
     """
     Lifecycle method executes before the pre-break period.
     """
-    skip_break = is_active_window_skipped(True)
+    if utility.IS_WAYLAND:
+        skip_break = is_active_window_skipped_wayland(True)
+    else:
+        skip_break = is_active_window_skipped_xorg(True)
     if dnd_while_on_battery and not skip_break:
         skip_break = is_on_battery()
     return skip_break
@@ -133,7 +154,10 @@ def on_start_break(break_obj):
     """
     Lifecycle method executes just before the break.
     """
-    skip_break = is_active_window_skipped(False)
+    if utility.IS_WAYLAND:
+        skip_break = is_active_window_skipped_wayland(True)
+    else:
+        skip_break = is_active_window_skipped_xorg(True)
     if dnd_while_on_battery and not skip_break:
         skip_break = is_on_battery()
     return skip_break
