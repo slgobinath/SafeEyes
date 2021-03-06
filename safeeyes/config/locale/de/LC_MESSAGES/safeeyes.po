@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-05-03 09:11+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2021-03-07 09:50+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1-dev\n"
+"X-Generator: Weblate 4.5.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -79,8 +79,7 @@ msgstr "Im Debug-Modus starten"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
-"Status der laufenden Instanz von Safe Eyes ausgeben und Anwendung beenden"
+msgstr "Status der laufenden Safe Eyes-Instanz ausgeben und beenden"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -139,7 +138,7 @@ msgstr "Aufschubdauer (in Minuten)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Pausen in zufälliger Reihenfolge anzeigen"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -279,7 +278,7 @@ msgstr "Bitte Programm '%s' für die Kommandozeile installieren"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Ungültiger Cron-Ausdruck „%s“"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -354,7 +353,7 @@ msgstr "Gesundheitsstatistik anzeigen"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Statistik-Rücksetzintervall (Cron-Ausdruck)"
 
 # plugin/notification
 msgid "Notification"
