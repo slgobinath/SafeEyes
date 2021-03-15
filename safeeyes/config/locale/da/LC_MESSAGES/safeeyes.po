@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-23 11:29+0000\n"
+"PO-Revision-Date: 2021-03-16 20:02+0000\n"
 "Last-Translator: jan madsen <jsm@janz.dk>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -138,7 +138,7 @@ msgstr "Udskyd varighed (i minutter)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Vis pauser i tilfældig rækkefølge"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -310,7 +310,6 @@ msgid "Play audible alert before breaks"
 msgstr "Afspil lydvarsling før pauser"
 
 # plugin/audiblealert
-#, fuzzy
 msgid "Play audible alert after breaks"
 msgstr "Afspil lydvarsling efter pauser"
 
@@ -348,7 +347,7 @@ msgstr "Vis statistikker baseret på brug af Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Nulstillingsinterval for statistik (cron-udtryk)"
 
 # plugin/notification
 msgid "Notification"
