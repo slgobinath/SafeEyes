@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-10 15:50+0000\n"
-"Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
+"PO-Revision-Date: 2021-03-25 08:29+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.5.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -103,8 +103,8 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"Safe Eyes protege tus ojos de la fatiga visual (astenopía), recordándote "
-"tomar descansos cuando estás trabajando muchas horas en el ordenador"
+"Safe Eyes protege sus ojos de la fatiga visual (astenopía), recordándole "
+"tomar descansos cuando ha trabajando muchas horas en el ordenador"
 
 # About dialog
 msgid "License"
@@ -140,7 +140,7 @@ msgstr "Duración de cada posposición (en minutos)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "Muestra pausas en orden aleatorio"
+msgstr "Mostrar descansos al azar"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -161,7 +161,7 @@ msgstr "Utilizar el servidor RPC para recibir órdenes en tiempo de ejecución"
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
-"Sin el servidor RPC, las órdenes ejecutadas en la terminal pueden no "
+"Sin el servidor RPC, las órdenes ejecutadas en el terminal pueden no "
 "funcionar"
 
 # Settings dialog
@@ -282,7 +282,7 @@ msgstr "Instale la herramienta de línea de órdenes «%s»"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr "Expresión cron inválida '%s'"
+msgstr "La expresión de cron «%s» no es válida"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -383,11 +383,11 @@ msgstr ""
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Comando personalizado del protector de pantalla"
+msgstr "Orden personalizada del salvapantallas"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "Mínimo de segundos para saltar sin el protector de pantalla"
+msgstr "Mínimo de segundos para saltar sin salvapantallas"
 
 # plugin/screensaver
 msgid "Lock screen"
