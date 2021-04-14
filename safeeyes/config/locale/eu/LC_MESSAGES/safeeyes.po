@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-04-04 17:26+0000\n"
+"PO-Revision-Date: 2021-04-15 12:26+0000\n"
 "Last-Translator: Porrumentzio <porrumentzio@riseup.net>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eu/>\n"
@@ -51,7 +51,7 @@ msgstr "Ibili pixka batean"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Jarri bizkarra aulkiaren kontra eta erlaxatu"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -132,366 +132,370 @@ msgstr "Atsedenaldirako prestatzeko denbora (segundotan)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Laster-teklak desgaitutako unea (segundotan)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr ""
+msgstr "Atzerapenaren iraupena (minututan)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Erakutsi atsedenaldiak ausazko ordenean"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Atsedenaldi zorrotza (saltatzeko modurik ez)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Baimendu atsedenaldiak atzeratzea"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Eutsi barruko egoerari"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Erabili RPC zerbitzaria exekuzio-denboraren komanduak jasotzeko"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "RPC zerbitzaririk gabe, komandu-lineako komanduek ez dute funtzionatuko"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "Atsedenaldik luzeak, motzen multzoa izan behar du"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Berrezarri"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "Ziur ezarpen guztiak lehenetsitakoetara berrezarri nahi dituzula?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Aukerak"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Atsedenaldi motzak"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Atsedenaldi luzeak"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Ezabatu"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Ziur atsedenaldi hau ezabatu nahi duzula?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Ekintza hau ezin da desegin."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Atsedenaldia"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Atsedenaldiak"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Gehigarriak"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Mota"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Motza"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Luzea"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Irudia"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Aukeratu"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Aukeratu irudi bat"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Iraupena"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Itxaroteko denbora"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Ezikusi"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Denbora (segundotan)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "Denbora (minututan)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Atsedenaldien ezarpenak"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Gehigarriaren ezarpenak"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Gehigarriak ez du %s ingurune-grafikoa onartzen"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Instalatu '%s' Python modulua"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Instalatu '%s' komandu-lerroko tresna"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Baliogabeko '%s' cron adierazpena"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Gehitu %(resource)s baliabidea %(config_resource)s direktorioan"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Atsedenaldi berria"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Kendu"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Baztertu"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Gorde"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Abisu entzungarria"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Erreproduzitu abisu entzungarria atsedenaldien aurretik eta ondoren"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Erreproduzitu abisu entzungarria atsedenaldien aurretik"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Erreproduzitu abisu entzungarria atsedenaldien ondoren"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Ez molestatu"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Saltatu atsedenaldia uneko leihoa pantaila osoan badago"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Ez eten honako leihoetan edonola ere"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Eten honako leihoetan haien egoerari erreparatu gabe"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Aldatu leiho etenezinak modu normalera"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Ez molestatu bateriarekin nagoenean"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Osasun estatistikak"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Erakutsi estatistikak Safe Eyes nola erabiltzen duzun ikusita"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Estatistikak berrezartzeko tartea (cron adierazpena)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Jakinarazpena"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Erakutsi sistemako jakinarazpena atsedenaldien aurretik"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Prestatu %s segundo barru atsedenaldi motza egiteko"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Prestatu %s segundo barru atsedenaldi luzea egiteko"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Pantaila babeslea"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
+"Blokeatu pantaila atsedenaldi luzeen ondoren pantaila-babeslea erakutsiz"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Pantaila-babeslearentzako komando pertsonalizatua"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Pantaila-babeslerik gabe saltatzeko gutxieneko segundoak"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Blokeatu pantaila"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Geldialdi adimenduna"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Pausatu Safe Eyes sistema inaktibo badago"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Safe Eyes pausatzeko gutxieneko denbora inaktiboa (segundotan)"
 
 # plugin/smartpause
+#, fuzzy
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Interpretatu denbora inaktiboa hurrengo atsedenaldiaren iraupenaren "
+"baliokide, atsedenaldi gisa"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Atzeratu hurrengo atsedenaldia sistema inaktibo egon arte"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Erretiluko ikonoa"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Erakutsi erretiluko ikonoa jakinarazpenen eremuan"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Erakutsi hurrengo atsedenaldia erretiluko ikonoan"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Baimendu Safe Eyes desgaitzea"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Honi buruz"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Desgaitu Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "%s arte desgaituta"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Berrabiarazi arte desgaituta"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Gaitu Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ordubeterako"
+msgstr[1] "%d ordurako"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Minutu baterako"
+msgstr[1] "%d minuturako"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Segundo baterako"
+msgstr[1] "%d segundorako"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Hurrengo atsedenaldia: %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Atsedenaldirik ez erabilgarri"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Ezarpenak"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Hartu atsedenaldia orain"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "Berrabiarazi arte"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Utzi"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Multimediaren kontrola"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pausatu multimedia erreproduzitzaileak atsedenaldiaren pantailatik"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pausatu multimedia"
