@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-24 07:50+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2021-04-18 10:26+0000\n"
+"Last-Translator: José Vieira <jvieira33@sapo.pt>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -15,59 +15,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.6-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "Feche firmemente os seus olhos"
+msgstr "Fechar os olhos com força"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Gire seus olhos algumas vezes para cada lado"
+msgstr "Mover os olhos algumas vezes para cada lado"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Gire seus olhos no sentido horário"
+msgstr "Rodar os olhos no sentido horário"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Gire seus olhos no sentido anti-horário"
+msgstr "Rodar os olhos no sentido anti-horário"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "Pisque seus olhos"
+msgstr "Piscar os olhos"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "Concentre-se em um ponto em uma longa distância"
+msgstr "Olhar para um ponto a longa distância"
 
 # Short break
 msgid "Have some water"
-msgstr "Tome um pouco de água"
+msgstr "Tomar um pouco de água"
 
 # Long break
 msgid "Walk for a while"
-msgstr "Caminhe por um tempo"
+msgstr "Andar um pouco"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "Se encoste na sua cadeira e relaxe"
+msgstr "Encostar-se na cadeira e relaxar"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "mostrar a janela sobre"
+msgstr "mostrar a janela 'Sobre'"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "desativar a instância do safeeyes que está rodando"
+msgstr "inativar a instância do safeeyes em execução"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "ativar a instância do safeeyes que está em execução"
+msgstr "reativar a instância do safeeyes em execução"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "fechar a instância atual do safeeyes e sair"
+msgstr "fechar a instância do safeeyes em execução e sair"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -75,7 +75,7 @@ msgstr "mostrar a janela de configuração"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "iniciar o safeeyes em modo de debug"
+msgstr "iniciar o safeeyes em modo de depuração"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
@@ -83,15 +83,15 @@ msgstr "mostrar o estado de execução do Safe Eyes e sair"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes não está em execução"
+msgstr "O Safe Eyes não está em execução"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"O Safe Eyes está em execução sem um servidor RPC ligado. Ligar para usar "
-"argumentos de linha de comando."
+"O Safe Eyes está em execução sem um servidor RPC (interno). Acionar um "
+"servidor RPC para usar argumentos de linha de comando."
 
 # About dialog
 msgid "Close"
@@ -103,8 +103,9 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"Safe Eyes protege seus olhos da fadiga ocular (astenopia) ao lembrá-lo de "
-"dar uma pausa enquando você trabalha por horas no computador"
+"O Safe Eyes ajuda a proteger os olhos da fadiga ocular (astenopia) ao "
+"interromper periodicamente a utilização do computador quando é usado por "
+"longos períodos, para que sejam feitas pausas para descanso"
 
 # About dialog
 msgid "License"
@@ -112,7 +113,7 @@ msgstr "Licença"
 
 # Break screen
 msgid "Skip"
-msgstr "Pular"
+msgstr "Ignorar"
 
 # Break screen
 msgid "Postpone"
@@ -120,19 +121,19 @@ msgstr "Adiar"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr "Duração da parada (em segundos)"
+msgstr "Duração da pausa (em segundos)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "Intervalo entre duas paradas (em minutos)"
+msgstr "Intervalo entre duas pausas (em minutos)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "Tempo de preparo para uma parada (em segundos)"
+msgstr "Tempo de aviso de pausa (em segundos)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "Período para desativar atalhos de teclado (em segundos)"
+msgstr "Período de desativação dos atalhos de teclado (em segundos)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
@@ -140,23 +141,23 @@ msgstr "Duração do adiamento (em minutos)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "Mostrar pausas em ordem aleatória"
+msgstr "Mostrar as pausas aleatoriamente"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "Pausa estrita (Não há como ignorar as pausas)"
+msgstr "Forçar pausas (não podem ser ignoradas)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "Permitir pausas de adiamentos"
+msgstr "Permitir adiamento de pausas"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "Persistir o estado interno"
+msgstr "Manter o estado interno"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "Utilize o servidor RPC para receber comandos de tempo de execução"
+msgstr "Utilizar um servidor RPC (interno) para receber comandos de runtime"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
@@ -166,17 +167,16 @@ msgstr ""
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
-"O intervalo de uma pausa longa deve ser um múltiplo do intervalo de uma "
-"pausa curta"
+"A duração de uma pausa longa tem que ser um múltiplo da duração de uma pausa "
+"curta"
 
 # Settings dialog
 msgid "Reset"
-msgstr "Reiniciar"
+msgstr "Restabelecer"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
-"Tem a certeza que deseja reiniciar todas as definições para a predefinição?"
+msgstr "Restabelecer realmente todas as definições para a predefinição?"
 
 # Settings dialog
 msgid "Options"
@@ -184,11 +184,11 @@ msgstr "Opções"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "Pausas Curtas"
+msgstr "Pausas curtas"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "Pausas Longas"
+msgstr "Pausas longas"
 
 # Settings dialog
 msgid "Delete"
@@ -196,11 +196,11 @@ msgstr "Eliminar"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Tem a certeza que deseja remover esta pausa?"
+msgstr "Remover efectivamente esta pausa?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Não pode anular esta ação."
+msgstr "Esta ação não pode ser anulada."
 
 # Settings dialog
 msgid "Break"
@@ -212,7 +212,7 @@ msgstr "Pausas"
 
 # Settings dialog
 msgid "Plugins"
-msgstr "Plug-ins"
+msgstr "Acrescentos"
 
 # Settings dialog
 msgid "Type"
@@ -220,11 +220,11 @@ msgstr "Tipo"
 
 # Settings dialog
 msgid "Short"
-msgstr "Curto"
+msgstr "Curta"
 
 # Settings dialog
 msgid "Long"
-msgstr "Longo"
+msgstr "Longa"
 
 # Settings dialog
 msgid "Image"
@@ -236,7 +236,7 @@ msgstr "Selecionar"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Por favor, selecione uma imagem"
+msgstr "Selecionar uma imagem"
 
 # Settings dialog
 msgid "Duration"
@@ -260,33 +260,31 @@ msgstr "Tempo (em minutos)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "Definições de Pausa"
+msgstr "Configurações da Pausa"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "Definições de Plug-in"
+msgstr "Definições do Acrescento"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "O plug-in não suporta o ambiente da área de trabalho %s"
+msgstr "O acrescento não funciona no ambiente de trabalho %s"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Por favor, instale o módulo '%s' do Pynthon"
+msgstr "Instalar o módulo Python '%s'"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Por favor, instale a ferramenta '%s' da linha de comandos"
+msgstr "Instalar a ferramenta de linha de comando '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr "A expressão de cron '%s' é inválida"
+msgstr "A expressão cron '%s' é inválida"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
-"Por favor, adicione o recurso %(resource)s para a diretoria "
-"%(config_resources)s"
+msgstr "Adicionar o recurso %(resource)s à pasta %(config_resources)s"
 
 # Settings dialog
 msgid "New Break"
@@ -306,7 +304,7 @@ msgstr "Guardar"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "Alerta Sonoro"
+msgstr "Alerta sonoro"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
@@ -318,31 +316,31 @@ msgstr "Reproduzir alerta sonoro antes das pausas"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "Tocar alerta audível depois das pausas"
+msgstr "Reproduzir alerta sonoro depois das pausas"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr "Não Perturbe"
+msgstr "Não perturbar"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Pular a parada se a janela ativa estiver em modo ecrã cheio"
+msgstr "Ignorar a pausa se a janela ativa estiver em modo ecrã completo"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "Não interromper estas janelas nunca"
+msgstr "Nunca interromper estas janelas"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "Interrompa essas janelas, independentemente do seu estado"
+msgstr "Interromper estas janelas, independentemente do seu estado"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "Mude as janelas interruptíveis para o modo normal"
+msgstr "Mudar as janelas interrompíveis para o modo normal"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Não perturbar enquanto a bateria estiver em uso"
+msgstr "Quando a usar a bateria, não perturbar"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -350,11 +348,11 @@ msgstr "Estatísticas de saúde"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Mostrar estatísticas baseadas em como você usa o Safe Eyes"
+msgstr "Mostrar estatísticas com base na utilização do Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr "Intervalo de reinicialização da estatística (expressão cron)"
+msgstr "Intervalo para reiniciação da estatística (expressão cron)"
 
 # plugin/notification
 msgid "Notification"
@@ -362,31 +360,31 @@ msgstr "Notificação"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Mostrar uma notificação do sistema antes da parada"
+msgstr "Mostrar notificações do sistema antes das pausas"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "Prepare-se para uma parada curta em %s segundos"
+msgstr "Pausa curta em %s segundos"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr "Prepare-se para uma parada longa em %s segundos"
+msgstr "Pausa longa em %s segundos"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr "Protetor de ecrã"
+msgstr "Proteção de ecrã"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Bloquear o ecrã após paradas longas iniciando a proteção de ecrã"
+msgstr "Bloquear o ecrã após pausas longas, acionando a proteção de ecrã"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "Comando para proteção de ecrã personalizada"
+msgstr "Comando personalizado para proteção de ecrã"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "Segundos mínimos para pular sem a proteção de ecrã"
+msgstr "Tempo mínimo em segundos para ignorar sem acionar a proteção de ecrã"
 
 # plugin/screensaver
 msgid "Lock screen"
@@ -394,25 +392,23 @@ msgstr "Bloquear ecrã"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "Pausa Inteligente"
+msgstr "Pausa com critério"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "Pausar o Safe Eyes se o sistema estiver ocioso"
+msgstr "Suspender o Safe Eyes se o sistema estiver inativo"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "Tempo ocioso mínimo para pausar o Safe Eyes (em segundos)"
+msgstr "Tempo mínimo inativo para suspender o Safe Eyes (em segundos)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
-"Interprete o tempo ocioso equivalente à duração da próxima parada como uma "
-"parada"
+msgstr "Interpretar o tempo inativo equivalente à próxima pausa como uma pausa"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "Adiar a próxima pausa até que o sistema se torne inativo"
+msgstr "Adiar a próxima pausa até que o sistema fique inativo"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -424,7 +420,7 @@ msgstr "Mostrar um ícone de bandeja na área de notificação"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "Mostrar a próxima hora de parada no ícone de bandeja"
+msgstr "Mostrar o horário da próxima pausa no ícone de bandeja"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
@@ -453,36 +449,36 @@ msgstr "Ativar o Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Para %d Hora"
-msgstr[1] "Para %d Horas"
+msgstr[0] "Por %d Hora"
+msgstr[1] "Por %d Horas"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Para %d Minuto"
-msgstr[1] "Para %d Minutos"
+msgstr[0] "Por %d Minuto"
+msgstr[1] "Por %d Minutos"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Para %d Segundo"
-msgstr[1] "Para %d Segundos"
+msgstr[0] "Por %d Segundo"
+msgstr[1] "Por %d Segundos"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "Próxima parada as %s"
+msgstr "Próxima pausa às %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "Sem Paradas Disponíveis"
+msgstr "Sem Pausas disponíveis"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr "Configurações"
+msgstr "Definições"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "Faça uma parada agora"
+msgstr "Fazer uma pausa agora"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -494,15 +490,15 @@ msgstr "Sair"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr "Controle de Multimédia"
+msgstr "Controlo multimédia"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "Pausar leitores de multimédia do ecrã de pausa"
+msgstr "Suspender reprodutores multimédia a partir do ecrã de pausa"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr "Pausar mutimédia"
+msgstr "Suspender a reprodução"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
