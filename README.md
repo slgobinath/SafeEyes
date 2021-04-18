@@ -95,6 +95,7 @@ Ensure to meet the following dependencies:
 - libappindicator-gtk3
 - python3-psutil
 - xprintidle (optional)
+- wlrctl (wayland optional)
 
 **To install Safe Eyes:**
 
