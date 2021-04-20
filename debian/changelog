@@ -1,4 +1,8 @@
-safeeyes (2.1.2-1) xenial; urgency=high
+safeeyes (2.1.3-1) xenial; urgency=high
+  * Fix the error if there is no long break
+
+  * Add wayland support for do not disturb me plugin
+
   * Fix missing icons and add random order of breaks
 
   * Create desktop entries from the code
