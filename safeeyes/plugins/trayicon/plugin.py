@@ -51,6 +51,7 @@ class TrayIcon:
         self.on_disable = context['api']['disable_safeeyes']
         self.take_break = context['api']['take_break']
         self.has_breaks = context['api']['has_breaks']
+        self.get_break_time = context['api']['get_break_time']
         self.plugin_config = plugin_config
         self.date_time = None
         self.active = True
@@ -122,9 +123,13 @@ class TrayIcon:
         # Add the sub menu to the enable/disable menu
         self.item_disable.set_submenu(self.sub_menu_disable)
 
-        # Settings menu item
+        # Manual break menu item
         self.item_manual_break = Gtk.MenuItem()
         self.item_manual_break.connect('activate', self.on_manual_break_clicked)
+
+        # Manual long break menu item
+        self.item_manual_long_break = Gtk.MenuItem()
+        self.item_manual_long_break.connect('activate', self.on_manual_long_break_clicked)
 
         # Settings menu item
         self.item_settings = Gtk.MenuItem()
@@ -149,6 +154,7 @@ class TrayIcon:
         self.menu.append(self.item_enable)
         self.menu.append(self.item_disable)
         self.menu.append(self.item_manual_break)
+        self.menu.append(self.item_manual_long_break)
         self.menu.append(self.item_settings)
         self.menu.append(self.item_about)
         self.menu.append(self.item_quit)
@@ -186,6 +192,7 @@ class TrayIcon:
         self.item_disable.set_label(_('Disable Safe Eyes'))
 
         breaks_found = self.has_breaks()
+        long_breaks_found = self.has_breaks(long_break = True)
         if breaks_found:
             if self.active:
                 if self.date_time:
@@ -206,8 +213,10 @@ class TrayIcon:
         self.item_enable.set_sensitive(breaks_found and not self.active)
         self.item_disable.set_sensitive(breaks_found and self.active)
         self.item_manual_break.set_sensitive(breaks_found and self.active)
+        self.item_manual_long_break.set_sensitive(long_breaks_found and self.active)
 
         self.item_manual_break.set_label(_('Take a break now'))
+        self.item_manual_long_break.set_label(_('Take a long break now'))
         self.item_settings.set_label(_('Settings'))
         self.item_about.set_label(_('About'))
         self.item_quit.set_label(_('Quit'))
@@ -263,8 +272,10 @@ class TrayIcon:
         """
         A private method to be called within this class to update the next break information using self.dateTime.
         """
-        formatted_time = utility.format_time(self.date_time)
+        show_long = self.plugin_config.get('show_long_break_time', False)
+        formatted_time = utility.format_time(self.get_break_time(show_long))
         message = _('Next break at %s') % (formatted_time)
+
         # Update the menu item label
         utility.execute_main_thread(self.item_info.set_label, message)
         # Update the tray icon label
@@ -278,6 +289,12 @@ class TrayIcon:
         Trigger a break manually.
         """
         self.take_break()
+
+    def on_manual_long_break_clicked(self, *args):
+        """
+        Trigger a break manually.
+        """
+        self.take_break(long_break = True)
 
     def on_enable_clicked(self, *args):
         """

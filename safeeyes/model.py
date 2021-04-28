@@ -113,10 +113,13 @@ class BreakQueue:
                     while brk != current_break and brk.name != last_break:
                         brk = self.next()
 
-    def get_break(self):
+    def get_break(self, long_break=False):
         if self.__current_break is None:
             self.__current_break = self.next()
-        return self.__current_break
+        if long_break:
+            return self.__next_long()
+        else:
+            return self.__current_break
 
     def is_long_break(self):
         return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
@@ -162,12 +165,12 @@ class BreakQueue:
     def reset(self):
         for break_object in self.__short_queue:
             break_object.time = self.__short_break_time
-        
+
         for break_object in self.__long_queue:
             break_object.time = self.__long_break_time
 
-    def is_empty(self):
-        return self.__short_queue is None and self.__long_queue is None
+    def is_empty(self, long_break=False):
+        return (long_break or self.__short_queue is None) and self.__long_queue is None
 
     def __next_short(self):
         longs  = self.__long_queue

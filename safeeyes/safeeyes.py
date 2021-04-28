@@ -93,10 +93,10 @@ class SafeEyes:
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
-        self.context['api']['take_break'] = lambda: utility.execute_main_thread(
-            self.safe_eyes_core.take_break)
+        self.context['api']['take_break'] = self.safe_eyes_core.take_break
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
+        self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
 
@@ -295,11 +295,11 @@ class SafeEyes:
         self.plugins_manager.stop_break()
         return True
 
-    def take_break(self):
+    def take_break(self, long_break=False):
         """
         Take a break now.
         """
-        self.safe_eyes_core.take_break()
+        self.safe_eyes_core.take_break(long_break)
 
     def status(self):
         """

@@ -19,6 +19,12 @@
             "default": false
         },
         {
+            "id": "show_long_break_time",
+            "label": "Show long break times",
+            "type": "BOOL",
+            "default": false
+        },
+        {
             "id": "allow_disabling",
             "label": "Allow disabling Safe Eyes",
             "type": "BOOL",
