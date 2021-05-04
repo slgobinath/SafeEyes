@@ -136,12 +136,11 @@ class SafeEyesCore:
         Returns the next break time
         """
         time = self.scheduled_next_break_time;
-        if (long_break):
+        if long_break:
             break_obj = self.break_queue.get_break(long_break)
             if not break_obj:
                 return False
-            if not self.break_queue.is_long_break:
-                time += datetime.timedelta(minutes=break_obj.time)
+            time += datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
 
         return time
 
