@@ -117,7 +117,7 @@ class BreakQueue:
         if self.__current_break is None:
             self.__current_break = self.next()
         if long_break:
-            return self.__next_long()
+            return self.__long_queue[self.__current_long]
         else:
             return self.__current_break
 

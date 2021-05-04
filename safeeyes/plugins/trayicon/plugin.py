@@ -274,7 +274,10 @@ class TrayIcon:
         """
         show_long = self.plugin_config.get('show_long_break_time', False)
         formatted_time = utility.format_time(self.get_break_time(show_long))
-        message = _('Next break at %s') % (formatted_time)
+        if show_long:
+            message = _('Next long break at %s') % (formatted_time)
+        else:
+            message = _('Next break at %s') % (formatted_time)
 
         # Update the menu item label
         utility.execute_main_thread(self.item_info.set_label, message)

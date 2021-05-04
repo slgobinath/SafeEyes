@@ -140,7 +140,8 @@ class SafeEyesCore:
             break_obj = self.break_queue.get_break(long_break)
             if not break_obj:
                 return False
-            time += datetime.timedelta(minutes=break_obj.time)
+            if not self.break_queue.is_long_break:
+                time += datetime.timedelta(minutes=break_obj.time)
 
         return time
 
