@@ -27,7 +27,6 @@ import logging
 context = None
 no_of_skipped_breaks = 0
 no_of_breaks = 0
-no_of_cycles = -1
 session = None
 safe_eyes_start_time = datetime.datetime.now()
 total_idle_time = 0
@@ -46,7 +45,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global session
     global no_of_skipped_breaks
     global no_of_breaks
-    global no_of_cycles
     global statistics_reset_cron
     global safe_eyes_start_time
     global total_idle_time
@@ -71,7 +69,6 @@ def init(ctx, safeeyes_config, plugin_config):
         if session is None:
             session = {'no_of_skipped_breaks': 0,
                        'no_of_breaks': 0,
-                       'no_of_cycles': -1,
                        'safe_eyes_start_time': safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S"),
                        'total_idle_time': 0,
                        'last_screen_time': -1,
@@ -79,7 +76,6 @@ def init(ctx, safeeyes_config, plugin_config):
             context['session']['plugin']['healthstats'] = session
         no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
         no_of_breaks = session.get('no_of_breaks', 0)
-        no_of_cycles = session.get('no_of_cycles', -1)
         total_idle_time = session.get('total_idle_time', 0)
         last_screen_time = session.get('last_screen_time', -1)
         str_time = session.get('safe_eyes_start_time', None)
@@ -115,12 +111,8 @@ def get_widget_title(break_obj):
         return ""
 
     global no_of_breaks
-    global no_of_cycles
     no_of_breaks += 1
-    if context['new_cycle']:
-        no_of_cycles += 1
     session['no_of_breaks'] = no_of_breaks
-    session['no_of_cycles'] = no_of_cycles
     session['safe_eyes_start_time'] = safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S")
     session['total_idle_time'] = total_idle_time
     session['last_screen_time'] = last_screen_time
@@ -129,7 +121,6 @@ def get_widget_title(break_obj):
 
 def _reset_stats():
     global no_of_breaks
-    global no_of_cycles
     global safe_eyes_start_time
     global total_idle_time
     global no_of_skipped_breaks
@@ -154,10 +145,8 @@ def _reset_stats():
         last_screen_time = round((total_duration_sec - total_idle_time) / 60)
         total_idle_time = 0
         no_of_breaks = 0
-        no_of_cycles = 0
         no_of_skipped_breaks = 0
         session['no_of_breaks'] = 0
-        session['no_of_cycles'] = 0
         session['no_of_skipped_breaks'] = 0
         session['safe_eyes_start_time'] = safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S")
         session['total_idle_time'] = total_idle_time
@@ -195,7 +184,7 @@ def get_widget_content(break_obj):
         elif screen_time < last_screen_time:
             symbol = '-'
         screen_time_diff = ' ( {}{:02d}:{:02d} )'.format(symbol, hrs_diff, mins_diff)
-    return "{}\tBREAKS: {}\tSKIPPED: {}\tCYCLES: {}\tSCREEN TIME: {}{}".format(heart, no_of_breaks, no_of_skipped_breaks, no_of_cycles, time_format, screen_time_diff)
+    return "{}\tBREAKS: {}\tSKIPPED: {}\tSCREEN TIME: {}{}".format(heart, no_of_breaks, no_of_skipped_breaks, time_format, screen_time_diff)
 
 
 def on_start():
