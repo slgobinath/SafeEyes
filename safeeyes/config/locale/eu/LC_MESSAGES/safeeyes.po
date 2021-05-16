@@ -449,19 +449,19 @@ msgstr "Gaitu Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "Ordubeterako"
+msgstr[0] "Ordu %derako"
 msgstr[1] "%d ordurako"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "Minutu baterako"
+msgstr[0] "Minutu %derako"
 msgstr[1] "%d minuturako"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "Segundo baterako"
+msgstr[0] "Segundo %derako"
 msgstr[1] "%d segundorako"
 
 #: plugins/trayicon
