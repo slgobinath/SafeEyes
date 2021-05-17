@@ -96,13 +96,13 @@ class TrayIcon:
             time_unit = disable_option['unit'].lower()
             if time_unit == 'seconds' or time_unit == 'second':
                 time_in_minutes = int(time_in_minutes / 60)
-                label = ['For %d Second', 'For %d Seconds']
+                label = ['For one second', 'For %d Seconds']
             elif time_unit == 'minutes' or time_unit == 'minute':
                 time_in_minutes = int(time_in_minutes * 1)
-                label = ['For %d Minute', 'For %d Minutes']
+                label = ['For one minute', 'For %d Minutes']
             elif time_unit == 'hours' or time_unit == 'hour':
                 time_in_minutes = int(time_in_minutes * 60)
-                label = ['For %d Hour', 'For %d Hours']
+                label = ['For one hour', 'For %d Hours']
             else:
                 # Invalid unit
                 logging.error('Invalid unit in disable option: ' + str(disable_option))
