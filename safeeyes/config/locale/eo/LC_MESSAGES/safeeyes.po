@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2021-02-10 15:50+0000\n"
+"PO-Revision-Date: 2021-05-21 15:32+0000\n"
 "Last-Translator: Jorge Maldonado Ventura <jorgesumle@freakspot.net>\n"
 "Language-Team: Esperanto <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eo/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.7-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -44,7 +44,7 @@ msgstr "Fokusu malfermegan punkton"
 
 # Short break
 msgid "Have some water"
-msgstr "Trinku kelke da akvon"
+msgstr "Trinku kelke da akvo"
 
 # Long break
 msgid "Walk for a while"
