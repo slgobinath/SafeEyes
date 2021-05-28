@@ -1,0 +1,56 @@
+{
+    "meta": {
+        "name": "Break Screen",
+        "description": "Show a full screen break reminder",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [
+        {
+            "id": "allow_skipping",
+            "label": "Allow skipping breaks",
+            "type": "BOOL",
+            "default": true
+        },
+        {
+            "id": "allow_postponing",
+            "label": "Allow postponing breaks",
+            "type": "BOOL",
+            "default": false
+        },
+        {
+            "id": "postpone_duration",
+            "label": "Postpone duration (in minutes)",
+            "type": "INT",
+            "default": 5,
+            "max": 60,
+            "min": 1
+        },
+        {
+            "id": "keyboard_disabled_period",
+            "label": "Keyboard disabled period (in seconds)",
+            "type": "INT",
+            "default": 2,
+            "max": 3600,
+            "min": -1
+        },
+        {
+            "id": "skip_keyboard_shortcut",
+            "label": "Skip button keyboard shortcut",
+            "type": "HIDDEN",
+            "default": 9
+        },
+        {
+            "id": "postpone_keyboard_shortcut",
+            "label": "Postpone button keyboard shortcut",
+            "type": "HIDDEN",
+            "default": 65
+        }
+    ]
+}

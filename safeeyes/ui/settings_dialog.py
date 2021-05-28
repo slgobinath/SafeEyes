@@ -21,7 +21,7 @@ import os
 
 import gi
 from safeeyes import utility
-from safeeyes.model import Config
+from safeeyes.config import Config
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -68,11 +68,7 @@ class SettingsDialog:
         self.spin_short_break_interval = builder.get_object('spin_short_break_interval')
         self.spin_long_break_interval = builder.get_object('spin_long_break_interval')
         self.spin_time_to_prepare = builder.get_object('spin_time_to_prepare')
-        self.spin_postpone_duration = builder.get_object('spin_postpone_duration')
-        self.spin_disable_keyboard_shortcut = builder.get_object('spin_disable_keyboard_shortcut')
-        self.switch_strict_break = builder.get_object('switch_strict_break')
         self.switch_random_order = builder.get_object('switch_random_order')
-        self.switch_postpone = builder.get_object('switch_postpone')
         self.switch_persist = builder.get_object('switch_persist')
         self.switch_rpc_server = builder.get_object('switch_rpc_server')
         self.info_bar_long_break = builder.get_object("info_bar_long_break")
@@ -86,9 +82,6 @@ class SettingsDialog:
         # Update relative states
         # GtkSwitch state-set signal is available only from 3.14
         if Gtk.get_minor_version() >= 14:
-            # Add event listener to postpone switch
-            self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
-            self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
             # Add event listener to RPC server switch
             self.switch_rpc_server.connect('state-set', self.on_switch_rpc_server_activate)
             self.on_switch_rpc_server_activate(self.switch_rpc_server, self.switch_rpc_server.get_active())
@@ -110,11 +103,7 @@ class SettingsDialog:
         self.spin_short_break_interval.set_value(config.get('short_break_interval'))
         self.spin_long_break_interval.set_value(config.get('long_break_interval'))
         self.spin_time_to_prepare.set_value(config.get('pre_break_warning_time'))
-        self.spin_postpone_duration.set_value(config.get('postpone_duration'))
-        self.spin_disable_keyboard_shortcut.set_value(config.get('shortcut_disable_time'))
-        self.switch_strict_break.set_active(config.get('strict_break'))
         self.switch_random_order.set_active(config.get('random_order'))
-        self.switch_postpone.set_active(config.get('allow_postpone'))
         self.switch_persist.set_active(config.get('persist_state'))
         self.switch_rpc_server.set_active(config.get('use_rpc_server'))
         self.infobar_long_break_shown = False
@@ -256,13 +245,6 @@ class SettingsDialog:
         """
         self.window.show_all()
 
-    def on_switch_postpone_activate(self, switch, state):
-        """
-        Event handler to the state change of the postpone switch.
-        Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
-        """
-        self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
-
     def on_spin_short_break_interval_change(self, spin_button, *value):
         """
         Event handler for value change of short break interval.
@@ -324,11 +306,7 @@ class SettingsDialog:
         self.config.set('short_break_interval', self.spin_short_break_interval.get_value_as_int())
         self.config.set('long_break_interval', self.spin_long_break_interval.get_value_as_int())
         self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
-        self.config.set('postpone_duration', self.spin_postpone_duration.get_value_as_int())
-        self.config.set('shortcut_disable_time', self.spin_disable_keyboard_shortcut.get_value_as_int())
-        self.config.set('strict_break', self.switch_strict_break.get_active())
         self.config.set('random_order', self.switch_random_order.get_active())
-        self.config.set('allow_postpone', self.switch_postpone.get_active())
         self.config.set('persist_state', self.switch_persist.get_active())
         self.config.set('use_rpc_server', self.switch_rpc_server.get_active())
         for plugin in self.config.get('plugins'):

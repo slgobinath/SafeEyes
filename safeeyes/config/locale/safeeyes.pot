@@ -445,6 +445,14 @@ msgid "Next break at %s"
 msgstr ""
 
 #: plugins/trayicon
+msgid "Next short break at %s"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Next long break at %s"
+msgstr ""
+
+#: plugins/trayicon
 msgid "No Breaks Available"
 msgstr ""
 
@@ -454,6 +462,18 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Take a break now"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
 msgstr ""
 
 #: plugins/trayicon
@@ -474,4 +494,12 @@ msgstr ""
 
 # plugin/mediacontrol
 msgid "Pause media"
+msgstr ""
+
+# plugin/breakscreen
+msgid "Break Screen"
+msgstr ""
+
+# plugin/breakscreen
+msgid "Show a full screen break reminder"
 msgstr ""

@@ -1,0 +1,182 @@
+#!/usr/bin/env python
+# Safe Eyes is a utility to remind you to take break frequently
+# to protect your eyes from eye strain.
+
+# Copyright (C) 2021  Gobinath
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+import inspect
+from typing import Optional, Any
+
+from safeeyes.context import Context
+from safeeyes.plugin_utils.plugin import Plugin
+from safeeyes.spi.breaks import Break
+from safeeyes.spi.plugin import Widget, TrayAction
+
+
+class PluginProxy(Plugin):
+    """
+    A proxy class representing the actual plugin object.
+    """
+
+    def __init__(self, plugin_id: str, plugin_module: Any, enabled: bool, plugin_config: dict, plugin_settings: dict):
+        self.__id: str = plugin_id
+        self.__plugin = plugin_module
+        self.__enabled: bool = enabled
+        self.__config: dict = plugin_config
+        self.__settings = plugin_settings
+
+    def is_enabled(self) -> bool:
+        return self.__enabled
+
+    def __is_supported(self, break_obj: Break):
+        if self.__config.get('break_override_allowed', False):
+            return break_obj.is_plugin_enabled(self.__id, self.__enabled)
+        else:
+            return self.__enabled
+
+    def can_breaks_override(self) -> bool:
+        return self.__config.get('break_override_allowed', False)
+
+    def disable(self) -> None:
+        if self.__enabled:
+            self.__enabled = False
+            if PluginProxy.__has_method(self.__plugin, 'disable', 0):
+                return self.__plugin.disable()
+
+    def enable(self) -> None:
+        if not self.__enabled:
+            self.__enabled = True
+            if PluginProxy.__has_method(self.__plugin, 'enable', 0):
+                return self.__plugin.enable()
+
+    def update_settings(self, plugin_settings: dict) -> None:
+        self.__settings = plugin_settings
+
+    def init(self, context: Context, config: dict) -> None:
+        """
+        This function is called to initialize the plugin.
+        """
+        if PluginProxy.__has_method(self.__plugin, 'init', 2):
+            self.__plugin.init(context, self.__settings)
+
+    def is_break_allowed(self, break_obj: Break) -> bool:
+        """
+        This function is called right before the pre-break and start break calls.
+        Plugins must implement this function if they want to skip a break.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'is_break_allowed', 1):
+            return self.__plugin.is_break_allowed(break_obj)
+        return True
+
+    def is_break_skipped(self, break_obj: Break) -> bool:
+        """
+        his function is called right after calling the is_break_allowed function if the output of
+        is_break_allowed is False. Plugins can return `True` if they want to skip the break and move to the next break.
+        If the output is `False`, the get_postpone_time function will be called.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'is_break_skipped', 1):
+            return self.__plugin.is_break_skipped(break_obj)
+        return False
+
+    def get_postpone_time(self, break_obj: Break) -> int:
+        """
+        This function is called right after calling the is_break_skipped function if the output of
+        is_break_skipped is False. Plugins can return a positive time in millis to postpone the break.
+        Zero or negative value indicates that the plugin doesn't want to postpone the break which
+        in turns will postpone the current break by a duration equivalent to the interval.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_postpone_time', 1):
+            return self.__plugin.get_postpone_time(break_obj)
+        return -1
+
+    def on_pre_break(self, break_obj: Break) -> None:
+        """
+        Called some time before starting the break to prepare the plugins. For example, the notification plugin will
+        show a notification during this method call.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'on_pre_break', 1):
+            self.__plugin.on_pre_break(break_obj)
+
+    def on_start_break(self, break_obj: Break) -> None:
+        """
+        Called when starting a break.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'on_start_break', 1):
+            self.__plugin.on_start_break(break_obj)
+
+    def on_count_down(self, break_obj: Break, countdown: int, seconds: int) -> None:
+        """
+        Called during a break.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'on_count_down', 3):
+            self.__plugin.on_count_down(break_obj, countdown, seconds)
+
+    def on_stop_break(self, break_obj: Break, skipped: bool, postponed: bool) -> None:
+        """
+        Called when a break is stopped.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'on_stop_break', 3):
+            self.__plugin.on_stop_break(break_obj, skipped, postponed)
+
+    def get_widget(self, break_obj: Break) -> Optional[Widget]:
+        """
+        Return an optional break screen widget.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_widget', 1):
+            self.__plugin.get_widget(break_obj)
+        return None
+
+    def get_tray_action(self, break_obj: Break) -> Optional[TrayAction]:
+        """
+        Return an optional break screen widget.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_tray_action', 1):
+            self.__plugin.get_tray_action(break_obj)
+        return None
+
+    def on_start(self) -> None:
+        """
+        Called when Safe Eyes is started.
+        """
+        if self.__enabled and PluginProxy.__has_method(self.__plugin, 'on_start', 0):
+            self.__plugin.on_start()
+
+    def on_stop(self) -> None:
+        """
+        Called when Safe Eyes is stopped.
+        """
+        if self.__enabled and PluginProxy.__has_method(self.__plugin, 'on_stop', 0):
+            self.__plugin.on_stop()
+
+    def on_exit(self) -> None:
+        """
+        Called when Safe Eyes is closed.
+        """
+        if self.__enabled and PluginProxy.__has_method(self.__plugin, 'on_exit', 0):
+            self.__plugin.on_exit()
+
+    def update_next_break(self, break_obj: Break, next_short_break: int, next_long_break: int) -> None:
+        """
+        Called when the next break is scheduled.
+        """
+        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'update_next_break', 3):
+            self.__plugin.update_next_break(break_obj, next_short_break, next_long_break)
+
+    @staticmethod
+    def __has_method(module, method_name, no_of_args=0):
+        """
+        Check whether the given function is defined in the module or not.
+        """
+        if hasattr(module, method_name):
+            if len(inspect.getfullargspec(getattr(module, method_name)).args) == no_of_args:
+                return True
+        return False

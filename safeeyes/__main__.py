@@ -30,9 +30,9 @@ from threading import Timer
 import gi
 import psutil
 from safeeyes import utility
-from safeeyes.model import Config
+from safeeyes.config import Config
 from safeeyes.safeeyes import SafeEyes
-from safeeyes.safeeyes import SAFE_EYES_VERSION
+from safeeyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
 
 gi.require_version('Gtk', '3.0')

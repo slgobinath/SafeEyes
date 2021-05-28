@@ -22,307 +22,163 @@ SafeEyes connects all the individual components and provide the complete applica
 
 import atexit
 import logging
-import os
-from threading import Timer
+import sys
 
 import dbus
 import gi
 from dbus.mainloop.glib import DBusGMainLoop
+
 from safeeyes import utility
-from safeeyes.ui.about_dialog import AboutDialog
-from safeeyes.ui.break_screen import BreakScreen
-from safeeyes.model import State
-from safeeyes.rpc import RPCServer
-from safeeyes.plugin_manager import PluginManager
-from safeeyes.core import SafeEyesCore
-from safeeyes.ui.settings_dialog import SettingsDialog
+from safeeyes.breaks.scheduler import BreakScheduler
+from safeeyes.config import Config
+from safeeyes.context import Context
+from safeeyes.plugin_utils.loader import PluginLoader
+from safeeyes.plugin_utils.manager import PluginManager
+from safeeyes.spi.api import CoreAPI
+from safeeyes.spi.state import State
+from safeeyes.thread import Heartbeat, main
+from safeeyes.ui.UIManager import UIManager
+from safeeyes.util import locale
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-SAFE_EYES_VERSION = "2.1.3"
 
-
-class SafeEyes:
+class SafeEyes(CoreAPI):
     """
     This class represents a runnable Safe Eyes instance.
     """
 
-    def __init__(self, system_locale, config):
-        self.active = False
-        self.break_screen = None
-        self.safe_eyes_core = None
-        self.config = config
-        self.context = {}
-        self.plugins_manager = None
-        self.settings_dialog_active = False
-        self.rpc_server = None
-        self._status = ''
+    def __init__(self, system_locale, config: Config):
+        self.__context: Context = Context(config, locale.init_locale())
+        self.__plugin_loader = PluginLoader()
+        self.__heartbeat = Heartbeat(self.__context)
+        self.__plugin_manager: PluginManager = PluginManager(self.__plugin_loader.load(config))
+        self.__scheduler: BreakScheduler = BreakScheduler(self.__context, self.__heartbeat, self.__plugin_manager)
+        self.__ui_manager: UIManager = UIManager(self.__context, self.__on_config_changed)
+        self.__active = False
+        self.__context.set_apis(self, self.__ui_manager, self.__scheduler, self.__plugin_manager)
 
-        # Initialize the Safe Eyes Context
-        self.context['version'] = SAFE_EYES_VERSION
-        self.context['desktop'] = utility.desktop_environment()
-        self.context['is_wayland'] = utility.is_wayland()
-        self.context['locale'] = system_locale
-        self.context['api'] = {}
-        self.context['api']['show_settings'] = lambda: utility.execute_main_thread(
-            self.show_settings)
-        self.context['api']['show_about'] = lambda: utility.execute_main_thread(
-            self.show_about)
-        self.context['api']['enable_safeeyes'] = lambda next_break_time=-1, reset_breaks=False: \
-            utility.execute_main_thread(self.enable_safeeyes, next_break_time, reset_breaks)
-        self.context['api']['disable_safeeyes'] = lambda status: utility.execute_main_thread(
-            self.disable_safeeyes, status)
-        self.context['api']['status'] = self.status
-        self.context['api']['quit'] = lambda: utility.execute_main_thread(
-            self.quit)
-        if self.config.get('persist_state'):
-            self.context['session'] = utility.open_session()
-        else:
-            self.context['session'] = {'plugin': {}}
-
-        self.break_screen = BreakScreen(
-            self.context, self.on_skipped, self.on_postponed, utility.STYLE_SHEET_PATH)
-        self.break_screen.initialize(self.config)
-        self.plugins_manager = PluginManager()
-        self.safe_eyes_core = SafeEyesCore(self.context)
-        self.safe_eyes_core.on_pre_break += self.plugins_manager.pre_break
-        self.safe_eyes_core.on_start_break += self.on_start_break
-        self.safe_eyes_core.start_break += self.start_break
-        self.safe_eyes_core.on_count_down += self.countdown
-        self.safe_eyes_core.on_stop_break += self.stop_break
-        self.safe_eyes_core.on_update_next_break += self.update_next_break
-        self.safe_eyes_core.initialize(self.config)
-        self.context['api']['take_break'] = lambda: utility.execute_main_thread(
-            self.safe_eyes_core.take_break)
-        self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
-        self.context['api']['postpone'] = self.safe_eyes_core.postpone
-        self.plugins_manager.init(self.context, self.config)
-        atexit.register(self.persist_session)
+        self.__plugin_manager.init(self.__context)
+        # Save the session on exit
+        atexit.register(self.__persist_session)
 
     def start(self):
         """
         Start Safe Eyes
         """
-        if self.config.get('use_rpc_server', True):
-            self.__start_rpc_server()
+        self.__heartbeat.start()
+        if not self.__active and self.__scheduler.has_breaks():
+            self.__active = True
+            self.__context.state = State.START
+            self.__plugin_manager.on_start()  # Call the start method of all plugins
+            self.__scheduler.start()
+            self.__handle_system_suspend()
 
-        if self.safe_eyes_core.has_breaks():
-            self.active = True
-            self.context['state'] = State.START
-            self.plugins_manager.start()		# Call the start method of all plugins
-            self.safe_eyes_core.start()
-            self.handle_system_suspend()
+    def stop(self):
+        """
+        Stop Safe Eyes
+        """
+        logging.info("Stop safe eyes")
+        self.__context.state = State.STOPPED
+        if self.__active:
+            self.__active = False
+            self.__plugin_manager.on_stop()
+            self.__scheduler.stop()
+            self.__heartbeat.stop()
+            self.__handle_system_suspend()
+        self.__persist_session()
 
-    def show_settings(self):
-        """
-        Listen to tray icon Settings action and send the signal to Settings dialog.
-        """
-        if not self.settings_dialog_active:
-            logging.info("Show Settings dialog")
-            self.settings_dialog_active = True
-            settings_dialog = SettingsDialog(
-                self.config.clone(), self.save_settings)
-            settings_dialog.show()
-
-    def show_about(self):
-        """
-        Listen to tray icon About action and send the signal to About dialog.
-        """
-        logging.info("Show About dialog")
-        about_dialog = AboutDialog(SAFE_EYES_VERSION)
-        about_dialog.show()
-
-    def quit(self):
-        """
-        Listen to the tray menu quit action and stop the core, notification and the app itself.
-        """
-        logging.info("Quit Safe Eyes")
-        self.context['state'] = State.QUIT
-        self.plugins_manager.stop()
-        self.safe_eyes_core.stop()
-        self.plugins_manager.exit()
-        self.__stop_rpc_server()
-        self.persist_session()
+    @main
+    def quit_safe_eyes(self):
+        self.stop()
+        logging.info("Quit safe eyes")
+        self.__context.state = State.QUIT
         Gtk.main_quit()
         # Exit all threads
-        os._exit(0)
+        # os._exit(0)
+        sys.exit(0)
 
-    def handle_suspend_callback(self, sleeping):
+    def enable_safe_eyes(self, scheduled_next_break_time=-1, reset_breaks=False):
+        """
+        Listen to tray icon enable action and send the signal to core.
+        """
+        self.start()
+
+    def disable_safe_eyes(self):
+        """
+        Listen to tray icon disable action and send the signal to core.
+        """
+        self.stop()
+
+    def __persist_session(self):
+        """
+        Save the session object to the session file.
+        """
+        if self.__context.config.get('persist_state'):
+            utility.write_json(utility.SESSION_FILE_PATH, self.__context.session)
+        else:
+            utility.delete(utility.SESSION_FILE_PATH)
+
+    def __start_rpc_server(self):
+        # if self.rpc_server is None:
+        #     self.rpc_server = RPCServer(self.__context.config.get('rpc_port'), self.context)
+        #     self.rpc_server.start()
+        pass
+
+    def __stop_rpc_server(self):
+        # if self.rpc_server is not None:
+        #     self.rpc_server.stop()
+        #     self.rpc_server = None
+        pass
+
+    def __on_config_changed(self, config: Config):
+        is_active = self.__active
+        if is_active:
+            self.stop()
+
+        logging.info("Save the safeeyes.json")
+        config.save()
+
+        logging.info("Initialize safe eyes with the modified config")
+
+        # Restart the core and initialize the components
+        self.__context.config = config
+        self.__plugin_manager = PluginManager(self.__plugin_loader.load(config))
+        self.__scheduler = BreakScheduler(self.__context, self.__heartbeat, self.__plugin_manager)
+        self.__plugin_manager.init(self.__context)
+        self.__context.set_apis(self, self.__ui_manager, self.__scheduler, self.__plugin_manager)
+
+        if is_active:
+            self.start()
+
+    def __handle_suspend_callback(self, sleeping):
         """
         If the system goes to sleep, Safe Eyes stop the core if it is already active.
         If it was active, Safe Eyes will become active after wake up.
         """
         if sleeping:
             # Sleeping / suspending
-            if self.active:
+            if self.__active:
                 logging.info("Stop Safe Eyes due to system suspend")
-                self.plugins_manager.stop()
-                self.safe_eyes_core.stop()
+                self.__plugin_manager.on_stop()
+                self.__scheduler.stop()
         else:
             # Resume from sleep
-            if self.active and self.safe_eyes_core.has_breaks():
+            if self.__active and self.__scheduler.has_breaks():
                 logging.info("Resume Safe Eyes after system wakeup")
-                self.plugins_manager.start()
-                self.safe_eyes_core.start()
+                self.__plugin_manager.on_start()
+                self.__scheduler.start()
 
-    def handle_system_suspend(self):
+    def __handle_system_suspend(self):
         """
         Setup system suspend listener.
         """
         DBusGMainLoop(set_as_default=True)
         bus = dbus.SystemBus()
-        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep',
-                                'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
-
-    def on_skipped(self):
-        """
-        Listen to break screen Skip action and send the signal to core.
-        """
-        logging.info("User skipped the break")
-        self.safe_eyes_core.skip()
-        self.plugins_manager.stop_break()
-
-    def on_postponed(self):
-        """
-        Listen to break screen Postpone action and send the signal to core.
-        """
-        logging.info("User postponed the break")
-        self.safe_eyes_core.postpone()
-        self.plugins_manager.stop_break()
-
-    def save_settings(self, config):
-        """
-        Listen to Settings dialog Save action and write to the config file.
-        """
-        self.settings_dialog_active = False
-
-        if self.config == config:
-            # Config is not modified
-            return
-
-        logging.info("Saving settings to safeeyes.json")
-        # Stop the Safe Eyes core
-        if self.active:
-            self.plugins_manager.stop()
-            self.safe_eyes_core.stop()
-
-        # Write the configuration to file
-        config.save()
-        self.persist_session()
-
-        logging.info("Initialize SafeEyesCore with modified settings")
-
-        if self.rpc_server is None and config.get('use_rpc_server'):
-            # RPC server wasn't running but now enabled
-            self.__start_rpc_server()
-        elif self.rpc_server is not None and not config.get('use_rpc_server'):
-            # RPC server was running but now disabled
-            self.__stop_rpc_server()
-
-        # Restart the core and initialize the components
-        self.config = config
-        self.safe_eyes_core.initialize(config)
-        self.break_screen.initialize(config)
-        self.plugins_manager.init(self.context, self.config)
-        if self.active and self.safe_eyes_core.has_breaks():
-            # 1 sec delay is required to give enough time for core to be stopped
-            Timer(1.0, self.safe_eyes_core.start).start()
-            self.plugins_manager.start()
-
-    def enable_safeeyes(self, scheduled_next_break_time=-1, reset_breaks=False):
-        """
-        Listen to tray icon enable action and send the signal to core.
-        """
-        if not self.active and self.safe_eyes_core.has_breaks():
-            self.active = True
-            self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
-            self.plugins_manager.start()
-
-    def disable_safeeyes(self, status=None):
-        """
-        Listen to tray icon disable action and send the signal to core.
-        """
-        if self.active:
-            self.active = False
-            self.plugins_manager.stop()
-            self.safe_eyes_core.stop()
-            if status is None:
-                status = _('Disabled until restart')
-            self._status = status
-
-    def on_start_break(self, break_obj):
-        """
-        Pass the break information to plugins.
-        """
-        if not self.plugins_manager.start_break(break_obj):
-            return False
-        return True
-
-    def start_break(self, break_obj):
-        """
-        Pass the break information to break screen.
-        """
-        # Get the HTML widgets content from plugins
-        widget = self.plugins_manager.get_break_screen_widgets(break_obj)
-        actions = self.plugins_manager.get_break_screen_tray_actions(break_obj)
-        self.break_screen.show_message(break_obj, widget, actions)
-
-    def countdown(self, countdown, seconds):
-        """
-        Pass the countdown to plugins and break screen.
-        """
-        self.break_screen.show_count_down(countdown, seconds)
-        self.plugins_manager.countdown(countdown, seconds)
-        return True
-
-    def update_next_break(self, break_obj, break_time):
-        """
-        Update the next break to plugins and save the session.
-        """
-        self.plugins_manager.update_next_break(break_obj, break_time)
-        self._status = _('Next break at %s') % (
-            utility.format_time(break_time))
-        if self.config.get('persist_state'):
-            utility.write_json(utility.SESSION_FILE_PATH,
-                               self.context['session'])
-
-    def stop_break(self):
-        """
-        Stop the current break.
-        """
-        self.break_screen.close()
-        self.plugins_manager.stop_break()
-        return True
-
-    def take_break(self):
-        """
-        Take a break now.
-        """
-        self.safe_eyes_core.take_break()
-
-    def status(self):
-        """
-        Return the status of Safe Eyes.
-        """
-        return self._status
-
-    def persist_session(self):
-        """
-        Save the session object to the session file.
-        """
-        if self.config.get('persist_state'):
-            utility.write_json(utility.SESSION_FILE_PATH,
-                               self.context['session'])
+        if self.__active:
+            bus.add_signal_receiver(self.__handle_suspend_callback, 'PrepareForSleep',
+                                    'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
         else:
-            utility.delete(utility.SESSION_FILE_PATH)
-
-    def __start_rpc_server(self):
-        if self.rpc_server is None:
-            self.rpc_server = RPCServer(self.config.get('rpc_port'), self.context)
-            self.rpc_server.start()
-
-    def __stop_rpc_server(self):
-        if self.rpc_server is not None:
-            self.rpc_server.stop()
-            self.rpc_server = None
+            bus.remove_signal_receiver(self.__handle_suspend_callback, 'PrepareForSleep',
+                                       'org.freedesktop.login1.Manager', 'org.freedesktop.login1')

@@ -22,17 +22,15 @@ This module contains utility functions for Safe Eyes and its plugins.
 
 import errno
 import imp
-import inspect
 import importlib
+import inspect
 import json
 import locale
 import logging
 import os
-import re
-import sys
 import shutil
 import subprocess
-import threading
+import sys
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
@@ -40,6 +38,7 @@ from pathlib import Path
 import babel.core
 import babel.dates
 import gi
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GLib
@@ -86,33 +85,16 @@ def get_resource_path(resource_name):
     return resource_location
 
 
-def start_thread(target_function, **args):
-    """
-    Execute the function in a separate thread.
-    """
-    thread = threading.Thread(target=target_function, name="WorkThread", daemon=False, kwargs=args)
-    thread.start()
-
-
-# def execute_main_thread(target_function, args=None):
-#     """
-#     Execute the given function in main thread.
-#     """
-#     if args:
-#         GLib.idle_add(lambda: target_function(args))
-#     else:
-#         GLib.idle_add(target_function)
-
-def execute_main_thread(target_function, arg1=None, arg2=None):
+def execute_main_thread(target_function, arg1=None, arg2=None, arg3=None):
     """
     Execute the given function in main thread.
     """
-    if arg1 is not None and arg2 is not None:
+    if arg1 is not None and arg2 is not None and arg3 is not None:
+        GLib.idle_add(lambda: target_function(arg1, arg2, arg3))
+    elif arg1 is not None and arg2 is not None:
         GLib.idle_add(lambda: target_function(arg1, arg2))
     elif arg1 is not None:
         GLib.idle_add(lambda: target_function(arg1))
-    elif arg2 is not None:
-        GLib.idle_add(lambda: target_function(arg2))
     else:
         GLib.idle_add(target_function)
 
@@ -217,7 +199,8 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_
     # Check the resources
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
-            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}
+            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource,
+                                                                                                 'config_resource': CONFIG_RESOURCE}
 
     plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
     if os.path.isfile(plugin_dependency_checker):
@@ -251,7 +234,8 @@ def load_plugins_config(safeeyes_config):
         config = load_json(plugin_config_path)
         if config is None:
             continue
-        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}), plugin_path)
+        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}),
+                                                           plugin_path)
         if dependency_description:
             plugin['enabled'] = False
             config['error'] = True
@@ -266,50 +250,6 @@ def load_plugins_config(safeeyes_config):
             setting['safeeyes_config'] = plugin['settings']
         configs.append(config)
     return configs
-
-
-def desktop_environment():
-    """
-    Detect the desktop environment.
-    """
-    global DESKTOP_ENVIRONMENT
-    desktop_session = os.environ.get('DESKTOP_SESSION')
-    current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
-    env = 'unknown'
-    if desktop_session is not None:
-        desktop_session = desktop_session.lower()
-        if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
-            env = desktop_session
-        elif desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop):
-            env = 'xfce'
-        elif desktop_session.startswith('lubuntu'):
-            env = 'lxde'
-        elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
-            env = 'kde'
-        elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-            env = 'gnome'
-        elif desktop_session.startswith('ubuntu'):
-            env = 'unity'
-    DESKTOP_ENVIRONMENT = env
-    return env
-
-def is_wayland():
-    """
-    Determine if Wayland is running
-    https://unix.stackexchange.com/a/325972/222290
-    """
-    global IS_WAYLAND
-    try:
-        session_id = subprocess.check_output(['loginctl']).split(b'\n')[1].split()[0]
-        output = subprocess.check_output(
-            ['loginctl', 'show-session', session_id, '-p', 'Type']
-        )
-    except BaseException:
-        logging.warning('Unable to determine if wayland is running. Assuming no.')
-        IS_WAYLAND = False
-    else:
-        IS_WAYLAND = bool(re.search(b'wayland', output, re.IGNORECASE))
-    return IS_WAYLAND
 
 
 def execute_command(command, args=[]):
@@ -366,7 +306,7 @@ def initialize_safeeyes():
     logging.info('Copy the config files to ~/.config/safeeyes')
 
     style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
-    
+
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
@@ -422,7 +362,7 @@ def initialize_platform():
     if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
-        
+
         # Remove existing file
         delete(desktop_entry)
 
@@ -439,11 +379,11 @@ def initialize_platform():
             local_icon = os.path.join(icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS))
             global_icon = os.path.join(sys.prefix, "share/icons", os.path.relpath(system_icon, SYSTEM_ICONS))
             parent_dir = str(Path(local_icon).parent)
-            
+
             if os.path.exists(global_icon):
                 # This icon is already added to the /usr/share/icons/hicolor folder
                 continue
-            
+
             # Create the directory if not exists
             mkdir(parent_dir)
 
@@ -465,7 +405,7 @@ def reset_config():
     # Copy the safeeyes.json and safeeyes_style.css
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-    
+
     # Add write permission (e.g. if original file was stored in /nix/store)
     os.chmod(CONFIG_FILE_PATH, 0o777)
     os.chmod(STYLE_SHEET_PATH, 0o777)
@@ -554,7 +494,7 @@ def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
         return
     config = {}
     config['id'] = plugin_id
-    config['enabled'] = False   # By default plugins are disabled
+    config['enabled'] = False  # By default plugins are disabled
     config['version'] = plugin_config['meta']['version']
     if plugin_config['settings']:
         config['settings'] = {}
@@ -656,7 +596,7 @@ def has_method(module, method_name, no_of_args=0):
     Check whether the given function is defined in the module or not.
     """
     if hasattr(module, method_name):
-        if len(inspect.getargspec(getattr(module, method_name)).args) == no_of_args:
+        if len(inspect.getfullargspec(getattr(module, method_name)).args) == no_of_args:
             return True
     return False
 

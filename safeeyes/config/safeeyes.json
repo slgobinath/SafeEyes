@@ -1,9 +1,8 @@
 {
     "meta": {
-        "config_version": "6.0.3"
+        "config_version": "6.0.4"
     },
     "random_order": true,
-    "allow_postpone": false,
     "short_break_interval": 15,
     "long_break_interval": 75,
     "long_break_duration": 60,
@@ -13,10 +12,6 @@
     "postpone_duration": 5,
     "use_rpc_server": true,
     "rpc_port": 7200,
-    "shortcut_disable_time": 2,
-    "shortcut_skip": 9,
-    "shortcut_postpone": 65,
-    "strict_break": false,
     "short_breaks": [{
             "name": "Tightly close your eyes"
         },
@@ -128,6 +123,19 @@
             "id": "mediacontrol",
             "enabled": true,
             "version": "0.0.1"
+        },
+        {
+            "id": "breakscreen",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "allow_skipping": true,
+                "allow_postponing": false,
+                "postpone_duration": 5,
+                "keyboard_disabled_period": 2,
+                "skip_keyboard_shortcut": 9,
+                "postpone_keyboard_shortcut": 65
+            }
         }
     ]
 }
