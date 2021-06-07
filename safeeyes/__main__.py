@@ -29,11 +29,12 @@ from threading import Timer
 
 import gi
 import psutil
+
+from safeeyes import SAFE_EYES_VERSION
 from safeeyes import utility
 from safeeyes.config import Config
-from safeeyes.safeeyes import SafeEyes
-from safeeyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
+from safeeyes.safeeyes import SafeEyes
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -57,7 +58,8 @@ def __running():
             else:
                 # In older versions cmdline was a list object
                 cmd_line = proc.cmdline
-            if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
+            if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and (
+                    'safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
                 process_count += 1
                 if process_count > 1:
                     return True
@@ -72,23 +74,25 @@ def __evaluate_arguments(args, safe_eyes):
     """
     Evaluate the arguments and execute the operations.
     """
-    if args.about:
-        utility.execute_main_thread(safe_eyes.show_about)
-    elif args.disable:
-        utility.execute_main_thread(safe_eyes.disable_safeeyes)
-    elif args.enable:
-        utility.execute_main_thread(safe_eyes.enable_safeeyes)
-    elif args.settings:
-        utility.execute_main_thread(safe_eyes.show_settings)
-    elif args.take_break:
-        utility.execute_main_thread(safe_eyes.take_break)
+    # if args.about:
+    #     utility.execute_main_thread(safe_eyes.show_about)
+    # elif args.disable:
+    #     utility.execute_main_thread(safe_eyes.disable_safeeyes)
+    # elif args.enable:
+    #     utility.execute_main_thread(safe_eyes.enable_safeeyes)
+    # elif args.settings:
+    #     utility.execute_main_thread(safe_eyes.show_settings)
+    # elif args.take_break:
+    #     utility.execute_main_thread(safe_eyes.take_break)
+    pass
 
 
 def main():
     """
     Start the Safe Eyes.
     """
-    system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH, languages=[utility.system_locale(), 'en_US'], fallback=True)
+    system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH,
+                                        languages=[utility.system_locale(), 'en_US'], fallback=True)
     system_locale.install()
     # locale.bindtextdomain is required for Glade files
     # gettext.bindtextdomain(gettext.textdomain(), Utility.LOCALE_PATH)
@@ -97,13 +101,15 @@ def main():
     parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-a', '--about', help=_('show the about dialog'), action='store_true')
-    group.add_argument('-d', '--disable', help=_('disable the currently running safeeyes instance'), action='store_true')
+    group.add_argument('-d', '--disable', help=_('disable the currently running safeeyes instance'),
+                       action='store_true')
     group.add_argument('-e', '--enable', help=_('enable the currently running safeeyes instance'), action='store_true')
     group.add_argument('-q', '--quit', help=_('quit the running safeeyes instance and exit'), action='store_true')
     group.add_argument('-s', '--settings', help=_('show the settings dialog'), action='store_true')
     group.add_argument('-t', '--take-break', help=_('Take a break now').lower(), action='store_true')
     parser.add_argument('--debug', help=_('start safeeyes in debug mode'), action='store_true')
-    parser.add_argument('--status', help=_('print the status of running safeeyes instance and exit'), action='store_true')
+    parser.add_argument('--status', help=_('print the status of running safeeyes instance and exit'),
+                        action='store_true')
     parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
     args = parser.parse_args()
 
@@ -151,5 +157,5 @@ def main():
 
 
 if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal.SIG_DFL)    # Handle Ctrl + C
+    signal.signal(signal.SIGINT, signal.SIG_DFL)  # Handle Ctrl + C
     main()

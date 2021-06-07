@@ -35,7 +35,7 @@ class BreaksStore:
         self.__long_queue: Queue = self.__build_longs()
 
         # Restore the last break from session
-        self.__restore_last_break(context.get_session(SESSION_KEY_BREAK))
+        self.__restore_last_break(context.session.get(SESSION_KEY_BREAK))
 
     def get_break(self, break_type=None) -> Optional[Break]:
         if self.__current_break is None:
@@ -75,7 +75,7 @@ class BreaksStore:
 
         break_obj.reset_time()
         self.__current_break = break_obj
-        self.__context.set_session(SESSION_KEY_BREAK, self.__current_break.name)
+        self.__context.session.set(SESSION_KEY_BREAK, self.__current_break.name)
 
         return break_obj
 
@@ -100,7 +100,7 @@ class BreaksStore:
     def __next_short(self) -> Optional[Break]:
         break_obj = self.__short_queue.next()
         if break_obj is not None:
-            self.__context.set_session(SESSION_KEY_BREAK_TYPE, BreakType.SHORT)
+            self.__context.session.set(SESSION_KEY_BREAK_TYPE, BreakType.SHORT)
             # Reduce the waiting time from the next long break
             if not self.__long_queue.is_empty():
                 next_long_break = self.__long_queue.peek()
@@ -110,7 +110,7 @@ class BreaksStore:
         return break_obj
 
     def __next_long(self) -> Optional[Break]:
-        self.__context.set_session(SESSION_KEY_BREAK_TYPE, BreakType.LONG)
+        self.__context.session.set(SESSION_KEY_BREAK_TYPE, BreakType.LONG)
         return self.__long_queue.next()
 
     def __restore_last_break(self, last_break: str) -> None:

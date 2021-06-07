@@ -16,25 +16,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
-from safeeyes import utility
+from safeeyes.context import Context
+from safeeyes.env import system
 
-def _get_next_reset_time(current_time, statistics_reset_cron):
-    import croniter
+
+def __is_valid_cron(expr: str) -> bool:
+    from croniter import croniter
+    from croniter.croniter import CroniterBadCronError
     try:
-        cron = croniter.croniter(statistics_reset_cron, current_time)
-        return cron.get_next(datetime.datetime)
-    except:
+        return bool(croniter.expand(expr))
+    except CroniterBadCronError:
         # Error in getting the next reset time
-        return None
+        return False
 
-def validate(plugin_config, plugin_settings):
-    if not utility.module_exist("croniter"):
-        return _("Please install the Python module '%s'") % "croniter"
+
+def validate(ctx: Context, plugin_config: dict, plugin_settings: dict):
+    if not system.module_exists("croniter"):
+        return _("Please install the Python module 'croniter'")
 
     # Validate the cron expression
     statistics_reset_cron = plugin_settings.get('statistics_reset_cron', '0 0 * * *')
-    if _get_next_reset_time(datetime.datetime.now(), statistics_reset_cron) is None:
+    if __is_valid_cron(statistics_reset_cron) is None:
         return _("Invalid cron expression '%s'") % statistics_reset_cron
     else:
         return None

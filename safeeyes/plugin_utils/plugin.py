@@ -17,11 +17,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import abc
+from datetime import datetime
 from typing import Optional
 
 from safeeyes.context import Context
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import Widget, TrayAction
+from safeeyes.spi.plugin import Widget, TrayAction, BreakAction
 
 
 class Plugin(abc.ABC):
@@ -31,29 +32,13 @@ class Plugin(abc.ABC):
         """
         pass
 
-    def is_break_allowed(self, break_obj: Break) -> bool:
+    def get_break_action(self, break_obj: Break) -> Optional[BreakAction]:
         """
-        This function is called right before the pre-break and start break calls.
-        Plugins must implement this function if they want to skip a break.
+        Called just before on_pre_break and on_start_break.
+        This is the opportunity for plugins to skip/postpone a break.
+        None means BreakAction.allow()
         """
-        return True
-
-    def is_break_skipped(self, break_obj: Break) -> bool:
-        """
-        his function is called right after calling the is_break_allowed function if the output of
-        is_break_allowed is False. Plugins can return `True` if they want to skip the break and move to the next break.
-        If the output is `False`, the get_postpone_time function will be called.
-        """
-        return False
-
-    def get_postpone_time(self, break_obj: Break) -> int:
-        """
-        This function is called right after calling the is_break_skipped function if the output of
-        is_break_skipped is False. Plugins can return a positive time in millis to postpone the break.
-        Zero or negative value indicates that the plugin doesn't want to postpone the break which
-        in turns will postpone the current break by a duration equivalent to the interval.
-        """
-        return -1
+        return BreakAction.allow()
 
     def on_pre_break(self, break_obj: Break) -> None:
         """
@@ -110,7 +95,7 @@ class Plugin(abc.ABC):
         """
         pass
 
-    def update_next_break(self, break_obj: Break, next_short_break: int, next_long_break: int) -> None:
+    def update_next_break(self, break_obj: Break, next_short_break: datetime, next_long_break: datetime) -> None:
         """
         Called when the next break is scheduled.
         """

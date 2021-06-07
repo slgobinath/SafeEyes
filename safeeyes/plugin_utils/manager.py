@@ -20,7 +20,7 @@ from safeeyes.context import Context
 from safeeyes.plugin_utils.proxy import PluginProxy
 from safeeyes.spi.api import PluginAPI
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import TrayAction, Widget
+from safeeyes.spi.plugin import TrayAction, Widget, BreakAction
 
 
 class PluginManager(PluginAPI):
@@ -33,24 +33,15 @@ class PluginManager(PluginAPI):
         for plugin in self.__plugins:
             plugin.init(context, {})
 
-    def is_break_allowed(self, break_obj: Break) -> bool:
+    def get_break_action(self, break_obj: Break) -> BreakAction:
+        """
+        This function is called before on_pre_break and on_start_break.
+        """
         for plugin in self.__plugins:
-            if not plugin.is_break_allowed(break_obj):
-                return False
-        return True
-
-    def is_break_skipped(self, break_obj: Break) -> bool:
-        for plugin in self.__plugins:
-            if plugin.is_break_skipped(break_obj):
-                return True
-        return False
-
-    def get_postpone_time(self, break_obj: Break) -> int:
-        for plugin in self.__plugins:
-            duration = plugin.get_postpone_time(break_obj)
-            if duration > 0:
-                return duration
-        return -1
+            action = plugin.get_break_action(break_obj)
+            if action is not None and action.not_allowed():
+                return action
+        return BreakAction.allow()
 
     def on_pre_break(self, break_obj: Break) -> None:
         for plugin in self.__plugins:
@@ -96,6 +87,7 @@ class PluginManager(PluginAPI):
         for plugin in self.__plugins:
             plugin.on_exit()
 
-    def update_next_break(self, break_obj: Break, next_short_break: datetime, next_long_break: datetime) -> None:
+    def update_next_break(self, break_obj: Break, next_short_break: datetime.datetime,
+                          next_long_break: datetime.datetime) -> None:
         for plugin in self.__plugins:
             plugin.update_next_break(break_obj, next_short_break, next_long_break)

@@ -19,12 +19,10 @@
 
 import logging
 import os
-import time
 from typing import List
 
 import gi
 from Xlib.display import Display
-from Xlib.display import X
 
 from safeeyes import utility
 from safeeyes.context import Context
@@ -212,7 +210,7 @@ class BreakScreen:
 
             # Set visual to apply css theme. It should be called before show method.
             window.set_visual(window.get_screen().get_rgba_visual())
-            if self.__context.env().name == 'kde':
+            if self.__context.env.name == 'kde':
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
@@ -244,35 +242,35 @@ class BreakScreen:
         logging.info("Lock the keyboard")
         self.__keyboard_locked = True
 
-        # Grab the keyboard
-        root = self.__display.screen().root
-        root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
-        root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
-
-        # Consume keyboard events
-        while self.__keyboard_locked:
-            if self.__display.pending_events() > 0:
-                # Avoid waiting for next event by checking pending events
-                event = self.__display.next_event()
-                if self.__enable_shortcut and event.type == X.KeyPress:
-                    if self.__allow_skipping and event.detail == self.__keycode_shortcut_skip:
-                        self.skip_break()
-                        break
-                    elif self.__allow_postponing and event.detail == self.__keycode_shortcut_postpone:
-                        self.postpone_break()
-                        break
-            else:
-                # Reduce the CPU usage by sleeping for a second
-                time.sleep(1)
+        # # Grab the keyboard
+        # root = self.__display.screen().root
+        # root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
+        # root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
+        #
+        # # Consume keyboard events
+        # while self.__keyboard_locked:
+        #     if self.__display.pending_events() > 0:
+        #         # Avoid waiting for next event by checking pending events
+        #         event = self.__display.next_event()
+        #         if self.__enable_shortcut and event.type == X.KeyPress:
+        #             if self.__allow_skipping and event.detail == self.__keycode_shortcut_skip:
+        #                 self.skip_break()
+        #                 break
+        #             elif self.__allow_postponing and event.detail == self.__keycode_shortcut_postpone:
+        #                 self.postpone_break()
+        #                 break
+        #     else:
+        #         # Reduce the CPU usage by sleeping for a second
+        #         time.sleep(1)
 
     def __release_keyboard(self):
         """
         Release the locked keyboard.
         """
-        logging.info("Unlock the keyboard")
+        logging.info("Break Screen: unlock the keyboard")
         self.__keyboard_locked = False
-        self.__display.ungrab_keyboard(X.CurrentTime)
-        self.__display.flush()
+        # self.__display.ungrab_keyboard(X.CurrentTime)
+        # self.__display.flush()
 
     @main
     def __destroy_all_screens(self):
@@ -301,6 +299,7 @@ def init(context: Context, config: dict) -> None:
     """
     This function is called to initialize the plugin.
     """
+    logging.info('Break Screen: initialize the plugin')
     global safe_eyes_context, break_config
     safe_eyes_context = context
     break_config = config

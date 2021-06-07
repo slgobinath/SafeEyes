@@ -18,15 +18,18 @@
 
 import math
 import os
+from typing import Callable
 
 import gi
+
 from safeeyes import utility
 from safeeyes.config import Config
+from safeeyes.context import Context
+from safeeyes.plugin_utils.loader import PluginLoader
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
-
 
 SETTINGS_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
 SETTINGS_DIALOG_PLUGIN_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_plugin.glade")
@@ -44,9 +47,10 @@ class SettingsDialog:
         Create and initialize SettingsDialog instance.
     """
 
-    def __init__(self, config, on_save_settings):
-        self.config = config
-        self.on_save_settings = on_save_settings
+    def __init__(self, context: Context, config: Config, on_save_settings: Callable[[Config], None]):
+        self.__context: Context = context
+        self.__config: Config = config
+        self.__on_save_settings: Callable[[Config], None] = on_save_settings
         self.plugin_switches = {}
         self.plugin_map = {}
         self.last_short_break_interval = config.get('short_break_interval')
@@ -95,9 +99,9 @@ class SettingsDialog:
         for long_break in config.get('long_breaks'):
             self.__create_break_item(long_break, False)
 
-        for plugin_config in utility.load_plugins_config(config):
+        for plugin_config in PluginLoader.load_plugins_config(self.__context, config):
             self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
-            
+
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
         self.spin_short_break_interval.set_value(config.get('short_break_interval'))
@@ -125,7 +129,7 @@ class SettingsDialog:
             lambda button: self.__show_break_properties_dialog(
                 break_config,
                 is_short,
-                self.config,
+                self.__config,
                 lambda cfg: lbl_name.set_label(_(cfg['name'])),
                 lambda is_short, break_config: self.__create_break_item(break_config, is_short),
                 lambda: parent_box.remove(box)
@@ -146,17 +150,18 @@ class SettingsDialog:
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
+
         def __confirmation_dialog_response(widget, response_id):
             if response_id == Gtk.ResponseType.OK:
                 utility.reset_config()
-                self.config = Config()
+                self.__config = Config()
                 # Remove breaks from the container
                 self.box_short_breaks.foreach(lambda element: self.box_short_breaks.remove(element))
                 self.box_long_breaks.foreach(lambda element: self.box_long_breaks.remove(element))
                 # Remove plugins from the container
                 self.box_plugins.foreach(lambda element: self.box_plugins.remove(element))
                 # Initialize again
-                self.__initialize(self.config)
+                self.__initialize(self.__config)
             widget.destroy()
 
         messagedialog = Gtk.MessageDialog(parent=self.window,
@@ -177,9 +182,9 @@ class SettingsDialog:
         def __confirmation_dialog_response(widget, response_id):
             if response_id == Gtk.ResponseType.OK:
                 if is_short:
-                    self.config.get('short_breaks').remove(break_config)
+                    self.__config.get('short_breaks').remove(break_config)
                 else:
-                    self.config.get('long_breaks').remove(break_config)
+                    self.__config.get('long_breaks').remove(break_config)
                 on_remove()
             widget.destroy()
 
@@ -253,7 +258,8 @@ class SettingsDialog:
         long_break_interval = self.spin_long_break_interval.get_value_as_int()
         self.spin_long_break_interval.set_range(short_break_interval * 2, 120)
         self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 2)
-        self.spin_long_break_interval.set_value(short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
+        self.spin_long_break_interval.set_value(
+            short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
         self.last_short_break_interval = short_break_interval
         if not self.initializing and not self.infobar_long_break_shown:
             self.infobar_long_break_shown = True
@@ -294,26 +300,27 @@ class SettingsDialog:
         """
         Event handler for add break button.
         """
-        dialog = NewBreakDialog(self.config, lambda is_short, break_config: self.__create_break_item(break_config, is_short))
+        dialog = NewBreakDialog(self.__config,
+                                lambda is_short, break_config: self.__create_break_item(break_config, is_short))
         dialog.show()
 
     def on_window_delete(self, *args):
         """
         Event handler for Settings dialog close action.
         """
-        self.config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
-        self.config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
-        self.config.set('short_break_interval', self.spin_short_break_interval.get_value_as_int())
-        self.config.set('long_break_interval', self.spin_long_break_interval.get_value_as_int())
-        self.config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
-        self.config.set('random_order', self.switch_random_order.get_active())
-        self.config.set('persist_state', self.switch_persist.get_active())
-        self.config.set('use_rpc_server', self.switch_rpc_server.get_active())
-        for plugin in self.config.get('plugins'):
+        self.__config.set('short_break_duration', self.spin_short_break_duration.get_value_as_int())
+        self.__config.set('long_break_duration', self.spin_long_break_duration.get_value_as_int())
+        self.__config.set('short_break_interval', self.spin_short_break_interval.get_value_as_int())
+        self.__config.set('long_break_interval', self.spin_long_break_interval.get_value_as_int())
+        self.__config.set('pre_break_warning_time', self.spin_time_to_prepare.get_value_as_int())
+        self.__config.set('random_order', self.switch_random_order.get_active())
+        self.__config.set('persist_state', self.switch_persist.get_active())
+        self.__config.set('use_rpc_server', self.switch_rpc_server.get_active())
+        for plugin in self.__config.get('plugins'):
             if plugin['id'] in self.plugin_switches:
                 plugin['enabled'] = self.plugin_switches[plugin['id']].get_active()
 
-        self.on_save_settings(self.config)    # Call the provided save method
+        self.__on_save_settings(self.__config)  # Call the provided save method
         self.window.destroy()
 
 
@@ -333,11 +340,15 @@ class PluginSettingsDialog:
         self.window.set_title(_('Plugin Settings'))
         for setting in config.get('settings'):
             if setting['type'].upper() == 'INT':
-                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'], setting.get('min', 0), setting.get('max', 120)), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'],
+                                         setting.get('min', 0), setting.get('max', 120)), False, False, 0)
             elif setting['type'].upper() == 'TEXT':
-                box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
             elif setting['type'].upper() == 'BOOL':
-                box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
 
     def __load_int_item(self, name, key, settings, min_value, max_value):
         """
@@ -471,9 +482,12 @@ class BreakSettingsDialog:
             self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
             self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
             self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
-            self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
-            self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
-            self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+            self.on_switch_override_interval_activate(self.switch_override_interval,
+                                                      self.switch_override_interval.get_active())
+            self.on_switch_override_duration_activate(self.switch_override_duration,
+                                                      self.switch_override_duration.get_active())
+            self.on_switch_override_plugins_activate(self.switch_override_plugins,
+                                                     self.switch_override_plugins.get_active())
 
     def on_switch_override_interval_activate(self, switch_button, state):
         """
@@ -498,7 +512,8 @@ class BreakSettingsDialog:
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN,
+                                       (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")

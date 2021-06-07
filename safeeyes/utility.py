@@ -21,15 +21,12 @@ This module contains utility functions for Safe Eyes and its plugins.
 """
 
 import errno
-import imp
-import importlib
 import inspect
 import json
 import locale
 import logging
 import os
 import shutil
-import subprocess
 import sys
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
@@ -41,7 +38,6 @@ import gi
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-from gi.repository import GLib
 from gi.repository import GdkPixbuf
 
 gi.require_version('Gdk', '3.0')
@@ -83,20 +79,6 @@ def get_resource_path(resource_name):
             resource_location = None
 
     return resource_location
-
-
-def execute_main_thread(target_function, arg1=None, arg2=None, arg3=None):
-    """
-    Execute the given function in main thread.
-    """
-    if arg1 is not None and arg2 is not None and arg3 is not None:
-        GLib.idle_add(lambda: target_function(arg1, arg2, arg3))
-    elif arg1 is not None and arg2 is not None:
-        GLib.idle_add(lambda: target_function(arg1, arg2))
-    elif arg1 is not None:
-        GLib.idle_add(lambda: target_function(arg1))
-    else:
-        GLib.idle_add(target_function)
 
 
 def system_locale(category=locale.LC_MESSAGES):
@@ -176,100 +158,6 @@ def delete(file_path):
         pass
 
 
-def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
-    """
-    Check the plugin dependencies.
-    """
-    # Check the desktop environment
-    if plugin_config['dependencies']['desktop_environments']:
-        # Plugin has restrictions on desktop environments
-        if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
-            return _('Plugin does not support %s desktop environment') % DESKTOP_ENVIRONMENT
-
-    # Check the Python modules
-    for module in plugin_config['dependencies']['python_modules']:
-        if not module_exist(module):
-            return _("Please install the Python module '%s'") % module
-
-    # Check the shell commands
-    for command in plugin_config['dependencies']['shell_commands']:
-        if not command_exist(command):
-            return _("Please install the command-line tool '%s'") % command
-
-    # Check the resources
-    for resource in plugin_config['dependencies']['resources']:
-        if get_resource_path(resource) is None:
-            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource,
-                                                                                                 'config_resource': CONFIG_RESOURCE}
-
-    plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
-    if os.path.isfile(plugin_dependency_checker):
-        dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
-        if dependency_checker and hasattr(dependency_checker, "validate"):
-            return dependency_checker.validate(plugin_config, plugin_settings)
-
-    return None
-
-
-def load_plugins_config(safeeyes_config):
-    """
-    Load all the plugins from the given directory.
-    """
-    configs = []
-    for plugin in safeeyes_config.get('plugins'):
-        plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
-        if not os.path.isdir(plugin_path):
-            # User plugin
-            plugin_path = os.path.join(USER_PLUGINS_DIR, plugin['id'])
-        plugin_config_path = os.path.join(plugin_path, 'config.json')
-        plugin_icon_path = os.path.join(plugin_path, 'icon.png')
-        plugin_module_path = os.path.join(plugin_path, 'plugin.py')
-        if not os.path.isfile(plugin_module_path):
-            return
-        icon = None
-        if os.path.isfile(plugin_icon_path):
-            icon = plugin_icon_path
-        else:
-            icon = get_resource_path('ic_plugin.png')
-        config = load_json(plugin_config_path)
-        if config is None:
-            continue
-        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}),
-                                                           plugin_path)
-        if dependency_description:
-            plugin['enabled'] = False
-            config['error'] = True
-            config['meta']['description'] = dependency_description
-            icon = get_resource_path('ic_warning.png')
-        else:
-            config['error'] = False
-        config['id'] = plugin['id']
-        config['icon'] = icon
-        config['enabled'] = plugin['enabled']
-        for setting in config['settings']:
-            setting['safeeyes_config'] = plugin['settings']
-        configs.append(config)
-    return configs
-
-
-def execute_command(command, args=[]):
-    """
-    Execute the shell command without waiting for its response.
-    """
-    if command:
-        command_to_execute = []
-        if isinstance(command, str):
-            command_to_execute.append(command)
-        else:
-            command_to_execute.extend(command)
-        if args:
-            command_to_execute.extend(args)
-        try:
-            subprocess.Popen(command_to_execute)
-        except BaseException:
-            logging.error('Error in executing the command ' + str(command))
-
-
 def command_exist(command):
     """
     Check whether the given command exist in the system or not.
@@ -277,17 +165,6 @@ def command_exist(command):
     if shutil.which(command):
         return True
     return False
-
-
-def module_exist(module):
-    """
-    Check wther the given Python module exists or not.
-    """
-    try:
-        imp.find_module(module)
-        return True
-    except ImportError:
-        return False
 
 
 def merge_configs(new_config, old_config):

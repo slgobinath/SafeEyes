@@ -15,14 +15,40 @@
 # GNU General Public License for more details.
 from typing import Any
 
-from safeeyes import SAFE_EYES_VERSION
+from safeeyes import SAFE_EYES_VERSION, utility
 from safeeyes.config import Config
-from safeeyes.spi.api import CoreAPI, BreakAPI, WindowAPI, PluginAPI
+from safeeyes.env.desktop import DesktopEnvironment
+from safeeyes.spi.api import CoreAPI, BreakAPI, WindowAPI, PluginAPI, ThreadAPI
 from safeeyes.spi.state import State
-from safeeyes.util.env import DesktopEnvironment
 
 SESSION_KEY_BREAK = 'break'
 SESSION_KEY_BREAK_TYPE = 'break_type'
+
+
+class Session:
+
+    def __init__(self, read_from_disk: bool):
+        self.__session: dict = utility.open_session() if read_from_disk else {'plugin': {}}
+
+    def get_plugin(self, plugin_id: str) -> dict:
+        if plugin_id not in self.__session['plugin']:
+            self.__session['plugin'][plugin_id] = {}
+        return self.__session['plugin'][plugin_id]
+
+    def set_plugin(self, plugin_id: str, value: dict) -> None:
+        self.__session['plugin'][plugin_id] = value
+
+    def get(self, key: str, default: Any = None) -> Any:
+        return self.__session.get(key, default)
+
+    def set(self, key: str, value: Any) -> None:
+        self.__session[key] = value
+
+    def save(self, write_to_disk: bool) -> None:
+        if write_to_disk:
+            utility.write_json(utility.SESSION_FILE_PATH, self.__session)
+        else:
+            utility.delete(utility.SESSION_FILE_PATH)
 
 
 class Context:
@@ -31,26 +57,23 @@ class Context:
         self.version: str = SAFE_EYES_VERSION
         self.config: Config = config
         self.locale = locale
-        self.session: dict = config.get_session()
+        self.session: Session = Session(config.get('persist_state', False))
         self.state = State.START
         self.__settings_dialog_visible = False
-        self.__env: DesktopEnvironment = DesktopEnvironment.get_env()
+        self.env: DesktopEnvironment = DesktopEnvironment.get_env()
         self.core_api: CoreAPI = None
+        self.thread_api: ThreadAPI = None
         self.break_api: BreakAPI = None
         self.window_api: WindowAPI = None
         self.plugin_api: PluginAPI = None
 
-    def set_apis(self, core_api: CoreAPI, window_api: WindowAPI, break_api: BreakAPI, plugin_api: PluginAPI) -> None:
+    def set_apis(self, core_api: CoreAPI,
+                 thread_api: ThreadAPI,
+                 window_api: WindowAPI,
+                 break_api: BreakAPI,
+                 plugin_api: PluginAPI) -> None:
         self.core_api = core_api
+        self.thread_api = thread_api
         self.break_api = break_api
         self.plugin_api = plugin_api
         self.window_api = window_api
-
-    def env(self) -> DesktopEnvironment:
-        return self.__env
-
-    def set_session(self, key: str, value: Any) -> None:
-        self.session[key] = value
-
-    def get_session(self, key: str) -> Any:
-        return self.session.get(key, None)

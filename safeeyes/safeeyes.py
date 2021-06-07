@@ -21,6 +21,7 @@ SafeEyes connects all the individual components and provide the complete applica
 """
 
 import atexit
+import datetime
 import logging
 import sys
 
@@ -28,7 +29,6 @@ import dbus
 import gi
 from dbus.mainloop.glib import DBusGMainLoop
 
-from safeeyes import utility
 from safeeyes.breaks.scheduler import BreakScheduler
 from safeeyes.config import Config
 from safeeyes.context import Context
@@ -53,17 +53,20 @@ class SafeEyes(CoreAPI):
         self.__context: Context = Context(config, locale.init_locale())
         self.__plugin_loader = PluginLoader()
         self.__heartbeat = Heartbeat(self.__context)
-        self.__plugin_manager: PluginManager = PluginManager(self.__plugin_loader.load(config))
+        self.__plugin_manager: PluginManager = PluginManager(self.__plugin_loader.load(self.__context))
         self.__scheduler: BreakScheduler = BreakScheduler(self.__context, self.__heartbeat, self.__plugin_manager)
         self.__ui_manager: UIManager = UIManager(self.__context, self.__on_config_changed)
         self.__active = False
-        self.__context.set_apis(self, self.__ui_manager, self.__scheduler, self.__plugin_manager)
+        self.__context.set_apis(self, self.__heartbeat, self.__ui_manager, self.__scheduler, self.__plugin_manager)
 
         self.__plugin_manager.init(self.__context)
         # Save the session on exit
         atexit.register(self.__persist_session)
 
-    def start(self):
+    def start(self, scheduled_next_break_time: datetime.datetime = None, reset_breaks=False):
+        """
+        Listen to tray icon enable action and send the signal to core.
+        """
         """
         Start Safe Eyes
         """
@@ -72,10 +75,14 @@ class SafeEyes(CoreAPI):
             self.__active = True
             self.__context.state = State.START
             self.__plugin_manager.on_start()  # Call the start method of all plugins
-            self.__scheduler.start()
+            # todo: reset breaks
+            self.__scheduler.start(scheduled_next_break_time)
             self.__handle_system_suspend()
 
     def stop(self):
+        """
+        Listen to tray icon disable action and send the signal to core.
+        """
         """
         Stop Safe Eyes
         """
@@ -90,7 +97,7 @@ class SafeEyes(CoreAPI):
         self.__persist_session()
 
     @main
-    def quit_safe_eyes(self):
+    def quit(self):
         self.stop()
         logging.info("Quit safe eyes")
         self.__context.state = State.QUIT
@@ -99,26 +106,11 @@ class SafeEyes(CoreAPI):
         # os._exit(0)
         sys.exit(0)
 
-    def enable_safe_eyes(self, scheduled_next_break_time=-1, reset_breaks=False):
-        """
-        Listen to tray icon enable action and send the signal to core.
-        """
-        self.start()
-
-    def disable_safe_eyes(self):
-        """
-        Listen to tray icon disable action and send the signal to core.
-        """
-        self.stop()
-
     def __persist_session(self):
         """
         Save the session object to the session file.
         """
-        if self.__context.config.get('persist_state'):
-            utility.write_json(utility.SESSION_FILE_PATH, self.__context.session)
-        else:
-            utility.delete(utility.SESSION_FILE_PATH)
+        self.__context.session.save(self.__context.config.get('persist_state', False))
 
     def __start_rpc_server(self):
         # if self.rpc_server is None:
@@ -144,10 +136,10 @@ class SafeEyes(CoreAPI):
 
         # Restart the core and initialize the components
         self.__context.config = config
-        self.__plugin_manager = PluginManager(self.__plugin_loader.load(config))
+        self.__plugin_manager = PluginManager(self.__plugin_loader.load(self.__context))
         self.__scheduler = BreakScheduler(self.__context, self.__heartbeat, self.__plugin_manager)
         self.__plugin_manager.init(self.__context)
-        self.__context.set_apis(self, self.__ui_manager, self.__scheduler, self.__plugin_manager)
+        self.__context.set_apis(self, self.__heartbeat, self.__ui_manager, self.__scheduler, self.__plugin_manager)
 
         if is_active:
             self.start()

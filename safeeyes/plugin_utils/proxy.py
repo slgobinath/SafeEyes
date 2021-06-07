@@ -14,12 +14,13 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 import inspect
+from datetime import datetime
 from typing import Optional, Any
 
 from safeeyes.context import Context
 from safeeyes.plugin_utils.plugin import Plugin
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import Widget, TrayAction
+from safeeyes.spi.plugin import Widget, TrayAction, BreakAction
 
 
 class PluginProxy(Plugin):
@@ -68,35 +69,13 @@ class PluginProxy(Plugin):
         if PluginProxy.__has_method(self.__plugin, 'init', 2):
             self.__plugin.init(context, self.__settings)
 
-    def is_break_allowed(self, break_obj: Break) -> bool:
+    def get_break_action(self, break_obj: Break) -> Optional[BreakAction]:
         """
-        This function is called right before the pre-break and start break calls.
-        Plugins must implement this function if they want to skip a break.
+        This function is called before on_pre_break and on_start_break.
         """
-        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'is_break_allowed', 1):
-            return self.__plugin.is_break_allowed(break_obj)
-        return True
-
-    def is_break_skipped(self, break_obj: Break) -> bool:
-        """
-        his function is called right after calling the is_break_allowed function if the output of
-        is_break_allowed is False. Plugins can return `True` if they want to skip the break and move to the next break.
-        If the output is `False`, the get_postpone_time function will be called.
-        """
-        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'is_break_skipped', 1):
-            return self.__plugin.is_break_skipped(break_obj)
-        return False
-
-    def get_postpone_time(self, break_obj: Break) -> int:
-        """
-        This function is called right after calling the is_break_skipped function if the output of
-        is_break_skipped is False. Plugins can return a positive time in millis to postpone the break.
-        Zero or negative value indicates that the plugin doesn't want to postpone the break which
-        in turns will postpone the current break by a duration equivalent to the interval.
-        """
-        if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_postpone_time', 1):
-            return self.__plugin.get_postpone_time(break_obj)
-        return -1
+        if PluginProxy.__has_method(self.__plugin, 'get_break_action', 1):
+            return self.__plugin.get_break_action(break_obj)
+        return BreakAction.allow()
 
     def on_pre_break(self, break_obj: Break) -> None:
         """
@@ -132,7 +111,7 @@ class PluginProxy(Plugin):
         Return an optional break screen widget.
         """
         if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_widget', 1):
-            self.__plugin.get_widget(break_obj)
+            return self.__plugin.get_widget(break_obj)
         return None
 
     def get_tray_action(self, break_obj: Break) -> Optional[TrayAction]:
@@ -140,7 +119,7 @@ class PluginProxy(Plugin):
         Return an optional break screen widget.
         """
         if self.__is_supported(break_obj) and PluginProxy.__has_method(self.__plugin, 'get_tray_action', 1):
-            self.__plugin.get_tray_action(break_obj)
+            return self.__plugin.get_tray_action(break_obj)
         return None
 
     def on_start(self) -> None:
@@ -164,7 +143,7 @@ class PluginProxy(Plugin):
         if self.__enabled and PluginProxy.__has_method(self.__plugin, 'on_exit', 0):
             self.__plugin.on_exit()
 
-    def update_next_break(self, break_obj: Break, next_short_break: int, next_long_break: int) -> None:
+    def update_next_break(self, break_obj: Break, next_short_break: datetime, next_long_break: datetime) -> None:
         """
         Called when the next break is scheduled.
         """

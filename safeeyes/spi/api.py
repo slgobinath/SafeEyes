@@ -36,13 +36,13 @@ class CoreAPI(abc.ABC):
     def get_status(self) -> str:
         return self.__status
 
-    def enable_safe_eyes(self, next_break_time: int = -1, reset_breaks: bool = False):
+    def start(self, next_break_time: datetime = None, reset_breaks: bool = False):
         pass
 
-    def disable_safe_eyes(self):
+    def stop(self):
         pass
 
-    def quit_safe_eyes(self):
+    def quit(self):
         pass
 
 
@@ -58,8 +58,7 @@ class BreakAPI(abc.ABC):
         pass
 
     def postpone(self, duration: int) -> None:
-        next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=duration)
-        self.schedule(next_break_time)
+        pass
 
     def schedule(self, next_break_time: datetime) -> None:
         pass
@@ -86,4 +85,27 @@ class PluginAPI(abc.ABC):
         pass
 
     def get_tray_actions(self, break_obj: Break) -> List[TrayAction]:
+        pass
+
+
+class Condition(abc.ABC):
+    def hold(self, timeout: int) -> None:
+        pass
+
+    def release_all(self) -> None:
+        pass
+
+
+class ThreadAPI(abc.ABC):
+
+    def release_all(self) -> None:
+        pass
+
+    def restart(self) -> None:
+        pass
+
+    def hold(self, timeout: int) -> None:
+        pass
+
+    def new_condition(self) -> Condition:
         pass

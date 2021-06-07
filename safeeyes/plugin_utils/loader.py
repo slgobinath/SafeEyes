@@ -14,18 +14,24 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 import importlib
+import inspect
 import logging
 import os
 import sys
 from typing import List, Any, Dict
 
-from safeeyes import utility
+from safeeyes import utility, SAFE_EYES_HOME_DIR, SAFE_EYES_CONFIG_DIR
 from safeeyes.config import Config
+from safeeyes.context import Context
+from safeeyes.env import system
 from safeeyes.plugin_utils.proxy import PluginProxy
 from safeeyes.utility import DESKTOP_ENVIRONMENT, CONFIG_RESOURCE
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
+
+SYSTEM_PLUGINS_DIR = os.path.join(SAFE_EYES_HOME_DIR, 'plugins')
+USER_PLUGINS_DIR = os.path.join(SAFE_EYES_CONFIG_DIR, 'plugins')
 
 
 class PluginLoader:
@@ -33,18 +39,18 @@ class PluginLoader:
     def __init__(self):
         self.__plugins: Dict[str, PluginProxy] = {}
 
-    def load(self, config: Config) -> List[PluginProxy]:
+    def load(self, context: Context) -> List[PluginProxy]:
         # Load the plugins
-        for plugin in config.get('plugins'):
+        for plugin in context.config.get('plugins'):
             try:
-                self.__load_plugin(plugin)
+                self.__load_plugin(context, plugin)
             except BaseException:
                 logging.exception('Error in loading the plugin: %s', plugin['id'])
                 continue
 
         return list(self.__plugins.values())
 
-    def __load_plugin(self, plugin: dict):
+    def __load_plugin(self, context: Context, plugin: dict):
         """
         Load the given plugin.
         """
@@ -86,8 +92,8 @@ class PluginLoader:
                 # The plugin is already enabled or partially loaded due to break_override_allowed
                 plugin_obj: PluginProxy = self.__plugins[plugin_id]
                 # Validate the dependencies again
-                if utility.check_plugin_dependencies(plugin_id, plugin_config, plugin.get('settings', {}),
-                                                     plugin_path):
+                if PluginLoader.__check_plugin_dependencies(context, plugin_id, plugin_config,
+                                                            plugin.get('settings', {}), plugin_path):
                     plugin_obj.disable()
                     del self.__plugins[plugin_id]
                     return
@@ -100,17 +106,59 @@ class PluginLoader:
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                if PluginLoader.__check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}),
-                                                            plugin_path):
+                if PluginLoader.__check_plugin_dependencies(context, plugin['id'], plugin_config,
+                                                            plugin.get('settings', {}), plugin_path):
                     return
 
                 # Load the plugin module
                 module = importlib.import_module((plugin['id'] + '.plugin'))
-                logging.info("Successfully loaded %s", str(module))
-                plugin_obj = PluginProxy(plugin['id'], module, plugin_enabled, plugin_config,
-                                         dict(plugin.get('settings', {})))
+                logging.info("Successfully loaded '%s' plugin from '%s'", plugin['id'], str(module.__file__))
+                new_settings = dict(plugin.get('settings', {}))
+                new_settings['path'] = os.path.join(plugin_dir, plugin_id)
+                plugin_obj = PluginProxy(plugin['id'], module, plugin_enabled, plugin_config, new_settings)
                 self.__plugins[plugin['id']] = plugin_obj
                 plugin_obj.enable()
+
+    @staticmethod
+    def load_plugins_config(context: Context, config: Config):
+        """
+        Load all the plugins from the given directory.
+        """
+        configs = []
+        for plugin in config.get('plugins'):
+            plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
+            if not os.path.isdir(plugin_path):
+                # User plugin
+                plugin_path = os.path.join(USER_PLUGINS_DIR, plugin['id'])
+            plugin_config_path = os.path.join(plugin_path, 'config.json')
+            plugin_icon_path = os.path.join(plugin_path, 'icon.png')
+            plugin_module_path = os.path.join(plugin_path, 'plugin.py')
+            if not os.path.isfile(plugin_module_path):
+                return
+            icon = None
+            if os.path.isfile(plugin_icon_path):
+                icon = plugin_icon_path
+            else:
+                icon = system.get_resource_path('ic_plugin.png')
+            config = utility.load_json(plugin_config_path)
+            if config is None:
+                continue
+            dependency_description = PluginLoader.__check_plugin_dependencies(context, plugin['id'], config,
+                                                                              plugin.get('settings', {}), plugin_path)
+            if dependency_description:
+                plugin['enabled'] = False
+                config['error'] = True
+                config['meta']['description'] = dependency_description
+                icon = system.get_resource_path('ic_warning.png')
+            else:
+                config['error'] = False
+            config['id'] = plugin['id']
+            config['icon'] = icon
+            config['enabled'] = plugin['enabled']
+            for setting in config['settings']:
+                setting['safeeyes_config'] = plugin['settings']
+            configs.append(config)
+        return configs
 
     @staticmethod
     def __remove_if_exists(list_of_items: List, item: Any):
@@ -121,7 +169,8 @@ class PluginLoader:
             list_of_items.remove(item)
 
     @staticmethod
-    def __check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
+    def __check_plugin_dependencies(context: Context, plugin_id: str, plugin_config: dict, plugin_settings: dict,
+                                    plugin_path: str):
         """
         Check the plugin dependencies.
         """
@@ -133,12 +182,12 @@ class PluginLoader:
 
         # Check the Python modules
         for module in plugin_config['dependencies']['python_modules']:
-            if not utility.module_exist(module):
+            if not system.module_exists(module):
                 return _("Please install the Python module '%s'") % module
 
         # Check the shell commands
         for command in plugin_config['dependencies']['shell_commands']:
-            if not utility.command_exist(command):
+            if not system.command_exists(command):
                 return _("Please install the command-line tool '%s'") % command
 
         # Check the resources
@@ -150,7 +199,8 @@ class PluginLoader:
         plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
         if os.path.isfile(plugin_dependency_checker):
             dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
-            if dependency_checker and hasattr(dependency_checker, "validate"):
-                return dependency_checker.validate(plugin_config, plugin_settings)
+            if dependency_checker and hasattr(dependency_checker, "validate") and len(
+                    inspect.getfullargspec(getattr(dependency_checker, "validate")).args) == 3:
+                return dependency_checker.validate(context, plugin_config, plugin_settings)
 
         return None

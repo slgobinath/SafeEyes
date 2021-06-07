@@ -17,14 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from safeeyes import utility
+from safeeyes.context import Context
 
 
-def validate(plugin_config, plugin_settings):
-    command = None
-    if utility.IS_WAYLAND:
-        command = "wlrctl"
-    else:
-        command = "xprop"
+def validate(ctx: Context, plugin_config: dict, plugin_settings: dict):
+    command = "wlrctl" if ctx.env.is_wayland() else "xprop"
     if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:

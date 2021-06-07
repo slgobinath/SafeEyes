@@ -20,6 +20,7 @@ import time
 from typing import List, Optional, Callable
 
 from safeeyes.context import Context
+from safeeyes.spi.api import ThreadAPI, Condition
 from safeeyes.spi.state import State
 
 
@@ -41,7 +42,7 @@ def worker(fun):
     return run
 
 
-class ThreadCondition:
+class ThreadCondition(Condition):
 
     def __init__(self):
         self.__waiting_condition: threading.Condition = threading.Condition()
@@ -60,7 +61,7 @@ class ThreadCondition:
         self.__waiting_condition.release()
 
 
-class Heartbeat:
+class Heartbeat(ThreadAPI):
     def __init__(self, context: Context):
         self.__waiting_condition: threading.Condition = threading.Condition()
         self.__context: Context = context
@@ -68,13 +69,13 @@ class Heartbeat:
         self.lock = threading.Lock()
         self.__conditions: List[ThreadCondition] = []
 
-    def start(self):
+    def start(self) -> None:
         """
         Stop the heartbeat.
         """
         self.running = True
 
-    def stop(self):
+    def stop(self) -> None:
         """
         Stop the heartbeat.
         """
@@ -85,7 +86,7 @@ class Heartbeat:
         self.__waiting_condition.notify_all()
         self.__waiting_condition.release()
 
-    def release_all(self):
+    def release_all(self) -> None:
         """
         Release all waiting threads so that they will continue executing their remaining tasks.
         """
@@ -96,7 +97,7 @@ class Heartbeat:
         self.__waiting_condition.notify_all()
         self.__waiting_condition.release()
 
-    def restart(self):
+    def restart(self) -> None:
         self.__waiting_condition.acquire()
         self.running = False
         self.__waiting_condition.notify_all()
@@ -104,7 +105,7 @@ class Heartbeat:
         time.sleep(1)  # Wait for 1 sec to ensure the scheduler is dead
         self.running = True
 
-    def hold(self, timeout: int):
+    def hold(self, timeout: int) -> None:
         self.__waiting_condition.acquire()
         self.__waiting_condition.wait(timeout)
         self.__waiting_condition.release()
@@ -120,13 +121,13 @@ class Timer:
     def __init__(self, context: Context, heartbeat: Heartbeat, on_timeout: Callable[[], None]):
         self.__context = context
         import datetime
-        self.__next_schedule: Optional[datetime] = None
+        self.__next_schedule: Optional[datetime.datetime] = None
         self.__heartbeat: Heartbeat = heartbeat
         self.__on_timeout: Callable[[], None] = on_timeout
         self.__condition: ThreadCondition = heartbeat.new_condition()
         self.__running = False
 
-    def schedule(self, next_break_at: datetime):
+    def schedule(self, next_break_at: datetime.datetime):
         self.__next_schedule = next_break_at
 
         with self.__heartbeat.lock:

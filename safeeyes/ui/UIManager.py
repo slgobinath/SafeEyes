@@ -39,7 +39,7 @@ class UIManager(WindowAPI):
         if not self.__settings_dialog_visible:
             logging.info("Show settings dialog")
             self.__settings_dialog_visible = True
-            settings_dialog = SettingsDialog(Config.from_json(), self.__save_settings)
+            settings_dialog = SettingsDialog(self.__context, Config.from_json(), self.__save_settings)
             settings_dialog.show()
 
     @main
@@ -51,7 +51,7 @@ class UIManager(WindowAPI):
         about_dialog = AboutDialog(self.__context.version)
         about_dialog.show()
 
-    def __save_settings(self, config):
+    def __save_settings(self, config: Config):
         """
         Listen to Settings dialog Save action and write to the config file.
         """

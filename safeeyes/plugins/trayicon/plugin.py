@@ -23,7 +23,7 @@ import gi
 
 from safeeyes.context import Context
 from safeeyes.spi.breaks import BreakType
-from safeeyes.thread import worker
+from safeeyes.thread import worker, main
 
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
@@ -245,7 +245,7 @@ class TrayIcon:
             self.__idle_condition.acquire()
             self.__idle_condition.notify_all()
             self.__idle_condition.release()
-        self.__context.core_api.quit_safe_eyes()
+        self.__context.core_api.quit()
 
     def show_settings(self, *args):
         """
@@ -276,7 +276,7 @@ class TrayIcon:
         formatted_time = utility.format_time(self.__date_time)
         message = _('Next break at %s') % (formatted_time)
         # Update the menu item label
-        utility.execute_main_thread(self.item_info.set_label, message)
+        self.__set_label(message)
         # Update the tray icon label
         if self.__config.get('show_time_in_tray', False):
             self.indicator.set_label(formatted_time, '')
@@ -302,7 +302,7 @@ class TrayIcon:
         if not self.__active:
             with self.lock:
                 self.enable_ui()
-                self.__context.core_api.enable_safe_eyes()
+                self.__context.core_api.start()
                 # Notify all schedulers
                 self.__idle_condition.acquire()
                 self.__idle_condition.notify_all()
@@ -320,13 +320,13 @@ class TrayIcon:
             time_to_wait = args[1]
             if time_to_wait <= 0:
                 info = _('Disabled until restart')
-                self.__context.core_api.disable_safe_eyes(info)
+                self.__context.core_api.stop(info)
                 self.__wakeup_time = None
                 self.item_info.set_label(info)
             else:
                 self.__wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
                 info = _('Disabled until %s') % utility.format_time(self.__wakeup_time)
-                self.__context.core_api.disable_safe_eyes(info)
+                self.__context.core_api.stop(info)
                 self.item_info.set_label(info)
                 self.__schedule_resume(time_to_wait)
 
@@ -383,15 +383,15 @@ class TrayIcon:
 
         with self.lock:
             if not self.__active:
-                utility.execute_main_thread(self.item_enable.activate)
+                self.__activate_enable_menu()
 
     @worker
     def start_animation(self):
         if not self.__active or not self.__animate:
             return
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+        self.__set_icon("safeeyes_disabled")
         time.sleep(0.5)
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        self.__set_icon("safeeyes_enabled")
         if self.__animate and self.__active:
             time.sleep(0.5)
             if self.__animate and self.__active:
@@ -400,9 +400,21 @@ class TrayIcon:
     def stop_animation(self):
         self.__animate = False
         if self.__active:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+            self.__set_icon("safeeyes_enabled")
         else:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+            self.__set_icon("safeeyes_disabled")
+
+    @main
+    def __set_icon(self, icon_name: str) -> None:
+        self.indicator.set_icon(icon_name)
+
+    @main
+    def __activate_enable_menu(self) -> None:
+        self.item_enable.activate()
+
+    @main
+    def __set_label(self, message: str) -> None:
+        self.item_info.set_label(message)
 
 
 context: Context = None

@@ -71,10 +71,33 @@ class Widget:
         self.content: str = content
 
     def is_empty(self) -> bool:
-        return self.title is not None and self.content is not None and len(self.title) > 0 and len(self.content) > 0
+        return self.title is None or self.content is None
 
     def format(self) -> str:
         if self.is_empty():
             return ''
         else:
             return '<b>{}</b>\n{}\n{}\n\n\n'.format(self.title, WIDGET_HORIZONTAL_LINE, self.content)
+
+
+class BreakAction:
+
+    def __init__(self, skipped: bool, postponed: bool, postpone_duration: int):
+        self.skipped = skipped
+        self.postponed = postponed
+        self.postpone_duration = postpone_duration
+
+    def not_allowed(self) -> bool:
+        return self.skipped or self.postponed
+
+    @staticmethod
+    def allow():
+        return BreakAction(False, False, -1)
+
+    @staticmethod
+    def skip():
+        return BreakAction(True, False, -1)
+
+    @staticmethod
+    def postpone(duration: int = -1):
+        return BreakAction(False, True, duration)

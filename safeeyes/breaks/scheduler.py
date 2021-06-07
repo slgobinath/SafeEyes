@@ -39,14 +39,23 @@ class BreakScheduler(BreakAPI):
         self.__breaks_store = BreaksStore(context)
         self.__timer = Timer(context, heartbeat, self.__start_break)
         self.__plugins: PluginManager = plugin_mgr
+        self.__skipped: bool = False
+        self.__postponed: bool = False
 
-    def start(self):
+    def start(self, next_break_time: datetime.datetime = None):
         if self.__breaks_store.is_empty():
             return
+        self.__reset_stop_flags()
         current_break = self.__breaks_store.get_break()
-        current_time = datetime.datetime.now()
-        waiting_time = current_break.waiting_time * 60
-        next_break_time = current_time + datetime.timedelta(seconds=waiting_time)
+
+        if current_break is None:
+            # This check is unnecessary
+            return
+
+        if next_break_time is None:
+            current_time = datetime.datetime.now()
+            waiting_time = current_break.waiting_time * 60
+            next_break_time = current_time + datetime.timedelta(seconds=waiting_time)
 
         self.schedule(next_break_time)
 
@@ -72,10 +81,15 @@ class BreakScheduler(BreakAPI):
         self.start()
 
     def skip(self):
-        self.__breaks_store.next()
-        self.start()
+        self.__skipped = True
+        self.next_break()
 
-    def schedule(self, next_break_time: datetime):
+    def postpone(self, duration: int) -> None:
+        self.__postponed = True
+        next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=duration)
+        self.schedule(next_break_time)
+
+    def schedule(self, next_break_time: datetime.datetime):
         if self.__breaks_store.is_empty():
             return
         with self.__heartbeat.lock:
@@ -98,29 +112,14 @@ class BreakScheduler(BreakAPI):
         self.__timer.schedule(next_break_time)
 
     def __start_break(self):
-        print("Starting a break")
         # BreakScheduler always call this method from a separate thread
         with self.__heartbeat.lock:
             self.__context.state = State.PRE_BREAK
 
         break_obj = self.__breaks_store.get_break()
         # Check if plugins want to cancel this break
-        if not self.__plugins.is_break_allowed(break_obj):
-            if self.__plugins.is_break_skipped(break_obj):
-                # Move to the next break
-                logging.info("Break '%s' is skipped by a plugin", break_obj.name)
-                self.__breaks_store.next()
-                self.start()
-                return
-            else:
-                postpone_time = self.__plugins.get_postpone_time(break_obj)
-                if postpone_time <= 0:
-                    break_obj.reset_time()
-                    postpone_time = break_obj.waiting_time * 60
-                logging.info("Break '%s' is postponed for %s seconds by a plugin", break_obj.name, postpone_time)
-                next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=postpone_time)
-                self.schedule(next_break_time)
-                return
+        if not self.__is_break_allowed(break_obj):
+            return
 
         # Send on_pre_break event
         self.__plugins.on_pre_break(break_obj)
@@ -136,11 +135,16 @@ class BreakScheduler(BreakAPI):
             else:
                 self.__context.state = State.BREAK
 
-        self.__take_break(break_obj)
+        if self.__is_break_allowed(break_obj):
+            self.__take_break(break_obj)
 
     def __take_break(self, break_obj: Break):
         self.__plugins.on_start_break(break_obj)
         self.__count_down(break_obj)
+
+    def __reset_stop_flags(self) -> None:
+        self.__skipped = False
+        self.__postponed = False
 
     @worker
     def __count_down(self, break_obj) -> None:
@@ -155,8 +159,8 @@ class BreakScheduler(BreakAPI):
             self.__condition.hold(1)
             countdown -= 1
 
-        # TODO: Replace the hard coded boolean values
-        self.__plugins.on_stop_break(break_obj, False, False)
+        self.__plugins.on_stop_break(break_obj, self.__skipped, self.__postponed)
+        self.__reset_stop_flags()
         with self.__heartbeat.lock:
             if self.__context.state != State.BREAK:
                 # State changed while counting down
@@ -164,3 +168,24 @@ class BreakScheduler(BreakAPI):
 
         # Start the next break
         self.next_break()
+
+    def __is_break_allowed(self, break_obj: Break) -> bool:
+        # Check if plugins want to cancel this break
+        action = self.__plugins.get_break_action(break_obj)
+        if action.not_allowed():
+            if action.skipped:
+                # Move to the next break
+                logging.info("Break '%s' is skipped by a plugin", break_obj.name)
+                self.__breaks_store.next()
+                self.start()
+                return True
+            else:
+                postpone_time = action.postpone_duration
+                if postpone_time <= 0:
+                    break_obj.reset_time()
+                    postpone_time = break_obj.waiting_time * 60
+                logging.info("Break '%s' is postponed for %s seconds by a plugin", break_obj.name, postpone_time)
+                next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=postpone_time)
+                self.schedule(next_break_time)
+                return True
+        return False
