@@ -178,7 +178,7 @@ class BreakScheduler(BreakAPI):
                 logging.info("Break '%s' is skipped by a plugin", break_obj.name)
                 self.__breaks_store.next()
                 self.start()
-                return True
+                return False
             else:
                 postpone_time = action.postpone_duration
                 if postpone_time <= 0:
@@ -187,5 +187,5 @@ class BreakScheduler(BreakAPI):
                 logging.info("Break '%s' is postponed for %s seconds by a plugin", break_obj.name, postpone_time)
                 next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=postpone_time)
                 self.schedule(next_break_time)
-                return True
-        return False
+                return False
+        return True
