@@ -18,18 +18,29 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
+
 import polib
 
-def validate_po(locale, path):
-     po = polib.pofile(path)
-     for entry in po:
-         if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
-             print("Number of varialbes mismatched in " + locale)
-             print(entry.msgid + " -> " + entry.msgstr)
-             print()
 
-locales = os.listdir('safeeyes/config/locale')
-for locale in locales:
-    path = os.path.join('safeeyes/config/locale', locale, "LC_MESSAGES/safeeyes.po")
-    if os.path.isfile(path):
-        validate_po(locale, path)
+def validate_po(locale, path):
+    po = polib.pofile(path)
+    for entry in po:
+        if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
+            print("Number of variables mismatched in " + locale)
+            print(entry.msgid + " -> " + entry.msgstr)
+            print()
+        if entry.msgid_plural and entry.msgstr_plural:
+            count = entry.msgid_plural.count("%")
+            for msg in entry.msgstr_plural.values():
+                if msg and (count != msg.count("%")):
+                    print("Number of variables mismatched in " + locale)
+                    print(entry.msgid_plural + " -> " + entry.msgstr)
+                    print()
+
+
+if __name__ == "__main__":
+    locales = os.listdir('safeeyes/config/locale')
+    for locale in locales:
+        path = os.path.join('safeeyes/config/locale', locale, "LC_MESSAGES/safeeyes.po")
+        if os.path.isfile(path):
+            validate_po(locale, path)
