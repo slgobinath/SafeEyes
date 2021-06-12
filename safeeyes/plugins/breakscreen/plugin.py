@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -69,7 +68,7 @@ class BreakScreen:
         """
         logging.info("User skipped the break")
         # Must call on_skip before close to lock screen before closing the break screen
-        self.__context.break_api.next_break()
+        self.__context.break_api.skip()
         self.close()
 
     def postpone_break(self):

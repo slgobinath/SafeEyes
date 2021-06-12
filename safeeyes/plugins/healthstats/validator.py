@@ -15,6 +15,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from typing import Optional
 
 from safeeyes.context import Context
 from safeeyes.env import system
@@ -30,7 +31,7 @@ def __is_valid_cron(expr: str) -> bool:
         return False
 
 
-def validate(ctx: Context, plugin_config: dict, plugin_settings: dict):
+def validate(ctx: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:
     if not system.module_exists("croniter"):
         return _("Please install the Python module 'croniter'")
 

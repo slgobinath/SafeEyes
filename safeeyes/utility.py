@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -31,6 +30,7 @@ import sys
 from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from typing import Optional
 
 import babel.core
 import babel.dates
@@ -123,7 +123,7 @@ def mkdir(path):
             raise
 
 
-def load_json(json_path):
+def load_json(json_path) -> Optional[dict]:
     """
     Load the JSON file from the given path.
     """

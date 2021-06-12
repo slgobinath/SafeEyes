@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -13,8 +12,8 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-import datetime
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 
 from safeeyes.context import Context
 from safeeyes.plugin_utils.proxy import PluginProxy
@@ -87,7 +86,7 @@ class PluginManager(PluginAPI):
         for plugin in self.__plugins:
             plugin.on_exit()
 
-    def update_next_break(self, break_obj: Break, next_short_break: datetime.datetime,
-                          next_long_break: datetime.datetime) -> None:
+    def update_next_break(self, break_obj: Break, next_short_break: Optional[datetime],
+                          next_long_break: Optional[datetime]) -> None:
         for plugin in self.__plugins:
             plugin.update_next_break(break_obj, next_short_break, next_long_break)

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -22,6 +21,7 @@ from typing import Optional
 from safeeyes.breaks.queue import Queue
 from safeeyes.context import Context, SESSION_KEY_BREAK, SESSION_KEY_BREAK_TYPE
 from safeeyes.spi.breaks import Break, BreakType
+from safeeyes.util.locale import _
 
 
 class BreaksStore:
@@ -60,22 +60,32 @@ class BreaksStore:
         """
         Select the next break. If the queue is empty, return None.
         """
-        break_obj = None
+        break_obj: Optional[Break] = None
         if self.is_empty():
             return break_obj
 
-        if self.__short_queue.is_empty():
+        if self.__short_queue.is_empty() or break_type == BreakType.LONG:
             break_obj = self.__next_long()
-        elif self.__long_queue.is_empty():
+        elif self.__long_queue.is_empty() or break_type == BreakType.SHORT:
             break_obj = self.__next_short()
-        elif break_type == BreakType.LONG or self.__long_queue.peek().waiting_time <= self.__short_queue.peek().waiting_time:
-            break_obj = self.__next_long()
         else:
-            break_obj = self.__next_short()
+            # break_type is not specified and the queue is not empty
+            next_long_break = self.__long_queue.peek()
+            next_short_break = self.__short_queue.peek()
+            if next_long_break and next_short_break and next_long_break.waiting_time <= next_short_break.waiting_time:
+                break_obj = self.__next_long()
+            else:
+                break_obj = self.__next_short()
 
-        break_obj.reset_time()
-        self.__current_break = break_obj
-        self.__context.session.set(SESSION_KEY_BREAK, self.__current_break.name)
+        if self.__current_break:
+            # Reset the last break time
+            self.__current_break.reset_time()
+
+        if break_obj:
+            self.__current_break = break_obj
+            self.__context.session.set(SESSION_KEY_BREAK, break_obj.name)
+        else:
+            self.__current_break = None
 
         return break_obj
 
@@ -116,11 +126,10 @@ class BreaksStore:
     def __restore_last_break(self, last_break: str) -> None:
         if not self.is_empty() and last_break is not None:
             current_break = self.get_break()
-            if last_break != current_break.name:
+            if current_break is not None and last_break != current_break.name:
                 next_break = self.next()
-                if next_break is not None:
-                    while next_break != current_break and next_break.name != last_break:
-                        next_break = self.next()
+                while next_break is not None and next_break != current_break and next_break.name != last_break:
+                    next_break = self.next()
 
     def __build_shorts(self) -> Queue:
         return BreaksStore.__build_queue(BreakType.SHORT,

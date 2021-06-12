@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -17,6 +16,7 @@ import logging
 import os
 import re
 import subprocess
+from typing import Optional
 
 
 class DesktopEnvironment:
@@ -40,10 +40,11 @@ class DesktopEnvironment:
         """
         Detect the desktop environment.
         """
-        desktop_session = os.environ.get('DESKTOP_SESSION')
-        current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
+        desktop_session: Optional[str] = os.environ.get('DESKTOP_SESSION')
+        current_desktop: Optional[str] = os.environ.get('XDG_CURRENT_DESKTOP')
         env = 'unknown'
         if desktop_session is not None:
+            gnome_session_id: Optional[str] = os.environ.get('GNOME_DESKTOP_SESSION_ID')
             desktop_session = desktop_session.lower()
             if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon',
                                    'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
@@ -55,8 +56,7 @@ class DesktopEnvironment:
             elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get(
                     'KDE_FULL_SESSION') == 'true':
                 env = 'kde'
-            elif (os.environ.get('GNOME_DESKTOP_SESSION_ID') is not None) and (
-                    'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID')):
+            elif (gnome_session_id is not None) and ('deprecated' not in gnome_session_id):
                 env = 'gnome'
             elif desktop_session.startswith('ubuntu'):
                 env = 'unity'

@@ -212,13 +212,18 @@ def on_stop():
     smart_pause.stop()
 
 
-def update_next_break(break_obj: Break, next_short_break: datetime.datetime,
-                      next_long_break: datetime.datetime) -> None:
+def update_next_break(break_obj: Break, next_short_break_time: Optional[datetime.datetime],
+                      next_long_break_time: Optional[datetime.datetime]) -> None:
     """
     Update the next break time.
     """
-    date_time = next_short_break if next_short_break < next_long_break else next_long_break
-    smart_pause.set_next_break(break_obj, date_time)
+    next_break_time: Optional[datetime.datetime] = None
+    if next_short_break_time is not None:
+        next_break_time = next_short_break_time if next_long_break_time is None or next_short_break_time < next_long_break_time else next_long_break_time
+    elif next_long_break_time is not None:
+        next_break_time = next_long_break_time if next_short_break_time is None or next_long_break_time < next_short_break_time else next_short_break_time
+    if next_break_time:
+        smart_pause.set_next_break(break_obj, next_break_time)
 
 
 def get_break_action(break_obj: Break) -> Optional[BreakAction]:

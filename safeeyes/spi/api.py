@@ -1,8 +1,7 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
-# Copyright (C) 2021  Gobinath
+# Copyright (C) 2017  Gobinath
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,9 +15,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 import abc
-import datetime
+from datetime import datetime
 from typing import List
 
 from safeeyes.spi.breaks import BreakType, Break

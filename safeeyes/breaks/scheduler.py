@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -19,6 +18,7 @@
 
 import datetime
 import logging
+from typing import Optional
 
 from safeeyes import utility
 from safeeyes.breaks.store import BreaksStore
@@ -28,6 +28,7 @@ from safeeyes.spi.api import BreakAPI
 from safeeyes.spi.breaks import BreakType, Break
 from safeeyes.spi.state import State
 from safeeyes.thread import Heartbeat, ThreadCondition, Timer, worker
+from safeeyes.util.locale import _
 
 
 class BreakScheduler(BreakAPI):
@@ -43,21 +44,8 @@ class BreakScheduler(BreakAPI):
         self.__postponed: bool = False
 
     def start(self, next_break_time: datetime.datetime = None):
-        if self.__breaks_store.is_empty():
-            return
         self.__reset_stop_flags()
-        current_break = self.__breaks_store.get_break()
-
-        if current_break is None:
-            # This check is unnecessary
-            return
-
-        if next_break_time is None:
-            current_time = datetime.datetime.now()
-            waiting_time = current_break.waiting_time * 60
-            next_break_time = current_time + datetime.timedelta(seconds=waiting_time)
-
-        self.schedule(next_break_time)
+        self.__start(next_break_time)
 
     def stop(self):
         self.__condition.release_all()
@@ -78,7 +66,7 @@ class BreakScheduler(BreakAPI):
 
     def next_break(self):
         self.__breaks_store.next()
-        self.start()
+        self.__start()
 
     def skip(self):
         self.__skipped = True
@@ -89,6 +77,23 @@ class BreakScheduler(BreakAPI):
         next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=duration)
         self.schedule(next_break_time)
 
+    def __start(self, next_break_time: datetime.datetime = None):
+        if self.__breaks_store.is_empty():
+            return
+
+        current_break = self.__breaks_store.get_break()
+
+        if current_break is None:
+            # This check is unnecessary
+            return
+
+        if next_break_time is None:
+            current_time = datetime.datetime.now()
+            waiting_time = current_break.waiting_time * 60
+            next_break_time = current_time + datetime.timedelta(seconds=waiting_time)
+
+        self.schedule(next_break_time)
+
     def schedule(self, next_break_time: datetime.datetime):
         if self.__breaks_store.is_empty():
             return
@@ -97,14 +102,18 @@ class BreakScheduler(BreakAPI):
         self.stop()
 
         next_break = self.__breaks_store.peek()
-        short_break_time = next_break_time
-        long_break_time = next_break_time
+        if next_break is None:
+            return
+        short_break_time: Optional[datetime.datetime] = None
+        long_break_time: Optional[datetime.datetime] = None
         if next_break.is_long_break():
-            short_break_time = next_break_time + datetime.timedelta(
-                minutes=self.__breaks_store.peek(BreakType.SHORT).waiting_time)
+            next_short_break = self.__breaks_store.peek(BreakType.SHORT)
+            if next_short_break:
+                short_break_time = next_break_time + datetime.timedelta(minutes=next_short_break.waiting_time)
         else:
-            long_break_time = next_break_time + datetime.timedelta(
-                minutes=self.__breaks_store.peek(BreakType.LONG).waiting_time)
+            next_long_break = self.__breaks_store.peek(BreakType.LONG)
+            if next_long_break:
+                long_break_time = next_break_time + datetime.timedelta(minutes=next_long_break.waiting_time)
 
         self.__context.core_api.set_status(_('Next break at %s') % (utility.format_time(next_break_time)))
         self.__plugins.update_next_break(next_break, short_break_time, long_break_time)

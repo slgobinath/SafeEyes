@@ -15,16 +15,14 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from typing import Optional
 
 from safeeyes import utility
+from safeeyes.context import Context
 
 
-def validate(plugin_config, plugin_settings):
-    command = None
-    if utility.DESKTOP_ENVIRONMENT == "gnome" and utility.IS_WAYLAND:
-        command = "dbus-send"
-    else:
-        command = "xprintidle"
+def validate(ctx: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:
+    command = "wlrctl" if ctx.env.is_wayland() else "xprop"
     if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:

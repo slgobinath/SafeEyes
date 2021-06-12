@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -95,8 +94,15 @@ class Plugin(abc.ABC):
         """
         pass
 
-    def update_next_break(self, break_obj: Break, next_short_break: datetime, next_long_break: datetime) -> None:
+    def update_next_break(self, break_obj: Break, next_short_break: Optional[datetime],
+                          next_long_break: Optional[datetime]) -> None:
         """
         Called when the next break is scheduled.
         """
+        pass
+
+
+class Validator(abc.ABC):
+
+    def validate(self, context: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:
         pass

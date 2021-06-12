@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -14,17 +13,18 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 import importlib
-import inspect
 import logging
 import os
 import sys
-from typing import List, Any, Dict
+from typing import List, Any, Dict, Optional
 
 from safeeyes import utility, SAFE_EYES_HOME_DIR, SAFE_EYES_CONFIG_DIR
 from safeeyes.config import Config
 from safeeyes.context import Context
 from safeeyes.env import system
-from safeeyes.plugin_utils.proxy import PluginProxy
+from safeeyes.plugin_utils.plugin import Validator
+from safeeyes.plugin_utils.proxy import PluginProxy, ValidatorProxy
+from safeeyes.util.locale import _
 from safeeyes.utility import DESKTOP_ENVIRONMENT, CONFIG_RESOURCE
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
@@ -54,11 +54,12 @@ class PluginLoader:
         """
         Load the given plugin.
         """
+        plugin_obj: PluginProxy
         plugin_id = plugin['id']
         plugin_enabled = plugin['enabled']
         if plugin_id in self.__plugins and not plugin_enabled:
             # Loading a disabled plugin but it was loaded earlier
-            plugin_obj: PluginProxy = self.__plugins[plugin_id]
+            plugin_obj = self.__plugins[plugin_id]
             plugin_obj.disable()
             if not plugin_obj.can_breaks_override():
                 # Plugin is disabled and breaks cannot override it
@@ -90,7 +91,7 @@ class PluginLoader:
         if plugin_enabled or plugin_config.get('break_override_allowed', False):
             if plugin_id in self.__plugins:
                 # The plugin is already enabled or partially loaded due to break_override_allowed
-                plugin_obj: PluginProxy = self.__plugins[plugin_id]
+                plugin_obj = self.__plugins[plugin_id]
                 # Validate the dependencies again
                 if PluginLoader.__check_plugin_dependencies(context, plugin_id, plugin_config,
                                                             plugin.get('settings', {}), plugin_path):
@@ -120,11 +121,11 @@ class PluginLoader:
                 plugin_obj.enable()
 
     @staticmethod
-    def load_plugins_config(context: Context, config: Config):
+    def load_plugins_config(context: Context, config: Config) -> List[dict]:
         """
         Load all the plugins from the given directory.
         """
-        configs = []
+        configs: List[dict] = []
         for plugin in config.get('plugins'):
             plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
             if not os.path.isdir(plugin_path):
@@ -134,30 +135,30 @@ class PluginLoader:
             plugin_icon_path = os.path.join(plugin_path, 'icon.png')
             plugin_module_path = os.path.join(plugin_path, 'plugin.py')
             if not os.path.isfile(plugin_module_path):
-                return
+                return []
             icon = None
             if os.path.isfile(plugin_icon_path):
                 icon = plugin_icon_path
             else:
                 icon = system.get_resource_path('ic_plugin.png')
-            config = utility.load_json(plugin_config_path)
-            if config is None:
+            plugin_config = utility.load_json(plugin_config_path)
+            if plugin_config is None:
                 continue
-            dependency_description = PluginLoader.__check_plugin_dependencies(context, plugin['id'], config,
+            dependency_description = PluginLoader.__check_plugin_dependencies(context, plugin['id'], plugin_config,
                                                                               plugin.get('settings', {}), plugin_path)
             if dependency_description:
                 plugin['enabled'] = False
-                config['error'] = True
-                config['meta']['description'] = dependency_description
+                plugin_config['error'] = True
+                plugin_config['meta']['description'] = dependency_description
                 icon = system.get_resource_path('ic_warning.png')
             else:
-                config['error'] = False
-            config['id'] = plugin['id']
-            config['icon'] = icon
-            config['enabled'] = plugin['enabled']
-            for setting in config['settings']:
+                plugin_config['error'] = False
+            plugin_config['id'] = plugin['id']
+            plugin_config['icon'] = icon
+            plugin_config['enabled'] = plugin['enabled']
+            for setting in plugin_config['settings']:
                 setting['safeeyes_config'] = plugin['settings']
-            configs.append(config)
+            configs.append(plugin_config)
         return configs
 
     @staticmethod
@@ -170,7 +171,7 @@ class PluginLoader:
 
     @staticmethod
     def __check_plugin_dependencies(context: Context, plugin_id: str, plugin_config: dict, plugin_settings: dict,
-                                    plugin_path: str):
+                                    plugin_path: str) -> Optional[str]:
         """
         Check the plugin dependencies.
         """
@@ -196,11 +197,16 @@ class PluginLoader:
                 return _('Please add the resource %(resource)s to %(config_resource)s directory') % {
                     'resource': resource, 'config_resource': CONFIG_RESOURCE}
 
-        plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
-        if os.path.isfile(plugin_dependency_checker):
-            dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
-            if dependency_checker and hasattr(dependency_checker, "validate") and len(
-                    inspect.getfullargspec(getattr(dependency_checker, "validate")).args) == 3:
-                return dependency_checker.validate(context, plugin_config, plugin_settings)
+        validator = PluginLoader.__get_validator(plugin_id, plugin_path)
+        if validator:
+            return validator.validate(context, plugin_config, plugin_settings)
 
+        return None
+
+    @staticmethod
+    def __get_validator(plugin_id: str, plugin_path: str) -> Optional[Validator]:
+        plugin_validator = os.path.join(plugin_path, 'validator.py')
+        if os.path.isfile(plugin_validator):
+            validator = importlib.import_module((plugin_id + '.validator'))
+            return ValidatorProxy(validator)
         return None

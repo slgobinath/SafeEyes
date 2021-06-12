@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
-from typing import Dict
+from typing import Dict, Optional
 
 import gi
 
@@ -435,12 +435,19 @@ def init(ctx: Context, plugin_config: dict):
         tray_icon.initialize(plugin_config)
 
 
-def update_next_break(break_obj, next_short_break_time, next_long_break_time):
+def update_next_break(break_obj, next_short_break_time: Optional[datetime.datetime],
+                      next_long_break_time: Optional[datetime.datetime]):
     """
     Update the next break time.
     """
-    next_break_time = next_short_break_time if next_short_break_time < next_long_break_time else next_long_break_time
-    tray_icon.next_break_time(next_break_time)
+    next_break_time: Optional[datetime.datetime] = None
+    if next_short_break_time is not None:
+        next_break_time = next_short_break_time if next_long_break_time is None or next_short_break_time < next_long_break_time else next_long_break_time
+    elif next_long_break_time is not None:
+        next_break_time = next_long_break_time if next_short_break_time is None or next_long_break_time < next_short_break_time else next_short_break_time
+
+    if next_break_time:
+        tray_icon.next_break_time(next_break_time)
 
 
 def on_pre_break(break_obj):

@@ -10,3 +10,7 @@ def init_locale():
     system_locale.install()
     locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
     return system_locale
+
+
+def _(message: str) -> str:
+    return gettext.gettext(message)

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
@@ -61,11 +60,11 @@ class Context:
         self.state = State.START
         self.__settings_dialog_visible = False
         self.env: DesktopEnvironment = DesktopEnvironment.get_env()
-        self.core_api: CoreAPI = None
-        self.thread_api: ThreadAPI = None
-        self.break_api: BreakAPI = None
-        self.window_api: WindowAPI = None
-        self.plugin_api: PluginAPI = None
+        self.core_api: CoreAPI
+        self.thread_api: ThreadAPI
+        self.break_api: BreakAPI
+        self.window_api: WindowAPI
+        self.plugin_api: PluginAPI
 
     def set_apis(self, core_api: CoreAPI,
                  thread_api: ThreadAPI,
