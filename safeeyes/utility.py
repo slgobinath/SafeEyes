@@ -371,7 +371,8 @@ def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
         return
     config = {}
     config['id'] = plugin_id
-    config['enabled'] = False  # By default plugins are disabled
+    # Disable all plugins by default except breakscreen
+    config['enabled'] = plugin_id == "breakscreen"
     config['version'] = plugin_config['meta']['version']
     if plugin_config['settings']:
         config['settings'] = {}
