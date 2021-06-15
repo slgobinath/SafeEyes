@@ -145,7 +145,7 @@ def init(ctx: Context, plugin_config: dict) -> None:
     """
     Initialize the plugin.
     """
-    logging.debug('Health Stats: initialize the plugin')
+    logging.info('Health Stats: initialize the plugin')
     global stats
     stats = HealthStats(ctx, plugin_config)
 

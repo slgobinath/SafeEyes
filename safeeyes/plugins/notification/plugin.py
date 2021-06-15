@@ -22,15 +22,16 @@ import gi
 
 from safeeyes.context import Context
 from safeeyes.spi.breaks import BreakType, Break
+from safeeyes.util.locale import _
 
-gi.require_version('Notify', '0.7')
+gi.require_version("Notify", "0.7")
 from gi.repository import Notify
 
 """
 Safe Eyes Notification plugin
 """
 
-APPINDICATOR_ID = 'safeeyes'
+APPINDICATOR_ID = "safeeyes"
 notification = None
 context = None
 warning_time = 10
@@ -44,9 +45,9 @@ def init(ctx: Context, plugin_config: dict) -> None:
     """
     global context
     global warning_time
-    logging.debug('Initialize Notification plugin')
+    logging.info("Notification: initialize the plugin")
     context = ctx
-    warning_time = ctx.config.get('pre_break_warning_time')
+    warning_time = ctx.config.get("pre_break_warning_time")
 
 
 def on_pre_break(break_obj: Break) -> None:
@@ -55,18 +56,18 @@ def on_pre_break(break_obj: Break) -> None:
     """
     # Construct the message based on the type of the next break
     global notification
-    logging.info('Show the notification')
-    message = '\n'
+    logging.debug("Notification: show the notification")
+    message = "\n"
     if break_obj.type == BreakType.SHORT:
-        message += (_('Ready for a short break in %s seconds') % warning_time)
+        message += (_("Ready for a short break in %s seconds") % warning_time)
     else:
-        message += (_('Ready for a long break in %s seconds') % warning_time)
+        message += (_("Ready for a long break in %s seconds") % warning_time)
 
-    notification = Notify.Notification.new('Safe Eyes', message, icon='safeeyes_enabled')
+    notification = Notify.Notification.new("Safe Eyes", message, icon="safeeyes_enabled")
     try:
         notification.show()
     except BaseException:
-        logging.error('Failed to show the notification')
+        logging.error("Notification: failed to show the notification")
 
 
 def on_start_break(break_obj: Break) -> None:
@@ -74,7 +75,7 @@ def on_start_break(break_obj: Break) -> None:
     Close the notification.
     """
     global notification
-    logging.info('Close pre-break notification')
+    logging.debug("Notification: close the pre-break notification")
     if notification:
         try:
             notification.close()
@@ -88,5 +89,5 @@ def on_exit() -> None:
     """
     Uninitialize the registered notificaion.
     """
-    logging.debug('Stop Notification plugin')
+    logging.info("Notification: stop the plugin")
     Notify.uninit()

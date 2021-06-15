@@ -36,13 +36,13 @@ class SmartPause:
         self.__context = context
         self.__lock: threading.Lock = threading.Lock()
         self.__condition: ThreadCondition = context.thread_api.new_condition()
-        self.__postpone_if_active = config['postpone_if_active']
-        self.__idle_time = config['idle_time']
-        self.__interpret_idle_as_break = config['interpret_idle_as_break']
-        self.__short_break_interval = context.config.get('short_break_interval') * 60  # Convert to seconds
-        self.__long_break_duration = context.config.get('long_break_duration')
+        self.__postpone_if_active = config["postpone_if_active"]
+        self.__idle_time = config["idle_time"]
+        self.__interpret_idle_as_break = config["interpret_idle_as_break"]
+        self.__short_break_interval = context.config.get("short_break_interval") * 60  # Convert to seconds
+        self.__long_break_duration = context.config.get("long_break_duration")
         self.__waiting_time = min(2, self.__idle_time)  # If idle time is 1 sec, wait only 1 sec
-        self.__is_wayland_and_gnome = context.env.name == 'gnome' and context.env.is_wayland()
+        self.__is_wayland_and_gnome = context.env.name == "gnome" and context.env.is_wayland()
         self.__active: bool = False
         self.__smart_pause_activated: bool = False
         self.__next_break_time: datetime.datetime = None
@@ -52,7 +52,7 @@ class SmartPause:
     def start(self) -> None:
         if not self.__is_active():
             # If SmartPause is already started, do not start it again
-            logging.debug('Start Smart Pause plugin')
+            logging.debug("Start Smart Pause plugin")
             self.__set_active(True)
             self.__start_idle_monitor()
 
@@ -61,7 +61,7 @@ class SmartPause:
             # Safe Eyes is stopped due to system idle
             self.__smart_pause_activated = False
             return
-        logging.debug('Stop Smart Pause plugin')
+        logging.debug("Stop Smart Pause plugin")
         self.__set_active(False)
         self.__condition.release_all()
 
@@ -80,8 +80,8 @@ class SmartPause:
         return False
 
     def clean(self) -> None:
-        session_config = self.__context.session.get_plugin('smartpause')
-        session_config.pop('idle_period', None)
+        session_config = self.__context.session.get_plugin("smartpause")
+        session_config.pop("idle_period", None)
 
     def __system_idle_time(self) -> int:
         if self.__is_wayland_and_gnome:
@@ -119,22 +119,23 @@ class SmartPause:
                 if system_idle_time >= self.__idle_time and self.__context.state == State.WAITING:
                     self.__smart_pause_activated = True
                     self.__idle_start_time = datetime.datetime.now() - datetime.timedelta(seconds=system_idle_time)
-                    logging.info('Pause Safe Eyes due to system idle')
+                    logging.debug("Smart Pause: pause Safe Eyes due to system idle")
                     self.__context.core_api.stop()
 
                 elif system_idle_time < self.__idle_time and self.__context.state == State.STOPPED and self.__idle_start_time is not None:
-                    logging.info('Resume Safe Eyes due to user activity')
+                    logging.debug("Smart Pause: resume Safe Eyes due to user activity")
                     self.__smart_pause_activated = False
                     idle_period = (datetime.datetime.now() - self.__idle_start_time)
                     idle_seconds = idle_period.total_seconds()
 
-                    session_config = self.__context.session.get_plugin('smartpause')
-                    session_config['idle_period'] = idle_seconds
-                    self.__context.session.set_plugin('smartpause', session_config)
+                    session_config = self.__context.session.get_plugin("smartpause")
+                    session_config["idle_period"] = idle_seconds
+                    self.__context.session.set_plugin("smartpause", session_config)
 
                     if self.__interpret_idle_as_break and idle_seconds >= self.__next_break_duration:
                         # User is idle for break duration and wants to consider it as a break
-                        logging.debug("Idle for %d seconds, long break %d", idle_seconds, self.__long_break_duration)
+                        logging.debug("Smart Pause: idle for %d seconds and the long break duration is %d",
+                                      idle_seconds, self.__long_break_duration)
                         self.__context.core_api.start(
                             reset_breaks=(idle_seconds >= self.__long_break_duration))
                     elif idle_seconds < self.__short_break_interval:
@@ -158,9 +159,9 @@ class SmartPause:
         """
         try:
             # Convert to seconds
-            return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
+            return int(subprocess.check_output(["xprintidle"]).decode("utf-8")) / 1000
         except BaseException as e:
-            logging.warning("Failed to get system idle time for xorg.")
+            logging.warning("Smart Pause: failed to get system idle time for xorg.")
             logging.warning(str(e))
             return 0
 
@@ -168,20 +169,20 @@ class SmartPause:
     def __gnome_wayland_idle_time():
         """
         Determine system idle time in seconds, specifically for gnome with wayland.
-        If there's a failure, return 0.
+        If there"s a failure, return 0.
         https://unix.stackexchange.com/a/492328/222290
         """
         try:
             output = subprocess.check_output([
-                'dbus-send',
-                '--print-reply',
-                '--dest=org.gnome.Mutter.IdleMonitor',
-                '/org/gnome/Mutter/IdleMonitor/Core',
-                'org.gnome.Mutter.IdleMonitor.GetIdletime'
+                "dbus-send",
+                "--print-reply",
+                "--dest=org.gnome.Mutter.IdleMonitor",
+                "/org/gnome/Mutter/IdleMonitor/Core",
+                "org.gnome.Mutter.IdleMonitor.GetIdletime"
             ])
-            return int(re.search(rb'\d+$', output).group(0)) / 1000
+            return int(re.search(rb"\d+$", output).group(0)) / 1000
         except BaseException as e:
-            logging.warning("Failed to get system idle time for gnome/wayland.")
+            logging.warning("Smart Pause: failed to get system idle time for gnome/wayland.")
             logging.warning(str(e))
             return 0
 
@@ -193,7 +194,7 @@ def init(context: Context, plugin_config: dict):
     """
     Initialize the plugin.
     """
-    logging.info('Initialize Smart Pause plugin')
+    logging.info("Smart Pause: initialize the plugin")
     global smart_pause
     smart_pause = SmartPause(context, plugin_config)
 

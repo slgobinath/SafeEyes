@@ -43,7 +43,7 @@ class Player:
 
     @staticmethod
     def __play(resource: str) -> None:
-        logging.info('Audible Alert: playing audio %s', resource)
+        logging.debug('Audible Alert: playing audio %s', resource)
         # Open the sound file
         path = utility.get_resource_path(resource)
         if path is not None:

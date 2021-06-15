@@ -54,7 +54,7 @@ class SystemState:
         return self.__is_wayland_full_screen() if self.__context.env.is_wayland() else self.__is_xorg_full_screen()
 
     def __is_wayland_full_screen(self) -> bool:
-        logging.info('Do Not Disturb: searching for full-screen application in wayland')
+        logging.debug('Do Not Disturb: searching for full-screen application in wayland')
         cmdlist = ['wlrctl', 'toplevel', 'find', 'state:fullscreen']
         try:
             process = subprocess.Popen(cmdlist, stdout=subprocess.PIPE)
@@ -75,7 +75,7 @@ class SystemState:
         Check for full-screen applications.
         This method must be executed by the main thread. If not, it will cause random failure.
         """
-        logging.info('Do Not Disturb: searching for full-screen application in xorg')
+        logging.debug('Do Not Disturb: searching for full-screen application in xorg')
         screen = Gdk.Screen.get_default()
 
         active_window = screen.get_active_window()
@@ -117,7 +117,7 @@ class SystemState:
         """
         on_battery = False
         power_sources = os.listdir('/sys/class/power_supply')
-        logging.info('Do Not Disturb: looking for battery status in available power sources: %s' % str(power_sources))
+        logging.debug('Do Not Disturb: looking for battery status in available power sources: %s' % str(power_sources))
         for power_source in power_sources:
             if 'BAT' in power_source:
                 # Found battery
@@ -140,7 +140,7 @@ system_state: SystemState
 
 
 def init(ctx: Context, plugin_config: dict):
-    logging.debug('Do Not Disturb: initialize the plugin')
+    logging.info('Do Not Disturb: initialize the plugin')
     global system_state
     system_state = SystemState(ctx, plugin_config)
 

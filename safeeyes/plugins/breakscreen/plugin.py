@@ -1,7 +1,7 @@
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
-# Copyright (C) 2021  Gobinath
+# Copyright (C) 2017  Gobinath
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,8 +28,9 @@ from safeeyes.context import Context
 from safeeyes.spi.breaks import Break
 from safeeyes.spi.plugin import TrayAction
 from safeeyes.thread import main, worker
+from safeeyes.util.locale import _
 
-gi.require_version('Gtk', '3.0')
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk
 from gi.repository import Gtk
 
@@ -46,12 +47,12 @@ class BreakScreen:
         self.__context: Context = context
         self.__count_labels: List[Gtk.Label] = []
         self.__display: Display = Display()
-        self.__allow_skipping: bool = config.get('allow_skipping', True)
-        self.__allow_postponing: bool = config.get('allow_postponing', False)
-        self.__postpone_duration: int = config.get('postpone_duration', 5) * 60
-        self.__keycode_shortcut_skip: int = config.get('skip_keyboard_shortcut', 9)
-        self.__keycode_shortcut_postpone: int = config.get('postpone_keyboard_shortcut', 65)
-        self.__shortcut_disable_time: int = config.get('keyboard_disabled_period', 2)
+        self.__allow_skipping: bool = config.get("allow_skipping", True)
+        self.__allow_postponing: bool = config.get("allow_postponing", False)
+        self.__postpone_duration: int = config.get("postpone_duration", 5) * 60
+        self.__keycode_shortcut_skip: int = config.get("skip_keyboard_shortcut", 9)
+        self.__keycode_shortcut_postpone: int = config.get("postpone_keyboard_shortcut", 65)
+        self.__shortcut_disable_time: int = config.get("keyboard_disabled_period", 2)
         self.__enable_shortcut: bool = False
         self.__keyboard_locked: bool = False
         self.__windows: List[Gtk.Window] = []
@@ -66,7 +67,7 @@ class BreakScreen:
         """
         Skip the break from the break screen
         """
-        logging.info("User skipped the break")
+        logging.debug("Break Screen: user skipped the break")
         # Must call on_skip before close to lock screen before closing the break screen
         self.__context.break_api.skip()
         self.close()
@@ -75,7 +76,7 @@ class BreakScreen:
         """
         Postpone the break from the break screen
         """
-        logging.info("User postponed the break")
+        logging.debug("Break Screen: user postponed the break")
         self.__context.break_api.postpone(self.__postpone_duration)
         self.close()
 
@@ -83,7 +84,6 @@ class BreakScreen:
         """
         Window close event handler.
         """
-        logging.info("Closing the break screen")
         self.close()
 
     def on_skip_clicked(self, button):
@@ -104,7 +104,7 @@ class BreakScreen:
         """
         self.__enable_shortcut = 0 <= self.__shortcut_disable_time <= seconds
         minutes, secs = divmod(countdown, 60)
-        time_format = '{:02d}:{:02d}'.format(minutes, secs)
+        time_format = "{:02d}:{:02d}".format(minutes, secs)
         self.__update_count_down(time_format)
 
     def show_message(self, break_obj):
@@ -123,7 +123,7 @@ class BreakScreen:
         """
         Hide the break screen from active window and destroy all other windows
         """
-        logging.info("Close the break screen(s)")
+        logging.debug("Break Screen: close the break screen(s)")
         self.__release_keyboard()
 
         # Destroy other windows if exists
@@ -148,7 +148,7 @@ class BreakScreen:
 
         screen = Gtk.Window().get_screen()
         no_of_monitors = screen.get_n_monitors()
-        logging.info("Show break screens in %d display(s)", no_of_monitors)
+        logging.debug("Break Screen: show break screens in %d display(s)", no_of_monitors)
 
         for monitor in range(no_of_monitors):
             monitor_gemoetry = screen.get_monitor_geometry(monitor)
@@ -184,17 +184,17 @@ class BreakScreen:
             # Add the buttons
             if self.__allow_postponing:
                 # Add postpone button
-                btn_postpone = Gtk.Button(_('Postpone'))
-                btn_postpone.get_style_context().add_class('btn_postpone')
-                btn_postpone.connect('clicked', self.on_postpone_clicked)
+                btn_postpone = Gtk.Button(_("Postpone"))
+                btn_postpone.get_style_context().add_class("btn_postpone")
+                btn_postpone.connect("clicked", self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
                 box_buttons.pack_start(btn_postpone, True, True, 0)
 
             if self.__allow_skipping:
                 # Add the skip button
-                btn_skip = Gtk.Button(_('Skip'))
-                btn_skip.get_style_context().add_class('btn_skip')
-                btn_skip.connect('clicked', self.on_skip_clicked)
+                btn_skip = Gtk.Button(_("Skip"))
+                btn_skip.get_style_context().add_class("btn_skip")
+                btn_skip.connect("clicked", self.on_skip_clicked)
                 btn_skip.set_visible(True)
                 box_buttons.pack_start(btn_skip, True, True, 0)
 
@@ -209,7 +209,7 @@ class BreakScreen:
 
             # Set visual to apply css theme. It should be called before show method.
             window.set_visual(window.get_screen().get_rgba_visual())
-            if self.__context.env.name == 'kde':
+            if self.__context.env.name == "kde":
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
@@ -223,7 +223,7 @@ class BreakScreen:
             # In other desktop environments, move the window after present
             window.move(x, y)
             window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-            logging.info("Moved break screen to Display[%d, %d]", x, y)
+            logging.debug("Break Screen: Moved break screen to Display[%d, %d]", x, y)
 
     @main
     def __update_count_down(self, count):
@@ -238,7 +238,7 @@ class BreakScreen:
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts
         """
-        logging.info("Lock the keyboard")
+        logging.debug("Break Screen: lock the keyboard")
         self.__keyboard_locked = True
 
         # # Grab the keyboard
@@ -266,7 +266,7 @@ class BreakScreen:
         """
         Release the locked keyboard.
         """
-        logging.info("Break Screen: unlock the keyboard")
+        logging.debug("Break Screen: unlock the keyboard")
         self.__keyboard_locked = False
         # self.__display.ungrab_keyboard(X.CurrentTime)
         # self.__display.flush()
@@ -282,7 +282,7 @@ class BreakScreen:
         del self.__count_labels[:]
 
     def __get_widgets(self, break_obj: Break) -> str:
-        widget_html = ''
+        widget_html = ""
         for widget in self.__context.plugin_api.get_widgets(break_obj):
             if widget is not None and not widget.is_empty():
                 widget_html += widget.format()
@@ -298,7 +298,7 @@ def init(context: Context, config: dict) -> None:
     """
     This function is called to initialize the plugin.
     """
-    logging.info('Break Screen: initialize the plugin')
+    logging.info("Break Screen: initialize the plugin")
     global safe_eyes_context, break_config
     safe_eyes_context = context
     break_config = config
