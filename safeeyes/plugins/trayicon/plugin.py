@@ -22,6 +22,7 @@ from typing import Dict, Optional
 import gi
 
 from safeeyes.context import Context
+from safeeyes.spi.api import Condition
 from safeeyes.spi.breaks import BreakType
 from safeeyes.thread import worker, main
 from safeeyes.util.locale import _
@@ -48,15 +49,15 @@ class TrayIcon:
     """
 
     def __init__(self, ctx: Context, plugin_config: Dict):
-        self.__context = ctx
-        self.__config = plugin_config
-        self.__date_time = None
-        self.__active = True
-        self.__wakeup_time = None
-        self.__idle_condition = ctx.thread_api.new_condition()
+        self.__context: Context = ctx
+        self.__config: dict = plugin_config
+        self.__date_time: Optional[datetime.datetime] = None
+        self.__active: bool = True
+        self.__wakeup_time: Optional[datetime.datetime] = None
+        self.__idle_condition: Condition = ctx.thread_api.new_condition()
         self.__lock = threading.Lock()
-        self.__allow_disabling = plugin_config["allow_disabling"]
-        self.__animate = False
+        self.__allow_disabling: bool = plugin_config["allow_disabling"]
+        self.__animate: bool = False
 
         # Construct the tray icon
         self.__indicator = appindicator.Indicator.new(
@@ -112,7 +113,7 @@ class TrayIcon:
 
             # Create submenu
             sub_menu_item = Gtk.MenuItem()
-            sub_menu_item.connect("activate", self.on_disable_clicked, time_in_minutes)
+            sub_menu_item.connect("activate", self.__on_disable_clicked, time_in_minutes)
             self.__sub_menu_disable_items.append([sub_menu_item, label, disable_option["time"]])
             self.__sub_menu_disable.append(sub_menu_item)
 
@@ -123,18 +124,18 @@ class TrayIcon:
         self.__sub_menu_manual_break.append(self.__sub_menu_manual_next_long_break)
         self.__item_manual_break.set_submenu(self.__sub_menu_manual_break)
 
-        self.__sub_menu_item_until_restart.connect("activate", self.on_disable_clicked, -1)
-        self.__sub_menu_manual_next_break.connect("activate", self.on_manual_break_clicked, None)
-        self.__sub_menu_manual_next_short_break.connect("activate", self.on_manual_break_clicked, BreakType.SHORT)
-        self.__sub_menu_manual_next_long_break.connect("activate", self.on_manual_break_clicked, BreakType.LONG)
-        self.__item_enable.connect("activate", self.on_enable_clicked)
-        self.__item_settings.connect("activate", self.show_settings)
-        self.__item_about.connect("activate", self.show_about)
-        self.__item_quit.connect("activate", self.quit_safe_eyes)
+        self.__sub_menu_item_until_restart.connect("activate", self.__on_disable_clicked, -1)
+        self.__sub_menu_manual_next_break.connect("activate", self.__on_manual_break_clicked, None)
+        self.__sub_menu_manual_next_short_break.connect("activate", self.__on_manual_break_clicked, BreakType.SHORT)
+        self.__sub_menu_manual_next_long_break.connect("activate", self.__on_manual_break_clicked, BreakType.LONG)
+        self.__item_enable.connect("activate", self.__on_enable_clicked)
+        self.__item_settings.connect("activate", self.__on_show_settings)
+        self.__item_about.connect("activate", self.__on_show_about)
+        self.__item_quit.connect("activate", self.__on_quit_safe_eyes)
 
         self.__set_labels()
 
-        # At startup, no need for activate menu
+        # At startup, no need to activate the menu
         self.__item_enable.set_sensitive(False)
 
         # Append all menu items and show the menu
@@ -161,12 +162,14 @@ class TrayIcon:
         self.__allow_disabling = plugin_config["allow_disabling"]
         self.__set_visibility()
 
+    @main
     def __set_visibility(self) -> None:
         self.__item_enable.set_visible(self.__allow_disabling)
         self.__item_disable.set_visible(self.__allow_disabling)
         self.__item_quit.set_visible(self.__allow_disabling)
         self.__item_quit.set_visible(self.__allow_disabling)
 
+    @main
     def __set_labels(self):
         """
         Update the text of menu items based on the selected language.
@@ -208,19 +211,7 @@ class TrayIcon:
         self.__item_about.set_label(_("About"))
         self.__item_quit.set_label(_("Quit"))
 
-    def show_icon(self):
-        """
-        Show the tray icon.
-        """
-        self.__indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
-
-    def hide_icon(self):
-        """
-        Hide the tray icon.
-        """
-        self.__indicator.set_status(appindicator.IndicatorStatus.PASSIVE)
-
-    def quit_safe_eyes(self, *args):
+    def __on_quit_safe_eyes(self, *args):
         """
         Handle Quit menu action.
         This action terminates the application.
@@ -231,43 +222,21 @@ class TrayIcon:
             self.__idle_condition.release_all()
         self.__context.core_api.quit()
 
-    def show_settings(self, *args):
+    def __on_show_settings(self, *args):
         """
         Handle Settings menu action.
         This action shows the Settings dialog.
         """
         self.__context.window_api.show_settings()
 
-    def show_about(self, *args):
+    def __on_show_about(self, *args):
         """
         Handle About menu action.
         This action shows the About dialog.
         """
         self.__context.window_api.show_about()
 
-    def next_break_time(self, dateTime):
-        """
-        Update the next break time to be displayed in the menu and optionally in the tray icon.
-        """
-        logging.debug("Tray Icon: update the next break information")
-        self.__date_time = dateTime
-        self.__set_next_break_info()
-
-    def __set_next_break_info(self):
-        """
-        A private method to be called within this class to update the next break information using self.dateTime.
-        """
-        formatted_time = utility.format_time(self.__date_time)
-        message = _("Next break at %s") % (formatted_time)
-        # Update the menu item label
-        self.__set_label(message)
-        # Update the tray icon label
-        if self.__config.get("show_time_in_tray", False):
-            self.__indicator.set_label(formatted_time, "")
-        else:
-            self.__indicator.set_label("", "")
-
-    def on_manual_break_clicked(self, *args):
+    def __on_manual_break_clicked(self, *args):
         """
         Trigger a break manually.
         """
@@ -277,7 +246,7 @@ class TrayIcon:
         else:
             self.__context.break_api.take_break()
 
-    def on_enable_clicked(self, *args):
+    def __on_enable_clicked(self, *args):
         """
         Handle "Enable Safe Eyes" menu action.
         This action enables the application if it is currently disabled.
@@ -290,7 +259,7 @@ class TrayIcon:
                 # Notify all schedulers
                 self.__idle_condition.release_all()
 
-    def on_disable_clicked(self, *args):
+    def __on_disable_clicked(self, *args):
         """
         Handle the menu actions of all the sub menus of "Disable Safe Eyes".
         This action disables the application if it is currently active.
@@ -313,6 +282,30 @@ class TrayIcon:
                 self.__item_info.set_label(info)
                 self.__schedule_resume(time_to_wait)
 
+    def update_next_break_time(self, date_time: datetime.datetime):
+        """
+        Update the next break time to be displayed in the menu and optionally in the tray icon.
+        """
+        logging.debug("Tray Icon: update the next break information")
+        self.__date_time = date_time
+        self.__set_next_break_info()
+
+    @main
+    def __set_next_break_info(self):
+        """
+        A private method to be called within this class to update the next break information using self.dateTime.
+        """
+        formatted_time = utility.format_time(self.__date_time)
+        message = _("Next break at %s") % formatted_time
+        # Update the menu item label
+        self.__set_label(message)
+        # Update the tray icon label
+        if self.__config.get("show_time_in_tray", False):
+            self.__indicator.set_label(formatted_time, "")
+        else:
+            self.__indicator.set_label("", "")
+
+    @main
     def lock_menu(self):
         """
         This method is called by the core to prevent user from disabling Safe Eyes after the notification.
@@ -320,6 +313,7 @@ class TrayIcon:
         if self.__active:
             self.__menu.set_sensitive(False)
 
+    @main
     def unlock_menu(self):
         """
         This method is called by the core to activate the menu after the the break.
@@ -327,6 +321,7 @@ class TrayIcon:
         if self.__active:
             self.__menu.set_sensitive(True)
 
+    @main
     def disable_ui(self):
         """
         Change the UI to disabled state.
@@ -342,6 +337,7 @@ class TrayIcon:
             self.__item_disable.set_sensitive(False)
             self.__item_manual_break.set_sensitive(False)
 
+    @main
     def enable_ui(self):
         """
         Change the UI to enabled state.
@@ -368,15 +364,11 @@ class TrayIcon:
 
     @worker
     def start_animation(self):
-        if not self.__active or not self.__animate:
-            return
-        self.__set_icon("safeeyes_disabled")
-        time.sleep(0.5)
-        self.__set_icon("safeeyes_enabled")
-        if self.__animate and self.__active:
+        while self.__active and self.__animate:
             time.sleep(0.5)
-            if self.__animate and self.__active:
-                self.start_animation()
+            self.__set_icon("safeeyes_disabled")
+            time.sleep(0.5)
+            self.__set_icon("safeeyes_enabled")
 
     def stop_animation(self):
         self.__animate = False
@@ -428,7 +420,7 @@ def update_next_break(break_obj, next_short_break_time: Optional[datetime.dateti
         next_break_time = next_long_break_time if next_short_break_time is None or next_long_break_time < next_short_break_time else next_short_break_time
 
     if next_break_time:
-        tray_icon.next_break_time(next_break_time)
+        tray_icon.update_next_break_time(next_break_time)
 
 
 def on_pre_break(break_obj):
