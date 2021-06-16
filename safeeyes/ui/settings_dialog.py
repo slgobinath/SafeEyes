@@ -220,7 +220,11 @@ class SettingsDialog:
         if plugin_config.get('break_override_allowed', False):
             self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
         if plugin_config['icon']:
-            builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(plugin_config['icon'],
+                                                             width=24,
+                                                             height=24,
+                                                             preserve_aspect_ratio=False)
+            builder.get_object('img_plugin_icon').set_from_pixbuf(pixbuf)
         if plugin_config['settings']:
             btn_properties.set_sensitive(True)
             btn_properties.connect('clicked', lambda button: self.__show_plugins_properties_dialog(plugin_config))
