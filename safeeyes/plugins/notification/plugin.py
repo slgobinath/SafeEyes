@@ -45,7 +45,6 @@ def init(ctx: Context, plugin_config: dict) -> None:
     """
     global context
     global warning_time
-    logging.info("Notification: initialize the plugin")
     context = ctx
     warning_time = ctx.config.get("pre_break_warning_time")
 
@@ -75,7 +74,6 @@ def on_start_break(break_obj: Break) -> None:
     Close the notification.
     """
     global notification
-    logging.debug("Notification: close the pre-break notification")
     if notification:
         try:
             notification.close()

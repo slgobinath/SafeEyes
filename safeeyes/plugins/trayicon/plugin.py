@@ -286,7 +286,6 @@ class TrayIcon:
         """
         Update the next break time to be displayed in the menu and optionally in the tray icon.
         """
-        logging.debug("Tray Icon: update the next break information")
         self.__date_time = date_time
         self.__set_next_break_info()
 
@@ -400,7 +399,6 @@ def init(ctx: Context, plugin_config: dict):
     """
     global context
     global tray_icon
-    logging.debug("Tray Icon: initialize the plugin")
     context = ctx
     if not tray_icon:
         tray_icon = TrayIcon(context, plugin_config)

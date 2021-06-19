@@ -107,15 +107,19 @@ class BreakScheduler(BreakAPI):
         short_break_time: Optional[datetime.datetime] = None
         long_break_time: Optional[datetime.datetime] = None
         if next_break.is_long_break():
+            long_break_time = next_break_time
             next_short_break = self.__breaks_store.peek(BreakType.SHORT)
             if next_short_break:
                 short_break_time = next_break_time + datetime.timedelta(minutes=next_short_break.waiting_time)
         else:
+            short_break_time = next_break_time
             next_long_break = self.__breaks_store.peek(BreakType.LONG)
             if next_long_break:
                 long_break_time = next_break_time + datetime.timedelta(minutes=next_long_break.waiting_time)
 
-        self.__context.core_api.set_status(_('Next break at %s') % (utility.format_time(next_break_time)))
+        formatted_time = utility.format_time(next_break_time)
+        logging.info("Scheduling the break '%s' at %s", next_break.name, formatted_time)
+        self.__context.core_api.set_status(_('Next break at %s') % formatted_time)
         self.__plugins.update_next_break(next_break, short_break_time, long_break_time)
 
         self.__timer.schedule(next_break_time)

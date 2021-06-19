@@ -1,6 +1,6 @@
 import unittest
 
-from safeeyes.util.env import DesktopEnvironment
+from safeeyes.env.desktop import DesktopEnvironment
 
 
 class DesktopEnvironmentTestCase(unittest.TestCase):

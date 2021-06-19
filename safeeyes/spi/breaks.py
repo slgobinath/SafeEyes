@@ -66,14 +66,14 @@ class Break:
         """
         return self.type == BreakType.SHORT
 
-    def is_plugin_enabled(self, plugin_id, is_plugin_enabled) -> bool:
+    def is_plugin_enabled(self, plugin_id) -> bool:
         """
         Check whether this break supports the given plugin.
         """
         if self.plugins:
             return plugin_id in self.plugins
         else:
-            return is_plugin_enabled
+            return False
 
     def reset_time(self) -> None:
         self.waiting_time = self.__original_time

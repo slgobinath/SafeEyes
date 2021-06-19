@@ -66,7 +66,6 @@ def init(ctx: Context, plugin_config: dict) -> None:
     """
     Initialize the screensaver plugin.
     """
-    logging.info('Media Control: initialize the plugin')
     global tray_icon_path
     tray_icon_path = os.path.join(plugin_config['path'], "resource/pause.png")
 

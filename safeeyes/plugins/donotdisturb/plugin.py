@@ -140,7 +140,6 @@ system_state: SystemState
 
 
 def init(ctx: Context, plugin_config: dict):
-    logging.info('Do Not Disturb: initialize the plugin')
     global system_state
     system_state = SystemState(ctx, plugin_config)
 

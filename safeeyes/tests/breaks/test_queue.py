@@ -1,7 +1,7 @@
 import unittest
 
 from safeeyes.breaks.queue import Queue
-from safeeyes.spi.breaks.spi import Break, BreakType
+from safeeyes.spi.breaks import Break, BreakType
 
 
 class QueueTestCase(unittest.TestCase):
@@ -18,11 +18,14 @@ class QueueTestCase(unittest.TestCase):
 
         self.assertEqual(queue.is_empty(), False)
         self.assertEqual(queue.peek(), short_1)
-        self.assertEqual(queue.next(), short_2)
-        self.assertEqual(queue.next(), short_3)
-        self.assertEqual(queue.peek(), short_3)
-        self.assertEqual(queue.next(), short_4)
         self.assertEqual(queue.next(), short_1)
+        self.assertEqual(queue.next(), short_2)
+        self.assertEqual(queue.peek(), short_3)
+        self.assertEqual(queue.next(), short_3)
+        self.assertEqual(queue.next(), short_4)
+        self.assertEqual(queue.peek(), short_1)
+        self.assertEqual(queue.next(), short_1)
+        self.assertEqual(queue.peek(), short_2)
 
     def test_rand_queue(self):
         queue = Queue(True)

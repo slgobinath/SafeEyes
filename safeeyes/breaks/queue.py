@@ -36,7 +36,6 @@ class Queue:
         self.__index: int = 0
         self.__random: bool = random_queue
         self.__first_peek = True
-        self.__first_next = True
 
     def is_empty(self) -> bool:
         """
@@ -65,20 +64,15 @@ class Queue:
 
     def next(self) -> Optional[Break]:
         """
-        Move to the next item in the queue.
+        Return the current value and move to the next.
         """
-        if self.__first_next:
-            self.__first_next = False
-            self.__first_peek = False
-            return self.peek()
-
-        if self.__index == (len(self.__values) - 1) and self.__random:
-            # Starting a new cycle. If required, shuffle the queue next time.
-            self.shuffle()
-
+        current_break = self.peek()
         self.__index = (self.__index + 1) % len(self.__values)
-
-        return self.peek()
+        if self.__random and current_break is not None and self.__index == 0:
+            # Starting a new cycle. If required, shuffle the queue next time.
+            # self.__index will be zero only at the end of a cycle if there is at least one break
+            self.shuffle()
+        return current_break
 
     def reset(self) -> None:
         """

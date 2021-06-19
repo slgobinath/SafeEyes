@@ -13,6 +13,7 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 import inspect
+import logging
 from datetime import datetime
 from typing import Optional, Any
 
@@ -50,24 +51,26 @@ class PluginProxy(Plugin):
         return self.__enabled
 
     def __is_supported(self, break_obj: Break):
-        if self.__config.get('break_override_allowed', False):
-            return break_obj.is_plugin_enabled(self.__id, self.__enabled)
+        if self.__enabled:
+            return True
         else:
-            return self.__enabled
+            return self.__config.get("break_override_allowed", False) and break_obj.is_plugin_enabled(self.__id)
 
     def can_breaks_override(self) -> bool:
-        return self.__config.get('break_override_allowed', False)
+        return self.__config.get("break_override_allowed", False)
 
     def disable(self) -> None:
         if self.__enabled:
             self.__enabled = False
-            if ModuleUtil.has_method(self.__plugin, 'disable', 0):
+            if ModuleUtil.has_method(self.__plugin, "disable", 0):
+                logging.debug("Disable the plugin '%s'", self.__id)
                 return self.__plugin.disable()
 
     def enable(self) -> None:
         if not self.__enabled:
             self.__enabled = True
-            if ModuleUtil.has_method(self.__plugin, 'enable', 0):
+            if ModuleUtil.has_method(self.__plugin, "enable", 0):
+                logging.debug("Enable the plugin '%s'", self.__id)
                 return self.__plugin.enable()
 
     def update_settings(self, plugin_settings: dict) -> None:
@@ -77,14 +80,16 @@ class PluginProxy(Plugin):
         """
         This function is called to initialize the plugin.
         """
-        if ModuleUtil.has_method(self.__plugin, 'init', 2):
+        if ModuleUtil.has_method(self.__plugin, "init", 2):
+            logging.debug("Init the plugin '%s'", self.__id)
             self.__plugin.init(context, self.__settings)
 
     def get_break_action(self, break_obj: Break) -> Optional[BreakAction]:
         """
         This function is called before on_pre_break and on_start_break.
         """
-        if ModuleUtil.has_method(self.__plugin, 'get_break_action', 1):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_break_action", 1):
+            logging.debug("Get break action from the plugin '%s'", self.__id)
             return self.__plugin.get_break_action(break_obj)
         return BreakAction.allow()
 
@@ -93,35 +98,40 @@ class PluginProxy(Plugin):
         Called some time before starting the break to prepare the plugins. For example, the notification plugin will
         show a notification during this method call.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'on_pre_break', 1):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_pre_break", 1):
+            logging.debug("Call on_pre_break of the plugin '%s'", self.__id)
             self.__plugin.on_pre_break(break_obj)
 
     def on_start_break(self, break_obj: Break) -> None:
         """
         Called when starting a break.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'on_start_break', 1):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_start_break", 1):
+            logging.debug("Call on_start_break of the plugin '%s'", self.__id)
             self.__plugin.on_start_break(break_obj)
 
     def on_count_down(self, break_obj: Break, countdown: int, seconds: int) -> None:
         """
         Called during a break.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'on_count_down', 3):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_count_down", 3):
+            # Do not log the on_count_down function call as there will be too many entries
             self.__plugin.on_count_down(break_obj, countdown, seconds)
 
     def on_stop_break(self, break_obj: Break, skipped: bool, postponed: bool) -> None:
         """
         Called when a break is stopped.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'on_stop_break', 3):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_stop_break", 3):
+            logging.debug("Call on_stop_break of the plugin '%s'", self.__id)
             self.__plugin.on_stop_break(break_obj, skipped, postponed)
 
     def get_widget(self, break_obj: Break) -> Optional[Widget]:
         """
         Return an optional break screen widget.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'get_widget', 1):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_widget", 1):
+            logging.debug("Get widget from the plugin '%s'", self.__id)
             return self.__plugin.get_widget(break_obj)
         return None
 
@@ -129,7 +139,8 @@ class PluginProxy(Plugin):
         """
         Return an optional break screen widget.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'get_tray_action', 1):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_tray_action", 1):
+            logging.debug("Get tray icon from the plugin '%s'", self.__id)
             return self.__plugin.get_tray_action(break_obj)
         return None
 
@@ -137,21 +148,24 @@ class PluginProxy(Plugin):
         """
         Called when Safe Eyes is started.
         """
-        if self.__enabled and ModuleUtil.has_method(self.__plugin, 'on_start', 0):
+        if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_start", 0):
+            logging.debug("Call on_start of the plugin '%s'", self.__id)
             self.__plugin.on_start()
 
     def on_stop(self) -> None:
         """
         Called when Safe Eyes is stopped.
         """
-        if self.__enabled and ModuleUtil.has_method(self.__plugin, 'on_stop', 0):
+        if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_stop", 0):
+            logging.debug("Call on_stop of the plugin '%s'", self.__id)
             self.__plugin.on_stop()
 
     def on_exit(self) -> None:
         """
         Called when Safe Eyes is closed.
         """
-        if self.__enabled and ModuleUtil.has_method(self.__plugin, 'on_exit', 0):
+        if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_exit", 0):
+            logging.debug("Call on_exit of the plugin '%s'", self.__id)
             self.__plugin.on_exit()
 
     def update_next_break(self, break_obj: Break, next_short_break: Optional[datetime],
@@ -159,7 +173,8 @@ class PluginProxy(Plugin):
         """
         Called when the next break is scheduled.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, 'update_next_break', 3):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "update_next_break", 3):
+            logging.debug("Call update_next_break of the plugin '%s'", self.__id)
             self.__plugin.update_next_break(break_obj, next_short_break, next_long_break)
 
 

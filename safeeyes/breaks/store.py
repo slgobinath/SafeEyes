@@ -64,6 +64,10 @@ class BreaksStore:
         if self.is_empty():
             return break_obj
 
+        if self.__current_break:
+            # Reset the last break time
+            self.__current_break.reset_time()
+
         if self.__short_queue.is_empty() or break_type == BreakType.LONG:
             break_obj = self.__next_long()
         elif self.__long_queue.is_empty() or break_type == BreakType.SHORT:
@@ -76,10 +80,6 @@ class BreaksStore:
                 break_obj = self.__next_long()
             else:
                 break_obj = self.__next_short()
-
-        if self.__current_break:
-            # Reset the last break time
-            self.__current_break.reset_time()
 
         if break_obj:
             self.__current_break = break_obj
@@ -112,10 +112,9 @@ class BreaksStore:
         if break_obj is not None:
             self.__context.session.set(SESSION_KEY_BREAK_TYPE, BreakType.SHORT)
             # Reduce the waiting time from the next long break
-            if not self.__long_queue.is_empty():
-                next_long_break = self.__long_queue.peek()
-                if next_long_break:
-                    next_long_break.waiting_time -= break_obj.waiting_time
+            next_long_break = self.__long_queue.peek()
+            if next_long_break:
+                next_long_break.waiting_time -= break_obj.waiting_time
 
         return break_obj
 

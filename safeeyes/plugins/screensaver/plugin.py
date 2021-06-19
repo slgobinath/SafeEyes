@@ -97,7 +97,6 @@ def init(ctx: Context, plugin_config: dict) -> None:
     """
     Initialize the screensaver plugin.
     """
-    logging.info("Screensaver: initialize the plugin")
     global screensaver
     global tray_icon_path
     screensaver = Screensaver(ctx, plugin_config)

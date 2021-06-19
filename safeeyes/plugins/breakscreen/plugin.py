@@ -298,7 +298,6 @@ def init(context: Context, config: dict) -> None:
     """
     This function is called to initialize the plugin.
     """
-    logging.info("Break Screen: initialize the plugin")
     global safe_eyes_context, break_config
     safe_eyes_context = context
     break_config = config

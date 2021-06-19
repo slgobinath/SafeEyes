@@ -58,7 +58,6 @@ def init(ctx: Context, plugin_config: dict) -> None:
     Initialize the plugin.
     """
     global player
-    logging.info('Audible Alert: initialize the plugin')
     player = Player(plugin_config)
 
 

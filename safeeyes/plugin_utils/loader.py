@@ -118,7 +118,8 @@ class PluginLoader:
                 new_settings['path'] = os.path.join(plugin_dir, plugin_id)
                 plugin_obj = PluginProxy(plugin['id'], module, plugin_enabled, plugin_config, new_settings)
                 self.__plugins[plugin['id']] = plugin_obj
-                plugin_obj.enable()
+                if plugin_enabled:
+                    plugin_obj.enable()
 
     @staticmethod
     def load_plugins_config(context: Context, config: Config) -> List[dict]:
