@@ -28,6 +28,7 @@ import dbus
 import gi
 from dbus.mainloop.glib import DBusGMainLoop
 
+from safeeyes.args import Arguments
 from safeeyes.breaks.scheduler import BreakScheduler
 from safeeyes.config import Config
 from safeeyes.context import Context
@@ -36,8 +37,8 @@ from safeeyes.plugin_utils.manager import PluginManager
 from safeeyes.spi.api import CoreAPI
 from safeeyes.spi.state import State
 from safeeyes.thread import Heartbeat, main
-from safeeyes.ui.UIManager import UIManager
-from safeeyes.util import locale
+from safeeyes.ui.manager import UIManager
+from safeeyes.util.locale import _
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -48,8 +49,8 @@ class SafeEyes(CoreAPI):
     This class represents a runnable Safe Eyes instance.
     """
 
-    def __init__(self, system_locale, config: Config):
-        self.__context: Context = Context(config, locale.init_locale())
+    def __init__(self, system_locale):
+        self.__context: Context = Context(Config(), system_locale)
         self.__plugin_loader = PluginLoader()
         self.__heartbeat = Heartbeat(self.__context)
         self.__plugin_manager: PluginManager = PluginManager(self.__plugin_loader.load(self.__context))
@@ -61,6 +62,22 @@ class SafeEyes(CoreAPI):
         self.__plugin_manager.init(self.__context)
         # Save the session on exit
         atexit.register(self.__persist_session)
+
+    def run(self, args):
+        arguments = Arguments(self.__context, self.__plugin_manager, args)
+        if self.__context.env.found_another_safe_eyes:
+            logging.info("Safe Eyes is already running")
+            arguments.execute_on_remote_instance()
+            sys.exit(0)
+        else:
+
+            if args.status:
+                print(_('Safe Eyes is not running'))
+                sys.exit(0)
+            elif not args.quit:
+                self.start()
+                arguments.execute_on_local_instance()
+                Gtk.main()
 
     def start(self, scheduled_next_break_time: datetime.datetime = None, reset_breaks=False):
         """
@@ -99,6 +116,8 @@ class SafeEyes(CoreAPI):
     def quit(self):
         self.stop()
         logging.info("Quit safe eyes")
+        self.__plugin_manager.disable()
+        self.__plugin_manager.on_exit()
         self.__context.state = State.QUIT
         Gtk.main_quit()
         # Exit all threads

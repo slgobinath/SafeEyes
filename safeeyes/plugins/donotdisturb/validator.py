@@ -22,7 +22,7 @@ from safeeyes.context import Context
 
 
 def validate(ctx: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:
-    command = "wlrctl" if ctx.env.is_wayland() else "xprop"
+    command = "wlrctl" if ctx.env.desktop.is_wayland() else "xprop"
     if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:

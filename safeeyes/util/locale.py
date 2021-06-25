@@ -1,5 +1,6 @@
 import gettext
 import locale
+import logging
 
 from safeeyes import utility
 
@@ -13,4 +14,8 @@ def init_locale():
 
 
 def _(message: str) -> str:
-    return gettext.gettext(message)
+    try:
+        return gettext.gettext(message)
+    except BaseException:
+        logging.exception("Error in getting the translation for %s", message)
+        return message

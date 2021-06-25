@@ -326,7 +326,7 @@ class TrayIcon:
         Change the UI to disabled state.
         """
         if self.__active:
-            logging.debug("Tray Icon: disable Safe Eyes")
+            logging.debug("Tray Icon: disable the icon")
             self.__active = False
             self.__indicator.set_icon("safeeyes_disabled")
             self.__item_info.set_label(_("Disabled until restart"))
@@ -342,7 +342,7 @@ class TrayIcon:
         Change the UI to enabled state.
         """
         if not self.__active:
-            logging.debug("Tray Icon: enable Safe Eyes")
+            logging.debug("Tray Icon: enable the icon")
             self.__active = True
             self.__indicator.set_icon("safeeyes_enabled")
             self.__item_info.set_sensitive(True)

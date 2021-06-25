@@ -42,7 +42,7 @@ class SmartPause:
         self.__short_break_interval = context.config.get("short_break_interval") * 60  # Convert to seconds
         self.__long_break_duration = context.config.get("long_break_duration")
         self.__waiting_time = min(2, self.__idle_time)  # If idle time is 1 sec, wait only 1 sec
-        self.__is_wayland_and_gnome = context.env.name == "gnome" and context.env.is_wayland()
+        self.__is_wayland_and_gnome = context.env.desktop.name == "gnome" and context.env.desktop.is_wayland()
         self.__active: bool = False
         self.__smart_pause_activated: bool = False
         self.__next_break_time: datetime.datetime = None
@@ -52,7 +52,6 @@ class SmartPause:
     def start(self) -> None:
         if not self.__is_active():
             # If SmartPause is already started, do not start it again
-            logging.debug("Start Smart Pause plugin")
             self.__set_active(True)
             self.__start_idle_monitor()
 
@@ -119,7 +118,7 @@ class SmartPause:
                 if system_idle_time >= self.__idle_time and self.__context.state == State.WAITING:
                     self.__smart_pause_activated = True
                     self.__idle_start_time = datetime.datetime.now() - datetime.timedelta(seconds=system_idle_time)
-                    logging.debug("Smart Pause: pause Safe Eyes due to system idle")
+                    logging.debug("Smart Pause: pause Safe Eyes due to system idle for %d seconds", system_idle_time)
                     self.__context.core_api.stop()
 
                 elif system_idle_time < self.__idle_time and self.__context.state == State.STOPPED and self.__idle_start_time is not None:
@@ -194,7 +193,6 @@ def init(context: Context, plugin_config: dict):
     """
     Initialize the plugin.
     """
-    logging.info("Smart Pause: initialize the plugin")
     global smart_pause
     smart_pause = SmartPause(context, plugin_config)
 

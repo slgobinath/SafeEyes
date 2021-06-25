@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "name": "RPC Server",
+    "description": "RPC server to receive command-line arguments",
+    "version": "0.0.1"
+  },
+  "dependencies": {
+    "python_modules": [],
+    "shell_commands": [],
+    "operating_systems": [],
+    "desktop_environments": [],
+    "resources": []
+  },
+  "settings": [
+    {
+      "id": "port",
+      "label": "Port",
+      "type": "INT",
+      "default": 7200,
+      "max": 65535,
+      "min": 1024
+    },
+    {
+      "id": "max_attempts",
+      "label": "Maximum adjacent ports to try",
+      "type": "INT",
+      "default": 5,
+      "max": 1024,
+      "min": 0
+    }
+  ]
+}

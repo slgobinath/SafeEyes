@@ -31,6 +31,12 @@ class Plugin(abc.ABC):
         """
         pass
 
+    def enable(self) -> None:
+        pass
+
+    def disable(self) -> None:
+        pass
+
     def get_break_action(self, break_obj: Break) -> Optional[BreakAction]:
         """
         Called just before on_pre_break and on_start_break.

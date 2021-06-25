@@ -346,6 +346,22 @@ msgstr ""
 msgid "Ready for a long break in %s seconds"
 msgstr ""
 
+# plugin/rpc
+msgid "Port"
+msgstr ""
+
+# plugin/rpc
+msgid "RPC server to receive command-line arguments"
+msgstr ""
+
+# plugin/rpc
+msgid "Maximum adjacent ports to try"
+msgstr ""
+
+# plugin/rpc
+msgid "Failed to acquire a port between %d and %d"
+msgstr ""
+
 # plugin/screensaver
 msgid "Screensaver"
 msgstr ""

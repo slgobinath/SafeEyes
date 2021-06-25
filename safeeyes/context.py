@@ -16,7 +16,7 @@ from typing import Any
 
 from safeeyes import SAFE_EYES_VERSION, utility
 from safeeyes.config import Config
-from safeeyes.env.desktop import DesktopEnvironment
+from safeeyes.env.system import Environment
 from safeeyes.spi.api import CoreAPI, BreakAPI, WindowAPI, PluginAPI, ThreadAPI
 from safeeyes.spi.state import State
 
@@ -59,7 +59,7 @@ class Context:
         self.session: Session = Session(config.get('persist_state', False))
         self.state = State.START
         self.__settings_dialog_visible = False
-        self.env: DesktopEnvironment = DesktopEnvironment.get_env()
+        self.env: Environment = Environment()
         self.core_api: CoreAPI
         self.thread_api: ThreadAPI
         self.break_api: BreakAPI

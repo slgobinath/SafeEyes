@@ -23,7 +23,7 @@ from safeeyes.util.locale import _
 
 
 def validate(ctx: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:
-    command = "dbus-send" if ctx.env.name == "gnome" and ctx.env.is_wayland() else "xprintidle"
+    command = "dbus-send" if ctx.env.desktop.name == "gnome" and ctx.env.desktop.is_wayland() else "xprintidle"
     if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:

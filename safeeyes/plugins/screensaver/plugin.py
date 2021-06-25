@@ -19,7 +19,6 @@
 Screensaver plugin locks the desktop using native screensaver application, after long breaks.
 """
 
-import logging
 import os
 from typing import Optional, List
 
@@ -40,7 +39,7 @@ class Screensaver:
         self.min_seconds: int = config["min_seconds"]
         self.__tray_icon_path: str = os.path.join(config["path"], "resource/lock.png")
         self.__command: List[str] = config["command"].split() if config[
-            "command"] else Screensaver.__lock_screen_command(ctx.env.name)
+            "command"] else Screensaver.__lock_screen_command(ctx.env.desktop.name)
         self.__lock_required = False
 
     def reset(self) -> None:

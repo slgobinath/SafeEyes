@@ -103,7 +103,6 @@ class PluginLoader:
                 new_settings = dict(plugin.get('settings', {}))
                 new_settings['path'] = os.path.join(plugin_dir, plugin_id)
                 plugin_obj.update_settings(new_settings)
-                plugin_obj.enable()
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
@@ -116,10 +115,11 @@ class PluginLoader:
                 logging.info("Successfully loaded '%s' plugin from '%s'", plugin['id'], str(module.__file__))
                 new_settings = dict(plugin.get('settings', {}))
                 new_settings['path'] = os.path.join(plugin_dir, plugin_id)
-                plugin_obj = PluginProxy(plugin['id'], module, plugin_enabled, plugin_config, new_settings)
+                plugin_obj = PluginProxy(plugin['id'], module, False, plugin_config, new_settings)
                 self.__plugins[plugin['id']] = plugin_obj
-                if plugin_enabled:
-                    plugin_obj.enable()
+
+            if plugin_enabled:
+                plugin_obj.enable()
 
     @staticmethod
     def load_plugins_config(context: Context, config: Config) -> List[dict]:

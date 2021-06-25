@@ -21,82 +21,25 @@ Safe Eyes is a utility to remind you to take break frequently to protect your ey
 """
 import argparse
 import gettext
-import locale
-import logging
 import signal
-import sys
-from threading import Timer
 
 import gi
-import psutil
 
 from safeeyes import SAFE_EYES_VERSION
 from safeeyes import utility
-from safeeyes.config import Config
-from safeeyes.rpc import RPCClient
 from safeeyes.safeeyes import SafeEyes
+from safeeyes.util import locale
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 
 gettext.install('safeeyes', utility.LOCALE_PATH)
-
-
-def __running():
-    """
-    Check if SafeEyes is already running.
-    """
-    process_count = 0
-    for proc in psutil.process_iter():
-        if not proc.cmdline:
-            continue
-        try:
-            # Check if safeeyes is in process arguments
-            if callable(proc.cmdline):
-                # Latest psutil has cmdline function
-                cmd_line = proc.cmdline()
-            else:
-                # In older versions cmdline was a list object
-                cmd_line = proc.cmdline
-            if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and (
-                    'safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
-                process_count += 1
-                if process_count > 1:
-                    return True
-
-        # Ignore if process does not exist or does not have command line args
-        except (IndexError, psutil.NoSuchProcess):
-            pass
-    return False
-
-
-def __evaluate_arguments(args, safe_eyes):
-    """
-    Evaluate the arguments and execute the operations.
-    """
-    # if args.about:
-    #     utility.execute_main_thread(safe_eyes.show_about)
-    # elif args.disable:
-    #     utility.execute_main_thread(safe_eyes.disable_safeeyes)
-    # elif args.enable:
-    #     utility.execute_main_thread(safe_eyes.enable_safeeyes)
-    # elif args.settings:
-    #     utility.execute_main_thread(safe_eyes.show_settings)
-    # elif args.take_break:
-    #     utility.execute_main_thread(safe_eyes.take_break)
-    pass
 
 
 def main():
     """
     Start the Safe Eyes.
     """
-    system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH,
-                                        languages=[utility.system_locale(), 'en_US'], fallback=True)
-    system_locale.install()
-    # locale.bindtextdomain is required for Glade files
-    # gettext.bindtextdomain(gettext.textdomain(), Utility.LOCALE_PATH)
-    locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
+    system_locale = locale.init_locale()
 
     parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
     group = parser.add_mutually_exclusive_group()
@@ -116,44 +59,9 @@ def main():
     # Initialize the logging
     utility.intialize_logging(args.debug)
     utility.initialize_platform()
-    config = Config()
 
-    if __running():
-        logging.info("Safe Eyes is already running")
-        if not config.get("use_rpc_server", True):
-            # RPC sever is disabled
-            print(_('Safe Eyes is running without an RPC server. Turn it on to use command-line arguments.'))
-            sys.exit(0)
-            return
-        rpc_client = RPCClient(config.get('rpc_port'))
-        if args.about:
-            rpc_client.show_about()
-        elif args.disable:
-            rpc_client.disable_safeeyes()
-        elif args.enable:
-            rpc_client.enable_safeeyes()
-        elif args.settings:
-            rpc_client.show_settings()
-        elif args.take_break:
-            rpc_client.take_break()
-        elif args.status:
-            print(rpc_client.status())
-        elif args.quit:
-            rpc_client.quit()
-        else:
-            # Default behavior is opening settings
-            rpc_client.show_settings()
-        sys.exit(0)
-    else:
-        if args.status:
-            print(_('Safe Eyes is not running'))
-            sys.exit(0)
-        elif not args.quit:
-            logging.info("Starting Safe Eyes")
-            safe_eyes = SafeEyes(system_locale, config)
-            safe_eyes.start()
-            Timer(1.0, lambda: __evaluate_arguments(args, safe_eyes)).start()
-            Gtk.main()
+    safe_eyes = SafeEyes(system_locale)
+    safe_eyes.run(args)
 
 
 if __name__ == '__main__':

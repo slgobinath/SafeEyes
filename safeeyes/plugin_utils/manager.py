@@ -32,6 +32,14 @@ class PluginManager(PluginAPI):
         for plugin in self.__plugins:
             plugin.init(context, {})
 
+    def enable(self) -> None:
+        for plugin in self.__plugins:
+            plugin.enable()
+
+    def disable(self) -> None:
+        for plugin in self.__plugins:
+            plugin.disable()
+
     def get_break_action(self, break_obj: Break) -> BreakAction:
         """
         This function is called before on_pre_break and on_start_break.
@@ -90,3 +98,9 @@ class PluginManager(PluginAPI):
                           next_long_break: Optional[datetime]) -> None:
         for plugin in self.__plugins:
             plugin.update_next_break(break_obj, next_short_break, next_long_break)
+
+    def get_plugin(self, plugin_id: str) -> Optional[PluginProxy]:
+        for plugin in self.__plugins:
+            if plugin.get_id() == plugin_id:
+                return plugin
+        return None

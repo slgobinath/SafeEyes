@@ -47,6 +47,9 @@ class PluginProxy(Plugin):
         self.__config: dict = plugin_config
         self.__settings = plugin_settings
 
+    def get_id(self) -> str:
+        return self.__id
+
     def is_enabled(self) -> bool:
         return self.__enabled
 
@@ -176,6 +179,13 @@ class PluginProxy(Plugin):
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "update_next_break", 3):
             logging.debug("Call update_next_break of the plugin '%s'", self.__id)
             self.__plugin.update_next_break(break_obj, next_short_break, next_long_break)
+
+    def execute_if_exists(self, func_name: str, *args, **kwargs) -> Optional[Any]:
+        if self.__enabled and hasattr(self.__plugin, func_name):
+            logging.debug("Call %s of the plugin '%s'", func_name, self.__id)
+            function = getattr(self.__plugin, func_name)
+            return function(*args, **kwargs)
+        return None
 
 
 class ValidatorProxy(Validator):

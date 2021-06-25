@@ -209,7 +209,7 @@ class BreakScreen:
 
             # Set visual to apply css theme. It should be called before show method.
             window.set_visual(window.get_screen().get_rgba_visual())
-            if self.__context.env.name == "kde":
+            if self.__context.env.desktop.name == "kde":
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
