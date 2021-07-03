@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2020-06-17 18:41+0000\n"
-"Last-Translator: Aanand Kainth <akainth015@gmail.com>\n"
+"PO-Revision-Date: 2021-07-04 07:32+0000\n"
+"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
 "Language-Team: English (United States) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/en_US/>\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.1.1-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -277,7 +277,7 @@ msgstr "Please install the command-line tool '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Invalid cron expression “%s”"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
