@@ -18,6 +18,7 @@
 
 import logging
 import socket
+import sys
 from contextlib import closing
 from typing import Optional
 from xmlrpc.client import ServerProxy
@@ -145,10 +146,11 @@ class RPCServer:
             logging.debug("RPC Server: starting the server listening on port %d", self.__port)
             while self.__server is not None and self.__running:
                 self.__server.handle_request()
-            self.__server.server_close()
             logging.debug("RPC Server: stopped the server successfully")
         finally:
             self.__running = True
+            # Make sure the worker thread is terminated
+            sys.exit(0)
 
     def stop(self):
         """
@@ -157,6 +159,14 @@ class RPCServer:
         if self.__server is not None and self.__running:
             logging.debug("RPC Server: stopping the server listening on port %d", self.__port)
             self.__running = False
+            # Send a dummy request to make sure the worker thread is released from waiting for requests
+            try:
+                rpc_client = RPCClient(self.__port)
+                rpc_client.get_status()
+            except BaseException:
+                pass
+            # Close the server
+            self.__server.server_close()
 
     @staticmethod
     def is_available(port: int) -> bool:
