@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-10 15:50+0000\n"
+"PO-Revision-Date: 2021-07-30 17:35+0000\n"
 "Last-Translator: Allan Nordhøy <epost@anotheragency.no>\n"
 "Language-Team: Norwegian Bokmål <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/nb_NO/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -163,7 +163,7 @@ msgstr "Uten RPC-tjeneren, vil ikke kommandolinje-argumenter virke"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "Tiden mellom lange pauser må være være en inndeling av de små pausene"
+msgstr "Tiden mellom lange pauser må være en inndeling av de små pausene"
 
 # Settings dialog
 msgid "Reset"
