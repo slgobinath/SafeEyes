@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-23 11:29+0000\n"
+"PO-Revision-Date: 2021-07-30 17:35+0000\n"
 "Last-Translator: Yogesh <yogesh@karnatakaeducation.org.in>\n"
 "Language-Team: Kannada <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/kn/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.7.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "ಕಣ್ಣನ್ನು ಗಟ್ಟಿಯಾಗಿ ಮುಚ್ಚಿರಿ"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -35,7 +35,7 @@ msgstr ""
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "ಕಣ್ಣನ್ನು ಮಿಟುಕಿಸಿ"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -43,35 +43,35 @@ msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "ಸ್ವಲ್ಪ ನೀರನ್ನು ಕುಡಿಯಿರಿ"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "ಕೆಲ ಸಮಯ ನಡೆದಾಡಿ"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "ನಿಮ್ಮ ಆಸನದ ಹಿಂಬದಿಗೆ ಹೊರಗಿ ವಿಶ್ರಮಿಸಿ"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "ಇದರ ಬಗ್ಗೆ ತೋರಿಸು"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ನಿಶ್ಕ್ರಿಯ ಗೊಳಿಸು"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ಸಕ್ರಿಯ ಗೊಳಿಸು"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ತ್ಯಜಿಸು"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "ಸಿದ್ಧತೆಗಳನ್ನು ತೋರಿಸು"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
@@ -83,7 +83,7 @@ msgstr "ಚಾಲನೆಯಲ್ಲಿರುವ ಸೇಫ್ಐಸ್ ಸ್ಥ�
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "ಸೇಫ್‌ಐಸ್ ನೆಡುಯುತ್ತಿಲ್ಲ"
 
 # RPC not enabled message
 msgid ""
@@ -95,7 +95,7 @@ msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "ಮುಚ್ಚಿರಿ"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
