@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-27 09:32+0000\n"
-"Last-Translator: Dmitriy Q <krotesk@mail.ru>\n"
+"PO-Revision-Date: 2021-08-15 22:33+0000\n"
+"Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
 "Language: uk\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.8-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -196,7 +196,7 @@ msgstr "Ви упевнені, що хочете видалити цю пере�
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Цю дію неможливо відмінити."
+msgstr "Цю дію неможливо скасувати."
 
 # Settings dialog
 msgid "Break"
