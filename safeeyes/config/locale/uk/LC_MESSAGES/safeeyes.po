@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-15 22:33+0000\n"
+"PO-Revision-Date: 2021-08-18 00:37+0000\n"
 "Last-Translator: Tymofii Lytvynenko <till.svit@gmail.com>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/uk/>\n"
@@ -139,7 +139,7 @@ msgstr "Тривалість відкладення (в хвилинах)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Показувати перерви у випадковому порядку"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -275,9 +275,8 @@ msgid "Please install the command-line tool '%s'"
 msgstr "Будь ласка, встановіть засіб вказівкового рядка «%s»"
 
 # Settings dialog
-#, fuzzy
 msgid "Invalid cron expression '%s'"
-msgstr "Неприпустимий вираз cron '% s'"
+msgstr "Неприпустимий вираз cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -351,7 +350,7 @@ msgstr "Показувати статистику на основі викори
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Інтервал скидання статистики (вираз cron)"
 
 # plugin/notification
 msgid "Notification"
