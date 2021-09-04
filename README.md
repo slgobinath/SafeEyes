@@ -60,14 +60,6 @@ sudo emerge -av x11-misc/safeeyes
 ### Debian
 
 ```bash
-sudo apt-get install gir1.2-appindicator3-0.1 gir1.2-notify-0.7 python3-psutil python3-xlib xprintidle python3-pip python3-babel python3-croniter
-sudo pip3 install safeeyes
-sudo update-icon-caches /usr/share/icons/hicolor
-```
-
-People using unstable/testing Debian can install Safe Eyes from the official repository using the following command:
-
-```bash
 sudo apt-get install safeeyes
 ```
 
