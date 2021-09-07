@@ -82,7 +82,7 @@ sudo zypper install safeeyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-appindicator3-0.1
+- gir1.2-appindicator3-0.1 or gir1.2-ayatanaappindicator3-0.1
 - gir1.2-notify-0.7
 - libappindicator-gtk3
 - python3-psutil
