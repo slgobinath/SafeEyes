@@ -46,6 +46,51 @@ waiting_time = 2
 interpret_idle_as_break = False
 is_wayland_and_gnome = False
 
+use_swayidle = False
+swayidle_running = False
+swayidle_process = None
+swayidle_lock = threading.Lock()
+swayidle_idle = 0
+swayidle_active = 0
+
+def __start_swayidle_monitor():
+    global swayidle_process
+    global swayidle_start
+    global swayidle_idle
+    global swayidle_active
+    logging.debug('Starting swayidle subprocess')
+    swayidle_process = subprocess.Popen([
+        "swayidle", "timeout", "1", "date +S%s", "resume", "date +R%s"
+        ], stdout=subprocess.PIPE, bufsize=1, universal_newlines=True, encoding='utf-8')
+    for line in swayidle_process.stdout:
+        with swayidle_lock:
+            typ = line[0]
+            timestamp = int(line[1:])
+            if typ == 'S':
+                swayidle_idle = timestamp
+            elif typ == 'R':
+                swayidle_active = timestamp
+
+def __stop_swayidle_monitor():
+    global swayidle_running
+    swayidle_lock.acquire()
+    if swayidle_running:
+        logging.debug('Stopping swayidle subprocess')
+        swayidle_process.terminate()
+        swayidle_running = False
+    swayidle_lock.release()
+
+def __swayidle_idle_time():
+    global swayidle_running
+    with swayidle_lock:
+        if not swayidle_running:
+            utility.start_thread(__start_swayidle_monitor)
+            swayidle_running = True
+        # Idle more recently than active, meaning idle time isn't stale.
+        if swayidle_idle > swayidle_active:
+            idle_time = int(datetime.datetime.now().timestamp()) - swayidle_idle
+            return idle_time
+    return 0
 
 def __gnome_wayland_idle_time():
     """
@@ -76,6 +121,8 @@ def __system_idle_time():
     try:
         if is_wayland_and_gnome:
             return __gnome_wayland_idle_time()
+        elif use_swayidle:
+            return __swayidle_idle_time()
         # Convert to seconds
         return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
     except BaseException:
@@ -116,6 +163,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global interpret_idle_as_break
     global postpone_if_active
     global is_wayland_and_gnome
+    global use_swayidle
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safe_eyes = context['api']['enable_safeeyes']
@@ -129,6 +177,7 @@ def init(ctx, safeeyes_config, plugin_config):
     long_break_duration = safeeyes_config.get('long_break_duration')
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
+    use_swayidle = context['desktop'] == 'sway'
 
 
 def __start_idle_monitor():
@@ -199,6 +248,8 @@ def on_stop():
         smart_pause_activated = False
         return
     logging.debug('Stop Smart Pause plugin')
+    if use_swayidle:
+        __stop_swayidle_monitor()
     __set_active(False)
     idle_condition.acquire()
     idle_condition.notify_all()
