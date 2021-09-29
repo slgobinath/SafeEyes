@@ -290,6 +290,9 @@ def desktop_environment():
             env = 'gnome'
         elif desktop_session.startswith('ubuntu'):
             env = 'unity'
+    elif current_desktop is not None:
+        if current_desktop.startswith('sway'):
+            env = 'sway'
     DESKTOP_ENVIRONMENT = env
     return env
 
