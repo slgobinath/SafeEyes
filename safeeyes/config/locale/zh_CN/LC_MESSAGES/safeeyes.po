@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-07 09:50+0000\n"
-"Last-Translator: Eric <spice2wolf@gmail.com>\n"
+"PO-Revision-Date: 2021-10-10 05:05+0000\n"
+"Last-Translator: Frank.wu <me@wuzhiping.top>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -23,15 +23,15 @@ msgstr "闭上您的眼睛休息一会"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "左右滚动您的眼珠"
+msgstr "向两边各翻几下眼睛"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "顺时针方向转动您的眼珠"
+msgstr "按顺时针方向旋转你的眼球"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "逆时针方向转动您的眼珠"
+msgstr "按逆时针方向旋转你的眼球"
 
 # Short break
 msgid "Blink your eyes"
@@ -83,7 +83,7 @@ msgstr "打印Safe Eyes运行状态后退出"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes尚未运行"
+msgstr "Safe Eyes 尚未运行"
 
 # RPC not enabled message
 msgid ""
