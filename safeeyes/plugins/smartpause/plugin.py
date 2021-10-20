@@ -47,11 +47,14 @@ interpret_idle_as_break = False
 is_wayland_and_gnome = False
 
 use_swayidle = False
-swayidle_running = False
 swayidle_process = None
 swayidle_lock = threading.Lock()
 swayidle_idle = 0
 swayidle_active = 0
+
+def __swayidle_running():
+    return (swayidle_process is not None and
+            swayidle_process.poll() is None)
 
 def __start_swayidle_monitor():
     global swayidle_process
@@ -72,20 +75,14 @@ def __start_swayidle_monitor():
                 swayidle_active = timestamp
 
 def __stop_swayidle_monitor():
-    global swayidle_running
-    swayidle_lock.acquire()
-    if swayidle_running:
+    if __swayidle_running():
         logging.debug('Stopping swayidle subprocess')
         swayidle_process.terminate()
-        swayidle_running = False
-    swayidle_lock.release()
 
 def __swayidle_idle_time():
-    global swayidle_running
     with swayidle_lock:
-        if not swayidle_running:
+        if not __swayidle_running():
             utility.start_thread(__start_swayidle_monitor)
-            swayidle_running = True
         # Idle more recently than active, meaning idle time isn't stale.
         if swayidle_idle > swayidle_active:
             idle_time = int(datetime.datetime.now().timestamp()) - swayidle_idle
