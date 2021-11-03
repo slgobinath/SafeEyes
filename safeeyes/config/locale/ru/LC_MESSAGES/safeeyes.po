@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-11 12:02+0000\n"
-"Last-Translator: Dmitriy Q <krotesk@mail.ru>\n"
+"PO-Revision-Date: 2021-11-03 14:15+0000\n"
+"Last-Translator: Itrych <itrych@aicoda.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 4.9-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -91,8 +91,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"Safe Eyes работает без RPC-сервера. Включите его чтобы использовать "
-"аргументы командной строки."
+"Программа Safe Eyes запущена без RPC сервера. Для использования аргументов "
+"коммандной строки запустите RPC сервер."
 
 # About dialog
 msgid "Close"
@@ -159,7 +159,7 @@ msgstr "Используйте RPC-сервер для получения зап
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Команды из командной строки могут не работать без RPC сервера"
+msgstr "Без RPC сервера, комманды из коммандной строки могут не работать"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
