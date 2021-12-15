@@ -17,6 +17,7 @@ from typing import Callable
 
 from safeeyes.config import Config
 from safeeyes.context import Context
+from safeeyes.plugin_utils.loader import PluginLoader
 from safeeyes.spi.api import WindowAPI
 from safeeyes.thread import main
 from safeeyes.ui.about_dialog import AboutDialog
@@ -25,9 +26,10 @@ from safeeyes.ui.settings_dialog import SettingsDialog
 
 class UIManager(WindowAPI):
 
-    def __init__(self, context: Context, on_config_changed: Callable[[Config], None]):
+    def __init__(self, context: Context, plugin_loader: PluginLoader, on_config_changed: Callable[[Config], None]):
         self.__settings_dialog_visible = False
         self.__context = context
+        self.__plugin_loader = plugin_loader
         self.__on_config_changed = on_config_changed
 
     @main
@@ -38,7 +40,8 @@ class UIManager(WindowAPI):
         if not self.__settings_dialog_visible:
             logging.info("Show settings dialog")
             self.__settings_dialog_visible = True
-            settings_dialog = SettingsDialog(self.__context, Config.from_json(), self.__save_settings)
+            settings_dialog = SettingsDialog(self.__context, Config.from_json(), self.__plugin_loader,
+                                             self.__save_settings)
             settings_dialog.show()
 
     @main

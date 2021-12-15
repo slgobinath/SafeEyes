@@ -22,7 +22,7 @@ import gi
 
 from safeeyes.context import Context
 from safeeyes.spi.breaks import BreakType, Break
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 gi.require_version("Notify", "0.7")
 from gi.repository import Notify

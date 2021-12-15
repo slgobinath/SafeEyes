@@ -26,9 +26,9 @@ from Xlib.display import Display
 from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import TrayAction
+from safeeyes.spi.plugin import TrayAction, BreakAction
 from safeeyes.thread import main, worker
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk
@@ -130,7 +130,7 @@ class BreakScreen:
         self.__destroy_all_screens()
 
     @staticmethod
-    def __tray_action(button, tray_action: TrayAction):
+    def __tray_action(tray_action: TrayAction):
         """
         Tray action handler.
         Hides all toolbar buttons for this action and call the action provided by the plugin.
@@ -175,7 +175,7 @@ class BreakScreen:
                 else:
                     toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
                 tray_action.add_toolbar_button(toolbar_button)
-                toolbar_button.connect("clicked", lambda button, action: BreakScreen.__tray_action(button, action),
+                toolbar_button.connect("clicked", lambda button, action: BreakScreen.__tray_action(action),
                                        tray_action)
                 toolbar_button.set_tooltip_text(_(tray_action.name))
                 toolbar.add(toolbar_button)
@@ -320,7 +320,7 @@ def on_count_down(break_obj: Break, countdown: int, seconds: int) -> None:
         break_screen.show_count_down(countdown, seconds)
 
 
-def on_stop_break(break_obj: Break, skipped: bool, postponed: bool) -> None:
+def on_stop_break(break_obj: Break, break_action: BreakAction) -> None:
     """
     Called when a break is stopped.
     """

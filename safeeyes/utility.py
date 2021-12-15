@@ -36,6 +36,8 @@ import babel.core
 import babel.dates
 import gi
 
+from safeeyes.util.locale import get_text as _
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
@@ -311,8 +313,10 @@ def intialize_logging(debug):
     # Append the logs and overwrite once reached 1MB
     if debug:
         # Log to file
-        file_handler = RotatingFileHandler(
-            LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0)
+        file_handler = RotatingFileHandler(filename=LOG_FILE_PATH,
+                                           maxBytes=1024 * 1024,
+                                           backupCount=5,
+                                           encoding=None)
         file_handler.setFormatter(log_formatter)
         # Log to console
         console_handler = logging.StreamHandler()
@@ -369,11 +373,8 @@ def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
     """
     if plugin_config is None:
         return
-    config = {}
-    config['id'] = plugin_id
+    config = {'id': plugin_id, 'enabled': plugin_id == "breakscreen", 'version': plugin_config['meta']['version']}
     # Disable all plugins by default except breakscreen
-    config['enabled'] = plugin_id == "breakscreen"
-    config['version'] = plugin_config['meta']['version']
     if plugin_config['settings']:
         config['settings'] = {}
         for setting in plugin_config['settings']:

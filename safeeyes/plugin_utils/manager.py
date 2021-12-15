@@ -62,9 +62,9 @@ class PluginManager(PluginAPI):
         for plugin in self.__plugins:
             plugin.on_count_down(break_obj, countdown, seconds)
 
-    def on_stop_break(self, break_obj: Break, skipped: bool, postponed: bool) -> None:
+    def on_stop_break(self, break_obj: Break, break_action: BreakAction) -> None:
         for plugin in self.__plugins:
-            plugin.on_stop_break(break_obj, skipped, postponed)
+            plugin.on_stop_break(break_obj, break_action)
 
     def get_widgets(self, break_obj: Break) -> List[Widget]:
         widgets: List[Widget] = []

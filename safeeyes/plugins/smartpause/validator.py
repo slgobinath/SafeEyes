@@ -19,7 +19,7 @@ from typing import Optional
 
 from safeeyes import utility
 from safeeyes.context import Context
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 
 def validate(ctx: Context, plugin_config: dict, plugin_settings: dict) -> Optional[str]:

@@ -24,10 +24,11 @@ import threading
 from typing import Optional
 
 from safeeyes.context import Context
+from safeeyes.spi.api import Condition
 from safeeyes.spi.breaks import Break
 from safeeyes.spi.plugin import BreakAction
 from safeeyes.spi.state import State
-from safeeyes.thread import ThreadCondition, worker
+from safeeyes.thread import worker
 
 
 class SmartPause:
@@ -35,7 +36,7 @@ class SmartPause:
     def __init__(self, context: Context, config: dict):
         self.__context = context
         self.__lock: threading.Lock = threading.Lock()
-        self.__condition: ThreadCondition = context.thread_api.new_condition()
+        self.__condition: Condition = context.thread_api.new_condition()
         self.__postpone_if_active = config["postpone_if_active"]
         self.__idle_time = config["idle_time"]
         self.__interpret_idle_as_break = config["interpret_idle_as_break"]
@@ -45,7 +46,7 @@ class SmartPause:
         self.__is_wayland_and_gnome = context.env.desktop.name == "gnome" and context.env.desktop.is_wayland()
         self.__active: bool = False
         self.__smart_pause_activated: bool = False
-        self.__next_break_time: datetime.datetime = None
+        self.__next_break_time: Optional[datetime.datetime] = None
         self.__next_break_duration: int = 0
         self.__idle_start_time: Optional[datetime.datetime] = None
 

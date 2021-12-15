@@ -22,18 +22,18 @@ import os
 import polib
 
 
-def validate_po(locale, path):
-    po = polib.pofile(path)
+def validate_po(locale_name, locale_path):
+    po = polib.pofile(locale_path)
     for entry in po:
         if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
-            print("Number of variables mismatched in " + locale)
+            print("Number of variables mismatched in " + locale_name)
             print(entry.msgid + " -> " + entry.msgstr)
             print()
         if entry.msgid_plural and entry.msgstr_plural:
             count = entry.msgid_plural.count("%")
             for msg in entry.msgstr_plural.values():
                 if msg and (count != msg.count("%")):
-                    print("Number of variables mismatched in " + locale)
+                    print("Number of variables mismatched in " + locale_name)
                     print(entry.msgid_plural + " -> " + entry.msgstr)
                     print()
 

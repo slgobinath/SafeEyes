@@ -16,7 +16,7 @@
             "id": "idle_time",
             "label": "Minimum idle time to pause Safe Eyes (in seconds)",
             "type": "INT",
-            "default": 5,
+            "default": 15,
             "max": 3600,
             "min": 5
         },

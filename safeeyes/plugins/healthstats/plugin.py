@@ -28,7 +28,8 @@ from croniter import CroniterBadCronError
 
 from safeeyes.context import Context
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import Widget
+from safeeyes.spi.plugin import Widget, BreakAction
+from safeeyes.util.locale import get_text as _
 
 
 class HealthStats:
@@ -154,11 +155,11 @@ def on_start_break(break_obj: Break) -> None:
         stats.count_break()
 
 
-def on_stop_break(break_obj: Break, skipped: bool, postponed: bool) -> None:
+def on_stop_break(break_obj: Break, break_action: BreakAction) -> None:
     """
     After the break, check if it is skipped.
     """
-    if stats.enabled and skipped:
+    if stats.enabled and break_action.skipped:
         stats.count_skipped_break()
 
 

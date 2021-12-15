@@ -25,6 +25,7 @@ from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.env import system
 from safeeyes.spi.breaks import Break
+from safeeyes.spi.plugin import BreakAction
 
 
 class Player:
@@ -68,11 +69,11 @@ def on_pre_break(break_obj: Break) -> None:
     player.play_pre_break()
 
 
-def on_stop_break(break_obj: Break, skipped: bool, postponed: bool) -> None:
+def on_stop_break(break_obj: Break, break_action: BreakAction) -> None:
     """
     After the break, play the alert sound
     """
     # Do not play if the break is skipped or postponed
-    if skipped or postponed:
+    if break_action.skipped or break_action.postponed:
         return
     player.play_stop_break()

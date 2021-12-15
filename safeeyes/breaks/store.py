@@ -21,7 +21,7 @@ from typing import Optional
 from safeeyes.breaks.queue import Queue
 from safeeyes.context import Context, SESSION_KEY_BREAK, SESSION_KEY_BREAK_TYPE
 from safeeyes.spi.breaks import Break, BreakType
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 
 class BreaksStore:

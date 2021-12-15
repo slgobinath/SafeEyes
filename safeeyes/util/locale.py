@@ -13,7 +13,7 @@ def init_locale():
     return system_locale
 
 
-def _(message: str) -> str:
+def get_text(message: str) -> str:
     try:
         return gettext.gettext(message)
     except BaseException:

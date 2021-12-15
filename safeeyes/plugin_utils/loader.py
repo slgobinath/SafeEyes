@@ -22,9 +22,10 @@ from safeeyes import utility, SAFE_EYES_HOME_DIR, SAFE_EYES_CONFIG_DIR
 from safeeyes.config import Config
 from safeeyes.context import Context
 from safeeyes.env import system
+from safeeyes.plugin_utils.error_repo import ErrorRepository
 from safeeyes.plugin_utils.plugin import Validator
 from safeeyes.plugin_utils.proxy import PluginProxy, ValidatorProxy
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 from safeeyes.utility import DESKTOP_ENVIRONMENT, CONFIG_RESOURCE
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
@@ -38,6 +39,7 @@ class PluginLoader:
 
     def __init__(self):
         self.__plugins: Dict[str, PluginProxy] = {}
+        self.__error_repo = ErrorRepository()
 
     def load(self, context: Context) -> List[PluginProxy]:
         # Load the plugins
@@ -45,7 +47,8 @@ class PluginLoader:
             try:
                 self.__load_plugin(context, plugin)
             except BaseException:
-                logging.exception('Error in loading the plugin: %s', plugin['id'])
+                self.__error_repo.log_error(plugin['id'], 'Error in loading the plugin. Run safeeyes in debug mode.')
+                logging.exception('Error while loading the plugin: %s', plugin['id'])
                 continue
 
         return list(self.__plugins.values())
@@ -115,14 +118,13 @@ class PluginLoader:
                 logging.info("Successfully loaded '%s' plugin from '%s'", plugin['id'], str(module.__file__))
                 new_settings = dict(plugin.get('settings', {}))
                 new_settings['path'] = os.path.join(plugin_dir, plugin_id)
-                plugin_obj = PluginProxy(plugin['id'], module, False, plugin_config, new_settings)
+                plugin_obj = PluginProxy(self.__error_repo, plugin['id'], module, False, plugin_config, new_settings)
                 self.__plugins[plugin['id']] = plugin_obj
 
             if plugin_enabled:
                 plugin_obj.enable()
 
-    @staticmethod
-    def load_plugins_config(context: Context, config: Config) -> List[dict]:
+    def load_plugins_config(self, context: Context, config: Config) -> List[dict]:
         """
         Load all the plugins from the given directory.
         """
@@ -147,10 +149,16 @@ class PluginLoader:
                 continue
             dependency_description = PluginLoader.__check_plugin_dependencies(context, plugin['id'], plugin_config,
                                                                               plugin.get('settings', {}), plugin_path)
+            plugin_error = self.__error_repo.get_error(plugin['id'])
             if dependency_description:
                 plugin['enabled'] = False
                 plugin_config['error'] = True
                 plugin_config['meta']['description'] = dependency_description
+                icon = system.get_resource_path('ic_warning.png')
+            elif plugin_error:
+                plugin['enabled'] = False
+                plugin_config['error'] = True
+                plugin_config['meta']['description'] = plugin_error
                 icon = system.get_resource_path('ic_warning.png')
             else:
                 plugin_config['error'] = False

@@ -64,7 +64,7 @@ class Plugin(abc.ABC):
         """
         pass
 
-    def on_stop_break(self, break_obj: Break, skipped: bool, postponed: bool) -> None:
+    def on_stop_break(self, break_obj: Break, break_action: BreakAction) -> None:
         """
         Called when a break is stopped.
         """

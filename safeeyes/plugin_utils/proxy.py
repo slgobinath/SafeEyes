@@ -18,6 +18,7 @@ from datetime import datetime
 from typing import Optional, Any
 
 from safeeyes.context import Context
+from safeeyes.plugin_utils.error_repo import ErrorRepository
 from safeeyes.plugin_utils.plugin import Plugin, Validator
 from safeeyes.spi.breaks import Break
 from safeeyes.spi.plugin import Widget, TrayAction, BreakAction
@@ -40,7 +41,9 @@ class PluginProxy(Plugin):
     A proxy class representing the actual plugin object.
     """
 
-    def __init__(self, plugin_id: str, plugin_module: Any, enabled: bool, plugin_config: dict, plugin_settings: dict):
+    def __init__(self, error_repo: ErrorRepository, plugin_id: str, plugin_module: Any, enabled: bool,
+                 plugin_config: dict, plugin_settings: dict):
+        self.__error_repo = error_repo
         self.__id: str = plugin_id
         self.__plugin = plugin_module
         self.__enabled: bool = enabled
@@ -67,14 +70,26 @@ class PluginProxy(Plugin):
             self.__enabled = False
             if ModuleUtil.has_method(self.__plugin, "disable", 0):
                 logging.debug("Disable the plugin '%s'", self.__id)
-                return self.__plugin.disable()
+                try:
+                    self.__plugin.disable()
+                except BaseException:
+                    self.__error_repo.log_error(self.__id, "Error in disabling the plugin")
+                    logging.exception("Error in disabling the plugin: %s", self.__id)
 
     def enable(self) -> None:
         if not self.__enabled:
+            if self.__error_repo.has_error(self.__id):
+                # Plugin was disabled due to an error
+                return
             self.__enabled = True
             if ModuleUtil.has_method(self.__plugin, "enable", 0):
                 logging.debug("Enable the plugin '%s'", self.__id)
-                return self.__plugin.enable()
+                try:
+                    self.__plugin.enable()
+                except BaseException:
+                    self.__enabled = False
+                    self.__error_repo.log_error(self.__id, "Error in enabling the plugin")
+                    logging.exception("Error in enabling the plugin: %s", self.__id)
 
     def update_settings(self, plugin_settings: dict) -> None:
         self.__settings = plugin_settings
@@ -85,7 +100,12 @@ class PluginProxy(Plugin):
         """
         if ModuleUtil.has_method(self.__plugin, "init", 2):
             logging.debug("Init the plugin '%s'", self.__id)
-            self.__plugin.init(context, self.__settings)
+            try:
+                self.__plugin.init(context, self.__settings)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in initializing the plugin")
+                logging.exception("Error in initializing the plugin: %s", self.__id)
 
     def get_break_action(self, break_obj: Break) -> Optional[BreakAction]:
         """
@@ -93,7 +113,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_break_action", 1):
             logging.debug("Get break action from the plugin '%s'", self.__id)
-            return self.__plugin.get_break_action(break_obj)
+            try:
+                return self.__plugin.get_break_action(break_obj)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in getting the break action")
+                logging.exception("Error in getting the break action from: %s", self.__id)
         return BreakAction.allow()
 
     def on_pre_break(self, break_obj: Break) -> None:
@@ -103,7 +128,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_pre_break", 1):
             logging.debug("Call on_pre_break of the plugin '%s'", self.__id)
-            self.__plugin.on_pre_break(break_obj)
+            try:
+                self.__plugin.on_pre_break(break_obj)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_pre_break")
+                logging.exception("Error in calling on_pre_break from: %s", self.__id)
 
     def on_start_break(self, break_obj: Break) -> None:
         """
@@ -111,7 +141,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_start_break", 1):
             logging.debug("Call on_start_break of the plugin '%s'", self.__id)
-            self.__plugin.on_start_break(break_obj)
+            try:
+                self.__plugin.on_start_break(break_obj)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_start_break")
+                logging.exception("Error in calling on_start_break from: %s", self.__id)
 
     def on_count_down(self, break_obj: Break, countdown: int, seconds: int) -> None:
         """
@@ -119,15 +154,25 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_count_down", 3):
             # Do not log the on_count_down function call as there will be too many entries
-            self.__plugin.on_count_down(break_obj, countdown, seconds)
+            try:
+                self.__plugin.on_count_down(break_obj, countdown, seconds)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_count_down")
+                logging.exception("Error in calling on_count_down from: %s", self.__id)
 
-    def on_stop_break(self, break_obj: Break, skipped: bool, postponed: bool) -> None:
+    def on_stop_break(self, break_obj: Break, break_action: BreakAction) -> None:
         """
         Called when a break is stopped.
         """
-        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_stop_break", 3):
+        if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "on_stop_break", 2):
             logging.debug("Call on_stop_break of the plugin '%s'", self.__id)
-            self.__plugin.on_stop_break(break_obj, skipped, postponed)
+            try:
+                self.__plugin.on_stop_break(break_obj, break_action)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_stop_break")
+                logging.exception("Error in calling on_stop_break from: %s", self.__id)
 
     def get_widget(self, break_obj: Break) -> Optional[Widget]:
         """
@@ -135,7 +180,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_widget", 1):
             logging.debug("Get widget from the plugin '%s'", self.__id)
-            return self.__plugin.get_widget(break_obj)
+            try:
+                return self.__plugin.get_widget(break_obj)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in getting the widget")
+                logging.exception("Error in getting the widget from: %s", self.__id)
         return None
 
     def get_tray_action(self, break_obj: Break) -> Optional[TrayAction]:
@@ -144,7 +194,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "get_tray_action", 1):
             logging.debug("Get tray icon from the plugin '%s'", self.__id)
-            return self.__plugin.get_tray_action(break_obj)
+            try:
+                return self.__plugin.get_tray_action(break_obj)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in getting the tray action")
+                logging.exception("Error in getting the tray action from: %s", self.__id)
         return None
 
     def on_start(self) -> None:
@@ -153,7 +208,12 @@ class PluginProxy(Plugin):
         """
         if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_start", 0):
             logging.debug("Call on_start of the plugin '%s'", self.__id)
-            self.__plugin.on_start()
+            try:
+                self.__plugin.on_start()
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_start")
+                logging.exception("Error in calling on_start from: %s", self.__id)
 
     def on_stop(self) -> None:
         """
@@ -161,7 +221,12 @@ class PluginProxy(Plugin):
         """
         if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_stop", 0):
             logging.debug("Call on_stop of the plugin '%s'", self.__id)
-            self.__plugin.on_stop()
+            try:
+                self.__plugin.on_stop()
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_stop")
+                logging.exception("Error in calling on_stop from: %s", self.__id)
 
     def on_exit(self) -> None:
         """
@@ -169,7 +234,12 @@ class PluginProxy(Plugin):
         """
         if self.__enabled and ModuleUtil.has_method(self.__plugin, "on_exit", 0):
             logging.debug("Call on_exit of the plugin '%s'", self.__id)
-            self.__plugin.on_exit()
+            try:
+                self.__plugin.on_exit()
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in calling on_exit")
+                logging.exception("Error in calling on_exit from: %s", self.__id)
 
     def update_next_break(self, break_obj: Break, next_short_break: Optional[datetime],
                           next_long_break: Optional[datetime]) -> None:
@@ -178,7 +248,12 @@ class PluginProxy(Plugin):
         """
         if self.__is_supported(break_obj) and ModuleUtil.has_method(self.__plugin, "update_next_break", 3):
             logging.debug("Call update_next_break of the plugin '%s'", self.__id)
-            self.__plugin.update_next_break(break_obj, next_short_break, next_long_break)
+            try:
+                self.__plugin.update_next_break(break_obj, next_short_break, next_long_break)
+            except BaseException:
+                self.__enabled = False
+                self.__error_repo.log_error(self.__id, "Error in updating the next break")
+                logging.exception("Error in updating the next break in: %s", self.__id)
 
     def execute_if_exists(self, func_name: str, *args, **kwargs) -> Optional[Any]:
         if self.__enabled and hasattr(self.__plugin, func_name):

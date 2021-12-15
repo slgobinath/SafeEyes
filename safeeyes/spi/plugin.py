@@ -3,10 +3,9 @@ import os
 import gi
 
 gi.require_version('Gtk', '3.0')
+gi.require_version('Gdk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GdkPixbuf
-
-gi.require_version('Gdk', '3.0')
 
 WIDGET_HORIZONTAL_LINE_LENGTH = 64
 WIDGET_HORIZONTAL_LINE = '─' * WIDGET_HORIZONTAL_LINE_LENGTH

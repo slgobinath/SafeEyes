@@ -19,7 +19,7 @@ from threading import Timer
 
 from safeeyes.context import Context
 from safeeyes.plugin_utils.manager import PluginManager
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 
 class Arguments:

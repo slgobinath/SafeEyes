@@ -28,7 +28,7 @@ from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.env import system
 from safeeyes.spi.breaks import Break
-from safeeyes.spi.plugin import TrayAction
+from safeeyes.spi.plugin import TrayAction, BreakAction
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
@@ -117,7 +117,7 @@ def on_count_down(break_obj: Break, countdown: int, seconds: int) -> None:
         screensaver.lock_later()
 
 
-def on_stop_break(break_obj: Break, skipped: bool, postponed: bool) -> None:
+def on_stop_break(break_obj: Break, break_action: BreakAction) -> None:
     """
     Lock the screen after a long break if the user has not skipped within min_seconds.
     """

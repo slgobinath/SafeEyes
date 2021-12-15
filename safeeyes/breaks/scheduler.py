@@ -26,9 +26,10 @@ from safeeyes.context import Context
 from safeeyes.plugin_utils.manager import PluginManager
 from safeeyes.spi.api import BreakAPI
 from safeeyes.spi.breaks import BreakType, Break
+from safeeyes.spi.plugin import BreakAction
 from safeeyes.spi.state import State
 from safeeyes.thread import Heartbeat, ThreadCondition, Timer, worker
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 
 class BreakScheduler(BreakAPI):
@@ -42,6 +43,7 @@ class BreakScheduler(BreakAPI):
         self.__plugins: PluginManager = plugin_mgr
         self.__skipped: bool = False
         self.__postponed: bool = False
+        self.__postponed_duration: int = -1
 
     def start(self, next_break_time: datetime.datetime = None):
         self.__reset_stop_flags()
@@ -74,6 +76,7 @@ class BreakScheduler(BreakAPI):
 
     def postpone(self, duration: int) -> None:
         self.__postponed = True
+        self.__postponed_duration = duration
         next_break_time = datetime.datetime.now() + datetime.timedelta(seconds=duration)
         self.schedule(next_break_time)
 
@@ -158,6 +161,7 @@ class BreakScheduler(BreakAPI):
     def __reset_stop_flags(self) -> None:
         self.__skipped = False
         self.__postponed = False
+        self.__postponed_duration = -1
 
     @worker
     def __count_down(self, break_obj) -> None:
@@ -172,7 +176,8 @@ class BreakScheduler(BreakAPI):
             self.__condition.hold(1)
             countdown -= 1
 
-        self.__plugins.on_stop_break(break_obj, self.__skipped, self.__postponed)
+        break_action = BreakAction(self.__skipped, self.__postponed, self.__postponed_duration)
+        self.__plugins.on_stop_break(break_obj, break_action)
         self.__reset_stop_flags()
         with self.__heartbeat.lock:
             if self.__context.state != State.BREAK:

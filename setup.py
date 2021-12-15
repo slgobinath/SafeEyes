@@ -1,7 +1,8 @@
-import os, sys, site
+import os
 import subprocess
-import setuptools
+import sys
 
+import setuptools
 
 requires = [
     'babel',
@@ -13,8 +14,8 @@ requires = [
 
 _ROOT = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(_ROOT, 'README.md')) as f:
-    long_description = f.read()
+with open(os.path.join(_ROOT, 'README.md')) as read_me_file:
+    long_description = read_me_file.read()
 
 
 def __compile_po_files():
@@ -22,12 +23,11 @@ def __compile_po_files():
     Compile the *.po trainslation files.
     """
     localedir = 'safeeyes/config/locale'
-    po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
-               for l in next(os.walk(localedir))[1]]
+    po_dirs = [localedir + '/' + locale + '/LC_MESSAGES/' for locale in next(os.walk(localedir))[1]]
     for po_dir in po_dirs:
-        po_files = [f
-                    for f in next(os.walk(po_dir))[2]
-                    if os.path.splitext(f)[1] == '.po']
+        po_files = [file
+                    for file in next(os.walk(po_dir))[2]
+                    if os.path.splitext(file)[1] == '.po']
         for po_file in po_files:
             filename, _ = os.path.splitext(po_file)
             mo_file = filename + '.mo'
@@ -42,16 +42,32 @@ def __data_files():
     """
     root_dir = sys.prefix
     return [(os.path.join(root_dir, "share/applications"), ["safeeyes/platform/safeeyes.desktop"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/status"), ["safeeyes/platform/icons/hicolor/24x24/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"), ["safeeyes/platform/icons/hicolor/24x24/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/status"), ["safeeyes/platform/icons/hicolor/16x16/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"), ["safeeyes/platform/icons/hicolor/16x16/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/status"), ["safeeyes/platform/icons/hicolor/32x32/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/32x32/status/safeeyes_enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"), ["safeeyes/platform/icons/hicolor/32x32/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"), ["safeeyes/platform/icons/hicolor/64x64/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"), ["safeeyes/platform/icons/hicolor/128x128/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/status"), ["safeeyes/platform/icons/hicolor/48x48/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/48x48/status/safeeyes_enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"), ["safeeyes/platform/icons/hicolor/48x48/apps/safeeyes.png"]),]
+            (os.path.join(root_dir, "share/icons/hicolor/24x24/status"),
+             ["safeeyes/platform/icons/hicolor/24x24/status/safeeyes_disabled.png",
+              "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_enabled.png",
+              "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_timer.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"),
+             ["safeeyes/platform/icons/hicolor/24x24/apps/safeeyes.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/16x16/status"),
+             ["safeeyes/platform/icons/hicolor/16x16/status/safeeyes_disabled.png",
+              "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_enabled.png",
+              "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_timer.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"),
+             ["safeeyes/platform/icons/hicolor/16x16/apps/safeeyes.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/32x32/status"),
+             ["safeeyes/platform/icons/hicolor/32x32/status/safeeyes_disabled.png",
+              "safeeyes/platform/icons/hicolor/32x32/status/safeeyes_enabled.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"),
+             ["safeeyes/platform/icons/hicolor/32x32/apps/safeeyes.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"),
+             ["safeeyes/platform/icons/hicolor/64x64/apps/safeeyes.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"),
+             ["safeeyes/platform/icons/hicolor/128x128/apps/safeeyes.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/48x48/status"),
+             ["safeeyes/platform/icons/hicolor/48x48/status/safeeyes_disabled.png",
+              "safeeyes/platform/icons/hicolor/48x48/status/safeeyes_enabled.png"]),
+            (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"),
+             ["safeeyes/platform/icons/hicolor/48x48/apps/safeeyes.png"]), ]
 
 
 def __package_files(directory):
@@ -76,6 +92,7 @@ def __package_data():
     data.extend(__package_files('safeeyes/platform'))
     return data
 
+
 setuptools.setup(
     name="safeeyes",
     version="2.1.3",
@@ -93,10 +110,11 @@ setuptools.setup(
     entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
     keywords='linux utility health eye-strain safe-eyes',
     classifiers=[
-        "Operating System :: POSIX :: Linux",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Development Status :: 5 - Production/Stable",
-        "Environment :: X11 Applications :: GTK",
-        "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in '3 3.5 3.6 3.7 3.8 3.9'.split()]
+                    "Operating System :: POSIX :: Linux",
+                    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+                    "Development Status :: 5 - Production/Stable",
+                    "Environment :: X11 Applications :: GTK",
+                    "Intended Audience :: End Users/Desktop",
+                    "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in
+                                             '3 3.5 3.6 3.7 3.8 3.9'.split()]
 )

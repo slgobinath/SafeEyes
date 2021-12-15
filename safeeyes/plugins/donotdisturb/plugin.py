@@ -51,14 +51,14 @@ class SystemState:
         if self.__dnd_while_on_battery and SystemState.__is_on_battery():
             logging.debug("Do Not Disturb: skipping the break as the system is on battery")
             return True
-        return self.__is_wayland_full_screen() if self.__context.env.desktop.is_wayland() else self.__is_xorg_full_screen()
+        return SystemState.__is_wayland_full_screen() if self.__context.env.desktop.is_wayland() else self.__is_xorg_full_screen()
 
-    def __is_wayland_full_screen(self) -> bool:
+    @staticmethod
+    def __is_wayland_full_screen() -> bool:
         logging.debug('Do Not Disturb: searching for full-screen application in wayland')
         cmdlist = ['wlrctl', 'toplevel', 'find', 'state:fullscreen']
         try:
             process = subprocess.Popen(cmdlist, stdout=subprocess.PIPE)
-            process.communicate()[0]
             if process.returncode == 0:
                 return True
             elif process.returncode == 1:

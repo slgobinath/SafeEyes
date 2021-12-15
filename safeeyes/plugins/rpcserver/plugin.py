@@ -142,15 +142,16 @@ class RPCServer:
         """
         Start the RPC server.
         """
-        try:
-            logging.debug("RPC Server: starting the server listening on port %d", self.__port)
-            while self.__server is not None and self.__running:
-                self.__server.handle_request()
-            logging.debug("RPC Server: stopped the server successfully")
-        finally:
-            self.__running = True
-            # Make sure the worker thread is terminated
-            sys.exit(0)
+        if self.__port is not None:
+            try:
+                logging.debug("RPC Server: starting the server listening on port %d", self.__port)
+                while self.__server is not None and self.__running:
+                    self.__server.handle_request()
+                logging.debug("RPC Server: stopped the server successfully")
+            finally:
+                self.__running = True
+                # Make sure the worker thread is terminated
+                sys.exit(0)
 
     def stop(self):
         """
@@ -201,7 +202,6 @@ class RPCServer:
     @staticmethod
     def get_safe_eyes_port(user: str, port: int, max_attempts: int) -> Optional[int]:
         i = 0
-        original_port = port
         while i < max_attempts:
             i += 1
             rpc_client = RPCClient(port)

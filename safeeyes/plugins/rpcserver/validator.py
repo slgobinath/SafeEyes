@@ -21,7 +21,7 @@ from typing import Optional
 from xmlrpc.client import ServerProxy
 
 from safeeyes.context import Context
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 
 def is_available(port: int) -> bool:

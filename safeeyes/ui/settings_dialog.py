@@ -26,6 +26,7 @@ from safeeyes import utility
 from safeeyes.config import Config
 from safeeyes.context import Context
 from safeeyes.plugin_utils.loader import PluginLoader
+from safeeyes.util.locale import get_text as _
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -47,9 +48,11 @@ class SettingsDialog:
         Create and initialize SettingsDialog instance.
     """
 
-    def __init__(self, context: Context, config: Config, on_save_settings: Callable[[Config], None]):
+    def __init__(self, context: Context, config: Config, plugin_loader: PluginLoader,
+                 on_save_settings: Callable[[Config], None]):
         self.__context: Context = context
         self.__config: Config = config
+        self.__plugin_loader = plugin_loader
         self.__on_save_settings: Callable[[Config], None] = on_save_settings
         self.plugin_switches = {}
         self.plugin_map = {}
@@ -88,7 +91,7 @@ class SettingsDialog:
         for long_break in config.get('long_breaks'):
             self.__create_break_item(long_break, False)
 
-        for plugin_config in PluginLoader.load_plugins_config(self.__context, config):
+        for plugin_config in self.__plugin_loader.load_plugins_config(self.__context, config):
             self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
 
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
@@ -119,7 +122,7 @@ class SettingsDialog:
                 is_short,
                 self.__config,
                 lambda cfg: lbl_name.set_label(_(cfg['name'])),
-                lambda is_short, break_config: self.__create_break_item(break_config, is_short),
+                lambda short, brk_cfg: self.__create_break_item(brk_cfg, short),
                 lambda: parent_box.remove(box)
             )
         )
@@ -215,14 +218,16 @@ class SettingsDialog:
             builder.get_object('img_plugin_icon').set_from_pixbuf(pixbuf)
         if plugin_config['settings']:
             btn_properties.set_sensitive(True)
-            btn_properties.connect('clicked', lambda button: self.__show_plugins_properties_dialog(plugin_config))
+            btn_properties.connect('clicked',
+                                   lambda button: SettingsDialog.__show_plugins_properties_dialog(plugin_config))
         else:
             btn_properties.set_sensitive(False)
         box = builder.get_object('box')
         box.set_visible(True)
         return box
 
-    def __show_plugins_properties_dialog(self, plugin_config):
+    @staticmethod
+    def __show_plugins_properties_dialog(plugin_config):
         """
         Show the PluginProperties dialog
         """

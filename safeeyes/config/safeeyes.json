@@ -108,7 +108,7 @@
       "enabled": true,
       "version": "0.0.3",
       "settings": {
-        "idle_time": 5,
+        "idle_time": 15,
         "interpret_idle_as_break": false,
         "postpone_if_active": false
       }

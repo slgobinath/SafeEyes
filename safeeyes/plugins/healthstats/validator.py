@@ -19,6 +19,7 @@ from typing import Optional
 
 from safeeyes.context import Context
 from safeeyes.env import system
+from safeeyes.util.locale import get_text as _
 
 
 def __is_valid_cron(expr: str) -> bool:

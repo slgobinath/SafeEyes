@@ -38,7 +38,7 @@ from safeeyes.spi.api import CoreAPI
 from safeeyes.spi.state import State
 from safeeyes.thread import Heartbeat, main
 from safeeyes.ui.manager import UIManager
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -50,12 +50,13 @@ class SafeEyes(CoreAPI):
     """
 
     def __init__(self, system_locale):
+        super().__init__()
         self.__context: Context = Context(Config(), system_locale)
         self.__plugin_loader = PluginLoader()
         self.__heartbeat = Heartbeat(self.__context)
         self.__plugin_manager: PluginManager = PluginManager(self.__plugin_loader.load(self.__context))
         self.__scheduler: BreakScheduler = BreakScheduler(self.__context, self.__heartbeat, self.__plugin_manager)
-        self.__ui_manager: UIManager = UIManager(self.__context, self.__on_config_changed)
+        self.__ui_manager: UIManager = UIManager(self.__context, self.__plugin_loader, self.__on_config_changed)
         self.__active = False
         self.__context.set_apis(self, self.__heartbeat, self.__ui_manager, self.__scheduler, self.__plugin_manager)
 

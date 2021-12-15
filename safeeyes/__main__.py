@@ -29,6 +29,7 @@ from safeeyes import SAFE_EYES_VERSION
 from safeeyes import utility
 from safeeyes.safeeyes import SafeEyes
 from safeeyes.util import locale
+from safeeyes.util.locale import get_text as _
 
 gi.require_version('Gtk', '3.0')
 

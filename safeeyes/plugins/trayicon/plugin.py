@@ -17,24 +17,24 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+import logging
+import threading
+import time
 from typing import Dict, Optional
 
 import gi
 
+from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.spi.api import Condition
 from safeeyes.spi.breaks import BreakType
 from safeeyes.thread import worker, main
-from safeeyes.util.locale import _
+from safeeyes.util.locale import get_text as _
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("AppIndicator3", "0.1")
-from gi.repository import AppIndicator3 as appindicator
+from gi.repository import AppIndicator3 as appIndicator
 from gi.repository import Gtk
-import logging
-from safeeyes import utility
-import threading
-import time
 
 """
 Safe Eyes tray icon plugin
@@ -60,9 +60,9 @@ class TrayIcon:
         self.__animate: bool = False
 
         # Construct the tray icon
-        self.__indicator = appindicator.Indicator.new(
-            APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
-        self.__indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
+        self.__indicator = appIndicator.Indicator.new(
+            APPINDICATOR_ID, "safeeyes_enabled", appIndicator.IndicatorCategory.APPLICATION_STATUS)
+        self.__indicator.set_status(appIndicator.IndicatorStatus.ACTIVE)
 
         # Construct the context menu
         self.__menu = Gtk.Menu()
@@ -271,7 +271,8 @@ class TrayIcon:
             time_to_wait = args[1]
             if time_to_wait <= 0:
                 info = _("Disabled until restart")
-                self.__context.core_api.stop(info)
+                self.__context.core_api.set_status(info)
+                self.__context.core_api.stop()
                 self.__wakeup_time = None
                 self.__item_info.set_label(info)
             else:
@@ -390,7 +391,7 @@ class TrayIcon:
 
 
 context: Context
-tray_icon: TrayIcon = None
+tray_icon: Optional[TrayIcon] = None
 
 
 def init(ctx: Context, plugin_config: dict):
