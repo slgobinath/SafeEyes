@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-10 15:50+0000\n"
+"PO-Revision-Date: 2022-01-11 15:55+0000\n"
 "Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 4.10.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -59,7 +59,7 @@ msgstr "afficher la boîte de dialogue À propos"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "désactiver l’instance de safeyes en cours"
+msgstr "désactiver l’instance de safeeyes en cours"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
@@ -67,7 +67,7 @@ msgstr "activer l’instance de safeyes en cours"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "fermer l’instance de safeyes en cours et sortir"
+msgstr "fermer l’instance de safeyes en cours et fermer"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -79,7 +79,7 @@ msgstr "démarrer safeeyes en mode de débogage"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "imprimer l’état de l’instance safeeyes en cours et sortir"
+msgstr "imprimer l’état de l’instance safeeyes en cours et fermer"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -103,7 +103,7 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"Safe Eyes protège vos yeux contre la fatigue de l'œil (asthénopie) en vous "
+"Safe Eyes protège vos yeux contre la fatigue de l’œil (asthénopie) en vous "
 "rappelant de prendre des pauses lors de vos longues heures de travail sur un "
 "ordinateur"
 
@@ -203,7 +203,7 @@ msgstr "Voulez-vous vraiment supprimer cette pause ?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Vous ne pouvez-pas annuler cette action."
+msgstr "Vous ne pouvez pas annuler cette action."
 
 # Settings dialog
 msgid "Break"
@@ -235,11 +235,11 @@ msgstr "Image"
 
 # Settings dialog
 msgid "Select"
-msgstr "Choisir"
+msgstr "Sélectionner"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Veuillez choisir une image"
+msgstr "Veuillez sélectionner une image"
 
 # Settings dialog
 msgid "Duration"
@@ -352,7 +352,7 @@ msgstr "Statistiques de santé"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Afficher des statistiques basées sur votre utilisation de Safe Eyes"
+msgstr "Afficher des statistiques d’après votre utilisation de Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
@@ -376,7 +376,7 @@ msgstr "Préparez-vous à une pause longue dans %s secondes"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr "Économiseur d'écran"
+msgstr "Économiseur d’écran"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
@@ -407,7 +407,7 @@ msgstr "Mettre Safe Eyes en pause si le système est inactif"
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
-"Durée d'inactivité minimale pour mettre Safe Eyes en pause (en secondes)"
+"Durée d’inactivité minimale pour mettre Safe Eyes en pause (en secondes)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -479,7 +479,7 @@ msgstr "Prochaine pause à %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "Aucune pause n'est prévue"
+msgstr "Aucune pause n'est proposée"
 
 #: plugins/trayicon
 msgid "Settings"
