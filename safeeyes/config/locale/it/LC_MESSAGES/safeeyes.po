@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-01-02 16:53+0000\n"
+"PO-Revision-Date: 2022-01-16 12:55+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -388,7 +388,7 @@ msgstr "Tempo minimo per il salto senza salvaschermo (in secondi)"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr "Schermo bloccato"
+msgstr "Blocca schermo"
 
 # plugin/smartpause
 msgid "Smart Pause"
