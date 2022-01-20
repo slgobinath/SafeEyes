@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-10-23 17:20+0000\n"
-"Last-Translator: mohammadbagher fakouri <mbfakourii@gmail.com>\n"
+"PO-Revision-Date: 2022-01-21 08:56+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
 "Language: fa\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.1\n"
+"X-Generator: Weblate 4.11-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -102,11 +102,13 @@ msgstr "بستن"
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "شرح"
+msgstr ""
+"استراحت چشم با یادآوری وقفه‌ها هنگام کارهای طولانی‌مدت با رایانه ، از "
+"چشمانتان در برابر خستگی چشم (استنوپیا) محافظت می‌کند"
 
 # About dialog
 msgid "License"
-msgstr "مجوز"
+msgstr "پروانه"
 
 # Break screen
 msgid "Skip"
@@ -122,7 +124,7 @@ msgstr "زمان استراحت (به ثانیه)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "بازه بین دو استراحت (به دقیقه)"
+msgstr "بازهٔ بین دو استراحت (به دقیقه)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
@@ -138,7 +140,7 @@ msgstr "به تعویق انداختن مدت زمان (در چند دقیقه)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "نمایش وقفه‌ها به ترتیب کاتوره‌ای"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -275,7 +277,7 @@ msgstr "لطفاً ابزار خط فرمان را نصب کنید '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "عبارت کرون نامعتبر «%s»"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -347,7 +349,7 @@ msgstr "آماری را براساس نحوه استفاده از Safe Eyes نش
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "بازهٔ بازنشانی آمار (عبارت کرون)"
 
 # plugin/notification
 msgid "Notification"
