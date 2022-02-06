@@ -10,7 +10,7 @@
 
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder.
 
-Visit the official site: http://slgobinath.github.io/SafeEyes/ for more details.
+Visit the official site: https://slgobinath.github.io/SafeEyes/ for more details.
 
 ## Safe Eyes command-line arguments
 
