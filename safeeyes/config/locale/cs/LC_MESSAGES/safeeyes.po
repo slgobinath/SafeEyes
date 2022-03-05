@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-11-26 16:05+0000\n"
+"PO-Revision-Date: 2022-03-06 20:59+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.10-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -140,7 +140,7 @@ msgstr "Odložit trvání (v minutách)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Zobrazovat přestávky v náhodném pořadí"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -276,7 +276,7 @@ msgstr "Nainstalujte si nástroj pro příkazový řádek „%s“"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Neplatný výraz pro plánovač (cron) „%s“"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -349,7 +349,7 @@ msgstr "Zobrazit zdravotní statistiky založené na používání Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Interval vynulování statistik (výraz pro plánovač cron)"
 
 # plugin/notification
 msgid "Notification"
