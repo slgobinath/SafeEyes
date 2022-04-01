@@ -33,7 +33,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</property>
+along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</property>
   </object>
   <object class="GtkWindow" id="window_about">
     <property name="can_focus">False</property>
@@ -135,14 +135,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
             </child>
             <child>
               <object class="GtkLinkButton" id="btn_url">
-                <property name="label" translatable="yes">http://slgobinath.github.io/SafeEyes</property>
+                <property name="label" translatable="yes">https://slgobinath.github.io/SafeEyes</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="focus_on_click">False</property>
                 <property name="receives_default">True</property>
                 <property name="halign">center</property>
                 <property name="relief">none</property>
-                <property name="uri">http://slgobinath.github.io/SafeEyes</property>
+                <property name="uri">https://slgobinath.github.io/SafeEyes</property>
               </object>
               <packing>
                 <property name="expand">False</property>
