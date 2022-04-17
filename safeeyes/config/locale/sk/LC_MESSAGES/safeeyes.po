@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2019-02-17 23:26+0000\n"
-"Last-Translator: Jose Riha <jose1711@gmail.com>\n"
+"PO-Revision-Date: 2022-04-17 16:06+0000\n"
+"Last-Translator: menom <menom1@protonmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sk/>\n"
 "Language: sk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.5-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes je spustený bez RPC serveru. Zapnite ho pre použitie argumentov v "
+"príkazovom riadku."
 
 # About dialog
 msgid "Close"
@@ -139,7 +141,7 @@ msgstr "Odložiť o (v minútach)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Ukazovať prestávky v náhodnom poradí"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -155,11 +157,11 @@ msgstr "Zachovať vnútorný stav"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Použiť RPC server na prijatie spúšťacích príkazov"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Bez RPC serveru príkazy v príkazovom riadku nemusia fungovať"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -275,7 +277,7 @@ msgstr "Prosím nainštalujte si nástroj '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Neplatný výraz pre cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -347,7 +349,7 @@ msgstr "Zobraziť štatistiky o tom, ako používate Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Interval vynulovania štatistík (výraz pre plánovač cron)"
 
 # plugin/notification
 msgid "Notification"
@@ -403,7 +405,7 @@ msgstr "Započítaj čas, kedy počítač nie je používaný, do prestávky"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Odložiť ďalšiu prestávku až dokiaľ bude systém nečinný"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -419,7 +421,7 @@ msgstr "Zobraziť čas nasledujúcej prestávku v ikone"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Povoliť vypnutie Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -488,12 +490,12 @@ msgstr "Koniec"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Ovládanie médií"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Pozastaviť prehrávače médií z obrazovky prestávky"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Pozastaviť média"
