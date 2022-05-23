@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-23 16:19+0000\n"
+"PO-Revision-Date: 2022-05-24 17:15+0000\n"
 "Last-Translator: Mohamed Omran <mohamedgomran@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
@@ -72,7 +72,7 @@ msgstr "غادر برنامج safeeyes المشتغل حاليّا"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "أظهر مربع الإعدادات"
+msgstr "إظهار لوحة اﻹعدادات"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
@@ -84,7 +84,7 @@ msgstr "أظهر حالة برنامج safeeyes المشتغل حاليا و أ�
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "SafeEyes غير مشغل"
+msgstr "SafeEyes لا يعمل"
 
 # RPC not enabled message
 msgid ""
@@ -137,7 +137,7 @@ msgstr "مدة التأخير (دقائق)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "اظهِّر الاستراحات بترتيب عشوائي"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -274,7 +274,7 @@ msgstr "من فضلك ثبّت أداة سطر الأوامر '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "تعبير الوظيفة المجدولة غير صحيح '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -290,7 +290,7 @@ msgstr "إزالة"
 
 # Settings dialog
 msgid "Discard"
-msgstr "اترك"
+msgstr "تجاهل"
 
 # Settings dialog
 msgid "Save"
@@ -298,7 +298,7 @@ msgstr "احفظ"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "تنبيه مسموع"
+msgstr "إنذار مسموع"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
@@ -386,7 +386,7 @@ msgstr "اغلق الشاشة"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "التوقف الذكي"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
@@ -398,7 +398,7 @@ msgstr "أقل مدة خمول لإيقاف Safe Eyes (بالثوان)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "تفسير وقت الخمول المكافئ لفترة الاستراحة القادمة على أنه استراحة"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
@@ -406,15 +406,15 @@ msgstr "اجًّل فترة الاستراحة القادمة حتى يصبح ا
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "الأيقونة"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "أظهِّر الأيقونة في منطقة الإشعارات"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "أظهِّر وقت الاستراحة القادمة في درج الأيقونة"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
@@ -443,68 +443,68 @@ msgstr "فعِّل Safe Eyes"
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لمدة %d ساعة"
+msgstr[1] "لمدة ساعة"
+msgstr[2] "لمدة ساعتين"
+msgstr[3] "لمدة %d ساعات"
+msgstr[4] "لمدة %d ساعة"
+msgstr[5] "لمدة %d ساعة"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لمدة %d دقيقة"
+msgstr[1] "لمدة دقيقة"
+msgstr[2] "لمدة دقيقتين"
+msgstr[3] "لمدة %d دقائق"
+msgstr[4] "لمدة %d دقيقة"
+msgstr[5] "لمدة %d دقيقة"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لمدة %d ثانية"
+msgstr[1] "لمدة ثانية"
+msgstr[2] "لمدة ثانيتين"
+msgstr[3] "لمدة %d ثوان"
+msgstr[4] "لمدة %d ثانية"
+msgstr[5] "لمدة %d ثانية"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "فترة الاستراحة القادمة بعد %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "لا يوجد فترات استراحة متاحة"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "الإعدادات"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "خُذ استراحة الآن"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "حتى إعادة التشغيل"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "اخرج"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "تحكم الوسائط"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "أوقِف مشغلات الوسائط في شاشة فترة الاستراحة"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "أوقِف الوسائط"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
