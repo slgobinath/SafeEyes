@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-12-23 11:29+0000\n"
-"Last-Translator: Muhammad Hegab <mhegab@hotmail.com>\n"
+"PO-Revision-Date: 2022-05-23 16:19+0000\n"
+"Last-Translator: Mohamed Omran <mohamedgomran@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -346,7 +346,7 @@ msgstr "أظهر الإحصاءات بناءً على كيفية استخدام�
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "فاصل إعادة ضبط الإحصائيات (تعبير وظيفة مجدولة)"
 
 # plugin/notification
 msgid "Notification"
@@ -366,23 +366,23 @@ msgstr "استعد لراحة طويلة بعد %s من الثواني"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "شاشة التوقف"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "اغلق الشاشة بعد فترة استراحة طويلة عن طريق بدأ شاشة التوقف"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "أمر شاشة التوقف مخصص"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "أقل عدد ثواني للتخطي بدون شاشة التوقف"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "اغلق الشاشة"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -390,11 +390,11 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "اوقف Safe Eyes إذا كان النظام خاملاً"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "أقل مدة خمول لإيقاف Safe Eyes (بالثوان)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
@@ -402,7 +402,7 @@ msgstr ""
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "اجًّل فترة الاستراحة القادمة حتى يصبح النظام خاملاً"
 
 #: plugins/trayicon
 msgid "Tray Icon"
