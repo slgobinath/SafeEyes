@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-11-03 14:15+0000\n"
-"Last-Translator: Itrych <itrych@aicoda.com>\n"
+"PO-Revision-Date: 2022-06-01 12:19+0000\n"
+"Last-Translator: AHOHNMYC <lqwh2h2cwa@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 4.13-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -92,7 +92,7 @@ msgid ""
 "arguments."
 msgstr ""
 "Программа Safe Eyes запущена без RPC сервера. Для использования аргументов "
-"коммандной строки запустите RPC сервер."
+"командной строки запустите RPC сервер."
 
 # About dialog
 msgid "Close"
@@ -103,7 +103,9 @@ msgstr "Закрыть"
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "Описание"
+msgstr ""
+"Safe Eyes защищает ваши глаза от перенапряжения (астенопии), напоминая о "
+"необходимости сделать перерыв во время долгих часов за ПК"
 
 # About dialog
 msgid "License"
@@ -143,7 +145,7 @@ msgstr "Показывать перерывы в случайном порядк
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "Обязательный перерыв (Невозможно отменить перерывы)"
+msgstr "Обязательный перерыв (без возможности пропуска)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -155,11 +157,11 @@ msgstr "Сохранять внутреннее состояние"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "Используйте RPC-сервер для получения запущенных команд"
+msgstr "Использовать RPC-сервер для получения запущенных команд"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Без RPC сервера, комманды из коммандной строки могут не работать"
+msgstr "Без RPC сервера, команды из командной строки могут не работать"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -232,7 +234,7 @@ msgstr "Выбрать"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Пожалуйста выберите изображение"
+msgstr "Пожалуйста, выберите изображение"
 
 # Settings dialog
 msgid "Duration"
@@ -268,11 +270,11 @@ msgstr "Дополнение не поддерживает окружение р
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "Пожалуйста установите модуль Python: %s"
+msgstr "Пожалуйста, установите модуль Python: %s"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "Пожалуйста установите инструмент командной строки '%s'"
+msgstr "Пожалуйста, установите инструмент командной строки '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
@@ -280,7 +282,7 @@ msgstr "Недопустимое выражение cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Пожалуйста добавьте источник %(resource)s в папку %(config_resource)"
+msgstr "Пожалуйста, добавьте источник %(resource)s в папку %(config_resource)"
 
 # Settings dialog
 msgid "New Break"
@@ -320,7 +322,7 @@ msgstr "Не беспокоить"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "Пропустить перерыв, если активое окно в полнооконном режиме"
+msgstr "Пропустить перерыв, если активное окно в полноэкранном режиме"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -336,7 +338,7 @@ msgstr "Переключать прерываемые окна в нормаль
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Не прерывать на автономном питании"
+msgstr "Не беспокоить при работе от батареи"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -344,7 +346,7 @@ msgstr "Статистика здоровья"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Показывать статистику основанную на использовании Safe Eyes"
+msgstr "Показывать статистику, основанную на использовании Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
@@ -401,8 +403,8 @@ msgstr "Минимальное время простоя для приостан
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
-"Интерпретировать время простоя равное продолжительности предстоящего "
-"перерыва как перерыв"
+"Интерпретировать время простоя, равное продолжительности предстоящего "
+"перерыва, как перерыв"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
@@ -422,7 +424,7 @@ msgstr "Показывать время до следующего перерыв
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "Разрешить запрет Safe Eyes"
+msgstr "Разрешить выключение Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -494,6 +496,7 @@ msgid "Media Control"
 msgstr "Управление мультимедиа"
 
 # plugin/mediacontrol
+#, fuzzy
 msgid "Pause media players from the break screen"
 msgstr "Приостановить воспроизведение медиаплееров с экрана паузы"
 
