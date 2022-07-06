@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-01-21 08:56+0000\n"
+"PO-Revision-Date: 2022-07-07 10:18+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -27,11 +27,11 @@ msgstr "چندبار چشمانتان را به اطراف بچرخانید"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "چشمان خود را در جهت عقربه های ساعت بچرخانید"
+msgstr "چشمانتان را ساعتگرد بچرخانید"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "چشم هایتان را در خلاف جهت عقربه های ساعت بچرخانید"
+msgstr "چشمانتان را پادساعتگرد بچرخانید"
 
 # Short break
 msgid "Blink your eyes"
@@ -59,39 +59,39 @@ msgstr "نشان دادن پنجره درباره"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "غیرفعال کردن نمونه safeeyes درحال اجرا"
+msgstr "از کار انداختن نمونهٔ محافظ چشم در حال اجرا"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "فعال کردن نمونه safeeyes درحال اجرا"
+msgstr "به کار انداختن نمونهٔ محافظ چشم در حال اجرا"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "بستن و خروج از safeeyes در حال اجرا"
+msgstr "بستن و خروج از نمونهٔ محافظ چشم در حال اجرا"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "نشان دادن پنجره تنظیمات"
+msgstr "نمایش گفت‌وگوی تنظیمات"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "اجرا کردن safeeyes در حالت دیباگ"
+msgstr "اجرای محافظ چشم در حالت رفع اشکال"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "وضعیت اجرای safeeyes را چاپ کرده و از آن خارج شوید"
+msgstr "چاپ وضعیت نمونهٔ محافظ چشم در جال اجرا و خروج"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "محافظ چشم در حال اجرا نیست"
+msgstr "محافظ چشم اجرا نمی‌شود"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"Safe Eyes بدون سرور RPC در حال اجرا است. برای استفاده از آرگومان های خط "
-"فرمان آن را روشن کنید."
+"محافظ چشم دارد بدون کارساز RPC اجرا می‌شود. برای استفاده از آرگومان‌های خط "
+"فرمان، روشنش کنید."
 
 # About dialog
 msgid "Close"
@@ -103,8 +103,8 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"استراحت چشم با یادآوری وقفه‌ها هنگام کارهای طولانی‌مدت با رایانه ، از "
-"چشمانتان در برابر خستگی چشم (استنوپیا) محافظت می‌کند"
+"محافظ چشم با یادآوردی استراحت هنگام کار طولانی با رایانه، از چشمانتان در "
+"برابر خشتگی جشم (استنوپیا) محافظت می‌کند"
 
 # About dialog
 msgid "License"
@@ -112,11 +112,11 @@ msgstr "پروانه"
 
 # Break screen
 msgid "Skip"
-msgstr "رد کردن"
+msgstr "پرش"
 
 # Break screen
 msgid "Postpone"
-msgstr "بعدا"
+msgstr "تعویق"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -128,27 +128,27 @@ msgstr "بازهٔ بین دو استراحت (به دقیقه)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "زمان آماده شدن برای استراحت (در چند ثانیه)"
+msgstr "زمان آمادگی برای استراحت (به ثانیه)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "میانبرهای صفحه کلید دوره غیرفعال شده (در چند ثانیه)"
+msgstr "دورهٔ از کار افتادن میان‌برهای صفحه کلید (به ثانیه)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr "به تعویق انداختن مدت زمان (در چند دقیقه)"
+msgstr "زمان تعویق (به دقیقه)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "نمایش وقفه‌ها به ترتیب کاتوره‌ای"
+msgstr "نمایش استراحت‌ها به ترتیب کاتوره‌ای"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "استراحت سخت (راهی برای جستجوی وقفه وجود ندارد)"
+msgstr "استراحت قاطع ( بدون راهی برای پرش از استراحت)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "به تعویق انداختن وقفه ها اجازه دهید"
+msgstr "اجازه به تعویق استراحت‌ها"
 
 # Settings dialog
 msgid "Persist the internal state"
@@ -156,36 +156,35 @@ msgstr "ادامه وضعیت داخلی"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "برای دریافت دستورات زمان اجرا از سرور RPC استفاده کنید"
+msgstr "استفاده از کارساز RPC برای دریافت دستورات زمان اجرا"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "بدون سرور RPC ، دستورات خط فرمان ممکن است کار نکنند"
+msgstr "بدون کارساز RPC ممکن است دستورات خط فرمان نکنند"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "فاصله زمانی طولانی باید مضربی از وقفه کوتاه باشد"
+msgstr "دورهٔ استراحت طولانی باید مضربی از دوره‌های استراحت کوتاه باشد"
 
 # Settings dialog
 msgid "Reset"
-msgstr "تنظیم مجدد"
+msgstr "بازنشانی"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
-"آیا مطمئن هستید که می خواهید همه تنظیمات را به حالت پیش فرض بازنشانی کنید؟"
+msgstr "مطمئنید که می‌خواهید تمامی تنظیمات را به پیش‌گزیده بازنشانی کنید؟"
 
 # Settings dialog
 msgid "Options"
-msgstr "گزینه ها"
+msgstr "گزینه‌ها"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "وقفه های کوتاه"
+msgstr "استراحت‌های کوتاه"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "وقفه های طولانی"
+msgstr "استراحت‌های طولانی"
 
 # Settings dialog
 msgid "Delete"
@@ -193,7 +192,7 @@ msgstr "حذف"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "آیا مطمئن هستید که می خواهید این وقفه را حذف کنید؟"
+msgstr "مطمئنید که می‌خواهید این استراحت را حذف کنید؟"
 
 # Settings dialog
 msgid "You can't undo this action."
@@ -205,15 +204,15 @@ msgstr "استراحت"
 
 # Settings dialog
 msgid "Breaks"
-msgstr "می شکند"
+msgstr "استراحت‌ها"
 
 # Settings dialog
 msgid "Plugins"
-msgstr "پلاگین ها"
+msgstr "افزایه‌ها"
 
 # Settings dialog
 msgid "Type"
-msgstr "نوع"
+msgstr "گونه"
 
 # Settings dialog
 msgid "Short"
@@ -229,51 +228,51 @@ msgstr "تصویر"
 
 # Settings dialog
 msgid "Select"
-msgstr "انتخاب کنید"
+msgstr "گزینش"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "لطفاً تصویری انتخاب کنید"
+msgstr "لطفاً تصویری برگزینید"
 
 # Settings dialog
 msgid "Duration"
-msgstr "مدت زمان"
+msgstr "طول"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr "وقت انتظار است"
+msgstr "زمان انتظار"
 
 # Settings dialog
 msgid "Override"
-msgstr "لغو کردن"
+msgstr "پایمالی"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr "زمان (در چند ثانیه)"
+msgstr "زمان (به ثانیه)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr "زمان (در چند دقیقه)"
+msgstr "زمان (به دقیقه)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "شکستن تنظیمات"
+msgstr "تنظیمات استراحت"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "تنظیمات پلاگین"
+msgstr "تنظیمات افزایه"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "پلاگین پشتیبانی نمی کند %s محیط دسک تاپ"
+msgstr "افزایه از محیط میزکار %s پشتیبانی نمی‌کند"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr "لطفاً ماژول پایتون را نصب کنید '%s'"
+msgstr "لطفاً پیمانهٔ %s پایتون را نصب کنید"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr "لطفاً ابزار خط فرمان را نصب کنید '%s'"
+msgstr "لطفاً ابزار خط فرمان %s را نصب کنید"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
@@ -281,7 +280,7 @@ msgstr "عبارت کرون نامعتبر «%s»"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "لطفا منبع را اضافه کنید %(resource) در %(config_resource)پوشه ها"
+msgstr "لطفا منبع %(resource)s را به شاخهٔ %(config_resource)s بیفزایید"
 
 # Settings dialog
 msgid "New Break"
@@ -305,15 +304,15 @@ msgstr "هشدار شنیدنی"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr "هشدار صوتی را قبل و بعد از وقفه پخش کنید"
+msgstr "پخش هشدار صوتی پیش و پس از استراحت‌ها"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "هشدار صوتی را قبل از وقفه پخش کنید"
+msgstr "پخش هشدار صوتی پیش از استراحت‌ها"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "بعد از وقفه هشدار صوتی را پخش کنید"
+msgstr "پخش هشدار صوتی پس از استراحت‌ها"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -325,15 +324,15 @@ msgstr "اگر پنجره فعال در حالت تمام صفحه است ، ا�
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "هر وقت بخواهید این پنجره ها را قطع نکنید"
+msgstr "این پنجره‌ها هرگز دچار وقفه نشوند"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "قطع این پنجره ها بدون توجه به وضعیت آنها"
+msgstr "وقفه دادن این پنجره‌ها فارغ از وضعیتشان"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "پنجره های قطع شونده را به حالت عادی تغییر دهید"
+msgstr "تغییر پنچره‌های وقفه‌پذیر به حالت عادی"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
@@ -341,11 +340,11 @@ msgstr "در هنگام شارژ باتری مزاحم نشوید"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr "آمار بهداشت"
+msgstr "آمار سلامتی"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "آماری را براساس نحوه استفاده از Safe Eyes نشان دهید"
+msgstr "نمایش آماری بر پایهٔ چگونگی استفاده‌تان از محافظ چشم"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
@@ -353,19 +352,19 @@ msgstr "بازهٔ بازنشانی آمار (عبارت کرون)"
 
 # plugin/notification
 msgid "Notification"
-msgstr "اطلاع"
+msgstr "آگاهی"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "قبل از وقفه یک اعلان سیستم را نشان دهید"
+msgstr "نمایش یک آگاهی سامانه پیش از استراحت‌ها"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr "آماده برای یک استراحت کوتاه در %s ثانیه"
+msgstr "آماده برای استراحتی کوتاه در %s ثانیه"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr "آماده برای یک استراحت طولانی در %s ثانیه"
+msgstr "آماده برای استراحتی طولانی در %s ثانیه"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -373,7 +372,7 @@ msgstr "محافظ صفحه"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "با اسکرین سیور ، صفحه را پس از وقفه های طولانی قفل کن"
+msgstr "قفل صفحه پس از استراحت‌های طولانی با آغاز محافظ صفحه"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
@@ -381,7 +380,7 @@ msgstr "دستور محافظ صفحه نمایش سفارشی"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "حداقل ثانیه برای پرش بدون محافظ صفحه نمایش"
+msgstr "کمینهٔ ثانیه‌ها برای پرش بدون محافظ صفحه"
 
 # plugin/screensaver
 msgid "Lock screen"
@@ -393,73 +392,73 @@ msgstr "مکث هوشمند"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "اگر سیستم بیکار است ، Safe Eyes را مکث کنید"
+msgstr "مکث محافظ چشم در صورت بی‌کاری سامانه"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "حداقل زمان بیکار برای مکث ایمن چشم ها (در چند ثانیه)"
+msgstr "کمینهٔ زمان بیکاری برای مکث محافظ چشم (به ثانیه)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr "زمان بیکار معادل مدت وقفه آینده را به عنوان یک استراحت تفسیر کنید"
+msgstr "وقفهٔ زمان بیکاری معادل زمان استراحت پیش رو به عنوان یک استراحت"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "وقفه بعدی را به تأخیر بیندازید تا سیستم بیکار شود"
+msgstr "تعویق استراحت بعدی تا زمان بیکار شدن سامانه"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "Tray Icon"
+msgstr "نقشک سینی"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "نماد تلاش مجدد را در قسمت اعلان نشان دهید"
+msgstr "نمایش نقشک سینی در ناحیهٔ آگاهی"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "زمان استراحت بعدی را در نماد تلاش مجدد نشان دهید"
+msgstr "نمایش زمان استراحت بعدی در نقشک سینی"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "اجازه دادن به غیرفعال کردن ایمن چشم ها"
+msgstr "اجازه به از کار انداختن محافظ چشم"
 
 #: plugins/trayicon
 msgid "About"
-msgstr "در باره"
+msgstr "درباره"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "غیر فعال سازی Safe Eyes"
+msgstr "از کار انداختن محافظ چشم"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "غیرفعال تا %s"
+msgstr "از کار افتاده تا %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "غیرفعال است تا راه اندازی مجدد"
+msgstr "از کار افتاده تا آغاز دوباره"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "فعال سازی Safe Eyes"
+msgstr "به کار انداختن محافظ چشم"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] "به مدت %d ساعت ها"
-msgstr[1] "به مدت %d ساعت"
+msgstr[0] "برای ۱ ساعت"
+msgstr[1] "برای %Id ساعت"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] "برای %d دقیقه"
-msgstr[1] "برای %d دقیقه ها"
+msgstr[0] "برای ۱ دقیقه"
+msgstr[1] "برای %Id دقیقه"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] "برای %d ثانیه"
-msgstr[1] "برای %d ثانیه ها"
+msgstr[0] "برای ۱ ثانیه"
+msgstr[1] "برای %dI ثانیه"
 
 #: plugins/trayicon
 msgid "Next break at %s"
@@ -467,7 +466,7 @@ msgstr "استراحت بعدی در %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "هیچ وقفه ای موجود نیست"
+msgstr "هیچ استراحتی موجود نیست"
 
 #: plugins/trayicon
 msgid "Settings"
@@ -475,23 +474,23 @@ msgstr "تنظیمات"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "کمی استراحت کن"
+msgstr "اکنون استراحت کنید"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr "تا راه اندازی مجدد"
+msgstr "تا آغاز دوباره"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "ترک کن"
+msgstr "خروج"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr "کنترل رسانه"
+msgstr "واپایش رسانه"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "توقف پخش کننده رسانه در توقف صفحه"
+msgstr "مکث پخش‌کننده‌های رسانه در صفحهٔ استراحت"
 
 # plugin/mediacontrol
 msgid "Pause media"
