@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2018-02-01 11:34+0000\n"
-"Last-Translator: Joan Montané <joan@montane.cat>\n"
+"PO-Revision-Date: 2022-08-08 21:25+0000\n"
+"Last-Translator: calbasi <joan@calbasi.net>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ca/>\n"
 "Language: ca\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19-dev\n"
+"X-Generator: Weblate 4.14-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -55,31 +55,31 @@ msgstr "Reclineu-vos sobre la cadira i relaxeu-vos"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "Mostra la informació Naltros"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "Inhabilita la instància de safeeyes en funcionament"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "Habilita la instància de safeeyes en funcionament"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "Tanca de la instància de safeeyes en funcionament i surt"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "Mostra la finestra de preferències"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Inicia safeeyes en mode de depuració"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "Mostra l'estat de la instància de safeeyes en funcionament i surt"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -139,11 +139,11 @@ msgstr "Durada d'una posposició (en minuts)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Mostra les pauses en ordre aleatori"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Pauses estrictes (sense possibilitat de saltar-se-les)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -167,99 +167,99 @@ msgstr ""
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Restablir"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "De veritat que voleu restablir les preferències als valors per defecte?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Opcions"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Pauses curtes"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Pauses llargues"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Suprimeix"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "De veritat que voleu suprimir aquesta pausa?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Aquesta acció no podrà revertir-se."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Pausa"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Pauses"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Complements"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Curta"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Llarga"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Imatge"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Trieu"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Si us plau, trieu una imatge"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Durada"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Temps d'espera"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Sobreescriu"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Temps (en segons)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "Temps (en minuts)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Preferències de la pausa"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Preferències del complement"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
@@ -283,15 +283,15 @@ msgstr ""
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Nova Pausa"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Suprimeix"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Descarta-ho"
 
 # Settings dialog
 msgid "Save"
@@ -299,7 +299,7 @@ msgstr "Desa"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Alerta audible"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
@@ -315,7 +315,7 @@ msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "No molesteu"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
@@ -339,7 +339,7 @@ msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Estadístiques de salut"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
