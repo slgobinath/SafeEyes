@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-04-15 12:26+0000\n"
-"Last-Translator: Porrumentzio <porrumentzio@riseup.net>\n"
+"PO-Revision-Date: 2022-09-28 22:17+0000\n"
+"Last-Translator: Gontzal Manuel Pujana Onaindia <thadahdenyse@gmail.com>\n"
 "Language-Team: Basque <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/eu/>\n"
 "Language: eu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 4.14.1\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -400,11 +400,10 @@ msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr "Safe Eyes pausatzeko gutxieneko denbora inaktiboa (segundotan)"
 
 # plugin/smartpause
-#, fuzzy
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
-"Interpretatu denbora inaktiboa hurrengo atsedenaldiaren iraupenaren "
-"baliokide, atsedenaldi gisa"
+"Interpretatu hurrengo atsedenaldiaren iraupenaren baliokidea den denbora "
+"inaktiboa atsedenaldi gisa"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
