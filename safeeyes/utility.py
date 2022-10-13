@@ -302,6 +302,13 @@ def is_wayland():
     https://unix.stackexchange.com/a/325972/222290
     """
     global IS_WAYLAND
+
+    # Easy method. Does not depend on loginctl
+    # https://stackoverflow.com/questions/45536141/how-i-can-find-out-if-a-linux-system-uses-wayland-or-x11/45537237#45537237
+    if "WAYLAND_DISPLAY" in os.environ:
+        IS_WAYLAND = True
+        return IS_WAYLAND
+
     try:
         session_id = subprocess.check_output(['loginctl']).split(b'\n')[1].split()[0]
         output = subprocess.check_output(
