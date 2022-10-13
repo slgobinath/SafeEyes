@@ -78,6 +78,12 @@ sudo zypper refresh
 sudo zypper install safeeyes
 ```
 
+### Alpine Linux
+
+```bash
+sudo apk add safeeyes
+```
+
 ### Other Linux & Run from source
 
 Ensure to meet the following dependencies:
