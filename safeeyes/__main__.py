@@ -90,9 +90,12 @@ def main():
     """
     system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH, languages=[utility.system_locale(), 'en_US'], fallback=True)
     system_locale.install()
-    # locale.bindtextdomain is required for Glade files
-    # gettext.bindtextdomain(gettext.textdomain(), Utility.LOCALE_PATH)
-    locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
+    try:
+        # locale.bindtextdomain is required for Glade files
+        locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
+    except AttributeError:
+        logging.warning('installed python\'s gettext module does not support locale.bindtextdomain. locale.bindtextdomain is required for Glade files')
+
 
     parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
     group = parser.add_mutually_exclusive_group()
