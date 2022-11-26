@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-11-26 01:51+0000\n"
-"Last-Translator: Gralias <ngocnhien94@gmail.com>\n"
+"PO-Revision-Date: 2022-11-26 23:54+0000\n"
+"Last-Translator: Minh P <phandinhminh@protonmail.ch>\n"
 "Language-Team: Vietnamese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/vi/>\n"
 "Language: vi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -90,7 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
-"Safe Eyes đang chạy mà không có RPC. Hãy bật lên thông qua tham số dòng lệnh"
+"Safe Eyes đang chạy mà không có máy chủ RPC. Bạn hãy bật nó lên để sử dụng "
+"tham số dòng lệnh nhé."
 
 # About dialog
 msgid "Close"
@@ -152,7 +153,7 @@ msgstr "Cho phép tạm hoãn nghỉ ngơi"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "Persist the internal state"
+msgstr "Duy trì nội trạng thái"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
