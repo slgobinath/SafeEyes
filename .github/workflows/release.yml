@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_API_SECRET }}
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
@@ -52,3 +55,13 @@ jobs:
         uses: pypa/gh-action-pypi-publish@v1.6.4
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+
+      - name: Sync Release with Master
+        run: |
+          git fetch origin
+          git checkout release
+          git pull origin release
+          git checkout master
+          git pull origin master
+          git merge release --ff-only
+          git push origin master
