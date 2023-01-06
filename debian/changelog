@@ -1,4 +1,4 @@
-safeeyes (2.1.4-3) lunar; urgency=high
+safeeyes (2.1.5-0) lunar; urgency=high
   * Minor bug fixes
 
   * Fix the ecd ..rror if there is no long break

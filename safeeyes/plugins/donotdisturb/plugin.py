@@ -80,21 +80,24 @@ def is_active_window_skipped_xorg(pre_break):
                 # Extract the process name
                 process_names = re.findall('"(.+?)"', stdout)
                 if process_names:
-                    process = process_names[1].lower()
-                    if process in skip_break_window_classes:
+                    process_name = process_names[1].lower()
+                    if _window_class_matches(process_name, skip_break_window_classes):
                         return True
-                    elif process in take_break_window_classes:
+                    elif _window_class_matches(process_name, take_break_window_classes):
                         if is_fullscreen and unfullscreen_allowed and not pre_break:
                             try:
                                 active_window.unfullscreen()
-                            except BaseException:
-                                logging.error(
-                                    'Error in unfullscreen the window ' + process)
+                            except BaseException as e:
+                                logging.error('Error in unfullscreen the window ' + process_name, exc_info=e)
                         return False
 
                 return is_fullscreen
 
     return False
+
+
+def _window_class_matches(window_class: str, classes: list) -> bool:
+    return any(map(lambda w: w in classes, window_class.split()))
 
 
 def is_on_battery():
@@ -131,10 +134,14 @@ def init(ctx, safeeyes_config, plugin_config):
     global dnd_while_on_battery
     logging.debug('Initialize Skip Fullscreen plugin')
     context = ctx
-    skip_break_window_classes = plugin_config['skip_break_windows'].split()
-    take_break_window_classes = plugin_config['take_break_windows'].split()
+    skip_break_window_classes = _normalize_window_classes(plugin_config['skip_break_windows'])
+    take_break_window_classes = _normalize_window_classes(plugin_config['take_break_windows'])
     unfullscreen_allowed = plugin_config['unfullscreen']
     dnd_while_on_battery = plugin_config['while_on_battery']
+
+
+def _normalize_window_classes(classes_as_str: str):
+    return [w.lower() for w in classes_as_str.split()]
 
 
 def on_pre_break(break_obj):

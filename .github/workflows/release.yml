@@ -1,0 +1,67 @@
+name: Release
+on:
+  push:
+    branches: [ release ]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_API_SECRET }}
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build
+
+      - name: Get Current Version
+        run: |
+          project_version=$(python3 setup.py --version)
+          echo "project_version=$project_version" >> $GITHUB_OUTPUT
+        id: get_current_version
+
+      - name: Create Tag
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          custom_tag: "v${{steps.get_current_version.outputs.project_version}}"
+          github_token: ${{ secrets.GH_API_SECRET }}
+
+      - name: Build Changelog
+        id: build_changelog
+        uses: mikepenz/release-changelog-builder-action@v3.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_API_SECRET }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: 'v${{steps.get_current_version.outputs.project_version}}'
+          body: ${{steps.build_changelog.outputs.changelog}}
+          token: ${{ secrets.GH_API_SECRET }}
+
+      - name: Build Python Package
+        run: rm -Rf build *.egg-info/ && python3 setup.py sdist bdist_wheel
+
+      - name: Publish to PyPi
+        uses: pypa/gh-action-pypi-publish@v1.6.4
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
+      - name: Sync Release with Master
+        run: |
+          git fetch origin
+          git checkout release
+          git pull origin release
+          git checkout master
+          git pull origin master
+          git merge release --ff-only
+          git push origin master
