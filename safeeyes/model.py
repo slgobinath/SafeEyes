@@ -84,7 +84,6 @@ class BreakQueue:
         self.__current_break = None
         self.__current_long = 0
         self.__current_short = 0
-        self.__shorts_taken = 0
         self.__short_break_time = config.get('short_break_interval')
         self.__long_break_time = config.get('long_break_interval')
         self.__is_random_order = config.get('random_order')
@@ -113,15 +112,18 @@ class BreakQueue:
                     while brk != current_break and brk.name != last_break:
                         brk = self.next()
 
-    def get_break(self):
+    def get_break(self, break_type = None):
         if self.__current_break is None:
-            self.__current_break = self.next()
+            self.__current_break = self.next(break_type)
+        elif break_type is not None and self.__current_break.type != break_type:
+            self.__current_break = self.next(break_type)
+
         return self.__current_break
 
     def is_long_break(self):
         return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
 
-    def next(self):
+    def next(self, break_type = None):
         break_obj = None
         shorts = self.__short_queue
         longs  = self.__long_queue
@@ -133,21 +135,10 @@ class BreakQueue:
             break_obj = self.__next_long()
         elif longs is None:
             break_obj = self.__next_short()
-        elif longs[self.__current_long].time <= shorts[self.__current_short].time:
+        elif break_type == BreakType.LONG_BREAK or longs[self.__current_long].time <= shorts[self.__current_short].time:
             break_obj = self.__next_long()
         else:
             break_obj = self.__next_short()
-
-        # Shorts and longs exist -> set cycle on every long
-        if break_obj.type == BreakType.LONG_BREAK:
-            self.context['new_cycle'] = True
-            self.__shorts_taken = 0
-        # Only shorts exist -> set cycle when enough short breaks pass
-        elif self.__shorts_taken  == self.__cycle_len:
-            self.context['new_cycle'] = True
-            self.__shorts_taken = 0
-        else:
-            self.context['new_cycle'] = False
 
         if self.__current_break is not None:
             # Reset the time of long breaks
@@ -166,8 +157,16 @@ class BreakQueue:
         for break_object in self.__long_queue:
             break_object.time = self.__long_break_time
 
-    def is_empty(self):
-        return self.__short_queue is None and self.__long_queue is None
+    def is_empty(self, break_type = None):
+        """
+        Check if the given break type is empty or not. If the break_type is None, check for both short and long breaks.
+        """
+        if break_type == BreakType.SHORT_BREAK:
+            return self.__short_queue is None
+        elif break_type == BreakType.LONG_BREAK:
+            return self.__long_queue is None
+        else:
+            return self.__short_queue is None and self.__long_queue is None
 
     def __next_short(self):
         longs  = self.__long_queue
@@ -185,7 +184,6 @@ class BreakQueue:
         if self.__current_short == 0 and self.__is_random_order:
             self.__build_shorts()
 
-        self.__shorts_taken += 1
         return break_obj
 
     def __next_long(self):

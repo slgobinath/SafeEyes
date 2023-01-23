@@ -131,7 +131,7 @@ class SafeEyesCore:
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
         self.context['postponed'] = True
 
-    def take_break(self):
+    def take_break(self, break_type = None):
         """
         Calling this method stops the scheduler and show the next break screen
         """
@@ -139,15 +139,15 @@ class SafeEyesCore:
             return
         if not self.context['state'] == State.WAITING:
             return
-        utility.start_thread(self.__take_break)
+        utility.start_thread(self.__take_break, break_type=break_type)
 
-    def has_breaks(self):
+    def has_breaks(self, break_type = None):
         """
-        Check whether Safe Eyes has breaks or not.
+        Check whether Safe Eyes has breaks or not. Use the break_type to check for either short or long break.
         """
-        return not self.break_queue.is_empty()
+        return not self.break_queue.is_empty(break_type)
 
-    def __take_break(self):
+    def __take_break(self, break_type = None):
         """
         Show the next break screen
         """
@@ -167,7 +167,7 @@ class SafeEyesCore:
             time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
             self.running = True
 
-        utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__fire_start_break, break_type)
 
     def __scheduler_job(self):
         """
@@ -243,9 +243,10 @@ class SafeEyesCore:
         self.__wait_for(self.postpone_duration)
         utility.execute_main_thread(self.__fire_start_break)
 
-    def __fire_start_break(self):
+    def __fire_start_break(self, break_type = None):
+        break_obj = self.break_queue.get_break(break_type)
         # Show the break screen
-        if not self.on_start_break.fire(self.break_queue.get_break()):
+        if not self.on_start_break.fire(break_obj):
             # Plugins want to ignore this break
             self.__start_next_break()
             return
@@ -258,15 +259,14 @@ class SafeEyesCore:
             # Wait in user thread
             utility.start_thread(self.__postpone_break)
         else:
-            self.start_break.fire(self.break_queue.get_break())
-            utility.start_thread(self.__start_break)
+            self.start_break.fire(break_obj)
+            utility.start_thread(self.__start_break, break_obj = break_obj)
 
-    def __start_break(self):
+    def __start_break(self, break_obj):
         """
         Start the break screen.
         """
         self.context['state'] = State.BREAK
-        break_obj = self.break_queue.get_break()
         countdown = break_obj.duration
         total_break_time = countdown
 

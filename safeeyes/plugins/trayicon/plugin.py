@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+from safeeyes.model import BreakType
 import gi
 gi.require_version('Gtk', '3.0')
 try:
@@ -85,10 +86,8 @@ class TrayIcon:
         self.item_enable.connect('activate', self.on_enable_clicked)
 
         self.item_disable = Gtk.MenuItem()
-        self.item_disable.connect('activate', self.on_disable_clicked)
-
         self.sub_menu_disable = Gtk.Menu()
-        self.sub_menu_items = []
+        self.sub_menu_disable_items = []
 
         # Read disable options and build the sub menu
         for disable_option in plugin_config['disable_options']:
@@ -116,7 +115,7 @@ class TrayIcon:
             # Create submenu
             sub_menu_item = Gtk.MenuItem()
             sub_menu_item.connect('activate', self.on_disable_clicked, time_in_minutes)
-            self.sub_menu_items.append([sub_menu_item, label, disable_option['time']])
+            self.sub_menu_disable_items.append([sub_menu_item, label, disable_option['time']])
             self.sub_menu_disable.append(sub_menu_item)
 
         # Disable until restart submenu
@@ -129,7 +128,19 @@ class TrayIcon:
 
         # Settings menu item
         self.item_manual_break = Gtk.MenuItem()
-        self.item_manual_break.connect('activate', self.on_manual_break_clicked)
+
+        self.sub_menu_manual_next_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_break.connect('activate', self.on_manual_break_clicked, None)
+        self.sub_menu_manual_next_short_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_short_break.connect('activate', self.on_manual_break_clicked, BreakType.SHORT_BREAK)
+        self.sub_menu_manual_next_long_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_long_break.connect('activate', self.on_manual_break_clicked, BreakType.LONG_BREAK)
+
+        self.sub_menu_manual_break = Gtk.Menu()
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_break)
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_short_break)
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_long_break)
+        self.item_manual_break.set_submenu(self.sub_menu_manual_break)
 
         # Settings menu item
         self.item_settings = Gtk.MenuItem()
@@ -182,7 +193,7 @@ class TrayIcon:
         """
         Update the text of menu items based on the selected language.
         """
-        for entry in self.sub_menu_items:
+        for entry in self.sub_menu_disable_items:
             # print(self.context['locale'].ngettext('For %d Hour', 'For %d Hours', 1) % 1)
             entry[0].set_label(self.context['locale'].ngettext(entry[1][0], entry[1][1], entry[2]) % entry[2])
 
@@ -213,6 +224,9 @@ class TrayIcon:
         self.item_manual_break.set_sensitive(breaks_found and self.active)
 
         self.item_manual_break.set_label(_('Take a break now'))
+        self.sub_menu_manual_next_break.set_label(_('Any break'))
+        self.sub_menu_manual_next_short_break.set_label(_('Short break'))
+        self.sub_menu_manual_next_long_break.set_label(_('Long break'))
         self.item_settings.set_label(_('Settings'))
         self.item_about.set_label(_('About'))
         self.item_quit.set_label(_('Quit'))
@@ -282,7 +296,11 @@ class TrayIcon:
         """
         Trigger a break manually.
         """
-        self.take_break()
+        if len(args) > 1:
+            break_type = args[1]
+            self.take_break(break_type)
+        else:
+            self.take_break()
 
     def on_enable_clicked(self, *args):
         """
