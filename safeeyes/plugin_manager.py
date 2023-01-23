@@ -84,8 +84,8 @@ class PluginManager:
         for plugin in config.get('plugins'):
             try:
                 self.__load_plugin(plugin)
-            except BaseException:
-                logging.error('Error in loading the plugin: %s', plugin['id'])
+            except BaseException as e:
+                logging.error('Error in loading the plugin %s: %s', plugin['id'], e)
                 continue
         # Initialize the plugins
         for plugin in self.__plugins_on_init:
