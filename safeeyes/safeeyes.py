@@ -96,6 +96,7 @@ class SafeEyes:
         self.context['api']['take_break'] = self.take_break
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
+        self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
 

@@ -120,8 +120,12 @@ class BreakQueue:
             return self.__current_break
 
         if break_type == BreakType.LONG_BREAK:
+            if self.__long_queue is None:
+                return None;
             return self.__long_queue[self.__current_long]
 
+        if self.__short_queue is None:
+            return None;
         return self.__short_queue[self.__current_short]
 
     def is_long_break(self):

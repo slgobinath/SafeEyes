@@ -131,6 +131,16 @@ class SafeEyesCore:
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
         self.context['postponed'] = True
 
+    def get_break_time(self, break_type = None):
+        """
+        Returns the next break time
+        """
+        break_obj = self.break_queue.get_break(break_type)
+        if not break_obj:
+            return False
+        time = self.scheduled_next_break_time + datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
+        return time
+
     def take_break(self, break_type = None):
         """
         Calling this method stops the scheduler and show the next break screen

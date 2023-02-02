@@ -77,6 +77,7 @@
             "version": "0.0.3",
             "settings": {
                 "show_time_in_tray": false,
+                "show_long_time_in_tray": false,
                 "allow_disabling": true,
                 "disable_options": [{
                         "time": 30,
