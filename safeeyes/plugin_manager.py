@@ -27,18 +27,28 @@ A plugin must have the following directory structure:
 The plugin.py can have following methods but all are optional:
  - description()
     If a custom description has to be displayed, use this function
- - on_init(context, safeeyes_config, plugin_config)
+ - init(context, safeeyes_config, plugin_config)
     Initialize the plugin. Will be called after loading and after every changes in configuration
  - on_start()
     Executes when Safe Eyes is enabled
  - on_stop()
     Executes when Safe Eyes is disabled
+ - on_exit()
+    Executes before Safe Eyes exits
+ - on_pre_break(break_obj)
+    Executes at the start of the prepare time for a break
+ - on_start_break(break_obj)
+    Executes when a break starts
+ - on_stop_break()
+    Executes when a break stops
+ - on_countdown(countdown, seconds)
+    Executes every second throughout a break
+ - update_next_break(break_obj, break_time)
+    Executes when the next break changes
  - enable()
     Executes once the plugin.py is loaded as a module
  - disable()
     Executes if the plugin is disabled at the runtime by the user
- - on_exit()
-    Executes before Safe Eyes exits
 """
 
 import importlib
