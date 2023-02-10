@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-18 00:37+0000\n"
+"PO-Revision-Date: 2023-02-11 11:39+0000\n"
 "Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sv/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -138,7 +138,7 @@ msgstr "Uppskjutningsvaraktighet (i minuter)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Visa avbrott i slumpmässig ordning"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
