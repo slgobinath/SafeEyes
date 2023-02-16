@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-02-03 06:02+0000\n"
+"PO-Revision-Date: 2023-02-17 05:35+0000\n"
 "Last-Translator: Yi Yunseok <ironyunseok@protonmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ko/>\n"
@@ -346,7 +346,7 @@ msgstr "세이프 아이즈 사용에 기반한 통계 표시"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr "통계 초기화 간격 (cron 표현식)"
+msgstr "통계 초기화 간격 (크론 표현식)"
 
 # plugin/notification
 msgid "Notification"
