@@ -85,6 +85,10 @@ class PluginManager:
             try:
                 self.__load_plugin(plugin)
             except BaseException as e:
+                traceback_wanted = logging.getLogger().getEffectiveLevel() == logging.DEBUG
+                if traceback_wanted:
+                    import traceback
+                    traceback.print_exc()
                 logging.error('Error in loading the plugin %s: %s', plugin['id'], e)
                 continue
         # Initialize the plugins
