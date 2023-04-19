@@ -62,7 +62,7 @@ LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
-SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/safeeyes.desktop")
+SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/io.github.slgobinath.SafeEyes.desktop")
 SYSTEM_ICONS = os.path.join(BIN_DIRECTORY, "platform/icons")
 DESKTOP_ENVIRONMENT = None
 IS_WAYLAND = False
@@ -400,7 +400,7 @@ def create_startup_entry():
     Create start up entry.
     """
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
-    startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
+    startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
 
     # Create the folder if not exist
     mkdir(startup_dir_path)
@@ -423,13 +423,13 @@ def initialize_platform():
 
     applications_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/applications')
     icons_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/icons')
-    desktop_entry = os.path.join(applications_dir_path, 'safeeyes.desktop')
+    desktop_entry = os.path.join(applications_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
 
     # Create the folder if not exist
     mkdir(icons_dir_path)
 
     # Create a desktop entry
-    if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
+    if not os.path.exists(os.path.join(sys.prefix, "share/applications/io.github.slgobinath.SafeEyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
         

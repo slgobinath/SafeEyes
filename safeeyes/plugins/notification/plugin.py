@@ -60,7 +60,7 @@ def on_pre_break(break_obj):
     else:
         message += (_('Ready for a long break in %s seconds') % warning_time)
 
-    notification = Notify.Notification.new('Safe Eyes', message, icon='safeeyes_enabled')
+    notification = Notify.Notification.new('Safe Eyes', message, icon='io.github.slgobinath.SafeEyes-enabled')
     try:
         notification.show()
     except BaseException:

@@ -68,7 +68,7 @@ class TrayIcon:
 
         # Construct the tray icon
         self.indicator = appindicator.Indicator.new(
-            APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
+            APPINDICATOR_ID, "io.github.slgobinath.SafeEyes-enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
 
         # Construct the context menu
@@ -77,7 +77,7 @@ class TrayIcon:
         # Next break info menu item
         self.item_info = Gtk.ImageMenuItem()
         img_timer = Gtk.Image()
-        img_timer.set_from_icon_name("safeeyes_timer", 16)
+        img_timer.set_from_icon_name("io.github.slgobinath.SafeEyes-timer", 16)
         self.item_info.set_image(img_timer)
 
         self.item_separator = Gtk.SeparatorMenuItem()
@@ -206,18 +206,18 @@ class TrayIcon:
             if self.active:
                 if self.date_time:
                     self.__set_next_break_info()
-                self.indicator.set_icon("safeeyes_enabled")
+                self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled")
             else:
                 if self.wakeup_time:
                     self.item_info.set_label(_('Disabled until %s') % utility.format_time(self.wakeup_time))
                 else:
                     self.item_info.set_label(_('Disabled until restart'))
                 self.indicator.set_label('', '')
-                self.indicator.set_icon("safeeyes_disabled")
+                self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         else:
             self.item_info.set_label(_('No Breaks Available'))
             self.indicator.set_label('', '')
-            self.indicator.set_icon("safeeyes_disabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         self.item_info.set_sensitive(breaks_found and self.active)
         self.item_enable.set_sensitive(breaks_found and not self.active)
         self.item_disable.set_sensitive(breaks_found and self.active)
@@ -360,7 +360,7 @@ class TrayIcon:
         if self.active:
             logging.info('Disable Safe Eyes')
             self.active = False
-            self.indicator.set_icon("safeeyes_disabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
             self.item_info.set_label(_('Disabled until restart'))
             self.indicator.set_label('', '')
             self.item_info.set_sensitive(False)
@@ -375,7 +375,7 @@ class TrayIcon:
         if not self.active:
             logging.info('Enable Safe Eyes')
             self.active = True
-            self.indicator.set_icon("safeeyes_enabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled")
             self.item_info.set_sensitive(True)
             self.item_enable.set_sensitive(False)
             self.item_disable.set_sensitive(True)
@@ -396,9 +396,9 @@ class TrayIcon:
     def start_animation(self):
         if not self.active or not self.animate:
             return
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled"))
         time.sleep(0.5)
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled"))
         if self.animate and self.active:
             time.sleep(0.5)
             if self.animate and self.active:
@@ -407,9 +407,9 @@ class TrayIcon:
     def stop_animation(self):
         self.animate = False
         if self.active:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled"))
         else:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled"))
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """
