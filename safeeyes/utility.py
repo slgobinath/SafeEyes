@@ -666,7 +666,7 @@ def has_method(module, method_name, no_of_args=0):
     Check whether the given function is defined in the module or not.
     """
     if hasattr(module, method_name):
-        if len(inspect.getargspec(getattr(module, method_name)).args) == no_of_args:
+        if len(inspect.getfullargspec(getattr(module, method_name)).args) == no_of_args:
             return True
     return False
 
