@@ -84,6 +84,14 @@ sudo zypper install safeeyes
 sudo apk add safeeyes
 ```
 
+### Flatpak
+
+[![Get it on Flathub][flathub-badge]][flathub]
+
+[flathub-badge]: https://flathub.org/assets/badges/flathub-badge-en.png
+
+[flathub]: https://flathub.org/apps/details/io.github.slgobinath.SafeEyes
+
 ### Other Linux & Run from source
 
 Ensure to meet the following dependencies:
