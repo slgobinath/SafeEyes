@@ -51,10 +51,11 @@ BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
 CONFIG_DIRECTORY = os.path.join(os.environ.get(
     'XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
+STYLE_SHEET_DIRECTORY = os.path.join(CONFIG_DIRECTORY, 'style')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
 CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
-STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
+STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, 'safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
 SYSTEM_STYLE_SHEET_PATH = os.path.join(
     BIN_DIRECTORY, "config/style/safeeyes_style.css")
@@ -371,17 +372,15 @@ def merge_configs(new_config, old_config):
 
 def initialize_safeeyes():
     """
-    Create the config file and style sheet in ~/.config/safeeyes directory.
+    Create the config file and style sheet in XDG_CONFIG_HOME(or ~/.config)/safeeyes directory.
     """
-    logging.info('Copy the config files to ~/.config/safeeyes')
-
-    style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
+    logging.info('Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes')
     
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
-    # Create the ~/.config/safeeyes/style directory
-    mkdir(style_dir_path)
+    # Create the XDG_CONFIG_HOME(or ~/.config)/safeeyes/style directory
+    mkdir(STYLE_SHEET_DIRECTORY)
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
