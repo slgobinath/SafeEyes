@@ -4,6 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
 [![Debian](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 [![AUR](https://img.shields.io/aur/version/safeeyes)](https://aur.archlinux.org/packages/safeeyes)
+[![Flathub](https://img.shields.io/flathub/v/io.github.slgobinath.SafeEyes)](https://flathub.org/apps/details/io.github.slgobinath.SafeEyes)
 [![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
 [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/slgobinath)
@@ -86,11 +87,9 @@ sudo apk add safeeyes
 
 ### Flatpak
 
-[![Get it on Flathub][flathub-badge]][flathub]
-
-[flathub-badge]: https://flathub.org/assets/badges/flathub-badge-en.png
-
-[flathub]: https://flathub.org/apps/details/io.github.slgobinath.SafeEyes
+```bash
+flatpak install flathub io.github.slgobinath.SafeEyes
+```
 
 ### Other Linux & Run from source
 
