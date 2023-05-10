@@ -51,10 +51,11 @@ BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
 CONFIG_DIRECTORY = os.path.join(os.environ.get(
     'XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
+STYLE_SHEET_DIRECTORY = os.path.join(CONFIG_DIRECTORY, 'style')
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
 CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
-STYLE_SHEET_PATH = os.path.join(CONFIG_DIRECTORY, 'style/safeeyes_style.css')
+STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, 'safeeyes_style.css')
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
 SYSTEM_STYLE_SHEET_PATH = os.path.join(
     BIN_DIRECTORY, "config/style/safeeyes_style.css")
@@ -62,7 +63,7 @@ LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
 SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
 USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
 LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
-SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/safeeyes.desktop")
+SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/io.github.slgobinath.SafeEyes.desktop")
 SYSTEM_ICONS = os.path.join(BIN_DIRECTORY, "platform/icons")
 DESKTOP_ENVIRONMENT = None
 IS_WAYLAND = False
@@ -371,17 +372,15 @@ def merge_configs(new_config, old_config):
 
 def initialize_safeeyes():
     """
-    Create the config file and style sheet in ~/.config/safeeyes directory.
+    Create the config file and style sheet in XDG_CONFIG_HOME(or ~/.config)/safeeyes directory.
     """
-    logging.info('Copy the config files to ~/.config/safeeyes')
-
-    style_dir_path = os.path.join(HOME_DIRECTORY, '.config/safeeyes/style')
+    logging.info('Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes')
     
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
-    # Create the ~/.config/safeeyes/style directory
-    mkdir(style_dir_path)
+    # Create the XDG_CONFIG_HOME(or ~/.config)/safeeyes/style directory
+    mkdir(STYLE_SHEET_DIRECTORY)
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
@@ -400,7 +399,7 @@ def create_startup_entry():
     Create start up entry.
     """
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
-    startup_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
+    startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
 
     # Create the folder if not exist
     mkdir(startup_dir_path)
@@ -423,13 +422,13 @@ def initialize_platform():
 
     applications_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/applications')
     icons_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/icons')
-    desktop_entry = os.path.join(applications_dir_path, 'safeeyes.desktop')
+    desktop_entry = os.path.join(applications_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
 
     # Create the folder if not exist
     mkdir(icons_dir_path)
 
     # Create a desktop entry
-    if not os.path.exists(os.path.join(sys.prefix, "share/applications/safeeyes.desktop")):
+    if not os.path.exists(os.path.join(sys.prefix, "share/applications/io.github.slgobinath.SafeEyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
         

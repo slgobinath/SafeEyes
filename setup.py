@@ -41,17 +41,17 @@ def __data_files():
     Collect the data files.
     """
     root_dir = sys.prefix
-    return [(os.path.join(root_dir, "share/applications"), ["safeeyes/platform/safeeyes.desktop"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/status"), ["safeeyes/platform/icons/hicolor/24x24/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/24x24/status/safeeyes_timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"), ["safeeyes/platform/icons/hicolor/24x24/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/status"), ["safeeyes/platform/icons/hicolor/16x16/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_enabled.png", "safeeyes/platform/icons/hicolor/16x16/status/safeeyes_timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"), ["safeeyes/platform/icons/hicolor/16x16/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/status"), ["safeeyes/platform/icons/hicolor/32x32/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/32x32/status/safeeyes_enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"), ["safeeyes/platform/icons/hicolor/32x32/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"), ["safeeyes/platform/icons/hicolor/64x64/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"), ["safeeyes/platform/icons/hicolor/128x128/apps/safeeyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/status"), ["safeeyes/platform/icons/hicolor/48x48/status/safeeyes_disabled.png", "safeeyes/platform/icons/hicolor/48x48/status/safeeyes_enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"), ["safeeyes/platform/icons/hicolor/48x48/apps/safeeyes.png"]),]
+    return [(os.path.join(root_dir, "share/applications"), ["safeeyes/platform/io.github.slgobinath.SafeEyes.desktop"]),
+    (os.path.join(root_dir, "share/icons/hicolor/24x24/status"), ["safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-enabled.png", "safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-timer.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"), ["safeeyes/platform/icons/hicolor/24x24/apps/io.github.slgobinath.SafeEyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/16x16/status"), ["safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-enabled.png", "safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-timer.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"), ["safeeyes/platform/icons/hicolor/16x16/apps/io.github.slgobinath.SafeEyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/32x32/status"), ["safeeyes/platform/icons/hicolor/32x32/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/32x32/status/io.github.slgobinath.SafeEyes-enabled.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"), ["safeeyes/platform/icons/hicolor/32x32/apps/io.github.slgobinath.SafeEyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"), ["safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"), ["safeeyes/platform/icons/hicolor/128x128/apps/io.github.slgobinath.SafeEyes.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/48x48/status"), ["safeeyes/platform/icons/hicolor/48x48/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/48x48/status/io.github.slgobinath.SafeEyes-enabled.png"]),
+    (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"), ["safeeyes/platform/icons/hicolor/48x48/apps/io.github.slgobinath.SafeEyes.png"]),]
 
 
 def __package_files(directory):
