@@ -1,0 +1,23 @@
+{
+    "meta": {
+        "name": "Limit Consecutive Skipping",
+        "description": "Limit how many breaks can be skipped or postponed in a row",
+        "version": "0.0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": [],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [{
+        "id": "number_of_allowed_skips_in_a_row",
+        "label": "How many skips or postpones are allowed in a row",
+        "type": "INT",
+        "default": 2,
+        "min": 1,
+        "max": 100
+    }],
+    "break_override_allowed": true
+}
