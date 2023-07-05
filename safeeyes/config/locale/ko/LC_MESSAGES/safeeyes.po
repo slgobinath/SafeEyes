@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-24 07:50+0000\n"
-"Last-Translator: Lee Yunseok <ironyunseok@protonmail.com>\n"
+"PO-Revision-Date: 2023-02-17 05:35+0000\n"
+"Last-Translator: Yi Yunseok <ironyunseok@protonmail.com>\n"
 "Language-Team: Korean <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ko/>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.16-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -346,7 +346,7 @@ msgstr "세이프 아이즈 사용에 기반한 통계 표시"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr "통계 재설정 간격 (크론 표현식)"
+msgstr "통계 초기화 간격 (크론 표현식)"
 
 # plugin/notification
 msgid "Notification"

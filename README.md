@@ -4,6 +4,7 @@
 [![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
 [![Debian](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 [![AUR](https://img.shields.io/aur/version/safeeyes)](https://aur.archlinux.org/packages/safeeyes)
+[![Flathub](https://img.shields.io/flathub/v/io.github.slgobinath.SafeEyes)](https://flathub.org/apps/details/io.github.slgobinath.SafeEyes)
 [![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
 [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/slgobinath)
@@ -84,6 +85,12 @@ sudo zypper install safeeyes
 sudo apk add safeeyes
 ```
 
+### Flatpak
+
+```bash
+flatpak install flathub io.github.slgobinath.SafeEyes
+```
+
 ### Other Linux & Run from source
 
 Ensure to meet the following dependencies:
@@ -160,6 +167,22 @@ For more details, please check the issue: [#329](https://github.com/slgobinath/S
 ## Third-party Plugins
 
 Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
+
+## How to Release?
+
+1. Checkout the latest commits from the `master` branch
+2. Run `python3 -m safeeyes` to make sure nothing is broken
+3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L81)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L88)
+    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
+    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L50)
+    - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu release)
+5. Commit the changes to `master`
+6. Create a pull-request from `master` to `release`
+7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
+
 
 ## License
 

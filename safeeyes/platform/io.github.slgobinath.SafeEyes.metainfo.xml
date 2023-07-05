@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>io.github.slgobinath.SafeEyes</id>
+
+    <name>Safe Eyes</name>
+    <developer_name>Gobinath</developer_name>
+    <summary>A Free and Open Source tool for Linux users to reduce and prevent repetitive strain
+        injury (RSI).</summary>
+
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-3.0</project_license>
+
+    <categories>
+        <category>Utility</category>
+        <category>Accessibility</category>
+      </categories>
+
+    <description>
+        <p>
+            Protect your eyes from eye strain using this simple and beautiful, yet extensible break
+            reminder
+        </p>
+        <p>
+            Features:
+        </p>
+        <p>
+            Remind you to take breaks with exercises to reduce RSI, Disable keyboard during breaks,
+            Notification before and after breaks, Smart pause if system is idle, Multi-screen
+            support, Customizable user interface, RPC API to control externally, Command-line
+            arguments to control the running instance, Customizable using plug-ins
+        </p>
+    </description>
+
+    <launchable type="desktop-id">io.github.slgobinath.SafeEyes.desktop</launchable>
+    <screenshots>
+        <screenshot type="default">
+            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_1.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_3.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_6.png</image>
+        </screenshot>
+    </screenshots>
+
+    <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
+
+    <releases>
+        <release version="2.1.6" date="2023-06-04" />
+    </releases>
+
+    <content_rating type="oars-1.1" />
+
+</component>

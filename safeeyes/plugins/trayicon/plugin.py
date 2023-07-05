@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import datetime
+from safeeyes.model import BreakType
 import gi
 gi.require_version('Gtk', '3.0')
 try:
@@ -67,7 +68,7 @@ class TrayIcon:
 
         # Construct the tray icon
         self.indicator = appindicator.Indicator.new(
-            APPINDICATOR_ID, "safeeyes_enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
+            APPINDICATOR_ID, "io.github.slgobinath.SafeEyes-enabled", appindicator.IndicatorCategory.APPLICATION_STATUS)
         self.indicator.set_status(appindicator.IndicatorStatus.ACTIVE)
 
         # Construct the context menu
@@ -76,7 +77,7 @@ class TrayIcon:
         # Next break info menu item
         self.item_info = Gtk.ImageMenuItem()
         img_timer = Gtk.Image()
-        img_timer.set_from_icon_name("safeeyes_timer", 16)
+        img_timer.set_from_icon_name("io.github.slgobinath.SafeEyes-timer", 16)
         self.item_info.set_image(img_timer)
 
         self.item_separator = Gtk.SeparatorMenuItem()
@@ -85,10 +86,8 @@ class TrayIcon:
         self.item_enable.connect('activate', self.on_enable_clicked)
 
         self.item_disable = Gtk.MenuItem()
-        self.item_disable.connect('activate', self.on_disable_clicked)
-
         self.sub_menu_disable = Gtk.Menu()
-        self.sub_menu_items = []
+        self.sub_menu_disable_items = []
 
         # Read disable options and build the sub menu
         for disable_option in plugin_config['disable_options']:
@@ -116,7 +115,7 @@ class TrayIcon:
             # Create submenu
             sub_menu_item = Gtk.MenuItem()
             sub_menu_item.connect('activate', self.on_disable_clicked, time_in_minutes)
-            self.sub_menu_items.append([sub_menu_item, label, disable_option['time']])
+            self.sub_menu_disable_items.append([sub_menu_item, label, disable_option['time']])
             self.sub_menu_disable.append(sub_menu_item)
 
         # Disable until restart submenu
@@ -129,7 +128,19 @@ class TrayIcon:
 
         # Settings menu item
         self.item_manual_break = Gtk.MenuItem()
-        self.item_manual_break.connect('activate', self.on_manual_break_clicked)
+
+        self.sub_menu_manual_next_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_break.connect('activate', self.on_manual_break_clicked, None)
+        self.sub_menu_manual_next_short_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_short_break.connect('activate', self.on_manual_break_clicked, BreakType.SHORT_BREAK)
+        self.sub_menu_manual_next_long_break = Gtk.MenuItem()
+        self.sub_menu_manual_next_long_break.connect('activate', self.on_manual_break_clicked, BreakType.LONG_BREAK)
+
+        self.sub_menu_manual_break = Gtk.Menu()
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_break)
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_short_break)
+        self.sub_menu_manual_break.append(self.sub_menu_manual_next_long_break)
+        self.item_manual_break.set_submenu(self.sub_menu_manual_break)
 
         # Settings menu item
         self.item_settings = Gtk.MenuItem()
@@ -182,7 +193,7 @@ class TrayIcon:
         """
         Update the text of menu items based on the selected language.
         """
-        for entry in self.sub_menu_items:
+        for entry in self.sub_menu_disable_items:
             # print(self.context['locale'].ngettext('For %d Hour', 'For %d Hours', 1) % 1)
             entry[0].set_label(self.context['locale'].ngettext(entry[1][0], entry[1][1], entry[2]) % entry[2])
 
@@ -195,24 +206,27 @@ class TrayIcon:
             if self.active:
                 if self.date_time:
                     self.__set_next_break_info()
-                self.indicator.set_icon("safeeyes_enabled")
+                self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled")
             else:
                 if self.wakeup_time:
                     self.item_info.set_label(_('Disabled until %s') % utility.format_time(self.wakeup_time))
                 else:
                     self.item_info.set_label(_('Disabled until restart'))
                 self.indicator.set_label('', '')
-                self.indicator.set_icon("safeeyes_disabled")
+                self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         else:
             self.item_info.set_label(_('No Breaks Available'))
             self.indicator.set_label('', '')
-            self.indicator.set_icon("safeeyes_disabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         self.item_info.set_sensitive(breaks_found and self.active)
         self.item_enable.set_sensitive(breaks_found and not self.active)
         self.item_disable.set_sensitive(breaks_found and self.active)
         self.item_manual_break.set_sensitive(breaks_found and self.active)
 
         self.item_manual_break.set_label(_('Take a break now'))
+        self.sub_menu_manual_next_break.set_label(_('Any break'))
+        self.sub_menu_manual_next_short_break.set_label(_('Short break'))
+        self.sub_menu_manual_next_long_break.set_label(_('Long break'))
         self.item_settings.set_label(_('Settings'))
         self.item_about.set_label(_('About'))
         self.item_quit.set_label(_('Quit'))
@@ -282,7 +296,11 @@ class TrayIcon:
         """
         Trigger a break manually.
         """
-        self.take_break()
+        if len(args) > 1:
+            break_type = args[1]
+            self.take_break(break_type)
+        else:
+            self.take_break()
 
     def on_enable_clicked(self, *args):
         """
@@ -342,7 +360,7 @@ class TrayIcon:
         if self.active:
             logging.info('Disable Safe Eyes')
             self.active = False
-            self.indicator.set_icon("safeeyes_disabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
             self.item_info.set_label(_('Disabled until restart'))
             self.indicator.set_label('', '')
             self.item_info.set_sensitive(False)
@@ -357,7 +375,7 @@ class TrayIcon:
         if not self.active:
             logging.info('Enable Safe Eyes')
             self.active = True
-            self.indicator.set_icon("safeeyes_enabled")
+            self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled")
             self.item_info.set_sensitive(True)
             self.item_enable.set_sensitive(False)
             self.item_disable.set_sensitive(True)
@@ -378,9 +396,9 @@ class TrayIcon:
     def start_animation(self):
         if not self.active or not self.animate:
             return
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled"))
         time.sleep(0.5)
-        utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+        utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled"))
         if self.animate and self.active:
             time.sleep(0.5)
             if self.animate and self.active:
@@ -389,9 +407,9 @@ class TrayIcon:
     def stop_animation(self):
         self.animate = False
         if self.active:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_enabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-enabled"))
         else:
-            utility.execute_main_thread(lambda: self.indicator.set_icon("safeeyes_disabled"))
+            utility.execute_main_thread(lambda: self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled"))
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """
