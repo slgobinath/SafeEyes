@@ -391,7 +391,7 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or reset. In these cases, we want to force the creation of a startup entry
+    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or manual deletion of .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation of a startup entry
     create_startup_entry(force=True)
 
 def create_startup_entry(force=False):
