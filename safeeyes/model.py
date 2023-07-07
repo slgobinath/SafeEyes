@@ -303,8 +303,8 @@ class Config:
         # self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if init:
-            # create_startup_entry will verify if a working symlink is in place before creating it
-            utility.create_startup_entry()
+            # if create_startup_entry finds a broken autostart symlink, it will repair it
+            utility.create_startup_entry(force=False)
             if self.__user_config is None:
                 utility.initialize_safeeyes()
                 self.__user_config = self.__system_config
