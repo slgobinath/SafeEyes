@@ -400,18 +400,22 @@ def create_startup_entry():
     """
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
     startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
-
-    # Create the folder if not exist
-    mkdir(startup_dir_path)
-
-    # Remove existing files
-    delete(startup_entry)
-
-    # Create the new startup entry
+    
+    # a FileNotFoundError will get thrown if the startup symlink is missing or is broken
     try:
-        os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
-    except OSError:
-        logging.error("Failed to create startup entry at %s" % startup_entry)
+        os.stat(startup_entry)
+    except FileNotFoundError:
+        # Create the folder if not exist
+        mkdir(startup_dir_path)
+
+        # Remove existing files
+        delete(startup_entry)
+
+        # Create the new startup entry
+        try:
+            os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
+        except OSError:
+            logging.error("Failed to create startup entry at %s" % startup_entry)
 
 
 def initialize_platform():
