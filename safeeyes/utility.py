@@ -391,8 +391,6 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    create_startup_entry()
-
 
 def create_startup_entry():
     """
