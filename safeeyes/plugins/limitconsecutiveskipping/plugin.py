@@ -1,9 +1,4 @@
 #!/usr/bin/env python
-# Safe Eyes is a utility to remind you to take break frequently
-# to protect your eyes from eye strain.
-
-# Copyright (C) 2017  Gobinath
-
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
