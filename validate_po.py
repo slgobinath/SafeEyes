@@ -24,7 +24,7 @@ def validate_po(locale, path):
      po = polib.pofile(path)
      for entry in po:
          if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
-             print("Number of varialbes mismatched in " + locale)
+             print("Number of variables mismatched in " + locale)
              print(entry.msgid + " -> " + entry.msgstr)
              print()
 
