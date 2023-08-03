@@ -19,17 +19,24 @@
 
 import os
 import polib
+import sys
 
-def validate_po(locale, path):
+def validate_po(locale: str, path: str) -> bool:
+     success = True
      po = polib.pofile(path)
      for entry in po:
          if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
-             print("Number of varialbes mismatched in " + locale)
+             print("Number of variables mismatched in " + locale)
              print(entry.msgid + " -> " + entry.msgstr)
              print()
+             success = False
+     return success
 
+success = True
 locales = os.listdir('safeeyes/config/locale')
-for locale in locales:
+for locale in sorted(locales):
     path = os.path.join('safeeyes/config/locale', locale, "LC_MESSAGES/safeeyes.po")
     if os.path.isfile(path):
-        validate_po(locale, path)
+        print('Validating translation %s...' % path)
+        success = validate_po(locale, path) and success
+sys.exit(0 if success else 1)
