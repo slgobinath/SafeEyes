@@ -34,7 +34,7 @@ def validate_po(locale: str, path: str) -> bool:
 
 success = True
 locales = os.listdir('safeeyes/config/locale')
-for locale in locales:
+for locale in sorted(locales):
     path = os.path.join('safeeyes/config/locale', locale, "LC_MESSAGES/safeeyes.po")
     if os.path.isfile(path):
         success = validate_po(locale, path) and success
