@@ -6,19 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-08-05 18:48+0000\n"
+"Last-Translator: Salif Mehmed <mail@salif.eu>\n"
+"Language-Team: Bulgarian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Затворете плътно очи"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -92,7 +93,7 @@ msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Затвори"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -103,15 +104,15 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Лиценз"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Пропусни"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Отложи"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -171,7 +172,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Опции"
 
 # Settings dialog
 msgid "Short Breaks"
@@ -283,7 +284,7 @@ msgstr ""
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Премахване"
 
 # Settings dialog
 msgid "Discard"
@@ -419,7 +420,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "Относно"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
@@ -465,7 +466,7 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
 
 #: plugins/trayicon
 msgid "Take a break now"
