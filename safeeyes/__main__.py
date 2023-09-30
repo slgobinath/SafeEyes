@@ -111,7 +111,7 @@ def main():
     args = parser.parse_args()
 
     # Initialize the logging
-    utility.intialize_logging(args.debug)
+    utility.initialize_logging(args.debug)
     utility.initialize_platform()
     config = Config()
 

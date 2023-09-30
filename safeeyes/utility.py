@@ -515,7 +515,7 @@ def replace_style_sheet():
     os.chmod(STYLE_SHEET_PATH, 0o777)
 
 
-def intialize_logging(debug):
+def initialize_logging(debug):
     """
     Initialize the logging framework using the Safe Eyes specific configurations.
     """
