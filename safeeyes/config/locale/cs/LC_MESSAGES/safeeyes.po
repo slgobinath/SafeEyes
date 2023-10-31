@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-06 20:59+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"PO-Revision-Date: 2023-10-31 16:04+0000\n"
+"Last-Translator: Kryštof Jelínek <krystof186@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -23,15 +23,15 @@ msgstr "Zavřete oči"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Zakroužete očima (několikrát na každou stranu)"
+msgstr "Zakružte očima (několikrát na každou stranu)"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "Zakroužete očima ve směru hodinových ručiček"
+msgstr "Zakružte očima ve směru hodinových ručiček"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "Zakroužete očima proti směru hodinových ručiček"
+msgstr "Zakružte očima proti směru hodinových ručiček"
 
 # Short break
 msgid "Blink your eyes"
