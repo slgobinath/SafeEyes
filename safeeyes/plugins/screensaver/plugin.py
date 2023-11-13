@@ -64,7 +64,7 @@ def __lock_screen_command():
             return ['mate-screensaver-command', '--lock']
         elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
             return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-        elif desktop_session in ['gnome', 'gnome-xorg', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu'):
+        elif desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu') or desktop_session.startswith('gnome'):
             if utility.command_exist('gnome-screensaver-command'):
                 return ['gnome-screensaver-command', '--lock']
             # From Gnome 3.8 no gnome-screensaver-command
