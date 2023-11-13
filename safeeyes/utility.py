@@ -287,7 +287,7 @@ def desktop_environment():
             env = 'lxde'
         elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
             env = 'kde'
-        elif os.environ.get('GNOME_DESKTOP_SESSION_ID') or desktop_session == 'gnome-xorg:
+        elif os.environ.get('GNOME_DESKTOP_SESSION_ID') or desktop_session.startswith('gnome'):
             env = 'gnome'
         elif desktop_session.startswith('ubuntu'):
             env = 'unity'
