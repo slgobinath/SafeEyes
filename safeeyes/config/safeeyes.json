@@ -122,7 +122,7 @@
             "enabled": false,
             "version": "0.0.2",
             "settings": {
-                "statistics_reset_interval": 24
+                "statistics_reset_cron": "0 0 * * *"
             }
         },
         {
