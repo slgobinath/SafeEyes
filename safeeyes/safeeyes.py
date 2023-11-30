@@ -158,7 +158,7 @@ class SafeEyes:
             if self.active:
                 logging.info("Stop Safe Eyes due to system suspend")
                 self.plugins_manager.stop()
-                self.safe_eyes_core.stop()
+                self.safe_eyes_core.stop(True)
         else:
             # Resume from sleep
             if self.active and self.safe_eyes_core.has_breaks():
@@ -239,14 +239,14 @@ class SafeEyes:
             self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()
 
-    def disable_safeeyes(self, status=None):
+    def disable_safeeyes(self, status=None, is_resting = False):
         """
         Listen to tray icon disable action and send the signal to core.
         """
         if self.active:
             self.active = False
             self.plugins_manager.stop()
-            self.safe_eyes_core.stop()
+            self.safe_eyes_core.stop(is_resting)
             if status is None:
                 status = _('Disabled until restart')
             self._status = status

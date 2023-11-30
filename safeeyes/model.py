@@ -258,12 +258,13 @@ class State(Enum):
     """
     Possible states of Safe Eyes.
     """
-    START = 0,
-    WAITING = 1,
-    PRE_BREAK = 2,
-    BREAK = 3,
-    STOPPED = 4,
-    QUIT = 5
+    START = 0,       # Starting scheduler
+    WAITING = 1,     # User is working (waiting for next break)
+    PRE_BREAK = 2,   # Preparing for break
+    BREAK = 3,       # Break
+    STOPPED = 4,     # Disabled
+    QUIT = 5,        # Quitting
+    RESTING = 6      # Resting (natural break)
 
 
 class EventHook:

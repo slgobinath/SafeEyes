@@ -21,12 +21,6 @@
             "min": 5
         },
         {
-            "id": "interpret_idle_as_break",
-            "label": "Interpret idle time equivalent to upcoming break duration as a break",
-            "type": "BOOL",
-            "default": false
-        },
-        {
             "id": "postpone_if_active",
             "label": "Postpone the next break until the system becomes idle",
             "type": "BOOL",
