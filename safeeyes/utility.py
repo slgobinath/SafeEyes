@@ -21,7 +21,6 @@ This module contains utility functions for Safe Eyes and its plugins.
 """
 
 import errno
-import imp
 import inspect
 import importlib
 import json
@@ -355,7 +354,7 @@ def module_exist(module):
     Check wther the given Python module exists or not.
     """
     try:
-        imp.find_module(module)
+        importlib.util.find_spec(module)
         return True
     except ImportError:
         return False
