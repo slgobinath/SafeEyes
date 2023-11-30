@@ -53,8 +53,8 @@ class TrayIcon:
         self.on_show_settings = context['api']['show_settings']
         self.on_show_about = context['api']['show_about']
         self.quit = context['api']['quit']
-        self.on_enable = context['api']['enable_safeeyes']
-        self.on_disable = context['api']['disable_safeeyes']
+        self.enable_safeeyes = context['api']['enable_safeeyes']
+        self.disable_safeeyes = context['api']['disable_safeeyes']
         self.take_break = context['api']['take_break']
         self.has_breaks = context['api']['has_breaks']
         self.get_break_time = context['api']['get_break_time']
@@ -324,7 +324,7 @@ class TrayIcon:
         if not self.active:
             with self.lock:
                 self.enable_ui()
-                self.on_enable()
+                self.enable_safeeyes()
                 # Notify all schedulers
                 self.idle_condition.acquire()
                 self.idle_condition.notify_all()
@@ -342,13 +342,13 @@ class TrayIcon:
             time_to_wait = args[1]
             if time_to_wait <= 0:
                 info = _('Disabled until restart')
-                self.on_disable(info)
+                self.disable_safeeyes(info)
                 self.wakeup_time = None
                 self.item_info.set_label(info)
             else:
                 self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
                 info = _('Disabled until %s') % utility.format_time(self.wakeup_time)
-                self.on_disable(info)
+                self.disable_safeeyes(info)
                 self.item_info.set_label(info)
                 utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
 
