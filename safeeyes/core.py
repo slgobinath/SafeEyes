@@ -188,18 +188,10 @@ class SafeEyesCore:
         if not self.running:
             return
 
-        # Convert to seconds
-        time_to_wait = self.break_queue.get_break().time * 60
         current_time = datetime.datetime.now()
         current_timestamp = current_time.timestamp()
 
-        if self.context['postponed']:
-            # Previous break was postponed
-            logging.info('Prepare for postponed break')
-            time_to_wait = self.postpone_duration
-            self.context['postponed'] = False
-
-        elif self.context['state'] == State.RESTING and self.paused_time > -1:
+        if self.context['state'] == State.RESTING and self.paused_time > -1:
             # Safe Eyes was resting
             paused_duration = int(current_timestamp - self.paused_time)
             self.paused_time = -1
@@ -208,9 +200,18 @@ class SafeEyesCore:
                 # Skip the next long break
                 self.break_queue.reset()
 
-        if current_timestamp < self.scheduled_next_break_timestamp:
+        if self.context['postponed']:
+            # Previous break was postponed
+            logging.info('Prepare for postponed break')
+            time_to_wait = self.postpone_duration
+            self.context['postponed'] = False
+        elif current_timestamp < self.scheduled_next_break_timestamp:
+            # Non-standard break was set.
             time_to_wait = round(self.scheduled_next_break_timestamp - current_timestamp)
             self.scheduled_next_break_timestamp = -1
+        else:
+            # Use next break, convert to seconds
+            time_to_wait = self.break_queue.get_break().time * 60
 
         self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
         self.context['state'] = State.WAITING
