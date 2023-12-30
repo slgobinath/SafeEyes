@@ -22,8 +22,9 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 
 import logging
 import random
-from distutils.version import LooseVersion
 from enum import Enum
+
+from packaging.version import parse
 
 from safeeyes import utility
 
@@ -323,7 +324,7 @@ class Config:
                 else:
                     user_config_version = str(
                         meta_obj.get('config_version', '0.0.0'))
-                    if LooseVersion(user_config_version) != LooseVersion(system_config_version):
+                    if parse(user_config_version) != parse(system_config_version):
                         # Update the user config
                         self.__merge_dictionary(
                             self.__user_config, self.__system_config)

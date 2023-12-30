@@ -32,7 +32,6 @@ import sys
 import shutil
 import subprocess
 import threading
-from distutils.version import LooseVersion
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -43,6 +42,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
+from packaging.version import parse
 
 gi.require_version('Gdk', '3.0')
 
@@ -547,7 +547,7 @@ def __update_plugin_config(plugin, plugin_config, config):
     if plugin_config is None:
         config['plugins'].remove(plugin)
     else:
-        if LooseVersion(plugin.get('version', '0.0.0')) != LooseVersion(plugin_config['meta']['version']):
+        if parse(plugin.get('version', '0.0.0')) != parse(plugin_config['meta']['version']):
             # Update the configuration
             plugin['version'] = plugin_config['meta']['version']
             setting_ids = []
