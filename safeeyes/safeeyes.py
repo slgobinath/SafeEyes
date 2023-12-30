@@ -25,9 +25,7 @@ import logging
 import os
 from threading import Timer
 
-import dbus
 import gi
-from dbus.mainloop.glib import DBusGMainLoop
 from safeeyes import utility
 from safeeyes.ui.about_dialog import AboutDialog
 from safeeyes.ui.break_screen import BreakScreen
@@ -189,14 +187,28 @@ class SafeEyes(Gtk.Application):
                 self.plugins_manager.start()
                 self.safe_eyes_core.start()
 
+    def handle_suspend_signal(self, proxy, sender, signal, parameters):
+        if signal != "PrepareForSleep":
+            return
+
+        (sleeping, ) = parameters
+
+        self.handle_suspend_callback(sleeping)
+
     def handle_system_suspend(self):
         """
         Setup system suspend listener.
         """
-        DBusGMainLoop(set_as_default=True)
-        bus = dbus.SystemBus()
-        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep',
-                                'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+        self.suspend_proxy = Gio.DBusProxy.new_for_bus_sync(
+            bus_type=Gio.BusType.SYSTEM,
+            flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
+            info=None,
+            name='org.freedesktop.login1',
+            object_path='/org/freedesktop/login1',
+            interface_name='org.freedesktop.login1.Manager',
+            cancellable=None,
+        )
+        self.suspend_proxy.connect('g-signal', self.handle_suspend_signal)
 
     def on_skipped(self):
         """
