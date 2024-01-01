@@ -121,11 +121,11 @@ python3 -m safeeyes
 Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
 
 
-### Install in Virtual Environment
+### Install in a virtual environment
 
-Some Linux systems like Cent OS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python Virtual Environment. The following instruction was tested on Cent OS 7.
+Some Linux systems like CentOS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python virtual environment.
 
-1. Install the necessary dependencies
+1. Install the necessary dependencies for CentOS 7
 
     ```bash
     sudo yum install python3-devel dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel gobject-introspection-devel cairo-gobject-devel
@@ -137,13 +137,12 @@ Some Linux systems like Cent OS do not have matching dependencies available in t
     mkdir ~/safeeyes
     cd ~/safeeyes/
 
-    pip3 install virtualenv --user
-    virtualenv --no-site-packages venv
+    python3 -m venv venv
     source venv/bin/activate
     pip3 install dbus-python safeeyes
     ```
 
-3. Start Safe Eyes from terminal
+3. Start Safe Eyes from the terminal
 
     ```bash
     cd ~/safeeyes & source venv/bin/activate
