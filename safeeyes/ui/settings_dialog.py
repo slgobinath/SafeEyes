@@ -24,8 +24,8 @@ from safeeyes import utility
 from safeeyes.model import Config, PluginDependency
 
 gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk
-from gi.repository import GdkPixbuf
+from gi.repository import Gtk, Gio
+from gi.repository import GdkPixbuf, Gdk
 
 
 SETTINGS_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
@@ -463,7 +463,6 @@ class BreakSettingsDialog:
         self.on_remove = on_remove
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_break')
         self.txt_break = builder.get_object('txt_break')
         self.switch_override_interval = builder.get_object('switch_override_interval')
@@ -471,7 +470,7 @@ class BreakSettingsDialog:
         self.switch_override_plugins = builder.get_object('switch_override_plugins')
         self.spin_interval = builder.get_object('spin_interval')
         self.spin_duration = builder.get_object('spin_duration')
-        self.img_break = builder.get_object('img_break')
+        self.btn_image = builder.get_object('btn_image')
         self.cmb_type = builder.get_object('cmb_type')
 
         grid_plugins = builder.get_object('grid_plugins')
@@ -509,7 +508,7 @@ class BreakSettingsDialog:
         row = 0
         col = 0
         for plugin_id in plugin_map.keys():
-            chk_button = Gtk.CheckButton(_(plugin_map[plugin_id]))
+            chk_button = Gtk.CheckButton.new_with_label(_(plugin_map[plugin_id]))
             self.plugin_check_buttons[plugin_id] = chk_button
             grid_plugins.attach(chk_button, row, col, 1, 1)
             if plugins_overriden:
@@ -520,14 +519,21 @@ class BreakSettingsDialog:
             if row > 2:
                 col += 1
                 row = 0
-        # GtkSwitch state-set signal is available only from 3.14
-        if Gtk.get_minor_version() >= 14:
-            self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
-            self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
-            self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
-            self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
-            self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
-            self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+
+        if 'image' in self.break_config:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            self.btn_image.set_child(image)
+
+        self.window.connect("close-request", self.on_window_delete)
+        self.btn_image.connect('clicked', self.select_image)
+
+        self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
+        self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
+        self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
+        self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
+        self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
+        self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
 
     def on_switch_override_interval_activate(self, switch_button, state):
         """
@@ -552,24 +558,36 @@ class BreakSettingsDialog:
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileDialog()
+        dialog.set_title(_('Please select an image'))
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")
         png_filter.add_mime_type("image/png")
         png_filter.add_pattern("*.png")
-        dialog.add_filter(png_filter)
+        filters = Gio.ListStore.new(Gtk.FileFilter)
+        filters.append(png_filter)
+        dialog.set_filters(filters)
 
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            self.break_config['image'] = dialog.get_filename()
+        dialog.open(self.window, None, self.select_image_callback)
+
+    def select_image_callback(self, dialog, result):
+        response = None
+
+        try:
+            response = dialog.open_finish(result)
+        except Exception:
+            # user pressing "Cancel" throws a generic exception here
+            pass
+
+        if response is not None:
+            self.break_config['image'] = response.get_path()
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
-            self.img_break.set_from_pixbuf(pixbuf)
-        elif response == Gtk.ResponseType.CANCEL:
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            self.btn_image.set_child(image)
+        else:
             self.break_config.pop('image', None)
-            self.img_break.set_from_stock('gtk-missing-image', Gtk.IconSize.BUTTON)
-
-        dialog.destroy()
+            self.btn_image.set_icon_name('gtk-missing-image')
 
     def on_window_delete(self, *args):
         """
@@ -615,7 +633,7 @@ class BreakSettingsDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
 
 class NewBreakDialog:
