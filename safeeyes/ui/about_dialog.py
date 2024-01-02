@@ -35,8 +35,11 @@ class AboutDialog:
 
     def __init__(self, version):
         builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('window_about')
+
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object('btn_close').connect('clicked', self.on_close_clicked)
+
         builder.get_object('lbl_decription').set_label(_("Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"))
         builder.get_object('lbl_license').set_label(_('License') + ':')
 
@@ -47,7 +50,7 @@ class AboutDialog:
         """
         Show the About dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
     def on_window_delete(self, *args):
         """
