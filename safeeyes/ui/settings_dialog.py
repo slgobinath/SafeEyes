@@ -55,7 +55,6 @@ class SettingsDialog:
         self.warn_bar_rpc_server_shown = False
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
-        builder.connect_signals(self)
 
         self.window = builder.get_object('window_settings')
         self.box_short_breaks = builder.get_object('box_short_breaks')
@@ -80,18 +79,26 @@ class SettingsDialog:
         self.info_bar_long_break.hide()
         self.warn_bar_rpc_server.hide()
 
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object('reset_menu').connect('clicked', self.on_reset_menu_clicked)
+        self.spin_short_break_interval.connect('value-changed', self.on_spin_short_break_interval_change)
+        self.info_bar_long_break.connect('close', self.on_info_bar_long_break_close)
+        self.info_bar_long_break.connect('response', self.on_info_bar_long_break_close)
+        self.spin_long_break_interval.connect('value-changed', self.on_spin_long_break_interval_change)
+        self.warn_bar_rpc_server.connect('close', self.on_warn_bar_rpc_server_close)
+        self.warn_bar_rpc_server.connect('response', self.on_warn_bar_rpc_server_close)
+        builder.get_object('btn_add_break').connect('clicked', self.add_break)
+
         # Set the current values of input fields
         self.__initialize(config)
 
-        # Update relative states
-        # GtkSwitch state-set signal is available only from 3.14
-        if Gtk.get_minor_version() >= 14:
-            # Add event listener to postpone switch
-            self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
-            self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
-            # Add event listener to RPC server switch
-            self.switch_rpc_server.connect('state-set', self.on_switch_rpc_server_activate)
-            self.on_switch_rpc_server_activate(self.switch_rpc_server, self.switch_rpc_server.get_active())
+        # Add event listener to postpone switch
+        self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
+        self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+        # Add event listener to RPC server switch
+        self.switch_rpc_server.connect('state-set', self.on_switch_rpc_server_activate)
+        self.on_switch_rpc_server_activate(self.switch_rpc_server, self.switch_rpc_server.get_active())
+
         self.initializing = False
 
     def __initialize(self, config):
@@ -103,8 +110,8 @@ class SettingsDialog:
             self.__create_break_item(long_break, False)
 
         for plugin_config in utility.load_plugins_config(config):
-            self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
-            
+            self.box_plugins.append(self.__create_plugin_item(plugin_config))
+
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
         self.spin_short_break_interval.set_value(config.get('short_break_interval'))
@@ -152,7 +159,7 @@ class SettingsDialog:
             )
         )
         box.set_visible(True)
-        parent_box.pack_start(box, False, False, 0)
+        parent_box.append(box)
         return box
 
     def on_reset_menu_clicked(self, button):
@@ -279,7 +286,7 @@ class SettingsDialog:
         """
         Show the SettingsDialog.
         """
-        self.window.show()
+        self.window.present()
 
     def on_switch_postpone_activate(self, switch, state):
         """
