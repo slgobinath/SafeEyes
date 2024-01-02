@@ -381,7 +381,6 @@ class PluginSettingsDialog:
         self.property_controls = []
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_plugin')
         box_settings = builder.get_object('box_settings')
         self.window.set_title(_('Plugin Settings'))
@@ -445,7 +444,7 @@ class PluginSettingsDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
 
 class BreakSettingsDialog:
@@ -646,7 +645,6 @@ class NewBreakDialog:
         self.on_add = on_add
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_new_break')
         self.txt_break = builder.get_object('txt_break')
         self.cmb_type = builder.get_object('cmb_type')
@@ -654,6 +652,10 @@ class NewBreakDialog:
 
         list_types[0][0] = _(list_types[0][0])
         list_types[1][0] = _(list_types[1][0])
+
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object('btn_discard').connect('clicked', self.discard)
+        builder.get_object('btn_save').connect('clicked', self.save)
 
         # Set the values
         self.window.set_title(_('New Break'))
@@ -688,4 +690,4 @@ class NewBreakDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()
