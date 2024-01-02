@@ -39,12 +39,12 @@ from pathlib import Path
 import babel.core
 import babel.dates
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 
-gi.require_version('Gdk', '3.0')
+gi.require_version('Gdk', '4.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')

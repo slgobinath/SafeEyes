@@ -27,7 +27,7 @@ import re
 import subprocess
 
 import gi
-gi.require_version('Gdk', '3.0')
+gi.require_version('Gdk', '4.0')
 from gi.repository import Gdk
 from gi.repository import GdkX11  # noqa F401
 from safeeyes import utility

@@ -26,7 +26,7 @@ import dbus
 import re
 import gi
 from safeeyes.model import TrayAction
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 
 tray_icon_path = None
