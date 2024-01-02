@@ -25,18 +25,13 @@ import locale
 import logging
 import signal
 import sys
-from threading import Timer
 
-import gi
 import psutil
 from safeeyes import utility
 from safeeyes.model import Config
 from safeeyes.safeeyes import SafeEyes
 from safeeyes.safeeyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
-
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
 
 gettext.install('safeeyes', utility.LOCALE_PATH)
 
@@ -66,22 +61,6 @@ def __running():
         except (IndexError, psutil.NoSuchProcess):
             pass
     return False
-
-
-def __evaluate_arguments(args, safe_eyes):
-    """
-    Evaluate the arguments and execute the operations.
-    """
-    if args.about:
-        utility.execute_main_thread(safe_eyes.show_about)
-    elif args.disable:
-        utility.execute_main_thread(safe_eyes.disable_safeeyes)
-    elif args.enable:
-        utility.execute_main_thread(safe_eyes.enable_safeeyes)
-    elif args.settings:
-        utility.execute_main_thread(safe_eyes.show_settings)
-    elif args.take_break:
-        utility.execute_main_thread(safe_eyes.take_break)
 
 
 def main():
@@ -147,10 +126,8 @@ def main():
             sys.exit(0)
         elif not args.quit:
             logging.info("Starting Safe Eyes")
-            safe_eyes = SafeEyes(system_locale, config)
+            safe_eyes = SafeEyes(system_locale, config, args)
             safe_eyes.start()
-            Timer(1.0, lambda: __evaluate_arguments(args, safe_eyes)).start()
-            Gtk.main()
 
 
 if __name__ == '__main__':
