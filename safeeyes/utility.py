@@ -660,7 +660,7 @@ def create_gtk_builder(glade_file):
     builder.add_from_file(glade_file)
     # Tranlslate all sub components
     for obj in builder.get_objects():
-        if (not isinstance(obj, Gtk.SeparatorMenuItem)) and hasattr(obj, "get_label"):
+        if hasattr(obj, "get_label"):
             label = obj.get_label()
             if label is not None:
                 obj.set_label(_(label))
