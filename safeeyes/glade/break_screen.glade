@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.1 -->
 <!--
 ~ Safe Eyes is a utility to remind you to take break frequently
 ~ to protect your eyes from eye strain.
@@ -20,115 +19,84 @@
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="window_main">
-    <property name="can_focus">False</property>
-    <property name="window_position">center</property>
-    <property name="hide_titlebar_when_maximized">True</property>
     <property name="icon_name">safeeyes</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="urgency_hint">True</property>
-    <property name="focus_on_map">False</property>
-    <property name="decorated">False</property>
-    <property name="deletable">False</property>
-    <property name="gravity">center</property>
-    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
+    <property name="decorated">0</property>
+    <property name="deletable">0</property>
     <child>
       <placeholder/>
     </child>
-    <child>
+    <property name="child">
       <object class="GtkGrid" id="grid1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="row_homogeneous">True</property>
-        <property name="column_homogeneous">True</property>
+        <property name="row_homogeneous">1</property>
+        <property name="column_homogeneous">1</property>
         <child>
           <object class="GtkBox" id="box_center_parent">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <property name="spacing">10</property>
             <child>
               <object class="GtkGrid" id="grid_central">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="row_spacing">10</property>
                 <child>
                   <object class="GtkImage" id="img_break">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">0</property>
+                    </layout>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkGrid" id="grid_parent">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="halign">center</property>
                     <property name="valign">center</property>
-                    <property name="hexpand">True</property>
+                    <property name="hexpand">1</property>
                     <property name="row_spacing">15</property>
                     <child>
                       <object class="GtkLabel" id="lbl_message">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Hello World</property>
+                        <property name="label" translatable="1">Hello World</property>
                         <property name="justify">center</property>
                         <style>
                           <class name="lbl_message"/>
                         </style>
+                        <layout>
+                          <property name="column">0</property>
+                          <property name="row">0</property>
+                          <property name="column-span">3</property>
+                        </layout>
                       </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                        <property name="width">3</property>
-                      </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment" id="alignment_button">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                      <object class="GtkLabel" id="lbl_count">
                         <property name="halign">center</property>
-                        <property name="yscale">0.20000000298023224</property>
-                        <child>
-                          <object class="GtkLabel" id="lbl_count">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label" translatable="yes">00</property>
-                            <style>
-                              <class name="lbl_count"/>
-                            </style>
-                          </object>
-                        </child>
+                        <property name="label" translatable="1">00</property>
+                        <style>
+                          <class name="lbl_count"/>
+                        </style>
+                        <layout>
+                          <property name="column">1</property>
+                          <property name="row">2</property>
+                        </layout>
                       </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkBox" id="box_buttons">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="spacing">50</property>
-                        <property name="homogeneous">True</property>
+                        <property name="homogeneous">1</property>
                         <child>
                           <placeholder/>
                         </child>
                         <child>
                           <placeholder/>
                         </child>
+                        <layout>
+                          <property name="column">1</property>
+                          <property name="row">3</property>
+                        </layout>
                       </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">3</property>
-                      </packing>
                     </child>
                     <child>
                       <placeholder/>
@@ -151,89 +119,62 @@
                     <child>
                       <placeholder/>
                     </child>
+                    <layout>
+                      <property name="column">0</property>
+                      <property name="row">1</property>
+                      <property name="row-span">3</property>
+                    </layout>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
-                    <property name="height">3</property>
-                  </packing>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="lbl_widget">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Widget</property>
+                <property name="vexpand">1</property>
+                <property name="label" translatable="1">Widget</property>
                 <property name="yalign">0.25</property>
                 <style>
                   <class name="lbl_widget"/>
                 </style>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="pack_type">end</property>
-                <property name="position">1</property>
-              </packing>
             </child>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">1</property>
+              <property name="row-span">2</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-            <property name="height">2</property>
-          </packing>
         </child>
         <child>
           <object class="GtkBox" id="box_top_panel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkToolbar" id="toolbar">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+              <object class="GtkBox" id="toolbar">
+                <property name="css-classes">toolbar</property>
+                <property name="can_focus">0</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
-                <property name="toolbar_style">icons</property>
-                <property name="icon_size">2</property>
                 <style>
                   <class name="toolbar"/>
                 </style>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="lbl_top">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="vexpand">1</property>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
             <style>
               <class name="box_top_panel"/>
             </style>
+            <layout>
+              <property name="column">0</property>
+              <property name="row">0</property>
+            </layout>
           </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-          </packing>
         </child>
       </object>
-    </child>
+    </property>
     <style>
       <class name="window_main"/>
     </style>

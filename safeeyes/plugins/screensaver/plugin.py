@@ -131,5 +131,5 @@ def on_stop_break():
 def get_tray_action(break_obj):
     return TrayAction.build("Lock screen",
                             tray_icon_path,
-                            Gtk.STOCK_DIALOG_AUTHENTICATION,
+                            "dialog-password",
                             __lock_screen)

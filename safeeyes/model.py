@@ -25,6 +25,10 @@ import random
 from distutils.version import LooseVersion
 from enum import Enum
 
+import gi
+gi.require_version('Gtk', '4.0')
+from gi.repository import Gtk
+
 from safeeyes import utility
 
 
@@ -397,7 +401,8 @@ class TrayAction:
 
     def get_icon(self):
         if self.system_icon:
-            return self.__icon
+            image = Gtk.Image.new_from_icon_name(self.__icon)
+            return image
         else:
             image = utility.load_and_scale_image(self.__icon, 16, 16)
             image.show()

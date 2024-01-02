@@ -74,5 +74,5 @@ def get_tray_action(break_obj):
     if players:
         return TrayAction.build("Pause media",
                                 tray_icon_path,
-                                Gtk.STOCK_MEDIA_PAUSE,
+                                "media-playback-pause",
                                 lambda: __pause_players(players))

@@ -59,7 +59,9 @@ class BreakScreen:
         # Initialize the theme
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(style_sheet_path)
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+        display = Gdk.Display.get_default()
+        Gtk.StyleContext.add_provider_for_display(display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def initialize(self, config):
         """
@@ -152,22 +154,22 @@ class BreakScreen:
         utility.start_thread(self.__lock_keyboard)
 
         display = Gdk.Display.get_default()
-        screen = display.get_default_screen()
-        no_of_monitors = display.get_n_monitors()
-        logging.info("Show break screens in %d display(s)", no_of_monitors)
+        monitors = display.get_monitors()
+        logging.info("Show break screens in %d display(s)", len(monitors))
 
-        for monitor_num in range(no_of_monitors):
-            monitor = display.get_monitor(monitor_num)
+        i = 0
+
+        for monitor in monitors:
             monitor_gemoetry = monitor.get_geometry()
             x = monitor_gemoetry.x
             y = monitor_gemoetry.y
 
             builder = Gtk.Builder()
             builder.add_from_file(BREAK_SCREEN_GLADE)
-            builder.connect_signals(self)
 
             window = builder.get_object("window_main")
-            window.set_title("SafeEyes-" + str(monitor_num))
+            window.connect("close-request", self.on_window_delete)
+            window.set_title("SafeEyes-" + str(i))
             lbl_message = builder.get_object("lbl_message")
             lbl_count = builder.get_object("lbl_count")
             lbl_widget = builder.get_object("lbl_widget")
@@ -176,15 +178,14 @@ class BreakScreen:
             toolbar = builder.get_object("toolbar")
 
             for tray_action in tray_actions:
-                toolbar_button = None
-                if tray_action.system_icon:
-                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.get_icon())
-                else:
-                    toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
+                # TODO: apparently, this would be better served with an icon theme + Gtk.button.new_from_icon_name
+                icon = tray_action.get_icon()
+                toolbar_button = Gtk.Button()
+                toolbar_button.set_child(icon)
                 tray_action.add_toolbar_button(toolbar_button)
                 toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
                 toolbar_button.set_tooltip_text(_(tray_action.name))
-                toolbar.add(toolbar_button)
+                toolbar.append(toolbar_button)
                 toolbar_button.show()
 
             # Add the buttons
@@ -194,7 +195,7 @@ class BreakScreen:
                 btn_postpone.get_style_context().add_class('btn_postpone')
                 btn_postpone.connect('clicked', self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
-                box_buttons.pack_start(btn_postpone, True, True, 0)
+                box_buttons.append(btn_postpone)
 
             if not self.strict_break:
                 # Add the skip button
@@ -202,7 +203,7 @@ class BreakScreen:
                 btn_skip.get_style_context().add_class('btn_skip')
                 btn_skip.connect('clicked', self.on_skip_clicked)
                 btn_skip.set_visible(True)
-                box_buttons.pack_start(btn_skip, True, True, 0)
+                box_buttons.append(btn_skip)
 
             # Set values
             if image_path:
@@ -213,23 +214,14 @@ class BreakScreen:
             self.windows.append(window)
             self.count_labels.append(lbl_count)
 
-            # Set visual to apply css theme. It should be called before show method.
-            window.set_visual(window.get_screen().get_rgba_visual())
             if self.context['desktop'] == 'kde':
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
-            # In Unity, move the window before present
-            window.move(x, y)
-            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-            window.stick()
-            window.set_keep_above(True)
-            window.fullscreen_on_monitor(screen, monitor_num)
+            window.fullscreen_on_monitor(monitor)
             window.present()
-            # In other desktop environments, move the window after present
-            window.move(x, y)
-            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-            logging.info("Moved break screen to Display[%d, %d]", x, y)
+
+            i = i + 1
 
     def __update_count_down(self, count):
         """
