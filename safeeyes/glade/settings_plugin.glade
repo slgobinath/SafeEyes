@@ -20,39 +20,23 @@
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="dialog_settings_plugin">
-    <property name="can_focus">False</property>
     <property name="title" translatable="yes">Properties</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="default_width">400</property>
-    <property name="default_height">10</property>
-    <property name="destroy_with_parent">True</property>
-    <property name="icon_name">safeeyes</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">center</property>
-    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
+    <property name="resizable">0</property>
+    <property name="modal">1</property>
+    <property name="default-width">400</property>
+    <property name="default-height">10</property>
+    <property name="destroy-with-parent">1</property>
+    <property name="icon-name">safeeyes</property>
     <child>
       <object class="GtkBox" id="box_settings">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_top">10</property>
-        <property name="margin_bottom">10</property>
+        <property name="visible">1</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="orientation">vertical</property>
         <property name="spacing">15</property>
-        <property name="homogeneous">True</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
+        <property name="homogeneous">1</property>
       </object>
     </child>
   </object>
