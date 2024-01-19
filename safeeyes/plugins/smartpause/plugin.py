@@ -194,7 +194,8 @@ def __start_idle_monitor():
                 smart_pause_activated = True
                 idle_start_time = datetime.datetime.now() - datetime.timedelta(seconds=system_idle_time)
                 logging.info('Pause Safe Eyes due to system idle')
-                disable_safeeyes(None, True)
+                info = _('Paused Safe Eyes due to system being idle')
+                self.disable_safeeyes(info)
             elif system_idle_time < idle_time and context['state'] == State.RESTING and idle_start_time is not None:
                 logging.info('Resume Safe Eyes due to user activity')
                 smart_pause_activated = False
