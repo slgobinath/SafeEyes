@@ -23,11 +23,16 @@ Media Control plugin lets users to pause currently playing media player from the
 import logging
 import os
 import dbus
+import dbus.exceptions
 import re
 import gi
 from safeeyes.model import TrayAction
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
+
+                    
+                    
+
 
 tray_icon_path = None
 
@@ -41,11 +46,18 @@ def __active_players():
 
     for service in bus.list_names():
         if re.match('org.mpris.MediaPlayer2.', service):
-            player = bus.get_object(service, "/org/mpris/MediaPlayer2")
-            interface = dbus.Interface(player, 'org.freedesktop.DBus.Properties')
-            status = str(interface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')).lower()
-            if status == "playing":
-                players.append(player)
+            try:
+                player = bus.get_object(service, "/org/mpris/MediaPlayer2")
+                interface = dbus.Interface(player, 'org.freedesktop.DBus.Properties')
+                status = str(interface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')).lower()
+                if status == "playing":
+                    players.append(player)
+            except dbus.exceptions.DBusException as e:
+                # Purpose of this: The Chromium snap (at least on ubuntu 20.04 LTS) forbids SafeEyes from sending dbus messages to Chromium and we must catch that exception and ignore that particular player. If we don't, the the method and plugin fails and the break itself fails to be called. With this fix, only impossible-to-reach players are ignored and all else works.
+                # The specific exception is (dbus.exceptions.DBusException: org.freedesktop.DBus.Error.AccessDenied)
+                # We don't care about logging the error but maybe we should log it in debug mode:
+                logging.debug(f"DBusException: {e}")
+
     return players
 
 
