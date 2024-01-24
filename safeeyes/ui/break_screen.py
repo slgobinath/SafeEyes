@@ -157,9 +157,6 @@ class BreakScreen:
         # Lock the keyboard
         if not self.context['is_wayland']:
             utility.start_thread(self.__lock_keyboard_x11)
-        else:
-            # TODO: Wayland keyboard locking
-            logging.warning("Keyboard locking not yet implemented for Wayland.")
 
         display = Gdk.Display.get_default()
         monitors = display.get_monitors()
@@ -231,6 +228,10 @@ class BreakScreen:
 
             window.fullscreen_on_monitor(monitor)
             window.present()
+
+            if self.context['is_wayland']:
+                # this may or may not be granted by the window system
+                window.get_surface().inhibit_system_shortcuts(None)
 
             i = i + 1
 
