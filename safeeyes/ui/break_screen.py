@@ -227,6 +227,10 @@ class BreakScreen:
             window.fullscreen_on_monitor(monitor)
             window.present()
 
+            if self.context['is_wayland']:
+                # this may or may not be granted by the window system
+                window.get_surface().inhibit_system_shortcuts(None)
+
             i = i + 1
 
     def __update_count_down(self, count):
