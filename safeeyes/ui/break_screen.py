@@ -44,7 +44,7 @@ class BreakScreen:
     def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
         self.context = context
         self.count_labels = []
-        self.display = None
+        self.x11_display = None
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
@@ -57,7 +57,7 @@ class BreakScreen:
         self.windows = []
 
         if not self.context['is_wayland']:
-            self.display = Display()
+            self.x11_display = Display()
 
         # Initialize the theme
         css_provider = Gtk.CssProvider()
@@ -137,7 +137,7 @@ class BreakScreen:
         """
         logging.info("Close the break screen(s)")
         if not self.context['is_wayland']:
-            self.__release_keyboard()
+            self.__release_keyboard_x11()
 
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
@@ -156,7 +156,7 @@ class BreakScreen:
         """
         # Lock the keyboard
         if not self.context['is_wayland']:
-            utility.start_thread(self.__lock_keyboard)
+            utility.start_thread(self.__lock_keyboard_x11)
         else:
             # TODO: Wayland keyboard locking
             logging.warning("Keyboard locking not yet implemented for Wayland.")
@@ -241,7 +241,7 @@ class BreakScreen:
         for label in self.count_labels:
             label.set_text(count)
 
-    def __lock_keyboard(self):
+    def __lock_keyboard_x11(self):
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts (X11 only)
         """
@@ -249,15 +249,15 @@ class BreakScreen:
         self.lock_keyboard = True
 
         # Grab the keyboard
-        root = self.display.screen().root
+        root = self.x11_display.screen().root
         root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
         root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
         # Consume keyboard events
         while self.lock_keyboard:
-            if self.display.pending_events() > 0:
+            if self.x11_display.pending_events() > 0:
                 # Avoid waiting for next event by checking pending events
-                event = self.display.next_event()
+                event = self.x11_display.next_event()
                 if self.enable_shortcut and event.type == X.KeyPress:
                     if event.detail == self.keycode_shortcut_skip and not self.strict_break:
                         self.skip_break()
@@ -269,14 +269,14 @@ class BreakScreen:
                 # Reduce the CPU usage by sleeping for a second
                 time.sleep(1)
 
-    def __release_keyboard(self):
+    def __release_keyboard_x11(self):
         """
         Release the locked keyboard.
         """
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
-        self.display.ungrab_keyboard(X.CurrentTime)
-        self.display.flush()
+        self.x11_display.ungrab_keyboard(X.CurrentTime)
+        self.x11_display.flush()
 
     def __destroy_all_screens(self):
         """
