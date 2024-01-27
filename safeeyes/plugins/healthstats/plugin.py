@@ -55,7 +55,6 @@ def init(ctx, safeeyes_config, plugin_config):
             'total_resets': 0,
         }
 
-        # session = context['session']['plugin'].get('healthstats', {}) | defaults
         session = context['session']['plugin'].get('healthstats', {}).copy()
         session.update(defaults) # refactored to maintain compatibility with python3.8 on Ubuntu 20.04 LTS (dict | dict syntax was introduced in python3.9).
         if 'no_of_breaks' in session:
