@@ -23,7 +23,7 @@ def validate(plugin_config, plugin_settings):
     command = None
     if utility.DESKTOP_ENVIRONMENT == "gnome" and utility.IS_WAYLAND:
         command = "dbus-send"
-    elif utility.DESKTOP_ENVIRONMENT == "sway":
+    elif utility.IS_WAYLAND:
         command = "swayidle"
     else:
         command = "xprintidle"
