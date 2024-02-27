@@ -155,6 +155,9 @@ class BreakScreen:
         no_of_monitors = screen.get_n_monitors()
         logging.info("Show break screens in %d display(s)", no_of_monitors)
 
+        skip_button_disabled = self.context.get('skip_button_disabled', False)
+        postpone_button_disabled = self.context.get('postpone_button_disabled', False)
+
         for monitor in range(no_of_monitors):
             monitor_gemoetry = screen.get_monitor_geometry(monitor)
             x = monitor_gemoetry.x
@@ -186,7 +189,7 @@ class BreakScreen:
                 toolbar_button.show()
 
             # Add the buttons
-            if self.enable_postpone:
+            if self.enable_postpone and not postpone_button_disabled:
                 # Add postpone button
                 btn_postpone = Gtk.Button(_('Postpone'))
                 btn_postpone.get_style_context().add_class('btn_postpone')
@@ -194,7 +197,7 @@ class BreakScreen:
                 btn_postpone.set_visible(True)
                 box_buttons.pack_start(btn_postpone, True, True, 0)
 
-            if not self.strict_break:
+            if not self.strict_break and not skip_button_disabled:
                 # Add the skip button
                 btn_skip = Gtk.Button(_('Skip'))
                 btn_skip.get_style_context().add_class('btn_skip')
