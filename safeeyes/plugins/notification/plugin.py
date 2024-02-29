@@ -84,7 +84,7 @@ def on_start_break(break_obj):
 
 def on_exit():
     """
-    Uninitialize the registered notificaion.
+    Uninitialize the registered notification.
     """
     logging.debug('Stop Notification plugin')
     Notify.uninit()

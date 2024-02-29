@@ -28,7 +28,7 @@ from xmlrpc.client import ServerProxy
 
 class RPCServer:
     """
-    An aynchronous RPC server.
+    An asynchronous RPC server.
     """
     def __init__(self, port, context):
         self.__running = False
