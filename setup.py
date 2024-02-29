@@ -8,6 +8,7 @@ requires = [
     'psutil',
     'croniter',
     'PyGObject',
+    'packaging',
     'python-xlib'
 ]
 
