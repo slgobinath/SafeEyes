@@ -164,56 +164,57 @@ class SettingsDialog:
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
-        def __confirmation_dialog_response(widget, response_id):
-            if response_id == Gtk.ResponseType.OK:
+        def __confirmation_dialog_response(dialog, result):
+            response_id = dialog.choose_finish(result)
+            if response_id == 1:
                 utility.reset_config()
                 self.config = Config()
                 # Remove breaks from the container
-                self.box_short_breaks.foreach(lambda element: self.box_short_breaks.remove(element))
-                self.box_long_breaks.foreach(lambda element: self.box_long_breaks.remove(element))
-                # Remove plugins from the container
-                self.box_plugins.foreach(lambda element: self.box_plugins.remove(element))
+                self.__clear_children(self.box_short_breaks)
+                self.__clear_children(self.box_long_breaks)
+                self.__clear_children(self.box_plugins)
                 # Initialize again
                 self.__initialize(self.config)
-            widget.destroy()
 
-        messagedialog = Gtk.MessageDialog()
+        messagedialog = Gtk.AlertDialog()
         messagedialog.set_modal(True)
-        messagedialog.set_transient_for(self.window)
-        messagedialog.set_property('message_type', Gtk.MessageType.WARNING)
-        messagedialog.set_property('text', _("Are you sure you want to reset all settings to default?"))
-        messagedialog.set_property('secondary-text', _("You can't undo this action."))
-        messagedialog.add_button('_Cancel', Gtk.ResponseType.CANCEL)
-        messagedialog.add_button(_("Reset"), Gtk.ResponseType.OK)
+        messagedialog.set_buttons(['_Cancel', _("Reset")])
+        messagedialog.set_message(_("Are you sure you want to reset all settings to default?"))
+        messagedialog.set_detail(_("You can't undo this action."))
 
-        messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.show()
+        messagedialog.set_cancel_button(0)
+        messagedialog.set_default_button(0)
+
+        messagedialog.choose(self.window, None, __confirmation_dialog_response)
+
+    def __clear_children(self, widget):
+        while widget.get_last_child() is not None:
+            widget.remove(widget.get_last_child())
 
     def __delete_break(self, break_config, is_short, on_remove):
         """
         Remove the break after a confirmation.
         """
 
-        def __confirmation_dialog_response(widget, response_id):
-            if response_id == Gtk.ResponseType.OK:
+        def __confirmation_dialog_response(dialog, result):
+            response_id = dialog.choose_finish(result)
+            if response_id == 1:
                 if is_short:
                     self.config.get('short_breaks').remove(break_config)
                 else:
                     self.config.get('long_breaks').remove(break_config)
                 on_remove()
-            widget.destroy()
 
-        messagedialog = Gtk.MessageDialog()
+        messagedialog = Gtk.AlertDialog()
         messagedialog.set_modal(True)
-        messagedialog.set_transient_for(self.window)
-        messagedialog.set_property('message_type', Gtk.MessageType.WARNING)
-        messagedialog.set_property('text', _("Are you sure you want to delete this break?"))
-        messagedialog.set_property('secondary-text', _("You can't undo this action."))
-        messagedialog.add_button('_Cancel', Gtk.ResponseType.CANCEL)
-        messagedialog.add_button(_("Delete"), Gtk.ResponseType.OK)
+        messagedialog.set_buttons(['_Cancel', _("Delete")])
+        messagedialog.set_message(_("Are you sure you want to delete this break?"))
+        messagedialog.set_detail(_("You can't undo this action."))
 
-        messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.show()
+        messagedialog.set_cancel_button(0)
+        messagedialog.set_default_button(0)
+
+        messagedialog.choose(self.window, None, __confirmation_dialog_response)
 
     def __create_plugin_item(self, plugin_config):
         """
