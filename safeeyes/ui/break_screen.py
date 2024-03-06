@@ -27,7 +27,7 @@ from safeeyes import utility
 from Xlib.display import Display
 from Xlib.display import X
 
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
@@ -44,7 +44,10 @@ class BreakScreen:
     def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
         self.context = context
         self.count_labels = []
-        self.display = Display()
+
+        if not self.context['is_wayland']:
+            self.x11_display = Display()
+
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
@@ -59,7 +62,9 @@ class BreakScreen:
         # Initialize the theme
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(style_sheet_path)
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+
+        display = Gdk.Display.get_default()
+        Gtk.StyleContext.add_provider_for_display(display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
     def initialize(self, config):
         """
@@ -131,7 +136,9 @@ class BreakScreen:
         Hide the break screen from active window and destroy all other windows
         """
         logging.info("Close the break screen(s)")
-        self.__release_keyboard()
+
+        if not self.context['is_wayland']:
+            self.__release_keyboard()
 
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
@@ -149,23 +156,26 @@ class BreakScreen:
         Show an empty break screen on all screens.
         """
         # Lock the keyboard
-        utility.start_thread(self.__lock_keyboard)
+        if not self.context['is_wayland']:
+            utility.start_thread(self.__lock_keyboard_x11)
 
-        screen = Gtk.Window().get_screen()
-        no_of_monitors = screen.get_n_monitors()
-        logging.info("Show break screens in %d display(s)", no_of_monitors)
+        display = Gdk.Display.get_default()
+        monitors = display.get_monitors()
+        logging.info("Show break screens in %d display(s)", len(monitors))
 
-        for monitor in range(no_of_monitors):
-            monitor_gemoetry = screen.get_monitor_geometry(monitor)
+        i = 0
+
+        for monitor in monitors:
+            monitor_gemoetry = monitor.get_geometry()
             x = monitor_gemoetry.x
             y = monitor_gemoetry.y
 
             builder = Gtk.Builder()
             builder.add_from_file(BREAK_SCREEN_GLADE)
-            builder.connect_signals(self)
 
             window = builder.get_object("window_main")
-            window.set_title("SafeEyes-" + str(monitor))
+            window.connect("close-request", self.on_window_delete)
+            window.set_title("SafeEyes-" + str(i))
             lbl_message = builder.get_object("lbl_message")
             lbl_count = builder.get_object("lbl_count")
             lbl_widget = builder.get_object("lbl_widget")
@@ -174,33 +184,32 @@ class BreakScreen:
             toolbar = builder.get_object("toolbar")
 
             for tray_action in tray_actions:
-                toolbar_button = None
-                if tray_action.system_icon:
-                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.get_icon())
-                else:
-                    toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
+                # TODO: apparently, this would be better served with an icon theme + Gtk.button.new_from_icon_name
+                icon = tray_action.get_icon()
+                toolbar_button = Gtk.Button()
+                toolbar_button.set_child(icon)
                 tray_action.add_toolbar_button(toolbar_button)
                 toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
                 toolbar_button.set_tooltip_text(_(tray_action.name))
-                toolbar.add(toolbar_button)
+                toolbar.append(toolbar_button)
                 toolbar_button.show()
 
             # Add the buttons
             if self.enable_postpone:
                 # Add postpone button
-                btn_postpone = Gtk.Button(_('Postpone'))
+                btn_postpone = Gtk.Button.new_with_label(_('Postpone'))
                 btn_postpone.get_style_context().add_class('btn_postpone')
                 btn_postpone.connect('clicked', self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
-                box_buttons.pack_start(btn_postpone, True, True, 0)
+                box_buttons.append(btn_postpone)
 
             if not self.strict_break:
                 # Add the skip button
-                btn_skip = Gtk.Button(_('Skip'))
+                btn_skip = Gtk.Button.new_with_label(_('Skip'))
                 btn_skip.get_style_context().add_class('btn_skip')
                 btn_skip.connect('clicked', self.on_skip_clicked)
                 btn_skip.set_visible(True)
-                box_buttons.pack_start(btn_skip, True, True, 0)
+                box_buttons.append(btn_skip)
 
             # Set values
             if image_path:
@@ -211,23 +220,18 @@ class BreakScreen:
             self.windows.append(window)
             self.count_labels.append(lbl_count)
 
-            # Set visual to apply css theme. It should be called before show method.
-            window.set_visual(window.get_screen().get_rgba_visual())
             if self.context['desktop'] == 'kde':
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
-            # In Unity, move the window before present
-            window.move(x, y)
-            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-            window.stick()
-            window.set_keep_above(True)
-            window.fullscreen()
+            window.fullscreen_on_monitor(monitor)
             window.present()
-            # In other desktop environments, move the window after present
-            window.move(x, y)
-            window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
-            logging.info("Moved break screen to Display[%d, %d]", x, y)
+
+            if self.context['is_wayland']:
+                # this may or may not be granted by the window system
+                window.get_surface().inhibit_system_shortcuts(None)
+
+            i = i + 1
 
     def __update_count_down(self, count):
         """
@@ -236,7 +240,7 @@ class BreakScreen:
         for label in self.count_labels:
             label.set_text(count)
 
-    def __lock_keyboard(self):
+    def __lock_keyboard_x11(self):
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts
         """
@@ -244,15 +248,15 @@ class BreakScreen:
         self.lock_keyboard = True
 
         # Grab the keyboard
-        root = self.display.screen().root
+        root = self.x11_display.screen().root
         root.change_attributes(event_mask=X.KeyPressMask | X.KeyReleaseMask)
         root.grab_keyboard(True, X.GrabModeAsync, X.GrabModeAsync, X.CurrentTime)
 
         # Consume keyboard events
         while self.lock_keyboard:
-            if self.display.pending_events() > 0:
+            if self.x11_display.pending_events() > 0:
                 # Avoid waiting for next event by checking pending events
-                event = self.display.next_event()
+                event = self.x11_display.next_event()
                 if self.enable_shortcut and event.type == X.KeyPress:
                     if event.detail == self.keycode_shortcut_skip and not self.strict_break:
                         self.skip_break()
@@ -264,14 +268,14 @@ class BreakScreen:
                 # Reduce the CPU usage by sleeping for a second
                 time.sleep(1)
 
-    def __release_keyboard(self):
+    def __release_keyboard_x11(self):
         """
         Release the locked keyboard.
         """
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
-        self.display.ungrab_keyboard(X.CurrentTime)
-        self.display.flush()
+        self.x11_display.ungrab_keyboard(X.CurrentTime)
+        self.x11_display.flush()
 
     def __destroy_all_screens(self):
         """

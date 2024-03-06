@@ -23,9 +23,9 @@ import gi
 from safeeyes import utility
 from safeeyes.model import Config
 
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
-from gi.repository import GdkPixbuf
+gi.require_version('Gtk', '4.0')
+from gi.repository import Gtk, Gio
+from gi.repository import GdkPixbuf, Gdk
 
 
 SETTINGS_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/settings_dialog.glade")
@@ -55,7 +55,6 @@ class SettingsDialog:
         self.warn_bar_rpc_server_shown = False
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
-        builder.connect_signals(self)
 
         self.window = builder.get_object('window_settings')
         self.box_short_breaks = builder.get_object('box_short_breaks')
@@ -80,18 +79,26 @@ class SettingsDialog:
         self.info_bar_long_break.hide()
         self.warn_bar_rpc_server.hide()
 
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object('reset_menu').connect('clicked', self.on_reset_menu_clicked)
+        self.spin_short_break_interval.connect('value-changed', self.on_spin_short_break_interval_change)
+        self.info_bar_long_break.connect('close', self.on_info_bar_long_break_close)
+        self.info_bar_long_break.connect('response', self.on_info_bar_long_break_close)
+        self.spin_long_break_interval.connect('value-changed', self.on_spin_long_break_interval_change)
+        self.warn_bar_rpc_server.connect('close', self.on_warn_bar_rpc_server_close)
+        self.warn_bar_rpc_server.connect('response', self.on_warn_bar_rpc_server_close)
+        builder.get_object('btn_add_break').connect('clicked', self.add_break)
+
         # Set the current values of input fields
         self.__initialize(config)
 
-        # Update relative states
-        # GtkSwitch state-set signal is available only from 3.14
-        if Gtk.get_minor_version() >= 14:
-            # Add event listener to postpone switch
-            self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
-            self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
-            # Add event listener to RPC server switch
-            self.switch_rpc_server.connect('state-set', self.on_switch_rpc_server_activate)
-            self.on_switch_rpc_server_activate(self.switch_rpc_server, self.switch_rpc_server.get_active())
+        # Add event listener to postpone switch
+        self.switch_postpone.connect('state-set', self.on_switch_postpone_activate)
+        self.on_switch_postpone_activate(self.switch_postpone, self.switch_postpone.get_active())
+        # Add event listener to RPC server switch
+        self.switch_rpc_server.connect('state-set', self.on_switch_rpc_server_activate)
+        self.on_switch_rpc_server_activate(self.switch_rpc_server, self.switch_rpc_server.get_active())
+
         self.initializing = False
 
     def __initialize(self, config):
@@ -103,7 +110,7 @@ class SettingsDialog:
             self.__create_break_item(long_break, False)
 
         for plugin_config in utility.load_plugins_config(config):
-            self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
+            self.box_plugins.append(self.__create_plugin_item(plugin_config))
             
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
@@ -152,57 +159,62 @@ class SettingsDialog:
             )
         )
         box.set_visible(True)
-        parent_box.pack_start(box, False, False, 0)
+        parent_box.append(box)
         return box
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
-        def __confirmation_dialog_response(widget, response_id):
-            if response_id == Gtk.ResponseType.OK:
+        def __confirmation_dialog_response(dialog, result):
+            response_id = dialog.choose_finish(result)
+            if response_id == 1:
                 utility.reset_config()
                 self.config = Config()
                 # Remove breaks from the container
-                self.box_short_breaks.foreach(lambda element: self.box_short_breaks.remove(element))
-                self.box_long_breaks.foreach(lambda element: self.box_long_breaks.remove(element))
-                # Remove plugins from the container
-                self.box_plugins.foreach(lambda element: self.box_plugins.remove(element))
+                self.__clear_children(self.box_short_breaks)
+                self.__clear_children(self.box_long_breaks)
+                self.__clear_children(self.box_plugins)
                 # Initialize again
                 self.__initialize(self.config)
-            widget.destroy()
 
-        messagedialog = Gtk.MessageDialog(parent=self.window,
-                                          flags=Gtk.DialogFlags.MODAL,
-                                          type=Gtk.MessageType.WARNING,
-                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                                   _("Reset"), Gtk.ResponseType.OK),
-                                          message_format=_("Are you sure you want to reset all settings to default?"))
-        messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.format_secondary_text(_("You can't undo this action."))
-        messagedialog.show()
+        messagedialog = Gtk.AlertDialog()
+        messagedialog.set_modal(True)
+        messagedialog.set_buttons(['_Cancel', _("Reset")])
+        messagedialog.set_message(_("Are you sure you want to reset all settings to default?"))
+        messagedialog.set_detail(_("You can't undo this action."))
+
+        messagedialog.set_cancel_button(0)
+        messagedialog.set_default_button(0)
+
+        messagedialog.choose(self.window, None, __confirmation_dialog_response)
+
+    def __clear_children(self, widget):
+        while widget.get_last_child() is not None:
+            widget.remove(widget.get_last_child())
 
     def __delete_break(self, break_config, is_short, on_remove):
         """
         Remove the break after a confirmation.
         """
 
-        def __confirmation_dialog_response(widget, response_id):
-            if response_id == Gtk.ResponseType.OK:
+        def __confirmation_dialog_response(dialog, result):
+            response_id = dialog.choose_finish(result)
+            if response_id == 1:
                 if is_short:
                     self.config.get('short_breaks').remove(break_config)
                 else:
                     self.config.get('long_breaks').remove(break_config)
                 on_remove()
-            widget.destroy()
 
-        messagedialog = Gtk.MessageDialog(parent=self.window,
-                                          flags=Gtk.DialogFlags.MODAL,
-                                          type=Gtk.MessageType.WARNING,
-                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                                   _("Delete"), Gtk.ResponseType.OK),
-                                          message_format=_("Are you sure you want to delete this break?"))
-        messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.format_secondary_text(_("You can't undo this action."))
-        messagedialog.show()
+        messagedialog = Gtk.AlertDialog()
+        messagedialog.set_modal(True)
+        messagedialog.set_buttons(['_Cancel', _("Delete")])
+        messagedialog.set_message(_("Are you sure you want to delete this break?"))
+        messagedialog.set_detail(_("You can't undo this action."))
+
+        messagedialog.set_cancel_button(0)
+        messagedialog.set_default_button(0)
+
+        messagedialog.choose(self.window, None, __confirmation_dialog_response)
 
     def __create_plugin_item(self, plugin_config):
         """
@@ -254,7 +266,7 @@ class SettingsDialog:
         """
         Show the SettingsDialog.
         """
-        self.window.show_all()
+        self.window.present()
 
     def on_switch_postpone_activate(self, switch, state):
         """
@@ -349,17 +361,18 @@ class PluginSettingsDialog:
         self.property_controls = []
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_plugin')
         box_settings = builder.get_object('box_settings')
         self.window.set_title(_('Plugin Settings'))
         for setting in config.get('settings'):
             if setting['type'].upper() == 'INT':
-                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'], setting.get('min', 0), setting.get('max', 120)), False, False, 0)
+                box_settings.append(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'], setting.get('min', 0), setting.get('max', 120)))
             elif setting['type'].upper() == 'TEXT':
-                box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.append(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']))
             elif setting['type'].upper() == 'BOOL':
-                box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.append(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']))
+
+        self.window.connect("close-request", self.on_window_delete)
 
     def __load_int_item(self, name, key, settings, min_value, max_value):
         """
@@ -413,7 +426,7 @@ class PluginSettingsDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
 
 class BreakSettingsDialog:
@@ -431,7 +444,6 @@ class BreakSettingsDialog:
         self.on_remove = on_remove
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_settings_break')
         self.txt_break = builder.get_object('txt_break')
         self.switch_override_interval = builder.get_object('switch_override_interval')
@@ -439,7 +451,7 @@ class BreakSettingsDialog:
         self.switch_override_plugins = builder.get_object('switch_override_plugins')
         self.spin_interval = builder.get_object('spin_interval')
         self.spin_duration = builder.get_object('spin_duration')
-        self.img_break = builder.get_object('img_break')
+        self.btn_image = builder.get_object('btn_image')
         self.cmb_type = builder.get_object('cmb_type')
 
         grid_plugins = builder.get_object('grid_plugins')
@@ -477,7 +489,7 @@ class BreakSettingsDialog:
         row = 0
         col = 0
         for plugin_id in plugin_map.keys():
-            chk_button = Gtk.CheckButton(_(plugin_map[plugin_id]))
+            chk_button = Gtk.CheckButton.new_with_label(_(plugin_map[plugin_id]))
             self.plugin_check_buttons[plugin_id] = chk_button
             grid_plugins.attach(chk_button, row, col, 1, 1)
             if plugins_overriden:
@@ -488,14 +500,21 @@ class BreakSettingsDialog:
             if row > 2:
                 col += 1
                 row = 0
-        # GtkSwitch state-set signal is available only from 3.14
-        if Gtk.get_minor_version() >= 14:
-            self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
-            self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
-            self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
-            self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
-            self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
-            self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+
+        if 'image' in self.break_config:
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            self.btn_image.set_child(image)
+
+        self.window.connect("close-request", self.on_window_delete)
+        self.btn_image.connect('clicked', self.select_image)
+
+        self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
+        self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
+        self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
+        self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
+        self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
+        self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
 
     def on_switch_override_interval_activate(self, switch_button, state):
         """
@@ -520,24 +539,36 @@ class BreakSettingsDialog:
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileDialog()
+        dialog.set_title(_('Please select an image'))
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")
         png_filter.add_mime_type("image/png")
         png_filter.add_pattern("*.png")
-        dialog.add_filter(png_filter)
+        filters = Gio.ListStore.new(Gtk.FileFilter)
+        filters.append(png_filter)
+        dialog.set_filters(filters)
 
-        response = dialog.run()
-        if response == Gtk.ResponseType.OK:
-            self.break_config['image'] = dialog.get_filename()
+        dialog.open(self.window, None, self.select_image_callback)
+
+    def select_image_callback(self, dialog, result):
+        response = None
+
+        try:
+            response = dialog.open_finish(result)
+        except Exception:
+            # user pressing "Cancel" throws a generic exception here
+            pass
+
+        if response is not None:
+            self.break_config['image'] = response.get_path()
             pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.break_config['image'], 16, 16, True)
-            self.img_break.set_from_pixbuf(pixbuf)
-        elif response == Gtk.ResponseType.CANCEL:
+            image = Gtk.Image.new_from_pixbuf(pixbuf)
+            self.btn_image.set_child(image)
+        else:
             self.break_config.pop('image', None)
-            self.img_break.set_from_stock('gtk-missing-image', Gtk.IconSize.BUTTON)
-
-        dialog.destroy()
+            self.btn_image.set_icon_name('gtk-missing-image')
 
     def on_window_delete(self, *args):
         """
@@ -583,7 +614,7 @@ class BreakSettingsDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
 
 class NewBreakDialog:
@@ -596,7 +627,6 @@ class NewBreakDialog:
         self.on_add = on_add
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
-        builder.connect_signals(self)
         self.window = builder.get_object('dialog_new_break')
         self.txt_break = builder.get_object('txt_break')
         self.cmb_type = builder.get_object('cmb_type')
@@ -604,6 +634,10 @@ class NewBreakDialog:
 
         list_types[0][0] = _(list_types[0][0])
         list_types[1][0] = _(list_types[1][0])
+
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object('btn_discard').connect('clicked', self.discard)
+        builder.get_object('btn_save').connect('clicked', self.save)
 
         # Set the values
         self.window.set_title(_('New Break'))
@@ -638,4 +672,4 @@ class NewBreakDialog:
         """
         Show the Properties dialog.
         """
-        self.window.show_all()
+        self.window.present()

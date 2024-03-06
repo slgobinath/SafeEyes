@@ -20,7 +20,7 @@
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkTextBuffer" id="text_buffer_license">
     <property name="text" translatable="yes">This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -36,167 +36,113 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</property>
   </object>
   <object class="GtkWindow" id="window_about">
-    <property name="can_focus">False</property>
     <property name="title" translatable="yes">Safe Eyes</property>
-    <property name="resizable">False</property>
-    <property name="window_position">center-always</property>
-    <property name="icon_name">safeeyes</property>
-    <property name="type_hint">dialog</property>
-    <property name="gravity">center</property>
-    <signal name="delete-event" handler="on_window_delete" swapped="no"/>
+    <property name="resizable">0</property>
+    <property name="icon-name">safeeyes</property>
     <child>
       <object class="GtkBox" id="layout_box">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_left">5</property>
-        <property name="margin_right">5</property>
-        <property name="margin_top">5</property>
-        <property name="margin_bottom">5</property>
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
+        <property name="visible">1</property>
+        <property name="margin-start">5</property>
+        <property name="margin-end">5</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
+        <property name="hexpand">1</property>
+        <property name="vexpand">1</property>
         <property name="orientation">vertical</property>
-        <property name="baseline_position">top</property>
+        <property name="baseline-position">top</property>
         <child>
           <object class="GtkBox" id="box1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="visible">1</property>
             <property name="valign">start</property>
-            <property name="hexpand">True</property>
+            <property name="hexpand">1</property>
             <property name="orientation">vertical</property>
             <child>
               <object class="GtkLabel" id="lbl_app_name">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="visible">1</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 <property name="label" translatable="yes">Safe Eyes 2.1.5</property>
                 <property name="justify">center</property>
+                <property name="hexpand">1</property>
+                <property name="vexpand">1</property>
                 <attributes>
                   <attribute name="style" value="normal"/>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="lbl_decription">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">4</property>
-                <property name="label" translatable="yes">Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer</property>
+                <property name="visible">1</property>
+                <property name="margin-top">4</property>
+                <property name="label" translatable="yes">Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you&apos;re working long hours at the computer</property>
                 <property name="justify">fill</property>
-                <property name="wrap">True</property>
-                <property name="width_chars">60</property>
-                <property name="max_width_chars">60</property>
+                <property name="wrap">1</property>
+                <property name="width-chars">60</property>
+                <property name="max-width-chars">60</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="lbl_license">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="visible">1</property>
                 <property name="halign">start</property>
                 <property name="valign">center</property>
-                <property name="margin_top">10</property>
+                <property name="margin-top">10</property>
                 <property name="label" translatable="yes">License:</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
             </child>
             <child>
               <object class="GtkTextView" id="txt_license">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="editable">False</property>
-                <property name="wrap_mode">word</property>
+                <property name="visible">1</property>
+                <property name="can-focus">1</property>
+                <property name="hexpand">1</property>
+                <property name="vexpand">1</property>
+                <property name="editable">0</property>
+                <property name="wrap-mode">word</property>
                 <property name="buffer">text_buffer_license</property>
-                <property name="accepts_tab">False</property>
+                <property name="accepts-tab">0</property>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">3</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLinkButton" id="btn_url">
                 <property name="label" translatable="yes">https://slgobinath.github.io/SafeEyes</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="focus_on_click">False</property>
-                <property name="receives_default">True</property>
+                <property name="visible">1</property>
+                <property name="can-focus">1</property>
+                <property name="focus-on-click">0</property>
+                <property name="receives-default">1</property>
                 <property name="halign">center</property>
-                <property name="relief">none</property>
+                <property name="has-frame">0</property>
                 <property name="uri">https://slgobinath.github.io/SafeEyes</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">4</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
         </child>
         <child>
           <object class="GtkSeparator" id="separator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
+            <property name="visible">1</property>
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
         <child>
-          <object class="GtkButtonBox" id="buttonbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
+          <object class="GtkBox" id="buttonbox">
+            <property name="visible">1</property>
             <property name="valign">start</property>
-            <property name="margin_right">5</property>
-            <property name="layout_style">end</property>
+            <property name="margin-end">5</property>
+            <property name="halign">end</property>
             <child>
               <object class="GtkButton" id="btn_close">
                 <property name="label" translatable="yes">Close</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_close_clicked" swapped="no"/>
+                <property name="visible">1</property>
+                <property name="can-focus">1</property>
+                <property name="receives-default">1</property>
+                <property name="hexpand">1</property>
+                <property name="vexpand">1</property>
               </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
         </child>
       </object>
     </child>

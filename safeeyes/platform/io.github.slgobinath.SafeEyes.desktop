@@ -24,7 +24,7 @@ Comment[ta]=உங்கள் கண்களை சோர்வடையாத
 Comment[tr]=Gözünüzü yorgunluğa karşı koruyun
 Comment[uk]=Захистіть свої очі від втоми
 Comment[vi]=Bảo vệ đôi mắt của bạn khỏi sự mệt mỏi
-Exec=env GDK_BACKEND=x11 safeeyes
+Exec=safeeyes
 Icon=io.github.slgobinath.SafeEyes
 Terminal=false
 Type=Application
