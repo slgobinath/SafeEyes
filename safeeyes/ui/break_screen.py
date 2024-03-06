@@ -151,12 +151,14 @@ class BreakScreen:
         # Lock the keyboard
         utility.start_thread(self.__lock_keyboard)
 
-        screen = Gtk.Window().get_screen()
-        no_of_monitors = screen.get_n_monitors()
+        display = Gdk.Display.get_default()
+        screen = display.get_default_screen()
+        no_of_monitors = display.get_n_monitors()
         logging.info("Show break screens in %d display(s)", no_of_monitors)
 
-        for monitor in range(no_of_monitors):
-            monitor_gemoetry = screen.get_monitor_geometry(monitor)
+        for monitor_num in range(no_of_monitors):
+            monitor = display.get_monitor(monitor_num)
+            monitor_gemoetry = monitor.get_geometry()
             x = monitor_gemoetry.x
             y = monitor_gemoetry.y
 
@@ -165,7 +167,7 @@ class BreakScreen:
             builder.connect_signals(self)
 
             window = builder.get_object("window_main")
-            window.set_title("SafeEyes-" + str(monitor))
+            window.set_title("SafeEyes-" + str(monitor_num))
             lbl_message = builder.get_object("lbl_message")
             lbl_count = builder.get_object("lbl_count")
             lbl_widget = builder.get_object("lbl_widget")
@@ -188,7 +190,7 @@ class BreakScreen:
             # Add the buttons
             if self.enable_postpone:
                 # Add postpone button
-                btn_postpone = Gtk.Button(_('Postpone'))
+                btn_postpone = Gtk.Button.new_with_label(_('Postpone'))
                 btn_postpone.get_style_context().add_class('btn_postpone')
                 btn_postpone.connect('clicked', self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
@@ -196,7 +198,7 @@ class BreakScreen:
 
             if not self.strict_break:
                 # Add the skip button
-                btn_skip = Gtk.Button(_('Skip'))
+                btn_skip = Gtk.Button.new_with_label(_('Skip'))
                 btn_skip.get_style_context().add_class('btn_skip')
                 btn_skip.connect('clicked', self.on_skip_clicked)
                 btn_skip.set_visible(True)
@@ -222,7 +224,7 @@ class BreakScreen:
             window.resize(monitor_gemoetry.width, monitor_gemoetry.height)
             window.stick()
             window.set_keep_above(True)
-            window.fullscreen()
+            window.fullscreen_on_monitor(screen, monitor_num)
             window.present()
             # In other desktop environments, move the window after present
             window.move(x, y)
