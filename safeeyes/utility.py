@@ -112,7 +112,7 @@ def execute_main_thread(target_function, arg1=None, arg2=None):
     elif arg1 is not None:
         GLib.idle_add(lambda: target_function(arg1))
     elif arg2 is not None:
-        GLib.idle_add(lambda: target_function(arg2))
+        GLib.idle_add(lambda: target_function(None, arg2))
     else:
         GLib.idle_add(target_function)
 
