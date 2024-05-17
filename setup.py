@@ -4,6 +4,7 @@ import setuptools
 
 
 requires = [
+    'pywayland',
     'babel',
     'psutil',
     'croniter',
