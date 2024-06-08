@@ -1,3 +1,9 @@
+safeeyes (2.1.7) noble; urgency=medium
+
+  * Support Python 3.12
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 29 Apr 2024 02:09:48 -0400
+
 safeeyes (2.1.6-0) lunar; urgency=high
   * Support Python 3.11
 

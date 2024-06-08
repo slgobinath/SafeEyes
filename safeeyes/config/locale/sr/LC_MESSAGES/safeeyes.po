@@ -6,94 +6,97 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2023-10-13 04:15+0000\n"
+"Last-Translator: Novak Urosevic <novak_urosevic@yahoo.com>\n"
+"Language-Team: Serbian <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/sr/>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.1-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr ""
+msgstr "Чврсто затворите очи"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "Колутајте очима „исцртавајући“ број 8 неколико пута"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "Колутајте очи у круг у смеру казаљке на сату"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "Колутајте очи у круг у смеру супротном од казаљке на сату"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "Трепћите очима"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "Усмерите поглед на тачку у даљини"
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "Попијте воду"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "Протегните се"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "Завалите се у фотељу и опустите се"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "Прикажи о нама прозор"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "Онемогућите тренутну сесију safeeyes-a"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "Омогућите тренутну сесију safeeyes-a"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "Искључите тренутну сесију safeeyes-а и затворите програм"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "Прикажи прозор са подешавањима"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Покрените safeeyes у режиму за исправљање грешака"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "Одштампајте статус тренутне сесије safeeyes-a и напустите"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes није укључен"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes ради без RPC (Remote Procedure Call) сервера. Укључите га како "
+"бисте користили командне-линије."
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "Затворите"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
@@ -101,396 +104,405 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
+"Safe Eyes штити Ваше очи од напрезања (astenopija) подсећајући Вас да "
+"правите паузе током вишесатне употребе компјутера"
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "Лиценца"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "Прескочите"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "Одложите"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "Време трајања паузе (у секундама)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "Временски период између две паузе (у минутима)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "Време припреме за паузу (у секундама)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Временски период искључења пречица тастатуре (у секундама)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr ""
+msgstr "Дужина трајања Одлагања (у минутима)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Прикажите паузе насумичним редоследом"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "Обавезна пауза (без могућности одлагања пауза)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "Дозволи одлагање пауза"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Задржи интерни статус"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Користите RPC сервер како бисте примили runtime команде"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Без RPC сервера, унос путем командних-линија можда неће бити успешан"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"Интервали између дугих пауза морају бити неколико пута дужи од интервала "
+"између кратких пауза"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Поново покрените"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
 msgstr ""
+"Да ли сигурно желите да вратите сва подешавања на подразумевана подешавања?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "Опције"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "Кратке Паузе"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "Дуге Паузе"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "Обришите"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "Да ли сигурно желите да обришете ову паузу?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "Не можете опозвати радњу."
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "Пауза"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "Паузе"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "Додаци"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "Укуцајте"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "Кратка"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "Дуга"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "Слика"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "Изаберите"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "Молимо Вас изаберите слику"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "Дужина трајања"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "Време чекања"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "Преписати"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr ""
+msgstr "Време (у секундама)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr ""
+msgstr "Време (у минутима)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "Подешавање паузе"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "Подешавање додатака"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "Додатак не подржава % радну површину"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Молимо Вас, преузмите модул '%s' за Пајтон"
 
 # Settings dialog
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Молимо Вас, преузмите алатку командне-линије '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Неправилан формат за извршавање cron посла '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
+"Молимо Вас, додајте ресурс %(resource)s у %(config_resource)s директоријум"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "Нова Пауза"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "Уклоните"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "Одбаците"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "Сачувајте"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "Звучно Обавештење"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Пустите звучно обавештење пре и после пауза"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Пустите звучно обавештење пре пауза"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Пустите звучно овавештење након пауза"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "Не Узнемиравај"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Прескочите паузу уколико је тренутни радни прозор у пуном екрану"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "Никада не ометајте ове радне прозоре"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Ометајте ове радне прозоре без обзира на њихово стање"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Промените променљив радни прозор у нормалан режим"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "Не Узнемиравај док компјутер ради са батерије"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "Здравствена статистика"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Покажи статистику на основу Ваше употребе Safe Eyes-a"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Интервал ресетовања Података (cron послова)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Обавештење"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Покажите системско обавештење пре почетка пауза"
 
 # plugin/notification
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Спремите се за кратку паузу у року од %s секунди"
 
 # plugin/notification
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "Спремите се за дугу паузу у року од %s секунди"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "Чувар екрана"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
 msgstr ""
+"Закључајте екран за време дугих паузи тако што ћете укључити чувар екрана"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "Команда за чувар екрана по жељи"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "Најмањи број секунди за прескакање без чувара екрана"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "Закључајте екран"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "Паметна Пауза"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "Зауставите Safe-Eyes уколико систем мирује"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
 msgstr ""
+"Најкраћи временски период потребан за заустављање Safe Eyes-a (у секундама)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
 msgstr ""
+"Протумачите време мировања еквивалентно трајању предстојеће паузе као паузу"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "Одложите наредну паузу док систем не постане неактиван"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "Иконица на панелу"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "Покажите иконицу на панелу у Обавештењима"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "Покажите време следеће паузе на иконици на панелу"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Дозволи онемогућавање Safe Eyes-a"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "О програму"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Онемогући Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr ""
+msgstr "Онемогућено до %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "Онемогућено до ресетовања"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Омогући Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "сат"
+msgstr[1] "сати"
+msgstr[2] "сати"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "минут"
+msgstr[1] "минута"
+msgstr[2] "минута"
 
 #: plugins/trayicon
 msgid "For %d Second"
 msgid_plural "For %d Seconds"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "секунда"
+msgstr[1] "секунде"
+msgstr[2] "секунди"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr ""
+msgstr "Наредна пауза је у %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "Нема доступних Пауза"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "Подешавања"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "Сада направи паузу"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "До ресетовања"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "Изађите"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "Контрола медија"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "Зауставите рад медијских плејера са екрана Паузе"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "Паузирај медије"

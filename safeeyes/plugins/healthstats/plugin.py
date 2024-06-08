@@ -25,188 +25,156 @@ import datetime
 import logging
 
 context = None
-no_of_skipped_breaks = 0
-no_of_breaks = 0
 session = None
-safe_eyes_start_time = datetime.datetime.now()
-total_idle_time = 0
-last_screen_time = -1
-statistics_reset_cron = '0 0 * * *'  # Every midnight
-time_to_reset_break = datetime.datetime.now()
+statistics_reset_cron = None
+default_statistics_reset_cron = '0 0 * * *'  # Every midnight
 next_reset_time = None
-enabled = True
+start_time = None
 
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the plugin.
     """
-    global enabled
     global context
     global session
-    global no_of_skipped_breaks
-    global no_of_breaks
     global statistics_reset_cron
-    global safe_eyes_start_time
-    global total_idle_time
-    global last_screen_time
-    global next_reset_time
 
     logging.debug('Initialize Health Stats plugin')
     context = ctx
-    statistics_reset_cron = plugin_config.get('statistics_reset_cron', '0 0 * * *')
-    # Compute the next reset time
-    next_reset_time = _get_next_reset_time(datetime.datetime.now(), statistics_reset_cron)
-    enabled = next_reset_time is not None
-
-    if not enabled:
-        # There is an error in the cron expression
-        logging.error("Error in parsing the cron expression `" + statistics_reset_cron + "`. Health Stats plugin is disabled.")
-        return
+    statistics_reset_cron = plugin_config.get('statistics_reset_cron', default_statistics_reset_cron)
 
     if session is None:
         # Read the session
-        session = context['session']['plugin'].get('healthstats', None)
-        if session is None:
-            session = {'no_of_skipped_breaks': 0,
-                       'no_of_breaks': 0,
-                       'safe_eyes_start_time': safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S"),
-                       'total_idle_time': 0,
-                       'last_screen_time': -1,
-                       'next_reset_time': next_reset_time.strftime("%Y-%m-%d %H:%M:%S")}
-            context['session']['plugin']['healthstats'] = session
-        no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
-        no_of_breaks = session.get('no_of_breaks', 0)
-        total_idle_time = session.get('total_idle_time', 0)
-        last_screen_time = session.get('last_screen_time', -1)
-        str_time = session.get('safe_eyes_start_time', None)
-        str_next_reset_time = session.get('next_reset_time', None)
-        if str_time:
-            safe_eyes_start_time = datetime.datetime.strptime(str_time, "%Y-%m-%d %H:%M:%S")
-        if str_next_reset_time:
-            next_reset_time = datetime.datetime.strptime(str_time, "%Y-%m-%d %H:%M:%S")
-            
-    _reset_stats()
+        defaults = {
+            'breaks': 0,
+            'skipped_breaks': 0,
+            'screen_time': 0,
+            'total_breaks': 0,
+            'total_skipped_breaks': 0,
+            'total_screen_time': 0,
+            'total_resets': 0,
+        }
+
+        session = context['session']['plugin'].get('healthstats', {}) | defaults
+        if 'no_of_breaks' in session:
+            # Ignore old format session.
+            session = defaults
+        context['session']['plugin']['healthstats'] = session
+
+    _get_next_reset_time()
 
 
 def on_stop_break():
-    """
-    After the break, check if it is skipped.
-    """
-    # Check if the plugin is enabled
-    if not enabled:
-        return
-
-    global no_of_skipped_breaks
+    # Check if break was skipped.
+    global session
     if context['skipped']:
-        no_of_skipped_breaks += 1
-        session['no_of_skipped_breaks'] = no_of_skipped_breaks
+        session['skipped_breaks'] += 1
+
+    # Screen time is starting again.
+    on_start()
+
+
+def on_start_break(break_obj):
+    global session
+    session['breaks'] += 1
+
+    # Screen time has stoped.
+    on_stop()
+
+
+def on_stop():
+    global start_time
+    _reset_stats()
+    if start_time:
+        screen_time = datetime.datetime.now() - start_time
+        session['screen_time'] += round(screen_time.total_seconds())
+        start_time = None
 
 
 def get_widget_title(break_obj):
     """
     Return the widget title.
     """
-    # Check if the plugin is enabled
-    if not enabled:
-        return ""
-
-    global no_of_breaks
-    no_of_breaks += 1
-    session['no_of_breaks'] = no_of_breaks
-    session['safe_eyes_start_time'] = safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S")
-    session['total_idle_time'] = total_idle_time
-    session['last_screen_time'] = last_screen_time
     return _('Health Statistics')
 
 
 def _reset_stats():
-    global no_of_breaks
-    global safe_eyes_start_time
-    global total_idle_time
-    global no_of_skipped_breaks
-    global last_screen_time
-    global next_reset_time
+    global session
 
     # Check if the reset time has passed
-    current_time = datetime.datetime.now()
-    total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
-    if current_time >= next_reset_time:
-        logging.debug("Resetting the health statistics")
-        # Reset statistics
-        if safe_eyes_start_time < next_reset_time:
-            # Safe Eyes is running even before the reset time
-            # Consider the reset time as the new start time
-            safe_eyes_start_time = next_reset_time
-            total_duration_sec = (current_time - safe_eyes_start_time).total_seconds()
+    if next_reset_time and datetime.datetime.now() >= next_reset_time:
+        logging.info("Resetting the health statistics")
 
         # Update the next_reset_time
-        next_reset_time = _get_next_reset_time(current_time, statistics_reset_cron)
+        _get_next_reset_time()
 
-        last_screen_time = round((total_duration_sec - total_idle_time) / 60)
-        total_idle_time = 0
-        no_of_breaks = 0
-        no_of_skipped_breaks = 0
-        session['no_of_breaks'] = 0
-        session['no_of_skipped_breaks'] = 0
-        session['safe_eyes_start_time'] = safe_eyes_start_time.strftime("%Y-%m-%d %H:%M:%S")
-        session['total_idle_time'] = total_idle_time
-        session['last_screen_time'] = last_screen_time
-        session['next_reset_time'] = next_reset_time.strftime("%Y-%m-%d %H:%M:%S")
-
-    return total_duration_sec
+        # Reset statistics
+        session['total_breaks'] += session['breaks']
+        session['total_skipped_breaks'] += session['skipped_breaks']
+        session['total_screen_time'] += session['screen_time']
+        session['total_resets'] += 1
+        session['breaks'] = 0
+        session['skipped_breaks'] = 0
+        session['screen_time'] = 0
 
 
 def get_widget_content(break_obj):
     """
     Return the statistics.
     """
-    # Check if the plugin is enabled
-    if not enabled:
-        return ""
-
-    total_duration_sec = _reset_stats()
-    screen_time = round((total_duration_sec - total_idle_time) / 60)
-    hours, minutes = divmod(screen_time, 60)
-    time_format = '{:02d}:{:02d}'.format(hours, minutes)
-    if hours > 6 or round((no_of_skipped_breaks / no_of_breaks), 1) >= 0.2:
+    global next_reset_time
+    resets = session['total_resets']
+    if session['screen_time'] > 21600 or (session['breaks'] and session['skipped_breaks'] / session['breaks']) >= 0.2:
         # Unhealthy behavior -> Red broken heart
         heart = '💔️'
     else:
         # Healthy behavior -> Green heart
         heart = '💚'
-    if last_screen_time < 0:
-        screen_time_diff = ''
-    else:
-        hrs_diff, mins_diff = divmod(abs(screen_time - last_screen_time), 60)
-        symbol = ''
-        if screen_time > last_screen_time:
-            symbol = '+'
-        elif screen_time < last_screen_time:
-            symbol = '-'
-        screen_time_diff = ' ( {}{:02d}:{:02d} )'.format(symbol, hrs_diff, mins_diff)
-    return "{}\tBREAKS: {}\tSKIPPED: {}\tSCREEN TIME: {}{}".format(heart, no_of_breaks, no_of_skipped_breaks, time_format, screen_time_diff)
+
+    content = [
+      heart,
+      f"BREAKS: {session['breaks']}",
+      f"SKIPPED: {session['skipped_breaks']}",
+      f"SCREEN TIME: {_format_interval(session['screen_time'])}",
+    ]
+
+    if resets:
+        content[1] += f" [{round(session['total_breaks'] / resets, 1)}]"
+        content[2] += f" [{round(session['total_skipped_breaks'] / resets, 1)}]"
+        content[3] += f" [{_format_interval(session['total_screen_time'] / resets)}]"
+
+    content = "\t".join(content)
+    if resets:
+        content += f"\n\t[] = average of {resets} reset(s)"
+    if next_reset_time is None:
+        content += f"\n\tSettings error in statistics reset interval: {statistics_reset_cron}"
+    return content
 
 
 def on_start():
     """
-    Add the idle period to the total idle time.
+    Track the start time.
     """
-    # Check if the plugin is enabled
-    if not enabled:
-        return ""
-
+    global start_time
     _reset_stats()
-    global total_idle_time
-    # idle_period is provided by Smart Pause plugin
-    total_idle_time += context.get('idle_period', 0)
-    session['total_idle_time'] = total_idle_time
+    start_time = datetime.datetime.now()
 
-def _get_next_reset_time(current_time, statistics_reset_cron):
+
+def _get_next_reset_time():
+    global next_reset_time
+    global session
+
     try:
-        cron = croniter.croniter(statistics_reset_cron, current_time)
-        next_time = cron.get_next(datetime.datetime)
-        logging.debug("Health stats will be reset at " + next_time.strftime("%Y-%m-%d %H:%M:%S"))
-        return next_time
+        cron = croniter.croniter(statistics_reset_cron, datetime.datetime.now())
+        next_reset_time = cron.get_next(datetime.datetime)
+        session['next_reset_time'] = next_reset_time.strftime("%Y-%m-%d %H:%M:%S")
+        logging.debug("Health stats will be reset at " + session['next_reset_time'])
     except:
-        # Error in getting the next reset time
-        return None
+        logging.error("Error in statistics reset expression: " + statistics_reset_cron)
+        next_reset_time = None
+
+
+def _format_interval(seconds):
+    screen_time = round(seconds / 60)
+    hours, minutes = divmod(screen_time, 60)
+    return '{:02d}:{:02d}'.format(hours, minutes)

@@ -21,7 +21,6 @@ This module contains utility functions for Safe Eyes and its plugins.
 """
 
 import errno
-import imp
 import inspect
 import importlib
 import json
@@ -355,7 +354,7 @@ def module_exist(module):
     Check wther the given Python module exists or not.
     """
     try:
-        imp.find_module(module)
+        importlib.util.find_spec(module)
         return True
     except ImportError:
         return False
@@ -391,27 +390,51 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    create_startup_entry()
+    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or manual deletion of .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation of a startup entry
+    create_startup_entry(force=True)
 
-
-def create_startup_entry():
+def create_startup_entry(force=False):
     """
     Create start up entry.
     """
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
     startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
+    # until SafeEyes 2.1.5 the startup entry had another name
+    # https://github.com/slgobinath/SafeEyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398 
+    obsolete_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
 
-    # Create the folder if not exist
-    mkdir(startup_dir_path)
+    create_link = False
 
-    # Remove existing files
-    delete(startup_entry)
+    if force:
+        # if force is True, just create the link
+        create_link = True
+    else:
+        # if force is False, we want to avoid creating the startup symlink if it was manually deleted by the user, we want to create it only if a broken one is found
+        if os.path.islink(startup_entry):
+            # if the link exists, check if it is broken
+            try:
+                os.stat(startup_entry)
+            except FileNotFoundError:
+                # a FileNotFoundError will get thrown if the startup symlink is broken
+                create_link = True 
 
-    # Create the new startup entry
-    try:
-        os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
-    except OSError:
-        logging.error("Failed to create startup entry at %s" % startup_entry)
+        if os.path.islink(obsolete_entry):
+            # if a link with the old naming exists, delete it and create a new one
+            create_link = True
+            delete(obsolete_entry)
+
+    if create_link:
+        # Create the folder if not exist
+        mkdir(startup_dir_path)
+
+        # Remove existing files
+        delete(startup_entry)
+
+        # Create the new startup entry
+        try:
+            os.symlink(SYSTEM_DESKTOP_FILE, startup_entry)
+        except OSError:
+            logging.error("Failed to create startup entry at %s" % startup_entry)
 
 
 def initialize_platform():
@@ -491,7 +514,7 @@ def replace_style_sheet():
     os.chmod(STYLE_SHEET_PATH, 0o777)
 
 
-def intialize_logging(debug):
+def initialize_logging(debug):
     """
     Initialize the logging framework using the Safe Eyes specific configurations.
     """

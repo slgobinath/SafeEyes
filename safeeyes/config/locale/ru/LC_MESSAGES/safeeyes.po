@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-03-22 16:41+0000\n"
-"Last-Translator: AHOHNMYC <lqwh2h2cwa@protonmail.com>\n"
+"PO-Revision-Date: 2023-11-26 00:02+0000\n"
+"Last-Translator: Almaz Mannanov <AlmazWorks@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.2-dev\n"
+"X-Generator: Weblate 5.2.1-rc\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -56,15 +56,15 @@ msgstr "Откиньтесь на спинку стула и расслабьт�
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "О программе"
+msgstr "показать окно \"о программе\""
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Отключить Safe Eyes"
+msgstr "отключить текущий запущенный экземпляр Safe Eyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Активировать Safe Eyes"
+msgstr "активировать текущий запущенный экземпляр Safe Eyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
@@ -72,7 +72,7 @@ msgstr "Закрыть Safe Eyes и выйти"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "Настройки"
+msgstr "показать окно настроек"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
@@ -290,7 +290,7 @@ msgstr "Новый перерыв"
 
 # Settings dialog
 msgid "Remove"
-msgstr "Удалить"
+msgstr "Стереть"
 
 # Settings dialog
 msgid "Discard"

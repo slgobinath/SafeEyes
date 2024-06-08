@@ -40,7 +40,7 @@ from safeeyes.ui.settings_dialog import SettingsDialog
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-SAFE_EYES_VERSION = "2.1.6"
+SAFE_EYES_VERSION = "2.1.7"
 
 
 class SafeEyes:
@@ -96,6 +96,7 @@ class SafeEyes:
         self.context['api']['take_break'] = self.take_break
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
+        self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
         self.plugins_manager.init(self.context, self.config)
         atexit.register(self.persist_session)
 
@@ -157,7 +158,7 @@ class SafeEyes:
             if self.active:
                 logging.info("Stop Safe Eyes due to system suspend")
                 self.plugins_manager.stop()
-                self.safe_eyes_core.stop()
+                self.safe_eyes_core.stop(True)
         else:
             # Resume from sleep
             if self.active and self.safe_eyes_core.has_breaks():
@@ -238,14 +239,14 @@ class SafeEyes:
             self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()
 
-    def disable_safeeyes(self, status=None):
+    def disable_safeeyes(self, status=None, is_resting = False):
         """
         Listen to tray icon disable action and send the signal to core.
         """
         if self.active:
             self.active = False
             self.plugins_manager.stop()
-            self.safe_eyes_core.stop()
+            self.safe_eyes_core.stop(is_resting)
             if status is None:
                 status = _('Disabled until restart')
             self._status = status

@@ -53,10 +53,11 @@ class TrayIcon:
         self.on_show_settings = context['api']['show_settings']
         self.on_show_about = context['api']['show_about']
         self.quit = context['api']['quit']
-        self.on_enable = context['api']['enable_safeeyes']
-        self.on_disable = context['api']['disable_safeeyes']
+        self.enable_safeeyes = context['api']['enable_safeeyes']
+        self.disable_safeeyes = context['api']['disable_safeeyes']
         self.take_break = context['api']['take_break']
         self.has_breaks = context['api']['has_breaks']
+        self.get_break_time = context['api']['get_break_time']
         self.plugin_config = plugin_config
         self.date_time = None
         self.active = True
@@ -126,7 +127,7 @@ class TrayIcon:
         # Add the sub menu to the enable/disable menu
         self.item_disable.set_submenu(self.sub_menu_disable)
 
-        # Settings menu item
+        # Manual break menu item
         self.item_manual_break = Gtk.MenuItem()
 
         self.sub_menu_manual_next_break = Gtk.MenuItem()
@@ -215,7 +216,7 @@ class TrayIcon:
                 self.indicator.set_label('', '')
                 self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         else:
-            self.item_info.set_label(_('No Breaks Available'))
+            self.item_info.set_label(_('No breaks available'))
             self.indicator.set_label('', '')
             self.indicator.set_icon("io.github.slgobinath.SafeEyes-disabled")
         self.item_info.set_sensitive(breaks_found and self.active)
@@ -282,13 +283,25 @@ class TrayIcon:
         """
         A private method to be called within this class to update the next break information using self.dateTime.
         """
-        formatted_time = utility.format_time(self.date_time)
-        message = _('Next break at %s') % (formatted_time)
+        formatted_time = utility.format_time(self.get_break_time())
+        long_time = self.get_break_time(BreakType.LONG_BREAK)
+
+        if long_time:
+            long_time = utility.format_time(long_time)
+            if long_time == formatted_time:
+                message = _('Next long break at %s') % (long_time)
+            else:
+                message = _('Next breaks at %s/%s') % (formatted_time, long_time)
+        else:
+            message = _('Next break at %s') % (formatted_time)
+
         # Update the menu item label
         utility.execute_main_thread(self.item_info.set_label, message)
+
         # Update the tray icon label
         if self.plugin_config.get('show_time_in_tray', False):
-            self.indicator.set_label(formatted_time, '')
+            show_long = long_time and self.plugin_config.get('show_long_time_in_tray', False)
+            self.indicator.set_label(long_time if show_long else formatted_time, '')
         else:
             self.indicator.set_label('', '')
 
@@ -311,7 +324,7 @@ class TrayIcon:
         if not self.active:
             with self.lock:
                 self.enable_ui()
-                self.on_enable()
+                self.enable_safeeyes()
                 # Notify all schedulers
                 self.idle_condition.acquire()
                 self.idle_condition.notify_all()
@@ -329,13 +342,13 @@ class TrayIcon:
             time_to_wait = args[1]
             if time_to_wait <= 0:
                 info = _('Disabled until restart')
-                self.on_disable(info)
+                self.disable_safeeyes(info)
                 self.wakeup_time = None
                 self.item_info.set_label(info)
             else:
                 self.wakeup_time = datetime.datetime.now() + datetime.timedelta(minutes=time_to_wait)
                 info = _('Disabled until %s') % utility.format_time(self.wakeup_time)
-                self.on_disable(info)
+                self.disable_safeeyes(info)
                 self.item_info.set_label(info)
                 utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
 

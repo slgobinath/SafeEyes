@@ -1,0 +1,31 @@
+name: Check translations
+
+# Drop permissions to minimum for security
+permissions:
+  contents: read
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  check_translations:
+    name: Check translations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install runtime dependencies
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip install polib
+
+      - name: Check translations
+        run: |
+          python3 validate_po.py

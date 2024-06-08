@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-04-03 10:36+0000\n"
-"Last-Translator: Michal Biesiada <blade-14@o2.pl>\n"
+"PO-Revision-Date: 2023-10-31 16:04+0000\n"
+"Last-Translator: Eryk Michalak <gnu.ewm@protonmail.com>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pl/>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.0-dev\n"
+"X-Generator: Weblate 5.2-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -141,7 +141,7 @@ msgstr "Czas przełożenia (w minutach)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "Wyświetlaj przerwy w losowej kolejności"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -169,11 +169,11 @@ msgstr "Długa przerwa musi być poprzedzona kilkoma krótkimi"
 
 # Settings dialog
 msgid "Reset"
-msgstr "Zresetuj ustawienia"
+msgstr "Resetuj"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "Czy jesteś pewien, że chcesz przywrócić ustawienia domyślne?"
+msgstr "Czy chcesz przywrócić ustawienia domyślne?"
 
 # Settings dialog
 msgid "Options"
@@ -193,11 +193,11 @@ msgstr "Usuń"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "Czy jesteś pewien, że chcesz usunąć tę przerwę?"
+msgstr "Czy na pewno chcesz usunąć tę przerwę?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Nie możesz cofnąć tej akcji."
+msgstr "Nie można cofnąć tej operacji."
 
 # Settings dialog
 msgid "Break"
@@ -277,7 +277,7 @@ msgstr "Proszę zainstalować wiersz poleceń '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Nieprawidłowe wyrażenie cron '%s'"
 
 # Settings dialog
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
@@ -349,7 +349,7 @@ msgstr "Pokaż statystyki oparte o Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Okres resetowania statystyk (wyrażenie cron)"
 
 # plugin/notification
 msgid "Notification"
@@ -480,7 +480,7 @@ msgstr "Ustawienia"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "Przerwa"
+msgstr "Zrób sobie teraz przerwę"
 
 #: plugins/trayicon
 msgid "Until restart"

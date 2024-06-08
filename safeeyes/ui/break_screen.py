@@ -41,7 +41,7 @@ class BreakScreen:
     This class reads the break_screen.glade and build the user interface.
     """
 
-    def __init__(self, context, on_skip, on_postpone, style_sheet_path):
+    def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
         self.context = context
         self.count_labels = []
         self.display = Display()
@@ -50,8 +50,8 @@ class BreakScreen:
         self.is_pretified = False
         self.keycode_shortcut_postpone = 65
         self.keycode_shortcut_skip = 9
-        self.on_postpone = on_postpone
-        self.on_skip = on_skip
+        self.on_postponed = on_postponed
+        self.on_skipped = on_skipped
         self.shortcut_disable_time = 2
         self.strict_break = False
         self.windows = []
@@ -77,8 +77,8 @@ class BreakScreen:
         Skip the break from the break screen
         """
         logging.info("User skipped the break")
-        # Must call on_skip before close to lock screen before closing the break screen
-        self.on_skip()
+        # Must call on_skipped before close to lock screen before closing the break screen
+        self.on_skipped()
         self.close()
 
     def postpone_break(self):
@@ -86,7 +86,7 @@ class BreakScreen:
         Postpone the break from the break screen
         """
         logging.info("User postponed the break")
-        self.on_postpone()
+        self.on_postponed()
         self.close()
 
     def on_window_delete(self, *args):

@@ -19,22 +19,6 @@
 import datetime
 from safeeyes import utility
 
-def _get_next_reset_time(current_time, statistics_reset_cron):
-    import croniter
-    try:
-        cron = croniter.croniter(statistics_reset_cron, current_time)
-        return cron.get_next(datetime.datetime)
-    except:
-        # Error in getting the next reset time
-        return None
-
 def validate(plugin_config, plugin_settings):
     if not utility.module_exist("croniter"):
         return _("Please install the Python module '%s'") % "croniter"
-
-    # Validate the cron expression
-    statistics_reset_cron = plugin_settings.get('statistics_reset_cron', '0 0 * * *')
-    if _get_next_reset_time(datetime.datetime.now(), statistics_reset_cron) is None:
-        return _("Invalid cron expression '%s'") % statistics_reset_cron
-    else:
-        return None
