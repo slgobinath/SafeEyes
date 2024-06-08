@@ -33,7 +33,7 @@ jobs:
       - name: Create Tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
-          custom_tag: "v${{steps.get_current_version.outputs.project_version}}"
+          custom_tag: "${{steps.get_current_version.outputs.project_version}}"
           github_token: ${{ secrets.GH_API_SECRET }}
 
       - name: Build Changelog
