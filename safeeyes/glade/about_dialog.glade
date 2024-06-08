@@ -71,7 +71,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="valign">center</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="label" translatable="yes">Safe Eyes 2.1.7</property>
+                <property name="label" translatable="yes">Safe Eyes 2.1.8</property>
                 <property name="justify">center</property>
                 <attributes>
                   <attribute name="style" value="normal"/>
