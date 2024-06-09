@@ -26,6 +26,13 @@ import os
 from safeeyes import utility
 from safeeyes.model import State
 
+import gi
+gi.require_version('Gtk', '4.0')
+gi.require_version('GdkWayland', '4.0')
+from gi.repository import Gdk, GdkWayland
+
+from .ext_idle_notify import ExtIdleNotify
+
 """
 Safe Eyes smart pause plugin
 """
@@ -46,11 +53,16 @@ waiting_time = 2
 is_wayland_and_gnome = False
 
 use_swayidle = False
+use_ext_idle_notify = False
 swayidle_process = None
 swayidle_lock = threading.Lock()
 swayidle_idle = 0
 swayidle_active = 0
 
+ext_idle_notify_lock = threading.Lock()
+ext_idle_notification_obj = None
+
+# swayidle
 def __swayidle_running():
     return (swayidle_process is not None and
             swayidle_process.poll() is None)
@@ -88,6 +100,31 @@ def __swayidle_idle_time():
             return idle_time
     return 0
 
+# ext idle
+def __start_ext_idle_monitor():
+    global ext_idle_notification_obj
+
+    ext_idle_notification_obj = ExtIdleNotify()
+    ext_idle_notification_obj.run()
+
+def __stop_ext_idle_monitor():
+    global ext_idle_notification_obj
+
+    with ext_idle_notify_lock:
+        if ext_idle_notification_obj is not None:
+            ext_idle_notification_obj.stop()
+            ext_idle_notification_obj = None;
+
+def __ext_idle_idle_time():
+    global ext_idle_notification_obj
+    with ext_idle_notify_lock:
+        if ext_idle_notification_obj is None:
+            __start_ext_idle_monitor()
+        else:
+            return ext_idle_notification_obj.get_idle_time_seconds()
+    return 0
+
+# gnome
 def __gnome_wayland_idle_time():
     """
     Determine system idle time in seconds, specifically for gnome with wayland.
@@ -119,6 +156,8 @@ def __system_idle_time():
             return __gnome_wayland_idle_time()
         elif use_swayidle:
             return __swayidle_idle_time()
+        elif use_ext_idle_notify:
+            return __ext_idle_idle_time()
         # Convert to seconds
         return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
     except BaseException:
@@ -159,6 +198,7 @@ def init(ctx, safeeyes_config, plugin_config):
     global postpone_if_active
     global is_wayland_and_gnome
     global use_swayidle
+    global use_ext_idle_notify
     logging.debug('Initialize Smart Pause plugin')
     context = ctx
     enable_safeeyes = context['api']['enable_safeeyes']
@@ -172,6 +212,7 @@ def init(ctx, safeeyes_config, plugin_config):
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
     use_swayidle = context['desktop'] == 'sway'
+    use_ext_idle_notify = context['is_wayland'] and not use_swayidle and not is_wayland_and_gnome
 
 
 def __start_idle_monitor():
@@ -244,6 +285,9 @@ def on_stop():
     idle_condition.acquire()
     idle_condition.notify_all()
     idle_condition.release()
+
+    if use_ext_idle_notify:
+        __stop_ext_idle_monitor()
 
 
 def update_next_break(break_obj, dateTime):
