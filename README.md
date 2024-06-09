@@ -41,7 +41,7 @@ Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
 ```bash
-sudo add-apt-repository ppa:slgobinath/safeeyes
+sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
 sudo apt install safeeyes
 ```
