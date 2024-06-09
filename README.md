@@ -7,7 +7,6 @@
 [![Flathub](https://img.shields.io/flathub/v/io.github.slgobinath.SafeEyes)](https://flathub.org/apps/details/io.github.slgobinath.SafeEyes)
 [![Translation status](https://hosted.weblate.org/widgets/safe-eyes/-/translations/svg-badge.svg)](https://hosted.weblate.org/engage/safe-eyes/?utm_source=widget)
 [![Awesome Humane Tech](https://raw.githubusercontent.com/humanetech-community/awesome-humane-tech/main/humane-tech-badge.svg?sanitize=true)](https://github.com/humanetech-community/awesome-humane-tech)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/slgobinath)
 
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder.
 
@@ -41,7 +40,7 @@ Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
 ```bash
-sudo add-apt-repository ppa:slgobinath/safeeyes
+sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
 sudo apt install safeeyes
 ```
@@ -187,9 +186,3 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 ## License
 
 GNU General Public License v3
-
-## IDE Support
-
-<p align="center">Thanks to JetBrains for offering IDE support to develop this Open Source project.</p>
-
-<p align="center"><a href="https://www.jetbrains.com/?from=SafeEyes"><img src="https://raw.githubusercontent.com/JetBrains/logos/master/web/jetbrains/jetbrains.svg?sanitize=true" width="64" align="center"></a></p>
