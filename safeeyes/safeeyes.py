@@ -40,7 +40,7 @@ from safeeyes.ui.settings_dialog import SettingsDialog
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-SAFE_EYES_VERSION = "2.1.8"
+SAFE_EYES_VERSION = "2.1.9"
 
 
 class SafeEyes:
