@@ -138,7 +138,7 @@ Some Linux systems like CentOS do not have matching dependencies available in th
 
     python3 -m venv venv
     source venv/bin/activate
-    pip3 install dbus-python safeeyes
+    pip3 install safeeyes
     ```
 
 3. Start Safe Eyes from the terminal

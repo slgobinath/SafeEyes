@@ -7,6 +7,7 @@ requires = [
     'babel',
     'psutil',
     'croniter',
+    'dbus-python',
     'PyGObject',
     'packaging',
     'python-xlib'
