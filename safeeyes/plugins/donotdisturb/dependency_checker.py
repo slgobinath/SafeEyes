@@ -22,6 +22,8 @@ from safeeyes import utility
 def validate(plugin_config, plugin_settings):
     command = None
     if utility.IS_WAYLAND:
+        if utility.DESKTOP_ENVIRONMENT == "gnome":
+            return None
         command = "wlrctl"
     else:
         command = "xprop"
