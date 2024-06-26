@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-02-21 10:01+0000\n"
+"PO-Revision-Date: 2024-06-27 00:57+0000\n"
 "Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -39,7 +39,7 @@ msgstr "眨眨眼"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "远眺：看看尽可能远的远处"
+msgstr "远眺：看看最远处"
 
 # Short break
 msgid "Have some water"
