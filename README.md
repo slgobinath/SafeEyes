@@ -66,7 +66,7 @@ sudo apt-get install safeeyes
 ### Fedora
 
 ```bash
-sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
+sudo dnf install python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
@@ -94,9 +94,7 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-appindicator3-0.1 or gir1.2-ayatanaappindicator3-0.1
 - gir1.2-notify-0.7
-- libappindicator-gtk3
 - python3-psutil
 - xprintidle (optional)
 - wlrctl (wayland optional)
@@ -138,7 +136,7 @@ Some Linux systems like CentOS do not have matching dependencies available in th
 
     python3 -m venv venv
     source venv/bin/activate
-    pip3 install dbus-python safeeyes
+    pip3 install safeeyes
     ```
 
 3. Start Safe Eyes from the terminal
