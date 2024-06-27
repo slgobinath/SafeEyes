@@ -89,7 +89,8 @@ msgstr "Safe Eyes 没有运行"
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
-msgstr "Safe Eyes 正在没有RPC服务器的情况下运行。打开RPC服务器可以使用命令行参数。"
+msgstr ""
+"Safe Eyes 正在没有RPC服务器的情况下运行。打开RPC服务器可以使用命令行参数。"
 
 # About dialog
 msgid "Close"
@@ -470,6 +471,18 @@ msgstr "设置"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "立即休息"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"

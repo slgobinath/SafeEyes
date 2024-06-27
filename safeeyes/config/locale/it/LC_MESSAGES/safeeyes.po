@@ -161,7 +161,8 @@ msgstr "Utilizza il server RPC per ricevere i comandi"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Senza il server RPC, i comandi a riga di comando non possono funzionare"
+msgstr ""
+"Senza il server RPC, i comandi a riga di comando non possono funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -481,6 +482,18 @@ msgstr "Preferenze"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "Fai una pausa adesso"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"

@@ -171,7 +171,8 @@ msgstr "Restablir"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "De veritat que voleu restablir les preferències als valors per defecte?"
+msgstr ""
+"De veritat que voleu restablir les preferències als valors per defecte?"
 
 # Settings dialog
 msgid "Options"
@@ -473,6 +474,18 @@ msgstr "Configuració"
 
 #: plugins/trayicon
 msgid "Take a break now"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
 msgstr ""
 
 #: plugins/trayicon

@@ -477,6 +477,18 @@ msgid "Take a break now"
 msgstr "اکنون استراحت کنید"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "تا آغاز دوباره"
 

@@ -480,6 +480,18 @@ msgid "Take a break now"
 msgstr "சுயவிருப்பிலான இடைவேளை"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "மீள ஆரம்பிக்கும் வரை"
 

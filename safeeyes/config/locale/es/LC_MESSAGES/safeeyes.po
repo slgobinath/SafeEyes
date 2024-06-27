@@ -486,6 +486,18 @@ msgid "Take a break now"
 msgstr "Tomar un descanso ahora"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Hasta el reinicio"
 

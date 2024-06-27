@@ -477,6 +477,18 @@ msgid "Take a break now"
 msgstr "Tee nüüd paus"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Taaskäivitumiseni"
 
