@@ -168,6 +168,7 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 
 ## How to Release?
 
+0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
