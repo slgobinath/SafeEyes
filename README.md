@@ -35,9 +35,18 @@ optional arguments:
 
 ## Installation guide
 
-Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
+Safe Eyes is available on the official repositories of many popular the distributions.
+
+[![Packaging status](https://repology.org/badge/vertical-allrepos/safeeyes.svg)](https://repology.org/project/safeeyes/versions)
+
+
+It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
+
+
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
+
+The official Safe Eyes PPA hosts the latest version of safeeyes for Ubuntu 22.04 and above. On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
