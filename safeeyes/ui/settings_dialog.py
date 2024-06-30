@@ -170,14 +170,16 @@ class SettingsDialog:
                 self.__initialize(self.config)
             widget.destroy()
 
-        messagedialog = Gtk.MessageDialog(parent=self.window,
-                                          flags=Gtk.DialogFlags.MODAL,
-                                          type=Gtk.MessageType.WARNING,
-                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                                   _("Reset"), Gtk.ResponseType.OK),
-                                          message_format=_("Are you sure you want to reset all settings to default?"))
+        messagedialog = Gtk.MessageDialog()
+        messagedialog.set_modal(True)
+        messagedialog.set_transient_for(self.window)
+        messagedialog.set_property('message_type', Gtk.MessageType.WARNING)
+        messagedialog.set_property('text', _("Are you sure you want to reset all settings to default?"))
+        messagedialog.set_property('secondary-text', _("You can't undo this action."))
+        messagedialog.add_button('_Cancel', Gtk.ResponseType.CANCEL)
+        messagedialog.add_button(_("Reset"), Gtk.ResponseType.OK)
+
         messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.format_secondary_text(_("You can't undo this action."))
         messagedialog.show()
 
     def __delete_break(self, break_config, is_short, on_remove):
@@ -194,14 +196,16 @@ class SettingsDialog:
                 on_remove()
             widget.destroy()
 
-        messagedialog = Gtk.MessageDialog(parent=self.window,
-                                          flags=Gtk.DialogFlags.MODAL,
-                                          type=Gtk.MessageType.WARNING,
-                                          buttons=(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-                                                   _("Delete"), Gtk.ResponseType.OK),
-                                          message_format=_("Are you sure you want to delete this break?"))
+        messagedialog = Gtk.MessageDialog()
+        messagedialog.set_modal(True)
+        messagedialog.set_transient_for(self.window)
+        messagedialog.set_property('message_type', Gtk.MessageType.WARNING)
+        messagedialog.set_property('text', _("Are you sure you want to delete this break?"))
+        messagedialog.set_property('secondary-text', _("You can't undo this action."))
+        messagedialog.add_button('_Cancel', Gtk.ResponseType.CANCEL)
+        messagedialog.add_button(_("Delete"), Gtk.ResponseType.OK)
+
         messagedialog.connect("response", __confirmation_dialog_response)
-        messagedialog.format_secondary_text(_("You can't undo this action."))
         messagedialog.show()
 
     def __create_plugin_item(self, plugin_config):
