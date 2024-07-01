@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: SafeEyes
+Upstream-Contact: Gobinath Loganathan <slgobinath@gmail.com>
+Source: https://slgobinath.github.io/SafeEyes/
+
+Files: *
+Copyright: 2016-2024, Gobinath Loganathan <slgobinath@gmail.com>
+           2019, Jorge Maldonado Ventura
+           2016-2024, Multiple Authors
+License: GPL-3.0+
