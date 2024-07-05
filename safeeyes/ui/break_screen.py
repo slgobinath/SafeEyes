@@ -52,13 +52,15 @@ class BreakScreen:
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
-        self.keycode_shortcut_postpone = 65
-        self.keycode_shortcut_skip = 9
+        self.keycode_shortcut_postpone = 65  # Space
+        self.keycode_shortcut_skip = 9  # Escape
         self.on_postponed = on_postponed
         self.on_skipped = on_skipped
         self.shortcut_disable_time = 2
         self.strict_break = False
         self.windows = []
+        self.show_skip_button = False
+        self.show_postpone_button = False
 
         if not self.context["is_wayland"]:
             self.x11_display = Display()
@@ -146,7 +148,12 @@ class BreakScreen:
         logging.info("Show break screens in %d display(s)", len(monitors))
 
         skip_button_disabled = self.context.get("skip_button_disabled", False)
+        self.show_skip_button = not self.strict_break and not skip_button_disabled
+
         postpone_button_disabled = self.context.get("postpone_button_disabled", False)
+        self.show_postpone_button = (
+            self.enable_postpone and not postpone_button_disabled
+        )
 
         i = 0
 
@@ -157,6 +164,15 @@ class BreakScreen:
             window = builder.get_object("window_main")
             window.set_application(self.application)
             window.connect("close-request", self.on_window_delete)
+
+            if self.context["is_wayland"]:
+                # Note: in theory, this could also be used on X11
+                # however, that already has its own implementation below
+                controller = Gtk.EventControllerKey()
+                controller.connect("key_pressed", self.on_key_pressed_wayland)
+                controller.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
+                window.add_controller(controller)
+
             window.set_title("SafeEyes-" + str(i))
             lbl_message = builder.get_object("lbl_message")
             lbl_count = builder.get_object("lbl_count")
@@ -182,7 +198,7 @@ class BreakScreen:
                 toolbar_button.show()
 
             # Add the buttons
-            if self.enable_postpone and not postpone_button_disabled:
+            if self.show_postpone_button:
                 # Add postpone button
                 btn_postpone = Gtk.Button.new_with_label(_("Postpone"))
                 btn_postpone.get_style_context().add_class("btn_postpone")
@@ -190,7 +206,7 @@ class BreakScreen:
                 btn_postpone.set_visible(True)
                 box_buttons.append(btn_postpone)
 
-            if not self.strict_break and not skip_button_disabled:
+            if self.show_skip_button:
                 # Add the skip button
                 btn_skip = Gtk.Button.new_with_label(_("Skip"))
                 btn_skip.get_style_context().add_class("btn_skip")
@@ -213,6 +229,11 @@ class BreakScreen:
 
             window.fullscreen_on_monitor(monitor)
             window.present()
+
+            # this ensures that none of the buttons is in focus immediately
+            # otherwise, pressing space presses that button instead of triggering the
+            # shortcut
+            window.set_focus(None)
 
             if not self.context["is_wayland"]:
                 self.__window_set_keep_above_x11(window)
@@ -297,6 +318,17 @@ class BreakScreen:
             else:
                 # Reduce the CPU usage by sleeping for a second
                 time.sleep(1)
+
+    def on_key_pressed_wayland(self, event_controller_key, keyval, keycode, state):
+        if self.enable_shortcut:
+            if keyval == Gdk.KEY_space and self.show_postpone_button:
+                self.postpone_break()
+                return True
+            elif keyval == Gdk.KEY_Escape and self.show_skip_button:
+                self.skip_break()
+                return True
+
+        return False
 
     def __release_keyboard_x11(self):
         """Release the locked keyboard."""
