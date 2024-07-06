@@ -102,7 +102,7 @@
     <property name="window-position">center</property>
     <property name="default-width">450</property>
     <property name="default-height">650</property>
-    <property name="icon-name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child>
