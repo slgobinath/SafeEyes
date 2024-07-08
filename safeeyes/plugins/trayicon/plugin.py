@@ -63,16 +63,35 @@ MENU_NODE_INFO = Gio.DBusNodeInfo.new_for_xml("""
             <arg type="u" direction="out"/>
             <arg type="(ia{sv}av)" direction="out"/>
         </method>
+        <method name="GetGroupProperties">
+			<arg type="ai" name="ids" direction="in"/>
+			<arg type="as" name="propertyNames" direction="in" />
+			<arg type="a(ia{sv})" name="properties" direction="out" />
+		</method>
+        <method name="GetProperty">
+			<arg type="i" name="id" direction="in"/>
+			<arg type="s" name="name" direction="in"/>
+			<arg type="v" name="value" direction="out"/>
+		</method>
         <method name="Event">
             <arg type="i" direction="in"/>
             <arg type="s" direction="in"/>
             <arg type="v" direction="in"/>
             <arg type="u" direction="in"/>
         </method>
+        <method name="EventGroup">
+			<arg type="a(isvu)" name="events" direction="in" />
+			<arg type="ai" name="idErrors" direction="out" />
+		</method>
         <method name="AboutToShow">
             <arg type="i" direction="in"/>
             <arg type="b" direction="out"/>
         </method>
+        <method name="AboutToShowGroup">
+			<arg type="ai" name="ids" direction="in" />
+			<arg type="ai" name="updatesNeeded" direction="out" />
+			<arg type="ai" name="idErrors" direction="out" />
+		</method>
         <signal name="LayoutUpdated">
             <arg type="u"/>
             <arg type="i"/>
@@ -144,7 +163,7 @@ class DBusMenuService(DBusService):
     revision = 0
 
     items = []
-    idToCallback = {}
+    idToItems = {}
 
     def __init__(self, session_bus, context, items):
         super().__init__(
@@ -158,30 +177,34 @@ class DBusMenuService(DBusService):
     def set_items(self, items):
         self.items = items
 
-        self.idToCallback = self.getItemCallbacks(items, {})
+        self.idToItems = self.getItemsFlat(items, {})
 
         self.revision += 1
 
         self.LayoutUpdated(self.revision, 0)
 
     @staticmethod
-    def getItemCallbacks(items, idToCallback):
+    def getItemsFlat(items, idToItems):
         for item in items:
             if item.get('hidden', False) == True:
                 continue
-            if 'callback' in item:
-                idToCallback[item['id']] = item['callback']
-            if 'children' in item:
-                idToCallback = DBusMenuService.getItemCallbacks(item['children'], idToCallback)
 
-        return idToCallback
+            idToItems[item['id']] = item
+
+            if 'children' in item:
+                idToItems = DBusMenuService.getItemsFlat(item['children'], idToItems)
+
+        return idToItems
 
     @staticmethod
-    def itemToDbus(item, recursion_depth):
-        result = {}
+    def singleItemToDbus(item):
+        props = DBusMenuService.itemPropsToDbus(item)
 
-        if item.get('hidden', False) == True:
-            return None
+        return (item['id'], props)
+
+    @staticmethod
+    def itemPropsToDbus(item):
+        result = {}
 
         string_props = ['label', 'icon-name', 'type', 'children-display']
         for key in string_props:
@@ -193,13 +216,22 @@ class DBusMenuService(DBusService):
             if key in item:
                 result[key] = GLib.Variant('b', item[key])
 
+        return result
+
+    @staticmethod
+    def itemToDbus(item, recursion_depth):
+        if item.get('hidden', False) == True:
+            return None
+
+        props = DBusMenuService.itemPropsToDbus(item)
+
         children = []
         if recursion_depth > 1 or recursion_depth == -1:
             if "children" in item:
                 children = [DBusMenuService.itemToDbus(item, recursion_depth - 1) for item in item['children']]
                 children = [i for i in children if i is not None]
 
-        return GLib.Variant("(ia{sv}av)", (item['id'], result, children))
+        return GLib.Variant("(ia{sv}av)", (item['id'], props, children))
 
     def findItemsWithParent(self, parent_id, items):
         for item in items:
@@ -238,15 +270,65 @@ class DBusMenuService(DBusService):
 
         return ret
 
+    def GetGroupProperties(self, ids, property_names):
+        ret = []
+
+        for idx in ids:
+            if idx in self.idToItems:
+                props = DBusMenuService.singleItemToDbus(self.idToItems[idx])
+                if props is not None:
+                    ret.append(props)
+
+        return (ret,)
+
+    def GetProperty(self, idx, name):
+        ret = None
+
+        if idx in self.idToItems:
+            props = DBusMenuService.singleItemToDbus(self.idToItems[idx])
+            if props is not None and name in props:
+                ret = props[name]
+
+        return ret
+
     def Event(self, idx, event_id, data, timestamp):
         if event_id != "clicked":
             return
 
-        if idx in self.idToCallback:
-            self.idToCallback[idx]()
+        if idx in self.idToItems:
+            item = self.idToItems[idx]
+            if 'callback' in item:
+                item['callback']()
+
+    def EventGroup(self, events):
+        not_found = []
+
+        for (idx, event_id, data, timestamp) in events:
+            if idx not in self.idToItems:
+                not_found.append(idx)
+                continue
+
+            if event_id != "clicked":
+                continue
+
+            item = self.idToItems[idx]
+            if 'callback' in item:
+                item['callback']()
+
+        return not_found
 
     def AboutToShow(self, item_id):
         return (False,)
+
+    def AboutToShowGroup(self, ids):
+        not_found = []
+
+        for idx in ids:
+            if idx not in self.idToItems:
+                not_found.append(idx)
+                continue
+
+        return ([], not_found)
 
     def LayoutUpdated(self, revision, parent):
         self.emit_signal(
