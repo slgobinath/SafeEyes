@@ -337,7 +337,7 @@ class DBusMenuService(DBusService):
         )
 
 class StatusNotifierItemService(DBusService):
-    DBUS_SERVICE_PATH = '/io/github/slgobinath/SafeEyes'
+    DBUS_SERVICE_PATH = '/org/ayatana/NotificationItem/io_github_slgobinath_SafeEyes'
 
     Category = 'ApplicationStatus'
     Id = 'io.github.slgobinath.SafeEyes'
