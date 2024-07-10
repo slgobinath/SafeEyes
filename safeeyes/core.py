@@ -98,7 +98,7 @@ class SafeEyesCore:
                 self.scheduled_next_break_timestamp = int(next_break_time)
                 utility.start_thread(self.__scheduler_job)
 
-    def stop(self):
+    def stop(self, is_resting=False):
         """
         Stop Safe Eyes if it is running.
         """
@@ -112,7 +112,7 @@ class SafeEyesCore:
             self.waiting_condition.acquire()
             self.running = False
             if self.context['state'] != State.QUIT:
-                self.context['state'] = State.STOPPED
+                self.context['state'] = State.RESTING if (is_resting) else State.STOPPED
             self.waiting_condition.notify_all()
             self.waiting_condition.release()
 
@@ -132,6 +132,16 @@ class SafeEyesCore:
             self.postpone_duration = self.default_postpone_duration
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
         self.context['postponed'] = True
+
+    def get_break_time(self, break_type = None):
+        """
+        Returns the next break time
+        """
+        break_obj = self.break_queue.get_break(break_type)
+        if not break_obj:
+            return False
+        time = self.scheduled_next_break_time + datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
+        return time
 
     def take_break(self, break_type = None):
         """
@@ -166,7 +176,7 @@ class SafeEyesCore:
             self.running = False
             self.waiting_condition.notify_all()
             self.waiting_condition.release()
-            time.sleep(1)  # Wait for 1 sec to ensure the sceduler is dead
+            time.sleep(1)  # Wait for 1 sec to ensure the scheduler is dead
             self.running = True
 
         if break_type is not None and self.break_queue.get_break().type != break_type:
@@ -180,32 +190,33 @@ class SafeEyesCore:
         if not self.running:
             return
 
-        self.context['state'] = State.WAITING
-        # Convert to seconds
-        time_to_wait = self.break_queue.get_break().time * 60
         current_time = datetime.datetime.now()
         current_timestamp = current_time.timestamp()
+
+        if self.context['state'] == State.RESTING and self.paused_time > -1:
+            # Safe Eyes was resting
+            paused_duration = int(current_timestamp - self.paused_time)
+            self.paused_time = -1
+            if paused_duration > self.break_queue.get_break(BreakType.LONG_BREAK).duration:
+                logging.info('Skip next long break due to the pause %ds longer than break duration', paused_duration)
+                # Skip the next long break
+                self.break_queue.reset()
 
         if self.context['postponed']:
             # Previous break was postponed
             logging.info('Prepare for postponed break')
             time_to_wait = self.postpone_duration
             self.context['postponed'] = False
-
-        elif self.paused_time > -1 and self.break_queue.is_long_break():
-            # Safe Eyes was paused earlier and next break is long
-            paused_duration = int(current_timestamp - self.paused_time)
-            self.paused_time = -1
-            if paused_duration > self.break_queue.get_break().duration:
-                logging.info('Skip next long break due to the pause longer than break duration')
-                # Skip the next long break
-                self.break_queue.next()
-
-        if current_timestamp < self.scheduled_next_break_timestamp:
+        elif current_timestamp < self.scheduled_next_break_timestamp:
+            # Non-standard break was set.
             time_to_wait = round(self.scheduled_next_break_timestamp - current_timestamp)
             self.scheduled_next_break_timestamp = -1
+        else:
+            # Use next break, convert to seconds
+            time_to_wait = self.break_queue.get_break().time * 60
 
         self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
+        self.context['state'] = State.WAITING
         utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
 
         # Wait for the pre break warning period

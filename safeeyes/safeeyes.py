@@ -38,17 +38,21 @@ from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
-SAFE_EYES_VERSION = "2.1.5"
+SAFE_EYES_VERSION = "2.1.9"
 
 
-class SafeEyes:
+class SafeEyes(Gtk.Application):
     """
     This class represents a runnable Safe Eyes instance.
     """
 
-    def __init__(self, system_locale, config):
+    def __init__(self, system_locale, config, cli_args):
+        super().__init__(
+            application_id="io.github.slgobinath.SafeEyes",
+            flags=Gio.ApplicationFlags.IS_SERVICE
+        )
         self.active = False
         self.break_screen = None
         self.safe_eyes_core = None
@@ -58,6 +62,7 @@ class SafeEyes:
         self.settings_dialog_active = False
         self.rpc_server = None
         self._status = ''
+        self.cli_args = cli_args
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
@@ -71,8 +76,8 @@ class SafeEyes:
             self.show_about)
         self.context['api']['enable_safeeyes'] = lambda next_break_time=-1, reset_breaks=False: \
             utility.execute_main_thread(self.enable_safeeyes, next_break_time, reset_breaks)
-        self.context['api']['disable_safeeyes'] = lambda status: utility.execute_main_thread(
-            self.disable_safeeyes, status)
+        self.context['api']['disable_safeeyes'] = lambda status=None, is_resting=False: utility.execute_main_thread(
+            self.disable_safeeyes, status, is_resting)
         self.context['api']['status'] = self.status
         self.context['api']['quit'] = lambda: utility.execute_main_thread(
             self.quit)
@@ -96,7 +101,11 @@ class SafeEyes:
         self.context['api']['take_break'] = self.take_break
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
+        self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
         self.plugins_manager.init(self.context, self.config)
+
+        self.hold()
+
         atexit.register(self.persist_session)
 
     def start(self):
@@ -112,6 +121,22 @@ class SafeEyes:
             self.plugins_manager.start()		# Call the start method of all plugins
             self.safe_eyes_core.start()
             self.handle_system_suspend()
+
+        self.run()
+
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        if self.cli_args.about:
+            self.show_about()
+        elif self.cli_args.disable:
+            self.disable_safeeyes()
+        elif self.cli_args.enable:
+            self.enable_safeeyes()
+        elif self.cli_args.settings:
+            self.show_settings()
+        elif self.cli_args.take_break:
+            self.take_break()
 
     def show_settings(self):
         """
@@ -143,9 +168,8 @@ class SafeEyes:
         self.plugins_manager.exit()
         self.__stop_rpc_server()
         self.persist_session()
-        Gtk.main_quit()
-        # Exit all threads
-        os._exit(0)
+
+        super().quit()
 
     def handle_suspend_callback(self, sleeping):
         """
@@ -157,7 +181,7 @@ class SafeEyes:
             if self.active:
                 logging.info("Stop Safe Eyes due to system suspend")
                 self.plugins_manager.stop()
-                self.safe_eyes_core.stop()
+                self.safe_eyes_core.stop(True)
         else:
             # Resume from sleep
             if self.active and self.safe_eyes_core.has_breaks():
@@ -238,14 +262,14 @@ class SafeEyes:
             self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()
 
-    def disable_safeeyes(self, status=None):
+    def disable_safeeyes(self, status=None, is_resting = False):
         """
         Listen to tray icon disable action and send the signal to core.
         """
         if self.active:
             self.active = False
             self.plugins_manager.stop()
-            self.safe_eyes_core.stop()
+            self.safe_eyes_core.stop(is_resting)
             if status is None:
                 status = _('Disabled until restart')
             self._status = status

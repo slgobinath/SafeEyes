@@ -19,6 +19,12 @@
             "default": false
         },
         {
+            "id": "show_long_time_in_tray",
+            "label": "Show only long breaks for tray icon time",
+            "type": "BOOL",
+            "default": false
+        },
+        {
             "id": "allow_disabling",
             "label": "Allow disabling Safe Eyes",
             "type": "BOOL",

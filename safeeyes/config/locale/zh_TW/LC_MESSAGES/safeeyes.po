@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-06 13:14+0000\n"
+"PO-Revision-Date: 2024-01-30 14:01+0000\n"
 "Last-Translator: 麋悟BigELK176 <bigelk176@gmail.com>\n"
 "Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hant/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.4.1-dev\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -136,7 +136,7 @@ msgstr "推遲休息時長（分鐘）"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "顯示休息隨機順序"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -468,6 +468,18 @@ msgstr "設定"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "立即休息"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"

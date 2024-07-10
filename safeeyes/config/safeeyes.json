@@ -77,6 +77,7 @@
             "version": "0.0.3",
             "settings": {
                 "show_time_in_tray": false,
+                "show_long_time_in_tray": false,
                 "allow_disabling": true,
                 "disable_options": [{
                         "time": 30,
@@ -103,7 +104,6 @@
             "version": "0.0.3",
             "settings": {
                 "idle_time": 5,
-                "interpret_idle_as_break": false,
                 "postpone_if_active": false
             }
         },
@@ -121,7 +121,7 @@
             "enabled": false,
             "version": "0.0.2",
             "settings": {
-                "statistics_reset_interval": 24
+                "statistics_reset_cron": "0 0 * * *"
             }
         },
         {

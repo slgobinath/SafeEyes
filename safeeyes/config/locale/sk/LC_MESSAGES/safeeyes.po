@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-04-17 16:06+0000\n"
+"PO-Revision-Date: 2024-07-10 11:09+0000\n"
 "Last-Translator: menom <menom1@protonmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sk/>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -105,7 +105,7 @@ msgid ""
 msgstr ""
 "Safe Eyes vám pripomenie, aby ste si urobili prestávku počas dlhých hodín "
 "stravených za počítačom. Chráni tak vaše oči pred prílišným namáhaním "
-"(asthenopiou)."
+"(asthenopiou)"
 
 # About dialog
 msgid "License"
@@ -479,6 +479,18 @@ msgstr "Nastavenia"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "Dať si prestávku"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr "Akákoľvek prestávka"
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr "Krátka prestávka"
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr "Dlhá prestávka"
 
 #: plugins/trayicon
 msgid "Until restart"

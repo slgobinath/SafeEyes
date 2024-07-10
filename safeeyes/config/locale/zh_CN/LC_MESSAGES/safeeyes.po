@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-10 05:05+0000\n"
-"Last-Translator: Frank.wu <me@wuzhiping.top>\n"
+"PO-Revision-Date: 2024-06-27 00:57+0000\n"
+"Last-Translator: aerowolf <aerowolf@tom.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,23 +15,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9-dev\n"
+"X-Generator: Weblate 5.6-rc\n"
 
 # Short break
 msgid "Tightly close your eyes"
-msgstr "闭上您的眼睛休息一会"
+msgstr "闭上眼睛休息一下"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "向两边各翻几下眼睛"
+msgstr "左右转动眼球"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "按顺时针方向旋转你的眼球"
+msgstr "顺时针方向转动眼球"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "按逆时针方向旋转你的眼球"
+msgstr "逆时针方向转动眼球"
 
 # Short break
 msgid "Blink your eyes"
@@ -39,11 +39,11 @@ msgstr "眨眨眼"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "望远：将视线聚焦到远处物体上"
+msgstr "远眺：看看最远处"
 
 # Short break
 msgid "Have some water"
-msgstr "喝一点水"
+msgstr "喝点水吧"
 
 # Long break
 msgid "Walk for a while"
@@ -51,7 +51,7 @@ msgstr "站起来走走"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "靠在椅背上休息一会"
+msgstr "靠在椅背上休息一下"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -59,15 +59,15 @@ msgstr "显示“关于”对话框"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "禁用当前正在运行的Safe Eyes"
+msgstr "暂停当前正在运行的Safe Eyes"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "启用当前正在运行的Safe Eyes"
+msgstr "恢复当前正在运行的Safe Eyes"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "退出正在运行的Safe Eeyes"
+msgstr "退出Safe Eeyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
@@ -79,17 +79,18 @@ msgstr "以调试模式运行Safe Eyes"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "打印Safe Eyes运行状态后退出"
+msgstr "显示Safe Eyes运行状态后退出"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes 尚未运行"
+msgstr "Safe Eyes 没有运行"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
-msgstr "Safe Eyes 正在没有RPC服务器的情况下运行。打开它以使用命令行参数。"
+msgstr ""
+"Safe Eyes 正在没有RPC服务器的情况下运行。打开RPC服务器可以使用命令行参数。"
 
 # About dialog
 msgid "Close"
@@ -106,7 +107,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr "许可证"
+msgstr "许可"
 
 # Break screen
 msgid "Skip"
@@ -142,7 +143,7 @@ msgstr "以随机顺序显示休息"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "坚持休息（无法跳过）"
+msgstr "坚持休息（不允许跳过）"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -150,7 +151,7 @@ msgstr "允许推迟休息"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "维持内部状态"
+msgstr "支持内部状态"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
@@ -414,11 +415,11 @@ msgstr "在通知区域显示托盘图标"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "在托盘图标上显示下次休息时间"
+msgstr "在托盘图标中显示下次休息时间"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "允许禁用Safe Eyes"
+msgstr "允许暂停Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -426,19 +427,19 @@ msgstr "关于"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "禁用 Safe Eyes"
+msgstr "暂停 Safe Eyes"
 
 #: plugins/trayicon
 msgid "Disabled until %s"
-msgstr "禁用软件直到 %s"
+msgstr "暂停，直到 %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "禁用软件直到重启"
+msgstr "暂停，直到重启"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "启用 Safe Eyes"
+msgstr "恢复 Safe Eyes"
 
 #: plugins/trayicon
 msgid "For %d Hour"
@@ -457,7 +458,7 @@ msgstr[0] "%d 秒"
 
 #: plugins/trayicon
 msgid "Next break at %s"
-msgstr "下次休息在 %s"
+msgstr "下次休息将在 %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
@@ -470,6 +471,18 @@ msgstr "设置"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "立即休息"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"

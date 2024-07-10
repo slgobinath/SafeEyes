@@ -30,6 +30,7 @@ import gi
 gi.require_version('Gdk', '3.0')
 from gi.repository import Gdk
 from gi.repository import GdkX11  # noqa F401
+from gi.repository import Gio
 from safeeyes import utility
 
 context = None
@@ -96,6 +97,31 @@ def is_active_window_skipped_xorg(pre_break):
     return False
 
 
+def is_idle_inhibited_gnome():
+    """
+    GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
+    fullscreen windows, but GNOME does expose whether idle actions like
+    starting a screensaver are inhibited, which is a close approximation if
+    not a better metric.
+    """
+
+    dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
+        bus_type=Gio.BusType.SESSION,
+        flags=Gio.DBusProxyFlags.NONE,
+        info=None,
+        name='org.gnome.SessionManager',
+        object_path='/org/gnome/SessionManager',
+        interface_name='org.gnome.SessionManager',
+        cancellable=None,
+    )
+    result = dbus_proxy.get_cached_property('InhibitedActions').unpack()
+
+    # The result is a bitfield, documented here:
+    # https://gitlab.gnome.org/GNOME/gnome-session/-/blob/9aa419397b7f6d42bee6e66cc5c5aad12902fba0/gnome-session/org.gnome.SessionManager.xml#L155
+    # The fourth bit indicates that idle is inhibited.
+    return bool(result & 0b1000)
+
+
 def _window_class_matches(window_class: str, classes: list) -> bool:
     return any(map(lambda w: w in classes, window_class.split()))
 
@@ -149,7 +175,10 @@ def on_pre_break(break_obj):
     Lifecycle method executes before the pre-break period.
     """
     if utility.IS_WAYLAND:
-        skip_break = is_active_window_skipped_wayland(True)
+        if utility.DESKTOP_ENVIRONMENT == 'gnome':
+            skip_break = is_idle_inhibited_gnome()
+        else:
+            skip_break = is_active_window_skipped_wayland(True)
     else:
         skip_break = is_active_window_skipped_xorg(True)
     if dnd_while_on_battery and not skip_break:
@@ -162,7 +191,10 @@ def on_start_break(break_obj):
     Lifecycle method executes just before the break.
     """
     if utility.IS_WAYLAND:
-        skip_break = is_active_window_skipped_wayland(True)
+        if utility.DESKTOP_ENVIRONMENT == 'gnome':
+            skip_break = is_idle_inhibited_gnome()
+        else:
+            skip_break = is_active_window_skipped_wayland(True)
     else:
         skip_break = is_active_window_skipped_xorg(True)
     if dnd_while_on_battery and not skip_break:

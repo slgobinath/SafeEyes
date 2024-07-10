@@ -22,8 +22,9 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 
 import logging
 import random
-from distutils.version import LooseVersion
 from enum import Enum
+
+from packaging.version import parse
 
 from safeeyes import utility
 
@@ -120,8 +121,12 @@ class BreakQueue:
             return self.__current_break
 
         if break_type == BreakType.LONG_BREAK:
+            if self.__long_queue is None:
+                return None;
             return self.__long_queue[self.__current_long]
 
+        if self.__short_queue is None:
+            return None;
         return self.__short_queue[self.__current_short]
 
     def is_long_break(self):
@@ -254,12 +259,13 @@ class State(Enum):
     """
     Possible states of Safe Eyes.
     """
-    START = 0,
-    WAITING = 1,
-    PRE_BREAK = 2,
-    BREAK = 3,
-    STOPPED = 4,
-    QUIT = 5
+    START = 0,       # Starting scheduler
+    WAITING = 1,     # User is working (waiting for next break)
+    PRE_BREAK = 2,   # Preparing for break
+    BREAK = 3,       # Break
+    STOPPED = 4,     # Disabled
+    QUIT = 5,        # Quitting
+    RESTING = 6      # Resting (natural break)
 
 
 class EventHook:
@@ -303,6 +309,8 @@ class Config:
         # self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if init:
+            # if create_startup_entry finds a broken autostart symlink, it will repair it
+            utility.create_startup_entry(force=False)
             if self.__user_config is None:
                 utility.initialize_safeeyes()
                 self.__user_config = self.__system_config
@@ -316,7 +324,7 @@ class Config:
                 else:
                     user_config_version = str(
                         meta_obj.get('config_version', '0.0.0'))
-                    if LooseVersion(user_config_version) != LooseVersion(system_config_version):
+                    if parse(user_config_version) != parse(system_config_version):
                         # Update the user config
                         self.__merge_dictionary(
                             self.__user_config, self.__system_config)

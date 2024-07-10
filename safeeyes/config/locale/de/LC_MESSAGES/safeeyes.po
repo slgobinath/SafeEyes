@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-07 09:50+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2023-07-04 20:53+0000\n"
+"Last-Translator: Sebastian Pipping <sebastian@pipping.org>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.1\n"
+"X-Generator: Weblate 5.0-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -102,7 +102,10 @@ msgstr "Schließen"
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "Beschreibung"
+msgstr ""
+"Safe Eyes schützt Ihre Augen vor Beschwerden (Asthenopie), indem es Sie "
+"regelmäßig erinnert, Pausen zu machen, wenn Sie längere Zeit am Bildschirm "
+"verbringen"
 
 # About dialog
 msgid "License"
@@ -480,6 +483,18 @@ msgstr "Einstellungen"
 #: plugins/trayicon
 msgid "Take a break now"
 msgstr "Jetzt Pause machen"
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"

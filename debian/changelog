@@ -1,4 +1,18 @@
-safeeyes (2.1.5-0) lunar; urgency=high
+safeeyes (2.1.9) noble; urgency=medium
+
+  * Fix crash in smartpause
+
+ -- Gobinath Loganathan <slgobinath@gmail.com>  Tue, 18 Jun 2024 20:25:00 -0400
+
+safeeyes (2.1.8) noble; urgency=medium
+
+  * Support Python 3.12
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 29 Apr 2024 02:09:48 -0400
+
+safeeyes (2.1.6-0) lunar; urgency=high
+  * Support Python 3.11
+
   * Minor bug fixes
 
   * Fix the ecd ..rror if there is no long break
