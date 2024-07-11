@@ -39,11 +39,11 @@ optional arguments:
 
 Safe Eyes is available on the official repositories of many popular the distributions.
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/safeeyes.svg)](https://repology.org/project/safeeyes/versions)
-
+<a href="https://repology.org/project/safeeyes/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/safeeyes.svg" alt="Packaging status" align="right">
+</a>
 
 It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
-
 
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
@@ -111,6 +111,7 @@ Ensure to meet the following dependencies:
 - python3-psutil
 - xprintidle (optional)
 - wlrctl (wayland optional)
+- Python 3.10+
 
 **To install Safe Eyes:**
 
