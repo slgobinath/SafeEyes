@@ -57,6 +57,7 @@ import os
 import sys
 
 from safeeyes import utility
+from safeeyes.model import RequiredPluginException
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
@@ -94,6 +95,8 @@ class PluginManager:
         for plugin in config.get('plugins'):
             try:
                 self.__load_plugin(plugin)
+            except RequiredPluginException as e:
+                raise e
             except BaseException as e:
                 traceback_wanted = logging.getLogger().getEffectiveLevel() == logging.DEBUG
                 if traceback_wanted:
@@ -298,7 +301,14 @@ class PluginManager:
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path):
+                message = utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path)
+                if message:
+                    if plugin_config['required_plugin']:
+                        raise RequiredPluginException(
+                            plugin['id'],
+                            plugin_config['meta']['name'],
+                            message
+                        )
                     return
 
                 # Load the plugin module

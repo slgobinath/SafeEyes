@@ -419,3 +419,20 @@ class TrayAction:
             return TrayAction(name, icon_id, action, True)
         else:
             return TrayAction(name, icon_path, action, False)
+
+class RequiredPluginException(Exception):
+    def __init__(self, plugin_id, plugin_name, message):
+        super().__init__(message)
+
+        self.plugin_id = plugin_id
+        self.plugin_name = plugin_name
+        self.message = message
+
+    def get_plugin_id(self):
+        return self.plugin_id
+
+    def get_plugin_name(self):
+        return self.plugin_name
+
+    def get_message(self):
+        return self.message

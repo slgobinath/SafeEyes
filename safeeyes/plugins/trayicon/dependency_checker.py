@@ -37,13 +37,13 @@ def validate(plugin_config, plugin_settings):
         return None
     else:
         if utility.DESKTOP_ENVIRONMENT == "gnome":
-            return _("Please install a gnome shell plugin providing tray icons, eg. 'Tray Icons Reloaded'")
+            return _("Please install a gnome shell plugin providing tray icons, eg. 'Tray Icons Reloaded'.")
         elif utility.IS_WAYLAND:
-            return _("Please install a plugin providing tray icons for your desktop environment")
+            return _("Please install a service providing tray icons for your desktop environment.")
         elif utility.DESKTOP_ENVIRONMENT == "lxde":
-            return _("Please install the 'snixembed' service")
+            return _("Please install the 'snixembed' service.")
         else:
-            return _("Please install the 'snixembed' service, or a plugin providing tray icons for your desktop environment")
+            return _("Please install the 'snixembed' service, or a service providing tray icons for your desktop environment.")
 
     command = None
     if utility.IS_WAYLAND:
