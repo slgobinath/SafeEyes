@@ -106,6 +106,10 @@ msgstr "leírás"
 msgid "License"
 msgstr "Licensz"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Kihagyás"

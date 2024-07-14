@@ -89,6 +89,10 @@ msgstr ""
 msgid "License"
 msgstr "Licence"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 msgid "Skip"
 msgstr "Izlaist"
 

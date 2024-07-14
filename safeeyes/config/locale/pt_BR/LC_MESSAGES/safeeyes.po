@@ -110,6 +110,10 @@ msgstr ""
 msgid "License"
 msgstr "Licença"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Pular"

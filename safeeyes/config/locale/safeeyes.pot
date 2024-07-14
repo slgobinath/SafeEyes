@@ -90,6 +90,10 @@ msgstr ""
 msgid "License"
 msgstr ""
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr ""
@@ -503,3 +507,4 @@ msgstr ""
 # plugin/limitconsecutiveskipping
 msgid "Skipped or postponed %d/%d breaks in a row"
 msgstr ""
+

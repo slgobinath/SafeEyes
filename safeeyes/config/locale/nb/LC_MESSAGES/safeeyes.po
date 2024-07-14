@@ -109,6 +109,10 @@ msgstr "Øyetrygg beskytter øyene dine fra belastning"
 msgid "License"
 msgstr "Lisens"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Hopp over"

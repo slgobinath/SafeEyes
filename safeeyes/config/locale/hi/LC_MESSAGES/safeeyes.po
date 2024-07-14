@@ -106,6 +106,10 @@ msgstr "विवरण"
 msgid "License"
 msgstr "लाइसेंस"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "छोड़ें"

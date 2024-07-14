@@ -106,6 +106,10 @@ msgstr "描述"
 msgid "License"
 msgstr "授權"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "跳過"
