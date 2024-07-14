@@ -1,104 +1,76 @@
-import os, sys, site
-import subprocess
-import setuptools
+#!/usr/bin/python3
+
+import os
+
+from pathlib import Path
+from setuptools import Command, setup
+from setuptools.command.build import build as orig_build
+
+class build(orig_build):
+    sub_commands = [('build_mo', None), *orig_build.sub_commands]
 
 
-requires = [
-    'pywayland',
-    'babel',
-    'psutil',
-    'croniter',
-    'PyGObject',
-    'packaging',
-    'python-xlib'
-]
+class build_mo(Command):
+    description = 'Compile .po files into .mo files'
 
-_ROOT = os.path.abspath(os.path.dirname(__file__))
+    files = None
 
-with open(os.path.join(_ROOT, 'README.md')) as f:
-    long_description = f.read()
+    def initialize_options(self):
+        self.files = None
+        self.editable_mode = False
+        self.build_lib = None
 
+    def finalize_options(self):
+        self.set_undefined_options("build_py", ("build_lib", "build_lib"))
+        pass
 
-def __compile_po_files():
-    """
-    Compile the *.po trainslation files.
-    """
-    localedir = 'safeeyes/config/locale'
-    po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
-               for l in next(os.walk(localedir))[1]]
-    for po_dir in po_dirs:
-        po_files = [f
-                    for f in next(os.walk(po_dir))[2]
-                    if os.path.splitext(f)[1] == '.po']
-        for po_file in po_files:
-            filename, _ = os.path.splitext(po_file)
-            mo_file = filename + '.mo'
-            msgfmt_cmd = 'msgfmt {} -o {}'.format(
-                po_dir + po_file, po_dir + mo_file)
-            subprocess.call(msgfmt_cmd, shell=True)
+    def run(self):
+        files = self._get_files()
 
+        for build_file, source_file in files.items():
+            if not self.editable_mode:
+                # Parent directory required for msgfmt to work correctly
+                Path(build_file).parent.mkdir(parents=True, exist_ok=True)
+            self.spawn(['msgfmt', source_file, '-o', build_file])
 
-def __data_files():
-    """
-    Collect the data files.
-    """
-    root_dir = sys.prefix
-    return [(os.path.join(root_dir, "share/applications"), ["safeeyes/platform/io.github.slgobinath.SafeEyes.desktop"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/status"), ["safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-enabled.png", "safeeyes/platform/icons/hicolor/24x24/status/io.github.slgobinath.SafeEyes-timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/24x24/apps"), ["safeeyes/platform/icons/hicolor/24x24/apps/io.github.slgobinath.SafeEyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/status"), ["safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-enabled.png", "safeeyes/platform/icons/hicolor/16x16/status/io.github.slgobinath.SafeEyes-timer.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/16x16/apps"), ["safeeyes/platform/icons/hicolor/16x16/apps/io.github.slgobinath.SafeEyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/status"), ["safeeyes/platform/icons/hicolor/32x32/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/32x32/status/io.github.slgobinath.SafeEyes-enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/32x32/apps"), ["safeeyes/platform/icons/hicolor/32x32/apps/io.github.slgobinath.SafeEyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/64x64/apps"), ["safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/128x128/apps"), ["safeeyes/platform/icons/hicolor/128x128/apps/io.github.slgobinath.SafeEyes.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/status"), ["safeeyes/platform/icons/hicolor/48x48/status/io.github.slgobinath.SafeEyes-disabled.png", "safeeyes/platform/icons/hicolor/48x48/status/io.github.slgobinath.SafeEyes-enabled.png"]),
-    (os.path.join(root_dir, "share/icons/hicolor/48x48/apps"), ["safeeyes/platform/icons/hicolor/48x48/apps/io.github.slgobinath.SafeEyes.png"]),]
+    def _get_files(self):
+        if self.files is not None:
+            return self.files
 
+        files = {}
 
-def __package_files(directory):
-    """
-    Collect the package files.
-    """
-    paths = []
-    for (path, _, filenames) in os.walk(directory):
-        for filename in filenames:
-            paths.append(os.path.join('..', path, filename))
-    return paths
+        localedir = 'safeeyes/config/locale'
+        po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
+                   for l in next(os.walk(localedir))[1]]
+        for po_dir in po_dirs:
+            po_files = [f
+                        for f in next(os.walk(po_dir))[2]
+                        if os.path.splitext(f)[1] == '.po']
+            for po_file in po_files:
+                filename, _ = os.path.splitext(po_file)
+                mo_file = filename + '.mo'
+
+                source_file = po_dir + po_file
+
+                build_file = po_dir + mo_file
+                if not self.editable_mode:
+                    build_file = os.path.join(self.build_lib, build_file)
+
+                files[build_file] = source_file
+
+        self.files = files
+        return files
+
+    def get_output_mapping(self):
+        return self._get_files()
+
+    def get_outputs(self):
+        return self._get_files().keys()
+
+    def get_source_files(self):
+        return  self._get_files().values()
 
 
-def __package_data():
-    """
-    Return a list of package data.
-    """
-    __compile_po_files()
-    data = ['glade/*.glade', 'resource/*']
-    data.extend(__package_files('safeeyes/config'))
-    data.extend(__package_files('safeeyes/plugins'))
-    data.extend(__package_files('safeeyes/platform'))
-    return data
-
-setuptools.setup(
-    name="safeeyes",
-    version="2.2.3",
-    description="Protect your eyes from eye strain using this continuous breaks reminder.",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    author="Gobinath Loganathan",
-    author_email="slgobinath@gmail.com",
-    url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.2.3.tar.gz",
-    packages=setuptools.find_packages(),
-    package_data={'safeeyes': __package_data()},
-    data_files=__data_files(),
-    install_requires=requires,
-    entry_points={'console_scripts': ['safeeyes = safeeyes.__main__:main']},
-    keywords='linux utility health eye-strain safe-eyes',
-    classifiers=[
-        "Operating System :: POSIX :: Linux",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Development Status :: 5 - Production/Stable",
-        "Environment :: X11 Applications :: GTK",
-        "Intended Audience :: End Users/Desktop",
-        "Topic :: Utilities"] + [('Programming Language :: Python :: %s' % x) for x in '3 3.5 3.6 3.7 3.8 3.9'.split()]
+setup(
+    cmdclass={'build': build, 'build_mo': build_mo}
 )
