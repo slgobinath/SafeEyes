@@ -1,4 +1,4 @@
-<img src="safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
+<img src="https://raw.githubusercontent.com/slgobinath/SafeEyes/master/safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
 
 # Safe Eyes
 
