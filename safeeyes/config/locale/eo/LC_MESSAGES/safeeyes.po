@@ -509,6 +509,22 @@ msgstr "Paŭzi plurmediajn ludilojn ene de la paŭza ekrano"
 msgid "Pause media"
 msgstr "Paŭzi aŭdovidaĵon"
 
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Intertempo por restarigi statistikojn (en horoj)"
