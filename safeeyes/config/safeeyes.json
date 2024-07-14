@@ -128,6 +128,14 @@
             "id": "mediacontrol",
             "enabled": true,
             "version": "0.0.1"
+        },
+        {
+            "id": "limitconsecutiveskipping",
+            "enabled": true,
+            "version": "0.0.1",
+            "settings": {
+                "number_of_allowed_skips_in_a_row": 2
+            }
         }
     ]
 }
