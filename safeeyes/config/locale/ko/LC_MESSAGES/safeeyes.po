@@ -108,6 +108,10 @@ msgstr "설명"
 msgid "License"
 msgstr "라이선스"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "넘기기"

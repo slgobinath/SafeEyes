@@ -109,6 +109,10 @@ msgstr ""
 msgid "License"
 msgstr "Llicència"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Omet"

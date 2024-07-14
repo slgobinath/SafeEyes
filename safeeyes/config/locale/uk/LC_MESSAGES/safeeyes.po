@@ -109,6 +109,10 @@ msgstr "Опис"
 msgid "License"
 msgstr "Ліцензія"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Пропустити"

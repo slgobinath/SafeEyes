@@ -107,6 +107,10 @@ msgstr "الوصف"
 msgid "License"
 msgstr "الرخصة"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "تجاوز"

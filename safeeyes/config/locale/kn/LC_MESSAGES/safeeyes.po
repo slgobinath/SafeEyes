@@ -108,6 +108,10 @@ msgstr "ವಿವರಣೆ"
 msgid "License"
 msgstr "ಪರವಾನಿಗೆ"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr ""

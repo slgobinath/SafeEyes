@@ -108,6 +108,10 @@ msgstr "Deskripsi"
 msgid "License"
 msgstr "Lisensi"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Lewati"

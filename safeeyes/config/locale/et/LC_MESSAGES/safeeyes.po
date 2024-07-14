@@ -110,6 +110,10 @@ msgstr ""
 msgid "License"
 msgstr "Litsents"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Jäta vahele"

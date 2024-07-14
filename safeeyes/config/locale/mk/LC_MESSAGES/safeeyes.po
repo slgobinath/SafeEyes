@@ -108,6 +108,10 @@ msgstr ""
 msgid "License"
 msgstr ""
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr ""
