@@ -24,6 +24,7 @@ import atexit
 import logging
 import os
 from threading import Timer
+from importlib import metadata
 
 import gi
 from safeeyes import utility
@@ -36,10 +37,11 @@ from safeeyes.plugin_manager import PluginManager
 from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog
 
+
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
-SAFE_EYES_VERSION = "2.2.2"
+SAFE_EYES_VERSION = metadata.version("safeeyes")
 
 
 class SafeEyes(Gtk.Application):
