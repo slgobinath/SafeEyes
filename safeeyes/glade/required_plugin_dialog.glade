@@ -24,7 +24,7 @@
   <object class="GtkWindow" id="window_required_plugin">
     <property name="title" translatable="1">Safe Eyes - Error</property>
     <property name="resizable">0</property>
-    <property name="icon-name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <child>
       <object class="GtkBox" id="layout_box">
         <property name="margin-start">5</property>
