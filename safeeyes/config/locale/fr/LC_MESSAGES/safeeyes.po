@@ -521,6 +521,22 @@ msgstr "Mettre les lecteurs multimédias en pause à partir de l’écran de pau
 msgid "Pause media"
 msgstr "Mettre le contenu multimédia en pause"
 
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Fréquence de réinitialisation (en heures)"
