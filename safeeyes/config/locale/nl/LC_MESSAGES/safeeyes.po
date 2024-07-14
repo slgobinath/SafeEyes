@@ -483,6 +483,18 @@ msgid "Take a break now"
 msgstr "Neem nu een pauze"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Tot herstart"
 
@@ -501,6 +513,22 @@ msgstr "Mediaspelers pauzeren via het pauzescherm"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Media pauzeren"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

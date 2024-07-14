@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <!--
 ~ Safe Eyes is a utility to remind you to take break frequently
 ~ to protect your eyes from eye strain.
@@ -102,7 +102,7 @@
     <property name="window-position">center</property>
     <property name="default-width">450</property>
     <property name="default-height">650</property>
-    <property name="icon-name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <property name="gravity">center</property>
     <signal name="delete-event" handler="on_window_delete" swapped="no"/>
     <child>
@@ -1156,7 +1156,7 @@
               <object class="GtkImage" id="img_icon">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="icon-name">safeeyes</property>
+                <property name="icon-name">io.github.slgobinath.SafeEyes</property>
                 <property name="icon_size">1</property>
               </object>
             </child>

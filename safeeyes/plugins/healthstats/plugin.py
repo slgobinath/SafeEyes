@@ -78,7 +78,7 @@ def on_start_break(break_obj):
     global session
     session['breaks'] += 1
 
-    # Screen time has stoped.
+    # Screen time has stopped.
     on_stop()
 
 

@@ -171,7 +171,8 @@ msgstr "Restablir"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "De veritat que voleu restablir les preferències als valors per defecte?"
+msgstr ""
+"De veritat que voleu restablir les preferències als valors per defecte?"
 
 # Settings dialog
 msgid "Options"
@@ -476,6 +477,18 @@ msgid "Take a break now"
 msgstr ""
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Fins que es reinicïi"
 
@@ -493,4 +506,20 @@ msgstr ""
 
 # plugin/mediacontrol
 msgid "Pause media"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
 msgstr ""

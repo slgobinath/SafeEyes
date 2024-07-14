@@ -470,6 +470,18 @@ msgid "Take a break now"
 msgstr "立即休息"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "直到重新啟動"
 
@@ -488,6 +500,22 @@ msgstr "休息畫面起暫停多媒體播放"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "暫停多媒體"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

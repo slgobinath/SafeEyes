@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-25 08:29+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"PO-Revision-Date: 2024-06-30 21:09+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -486,6 +486,18 @@ msgid "Take a break now"
 msgstr "Tomar un descanso ahora"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr "Cualquier descanso"
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr "Descanso corto"
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr "Descanso largo"
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Hasta el reinicio"
 
@@ -504,6 +516,22 @@ msgstr "Pausar los reproductores de medios desde la pantalla de descanso"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pausar multimedia"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

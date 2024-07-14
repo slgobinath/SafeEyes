@@ -67,6 +67,8 @@ class SafeEyesCore:
         self.context = context
         self.context['skipped'] = False
         self.context['postponed'] = False
+        self.context['skip_button_disabled'] = False
+        self.context['postpone_button_disabled'] = False
         self.context['state'] = State.WAITING
 
     def initialize(self, config):
@@ -299,6 +301,8 @@ class SafeEyesCore:
 
         # Reset the skipped flag
         self.context['skipped'] = False
+        self.context['skip_button_disabled'] = False
+        self.context['postpone_button_disabled'] = False
         self.__start_next_break()
 
     def __wait_for(self, duration):

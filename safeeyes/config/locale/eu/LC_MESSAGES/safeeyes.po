@@ -160,7 +160,8 @@ msgstr "Erabili RPC zerbitzaria exekuzio-denboraren komanduak jasotzeko"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "RPC zerbitzaririk gabe, komandu-lineako komanduek ez dute funtzionatuko"
+msgstr ""
+"RPC zerbitzaririk gabe, komandu-lineako komanduek ez dute funtzionatuko"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -482,6 +483,18 @@ msgid "Take a break now"
 msgstr "Egin orain etenaldia"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Berrabiarazi arte"
 
@@ -500,3 +513,19 @@ msgstr "Pausatu multimedia etenaldiaren pantailatik"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pausatu multimedia"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""

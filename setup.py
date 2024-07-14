@@ -7,7 +7,9 @@ requires = [
     'babel',
     'psutil',
     'croniter',
+    'dbus-python',
     'PyGObject',
+    'packaging',
     'python-xlib'
 ]
 
@@ -78,14 +80,14 @@ def __package_data():
 
 setuptools.setup(
     name="safeeyes",
-    version="2.1.9",
+    version="2.2.0",
     description="Protect your eyes from eye strain using this continuous breaks reminder.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Gobinath Loganathan",
     author_email="slgobinath@gmail.com",
     url="https://github.com/slgobinath/SafeEyes",
-    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.1.9.tar.gz",
+    download_url="https://github.com/slgobinath/SafeEyes/archive/v2.2.0.tar.gz",
     packages=setuptools.find_packages(),
     package_data={'safeeyes': __package_data()},
     data_files=__data_files(),

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-01-16 12:55+0000\n"
+"PO-Revision-Date: 2024-07-02 12:09+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -161,7 +161,8 @@ msgstr "Utilizza il server RPC per ricevere i comandi"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Senza il server RPC, i comandi a riga di comando non possono funzionare"
+msgstr ""
+"Senza il server RPC, i comandi a riga di comando non possono funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -483,6 +484,18 @@ msgid "Take a break now"
 msgstr "Fai una pausa adesso"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr "Qualsiasi pausa"
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr "Breve pausa"
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr "Lunga pausa"
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "Fino al riavvio"
 
@@ -501,3 +514,19 @@ msgstr "Metti in pausa i media dallo schermo di break"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Metti in pausa i media"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""

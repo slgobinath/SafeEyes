@@ -38,17 +38,21 @@ from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
-SAFE_EYES_VERSION = "2.1.9"
+SAFE_EYES_VERSION = "2.2.0"
 
 
-class SafeEyes:
+class SafeEyes(Gtk.Application):
     """
     This class represents a runnable Safe Eyes instance.
     """
 
-    def __init__(self, system_locale, config):
+    def __init__(self, system_locale, config, cli_args):
+        super().__init__(
+            application_id="io.github.slgobinath.SafeEyes",
+            flags=Gio.ApplicationFlags.IS_SERVICE
+        )
         self.active = False
         self.break_screen = None
         self.safe_eyes_core = None
@@ -58,6 +62,7 @@ class SafeEyes:
         self.settings_dialog_active = False
         self.rpc_server = None
         self._status = ''
+        self.cli_args = cli_args
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
@@ -98,6 +103,9 @@ class SafeEyes:
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
         self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
         self.plugins_manager.init(self.context, self.config)
+
+        self.hold()
+
         atexit.register(self.persist_session)
 
     def start(self):
@@ -113,6 +121,22 @@ class SafeEyes:
             self.plugins_manager.start()		# Call the start method of all plugins
             self.safe_eyes_core.start()
             self.handle_system_suspend()
+
+        self.run()
+
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        if self.cli_args.about:
+            self.show_about()
+        elif self.cli_args.disable:
+            self.disable_safeeyes()
+        elif self.cli_args.enable:
+            self.enable_safeeyes()
+        elif self.cli_args.settings:
+            self.show_settings()
+        elif self.cli_args.take_break:
+            self.take_break()
 
     def show_settings(self):
         """
@@ -144,9 +168,8 @@ class SafeEyes:
         self.plugins_manager.exit()
         self.__stop_rpc_server()
         self.persist_session()
-        Gtk.main_quit()
-        # Exit all threads
-        os._exit(0)
+
+        super().quit()
 
     def handle_suspend_callback(self, sleeping):
         """

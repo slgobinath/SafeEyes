@@ -480,6 +480,18 @@ msgid "Take a break now"
 msgstr "சுயவிருப்பிலான இடைவேளை"
 
 #: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
 msgid "Until restart"
 msgstr "மீள ஆரம்பிக்கும் வரை"
 
@@ -498,6 +510,22 @@ msgstr "இடைவேளை திரையில் இருந்து ப
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "பல்லூடகத்தை இடைநிறுத்து"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

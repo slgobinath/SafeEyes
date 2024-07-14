@@ -1,3 +1,5 @@
+<img src="safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
+
 # Safe Eyes
 
 [![Release](https://img.shields.io/github/v/release/slgobinath/SafeEyes)](https://github.com/slgobinath/SafeEyes/releases)
@@ -35,9 +37,18 @@ optional arguments:
 
 ## Installation guide
 
-Safe Eyes is available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
+Safe Eyes is available on the official repositories of many popular the distributions.
+
+<a href="https://repology.org/project/safeeyes/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/safeeyes.svg" alt="Packaging status" align="right">
+</a>
+
+It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
+
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
+
+The official Safe Eyes PPA hosts the latest version of safeeyes for Ubuntu 22.04 and above. On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
@@ -100,6 +111,7 @@ Ensure to meet the following dependencies:
 - python3-psutil
 - xprintidle (optional)
 - wlrctl (wayland optional)
+- Python 3.10+
 
 **To install Safe Eyes:**
 
@@ -138,7 +150,7 @@ Some Linux systems like CentOS do not have matching dependencies available in th
 
     python3 -m venv venv
     source venv/bin/activate
-    pip3 install dbus-python safeeyes
+    pip3 install safeeyes
     ```
 
 3. Start Safe Eyes from the terminal
@@ -168,13 +180,14 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 
 ## How to Release?
 
+0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L81)
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L88)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L83)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L90)
     - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
-    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L50)
+    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
 4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu release)
 5. Commit the changes to `master`

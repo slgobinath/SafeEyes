@@ -1,3 +1,9 @@
+safeeyes (2.2.0) jammy; urgency=medium
+
+  * Limit consecutive skips
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 14 Jul 2024 09:30:12 -0400
+
 safeeyes (2.1.9) noble; urgency=medium
 
   * Fix crash in smartpause

@@ -3,9 +3,12 @@
     <id>io.github.slgobinath.SafeEyes</id>
 
     <name>Safe Eyes</name>
-    <developer_name>Gobinath</developer_name>
-    <summary>A Free and Open Source tool for Linux users to reduce and prevent repetitive strain
-        injury (RSI).</summary>
+    
+    <developer id="io.github.slgobinath">
+        <name>Gobinath</name>
+    </developer>
+
+    <summary>A FOSS tool for Linux users to reduce and prevent repetitive strain injury (RSI)</summary>
 
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0</project_license>
@@ -13,7 +16,7 @@
     <categories>
         <category>Utility</category>
         <category>Accessibility</category>
-      </categories>
+    </categories>
 
     <description>
         <p>
@@ -34,12 +37,15 @@
     <launchable type="desktop-id">io.github.slgobinath.SafeEyes.desktop</launchable>
     <screenshots>
         <screenshot type="default">
+            <caption>Safe Eyes short break screen.</caption>
             <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_1.png</image>
         </screenshot>
         <screenshot>
+            <caption>Safe Eyes long break screen.</caption>
             <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_3.png</image>
         </screenshot>
         <screenshot>
+            <caption>Safe Eyes settings window.</caption>
             <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_6.png</image>
         </screenshot>
     </screenshots>
@@ -47,7 +53,13 @@
     <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
 
     <releases>
-        <release version="2.1.9" date="2023-06-04" />
+        <release version="2.2.0" date="2024-07-14" />
+        <release version="2.1.9" date="2024-06-19" />
+        <release version="2.1.8" date="2024-06-08" />
+        <release version="2.1.7" date="2024-06-08" />
+        <release version="2.1.6" date="2023-07-05" />
+        <release version="2.1.5" date="2023-01-06" />
+        <release version="2.1.4" date="2022-11-20" />
     </releases>
 
     <content_rating type="oars-1.1" />
