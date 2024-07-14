@@ -53,6 +53,7 @@
     <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
 
     <releases>
+        <release version="2.2.0" date="2024-07-14" />
         <release version="2.1.9" date="2024-06-19" />
         <release version="2.1.8" date="2024-06-08" />
         <release version="2.1.7" date="2024-06-08" />

@@ -184,10 +184,10 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L81)
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L88)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L83)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L90)
     - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
-    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L50)
+    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
 4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu release)
 5. Commit the changes to `master`
