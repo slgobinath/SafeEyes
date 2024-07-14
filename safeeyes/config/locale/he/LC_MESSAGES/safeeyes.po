@@ -108,6 +108,10 @@ msgstr "תיאור"
 msgid "License"
 msgstr "רישיון"
 
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "מסך הפסקה"
