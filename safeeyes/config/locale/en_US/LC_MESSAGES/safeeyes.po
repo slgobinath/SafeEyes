@@ -512,3 +512,19 @@ msgstr "Pause media"
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Interval to reset statistics (in hours)"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "Limit Consecutive Skipping"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "How many skips or postpones are allowed in a row"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr "Limit how many breaks can be skipped or postponed in a row"
+
+# plugin/limitconsecutiveskipping
+msgid "Skipped or postponed %d/%d breaks in a row"
+msgstr "Skipped or postponed %d/%d breaks in a row"
