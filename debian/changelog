@@ -1,3 +1,11 @@
+safeeyes (2.2.1) jammy; urgency=medium
+
+  * Make limit consecutive skips to default
+
+  * Add list of contributors to About page
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 14 Jul 2024 16:15:54 -0400
+
 safeeyes (2.2.0) jammy; urgency=medium
 
   * Limit consecutive skips
