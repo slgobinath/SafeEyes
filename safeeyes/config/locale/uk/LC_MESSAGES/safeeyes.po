@@ -535,6 +535,10 @@ msgstr ""
 msgid "Skipped or postponed %d/%d breaks in a row"
 msgstr ""
 
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Інтервал скидання статистики (в годинах)"
