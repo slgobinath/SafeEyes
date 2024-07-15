@@ -19,6 +19,10 @@
 """This module creates the AboutDialog which shows the version and license."""
 
 import os
+import gi
+
+gi.require_version("Gtk", "4.0")
+from gi.repository import Gtk
 
 from safeeyes import utility
 from safeeyes.translations import translate as _
@@ -26,7 +30,8 @@ from safeeyes.translations import translate as _
 ABOUT_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
 
-class AboutDialog:
+@Gtk.Template(filename=ABOUT_DIALOG_GLADE)
+class AboutDialog(Gtk.ApplicationWindow):
     """AboutDialog reads the about_dialog.glade and build the user interface
     using that file.
 
@@ -34,33 +39,36 @@ class AboutDialog:
     license and the GitHub url.
     """
 
+    __gtype_name__ = "AboutDialog"
+
+    lbl_decription = Gtk.Template.Child()
+    lbl_license = Gtk.Template.Child()
+    lbl_app_name = Gtk.Template.Child()
+
     def __init__(self, application, version):
-        builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
-        self.window = builder.get_object("window_about")
-        self.window.set_application(application)
+        super().__init__(application=application)
 
-        self.window.connect("close-request", self.on_window_delete)
-        builder.get_object("btn_close").connect("clicked", self.on_close_clicked)
-
-        builder.get_object("lbl_decription").set_label(
+        self.lbl_decription.set_label(
             _(
                 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding"
                 " you to take breaks while you're working long hours at the computer"
             )
         )
-        builder.get_object("lbl_license").set_label(_("License") + ":")
+        self.lbl_license.set_label(_("License") + ":")
 
         # Set the version at the runtime
-        builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
+        self.lbl_app_name.set_label("Safe Eyes " + version)
 
     def show(self):
         """Show the About dialog."""
-        self.window.present()
+        self.present()
 
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Window close event handler."""
-        self.window.destroy()
+        self.destroy()
 
+    @Gtk.Template.Callback()
     def on_close_clicked(self, *args):
         """Close button click event handler."""
-        self.window.destroy()
+        self.destroy()
