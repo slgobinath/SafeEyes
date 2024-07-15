@@ -54,7 +54,8 @@ SETTINGS_ITEM_BOOL_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_bool.
 class SettingsDialog:
     """Create and initialize SettingsDialog instance."""
 
-    def __init__(self, config, on_save_settings):
+    def __init__(self, application, config, on_save_settings):
+        self.application = application
         self.config = config
         self.on_save_settings = on_save_settings
         self.plugin_switches = {}
@@ -67,6 +68,7 @@ class SettingsDialog:
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
 
         self.window = builder.get_object("window_settings")
+        self.window.set_application(application)
         self.box_short_breaks = builder.get_object("box_short_breaks")
         self.box_long_breaks = builder.get_object("box_long_breaks")
         self.box_plugins = builder.get_object("box_plugins")
@@ -291,7 +293,7 @@ class SettingsDialog:
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
-        dialog = PluginSettingsDialog(plugin_config)
+        dialog = PluginSettingsDialog(self.application, plugin_config)
         dialog.show()
 
     def __disable_errored_plugin(self, button, plugin_config):
@@ -304,7 +306,14 @@ class SettingsDialog:
     ):
         """Show the BreakProperties dialog."""
         dialog = BreakSettingsDialog(
-            break_config, is_short, parent, self.plugin_map, on_close, on_add, on_remove
+            self.application,
+            break_config,
+            is_short,
+            parent,
+            self.plugin_map,
+            on_close,
+            on_add,
+            on_remove,
         )
         dialog.show()
 
@@ -413,12 +422,13 @@ class SettingsDialog:
 class PluginSettingsDialog:
     """Builds a settings dialog based on the configuration of a plugin."""
 
-    def __init__(self, config):
+    def __init__(self, application, config):
         self.config = config
         self.property_controls = []
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
         self.window = builder.get_object("dialog_settings_plugin")
+        self.window.set_application(application)
         box_settings = builder.get_object("box_settings")
         self.window.set_title(_("Plugin Settings"))
         for setting in config.get("settings"):
@@ -505,6 +515,7 @@ class BreakSettingsDialog:
 
     def __init__(
         self,
+        application,
         break_config,
         is_short,
         parent_config,
@@ -523,6 +534,7 @@ class BreakSettingsDialog:
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
         self.window = builder.get_object("dialog_settings_break")
+        self.window.set_application(application)
         self.txt_break = builder.get_object("txt_break")
         self.switch_override_interval = builder.get_object("switch_override_interval")
         self.switch_override_duration = builder.get_object("switch_override_duration")
@@ -702,12 +714,13 @@ class BreakSettingsDialog:
 class NewBreakDialog:
     """Builds a new break dialog."""
 
-    def __init__(self, parent_config, on_add):
+    def __init__(self, application, parent_config, on_add):
         self.parent_config = parent_config
         self.on_add = on_add
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
         self.window = builder.get_object("dialog_new_break")
+        self.window.set_application(application)
         self.txt_break = builder.get_object("txt_break")
         self.cmb_type = builder.get_object("cmb_type")
         list_types = builder.get_object("lst_break_types")

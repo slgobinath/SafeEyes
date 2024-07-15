@@ -54,7 +54,7 @@
     <property name="default-width">500</property>
     <property name="default-height">50</property>
     <property name="destroy-with-parent">1</property>
-    <property name="icon-name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <child>
       <object class="GtkBox" id="box_settings">
         <property name="visible">1</property>

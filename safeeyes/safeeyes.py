@@ -105,7 +105,11 @@ class SafeEyes(Gtk.Application):
             self.context["session"] = {"plugin": {}}
 
         self.break_screen = BreakScreen(
-            self.context, self.on_skipped, self.on_postponed, utility.STYLE_SHEET_PATH
+            self,
+            self.context,
+            self.on_skipped,
+            self.on_postponed,
+            utility.STYLE_SHEET_PATH,
         )
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager()
@@ -193,7 +197,9 @@ class SafeEyes(Gtk.Application):
         if not self.settings_dialog_active:
             logging.info("Show Settings dialog")
             self.settings_dialog_active = True
-            settings_dialog = SettingsDialog(self.config.clone(), self.save_settings)
+            settings_dialog = SettingsDialog(
+                self, self.config.clone(), self.save_settings
+            )
             settings_dialog.show()
 
     def show_required_plugin_dialog(self, error: RequiredPluginException):
@@ -228,7 +234,7 @@ class SafeEyes(Gtk.Application):
         dialog.
         """
         logging.info("Show About dialog")
-        about_dialog = AboutDialog(SAFE_EYES_VERSION)
+        about_dialog = AboutDialog(self, SAFE_EYES_VERSION)
         about_dialog.show()
 
     def quit(self):
