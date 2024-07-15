@@ -508,3 +508,6 @@ msgstr ""
 msgid "Skipped or postponed %d/%d breaks in a row"
 msgstr ""
 
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
