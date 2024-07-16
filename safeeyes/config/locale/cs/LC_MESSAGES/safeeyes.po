@@ -538,6 +538,25 @@ msgstr ""
 msgid "RSI Prevention"
 msgstr ""
 
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+msgid "Next long break at %s"
+msgstr ""
+
+msgid "Next breaks at %s/%s"
+msgstr ""
+
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid "Please install the dependencies or disable the plugin."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Interval pro resetování statistik (v hodinách)"

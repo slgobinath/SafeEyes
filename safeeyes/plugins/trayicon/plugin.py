@@ -341,11 +341,11 @@ class StatusNotifierItemService(DBusService):
 
     Category = 'ApplicationStatus'
     Id = 'io.github.slgobinath.SafeEyes'
-    Title = _('Safe Eyes')
+    Title = 'Safe Eyes'
     Status = 'Active'
     IconName = 'io.github.slgobinath.SafeEyes-enabled'
     IconThemePath = ''
-    ToolTip = ('', [], _('Safe Eyes'), '')
+    ToolTip = ('', [], 'Safe Eyes', '')
     ItemIsMenu = True
     Menu = None
 
@@ -447,7 +447,7 @@ class TrayIcon:
     def get_items(self):
         breaks_found = self.has_breaks()
 
-        info_message = _('No breaks available')
+        info_message = _('No Breaks Available')
 
         if breaks_found:
             if self.active:
@@ -546,17 +546,17 @@ class TrayIcon:
                 'children': [
                     {
                         'id': 9,
-                        'label': _('Any Break'),
+                        'label': _('Any break'),
                         'callback': lambda: self.on_manual_break_clicked(None),
                     },
                     {
                         'id': 10,
-                        'label': _('Short Break'),
+                        'label': _('Short break'),
                         'callback': lambda: self.on_manual_break_clicked(BreakType.SHORT_BREAK),
                     },
                     {
                         'id': 11,
-                        'label': _('Long Break'),
+                        'label': _('Long break'),
                         'callback': lambda: self.on_manual_break_clicked(BreakType.LONG_BREAK),
                     },
                 ]
@@ -597,7 +597,7 @@ class TrayIcon:
         else:
             description = ''
 
-        self.sni_service.set_tooltip(_('Safe Eyes'), description)
+        self.sni_service.set_tooltip('Safe Eyes', description)
 
     def quit_safe_eyes(self):
         """
