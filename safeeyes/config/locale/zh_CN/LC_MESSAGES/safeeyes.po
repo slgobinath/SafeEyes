@@ -541,10 +541,18 @@ msgstr ""
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
-msgid "Please install the dependencies or disable the plugin."
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
 msgstr ""
 
 msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
 msgstr ""
 
 # plugin/healthstats
