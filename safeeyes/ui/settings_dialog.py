@@ -232,18 +232,24 @@ class SettingsDialog:
             lbl_plugin_name.set_sensitive(False)
             lbl_plugin_description.set_sensitive(False)
             switch_enable.set_sensitive(False)
+            btn_properties.set_sensitive(False)
+            if plugin_config['enabled']:
+                btn_disable_errored = builder.get_object('btn_disable_errored')
+                btn_disable_errored.set_visible(True)
+                btn_disable_errored.connect('clicked', lambda button: self.__disable_errored_plugin(button, plugin_config))
+
         else:
             lbl_plugin_description.set_label(_(plugin_config['meta']['description']))
+            if plugin_config['settings']:
+                btn_properties.set_sensitive(True)
+                btn_properties.connect('clicked', lambda button: self.__show_plugins_properties_dialog(plugin_config))
+            else:
+                btn_properties.set_sensitive(False)
         self.plugin_switches[plugin_config['id']] = switch_enable
         if plugin_config.get('break_override_allowed', False):
             self.plugin_map[plugin_config['id']] = plugin_config['meta']['name']
         if plugin_config['icon']:
             builder.get_object('img_plugin_icon').set_from_file(plugin_config['icon'])
-        if plugin_config['settings']:
-            btn_properties.set_sensitive(True)
-            btn_properties.connect('clicked', lambda button: self.__show_plugins_properties_dialog(plugin_config))
-        else:
-            btn_properties.set_sensitive(False)
         box = builder.get_object('box')
         box.set_visible(True)
         return box
@@ -254,6 +260,13 @@ class SettingsDialog:
         """
         dialog = PluginSettingsDialog(plugin_config)
         dialog.show()
+
+    def __disable_errored_plugin(self, button, plugin_config):
+        """
+        Permanently disable errored plugin
+        """
+        button.set_sensitive(False)
+        self.plugin_switches[plugin_config['id']].set_active(False)
 
     def __show_break_properties_dialog(self, break_config, is_short, parent, on_close, on_add, on_remove):
         """

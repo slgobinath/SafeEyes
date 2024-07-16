@@ -241,7 +241,6 @@ def load_plugins_config(safeeyes_config):
             continue
         dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}), plugin_path)
         if dependency_description:
-            plugin['enabled'] = False
             config['error'] = True
             config['meta']['dependency_description'] = dependency_description
             icon = get_resource_path('ic_warning.png')

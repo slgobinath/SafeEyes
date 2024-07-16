@@ -303,7 +303,7 @@ class PluginManager:
                 # Check for dependencies
                 message = utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path)
                 if message:
-                    if plugin_config['required_plugin']:
+                    if plugin_config.get('required_plugin', False):
                         raise RequiredPluginException(
                             plugin['id'],
                             plugin_config['meta']['name'],
