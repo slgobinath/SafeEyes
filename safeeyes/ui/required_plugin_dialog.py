@@ -46,7 +46,10 @@ class RequiredPluginDialog:
 
         builder.get_object('lbl_header').set_label(_("The required plugin '%s' is missing dependencies!") % _(plugin_name))
 
-        builder.get_object('lbl_main').set_label(_("Please install the dependencies or disable the plugin."))
+        builder.get_object('lbl_main').set_label(_("Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings."))
+
+        builder.get_object('btn_close').set_label(_("Quit"))
+        builder.get_object('btn_disable_plugin').set_label(_("Disable plugin temporarily"))
 
         if isinstance(message, PluginDependency):
             builder.get_object('lbl_message').set_label(_(message.message))

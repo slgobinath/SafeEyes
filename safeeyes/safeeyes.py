@@ -156,9 +156,6 @@ class SafeEyes(Gtk.Application):
             settings_dialog.show()
 
     def show_required_plugin_dialog(self, plugin_id, plugin_name, message):
-        """
-        Listen to tray icon About action and send the signal to About dialog.
-        """
         logging.info("Show RequiredPlugin dialog")
         dialog = RequiredPluginDialog(
             plugin_id,
@@ -170,15 +167,14 @@ class SafeEyes(Gtk.Application):
         dialog.show()
 
     def disable_plugin(self, plugin_id):
+        """
+        Temporarily disable plugin, and restart SafeEyes.
+        """
         config = self.config.clone()
 
         for plugin in config.get('plugins'):
             if plugin['id'] == plugin_id:
                 plugin['enabled'] = False
-
-        logging.info("Saving settings to safeeyes.json")
-
-        config.save()
 
         self.required_plugin_dialog_active = False
 

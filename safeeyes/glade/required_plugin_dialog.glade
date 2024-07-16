@@ -67,15 +67,15 @@
                 <property name="label" translatable="yes">Click here for more information</property>
                 <property name="uri">https://slgobinath.github.io/SafeEyes</property>
                 <property name="visible">0</property>
-                <property name="margin-top">5</property>
-                <property name="margin-bottom">5</property>
               </object>
             </child>
             <child>
               <object class="GtkLabel" id="lbl_main">
-                <property name="margin-top">5</property>
-                <property name="margin-bottom">5</property>
-                <property name="label" translatable="1">Please install the dependencies or disable the plugin.</property>
+                <property name="margin">5</property>
+                <property name="wrap">1</property>
+                <property name="justify">center</property>
+                <property name="max-width-chars">60</property>
+                <property name="label" translatable="1">Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings.</property>
                 <attributes>
                   <attribute name="style" value="normal"></attribute>
                 </attributes>
@@ -106,7 +106,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_disable_plugin">
-                <property name="label" translatable="1">Disable plugin</property>
+                <property name="label" translatable="1">Disable plugin temporarily</property>
               </object>
             </child>
           </object>
