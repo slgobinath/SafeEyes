@@ -21,7 +21,7 @@ import os
 
 import gi
 from safeeyes import utility
-from safeeyes.model import Config
+from safeeyes.model import Config, PluginDependency
 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
@@ -220,7 +220,15 @@ class SettingsDialog:
         lbl_plugin_name.set_label(_(plugin_config['meta']['name']))
         switch_enable.set_active(plugin_config['enabled'])
         if plugin_config['error']:
-            lbl_plugin_description.set_label(_(plugin_config['meta']['description']))
+            message = plugin_config['meta']['dependency_description']
+            if isinstance(message, PluginDependency):
+                lbl_plugin_description.set_label(_(message.message))
+                btn_plugin_extra_link = builder.get_object('btn_plugin_extra_link')
+                btn_plugin_extra_link.set_label(_("Click here for more information"))
+                btn_plugin_extra_link.set_uri(message.link)
+                btn_plugin_extra_link.set_visible(True)
+            else:
+                lbl_plugin_description.set_label(_(message))
             lbl_plugin_name.set_sensitive(False)
             lbl_plugin_description.set_sensitive(False)
             switch_enable.set_sensitive(False)
@@ -258,7 +266,7 @@ class SettingsDialog:
         """
         Show the SettingsDialog.
         """
-        self.window.show_all()
+        self.window.show()
 
     def on_switch_postpone_activate(self, switch, state):
         """

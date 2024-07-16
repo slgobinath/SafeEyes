@@ -23,6 +23,7 @@ This module creates the RequiredPluginDialog which shows the error for a require
 import os
 
 from safeeyes import utility
+from safeeyes.model import PluginDependency
 
 REQUIRED_PLUGIN_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/required_plugin_dialog.glade")
 
@@ -47,7 +48,14 @@ class RequiredPluginDialog:
 
         builder.get_object('lbl_main').set_label(_("Please install the dependencies or disable the plugin."))
 
-        builder.get_object('lbl_message').set_label(message)
+        if isinstance(message, PluginDependency):
+            builder.get_object('lbl_message').set_label(_(message.message))
+            btn_extra_link = builder.get_object('btn_extra_link')
+            btn_extra_link.set_label(_("Click here for more information"))
+            btn_extra_link.set_uri(message.link)
+            btn_extra_link.set_visible(True)
+        else:
+            builder.get_object('lbl_message').set_label(_(message))
 
     def show(self):
         """

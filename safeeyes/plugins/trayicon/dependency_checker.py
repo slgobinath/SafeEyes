@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from safeeyes import utility
+from safeeyes.model import PluginDependency
 
 import gi
 gi.require_version('Gio', '2.0')
@@ -36,14 +37,10 @@ def validate(plugin_config, plugin_settings):
     if dbus_proxy.NameHasOwner('(s)', 'org.kde.StatusNotifierWatcher'):
         return None
     else:
-        if utility.DESKTOP_ENVIRONMENT == "gnome":
-            return _("Please install a gnome shell plugin providing tray icons, eg. 'Tray Icons Reloaded'.")
-        elif utility.IS_WAYLAND:
-            return _("Please install a service providing tray icons for your desktop environment.")
-        elif utility.DESKTOP_ENVIRONMENT == "lxde":
-            return _("Please install the 'snixembed' service.")
-        else:
-            return _("Please install the 'snixembed' service, or a service providing tray icons for your desktop environment.")
+        return PluginDependency(
+            message=_("Please install service providing tray icons for your desktop environment."),
+            link="https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon"
+        )
 
     command = None
     if utility.IS_WAYLAND:
