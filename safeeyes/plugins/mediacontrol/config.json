@@ -5,7 +5,7 @@
         "version": "0.0.1"
     },
     "dependencies": {
-        "python_modules": ["dbus"],
+        "python_modules": [],
         "shell_commands": [],
         "operating_systems": [],
         "desktop_environments": [],

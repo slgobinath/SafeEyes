@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<!--
+~ Safe Eyes is a utility to remind you to take break frequently
+~ to protect your eyes from eye strain.
+
+~ Copyright (C) 2016  Gobinath
+
+~ This program is free software: you can redistribute it and/or modify
+~ it under the terms of the GNU General Public License as published by
+~ the Free Software Foundation, either version 3 of the License, or
+~ (at your option) any later version.
+
+~ This program is distributed in the hope that it will be useful,
+~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~ GNU General Public License for more details.
+
+~ You should have received a copy of the GNU General Public License
+~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <object class="GtkWindow" id="window_required_plugin">
+    <property name="title" translatable="1">Safe Eyes - Error</property>
+    <property name="resizable">0</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <child>
+      <object class="GtkBox" id="layout_box">
+        <property name="margin-start">5</property>
+        <property name="margin-end">5</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">5</property>
+        <property name="hexpand">1</property>
+        <property name="vexpand">1</property>
+        <property name="orientation">vertical</property>
+        <property name="baseline-position">top</property>
+        <child>
+          <object class="GtkBox" id="box1">
+            <property name="valign">start</property>
+            <property name="hexpand">1</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="lbl_header">
+                <property name="justify">center</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
+                <property name="label" translatable="1">A required plugin is missing dependencies!</property>
+                <attributes>
+                  <attribute name="style" value="normal"></attribute>
+                  <attribute name="weight" value="bold"></attribute>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lbl_message">
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">5</property>
+                <property name="label" translatable="1"></property>
+                <attributes>
+                  <attribute name="style" value="normal"></attribute>
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLinkButton" id="btn_extra_link">
+                <property name="label" translatable="yes">Click here for more information</property>
+                <property name="uri">https://slgobinath.github.io/SafeEyes</property>
+                <property name="visible">0</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lbl_main">
+                <property name="margin">5</property>
+                <property name="wrap">1</property>
+                <property name="justify">center</property>
+                <property name="max-width-chars">60</property>
+                <property name="label" translatable="1">Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings.</property>
+                <attributes>
+                  <attribute name="style" value="normal"></attribute>
+                </attributes>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="separator">
+            <property name="margin_top">5</property>
+            <property name="margin_bottom">5</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="buttonbox">
+            <property name="valign">start</property>
+            <property name="halign">end</property>
+            <property name="margin-end">5</property>
+            <property name="vexpand">1</property>
+            <property name="homogeneous">1</property>
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkButton" id="btn_close">
+                <property name="label" translatable="1">Quit</property>
+                <property name="receives-default">1</property>
+                <property name="vexpand">1</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_disable_plugin">
+                <property name="label" translatable="1">Disable plugin temporarily</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

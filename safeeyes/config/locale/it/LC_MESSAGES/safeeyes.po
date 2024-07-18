@@ -538,3 +538,30 @@ msgstr ""
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+msgid "Next long break at %s"
+msgstr ""
+
+msgid "Next breaks at %s/%s"
+msgstr ""
+
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
