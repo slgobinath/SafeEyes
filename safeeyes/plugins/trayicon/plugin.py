@@ -64,15 +64,15 @@ MENU_NODE_INFO = Gio.DBusNodeInfo.new_for_xml("""
             <arg type="(ia{sv}av)" direction="out"/>
         </method>
         <method name="GetGroupProperties">
-			<arg type="ai" name="ids" direction="in"/>
-			<arg type="as" name="propertyNames" direction="in" />
-			<arg type="a(ia{sv})" name="properties" direction="out" />
-		</method>
+            <arg type="ai" name="ids" direction="in"/>
+            <arg type="as" name="propertyNames" direction="in" />
+            <arg type="a(ia{sv})" name="properties" direction="out" />
+        </method>
         <method name="GetProperty">
-			<arg type="i" name="id" direction="in"/>
-			<arg type="s" name="name" direction="in"/>
-			<arg type="v" name="value" direction="out"/>
-		</method>
+            <arg type="i" name="id" direction="in"/>
+            <arg type="s" name="name" direction="in"/>
+            <arg type="v" name="value" direction="out"/>
+        </method>
         <method name="Event">
             <arg type="i" direction="in"/>
             <arg type="s" direction="in"/>
@@ -80,24 +80,25 @@ MENU_NODE_INFO = Gio.DBusNodeInfo.new_for_xml("""
             <arg type="u" direction="in"/>
         </method>
         <method name="EventGroup">
-			<arg type="a(isvu)" name="events" direction="in" />
-			<arg type="ai" name="idErrors" direction="out" />
-		</method>
+            <arg type="a(isvu)" name="events" direction="in" />
+            <arg type="ai" name="idErrors" direction="out" />
+        </method>
         <method name="AboutToShow">
             <arg type="i" direction="in"/>
             <arg type="b" direction="out"/>
         </method>
         <method name="AboutToShowGroup">
-			<arg type="ai" name="ids" direction="in" />
-			<arg type="ai" name="updatesNeeded" direction="out" />
-			<arg type="ai" name="idErrors" direction="out" />
-		</method>
+            <arg type="ai" name="ids" direction="in" />
+            <arg type="ai" name="updatesNeeded" direction="out" />
+            <arg type="ai" name="idErrors" direction="out" />
+        </method>
         <signal name="LayoutUpdated">
             <arg type="u"/>
             <arg type="i"/>
         </signal>
     </interface>
 </node>""").interfaces[0]
+
 
 class DBusService:
     def __init__(self, interface_info, object_path, bus):
@@ -142,7 +143,7 @@ class DBusService:
         property_info = self.interface_info.lookup_property(property_name)
         return GLib.Variant(property_info.signature, getattr(self, property_name))
 
-    def emit_signal(self, signal_name, args = None):
+    def emit_signal(self, signal_name, args=None):
         signal_info = self.interface_info.lookup_signal(signal_name)
         if len(signal_info.args) == 0:
             parameters = None
@@ -156,6 +157,7 @@ class DBusService:
             signal_name=signal_name,
             parameters=parameters
         )
+
 
 class DBusMenuService(DBusService):
     DBUS_SERVICE_PATH = '/io/github/slgobinath/SafeEyes/Menu'
@@ -186,7 +188,7 @@ class DBusMenuService(DBusService):
     @staticmethod
     def getItemsFlat(items, idToItems):
         for item in items:
-            if item.get('hidden', False) == True:
+            if item.get('hidden', False):
                 continue
 
             idToItems[item['id']] = item
@@ -220,7 +222,7 @@ class DBusMenuService(DBusService):
 
     @staticmethod
     def itemToDbus(item, recursion_depth):
-        if item.get('hidden', False) == True:
+        if item.get('hidden', False):
             return None
 
         props = DBusMenuService.itemPropsToDbus(item)
@@ -235,7 +237,7 @@ class DBusMenuService(DBusService):
 
     def findItemsWithParent(self, parent_id, items):
         for item in items:
-            if item.get('hidden', False) == True:
+            if item.get('hidden', False):
                 continue
             if 'children' in item:
                 if item['id'] == parent_id:
@@ -263,7 +265,7 @@ class DBusMenuService(DBusService):
             self.revision,
             (
                 0,
-                { 'children-display': GLib.Variant('s', 'submenu') },
+                {'children-display': GLib.Variant('s', 'submenu')},
                 children
             )
         )
@@ -336,6 +338,7 @@ class DBusMenuService(DBusService):
             (revision, parent)
         )
 
+
 class StatusNotifierItemService(DBusService):
     DBUS_SERVICE_PATH = '/org/ayatana/NotificationItem/io_github_slgobinath_SafeEyes'
 
@@ -398,6 +401,7 @@ class StatusNotifierItemService(DBusService):
             'NewTooltip'
         )
 
+
 class TrayIcon:
     """
     Create and show the tray icon along with the tray menu.
@@ -428,7 +432,7 @@ class TrayIcon:
         self.sni_service = StatusNotifierItemService(
             session_bus,
             context,
-            menu_items = self.get_items()
+            menu_items=self.get_items()
         )
         self.sni_service.register()
 
@@ -651,7 +655,6 @@ class TrayIcon:
 
         return (formatted_time, None, False)
 
-
     def on_manual_break_clicked(self, break_type):
         """
         Trigger a break manually.
@@ -758,6 +761,7 @@ class TrayIcon:
             utility.execute_main_thread(lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled"))
         else:
             utility.execute_main_thread(lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled"))
+
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """

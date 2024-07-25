@@ -104,7 +104,7 @@ class SettingsDialog:
 
         for plugin_config in utility.load_plugins_config(config):
             self.box_plugins.pack_start(self.__create_plugin_item(plugin_config), False, False, 0)
-            
+
         self.spin_short_break_duration.set_value(config.get('short_break_duration'))
         self.spin_long_break_duration.set_value(config.get('long_break_duration'))
         self.spin_short_break_interval.set_value(config.get('short_break_interval'))
@@ -157,6 +157,7 @@ class SettingsDialog:
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
+
         def __confirmation_dialog_response(widget, response_id):
             if response_id == Gtk.ResponseType.OK:
                 utility.reset_config()
@@ -236,7 +237,8 @@ class SettingsDialog:
             if plugin_config['enabled']:
                 btn_disable_errored = builder.get_object('btn_disable_errored')
                 btn_disable_errored.set_visible(True)
-                btn_disable_errored.connect('clicked', lambda button: self.__disable_errored_plugin(button, plugin_config))
+                btn_disable_errored.connect(
+                    'clicked', lambda button: self.__disable_errored_plugin(button, plugin_config))
 
         else:
             lbl_plugin_description.set_label(_(plugin_config['meta']['description']))
@@ -296,7 +298,8 @@ class SettingsDialog:
         long_break_interval = self.spin_long_break_interval.get_value_as_int()
         self.spin_long_break_interval.set_range(short_break_interval * 2, 120)
         self.spin_long_break_interval.set_increments(short_break_interval, short_break_interval * 2)
-        self.spin_long_break_interval.set_value(short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
+        self.spin_long_break_interval.set_value(
+            short_break_interval * math.ceil(long_break_interval / self.last_short_break_interval))
         self.last_short_break_interval = short_break_interval
         if not self.initializing and not self.infobar_long_break_shown:
             self.infobar_long_break_shown = True
@@ -337,7 +340,8 @@ class SettingsDialog:
         """
         Event handler for add break button.
         """
-        dialog = NewBreakDialog(self.config, lambda is_short, break_config: self.__create_break_item(break_config, is_short))
+        dialog = NewBreakDialog(self.config, lambda is_short,
+                                break_config: self.__create_break_item(break_config, is_short))
         dialog.show()
 
     def on_window_delete(self, *args):
@@ -380,11 +384,32 @@ class PluginSettingsDialog:
         self.window.set_title(_('Plugin Settings'))
         for setting in config.get('settings'):
             if setting['type'].upper() == 'INT':
-                box_settings.pack_start(self.__load_int_item(setting['label'], setting['id'], setting['safeeyes_config'], setting.get('min', 0), setting.get('max', 120)), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_int_item(
+                        setting['label'],
+                        setting['id'],
+                        setting['safeeyes_config'],
+                        setting.get('min', 0),
+                        setting.get('max', 120)
+                    ),
+                    False,
+                    False,
+                    0
+                )
             elif setting['type'].upper() == 'TEXT':
-                box_settings.pack_start(self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_text_item(setting['label'], setting['id'], setting['safeeyes_config']),
+                    False,
+                    False,
+                    0
+                )
             elif setting['type'].upper() == 'BOOL':
-                box_settings.pack_start(self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']), False, False, 0)
+                box_settings.pack_start(
+                    self.__load_bool_item(setting['label'], setting['id'], setting['safeeyes_config']),
+                    False,
+                    False,
+                    0
+                )
 
     def __load_int_item(self, name, key, settings, min_value, max_value):
         """
@@ -518,9 +543,12 @@ class BreakSettingsDialog:
             self.switch_override_interval.connect('state-set', self.on_switch_override_interval_activate)
             self.switch_override_duration.connect('state-set', self.on_switch_override_duration_activate)
             self.switch_override_plugins.connect('state-set', self.on_switch_override_plugins_activate)
-            self.on_switch_override_interval_activate(self.switch_override_interval, self.switch_override_interval.get_active())
-            self.on_switch_override_duration_activate(self.switch_override_duration, self.switch_override_duration.get_active())
-            self.on_switch_override_plugins_activate(self.switch_override_plugins, self.switch_override_plugins.get_active())
+            self.on_switch_override_interval_activate(
+                self.switch_override_interval, self.switch_override_interval.get_active())
+            self.on_switch_override_duration_activate(
+                self.switch_override_duration, self.switch_override_duration.get_active())
+            self.on_switch_override_plugins_activate(
+                self.switch_override_plugins, self.switch_override_plugins.get_active())
 
     def on_switch_override_interval_activate(self, switch_button, state):
         """
@@ -545,7 +573,12 @@ class BreakSettingsDialog:
         """
         Show a file chooser dialog and let the user to select an image.
         """
-        dialog = Gtk.FileChooserDialog(_('Please select an image'), self.window, Gtk.FileChooserAction.OPEN, (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK))
+        dialog = Gtk.FileChooserDialog(
+            _('Please select an image'),
+            self.window,
+            Gtk.FileChooserAction.OPEN,
+            (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OPEN, Gtk.ResponseType.OK)
+        )
 
         png_filter = Gtk.FileFilter()
         png_filter.set_name("PNG files")

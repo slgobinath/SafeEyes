@@ -44,9 +44,13 @@ class RequiredPluginDialog:
         builder.get_object('btn_close').connect('clicked', self.on_close_clicked)
         builder.get_object('btn_disable_plugin').connect('clicked', self.on_disable_plugin_clicked)
 
-        builder.get_object('lbl_header').set_label(_("The required plugin '%s' is missing dependencies!") % _(plugin_name))
+        builder.get_object('lbl_header').set_label(
+            _("The required plugin '%s' is missing dependencies!") % _(plugin_name)
+        )
 
-        builder.get_object('lbl_main').set_label(_("Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings."))
+        builder.get_object('lbl_main').set_label(
+            _("Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings.")  # noqa: E501
+        )
 
         builder.get_object('btn_close').set_label(_("Quit"))
         builder.get_object('btn_disable_plugin').set_label(_("Disable plugin temporarily"))

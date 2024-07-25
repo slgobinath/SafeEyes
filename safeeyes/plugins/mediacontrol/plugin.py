@@ -20,7 +20,6 @@
 Media Control plugin lets users to pause currently playing media player from the break screen.
 """
 
-import logging
 import os
 import re
 import gi

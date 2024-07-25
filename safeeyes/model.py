@@ -94,11 +94,10 @@ class BreakQueue:
         self.__build_longs()
         self.__build_shorts()
 
-
         # Interface guarantees that short_interval >= 1
         # And that long_interval is a multiple of short_interval
         short_interval = config.get('short_break_interval')
-        long_interval  = config.get('long_break_interval')
+        long_interval = config.get('long_break_interval')
         self.__cycle_len = int(long_interval / short_interval)
         # To count every long break as a cycle in .next() if there are no short breaks
         if self.__short_queue is None:
@@ -114,7 +113,7 @@ class BreakQueue:
                     while brk != current_break and brk.name != last_break:
                         brk = self.next()
 
-    def get_break(self, break_type = None):
+    def get_break(self, break_type=None):
         if self.__current_break is None:
             self.__current_break = self.next()
 
@@ -123,20 +122,20 @@ class BreakQueue:
 
         if break_type == BreakType.LONG_BREAK:
             if self.__long_queue is None:
-                return None;
+                return None
             return self.__long_queue[self.__current_long]
 
         if self.__short_queue is None:
-            return None;
+            return None
         return self.__short_queue[self.__current_short]
 
     def is_long_break(self):
         return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
 
-    def next(self, break_type = None):
+    def next(self, break_type=None):
         break_obj = None
         shorts = self.__short_queue
-        longs  = self.__long_queue
+        longs = self.__long_queue
 
         # Reset break that has just ended
         if self.is_long_break():
@@ -175,7 +174,7 @@ class BreakQueue:
         for break_object in self.__long_queue:
             break_object.time = self.__long_break_time
 
-    def is_empty(self, break_type = None):
+    def is_empty(self, break_type=None):
         """
         Check if the given break type is empty or not. If the break_type is None, check for both short and long breaks.
         """
@@ -187,7 +186,6 @@ class BreakQueue:
             return self.__short_queue is None and self.__long_queue is None
 
     def __next_short(self):
-        longs  = self.__long_queue
         shorts = self.__short_queue
         break_obj = shorts[self.__current_short]
         self.context['break_type'] = 'short'
@@ -198,7 +196,7 @@ class BreakQueue:
         return break_obj
 
     def __next_long(self):
-        longs  = self.__long_queue
+        longs = self.__long_queue
         break_obj = longs[self.__current_long]
         self.context['break_type'] = 'long'
 
@@ -243,17 +241,20 @@ class BreakQueue:
         return queue
 
     def __build_shorts(self):
-        self.__short_queue = self.__build_queue(BreakType.SHORT_BREAK,
-                                                  self.__config.get('short_breaks'),
-                                                  self.__short_break_time,
-                                                  self.__config.get('short_break_duration'))
+        self.__short_queue = self.__build_queue(
+            BreakType.SHORT_BREAK,
+            self.__config.get('short_breaks'),
+            self.__short_break_time,
+            self.__config.get('short_break_duration')
+        )
 
     def __build_longs(self):
-        self.__long_queue = self.__build_queue(BreakType.LONG_BREAK,
-                                                 self.__config.get('long_breaks'),
-                                                 self.__long_break_time,
-                                                 self.__config.get('long_break_duration'))
-
+        self.__long_queue = self.__build_queue(
+            BreakType.LONG_BREAK,
+            self.__config.get('long_breaks'),
+            self.__long_break_time,
+            self.__config.get('long_break_duration')
+        )
 
 
 class State(Enum):
@@ -421,13 +422,15 @@ class TrayAction:
         else:
             return TrayAction(name, icon_path, action, False)
 
+
 @dataclass
 class PluginDependency:
     message: str
-    link: str|None = None
+    link: str | None = None
+
 
 class RequiredPluginException(Exception):
-    def __init__(self, plugin_id, plugin_name: str, message: str|PluginDependency):
+    def __init__(self, plugin_id, plugin_name: str, message: str | PluginDependency):
         if isinstance(message, PluginDependency):
             msg = message.message
         else:

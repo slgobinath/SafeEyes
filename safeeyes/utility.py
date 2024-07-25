@@ -105,6 +105,7 @@ def execute_main_thread(target_function, *args, **kwargs):
     """
     GLib.idle_add(lambda: target_function(*args, **kwargs))
 
+
 def system_locale(category=locale.LC_MESSAGES):
     """
     Return the system locale. If not available, return en_US.UTF-8.
@@ -205,7 +206,7 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_
     # Check the resources
     for resource in plugin_config['dependencies']['resources']:
         if get_resource_path(resource) is None:
-            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}
+            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}  # noqa: E501
 
     plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
     if os.path.isfile(plugin_dependency_checker):
@@ -239,7 +240,8 @@ def load_plugins_config(safeeyes_config):
         config = load_json(plugin_config_path)
         if config is None:
             continue
-        dependency_description = check_plugin_dependencies(plugin['id'], config, plugin.get('settings', {}), plugin_path)
+        dependency_description = check_plugin_dependencies(
+            plugin['id'], config, plugin.get('settings', {}), plugin_path)
         if dependency_description:
             config['error'] = True
             config['meta']['dependency_description'] = dependency_description
@@ -265,13 +267,19 @@ def desktop_environment():
     env = 'unknown'
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
-        if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
+        if desktop_session in [
+            'gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox',
+            'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde'
+        ]:
             env = desktop_session
         elif desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop):
             env = 'xfce'
         elif desktop_session.startswith('lubuntu'):
             env = 'lxde'
-        elif 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
+        elif (
+            'plasma' in desktop_session or desktop_session.startswith('kubuntu')
+            or os.environ.get('KDE_FULL_SESSION') == 'true'
+        ):
             env = 'kde'
         elif os.environ.get('GNOME_DESKTOP_SESSION_ID') or desktop_session.startswith('gnome'):
             env = 'gnome'
@@ -282,6 +290,7 @@ def desktop_environment():
             env = 'sway'
     DESKTOP_ENVIRONMENT = env
     return env
+
 
 def is_wayland():
     """
@@ -361,7 +370,7 @@ def initialize_safeeyes():
     Create the config file and style sheet in XDG_CONFIG_HOME(or ~/.config)/safeeyes directory.
     """
     logging.info('Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes')
-    
+
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
@@ -377,7 +386,9 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or manual deletion of .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation of a startup entry
+    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation
+    # or manual deletion of .config/safeeyes/safeeyes.json file.
+    # In these cases, we want to force the creation of a startup entry
     create_startup_entry(force=True)
 
 def create_startup_entry(force=False):
@@ -387,7 +398,7 @@ def create_startup_entry(force=False):
     startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
     startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
     # until SafeEyes 2.1.5 the startup entry had another name
-    # https://github.com/slgobinath/SafeEyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398 
+    # https://github.com/slgobinath/SafeEyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398
     obsolete_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
 
     create_link = False
@@ -396,14 +407,15 @@ def create_startup_entry(force=False):
         # if force is True, just create the link
         create_link = True
     else:
-        # if force is False, we want to avoid creating the startup symlink if it was manually deleted by the user, we want to create it only if a broken one is found
+        # if force is False, we want to avoid creating the startup symlink if it was manually deleted by the user,
+        # we want to create it only if a broken one is found
         if os.path.islink(startup_entry):
             # if the link exists, check if it is broken
             try:
                 os.stat(startup_entry)
             except FileNotFoundError:
                 # a FileNotFoundError will get thrown if the startup symlink is broken
-                create_link = True 
+                create_link = True
 
         if os.path.islink(obsolete_entry):
             # if a link with the old naming exists, delete it and create a new one
@@ -441,7 +453,7 @@ def initialize_platform():
     if not os.path.exists(os.path.join(sys.prefix, "share/applications/io.github.slgobinath.SafeEyes.desktop")):
         # Create the folder if not exist
         mkdir(applications_dir_path)
-        
+
         # Remove existing file
         delete(desktop_entry)
 
@@ -458,11 +470,11 @@ def initialize_platform():
             local_icon = os.path.join(icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS))
             global_icon = os.path.join(sys.prefix, "share/icons", os.path.relpath(system_icon, SYSTEM_ICONS))
             parent_dir = str(Path(local_icon).parent)
-            
+
             if os.path.exists(global_icon):
                 # This icon is already added to the /usr/share/icons/hicolor folder
                 continue
-            
+
             # Create the directory if not exists
             mkdir(parent_dir)
 
@@ -484,7 +496,7 @@ def reset_config():
     # Copy the safeeyes.json and safeeyes_style.css
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-    
+
     # Add write permission (e.g. if original file was stored in /nix/store)
     os.chmod(CONFIG_FILE_PATH, 0o777)
     os.chmod(STYLE_SHEET_PATH, 0o777)

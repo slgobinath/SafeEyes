@@ -54,23 +54,46 @@ def __lock_screen_command():
     current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
-        if ('xfce' in desktop_session or desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop)) and utility.command_exist('xflock4'):
+        if (
+            (
+                'xfce' in desktop_session or desktop_session.startswith('xubuntu')
+                or (current_desktop is not None and 'xfce' in current_desktop)
+            ) and utility.command_exist('xflock4')
+        ):
             return ['xflock4']
         elif desktop_session == 'cinnamon' and utility.command_exist('cinnamon-screensaver-command'):
             return ['cinnamon-screensaver-command', '--lock']
-        elif (desktop_session == 'pantheon' or desktop_session.startswith('lubuntu')) and utility.command_exist('light-locker-command'):
+        elif (
+            (desktop_session == 'pantheon' or desktop_session.startswith('lubuntu'))
+            and utility.command_exist('light-locker-command')
+        ):
             return ['light-locker-command', '--lock']
         elif desktop_session == 'mate' and utility.command_exist('mate-screensaver-command'):
             return ['mate-screensaver-command', '--lock']
-        elif desktop_session == 'kde' or 'plasma' in desktop_session or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true':
+        elif (
+                desktop_session == 'kde' or 'plasma' in desktop_session
+                or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true'
+        ):
             return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
-        elif desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu') or desktop_session.startswith('gnome'):
+        elif (
+            desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu')
+            or desktop_session.startswith('gnome')
+        ):
             if utility.command_exist('gnome-screensaver-command'):
                 return ['gnome-screensaver-command', '--lock']
             # From Gnome 3.8 no gnome-screensaver-command
-            return ['dbus-send', '--type=method_call', '--dest=org.gnome.ScreenSaver', '/org/gnome/ScreenSaver', 'org.gnome.ScreenSaver.Lock']
+            return [
+                'dbus-send',
+                '--type=method_call',
+                '--dest=org.gnome.ScreenSaver',
+                '/org/gnome/ScreenSaver',
+                'org.gnome.ScreenSaver.Lock'
+            ]
         elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-            if 'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID') and utility.command_exist('gnome-screensaver-command'):
+            if (
+                'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID')
+                and utility.command_exist('gnome-screensaver-command')
+            ):
                 # Gnome 2
                 return ['gnome-screensaver-command', '--lock']
     return None

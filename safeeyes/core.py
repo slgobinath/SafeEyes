@@ -26,7 +26,6 @@ import threading
 import time
 
 from safeeyes import utility
-from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook
@@ -133,17 +132,18 @@ class SafeEyesCore:
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
         self.context['postponed'] = True
 
-    def get_break_time(self, break_type = None):
+    def get_break_time(self, break_type=None):
         """
         Returns the next break time
         """
         break_obj = self.break_queue.get_break(break_type)
         if not break_obj:
             return False
-        time = self.scheduled_next_break_time + datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
+        time = self.scheduled_next_break_time + \
+            datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
         return time
 
-    def take_break(self, break_type = None):
+    def take_break(self, break_type=None):
         """
         Calling this method stops the scheduler and show the next break screen
         """
@@ -153,13 +153,13 @@ class SafeEyesCore:
             return
         utility.start_thread(self.__take_break, break_type=break_type)
 
-    def has_breaks(self, break_type = None):
+    def has_breaks(self, break_type=None):
         """
         Check whether Safe Eyes has breaks or not. Use the break_type to check for either short or long break.
         """
         return not self.break_queue.is_empty(break_type)
 
-    def __take_break(self, break_type = None):
+    def __take_break(self, break_type=None):
         """
         Show the next break screen
         """
@@ -269,7 +269,8 @@ class SafeEyesCore:
             # Plugins want to postpone this break
             self.context['postponed'] = False
             # Update the next break time
-            self.scheduled_next_break_time = self.scheduled_next_break_time + datetime.timedelta(seconds=self.postpone_duration)
+            self.scheduled_next_break_time = self.scheduled_next_break_time + \
+                datetime.timedelta(seconds=self.postpone_duration)
             self.__fire_on_update_next_break(self.scheduled_next_break_time)
             # Wait in user thread
             utility.start_thread(self.__postpone_break)

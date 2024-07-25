@@ -27,6 +27,7 @@ no_of_skipped_breaks = 0
 session = None
 enabled = True
 
+
 def init(ctx, safeeyes_config, plugin_config):
     """
     Initialize the plugin.
@@ -96,4 +97,3 @@ def get_widget_content(break_obj):
         return ""
 
     return _('Skipped or postponed %d/%d breaks in a row') % (no_of_skipped_breaks, no_allowed_skips)
-

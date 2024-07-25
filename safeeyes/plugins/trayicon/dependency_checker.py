@@ -23,6 +23,7 @@ import gi
 gi.require_version('Gio', '2.0')
 from gi.repository import Gio
 
+
 def validate(plugin_config, plugin_settings):
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,

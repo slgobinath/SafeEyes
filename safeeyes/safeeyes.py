@@ -22,7 +22,6 @@ SafeEyes connects all the individual components and provide the complete applica
 
 import atexit
 import logging
-import os
 from threading import Timer
 
 import gi
@@ -320,7 +319,7 @@ class SafeEyes(Gtk.Application):
             self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()
 
-    def disable_safeeyes(self, status=None, is_resting = False):
+    def disable_safeeyes(self, status=None, is_resting=False):
         """
         Listen to tray icon disable action and send the signal to core.
         """
@@ -376,7 +375,7 @@ class SafeEyes(Gtk.Application):
         self.plugins_manager.stop_break()
         return True
 
-    def take_break(self, break_type = None):
+    def take_break(self, break_type=None):
         """
         Take a break now.
         """

@@ -19,7 +19,6 @@
 
 import logging
 import os
-import threading
 import time
 
 import gi
@@ -59,7 +58,11 @@ class BreakScreen:
         # Initialize the theme
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(style_sheet_path)
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            css_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
 
     def initialize(self, config):
         """
@@ -185,7 +188,11 @@ class BreakScreen:
                 else:
                     toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
                 tray_action.add_toolbar_button(toolbar_button)
-                toolbar_button.connect("clicked", lambda button, action: self.__tray_action(button, action), tray_action)
+                toolbar_button.connect(
+                    "clicked",
+                    lambda button, action: self.__tray_action(button, action),
+                    tray_action
+                )
                 toolbar_button.set_tooltip_text(_(tray_action.name))
                 toolbar.add(toolbar_button)
                 toolbar_button.show()

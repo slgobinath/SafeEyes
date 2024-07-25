@@ -267,7 +267,12 @@ class PluginManager:
                 # The plugin is already enabled or partially loaded due to break_override_allowed
 
                 # Validate the dependencies again
-                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path):
+                if utility.check_plugin_dependencies(
+                    plugin['id'],
+                    plugin_config,
+                    plugin.get('settings', {}),
+                    plugin_path
+                ):
                     plugin_obj['enabled'] = False
                     utility.remove_if_exists(self.__plugins_on_start, plugin_obj)
                     utility.remove_if_exists(self.__plugins_on_stop, plugin_obj)
@@ -301,7 +306,12 @@ class PluginManager:
             else:
                 # This is the first time to load the plugin
                 # Check for dependencies
-                message = utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path)
+                message = utility.check_plugin_dependencies(
+                    plugin['id'],
+                    plugin_config,
+                    plugin.get('settings', {}),
+                    plugin_path
+                )
                 if message:
                     if plugin_config.get('required_plugin', False):
                         raise RequiredPluginException(

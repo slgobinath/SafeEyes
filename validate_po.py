@@ -21,16 +21,18 @@ import os
 import polib
 import sys
 
+
 def validate_po(locale: str, path: str) -> bool:
-     success = True
-     po = polib.pofile(path)
-     for entry in po:
-         if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
-             print("Number of variables mismatched in " + locale)
-             print(entry.msgid + " -> " + entry.msgstr)
-             print()
-             success = False
-     return success
+    success = True
+    po = polib.pofile(path)
+    for entry in po:
+        if entry.msgstr and (entry.msgid.count("%") != entry.msgstr.count("%")):
+            print("Number of variables mismatched in " + locale)
+            print(entry.msgid + " -> " + entry.msgstr)
+            print()
+            success = False
+    return success
+
 
 success = True
 locales = os.listdir('safeeyes/config/locale')

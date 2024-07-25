@@ -21,7 +21,6 @@ import logging
 import subprocess
 import threading
 import re
-import os
 
 from safeeyes import utility
 from safeeyes.model import State
@@ -51,9 +50,11 @@ swayidle_lock = threading.Lock()
 swayidle_idle = 0
 swayidle_active = 0
 
+
 def __swayidle_running():
     return (swayidle_process is not None and
             swayidle_process.poll() is None)
+
 
 def __start_swayidle_monitor():
     global swayidle_process
@@ -73,10 +74,12 @@ def __start_swayidle_monitor():
             elif typ == 'R':
                 swayidle_active = timestamp
 
+
 def __stop_swayidle_monitor():
     if __swayidle_running():
         logging.debug('Stopping swayidle subprocess')
         swayidle_process.terminate()
+
 
 def __swayidle_idle_time():
     with swayidle_lock:
@@ -87,6 +90,7 @@ def __swayidle_idle_time():
             idle_time = int(datetime.datetime.now().timestamp()) - swayidle_idle
             return idle_time
     return 0
+
 
 def __gnome_wayland_idle_time():
     """
