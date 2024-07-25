@@ -391,6 +391,7 @@ def initialize_safeeyes():
     # In these cases, we want to force the creation of a startup entry
     create_startup_entry(force=True)
 
+
 def create_startup_entry(force=False):
     """
     Create start up entry.
