@@ -26,7 +26,8 @@ import os
 
 from safeeyes import utility
 from safeeyes.model import TrayAction
-gi.require_version('Gtk', '3.0')
+
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 context = None
@@ -50,52 +51,56 @@ def __lock_screen_command():
         XFCE:						['xflock4']
         Otherwise:					None
     """
-    desktop_session = os.environ.get('DESKTOP_SESSION')
-    current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
+    desktop_session = os.environ.get("DESKTOP_SESSION")
+    current_desktop = os.environ.get("XDG_CURRENT_DESKTOP")
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
         if (
-            (
-                'xfce' in desktop_session or desktop_session.startswith('xubuntu')
-                or (current_desktop is not None and 'xfce' in current_desktop)
-            ) and utility.command_exist('xflock4')
+            "xfce" in desktop_session
+            or desktop_session.startswith("xubuntu")
+            or (current_desktop is not None and "xfce" in current_desktop)
+        ) and utility.command_exist("xflock4"):
+            return ["xflock4"]
+        elif desktop_session == "cinnamon" and utility.command_exist(
+            "cinnamon-screensaver-command"
         ):
-            return ['xflock4']
-        elif desktop_session == 'cinnamon' and utility.command_exist('cinnamon-screensaver-command'):
-            return ['cinnamon-screensaver-command', '--lock']
+            return ["cinnamon-screensaver-command", "--lock"]
         elif (
-            (desktop_session == 'pantheon' or desktop_session.startswith('lubuntu'))
-            and utility.command_exist('light-locker-command')
+            desktop_session == "pantheon" or desktop_session.startswith("lubuntu")
+        ) and utility.command_exist("light-locker-command"):
+            return ["light-locker-command", "--lock"]
+        elif desktop_session == "mate" and utility.command_exist(
+            "mate-screensaver-command"
         ):
-            return ['light-locker-command', '--lock']
-        elif desktop_session == 'mate' and utility.command_exist('mate-screensaver-command'):
-            return ['mate-screensaver-command', '--lock']
+            return ["mate-screensaver-command", "--lock"]
         elif (
-                desktop_session == 'kde' or 'plasma' in desktop_session
-                or desktop_session.startswith('kubuntu') or os.environ.get('KDE_FULL_SESSION') == 'true'
+            desktop_session == "kde"
+            or "plasma" in desktop_session
+            or desktop_session.startswith("kubuntu")
+            or os.environ.get("KDE_FULL_SESSION") == "true"
         ):
-            return ['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+            return ["qdbus", "org.freedesktop.ScreenSaver", "/ScreenSaver", "Lock"]
         elif (
-            desktop_session in ['gnome', 'unity', 'budgie-desktop'] or desktop_session.startswith('ubuntu')
-            or desktop_session.startswith('gnome')
+            desktop_session in ["gnome", "unity", "budgie-desktop"]
+            or desktop_session.startswith("ubuntu")
+            or desktop_session.startswith("gnome")
         ):
-            if utility.command_exist('gnome-screensaver-command'):
-                return ['gnome-screensaver-command', '--lock']
+            if utility.command_exist("gnome-screensaver-command"):
+                return ["gnome-screensaver-command", "--lock"]
             # From Gnome 3.8 no gnome-screensaver-command
             return [
-                'dbus-send',
-                '--type=method_call',
-                '--dest=org.gnome.ScreenSaver',
-                '/org/gnome/ScreenSaver',
-                'org.gnome.ScreenSaver.Lock'
+                "dbus-send",
+                "--type=method_call",
+                "--dest=org.gnome.ScreenSaver",
+                "/org/gnome/ScreenSaver",
+                "org.gnome.ScreenSaver.Lock",
             ]
-        elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-            if (
-                'deprecated' not in os.environ.get('GNOME_DESKTOP_SESSION_ID')
-                and utility.command_exist('gnome-screensaver-command')
-            ):
+        elif os.environ.get("GNOME_DESKTOP_SESSION_ID"):
+            if "deprecated" not in os.environ.get(
+                "GNOME_DESKTOP_SESSION_ID"
+            ) and utility.command_exist("gnome-screensaver-command"):
                 # Gnome 2
-                return ['gnome-screensaver-command', '--lock']
+                return ["gnome-screensaver-command", "--lock"]
     return None
 
 
@@ -112,12 +117,12 @@ def init(ctx, safeeyes_config, plugin_config):
     global lock_screen_command
     global min_seconds
     global tray_icon_path
-    logging.debug('Initialize Screensaver plugin')
+    logging.debug("Initialize Screensaver plugin")
     context = ctx
-    min_seconds = plugin_config['min_seconds']
-    tray_icon_path = os.path.join(plugin_config['path'], "resource/lock.png")
-    if plugin_config['command']:
-        lock_screen_command = plugin_config['command'].split()
+    min_seconds = plugin_config["min_seconds"]
+    tray_icon_path = os.path.join(plugin_config["path"], "resource/lock.png")
+    if plugin_config["command"]:
+        lock_screen_command = plugin_config["command"].split()
     else:
         lock_screen_command = __lock_screen_command()
 
@@ -152,7 +157,6 @@ def on_stop_break():
 
 
 def get_tray_action(break_obj):
-    return TrayAction.build("Lock screen",
-                            tray_icon_path,
-                            Gtk.STOCK_DIALOG_AUTHENTICATION,
-                            __lock_screen)
+    return TrayAction.build(
+        "Lock screen", tray_icon_path, Gtk.STOCK_DIALOG_AUTHENTICATION, __lock_screen
+    )

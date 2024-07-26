@@ -26,7 +26,7 @@ from safeeyes import utility
 from Xlib.display import Display
 from Xlib.display import X
 
-gi.require_version('Gtk', '3.0')
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
@@ -61,7 +61,7 @@ class BreakScreen:
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
             css_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
     def initialize(self, config):
@@ -69,11 +69,11 @@ class BreakScreen:
         Initialize the internal properties from configuration
         """
         logging.info("Initialize the break screen")
-        self.enable_postpone = config.get('allow_postpone', False)
-        self.keycode_shortcut_postpone = config.get('shortcut_postpone', 65)
-        self.keycode_shortcut_skip = config.get('shortcut_skip', 9)
-        self.shortcut_disable_time = config.get('shortcut_disable_time', 2)
-        self.strict_break = config.get('strict_break', False)
+        self.enable_postpone = config.get("allow_postpone", False)
+        self.keycode_shortcut_postpone = config.get("shortcut_postpone", 65)
+        self.keycode_shortcut_skip = config.get("shortcut_skip", 9)
+        self.shortcut_disable_time = config.get("shortcut_disable_time", 2)
+        self.strict_break = config.get("strict_break", False)
 
     def skip_break(self):
         """
@@ -117,7 +117,7 @@ class BreakScreen:
         """
         self.enable_shortcut = self.shortcut_disable_time <= seconds
         mins, secs = divmod(countdown, 60)
-        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        timeformat = "{:02d}:{:02d}".format(mins, secs)
         GLib.idle_add(lambda: self.__update_count_down(timeformat))
 
     def show_message(self, break_obj, widget, tray_actions=[]):
@@ -127,7 +127,9 @@ class BreakScreen:
         message = break_obj.name
         image_path = break_obj.image
         self.enable_shortcut = self.shortcut_disable_time <= 0
-        GLib.idle_add(lambda: self.__show_break_screen(message, image_path, widget, tray_actions))
+        GLib.idle_add(
+            lambda: self.__show_break_screen(message, image_path, widget, tray_actions)
+        )
 
     def close(self):
         """
@@ -159,8 +161,8 @@ class BreakScreen:
         no_of_monitors = display.get_n_monitors()
         logging.info("Show break screens in %d display(s)", no_of_monitors)
 
-        skip_button_disabled = self.context.get('skip_button_disabled', False)
-        postpone_button_disabled = self.context.get('postpone_button_disabled', False)
+        skip_button_disabled = self.context.get("skip_button_disabled", False)
+        postpone_button_disabled = self.context.get("postpone_button_disabled", False)
 
         for monitor_num in range(no_of_monitors):
             monitor = display.get_monitor(monitor_num)
@@ -184,14 +186,18 @@ class BreakScreen:
             for tray_action in tray_actions:
                 toolbar_button = None
                 if tray_action.system_icon:
-                    toolbar_button = Gtk.ToolButton.new_from_stock(tray_action.get_icon())
+                    toolbar_button = Gtk.ToolButton.new_from_stock(
+                        tray_action.get_icon()
+                    )
                 else:
-                    toolbar_button = Gtk.ToolButton.new(tray_action.get_icon(), tray_action.name)
+                    toolbar_button = Gtk.ToolButton.new(
+                        tray_action.get_icon(), tray_action.name
+                    )
                 tray_action.add_toolbar_button(toolbar_button)
                 toolbar_button.connect(
                     "clicked",
                     lambda button, action: self.__tray_action(button, action),
-                    tray_action
+                    tray_action,
                 )
                 toolbar_button.set_tooltip_text(_(tray_action.name))
                 toolbar.add(toolbar_button)
@@ -200,17 +206,17 @@ class BreakScreen:
             # Add the buttons
             if self.enable_postpone and not postpone_button_disabled:
                 # Add postpone button
-                btn_postpone = Gtk.Button.new_with_label(_('Postpone'))
-                btn_postpone.get_style_context().add_class('btn_postpone')
-                btn_postpone.connect('clicked', self.on_postpone_clicked)
+                btn_postpone = Gtk.Button.new_with_label(_("Postpone"))
+                btn_postpone.get_style_context().add_class("btn_postpone")
+                btn_postpone.connect("clicked", self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
                 box_buttons.pack_start(btn_postpone, True, True, 0)
 
             if not self.strict_break and not skip_button_disabled:
                 # Add the skip button
-                btn_skip = Gtk.Button.new_with_label(_('Skip'))
-                btn_skip.get_style_context().add_class('btn_skip')
-                btn_skip.connect('clicked', self.on_skip_clicked)
+                btn_skip = Gtk.Button.new_with_label(_("Skip"))
+                btn_skip.get_style_context().add_class("btn_skip")
+                btn_skip.connect("clicked", self.on_skip_clicked)
                 btn_skip.set_visible(True)
                 box_buttons.pack_start(btn_skip, True, True, 0)
 
@@ -225,7 +231,7 @@ class BreakScreen:
 
             # Set visual to apply css theme. It should be called before show method.
             window.set_visual(window.get_screen().get_rgba_visual())
-            if self.context['desktop'] == 'kde':
+            if self.context["desktop"] == "kde":
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
@@ -266,10 +272,16 @@ class BreakScreen:
                 # Avoid waiting for next event by checking pending events
                 event = self.display.next_event()
                 if self.enable_shortcut and event.type == X.KeyPress:
-                    if event.detail == self.keycode_shortcut_skip and not self.strict_break:
+                    if (
+                        event.detail == self.keycode_shortcut_skip
+                        and not self.strict_break
+                    ):
                         self.skip_break()
                         break
-                    elif self.enable_postpone and event.detail == self.keycode_shortcut_postpone:
+                    elif (
+                        self.enable_postpone
+                        and event.detail == self.keycode_shortcut_postpone
+                    ):
                         self.postpone_break()
                         break
             else:

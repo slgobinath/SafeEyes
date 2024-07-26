@@ -34,16 +34,16 @@ def play_sound(resource_name):
     Arguments:
         resource_name {string} -- name of the wav file resource
     """
-    logging.info('Playing audible alert %s', resource_name)
+    logging.info("Playing audible alert %s", resource_name)
     try:
         # Open the sound file
         path = utility.get_resource_path(resource_name)
         if path is None:
             return
-        utility.execute_command('aplay', ['-q', path])
+        utility.execute_command("aplay", ["-q", path])
 
     except BaseException:
-        logging.error('Failed to play audible alert %s', resource_name)
+        logging.error("Failed to play audible alert %s", resource_name)
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -53,10 +53,10 @@ def init(ctx, safeeyes_config, plugin_config):
     global context
     global pre_break_alert
     global post_break_alert
-    logging.debug('Initialize Audible Alert plugin')
+    logging.debug("Initialize Audible Alert plugin")
     context = ctx
-    pre_break_alert = plugin_config['pre_break_alert']
-    post_break_alert = plugin_config['post_break_alert']
+    pre_break_alert = plugin_config["pre_break_alert"]
+    post_break_alert = plugin_config["post_break_alert"]
 
 
 def on_pre_break(break_obj):
@@ -66,7 +66,7 @@ def on_pre_break(break_obj):
         break_obj {safeeyes.model.Break} -- the break object
     """
     if pre_break_alert:
-        play_sound('on_pre_break.wav')
+        play_sound("on_pre_break.wav")
 
 
 def on_stop_break():
@@ -74,6 +74,6 @@ def on_stop_break():
     After the break, play the alert sound
     """
     # Do not play if the break is skipped or postponed
-    if context['skipped'] or context['postponed'] or not post_break_alert:
+    if context["skipped"] or context["postponed"] or not post_break_alert:
         return
-    play_sound('on_stop_break.wav')
+    play_sound("on_stop_break.wav")

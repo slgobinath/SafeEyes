@@ -45,7 +45,9 @@ class Break:
         self.next = None
 
     def __str__(self):
-        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(self.name, self.type, self.duration)
+        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(
+            self.name, self.type, self.duration
+        )
 
     def __repr__(self):
         return str(self)
@@ -76,6 +78,7 @@ class BreakType(Enum):
     """
     Type of Safe Eyes breaks.
     """
+
     SHORT_BREAK = 1
     LONG_BREAK = 2
 
@@ -86,9 +89,9 @@ class BreakQueue:
         self.__current_break = None
         self.__current_long = 0
         self.__current_short = 0
-        self.__short_break_time = config.get('short_break_interval')
-        self.__long_break_time = config.get('long_break_interval')
-        self.__is_random_order = config.get('random_order')
+        self.__short_break_time = config.get("short_break_interval")
+        self.__long_break_time = config.get("long_break_interval")
+        self.__is_random_order = config.get("random_order")
         self.__config = config
 
         self.__build_longs()
@@ -96,8 +99,8 @@ class BreakQueue:
 
         # Interface guarantees that short_interval >= 1
         # And that long_interval is a multiple of short_interval
-        short_interval = config.get('short_break_interval')
-        long_interval = config.get('long_break_interval')
+        short_interval = config.get("short_break_interval")
+        long_interval = config.get("long_break_interval")
         self.__cycle_len = int(long_interval / short_interval)
         # To count every long break as a cycle in .next() if there are no short breaks
         if self.__short_queue is None:
@@ -105,7 +108,7 @@ class BreakQueue:
 
         # Restore the last break from session
         if not self.is_empty():
-            last_break = context['session'].get('break')
+            last_break = context["session"].get("break")
             if last_break is not None:
                 current_break = self.get_break()
                 if last_break != current_break.name:
@@ -130,7 +133,10 @@ class BreakQueue:
         return self.__short_queue[self.__current_short]
 
     def is_long_break(self):
-        return self.__current_break is not None and self.__current_break.type == BreakType.LONG_BREAK
+        return (
+            self.__current_break is not None
+            and self.__current_break.type == BreakType.LONG_BREAK
+        )
 
     def next(self, break_type=None):
         break_obj = None
@@ -157,13 +163,16 @@ class BreakQueue:
             break_obj = self.__next_long()
         elif longs is None:
             break_obj = self.__next_short()
-        elif break_type == BreakType.LONG_BREAK or longs[self.__current_long].time <= shorts[self.__current_short].time:
+        elif (
+            break_type == BreakType.LONG_BREAK
+            or longs[self.__current_long].time <= shorts[self.__current_short].time
+        ):
             break_obj = self.__next_long()
         else:
             break_obj = self.__next_short()
 
         self.__current_break = break_obj
-        self.context['session']['break'] = self.__current_break.name
+        self.context["session"]["break"] = self.__current_break.name
 
         return break_obj
 
@@ -188,7 +197,7 @@ class BreakQueue:
     def __next_short(self):
         shorts = self.__short_queue
         break_obj = shorts[self.__current_short]
-        self.context['break_type'] = 'short'
+        self.context["break_type"] = "short"
 
         # Update the index to next
         self.__current_short = (self.__current_short + 1) % len(shorts)
@@ -198,7 +207,7 @@ class BreakQueue:
     def __next_long(self):
         longs = self.__long_queue
         break_obj = longs[self.__current_long]
-        self.context['break_type'] = 'long'
+        self.context["break_type"] = "long"
 
         # Update the index to next
         self.__current_long = (self.__current_long + 1) % len(longs)
@@ -222,20 +231,18 @@ class BreakQueue:
 
         queue = [None] * size
         for i, break_config in enumerate(breaks_order):
-            name = _(break_config['name'])
-            duration = break_config.get('duration', break_duration)
-            image = break_config.get('image')
-            plugins = break_config.get('plugins', None)
-            interval = break_config.get('interval', break_time)
+            name = _(break_config["name"])
+            duration = break_config.get("duration", break_duration)
+            image = break_config.get("image")
+            plugins = break_config.get("plugins", None)
+            interval = break_config.get("interval", break_time)
 
             # Validate time value
             if not isinstance(duration, int) or duration <= 0:
-                logging.error('Invalid break duration in: ' +
-                              str(break_config))
+                logging.error("Invalid break duration in: " + str(break_config))
                 continue
 
-            break_obj = Break(break_type, name, interval,
-                              duration, image, plugins)
+            break_obj = Break(break_type, name, interval, duration, image, plugins)
             queue[i] = break_obj
 
         return queue
@@ -243,17 +250,17 @@ class BreakQueue:
     def __build_shorts(self):
         self.__short_queue = self.__build_queue(
             BreakType.SHORT_BREAK,
-            self.__config.get('short_breaks'),
+            self.__config.get("short_breaks"),
             self.__short_break_time,
-            self.__config.get('short_break_duration')
+            self.__config.get("short_break_duration"),
         )
 
     def __build_longs(self):
         self.__long_queue = self.__build_queue(
             BreakType.LONG_BREAK,
-            self.__config.get('long_breaks'),
+            self.__config.get("long_breaks"),
             self.__long_break_time,
-            self.__config.get('long_break_duration')
+            self.__config.get("long_break_duration"),
         )
 
 
@@ -261,13 +268,14 @@ class State(Enum):
     """
     Possible states of Safe Eyes.
     """
-    START = 0,       # Starting scheduler
-    WAITING = 1,     # User is working (waiting for next break)
-    PRE_BREAK = 2,   # Preparing for break
-    BREAK = 3,       # Break
-    STOPPED = 4,     # Disabled
-    QUIT = 5,        # Quitting
-    RESTING = 6      # Resting (natural break)
+
+    START = (0,)  # Starting scheduler
+    WAITING = (1,)  # User is working (waiting for next break)
+    PRE_BREAK = (2,)  # Preparing for break
+    BREAK = (3,)  # Break
+    STOPPED = (4,)  # Disabled
+    QUIT = (5,)  # Quitting
+    RESTING = 6  # Resting (natural break)
 
 
 class EventHook:
@@ -304,8 +312,7 @@ class Config:
     def __init__(self, init=True):
         # Read the config files
         self.__user_config = utility.load_json(utility.CONFIG_FILE_PATH)
-        self.__system_config = utility.load_json(
-            utility.SYSTEM_CONFIG_FILE_PATH)
+        self.__system_config = utility.load_json(utility.SYSTEM_CONFIG_FILE_PATH)
         # If there any breaking changes in long_breaks, short_breaks or any other keys, use the __force_upgrade list
         self.__force_upgrade = []
         # self.__force_upgrade = ['long_breaks', 'short_breaks']
@@ -318,18 +325,18 @@ class Config:
                 self.__user_config = self.__system_config
                 self.save()
             else:
-                system_config_version = self.__system_config['meta']['config_version']
-                meta_obj = self.__user_config.get('meta', None)
+                system_config_version = self.__system_config["meta"]["config_version"]
+                meta_obj = self.__user_config.get("meta", None)
                 if meta_obj is None:
                     # Corrupted user config
                     self.__user_config = self.__system_config
                 else:
-                    user_config_version = str(
-                        meta_obj.get('config_version', '0.0.0'))
+                    user_config_version = str(meta_obj.get("config_version", "0.0.0"))
                     if parse(user_config_version) != parse(system_config_version):
                         # Update the user config
                         self.__merge_dictionary(
-                            self.__user_config, self.__system_config)
+                            self.__user_config, self.__system_config
+                        )
                         self.__user_config = self.__system_config
                         # Update the style sheet
                         utility.replace_style_sheet()

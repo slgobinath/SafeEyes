@@ -38,18 +38,18 @@ def init(ctx, safeeyes_config, plugin_config):
     global no_of_skipped_breaks
     global no_allowed_skips
 
-    logging.debug('Initialize Limit consecutive skipping plugin')
+    logging.debug("Initialize Limit consecutive skipping plugin")
     context = ctx
 
-    no_allowed_skips = plugin_config.get('number_of_allowed_skips_in_a_row', 2)
+    no_allowed_skips = plugin_config.get("number_of_allowed_skips_in_a_row", 2)
 
     if session is None:
         # Read the session
-        session = context['session']['plugin'].get('limitconsecutiveskipping', None)
+        session = context["session"]["plugin"].get("limitconsecutiveskipping", None)
         if session is None:
-            session = {'no_of_skipped_breaks': 0}
-            context['session']['plugin']['limitconsecutiveskipping'] = session
-        no_of_skipped_breaks = session.get('no_of_skipped_breaks', 0)
+            session = {"no_of_skipped_breaks": 0}
+            context["session"]["plugin"]["limitconsecutiveskipping"] = session
+        no_of_skipped_breaks = session.get("no_of_skipped_breaks", 0)
 
 
 def on_stop_break():
@@ -61,20 +61,22 @@ def on_stop_break():
         return
 
     global no_of_skipped_breaks
-    if context['skipped'] or context['postponed']:
+    if context["skipped"] or context["postponed"]:
         no_of_skipped_breaks += 1
-        session['no_of_skipped_breaks'] = no_of_skipped_breaks
+        session["no_of_skipped_breaks"] = no_of_skipped_breaks
     else:
         no_of_skipped_breaks = 0
-        session['no_of_skipped_breaks'] = no_of_skipped_breaks
+        session["no_of_skipped_breaks"] = no_of_skipped_breaks
 
 
 def on_start_break(break_obj):
-    logging.debug('Skipped / allowed = {} / {}'.format(no_of_skipped_breaks, no_allowed_skips))
+    logging.debug(
+        "Skipped / allowed = {} / {}".format(no_of_skipped_breaks, no_allowed_skips)
+    )
 
     if no_of_skipped_breaks >= no_allowed_skips:
-        context['postpone_button_disabled'] = True
-        context['skip_button_disabled'] = True
+        context["postpone_button_disabled"] = True
+        context["skip_button_disabled"] = True
 
 
 def get_widget_title(break_obj):
@@ -85,7 +87,7 @@ def get_widget_title(break_obj):
     if not enabled:
         return ""
 
-    return _('Limit Consecutive Skipping')
+    return _("Limit Consecutive Skipping")
 
 
 def get_widget_content(break_obj):
@@ -96,4 +98,7 @@ def get_widget_content(break_obj):
     if not enabled:
         return ""
 
-    return _('Skipped or postponed %d/%d breaks in a row') % (no_of_skipped_breaks, no_allowed_skips)
+    return _("Skipped or postponed %d/%d breaks in a row") % (
+        no_of_skipped_breaks,
+        no_allowed_skips,
+    )

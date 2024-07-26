@@ -38,31 +38,35 @@ from pathlib import Path
 import babel.core
 import babel.dates
 import gi
-gi.require_version('Gtk', '3.0')
+
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 from packaging.version import parse
 
-gi.require_version('Gdk', '3.0')
+gi.require_version("Gdk", "3.0")
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
-HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
-CONFIG_DIRECTORY = os.path.join(os.environ.get(
-    'XDG_CONFIG_HOME') or os.path.join(HOME_DIRECTORY, '.config'), 'safeeyes')
-STYLE_SHEET_DIRECTORY = os.path.join(CONFIG_DIRECTORY, 'style')
-CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'safeeyes.json')
-CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, 'resource')
-SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, 'session.json')
-STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, 'safeeyes_style.css')
+HOME_DIRECTORY = os.environ.get("HOME") or os.path.expanduser("~")
+CONFIG_DIRECTORY = os.path.join(
+    os.environ.get("XDG_CONFIG_HOME") or os.path.join(HOME_DIRECTORY, ".config"),
+    "safeeyes",
+)
+STYLE_SHEET_DIRECTORY = os.path.join(CONFIG_DIRECTORY, "style")
+CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, "safeeyes.json")
+CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, "resource")
+SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, "session.json")
+STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, "safeeyes_style.css")
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
-SYSTEM_STYLE_SHEET_PATH = os.path.join(
-    BIN_DIRECTORY, "config/style/safeeyes_style.css")
-LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, 'safeeyes.log')
-SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, 'plugins')
-USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, 'plugins')
-LOCALE_PATH = os.path.join(BIN_DIRECTORY, 'config/locale')
-SYSTEM_DESKTOP_FILE = os.path.join(BIN_DIRECTORY, "platform/io.github.slgobinath.SafeEyes.desktop")
+SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
+LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, "safeeyes.log")
+SYSTEM_PLUGINS_DIR = os.path.join(BIN_DIRECTORY, "plugins")
+USER_PLUGINS_DIR = os.path.join(CONFIG_DIRECTORY, "plugins")
+LOCALE_PATH = os.path.join(BIN_DIRECTORY, "config/locale")
+SYSTEM_DESKTOP_FILE = os.path.join(
+    BIN_DIRECTORY, "platform/io.github.slgobinath.SafeEyes.desktop"
+)
 SYSTEM_ICONS = os.path.join(BIN_DIRECTORY, "platform/icons")
 DESKTOP_ENVIRONMENT = None
 IS_WAYLAND = False
@@ -77,8 +81,7 @@ def get_resource_path(resource_name):
         return None
     resource_location = os.path.join(CONFIG_RESOURCE, resource_name)
     if not os.path.isfile(resource_location):
-        resource_location = os.path.join(
-            BIN_DIRECTORY, 'resource', resource_name)
+        resource_location = os.path.join(BIN_DIRECTORY, "resource", resource_name)
         if not os.path.isfile(resource_location):
             # Resource not found
             resource_location = None
@@ -90,7 +93,9 @@ def start_thread(target_function, **args):
     """
     Execute the function in a separate thread.
     """
-    thread = threading.Thread(target=target_function, name="WorkThread", daemon=False, kwargs=args)
+    thread = threading.Thread(
+        target=target_function, name="WorkThread", daemon=False, kwargs=args
+    )
     thread.start()
 
 
@@ -98,6 +103,7 @@ def start_thread(target_function, **args):
 #     """
 #     Execute the given function in main thread, forwarding positional and keyword arguments.
 #     """
+
 
 def execute_main_thread(target_function, *args, **kwargs):
     """
@@ -111,14 +117,14 @@ def system_locale(category=locale.LC_MESSAGES):
     Return the system locale. If not available, return en_US.UTF-8.
     """
     try:
-        locale.setlocale(locale.LC_ALL, '')
+        locale.setlocale(locale.LC_ALL, "")
         sys_locale = locale.getlocale(category)[0]
         if not sys_locale:
-            sys_locale = 'en_US.UTF-8'
+            sys_locale = "en_US.UTF-8"
         return sys_locale
     except BaseException:
         # Some systems does not return proper locale
-        return 'en_US.UTF-8'
+        return "en_US.UTF-8"
 
 
 def format_time(time):
@@ -127,11 +133,11 @@ def format_time(time):
     """
     sys_locale = system_locale(locale.LC_TIME)
     try:
-        return babel.dates.format_time(time, format='short', locale=sys_locale)
+        return babel.dates.format_time(time, format="short", locale=sys_locale)
     except babel.core.UnknownLocaleError:
         # Some locale types are not supported by the babel library.
         # Use 'en' locale format if the system locale is not supported.
-        return babel.dates.format_time(time, format='short', locale='en')
+        return babel.dates.format_time(time, format="short", locale="en")
 
 
 def mkdir(path):
@@ -144,7 +150,7 @@ def mkdir(path):
         if exc.errno == errno.EEXIST and os.path.isdir(path):
             pass
         else:
-            logging.error('Error while creating ' + str(path))
+            logging.error("Error while creating " + str(path))
             raise
 
 
@@ -167,7 +173,7 @@ def write_json(json_path, json_obj):
     Write the JSON object at the given path
     """
     try:
-        with open(json_path, 'w') as json_file:
+        with open(json_path, "w") as json_file:
             json.dump(json_obj, json_file, indent=4, sort_keys=True)
     except BaseException:
         pass
@@ -188,29 +194,42 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_
     Check the plugin dependencies.
     """
     # Check the desktop environment
-    if plugin_config['dependencies']['desktop_environments']:
+    if plugin_config["dependencies"]["desktop_environments"]:
         # Plugin has restrictions on desktop environments
-        if DESKTOP_ENVIRONMENT not in plugin_config['dependencies']['desktop_environments']:
-            return _('Plugin does not support %s desktop environment') % DESKTOP_ENVIRONMENT
+        if (
+            DESKTOP_ENVIRONMENT
+            not in plugin_config["dependencies"]["desktop_environments"]
+        ):
+            return (
+                _("Plugin does not support %s desktop environment")
+                % DESKTOP_ENVIRONMENT
+            )
 
     # Check the Python modules
-    for module in plugin_config['dependencies']['python_modules']:
+    for module in plugin_config["dependencies"]["python_modules"]:
         if not module_exist(module):
             return _("Please install the Python module '%s'") % module
 
     # Check the shell commands
-    for command in plugin_config['dependencies']['shell_commands']:
+    for command in plugin_config["dependencies"]["shell_commands"]:
         if not command_exist(command):
             return _("Please install the command-line tool '%s'") % command
 
     # Check the resources
-    for resource in plugin_config['dependencies']['resources']:
+    for resource in plugin_config["dependencies"]["resources"]:
         if get_resource_path(resource) is None:
-            return _('Please add the resource %(resource)s to %(config_resource)s directory') % {'resource': resource, 'config_resource': CONFIG_RESOURCE}  # noqa: E501
+            return _(
+                "Please add the resource %(resource)s to %(config_resource)s directory"
+            ) % {
+                "resource": resource,
+                "config_resource": CONFIG_RESOURCE,
+            }  # noqa: E501
 
-    plugin_dependency_checker = os.path.join(plugin_path, 'dependency_checker.py')
+    plugin_dependency_checker = os.path.join(plugin_path, "dependency_checker.py")
     if os.path.isfile(plugin_dependency_checker):
-        dependency_checker = importlib.import_module((plugin_id + '.dependency_checker'))
+        dependency_checker = importlib.import_module(
+            (plugin_id + ".dependency_checker")
+        )
         if dependency_checker and hasattr(dependency_checker, "validate"):
             return dependency_checker.validate(plugin_config, plugin_settings)
 
@@ -222,37 +241,38 @@ def load_plugins_config(safeeyes_config):
     Load all the plugins from the given directory.
     """
     configs = []
-    for plugin in safeeyes_config.get('plugins'):
-        plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin['id'])
+    for plugin in safeeyes_config.get("plugins"):
+        plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin["id"])
         if not os.path.isdir(plugin_path):
             # User plugin
-            plugin_path = os.path.join(USER_PLUGINS_DIR, plugin['id'])
-        plugin_config_path = os.path.join(plugin_path, 'config.json')
-        plugin_icon_path = os.path.join(plugin_path, 'icon.png')
-        plugin_module_path = os.path.join(plugin_path, 'plugin.py')
+            plugin_path = os.path.join(USER_PLUGINS_DIR, plugin["id"])
+        plugin_config_path = os.path.join(plugin_path, "config.json")
+        plugin_icon_path = os.path.join(plugin_path, "icon.png")
+        plugin_module_path = os.path.join(plugin_path, "plugin.py")
         if not os.path.isfile(plugin_module_path):
             return
         icon = None
         if os.path.isfile(plugin_icon_path):
             icon = plugin_icon_path
         else:
-            icon = get_resource_path('ic_plugin.png')
+            icon = get_resource_path("ic_plugin.png")
         config = load_json(plugin_config_path)
         if config is None:
             continue
         dependency_description = check_plugin_dependencies(
-            plugin['id'], config, plugin.get('settings', {}), plugin_path)
+            plugin["id"], config, plugin.get("settings", {}), plugin_path
+        )
         if dependency_description:
-            config['error'] = True
-            config['meta']['dependency_description'] = dependency_description
-            icon = get_resource_path('ic_warning.png')
+            config["error"] = True
+            config["meta"]["dependency_description"] = dependency_description
+            icon = get_resource_path("ic_warning.png")
         else:
-            config['error'] = False
-        config['id'] = plugin['id']
-        config['icon'] = icon
-        config['enabled'] = plugin['enabled']
-        for setting in config['settings']:
-            setting['safeeyes_config'] = plugin['settings']
+            config["error"] = False
+        config["id"] = plugin["id"]
+        config["icon"] = icon
+        config["enabled"] = plugin["enabled"]
+        for setting in config["settings"]:
+            setting["safeeyes_config"] = plugin["settings"]
         configs.append(config)
     return configs
 
@@ -262,32 +282,51 @@ def desktop_environment():
     Detect the desktop environment.
     """
     global DESKTOP_ENVIRONMENT
-    desktop_session = os.environ.get('DESKTOP_SESSION')
-    current_desktop = os.environ.get('XDG_CURRENT_DESKTOP')
-    env = 'unknown'
+    desktop_session = os.environ.get("DESKTOP_SESSION")
+    current_desktop = os.environ.get("XDG_CURRENT_DESKTOP")
+    env = "unknown"
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
         if desktop_session in [
-            'gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox',
-            'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde'
+            "gnome",
+            "unity",
+            "budgie-desktop",
+            "cinnamon",
+            "mate",
+            "xfce4",
+            "lxde",
+            "pantheon",
+            "fluxbox",
+            "blackbox",
+            "openbox",
+            "icewm",
+            "jwm",
+            "afterstep",
+            "trinity",
+            "kde",
         ]:
             env = desktop_session
-        elif desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop):
-            env = 'xfce'
-        elif desktop_session.startswith('lubuntu'):
-            env = 'lxde'
-        elif (
-            'plasma' in desktop_session or desktop_session.startswith('kubuntu')
-            or os.environ.get('KDE_FULL_SESSION') == 'true'
+        elif desktop_session.startswith("xubuntu") or (
+            current_desktop is not None and "xfce" in current_desktop
         ):
-            env = 'kde'
-        elif os.environ.get('GNOME_DESKTOP_SESSION_ID') or desktop_session.startswith('gnome'):
-            env = 'gnome'
-        elif desktop_session.startswith('ubuntu'):
-            env = 'unity'
+            env = "xfce"
+        elif desktop_session.startswith("lubuntu"):
+            env = "lxde"
+        elif (
+            "plasma" in desktop_session
+            or desktop_session.startswith("kubuntu")
+            or os.environ.get("KDE_FULL_SESSION") == "true"
+        ):
+            env = "kde"
+        elif os.environ.get("GNOME_DESKTOP_SESSION_ID") or desktop_session.startswith(
+            "gnome"
+        ):
+            env = "gnome"
+        elif desktop_session.startswith("ubuntu"):
+            env = "unity"
     elif current_desktop is not None:
-        if current_desktop.startswith('sway'):
-            env = 'sway'
+        if current_desktop.startswith("sway"):
+            env = "sway"
     DESKTOP_ENVIRONMENT = env
     return env
 
@@ -306,15 +345,15 @@ def is_wayland():
         return IS_WAYLAND
 
     try:
-        session_id = subprocess.check_output(['loginctl']).split(b'\n')[1].split()[0]
+        session_id = subprocess.check_output(["loginctl"]).split(b"\n")[1].split()[0]
         output = subprocess.check_output(
-            ['loginctl', 'show-session', session_id, '-p', 'Type']
+            ["loginctl", "show-session", session_id, "-p", "Type"]
         )
     except BaseException:
-        logging.warning('Unable to determine if wayland is running. Assuming no.')
+        logging.warning("Unable to determine if wayland is running. Assuming no.")
         IS_WAYLAND = False
     else:
-        IS_WAYLAND = bool(re.search(b'wayland', output, re.IGNORECASE))
+        IS_WAYLAND = bool(re.search(b"wayland", output, re.IGNORECASE))
     return IS_WAYLAND
 
 
@@ -333,7 +372,7 @@ def execute_command(command, args=[]):
         try:
             subprocess.Popen(command_to_execute)
         except BaseException:
-            logging.error('Error in executing the command ' + str(command))
+            logging.error("Error in executing the command " + str(command))
 
 
 def command_exist(command):
@@ -369,7 +408,7 @@ def initialize_safeeyes():
     """
     Create the config file and style sheet in XDG_CONFIG_HOME(or ~/.config)/safeeyes directory.
     """
-    logging.info('Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes')
+    logging.info("Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes")
 
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
@@ -396,11 +435,13 @@ def create_startup_entry(force=False):
     """
     Create start up entry.
     """
-    startup_dir_path = os.path.join(HOME_DIRECTORY, '.config/autostart')
-    startup_entry = os.path.join(startup_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
+    startup_dir_path = os.path.join(HOME_DIRECTORY, ".config/autostart")
+    startup_entry = os.path.join(
+        startup_dir_path, "io.github.slgobinath.SafeEyes.desktop"
+    )
     # until SafeEyes 2.1.5 the startup entry had another name
     # https://github.com/slgobinath/SafeEyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398
-    obsolete_entry = os.path.join(startup_dir_path, 'safeeyes.desktop')
+    obsolete_entry = os.path.join(startup_dir_path, "safeeyes.desktop")
 
     create_link = False
 
@@ -443,15 +484,21 @@ def initialize_platform():
     """
     logging.debug("Initialize the platform")
 
-    applications_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/applications')
-    icons_dir_path = os.path.join(HOME_DIRECTORY, '.local/share/icons')
-    desktop_entry = os.path.join(applications_dir_path, 'io.github.slgobinath.SafeEyes.desktop')
+    applications_dir_path = os.path.join(HOME_DIRECTORY, ".local/share/applications")
+    icons_dir_path = os.path.join(HOME_DIRECTORY, ".local/share/icons")
+    desktop_entry = os.path.join(
+        applications_dir_path, "io.github.slgobinath.SafeEyes.desktop"
+    )
 
     # Create the folder if not exist
     mkdir(icons_dir_path)
 
     # Create a desktop entry
-    if not os.path.exists(os.path.join(sys.prefix, "share/applications/io.github.slgobinath.SafeEyes.desktop")):
+    if not os.path.exists(
+        os.path.join(
+            sys.prefix, "share/applications/io.github.slgobinath.SafeEyes.desktop"
+        )
+    ):
         # Create the folder if not exist
         mkdir(applications_dir_path)
 
@@ -465,11 +512,15 @@ def initialize_platform():
             logging.error("Failed to create desktop entry at %s" % desktop_entry)
 
     # Add links for all icons
-    for (path, _, filenames) in os.walk(SYSTEM_ICONS):
+    for path, _, filenames in os.walk(SYSTEM_ICONS):
         for filename in filenames:
             system_icon = os.path.join(path, filename)
-            local_icon = os.path.join(icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS))
-            global_icon = os.path.join(sys.prefix, "share/icons", os.path.relpath(system_icon, SYSTEM_ICONS))
+            local_icon = os.path.join(
+                icons_dir_path, os.path.relpath(system_icon, SYSTEM_ICONS)
+            )
+            global_icon = os.path.join(
+                sys.prefix, "share/icons", os.path.relpath(system_icon, SYSTEM_ICONS)
+            )
             parent_dir = str(Path(local_icon).parent)
 
             if os.path.exists(global_icon):
@@ -521,13 +572,15 @@ def initialize_logging(debug):
     # Configure logging.
     root_logger = logging.getLogger()
     log_formatter = logging.Formatter(
-        '%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s')
+        "%(asctime)s [%(levelname)s]:[%(threadName)s] %(message)s"
+    )
 
     # Append the logs and overwrite once reached 1MB
     if debug:
         # Log to file
         file_handler = RotatingFileHandler(
-            LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0)
+            LOG_FILE_PATH, maxBytes=1024 * 1024, backupCount=5, encoding=None, delay=0
+        )
         file_handler.setFormatter(log_formatter)
         # Log to console
         console_handler = logging.StreamHandler()
@@ -544,8 +597,8 @@ def __open_plugin_config(plugins_dir, plugin_id):
     """
     Open the given plugin's configuration.
     """
-    plugin_config_path = os.path.join(plugins_dir, plugin_id, 'config.json')
-    plugin_module_path = os.path.join(plugins_dir, plugin_id, 'plugin.py')
+    plugin_config_path = os.path.join(plugins_dir, plugin_id, "config.json")
+    plugin_module_path = os.path.join(plugins_dir, plugin_id, "plugin.py")
     if not os.path.isfile(plugin_config_path) or not os.path.isfile(plugin_module_path):
         # Either the config.json or plugin.py is not available
         return None
@@ -557,42 +610,43 @@ def __update_plugin_config(plugin, plugin_config, config):
     Update the plugin configuration.
     """
     if plugin_config is None:
-        config['plugins'].remove(plugin)
+        config["plugins"].remove(plugin)
     else:
-        if parse(plugin.get('version', '0.0.0')) != parse(plugin_config['meta']['version']):
+        if parse(plugin.get("version", "0.0.0")) != parse(
+            plugin_config["meta"]["version"]
+        ):
             # Update the configuration
-            plugin['version'] = plugin_config['meta']['version']
+            plugin["version"] = plugin_config["meta"]["version"]
             setting_ids = []
             # Add the new settings
-            for setting in plugin_config['settings']:
-                setting_ids.append(setting['id'])
-                if 'settings' not in plugin:
-                    plugin['settings'] = {}
-                if plugin['settings'].get(setting['id'], None) is None:
-                    plugin['settings'][setting['id']] = setting['default']
+            for setting in plugin_config["settings"]:
+                setting_ids.append(setting["id"])
+                if "settings" not in plugin:
+                    plugin["settings"] = {}
+                if plugin["settings"].get(setting["id"], None) is None:
+                    plugin["settings"][setting["id"]] = setting["default"]
             # Remove the removed ids
             keys_to_remove = []
-            for key in plugin.get('settings', []):
+            for key in plugin.get("settings", []):
                 if key not in setting_ids:
                     keys_to_remove.append(key)
             for key in keys_to_remove:
-                del plugin['settings'][key]
+                del plugin["settings"][key]
 
 
 def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
-    """
-    """
+    """ """
     if plugin_config is None:
         return
     config = {}
-    config['id'] = plugin_id
-    config['enabled'] = False   # By default plugins are disabled
-    config['version'] = plugin_config['meta']['version']
-    if plugin_config['settings']:
-        config['settings'] = {}
-        for setting in plugin_config['settings']:
-            config['settings'][setting['id']] = setting['default']
-    safe_eyes_config['plugins'].append(config)
+    config["id"] = plugin_id
+    config["enabled"] = False  # By default plugins are disabled
+    config["version"] = plugin_config["meta"]["version"]
+    if plugin_config["settings"]:
+        config["settings"] = {}
+        for setting in plugin_config["settings"]:
+            config["settings"][setting["id"]] = setting["default"]
+    safe_eyes_config["plugins"].append(config)
 
 
 def merge_plugins(config):
@@ -615,8 +669,8 @@ def merge_plugins(config):
         user_plugins = []
 
     # Create a list of existing plugins
-    for plugin in config['plugins']:
-        plugin_id = plugin['id']
+    for plugin in config["plugins"]:
+        plugin_id = plugin["id"]
         if plugin_id in system_plugins:
             plugin_config = __open_plugin_config(SYSTEM_PLUGINS_DIR, plugin_id)
             __update_plugin_config(plugin, plugin_config, config)
@@ -626,7 +680,7 @@ def merge_plugins(config):
             __update_plugin_config(plugin, plugin_config, config)
             user_plugins.remove(plugin_id)
         else:
-            config['plugins'].remove(plugin)
+            config["plugins"].remove(plugin)
 
     # Add all system plugins
     for plugin_id in system_plugins:
@@ -643,11 +697,11 @@ def open_session():
     """
     Open the last session.
     """
-    logging.info('Reading the session file')
+    logging.info("Reading the session file")
 
     session = load_json(SESSION_FILE_PATH)
     if session is None:
-        session = {'plugin': {}}
+        session = {"plugin": {}}
     return session
 
 
@@ -656,7 +710,7 @@ def create_gtk_builder(glade_file):
     Create a Gtk builder and load the glade file.
     """
     builder = Gtk.Builder()
-    builder.set_translation_domain('safeeyes')
+    builder.set_translation_domain("safeeyes")
     builder.add_from_file(glade_file)
     # Tranlslate all sub components
     for obj in builder.get_objects():
@@ -675,10 +729,8 @@ def load_and_scale_image(path, width, height):
     if not os.path.isfile(path):
         return None
     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
-        filename=path,
-        width=width,
-        height=height,
-        preserve_aspect_ratio=True)
+        filename=path, width=width, height=height, preserve_aspect_ratio=True
+    )
     image = Gtk.Image.new_from_pixbuf(pixbuf)
     return image
 

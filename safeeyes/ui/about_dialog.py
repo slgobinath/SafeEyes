@@ -36,14 +36,16 @@ class AboutDialog:
     def __init__(self, version):
         builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
         builder.connect_signals(self)
-        self.window = builder.get_object('window_about')
-        builder.get_object('lbl_decription').set_label(
-            _("Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer")  # noqa: E501
+        self.window = builder.get_object("window_about")
+        builder.get_object("lbl_decription").set_label(
+            _(
+                "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"  # noqa: E501
+            )
         )
-        builder.get_object('lbl_license').set_label(_('License') + ':')
+        builder.get_object("lbl_license").set_label(_("License") + ":")
 
         # Set the version at the runtime
-        builder.get_object('lbl_app_name').set_label('Safe Eyes ' + version)
+        builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
 
     def show(self):
         """

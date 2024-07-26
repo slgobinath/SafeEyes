@@ -24,7 +24,8 @@ import os
 import re
 import gi
 from safeeyes.model import TrayAction
-gi.require_version('Gtk', '3.0')
+
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio
 
 tray_icon_path = None
@@ -40,25 +41,25 @@ def __active_players():
         bus_type=Gio.BusType.SESSION,
         flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
         info=None,
-        name='org.freedesktop.DBus',
-        object_path='/org/freedesktop/DBus',
-        interface_name='org.freedesktop.DBus',
+        name="org.freedesktop.DBus",
+        object_path="/org/freedesktop/DBus",
+        interface_name="org.freedesktop.DBus",
         cancellable=None,
     )
 
     for service in dbus_proxy.ListNames():
-        if re.match('org.mpris.MediaPlayer2.', service):
+        if re.match("org.mpris.MediaPlayer2.", service):
             player = Gio.DBusProxy.new_for_bus_sync(
                 bus_type=Gio.BusType.SESSION,
                 flags=Gio.DBusProxyFlags.NONE,
                 info=None,
                 name=service,
-                object_path='/org/mpris/MediaPlayer2',
-                interface_name='org.mpris.MediaPlayer2.Player',
+                object_path="/org/mpris/MediaPlayer2",
+                interface_name="org.mpris.MediaPlayer2.Player",
                 cancellable=None,
             )
 
-            status = player.get_cached_property('PlaybackStatus').unpack().lower()
+            status = player.get_cached_property("PlaybackStatus").unpack().lower()
 
             if status == "playing":
                 players.append(player)
@@ -78,7 +79,7 @@ def init(ctx, safeeyes_config, plugin_config):
     Initialize the screensaver plugin.
     """
     global tray_icon_path
-    tray_icon_path = os.path.join(plugin_config['path'], "resource/pause.png")
+    tray_icon_path = os.path.join(plugin_config["path"], "resource/pause.png")
 
 
 def get_tray_action(break_obj):
@@ -87,7 +88,9 @@ def get_tray_action(break_obj):
     """
     players = __active_players()
     if players:
-        return TrayAction.build("Pause media",
-                                tray_icon_path,
-                                Gtk.STOCK_MEDIA_PAUSE,
-                                lambda: __pause_players(players))
+        return TrayAction.build(
+            "Pause media",
+            tray_icon_path,
+            Gtk.STOCK_MEDIA_PAUSE,
+            lambda: __pause_players(players),
+        )

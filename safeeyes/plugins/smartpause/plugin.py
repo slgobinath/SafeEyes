@@ -52,8 +52,7 @@ swayidle_active = 0
 
 
 def __swayidle_running():
-    return (swayidle_process is not None and
-            swayidle_process.poll() is None)
+    return swayidle_process is not None and swayidle_process.poll() is None
 
 
 def __start_swayidle_monitor():
@@ -61,23 +60,27 @@ def __start_swayidle_monitor():
     global swayidle_start
     global swayidle_idle
     global swayidle_active
-    logging.debug('Starting swayidle subprocess')
-    swayidle_process = subprocess.Popen([
-        "swayidle", "timeout", "1", "date +S%s", "resume", "date +R%s"
-        ], stdout=subprocess.PIPE, bufsize=1, universal_newlines=True, encoding='utf-8')
+    logging.debug("Starting swayidle subprocess")
+    swayidle_process = subprocess.Popen(
+        ["swayidle", "timeout", "1", "date +S%s", "resume", "date +R%s"],
+        stdout=subprocess.PIPE,
+        bufsize=1,
+        universal_newlines=True,
+        encoding="utf-8",
+    )
     for line in swayidle_process.stdout:
         with swayidle_lock:
             typ = line[0]
             timestamp = int(line[1:])
-            if typ == 'S':
+            if typ == "S":
                 swayidle_idle = timestamp
-            elif typ == 'R':
+            elif typ == "R":
                 swayidle_active = timestamp
 
 
 def __stop_swayidle_monitor():
     if __swayidle_running():
-        logging.debug('Stopping swayidle subprocess')
+        logging.debug("Stopping swayidle subprocess")
         swayidle_process.terminate()
 
 
@@ -99,14 +102,16 @@ def __gnome_wayland_idle_time():
     https://unix.stackexchange.com/a/492328/222290
     """
     try:
-        output = subprocess.check_output([
-            'dbus-send',
-            '--print-reply',
-            '--dest=org.gnome.Mutter.IdleMonitor',
-            '/org/gnome/Mutter/IdleMonitor/Core',
-            'org.gnome.Mutter.IdleMonitor.GetIdletime'
-        ])
-        return int(re.search(rb'\d+$', output).group(0)) / 1000
+        output = subprocess.check_output(
+            [
+                "dbus-send",
+                "--print-reply",
+                "--dest=org.gnome.Mutter.IdleMonitor",
+                "/org/gnome/Mutter/IdleMonitor/Core",
+                "org.gnome.Mutter.IdleMonitor.GetIdletime",
+            ]
+        )
+        return int(re.search(rb"\d+$", output).group(0)) / 1000
     except BaseException as e:
         logging.warning("Failed to get system idle time for gnome/wayland.")
         logging.warning(str(e))
@@ -124,7 +129,7 @@ def __system_idle_time():
         elif use_swayidle:
             return __swayidle_idle_time()
         # Convert to seconds
-        return int(subprocess.check_output(['xprintidle']).decode('utf-8')) / 1000
+        return int(subprocess.check_output(["xprintidle"]).decode("utf-8")) / 1000
     except BaseException:
         return 0
 
@@ -163,19 +168,20 @@ def init(ctx, safeeyes_config, plugin_config):
     global postpone_if_active
     global is_wayland_and_gnome
     global use_swayidle
-    logging.debug('Initialize Smart Pause plugin')
+    logging.debug("Initialize Smart Pause plugin")
     context = ctx
-    enable_safeeyes = context['api']['enable_safeeyes']
-    disable_safeeyes = context['api']['disable_safeeyes']
-    postpone = context['api']['postpone']
-    idle_time = plugin_config['idle_time']
-    postpone_if_active = plugin_config['postpone_if_active']
-    short_break_interval = safeeyes_config.get(
-        'short_break_interval') * 60  # Convert to seconds
-    long_break_duration = safeeyes_config.get('long_break_duration')
+    enable_safeeyes = context["api"]["enable_safeeyes"]
+    disable_safeeyes = context["api"]["disable_safeeyes"]
+    postpone = context["api"]["postpone"]
+    idle_time = plugin_config["idle_time"]
+    postpone_if_active = plugin_config["postpone_if_active"]
+    short_break_interval = (
+        safeeyes_config.get("short_break_interval") * 60
+    )  # Convert to seconds
+    long_break_duration = safeeyes_config.get("long_break_duration")
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
-    is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
-    use_swayidle = context['desktop'] == 'sway'
+    is_wayland_and_gnome = context["desktop"] == "gnome" and context["is_wayland"]
+    use_swayidle = context["desktop"] == "sway"
 
 
 def __start_idle_monitor():
@@ -194,17 +200,23 @@ def __start_idle_monitor():
         if __is_active():
             # Get the system idle time
             system_idle_time = __system_idle_time()
-            if system_idle_time >= idle_time and context['state'] == State.WAITING:
+            if system_idle_time >= idle_time and context["state"] == State.WAITING:
                 smart_pause_activated = True
-                idle_start_time = datetime.datetime.now() - datetime.timedelta(seconds=system_idle_time)
-                logging.info('Pause Safe Eyes due to system idle')
+                idle_start_time = datetime.datetime.now() - datetime.timedelta(
+                    seconds=system_idle_time
+                )
+                logging.info("Pause Safe Eyes due to system idle")
                 disable_safeeyes(None, True)
-            elif system_idle_time < idle_time and context['state'] == State.RESTING and idle_start_time is not None:
-                logging.info('Resume Safe Eyes due to user activity')
+            elif (
+                system_idle_time < idle_time
+                and context["state"] == State.RESTING
+                and idle_start_time is not None
+            ):
+                logging.info("Resume Safe Eyes due to user activity")
                 smart_pause_activated = False
-                idle_period = (datetime.datetime.now() - idle_start_time)
+                idle_period = datetime.datetime.now() - idle_start_time
                 idle_seconds = idle_period.total_seconds()
-                context['idle_period'] = idle_seconds
+                context["idle_period"] = idle_seconds
                 if idle_seconds < short_break_interval:
                     # Credit back the idle time
                     if next_break_time is not None:
@@ -226,7 +238,7 @@ def on_start():
     global active
     if not __is_active():
         # If SmartPause is already started, do not start it again
-        logging.debug('Start Smart Pause plugin')
+        logging.debug("Start Smart Pause plugin")
         __set_active(True)
         utility.start_thread(__start_idle_monitor)
 
@@ -241,7 +253,7 @@ def on_stop():
         # Safe Eyes is stopped due to system idle
         smart_pause_activated = False
         return
-    logging.debug('Stop Smart Pause plugin')
+    logging.debug("Stop Smart Pause plugin")
     if use_swayidle:
         __stop_swayidle_monitor()
     __set_active(False)
@@ -276,4 +288,4 @@ def disable():
     SmartPause plugin was active earlier but now user has disabled it.
     """
     # Remove the idle_period
-    context.pop('idle_period', None)
+    context.pop("idle_period", None)
