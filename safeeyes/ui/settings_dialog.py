@@ -22,6 +22,7 @@ import os
 import gi
 from safeeyes import utility
 from safeeyes.model import Config, PluginDependency
+from safeeyes.translations import translate as _
 
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, Gio

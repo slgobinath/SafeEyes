@@ -20,6 +20,7 @@ import logging
 
 import gi
 from safeeyes.model import BreakType
+from safeeyes.translations import translate as _
 
 gi.require_version("Notify", "0.7")
 from gi.repository import Notify
