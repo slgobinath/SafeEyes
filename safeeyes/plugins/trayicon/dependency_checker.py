@@ -18,6 +18,7 @@
 
 from safeeyes import utility
 from safeeyes.model import PluginDependency
+from safeeyes.translations import translate as _
 
 import gi
 
