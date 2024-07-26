@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-SafeEyes connects all the individual components and provide the complete application.
+"""SafeEyes connects all the individual components and provide the complete
+application.
 """
 
 import atexit
@@ -42,9 +42,7 @@ SAFE_EYES_VERSION = "2.2.1"
 
 
 class SafeEyes(Gtk.Application):
-    """
-    This class represents a runnable Safe Eyes instance.
-    """
+    """This class represents a runnable Safe Eyes instance."""
 
     required_plugin_dialog_active = False
 
@@ -124,9 +122,7 @@ class SafeEyes(Gtk.Application):
         atexit.register(self.persist_session)
 
     def start(self):
-        """
-        Start Safe Eyes
-        """
+        """Start Safe Eyes."""
         if self.config.get("use_rpc_server", True):
             self.__start_rpc_server()
 
@@ -154,8 +150,8 @@ class SafeEyes(Gtk.Application):
             self.take_break()
 
     def show_settings(self):
-        """
-        Listen to tray icon Settings action and send the signal to Settings dialog.
+        """Listen to tray icon Settings action and send the signal to Settings
+        dialog.
         """
         if not self.settings_dialog_active:
             logging.info("Show Settings dialog")
@@ -175,9 +171,7 @@ class SafeEyes(Gtk.Application):
         dialog.show()
 
     def disable_plugin(self, plugin_id):
-        """
-        Temporarily disable plugin, and restart SafeEyes.
-        """
+        """Temporarily disable plugin, and restart SafeEyes."""
         config = self.config.clone()
 
         for plugin in config.get("plugins"):
@@ -189,16 +183,16 @@ class SafeEyes(Gtk.Application):
         self.restart(config, set_active=True)
 
     def show_about(self):
-        """
-        Listen to tray icon About action and send the signal to About dialog.
+        """Listen to tray icon About action and send the signal to About
+        dialog.
         """
         logging.info("Show About dialog")
         about_dialog = AboutDialog(SAFE_EYES_VERSION)
         about_dialog.show()
 
     def quit(self):
-        """
-        Listen to the tray menu quit action and stop the core, notification and the app itself.
+        """Listen to the tray menu quit action and stop the core, notification
+        and the app itself.
         """
         logging.info("Quit Safe Eyes")
         self.context["state"] = State.QUIT
@@ -211,8 +205,9 @@ class SafeEyes(Gtk.Application):
         super().quit()
 
     def handle_suspend_callback(self, sleeping):
-        """
-        If the system goes to sleep, Safe Eyes stop the core if it is already active.
+        """If the system goes to sleep, Safe Eyes stop the core if it is
+        already active.
+
         If it was active, Safe Eyes will become active after wake up.
         """
         if sleeping:
@@ -237,9 +232,7 @@ class SafeEyes(Gtk.Application):
         self.handle_suspend_callback(sleeping)
 
     def handle_system_suspend(self):
-        """
-        Setup system suspend listener.
-        """
+        """Setup system suspend listener."""
         self.suspend_proxy = Gio.DBusProxy.new_for_bus_sync(
             bus_type=Gio.BusType.SYSTEM,
             flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
@@ -252,24 +245,22 @@ class SafeEyes(Gtk.Application):
         self.suspend_proxy.connect("g-signal", self.handle_suspend_signal)
 
     def on_skipped(self):
-        """
-        Listen to break screen Skip action and send the signal to core.
-        """
+        """Listen to break screen Skip action and send the signal to core."""
         logging.info("User skipped the break")
         self.safe_eyes_core.skip()
         self.plugins_manager.stop_break()
 
     def on_postponed(self):
-        """
-        Listen to break screen Postpone action and send the signal to core.
+        """Listen to break screen Postpone action and send the signal to
+        core.
         """
         logging.info("User postponed the break")
         self.safe_eyes_core.postpone()
         self.plugins_manager.stop_break()
 
     def save_settings(self, config):
-        """
-        Listen to Settings dialog Save action and write to the config file.
+        """Listen to Settings dialog Save action and write to the config
+        file.
         """
         self.settings_dialog_active = False
 
@@ -322,9 +313,7 @@ class SafeEyes(Gtk.Application):
             self.plugins_manager.start()
 
     def enable_safeeyes(self, scheduled_next_break_time=-1, reset_breaks=False):
-        """
-        Listen to tray icon enable action and send the signal to core.
-        """
+        """Listen to tray icon enable action and send the signal to core."""
         if (
             not self.required_plugin_dialog_active
             and not self.active
@@ -335,9 +324,7 @@ class SafeEyes(Gtk.Application):
             self.plugins_manager.start()
 
     def disable_safeeyes(self, status=None, is_resting=False):
-        """
-        Listen to tray icon disable action and send the signal to core.
-        """
+        """Listen to tray icon disable action and send the signal to core."""
         if self.active:
             self.active = False
             self.plugins_manager.stop()
@@ -347,63 +334,47 @@ class SafeEyes(Gtk.Application):
             self._status = status
 
     def on_start_break(self, break_obj):
-        """
-        Pass the break information to plugins.
-        """
+        """Pass the break information to plugins."""
         if not self.plugins_manager.start_break(break_obj):
             return False
         return True
 
     def start_break(self, break_obj):
-        """
-        Pass the break information to break screen.
-        """
+        """Pass the break information to break screen."""
         # Get the HTML widgets content from plugins
         widget = self.plugins_manager.get_break_screen_widgets(break_obj)
         actions = self.plugins_manager.get_break_screen_tray_actions(break_obj)
         self.break_screen.show_message(break_obj, widget, actions)
 
     def countdown(self, countdown, seconds):
-        """
-        Pass the countdown to plugins and break screen.
-        """
+        """Pass the countdown to plugins and break screen."""
         self.break_screen.show_count_down(countdown, seconds)
         self.plugins_manager.countdown(countdown, seconds)
         return True
 
     def update_next_break(self, break_obj, break_time):
-        """
-        Update the next break to plugins and save the session.
-        """
+        """Update the next break to plugins and save the session."""
         self.plugins_manager.update_next_break(break_obj, break_time)
         self._status = _("Next break at %s") % (utility.format_time(break_time))
         if self.config.get("persist_state"):
             utility.write_json(utility.SESSION_FILE_PATH, self.context["session"])
 
     def stop_break(self):
-        """
-        Stop the current break.
-        """
+        """Stop the current break."""
         self.break_screen.close()
         self.plugins_manager.stop_break()
         return True
 
     def take_break(self, break_type=None):
-        """
-        Take a break now.
-        """
+        """Take a break now."""
         utility.execute_main_thread(self.safe_eyes_core.take_break, break_type)
 
     def status(self):
-        """
-        Return the status of Safe Eyes.
-        """
+        """Return the status of Safe Eyes."""
         return self._status
 
     def persist_session(self):
-        """
-        Save the session object to the session file.
-        """
+        """Save the session object to the session file."""
         if self.config.get("persist_state"):
             utility.write_json(utility.SESSION_FILE_PATH, self.context["session"])
         else:

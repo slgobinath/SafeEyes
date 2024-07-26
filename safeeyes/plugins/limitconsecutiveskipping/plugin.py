@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Limit how many breaks can be skipped or postponed in a row.
-"""
+"""Limit how many breaks can be skipped or postponed in a row."""
 
 import logging
 
@@ -29,9 +27,7 @@ enabled = True
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
+    """Initialize the plugin."""
     global enabled
     global context
     global session
@@ -53,9 +49,7 @@ def init(ctx, safeeyes_config, plugin_config):
 
 
 def on_stop_break():
-    """
-    After the break, check if it is skipped.
-    """
+    """After the break, check if it is skipped."""
     # Check if the plugin is enabled
     if not enabled:
         return
@@ -80,9 +74,7 @@ def on_start_break(break_obj):
 
 
 def get_widget_title(break_obj):
-    """
-    Return the widget title.
-    """
+    """Return the widget title."""
     # Check if the plugin is enabled
     if not enabled:
         return ""
@@ -91,9 +83,7 @@ def get_widget_title(break_obj):
 
 
 def get_widget_content(break_obj):
-    """
-    Return the statistics.
-    """
+    """Return the statistics."""
     # Check if the plugin is enabled
     if not enabled:
         return ""

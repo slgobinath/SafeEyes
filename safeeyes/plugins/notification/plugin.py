@@ -37,9 +37,7 @@ Notify.init(APPINDICATOR_ID)
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
+    """Initialize the plugin."""
     global context
     global warning_time
     logging.debug("Initialize Notification plugin")
@@ -48,9 +46,7 @@ def init(ctx, safeeyes_config, plugin_config):
 
 
 def on_pre_break(break_obj):
-    """
-    Show the notification
-    """
+    """Show the notification."""
     # Construct the message based on the type of the next break
     global notification
     logging.info("Show the notification")
@@ -70,9 +66,7 @@ def on_pre_break(break_obj):
 
 
 def on_start_break(break_obj):
-    """
-    Close the notification.
-    """
+    """Close the notification."""
     global notification
     logging.info("Close pre-break notification")
     if notification:
@@ -85,8 +79,6 @@ def on_start_break(break_obj):
 
 
 def on_exit():
-    """
-    Uninitialize the registered notification.
-    """
+    """Uninitialize the registered notification."""
     logging.debug("Stop Notification plugin")
     Notify.uninit()

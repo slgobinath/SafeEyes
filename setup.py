@@ -1,4 +1,5 @@
-import os, sys, site
+import os
+import sys
 import subprocess
 import setuptools
 
@@ -12,12 +13,10 @@ with open(os.path.join(_ROOT, "README.md")) as f:
 
 
 def __compile_po_files():
-    """
-    Compile the *.po trainslation files.
-    """
+    """Compile the *.po trainslation files."""
     localedir = "safeeyes/config/locale"
     po_dirs = [
-        localedir + "/" + l + "/LC_MESSAGES/" for l in next(os.walk(localedir))[1]
+        localedir + "/" + d + "/LC_MESSAGES/" for d in next(os.walk(localedir))[1]
     ]
     for po_dir in po_dirs:
         po_files = [
@@ -31,9 +30,7 @@ def __compile_po_files():
 
 
 def __data_files():
-    """
-    Collect the data files.
-    """
+    """Collect the data files."""
     root_dir = sys.prefix
     return [
         (
@@ -110,9 +107,7 @@ def __data_files():
 
 
 def __package_files(directory):
-    """
-    Collect the package files.
-    """
+    """Collect the package files."""
     paths = []
     for path, _, filenames in os.walk(directory):
         for filename in filenames:
@@ -121,9 +116,7 @@ def __package_files(directory):
 
 
 def __package_data():
-    """
-    Return a list of package data.
-    """
+    """Return a list of package data."""
     __compile_po_files()
     data = ["glade/*.glade", "resource/*"]
     data.extend(__package_files("safeeyes/config"))
@@ -135,7 +128,9 @@ def __package_data():
 setuptools.setup(
     name="safeeyes",
     version="2.2.1",
-    description="Protect your eyes from eye strain using this continuous breaks reminder.",
+    description=(
+        "Protect your eyes from eye strain using this continuous breaks reminder."
+    ),
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Gobinath Loganathan",
@@ -157,7 +152,7 @@ setuptools.setup(
         "Topic :: Utilities",
     ]
     + [
-        ("Programming Language :: Python :: %s" % x)
+        "Programming Language :: Python :: %s" % x
         for x in "3 3.5 3.6 3.7 3.8 3.9".split()
     ],
 )

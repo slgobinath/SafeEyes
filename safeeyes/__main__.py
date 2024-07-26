@@ -16,9 +16,10 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""Safe Eyes is a utility to remind you to take break frequently to protect
+your eyes from eye strain.
 """
-Safe Eyes is a utility to remind you to take break frequently to protect your eyes from eye strain.
-"""
+
 import argparse
 import gettext
 import locale
@@ -37,9 +38,7 @@ gettext.install("safeeyes", utility.LOCALE_PATH)
 
 
 def __running():
-    """
-    Check if SafeEyes is already running.
-    """
+    """Check if SafeEyes is already running."""
     process_count = 0
     for proc in psutil.process_iter():
         if not proc.cmdline:
@@ -66,9 +65,7 @@ def __running():
 
 
 def main():
-    """
-    Start the Safe Eyes.
-    """
+    """Start the Safe Eyes."""
     system_locale = gettext.translation(
         "safeeyes",
         localedir=utility.LOCALE_PATH,
@@ -81,7 +78,8 @@ def main():
         locale.bindtextdomain("safeeyes", utility.LOCALE_PATH)
     except AttributeError:
         logging.warning(
-            "installed python's gettext module does not support locale.bindtextdomain. locale.bindtextdomain is required for Glade files"  # noqa: E501
+            "installed python's gettext module does not support locale.bindtextdomain."
+            " locale.bindtextdomain is required for Glade files"
         )
 
     parser = argparse.ArgumentParser(prog="safeeyes", description=_("description"))
@@ -137,7 +135,8 @@ def main():
             # RPC sever is disabled
             print(
                 _(
-                    "Safe Eyes is running without an RPC server. Turn it on to use command-line arguments."
+                    "Safe Eyes is running without an RPC server. Turn it on to use"
+                    " command-line arguments."
                 )
             )
             sys.exit(0)

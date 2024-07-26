@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Audible Alert plugin plays a sound after each breaks to notify the user that the break has end.
+"""Audible Alert plugin plays a sound after each breaks to notify the user that
+the break has end.
 """
 
 import logging
@@ -32,7 +32,9 @@ def play_sound(resource_name):
     """Play the audio resource.
 
     Arguments:
+    ---------
         resource_name {string} -- name of the wav file resource
+
     """
     logging.info("Playing audible alert %s", resource_name)
     try:
@@ -47,9 +49,7 @@ def play_sound(resource_name):
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
+    """Initialize the plugin."""
     global context
     global pre_break_alert
     global post_break_alert
@@ -63,16 +63,16 @@ def on_pre_break(break_obj):
     """Play the pre_break sound if the option is enabled.
 
     Arguments:
+    ---------
         break_obj {safeeyes.model.Break} -- the break object
+
     """
     if pre_break_alert:
         play_sound("on_pre_break.wav")
 
 
 def on_stop_break():
-    """
-    After the break, play the alert sound
-    """
+    """After the break, play the alert sound."""
     # Do not play if the break is skipped or postponed
     if context["skipped"] or context["postponed"] or not post_break_alert:
         return

@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-This module creates the RequiredPluginDialog which shows the error for a required plugin.
+"""This module creates the RequiredPluginDialog which shows the error for a
+required plugin.
 """
 
 import os
@@ -31,8 +31,8 @@ REQUIRED_PLUGIN_DIALOG_GLADE = os.path.join(
 
 
 class RequiredPluginDialog:
-    """
-    RequiredPluginDialog shows an error when a plugin has required dependencies.
+    """RequiredPluginDialog shows an error when a plugin has required
+    dependencies.
     """
 
     def __init__(self, plugin_id, plugin_name, message, on_quit, on_disable_plugin):
@@ -54,7 +54,8 @@ class RequiredPluginDialog:
 
         builder.get_object("lbl_main").set_label(
             _(
-                "Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings."  # noqa: E501
+                "Please install the dependencies or disable the plugin. To hide this"
+                " message, you can also deactivate the plugin in the settings."
             )
         )
 
@@ -73,15 +74,11 @@ class RequiredPluginDialog:
             builder.get_object("lbl_message").set_label(_(message))
 
     def show(self):
-        """
-        Show the dialog.
-        """
+        """Show the dialog."""
         self.window.show_all()
 
     def on_window_delete(self, *args):
-        """
-        Window close event handler.
-        """
+        """Window close event handler."""
         self.window.destroy()
         self.on_quit()
 

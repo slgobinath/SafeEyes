@@ -41,9 +41,10 @@ def validate(plugin_config, plugin_settings):
     else:
         return PluginDependency(
             message=_(
-                "Please install service providing tray icons for your desktop environment."
+                "Please install service providing tray icons for your desktop"
+                " environment."
             ),
-            link="https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon",
+            link="https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon",  # noqa E501
         )
 
     command = None

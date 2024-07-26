@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Skip Fullscreen plugin skips the break if the active window is fullscreen.
+"""Skip Fullscreen plugin skips the break if the active window is fullscreen.
+
 NOTE: Do not remove the unused import 'GdkX11' because it is required in Ubuntu 14.04
 """
 
@@ -61,9 +61,10 @@ def is_active_window_skipped_wayland(pre_break):
 
 
 def is_active_window_skipped_xorg(pre_break):
-    """
-    Check for full-screen applications.
-    This method must be executed by the main thread. If not, it will cause random failure.
+    """Check for full-screen applications.
+
+    This method must be executed by the main thread. If not, it will
+    cause random failure.
     """
     logging.info("Searching for full-screen application")
     screen = Gdk.Screen.get_default()
@@ -111,13 +112,11 @@ def is_active_window_skipped_xorg(pre_break):
 
 
 def is_idle_inhibited_gnome():
-    """
-    GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
+    """GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
     fullscreen windows, but GNOME does expose whether idle actions like
-    starting a screensaver are inhibited, which is a close approximation if
-    not a better metric.
+    starting a screensaver are inhibited, which is a close approximation if not
+    a better metric.
     """
-
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,
         flags=Gio.DBusProxyFlags.NONE,
@@ -140,9 +139,7 @@ def _window_class_matches(window_class: str, classes: list) -> bool:
 
 
 def is_on_battery():
-    """
-    Check if the computer is running on battery.
-    """
+    """Check if the computer is running on battery."""
     on_battery = False
     available_power_sources = os.listdir("/sys/class/power_supply")
     logging.info(
@@ -191,9 +188,7 @@ def _normalize_window_classes(classes_as_str: str):
 
 
 def on_pre_break(break_obj):
-    """
-    Lifecycle method executes before the pre-break period.
-    """
+    """Lifecycle method executes before the pre-break period."""
     if utility.IS_WAYLAND:
         if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()
@@ -207,9 +202,7 @@ def on_pre_break(break_obj):
 
 
 def on_start_break(break_obj):
-    """
-    Lifecycle method executes just before the break.
-    """
+    """Lifecycle method executes just before the break."""
     if utility.IS_WAYLAND:
         if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()

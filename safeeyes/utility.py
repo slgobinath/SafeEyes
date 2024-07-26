@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-This module contains utility functions for Safe Eyes and its plugins.
-"""
+"""This module contains utility functions for Safe Eyes and its plugins."""
 
 import errno
 import inspect
@@ -73,9 +71,11 @@ IS_WAYLAND = False
 
 
 def get_resource_path(resource_name):
-    """
-    Return the user-defined resource if a system resource is overridden by the user.
-    Otherwise, return the system resource. Return None if the specified resource does not exist.
+    """Return the user-defined resource if a system resource is overridden by
+    the user.
+
+    Otherwise, return the system resource. Return None if the specified
+    resource does not exist.
     """
     if resource_name is None:
         return None
@@ -90,31 +90,22 @@ def get_resource_path(resource_name):
 
 
 def start_thread(target_function, **args):
-    """
-    Execute the function in a separate thread.
-    """
+    """Execute the function in a separate thread."""
     thread = threading.Thread(
         target=target_function, name="WorkThread", daemon=False, kwargs=args
     )
     thread.start()
 
 
-# def execute_main_thread(target_function, *args, **kwargs):
-#     """
-#     Execute the given function in main thread, forwarding positional and keyword arguments.
-#     """
-
-
 def execute_main_thread(target_function, *args, **kwargs):
-    """
-    Execute the given function in main thread.
-    """
+    """Execute the given function in main thread."""
     GLib.idle_add(lambda: target_function(*args, **kwargs))
 
 
 def system_locale(category=locale.LC_MESSAGES):
-    """
-    Return the system locale. If not available, return en_US.UTF-8.
+    """Return the system locale.
+
+    If not available, return en_US.UTF-8.
     """
     try:
         locale.setlocale(locale.LC_ALL, "")
@@ -128,9 +119,7 @@ def system_locale(category=locale.LC_MESSAGES):
 
 
 def format_time(time):
-    """
-    Format time based on the system time.
-    """
+    """Format time based on the system time."""
     sys_locale = system_locale(locale.LC_TIME)
     try:
         return babel.dates.format_time(time, format="short", locale=sys_locale)
@@ -141,9 +130,7 @@ def format_time(time):
 
 
 def mkdir(path):
-    """
-    Create directory if not exists.
-    """
+    """Create directory if not exists."""
     try:
         os.makedirs(path)
     except OSError as exc:
@@ -155,9 +142,7 @@ def mkdir(path):
 
 
 def load_json(json_path):
-    """
-    Load the JSON file from the given path.
-    """
+    """Load the JSON file from the given path."""
     json_obj = None
     if os.path.isfile(json_path):
         try:
@@ -169,9 +154,7 @@ def load_json(json_path):
 
 
 def write_json(json_path, json_obj):
-    """
-    Write the JSON object at the given path
-    """
+    """Write the JSON object at the given path."""
     try:
         with open(json_path, "w") as json_file:
             json.dump(json_obj, json_file, indent=4, sort_keys=True)
@@ -180,9 +163,7 @@ def write_json(json_path, json_obj):
 
 
 def delete(file_path):
-    """
-    Delete the given file or directory
-    """
+    """Delete the given file or directory."""
     try:
         os.remove(file_path)
     except OSError:
@@ -190,9 +171,7 @@ def delete(file_path):
 
 
 def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
-    """
-    Check the plugin dependencies.
-    """
+    """Check the plugin dependencies."""
     # Check the desktop environment
     if plugin_config["dependencies"]["desktop_environments"]:
         # Plugin has restrictions on desktop environments
@@ -223,7 +202,7 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_
             ) % {
                 "resource": resource,
                 "config_resource": CONFIG_RESOURCE,
-            }  # noqa: E501
+            }
 
     plugin_dependency_checker = os.path.join(plugin_path, "dependency_checker.py")
     if os.path.isfile(plugin_dependency_checker):
@@ -237,9 +216,7 @@ def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_
 
 
 def load_plugins_config(safeeyes_config):
-    """
-    Load all the plugins from the given directory.
-    """
+    """Load all the plugins from the given directory."""
     configs = []
     for plugin in safeeyes_config.get("plugins"):
         plugin_path = os.path.join(SYSTEM_PLUGINS_DIR, plugin["id"])
@@ -278,9 +255,7 @@ def load_plugins_config(safeeyes_config):
 
 
 def desktop_environment():
-    """
-    Detect the desktop environment.
-    """
+    """Detect the desktop environment."""
     global DESKTOP_ENVIRONMENT
     desktop_session = os.environ.get("DESKTOP_SESSION")
     current_desktop = os.environ.get("XDG_CURRENT_DESKTOP")
@@ -332,8 +307,8 @@ def desktop_environment():
 
 
 def is_wayland():
-    """
-    Determine if Wayland is running
+    """Determine if Wayland is running.
+
     https://unix.stackexchange.com/a/325972/222290
     """
     global IS_WAYLAND
@@ -358,9 +333,7 @@ def is_wayland():
 
 
 def execute_command(command, args=[]):
-    """
-    Execute the shell command without waiting for its response.
-    """
+    """Execute the shell command without waiting for its response."""
     if command:
         command_to_execute = []
         if isinstance(command, str):
@@ -376,18 +349,14 @@ def execute_command(command, args=[]):
 
 
 def command_exist(command):
-    """
-    Check whether the given command exist in the system or not.
-    """
+    """Check whether the given command exist in the system or not."""
     if shutil.which(command):
         return True
     return False
 
 
 def module_exist(module):
-    """
-    Check wther the given Python module exists or not.
-    """
+    """Check wther the given Python module exists or not."""
     try:
         importlib.util.find_spec(module)
         return True
@@ -396,17 +365,15 @@ def module_exist(module):
 
 
 def merge_configs(new_config, old_config):
-    """
-    Merge the values of old_config into the new_config.
-    """
+    """Merge the values of old_config into the new_config."""
     new_config = new_config.copy()
     new_config.update(old_config)
     return new_config
 
 
 def initialize_safeeyes():
-    """
-    Create the config file and style sheet in XDG_CONFIG_HOME(or ~/.config)/safeeyes directory.
+    """Create the config file and style sheet in XDG_CONFIG_HOME(or
+    ~/.config)/safeeyes directory.
     """
     logging.info("Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes")
 
@@ -425,16 +392,15 @@ def initialize_safeeyes():
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
 
-    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation
-    # or manual deletion of .config/safeeyes/safeeyes.json file.
-    # In these cases, we want to force the creation of a startup entry
+    # initialize_safeeyes gets called when the configuration file is not present, which
+    # happens just after installation or manual deletion of
+    # .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation
+    # of a startup entry
     create_startup_entry(force=True)
 
 
 def create_startup_entry(force=False):
-    """
-    Create start up entry.
-    """
+    """Create start up entry."""
     startup_dir_path = os.path.join(HOME_DIRECTORY, ".config/autostart")
     startup_entry = os.path.join(
         startup_dir_path, "io.github.slgobinath.SafeEyes.desktop"
@@ -449,8 +415,9 @@ def create_startup_entry(force=False):
         # if force is True, just create the link
         create_link = True
     else:
-        # if force is False, we want to avoid creating the startup symlink if it was manually deleted by the user,
-        # we want to create it only if a broken one is found
+        # if force is False, we want to avoid creating the startup symlink if it was
+        # manually deleted by the user, we want to create it only if a broken one is
+        # found
         if os.path.islink(startup_entry):
             # if the link exists, check if it is broken
             try:
@@ -479,9 +446,7 @@ def create_startup_entry(force=False):
 
 
 def initialize_platform():
-    """
-    Copy icons and generate desktop entries.
-    """
+    """Copy icons and generate desktop entries."""
     logging.debug("Initialize the platform")
 
     applications_dir_path = os.path.join(HOME_DIRECTORY, ".local/share/applications")
@@ -557,17 +522,15 @@ def reset_config():
 
 
 def replace_style_sheet():
-    """
-    Replace the user style sheet by system style sheet.
-    """
+    """Replace the user style sheet by system style sheet."""
     delete(STYLE_SHEET_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
     os.chmod(STYLE_SHEET_PATH, 0o777)
 
 
 def initialize_logging(debug):
-    """
-    Initialize the logging framework using the Safe Eyes specific configurations.
+    """Initialize the logging framework using the Safe Eyes specific
+    configurations.
     """
     # Configure logging.
     root_logger = logging.getLogger()
@@ -594,9 +557,7 @@ def initialize_logging(debug):
 
 
 def __open_plugin_config(plugins_dir, plugin_id):
-    """
-    Open the given plugin's configuration.
-    """
+    """Open the given plugin's configuration."""
     plugin_config_path = os.path.join(plugins_dir, plugin_id, "config.json")
     plugin_module_path = os.path.join(plugins_dir, plugin_id, "plugin.py")
     if not os.path.isfile(plugin_config_path) or not os.path.isfile(plugin_module_path):
@@ -606,9 +567,7 @@ def __open_plugin_config(plugins_dir, plugin_id):
 
 
 def __update_plugin_config(plugin, plugin_config, config):
-    """
-    Update the plugin configuration.
-    """
+    """Update the plugin configuration."""
     if plugin_config is None:
         config["plugins"].remove(plugin)
     else:
@@ -635,7 +594,6 @@ def __update_plugin_config(plugin, plugin_config, config):
 
 
 def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
-    """ """
     if plugin_config is None:
         return
     config = {}
@@ -650,9 +608,7 @@ def __add_plugin_config(plugin_id, plugin_config, safe_eyes_config):
 
 
 def merge_plugins(config):
-    """
-    Merge plugin configurations with Safe Eyes configuration.
-    """
+    """Merge plugin configurations with Safe Eyes configuration."""
     system_plugins = None
     user_plugins = None
 
@@ -694,9 +650,7 @@ def merge_plugins(config):
 
 
 def open_session():
-    """
-    Open the last session.
-    """
+    """Open the last session."""
     logging.info("Reading the session file")
 
     session = load_json(SESSION_FILE_PATH)
@@ -706,9 +660,7 @@ def open_session():
 
 
 def create_gtk_builder(glade_file):
-    """
-    Create a Gtk builder and load the glade file.
-    """
+    """Create a Gtk builder and load the glade file."""
     builder = Gtk.Builder()
     builder.set_translation_domain("safeeyes")
     builder.add_from_file(glade_file)
@@ -736,9 +688,7 @@ def load_and_scale_image(path, width, height):
 
 
 def has_method(module, method_name, no_of_args=0):
-    """
-    Check whether the given function is defined in the module or not.
-    """
+    """Check whether the given function is defined in the module or not."""
     if hasattr(module, method_name):
         if len(inspect.getfullargspec(getattr(module, method_name)).args) == no_of_args:
             return True
@@ -746,8 +696,6 @@ def has_method(module, method_name, no_of_args=0):
 
 
 def remove_if_exists(list_of_items, item):
-    """
-    Remove the item from the list_of_items it it exists.
-    """
+    """Remove the item from the list_of_items it it exists."""
     if item in list_of_items:
         list_of_items.remove(item)

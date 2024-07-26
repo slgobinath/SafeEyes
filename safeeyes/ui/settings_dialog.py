@@ -52,9 +52,7 @@ SETTINGS_ITEM_BOOL_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_bool.
 
 
 class SettingsDialog:
-    """
-    Create and initialize SettingsDialog instance.
-    """
+    """Create and initialize SettingsDialog instance."""
 
     def __init__(self, config, on_save_settings):
         self.config = config
@@ -144,9 +142,7 @@ class SettingsDialog:
         self.infobar_long_break_shown = False
 
     def __create_break_item(self, break_config, is_short):
-        """
-        Create an entry for break to be listed in the break tab.
-        """
+        """Create an entry for break to be listed in the break tab."""
         parent_box = self.box_long_breaks
         if is_short:
             parent_box = self.box_short_breaks
@@ -218,9 +214,7 @@ class SettingsDialog:
         messagedialog.show()
 
     def __delete_break(self, break_config, is_short, on_remove):
-        """
-        Remove the break after a confirmation.
-        """
+        """Remove the break after a confirmation."""
 
         def __confirmation_dialog_response(widget, response_id):
             if response_id == Gtk.ResponseType.OK:
@@ -246,9 +240,7 @@ class SettingsDialog:
         messagedialog.show()
 
     def __create_plugin_item(self, plugin_config):
-        """
-        Create an entry for plugin to be listed in the plugin tab.
-        """
+        """Create an entry for plugin to be listed in the plugin tab."""
         builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
         lbl_plugin_name = builder.get_object("lbl_plugin_name")
         lbl_plugin_description = builder.get_object("lbl_plugin_description")
@@ -298,47 +290,38 @@ class SettingsDialog:
         return box
 
     def __show_plugins_properties_dialog(self, plugin_config):
-        """
-        Show the PluginProperties dialog
-        """
+        """Show the PluginProperties dialog."""
         dialog = PluginSettingsDialog(plugin_config)
         dialog.show()
 
     def __disable_errored_plugin(self, button, plugin_config):
-        """
-        Permanently disable errored plugin
-        """
+        """Permanently disable errored plugin."""
         button.set_sensitive(False)
         self.plugin_switches[plugin_config["id"]].set_active(False)
 
     def __show_break_properties_dialog(
         self, break_config, is_short, parent, on_close, on_add, on_remove
     ):
-        """
-        Show the BreakProperties dialog
-        """
+        """Show the BreakProperties dialog."""
         dialog = BreakSettingsDialog(
             break_config, is_short, parent, self.plugin_map, on_close, on_add, on_remove
         )
         dialog.show()
 
     def show(self):
-        """
-        Show the SettingsDialog.
-        """
+        """Show the SettingsDialog."""
         self.window.show()
 
     def on_switch_postpone_activate(self, switch, state):
-        """
-        Event handler to the state change of the postpone switch.
-        Enable or disable the self.spin_postpone_duration based on the state of the postpone switch.
+        """Event handler to the state change of the postpone switch.
+
+        Enable or disable the self.spin_postpone_duration based on the
+        state of the postpone switch.
         """
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
 
     def on_spin_short_break_interval_change(self, spin_button, *value):
-        """
-        Event handler for value change of short break interval.
-        """
+        """Event handler for value change of short break interval."""
         short_break_interval = self.spin_short_break_interval.get_value_as_int()
         long_break_interval = self.spin_long_break_interval.get_value_as_int()
         self.spin_long_break_interval.set_range(short_break_interval * 2, 120)
@@ -355,23 +338,20 @@ class SettingsDialog:
             self.info_bar_long_break.show()
 
     def on_spin_long_break_interval_change(self, spin_button, *value):
-        """
-        Event handler for value change of long break interval.
-        """
+        """Event handler for value change of long break interval."""
         if not self.initializing and not self.infobar_long_break_shown:
             self.infobar_long_break_shown = True
             self.info_bar_long_break.show()
 
     def on_info_bar_long_break_close(self, infobar, *user_data):
-        """
-        Event handler for info bar close action.
-        """
+        """Event handler for info bar close action."""
         self.info_bar_long_break.hide()
 
     def on_switch_rpc_server_activate(self, switch, enabled):
-        """
-        Event handler to the state change of the rpc server switch.
-        Show or hide the self.warn_bar_rpc_server based on the state of the rpc server.
+        """Event handler to the state change of the rpc server switch.
+
+        Show or hide the self.warn_bar_rpc_server based on the state of
+        the rpc server.
         """
         if not self.initializing and not enabled and not self.warn_bar_rpc_server_shown:
             self.warn_bar_rpc_server_shown = True
@@ -380,15 +360,11 @@ class SettingsDialog:
             self.warn_bar_rpc_server.hide()
 
     def on_warn_bar_rpc_server_close(self, warnbar, *user_data):
-        """
-        Event handler for warning bar close action.
-        """
+        """Event handler for warning bar close action."""
         self.warn_bar_rpc_server.hide()
 
     def add_break(self, button):
-        """
-        Event handler for add break button.
-        """
+        """Event handler for add break button."""
         dialog = NewBreakDialog(
             self.config,
             lambda is_short, break_config: self.__create_break_item(
@@ -398,9 +374,7 @@ class SettingsDialog:
         dialog.show()
 
     def on_window_delete(self, *args):
-        """
-        Event handler for Settings dialog close action.
-        """
+        """Event handler for Settings dialog close action."""
         self.config.set(
             "short_break_duration", self.spin_short_break_duration.get_value_as_int()
         )
@@ -437,9 +411,7 @@ class SettingsDialog:
 
 
 class PluginSettingsDialog:
-    """
-    Builds a settings dialog based on the configuration of a plugin.
-    """
+    """Builds a settings dialog based on the configuration of a plugin."""
 
     def __init__(self, config):
         self.config = config
@@ -484,9 +456,7 @@ class PluginSettingsDialog:
                 )
 
     def __load_int_item(self, name, key, settings, min_value, max_value):
-        """
-        Load the UI control for int property.
-        """
+        """Load the UI control for int property."""
         builder = utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
         builder.get_object("lbl_name").set_label(_(name))
         spin_value = builder.get_object("spin_value")
@@ -500,9 +470,7 @@ class PluginSettingsDialog:
         return box
 
     def __load_text_item(self, name, key, settings):
-        """
-        Load the UI control for text property.
-        """
+        """Load the UI control for text property."""
         builder = utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
         builder.get_object("lbl_name").set_label(_(name))
         txt_value = builder.get_object("txt_value")
@@ -515,9 +483,7 @@ class PluginSettingsDialog:
         return box
 
     def __load_bool_item(self, name, key, settings):
-        """
-        Load the UI control for boolean property.
-        """
+        """Load the UI control for boolean property."""
         builder = utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
         builder.get_object("lbl_name").set_label(_(name))
         switch_value = builder.get_object("switch_value")
@@ -530,9 +496,7 @@ class PluginSettingsDialog:
         return box
 
     def on_window_delete(self, *args):
-        """
-        Event handler for Properties dialog close action.
-        """
+        """Event handler for Properties dialog close action."""
         for property_control in self.property_controls:
             property_control["settings"][property_control["key"]] = property_control[
                 "value"
@@ -540,16 +504,12 @@ class PluginSettingsDialog:
         self.window.destroy()
 
     def show(self):
-        """
-        Show the Properties dialog.
-        """
+        """Show the Properties dialog."""
         self.window.show_all()
 
 
 class BreakSettingsDialog:
-    """
-    Builds a settings dialog based on the configuration of a plugin.
-    """
+    """Builds a settings dialog based on the configuration of a plugin."""
 
     def __init__(
         self,
@@ -651,28 +611,20 @@ class BreakSettingsDialog:
             )
 
     def on_switch_override_interval_activate(self, switch_button, state):
-        """
-        switch_override_interval state change event handler.
-        """
+        """switch_override_interval state change event handler."""
         self.spin_interval.set_sensitive(state)
 
     def on_switch_override_duration_activate(self, switch_button, state):
-        """
-        switch_override_duration state change event handler.
-        """
+        """switch_override_duration state change event handler."""
         self.spin_duration.set_sensitive(state)
 
     def on_switch_override_plugins_activate(self, switch_button, state):
-        """
-        switch_override_plugins state change event handler.
-        """
+        """switch_override_plugins state change event handler."""
         for chk_box in self.plugin_check_buttons.values():
             chk_box.set_sensitive(state)
 
     def select_image(self, button):
-        """
-        Show a file chooser dialog and let the user to select an image.
-        """
+        """Show a file chooser dialog and let the user to select an image."""
         dialog = Gtk.FileChooserDialog(
             _("Please select an image"),
             self.window,
@@ -705,9 +657,7 @@ class BreakSettingsDialog:
         dialog.destroy()
 
     def on_window_delete(self, *args):
-        """
-        Event handler for Properties dialog close action.
-        """
+        """Event handler for Properties dialog close action."""
         break_name = self.txt_break.get_text().strip()
         if break_name:
             self.break_config["name"] = break_name
@@ -745,16 +695,12 @@ class BreakSettingsDialog:
         self.window.destroy()
 
     def show(self):
-        """
-        Show the Properties dialog.
-        """
+        """Show the Properties dialog."""
         self.window.show_all()
 
 
 class NewBreakDialog:
-    """
-    Builds a new break dialog.
-    """
+    """Builds a new break dialog."""
 
     def __init__(self, parent_config, on_add):
         self.parent_config = parent_config
@@ -774,15 +720,11 @@ class NewBreakDialog:
         self.window.set_title(_("New Break"))
 
     def discard(self, button):
-        """
-        Close the dialog.
-        """
+        """Close the dialog."""
         self.window.destroy()
 
     def save(self, button):
-        """
-        Event handler for Properties dialog close action.
-        """
+        """Event handler for Properties dialog close action."""
         break_config = {"name": self.txt_break.get_text().strip()}
 
         if self.cmb_type.get_active() == 0:
@@ -794,13 +736,9 @@ class NewBreakDialog:
         self.window.destroy()
 
     def on_window_delete(self, *args):
-        """
-        Event handler for dialog close action.
-        """
+        """Event handler for dialog close action."""
         self.window.destroy()
 
     def show(self):
-        """
-        Show the Properties dialog.
-        """
+        """Show the Properties dialog."""
         self.window.show_all()

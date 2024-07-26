@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Screensaver plugin locks the desktop using native screensaver application, after long breaks.
+"""Screensaver plugin locks the desktop using native screensaver application,
+after long breaks.
 """
 
 import gi
@@ -40,14 +40,16 @@ tray_icon_path = None
 
 
 def __lock_screen_command():
-    """
-    Function tries to detect the screensaver command based on the current envinroment
+    """Function tries to detect the screensaver command based on the current
+    envinroment.
+
     Possible results:
         Gnome, Unity, Budgie:		['gnome-screensaver-command', '--lock']
         Cinnamon:					['cinnamon-screensaver-command', '--lock']
         Pantheon, LXDE:				['light-locker-command', '--lock']
         Mate:						['mate-screensaver-command', '--lock']
-        KDE:						['qdbus', 'org.freedesktop.ScreenSaver', '/ScreenSaver', 'Lock']
+        KDE:						['qdbus', 'org.freedesktop.ScreenSaver',
+                                    '/ScreenSaver', 'Lock']
         XFCE:						['xflock4']
         Otherwise:					None
     """
@@ -110,9 +112,7 @@ def __lock_screen():
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the screensaver plugin.
-    """
+    """Initialize the screensaver plugin."""
     global context
     global lock_screen_command
     global min_seconds
@@ -128,8 +128,8 @@ def init(ctx, safeeyes_config, plugin_config):
 
 
 def on_start_break(break_obj):
-    """
-    Determine the break type and only if it is a long break, enable the lock_screen flag.
+    """Determine the break type and only if it is a long break, enable the
+    lock_screen flag.
     """
     global lock_screen
     global seconds_passed
@@ -141,16 +141,14 @@ def on_start_break(break_obj):
 
 
 def on_countdown(countdown, seconds):
-    """
-    Keep track of seconds passed from the beginning of long break.
-    """
+    """Keep track of seconds passed from the beginning of long break."""
     global seconds_passed
     seconds_passed = seconds
 
 
 def on_stop_break():
-    """
-    Lock the screen after a long break if the user has not skipped within min_seconds.
+    """Lock the screen after a long break if the user has not skipped within
+    min_seconds.
     """
     if user_locked_screen or (lock_screen and seconds_passed >= min_seconds):
         utility.execute_command(lock_screen_command)

@@ -96,8 +96,9 @@ def __swayidle_idle_time():
 
 
 def __gnome_wayland_idle_time():
-    """
-    Determine system idle time in seconds, specifically for gnome with wayland.
+    """Determine system idle time in seconds, specifically for gnome with
+    wayland.
+
     If there's a failure, return 0.
     https://unix.stackexchange.com/a/492328/222290
     """
@@ -119,8 +120,8 @@ def __gnome_wayland_idle_time():
 
 
 def __system_idle_time():
-    """
-    Get system idle time in minutes.
+    """Get system idle time in minutes.
+
     Return the idle time if xprintidle is available, otherwise return 0.
     """
     try:
@@ -135,9 +136,7 @@ def __system_idle_time():
 
 
 def __is_active():
-    """
-    Thread safe function to see if this plugin is active or not.
-    """
+    """Thread safe function to see if this plugin is active or not."""
     is_active = False
     with lock:
         is_active = active
@@ -145,18 +144,14 @@ def __is_active():
 
 
 def __set_active(is_active):
-    """
-    Thread safe function to change the state of the plugin.
-    """
+    """Thread safe function to change the state of the plugin."""
     global active
     with lock:
         active = is_active
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
+    """Initialize the plugin."""
     global context
     global enable_safeeyes
     global disable_safeeyes
@@ -185,8 +180,8 @@ def init(ctx, safeeyes_config, plugin_config):
 
 
 def __start_idle_monitor():
-    """
-    Continuously check the system idle time and pause/resume Safe Eyes based on it.
+    """Continuously check the system idle time and pause/resume Safe Eyes based
+    on it.
     """
     global smart_pause_activated
     global idle_start_time
@@ -221,7 +216,8 @@ def __start_idle_monitor():
                     # Credit back the idle time
                     if next_break_time is not None:
                         # This method runs in a thread since the start.
-                        # It may run before next_break is initialized in the update_next_break method
+                        # It may run before next_break is initialized in the
+                        # update_next_break method
                         next_break = next_break_time + idle_period
                         enable_safeeyes(next_break.timestamp())
                     else:
@@ -232,9 +228,7 @@ def __start_idle_monitor():
 
 
 def on_start():
-    """
-    Start a thread to continuously call xprintidle.
-    """
+    """Start a thread to continuously call xprintidle."""
     global active
     if not __is_active():
         # If SmartPause is already started, do not start it again
@@ -244,9 +238,7 @@ def on_start():
 
 
 def on_stop():
-    """
-    Stop the thread from continuously calling xprintidle.
-    """
+    """Stop the thread from continuously calling xprintidle."""
     global active
     global smart_pause_activated
     if smart_pause_activated:
@@ -263,9 +255,7 @@ def on_stop():
 
 
 def update_next_break(break_obj, dateTime):
-    """
-    Update the next break time.
-    """
+    """Update the next break time."""
     global next_break_time
     global next_break_duration
     next_break_time = dateTime
@@ -273,9 +263,7 @@ def update_next_break(break_obj, dateTime):
 
 
 def on_start_break(break_obj):
-    """
-    Lifecycle method executes just before the break.
-    """
+    """Lifecycle method executes just before the break."""
     if postpone_if_active:
         # Postpone this break if the user is active
         system_idle_time = __system_idle_time()
@@ -284,8 +272,6 @@ def on_start_break(break_obj):
 
 
 def disable():
-    """
-    SmartPause plugin was active earlier but now user has disabled it.
-    """
+    """SmartPause plugin was active earlier but now user has disabled it."""
     # Remove the idle_period
     context.pop("idle_period", None)

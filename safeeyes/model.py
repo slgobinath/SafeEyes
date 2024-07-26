@@ -16,8 +16,8 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-This module contains the entity classes used by Safe Eyes and its plugins.
+"""This module contains the entity classes used by Safe Eyes and its
+plugins.
 """
 
 import logging
@@ -31,9 +31,7 @@ from safeeyes import utility
 
 
 class Break:
-    """
-    An entity class which represents a break.
-    """
+    """An entity class which represents a break."""
 
     def __init__(self, break_type, name, time, duration, image, plugins):
         self.type = break_type
@@ -53,21 +51,15 @@ class Break:
         return str(self)
 
     def is_long_break(self):
-        """
-        Check whether this break is a long break.
-        """
+        """Check whether this break is a long break."""
         return self.type == BreakType.LONG_BREAK
 
     def is_short_break(self):
-        """
-        Check whether this break is a short break.
-        """
+        """Check whether this break is a short break."""
         return self.type == BreakType.SHORT_BREAK
 
     def plugin_enabled(self, plugin_id, is_plugin_enabled):
-        """
-        Check whether this break supports the given plugin.
-        """
+        """Check whether this break supports the given plugin."""
         if self.plugins:
             return plugin_id in self.plugins
         else:
@@ -75,9 +67,7 @@ class Break:
 
 
 class BreakType(Enum):
-    """
-    Type of Safe Eyes breaks.
-    """
+    """Type of Safe Eyes breaks."""
 
     SHORT_BREAK = 1
     LONG_BREAK = 2
@@ -184,8 +174,9 @@ class BreakQueue:
             break_object.time = self.__long_break_time
 
     def is_empty(self, break_type=None):
-        """
-        Check if the given break type is empty or not. If the break_type is None, check for both short and long breaks.
+        """Check if the given break type is empty or not.
+
+        If the break_type is None, check for both short and long breaks.
         """
         if break_type == BreakType.SHORT_BREAK:
             return self.__short_queue is None
@@ -215,9 +206,7 @@ class BreakQueue:
         return break_obj
 
     def __build_queue(self, break_type, break_configs, break_time, break_duration):
-        """
-        Build a queue of breaks.
-        """
+        """Build a queue of breaks."""
         size = len(break_configs)
 
         if 0 == size:
@@ -265,9 +254,7 @@ class BreakQueue:
 
 
 class State(Enum):
-    """
-    Possible states of Safe Eyes.
-    """
+    """Possible states of Safe Eyes."""
 
     START = (0,)  # Starting scheduler
     WAITING = (1,)  # User is working (waiting for next break)
@@ -279,9 +266,7 @@ class State(Enum):
 
 
 class EventHook:
-    """
-    Hook to attach and detach listeners to system events.
-    """
+    """Hook to attach and detach listeners to system events."""
 
     def __init__(self):
         self.__handlers = []
@@ -295,9 +280,7 @@ class EventHook:
         return self
 
     def fire(self, *args, **keywargs):
-        """
-        Fire all listeners attached with.
-        """
+        """Fire all listeners attached with."""
         for handler in self.__handlers:
             if not handler(*args, **keywargs):
                 return False
@@ -305,20 +288,20 @@ class EventHook:
 
 
 class Config:
-    """
-    The configuration of Safe Eyes.
-    """
+    """The configuration of Safe Eyes."""
 
     def __init__(self, init=True):
         # Read the config files
         self.__user_config = utility.load_json(utility.CONFIG_FILE_PATH)
         self.__system_config = utility.load_json(utility.SYSTEM_CONFIG_FILE_PATH)
-        # If there any breaking changes in long_breaks, short_breaks or any other keys, use the __force_upgrade list
+        # If there any breaking changes in long_breaks, short_breaks or any other keys,
+        # use the __force_upgrade list
         self.__force_upgrade = []
         # self.__force_upgrade = ['long_breaks', 'short_breaks']
 
         if init:
-            # if create_startup_entry finds a broken autostart symlink, it will repair it
+            # if create_startup_entry finds a broken autostart symlink, it will repair
+            # it
             utility.create_startup_entry(force=False)
             if self.__user_config is None:
                 utility.initialize_safeeyes()
@@ -345,9 +328,7 @@ class Config:
             self.save()
 
     def __merge_dictionary(self, old_dict, new_dict):
-        """
-        Merge the dictionaries.
-        """
+        """Merge the dictionaries."""
         for key in new_dict:
             if key == "meta" or key in self.__force_upgrade:
                 continue
@@ -366,24 +347,18 @@ class Config:
         return config
 
     def save(self):
-        """
-        Save the configuration to file.
-        """
+        """Save the configuration to file."""
         utility.write_json(utility.CONFIG_FILE_PATH, self.__user_config)
 
     def get(self, key, default_value=None):
-        """
-        Get the value.
-        """
+        """Get the value."""
         value = self.__user_config.get(key, default_value)
         if value is None:
             value = self.__system_config.get(key, None)
         return value
 
     def set(self, key, value):
-        """
-        Set the value.
-        """
+        """Set the value."""
         self.__user_config[key] = value
 
     def __eq__(self, config):
@@ -394,9 +369,7 @@ class Config:
 
 
 class TrayAction:
-    """
-    Data object wrapping name, icon and action.
-    """
+    """Data object wrapping name, icon and action."""
 
     def __init__(self, name, icon, action, system_icon):
         self.name = name

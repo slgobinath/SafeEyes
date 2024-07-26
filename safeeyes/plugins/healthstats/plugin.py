@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Show health statistics on the break screen.
-"""
+"""Show health statistics on the break screen."""
 
 import croniter
 import datetime
@@ -33,9 +31,7 @@ start_time = None
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the plugin.
-    """
+    """Initialize the plugin."""
     global context
     global session
     global statistics_reset_cron
@@ -95,9 +91,7 @@ def on_stop():
 
 
 def get_widget_title(break_obj):
-    """
-    Return the widget title.
-    """
+    """Return the widget title."""
     return _("Health Statistics")
 
 
@@ -122,9 +116,7 @@ def _reset_stats():
 
 
 def get_widget_content(break_obj):
-    """
-    Return the statistics.
-    """
+    """Return the statistics."""
     global next_reset_time
     resets = session["total_resets"]
     if (
@@ -160,9 +152,7 @@ def get_widget_content(break_obj):
 
 
 def on_start():
-    """
-    Track the start time.
-    """
+    """Track the start time."""
     global start_time
     _reset_stats()
     start_time = datetime.datetime.now()

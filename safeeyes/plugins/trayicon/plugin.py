@@ -411,9 +411,7 @@ class StatusNotifierItemService(DBusService):
 
 
 class TrayIcon:
-    """
-    Create and show the tray icon along with the tray menu.
-    """
+    """Create and show the tray icon along with the tray menu."""
 
     def __init__(self, context, plugin_config):
         self.context = context
@@ -445,9 +443,7 @@ class TrayIcon:
         self.update_tooltip()
 
     def initialize(self, plugin_config):
-        """
-        Initialize the tray icon by setting the config.
-        """
+        """Initialize the tray icon by setting the config."""
         self.plugin_config = plugin_config
         self.allow_disabling = plugin_config["allow_disabling"]
 
@@ -634,8 +630,8 @@ class TrayIcon:
         self.sni_service.set_tooltip("Safe Eyes", description)
 
     def quit_safe_eyes(self):
-        """
-        Handle Quit menu action.
+        """Handle Quit menu action.
+
         This action terminates the application.
         """
         with self.lock:
@@ -647,22 +643,22 @@ class TrayIcon:
         self.quit()
 
     def show_settings(self):
-        """
-        Handle Settings menu action.
+        """Handle Settings menu action.
+
         This action shows the Settings dialog.
         """
         self.on_show_settings()
 
     def show_about(self):
-        """
-        Handle About menu action.
+        """Handle About menu action.
+
         This action shows the About dialog.
         """
         self.on_show_about()
 
     def next_break_time(self, dateTime):
-        """
-        Update the next break time to be displayed in the menu and optionally in the tray icon.
+        """Update the next break time to be displayed in the menu and
+        optionally in the tray icon.
         """
         logging.info("Update next break information")
         self.date_time = dateTime
@@ -686,14 +682,12 @@ class TrayIcon:
         return (formatted_time, None, False)
 
     def on_manual_break_clicked(self, break_type):
-        """
-        Trigger a break manually.
-        """
+        """Trigger a break manually."""
         self.take_break(break_type)
 
     def on_enable_clicked(self):
-        """
-        Handle 'Enable Safe Eyes' menu action.
+        """Handle 'Enable Safe Eyes' menu action.
+
         This action enables the application if it is currently disabled.
         """
         if not self.active:
@@ -706,8 +700,8 @@ class TrayIcon:
                 self.idle_condition.release()
 
     def on_disable_clicked(self, time_to_wait):
-        """
-        Handle the menu actions of all the sub menus of 'Disable Safe Eyes'.
+        """Handle the menu actions of all the sub menus of 'Disable Safe Eyes'.
+
         This action disables the application if it is currently active.
         """
         if self.active:
@@ -727,25 +721,23 @@ class TrayIcon:
             self.update_menu()
 
     def lock_menu(self):
-        """
-        This method is called by the core to prevent user from disabling Safe Eyes after the notification.
+        """This method is called by the core to prevent user from disabling
+        Safe Eyes after the notification.
         """
         if self.active:
             self.menu_locked = True
             self.update_menu()
 
     def unlock_menu(self):
-        """
-        This method is called by the core to activate the menu after the the break.
+        """This method is called by the core to activate the menu after the the
+        break.
         """
         if self.active:
             self.menu_locked = False
             self.update_menu()
 
     def disable_ui(self):
-        """
-        Change the UI to disabled state.
-        """
+        """Change the UI to disabled state."""
         if self.active:
             logging.info("Disable Safe Eyes")
             self.active = False
@@ -754,9 +746,7 @@ class TrayIcon:
             self.update_menu()
 
     def enable_ui(self):
-        """
-        Change the UI to enabled state.
-        """
+        """Change the UI to enabled state."""
         if not self.active:
             logging.info("Enable Safe Eyes")
             self.active = True
@@ -765,8 +755,8 @@ class TrayIcon:
             self.update_menu()
 
     def __schedule_resume(self, time_minutes):
-        """
-        Schedule a local timer to enable Safe Eyes after the given timeout.
+        """Schedule a local timer to enable Safe Eyes after the given
+        timeout.
         """
         self.idle_condition.acquire()
         self.idle_condition.wait(time_minutes * 60)  # Convert to seconds
@@ -808,9 +798,7 @@ class TrayIcon:
 
 
 def init(ctx, safeeyes_cfg, plugin_config):
-    """
-    Initialize the tray icon.
-    """
+    """Initialize the tray icon."""
     global context
     global tray_icon
     global safeeyes_config
@@ -824,16 +812,12 @@ def init(ctx, safeeyes_cfg, plugin_config):
 
 
 def update_next_break(break_obj, next_break_time):
-    """
-    Update the next break time.
-    """
+    """Update the next break time."""
     tray_icon.next_break_time(next_break_time)
 
 
 def on_pre_break(break_obj):
-    """
-    Disable the menu if strict_break is enabled
-    """
+    """Disable the menu if strict_break is enabled."""
     if safeeyes_config.get("strict_break"):
         tray_icon.lock_menu()
     tray_icon.animate = True
@@ -849,14 +833,10 @@ def on_stop_break():
 
 
 def on_start():
-    """
-    Enable the tray icon.
-    """
+    """Enable the tray icon."""
     tray_icon.enable_ui()
 
 
 def on_stop():
-    """
-    Disable the tray icon.
-    """
+    """Disable the tray icon."""
     tray_icon.disable_ui()
