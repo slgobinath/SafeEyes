@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-24 17:15+0000\n"
-"Last-Translator: Mohamed Omran <mohamedgomran@gmail.com>\n"
+"PO-Revision-Date: 2024-07-26 11:09+0000\n"
+"Last-Translator: RDWN IT <raraja701@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 4.13-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 # Short break
 msgid "Tightly close your eyes"
@@ -492,15 +492,15 @@ msgstr "خُذ استراحة الآن"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "كل ألإستراحات"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "إستراحة قصيرة"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "إستراحة طويلة"
 
 #: plugins/trayicon
 msgid "Until restart"
