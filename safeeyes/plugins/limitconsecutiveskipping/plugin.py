@@ -19,6 +19,7 @@
 """Limit how many breaks can be skipped or postponed in a row."""
 
 import logging
+from safeeyes.translations import translate as _
 
 context = None
 no_of_skipped_breaks = 0

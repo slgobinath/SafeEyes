@@ -23,6 +23,7 @@ import time
 
 import gi
 from safeeyes import utility
+from safeeyes.translations import translate as _
 import Xlib
 from Xlib.display import Display
 from Xlib import X
