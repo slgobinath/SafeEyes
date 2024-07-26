@@ -46,6 +46,7 @@ from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 from packaging.version import parse
+from safeeyes.translations import translate as _
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get("HOME") or os.path.expanduser("~")
@@ -533,7 +534,7 @@ def initialize_platform():
             logging.error("Failed to create desktop entry at %s" % desktop_entry)
 
     # Add links for all icons
-    for path, _, filenames in os.walk(SYSTEM_ICONS):
+    for path, _dirnames, filenames in os.walk(SYSTEM_ICONS):
         for filename in filenames:
             system_icon = os.path.join(path, filename)
             local_icon = os.path.join(

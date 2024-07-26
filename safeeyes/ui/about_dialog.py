@@ -21,6 +21,7 @@
 import os
 
 from safeeyes import utility
+from safeeyes.translations import translate as _
 
 ABOUT_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/about_dialog.glade")
 
