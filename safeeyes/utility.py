@@ -365,20 +365,27 @@ def initialize_safeeyes():
     # Remove the ~/.config/safeeyes/safeeyes.json file
     delete(CONFIG_FILE_PATH)
 
-    # Create the XDG_CONFIG_HOME(or ~/.config)/safeeyes/style directory
-    mkdir(STYLE_SHEET_DIRECTORY)
+    if not os.path.isdir(CONFIG_DIRECTORY):
+        mkdir(CONFIG_DIRECTORY)
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     os.chmod(CONFIG_FILE_PATH, 0o777)
 
+    create_user_stylesheet_if_missing()
+
+    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or manual deletion of .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation of a startup entry
+    create_startup_entry(force=True)
+
+def create_user_stylesheet_if_missing():
+    # Create the XDG_CONFIG_HOME(or ~/.config)/safeeyes/style directory
+    if not os.path.isdir(STYLE_SHEET_DIRECTORY):
+        mkdir(STYLE_SHEET_DIRECTORY)
+
     # Copy the new style sheet
     if not os.path.isfile(STYLE_SHEET_PATH):
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
         os.chmod(STYLE_SHEET_PATH, 0o777)
-
-    # initialize_safeeyes gets called when the configuration file is not present, which happens just after installation or manual deletion of .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation of a startup entry
-    create_startup_entry(force=True)
 
 def create_startup_entry(force=False):
     """
