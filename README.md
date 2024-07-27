@@ -106,7 +106,11 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 Ensure to meet the following dependencies:
 
 - gir1.2-notify-0.7
+- python3-babel
+- python3-croniter
 - python3-psutil
+- python3-packaging
+- python3-xlib
 - xprintidle (optional)
 - wlrctl (wayland optional)
 - Python 3.10+
