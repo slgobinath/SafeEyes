@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-26 11:09+0000\n"
+"PO-Revision-Date: 2024-07-28 15:09+0000\n"
 "Last-Translator: Parsa Nobahari <parsa.nobahari@gmail.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
@@ -112,11 +112,11 @@ msgstr "پروانه"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "لیست مشارکت‌کنندگان"
 
 # Break screen
 msgid "Skip"
-msgstr "پرش"
+msgstr "ردکن"
 
 # Break screen
 msgid "Postpone"
@@ -148,7 +148,7 @@ msgstr "نمایش استراحت‌ها به ترتیب کاتوره‌ای"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "استراحت قاطع ( بدون راهی برای پرش از استراحت)"
+msgstr "استراحت قاطع ( راهی برای ردکردن از استراحت نباشد)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -324,7 +324,7 @@ msgstr "مزاحم نشوید"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "اگر پنجره فعال در حالت تمام صفحه است ، از پرش صرف نظر کنید"
+msgstr "اگر پنجره فعال در حالت تمام‌صفحه است، از ردکردن صرف نظر کنید"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -384,7 +384,7 @@ msgstr "دستور محافظ صفحه نمایش سفارشی"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "کمینهٔ ثانیه‌ها برای پرش بدون محافظ صفحه"
+msgstr "حداقل ثانیه‌ها برای ردکردن بدون محافظ صفحه"
 
 # plugin/screensaver
 msgid "Lock screen"
@@ -514,50 +514,53 @@ msgstr "مکث رسانه"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "محدود‌کردن ردکردن بیش‌از‌حد"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "چقدر پشت‌سرهم ردکردن یا به تعویق انداختن مجاز است"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "تعداد استراحت‌ها را که می‌توان پشت‌سرهم رد یا به تعویق انداخت محدود کن"
 
 # plugin/limitconsecutiveskipping
 msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr ""
+msgstr "%d/%d استراحت‌ها پشت‌سرهم رد یا به تعویق افتاده‌اند"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "جلوگیری از آر‌ اس آی"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"لطفاً آیکون‌های نوار ارائه دهنده خدمات را برای محیط دسکتاپ خود نصب کنید."
 
 msgid "Next long break at %s"
-msgstr ""
+msgstr "استراحت طولانی بعدی در %s"
 
 msgid "Next breaks at %s/%s"
-msgstr ""
+msgstr "استراحت‌های بعدی در %s"
 
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "افزونه موردنیاز '%s' فاقد دِپِندِنسی است!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"لطفاً دِپِندِنسی ها را نصب کنید یا افزونه را غیرفعال کنید. برای مخفی کردن این "
+"پیام، می توانید افزونه را در تنظیمات غیرفعال کنید."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "برای اطلاعات بیشتر اینجا کلیک کنید"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "غیرفعال کردن موقت افزونه"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "غیرفعال کردن دائمی"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
