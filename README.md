@@ -48,11 +48,15 @@ It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can ch
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
-The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes for Ubuntu 22.04 and above. On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
-
+The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes **for Ubuntu 22.04 and above**. 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
+sudo apt install safeeyes
+```
+
+On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
+```bash
 sudo apt install safeeyes
 ```
 
