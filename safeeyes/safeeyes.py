@@ -358,6 +358,7 @@ class SafeEyes(Gtk.Application):
             error.get_message(),
             self.quit,
             lambda: self.disable_plugin(plugin_id),
+            application=self,
         )
         dialog.show()
 
