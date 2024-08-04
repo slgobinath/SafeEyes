@@ -110,6 +110,25 @@ def validate_placeholders(message: str) -> bool:
     return success
 
 
+def get_placeholders(message: str) -> tuple:
+    percents = re.finditer(r"%(?P<name>\(\w+\))?(?P<format>[a-z])", message)
+
+    unnamed = defaultdict(int)
+    named = set()
+    for percent in percents:
+        if percent.group("name"):
+            named.add(f"%({percent.group('name')}){percent.group('format')}")
+        else:
+            match = f"%{percent.group('format')}"
+            unnamed[match] += 1
+    return (unnamed, named)
+
+
+def ensure_named_placeholders(message: str) -> bool:
+    (unnamed, named) = get_placeholders(message)
+    return len(unnamed) == 0
+
+
 def validate_pot() -> bool:
     success = True
 
@@ -123,26 +142,22 @@ def validate_pot() -> bool:
             success = False
         if not validate_placeholders(new_entry.msgid):
             success = False
+        if new_entry.msgid_plural:
+            if not (
+                ensure_named_placeholders(new_entry.msgid)
+                and ensure_named_placeholders(new_entry.msgid_plural)
+            ):
+                print(
+                    f"Plural message must use named placeholders: '{new_entry.msgid}'"
+                )
+                success = False
 
     return success
 
 
 def has_equal_placeholders(left: str, right: str) -> bool:
-    def _get_placeholders(message: str) -> tuple:
-        percents = re.finditer(r"%(?P<name>\(\w+\))?(?P<format>[a-z])", message)
-
-        unnamed = defaultdict(int)
-        named = set()
-        for percent in percents:
-            if percent.group("name"):
-                named.add(f"%({percent.group('name')}){percent.group('format')}")
-            else:
-                match = f"%{percent.group('format')}"
-                unnamed[match] += 1
-        return (unnamed, named)
-
-    (left_unnamed, left_named) = _get_placeholders(left)
-    (right_unnamed, right_named) = _get_placeholders(right)
+    (left_unnamed, left_named) = get_placeholders(left)
+    (right_unnamed, right_named) = get_placeholders(right)
 
     # count unnamed cases (eg. %s, %d)
     for match, count in left_unnamed.items():
