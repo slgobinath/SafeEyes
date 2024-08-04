@@ -549,7 +549,7 @@ msgstr ""
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -561,13 +561,15 @@ msgstr ""
 "Bitte installieren Sie einen Dienst, der Leistensymbole für Ihre Desktop-"
 "Umgebung bereitstellt."
 
+#, python-format
 msgid "Next long break at %s"
 msgstr "Nächste lange Pause um %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Nächste Pausen um %(short)s/%(long)s"
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "Dem benötigten Plugin '%s' fehlen Abhängigkeiten!"
 
@@ -590,31 +592,6 @@ msgstr "Permanent ausschalten"
 
 msgid "License:"
 msgstr ""
-
-#: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Für %d Stunde"
-msgstr[1] "Für %d Stunden"
-
-#: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Für %d Minute"
-msgstr[1] "Für %d Minuten"
-
-#: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Für %d Sekunde"
-msgstr[1] "Für %d Sekunden"
-
-# plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "%d/%d Pausen hintereinander übersprungen oder aufgeschoben"
-
-msgid "Next breaks at %s/%s"
-msgstr "Nächste Pausen um %s/%s"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

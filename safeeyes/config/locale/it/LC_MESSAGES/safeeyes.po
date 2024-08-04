@@ -546,7 +546,7 @@ msgstr ""
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "%(num)d/%(allowed)d pause saltate o posticipate di seguito"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -558,13 +558,15 @@ msgstr ""
 "Installa il servizio che fornisce le icone della barra delle applicazioni "
 "per il tuo ambiente desktop."
 
+#, python-format
 msgid "Next long break at %s"
 msgstr "Prossima pausa lunga alle %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Prossime pause alle %(short)s/%(long)s"
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "Al plugin richiesto '%s' mancano delle dipendenze!"
 
@@ -586,28 +588,3 @@ msgstr "Disattivare in modo permanente"
 
 msgid "License:"
 msgstr ""
-
-#: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Per %d ora"
-msgstr[1] "Per %d ore"
-
-#: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Per %d minuto"
-msgstr[1] "Per %d minuti"
-
-#: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Per %d secondo"
-msgstr[1] "Per %d secondi"
-
-# plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "%d/%d pause saltate o posticipate di seguito"
-
-msgid "Next breaks at %s/%s"
-msgstr "Prossime pause alle %s/%s"
