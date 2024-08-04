@@ -450,13 +450,13 @@ msgstr "به کار انداختن محافظ چشم"
 msgid "For %d Hour"
 msgid_plural "For %d Hours"
 msgstr[0] "برای ۱ ساعت"
-msgstr[1] "برای %Id ساعت"
+msgstr[1] "برای %dI ساعت"
 
 #: plugins/trayicon
 msgid "For %d Minute"
 msgid_plural "For %d Minutes"
 msgstr[0] "برای ۱ دقیقه"
-msgstr[1] "برای %Id دقیقه"
+msgstr[1] "برای %dI دقیقه"
 
 #: plugins/trayicon
 msgid "For %d Second"
@@ -541,7 +541,7 @@ msgid "Next long break at %s"
 msgstr "استراحت طولانی بعدی در %s"
 
 msgid "Next breaks at %s/%s"
-msgstr "استراحت‌های بعدی در %s"
+msgstr "استراحت‌های بعدی در %s/%s"
 
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "افزونه موردنیاز '%s' فاقد دِپِندِنسی است!"
