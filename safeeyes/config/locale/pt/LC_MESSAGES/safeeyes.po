@@ -451,22 +451,22 @@ msgid "Enable Safe Eyes"
 msgstr "Ativar o Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Por %d Hora"
-msgstr[1] "Por %d Horas"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Por %(num)d Hora"
+msgstr[1] "Por %(num)d Horas"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Por %d Minuto"
-msgstr[1] "Por %d Minutos"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Por %(num)d Minuto"
+msgstr[1] "Por %(num)d Minutos"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Por %d Segundo"
-msgstr[1] "Por %d Segundos"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Por %(num)d Segundo"
+msgstr[1] "Por %(num)d Segundos"
 
 #: plugins/trayicon
 msgid "Next break at %s"

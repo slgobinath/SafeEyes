@@ -452,25 +452,25 @@ msgid "Enable Safe Eyes"
 msgstr "Įjungti Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d valandai"
-msgstr[1] "%d valandoms"
-msgstr[2] "%d valandų"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d valandai"
+msgstr[1] "%(num)d valandoms"
+msgstr[2] "%(num)d valandų"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d minutei"
-msgstr[1] "%d minutėms"
-msgstr[2] "%d minučių"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d minutei"
+msgstr[1] "%(num)d minutėms"
+msgstr[2] "%(num)d minučių"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d sekundei"
-msgstr[1] "%d sekundėms"
-msgstr[2] "%d sekundžių"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d sekundei"
+msgstr[1] "%(num)d sekundėms"
+msgstr[2] "%(num)d sekundžių"
 
 #: plugins/trayicon
 msgid "Next break at %s"

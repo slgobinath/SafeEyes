@@ -455,22 +455,22 @@ msgid "Enable Safe Eyes"
 msgstr "Омогући Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
 msgstr[0] "сат"
 msgstr[1] "сати"
 msgstr[2] "сати"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
 msgstr[0] "минут"
 msgstr[1] "минута"
 msgstr[2] "минута"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
 msgstr[0] "секунда"
 msgstr[1] "секунде"
 msgstr[2] "секунди"

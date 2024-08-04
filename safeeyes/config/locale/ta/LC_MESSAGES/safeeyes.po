@@ -450,22 +450,22 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes ஐ செயல்படுத்துக"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d மணித்தியாலத்திற்கு"
-msgstr[1] "%d மணித்தியாலங்களுக்கு"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d மணித்தியாலத்திற்கு"
+msgstr[1] "%(num)d மணித்தியாலங்களுக்கு"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d நிமிடத்திற்கு"
-msgstr[1] "%d நிமிடங்களுக்கு"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d நிமிடத்திற்கு"
+msgstr[1] "%(num)d நிமிடங்களுக்கு"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d வினாடிக்கு"
-msgstr[1] "%d வினாடிகளுக்கு"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d வினாடிக்கு"
+msgstr[1] "%(num)d வினாடிகளுக்கு"
 
 #: plugins/trayicon
 msgid "Next break at %s"

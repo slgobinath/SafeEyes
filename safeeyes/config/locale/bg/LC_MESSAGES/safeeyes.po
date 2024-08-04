@@ -443,22 +443,22 @@ msgid "Enable Safe Eyes"
 msgstr "Включване на Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "За %d Час"
-msgstr[1] "За %d Часа"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "За %(num)d Час"
+msgstr[1] "За %(num)d Часа"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "За %d Минута"
-msgstr[1] "За %d Минути"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "За %(num)d Минута"
+msgstr[1] "За %(num)d Минути"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "За %d Секунда"
-msgstr[1] "За %d Секунди"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "За %(num)d Секунда"
+msgstr[1] "За %(num)d Секунди"
 
 #: plugins/trayicon
 msgid "Next break at %s"

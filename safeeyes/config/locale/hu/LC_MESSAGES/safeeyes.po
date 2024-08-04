@@ -444,22 +444,22 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes Engedélyezése"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d Órára"
-msgstr[1] "%d Órára"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d Órára"
+msgstr[1] "%(num)d Órára"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d Percre"
-msgstr[1] "%d Percre"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d Percre"
+msgstr[1] "%(num)d Percre"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d Másodpercre"
-msgstr[1] "%d Másodpercre"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d Másodpercre"
+msgstr[1] "%(num)d Másodpercre"
 
 #: plugins/trayicon
 msgid "Next break at %s"

@@ -476,7 +476,7 @@ class TrayIcon:
 
             for disable_option in self.plugin_config['disable_options']:
                 time_in_minutes = time_in_x = disable_option['time']
-                label = []
+
                 # Validate time value
                 if not isinstance(time_in_minutes, int) or time_in_minutes <= 0:
                     logging.error('Invalid time in disable option: ' + str(time_in_minutes))
@@ -484,19 +484,29 @@ class TrayIcon:
                 time_unit = disable_option['unit'].lower()
                 if time_unit == 'seconds' or time_unit == 'second':
                     time_in_minutes = int(time_in_minutes / 60)
-                    label = ['For %d Second', 'For %d Seconds']
+                    label = self.context['locale'].ngettext(
+                        'For %(num)d Second',
+                        'For %(num)d Seconds',
+                        time_in_x
+                    ) % {'num': time_in_x}
                 elif time_unit == 'minutes' or time_unit == 'minute':
                     time_in_minutes = int(time_in_minutes * 1)
-                    label = ['For %d Minute', 'For %d Minutes']
+                    label = self.context['locale'].ngettext(
+                        'For %(num)d Minute',
+                        'For %(num)d Minutes',
+                        time_in_x
+                    ) % {'num': time_in_x}
                 elif time_unit == 'hours' or time_unit == 'hour':
                     time_in_minutes = int(time_in_minutes * 60)
-                    label = ['For %d Hour', 'For %d Hours']
+                    label = self.context['locale'].ngettext(
+                        'For %(num)d Hour',
+                        'For %(num)d Hours',
+                        time_in_x
+                    ) % {'num': time_in_x}
                 else:
                     # Invalid unit
                     logging.error('Invalid unit in disable option: ' + str(disable_option))
                     continue
-
-                label = self.context['locale'].ngettext(label[0], label[1], time_in_x) % time_in_x
 
                 disable_items.append({
                     'id': disable_option_dynamic_id,

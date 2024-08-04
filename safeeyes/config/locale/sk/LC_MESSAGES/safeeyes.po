@@ -448,25 +448,25 @@ msgid "Enable Safe Eyes"
 msgstr "Povoliť Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Počas %d hodiny"
-msgstr[1] "Počas %d hodín"
-msgstr[2] "Počas %d hodín"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Počas %(num)d hodiny"
+msgstr[1] "Počas %(num)d hodín"
+msgstr[2] "Počas %(num)d hodín"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Počas %d minúty"
-msgstr[1] "Počas %d minút"
-msgstr[2] "Počas %d minút"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Počas %(num)d minúty"
+msgstr[1] "Počas %(num)d minút"
+msgstr[2] "Počas %(num)d minút"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Počas %d sekundy"
-msgstr[1] "Počas %d sekúnd"
-msgstr[2] "Počas %d sekúnd"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Počas %(num)d sekundy"
+msgstr[1] "Počas %(num)d sekúnd"
+msgstr[2] "Počas %(num)d sekúnd"
 
 #: plugins/trayicon
 msgid "Next break at %s"

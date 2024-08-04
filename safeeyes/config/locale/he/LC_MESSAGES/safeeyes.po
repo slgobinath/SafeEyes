@@ -445,22 +445,22 @@ msgid "Enable Safe Eyes"
 msgstr "להפעיל את ההגנה על העיניים"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
 msgstr[0] "למשך שעה"
-msgstr[1] "למשך %s שעות"
+msgstr[1] "למשך %(num)d שעות"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
 msgstr[0] "למשך דקה"
-msgstr[1] "למשך %s דקות"
+msgstr[1] "למשך %(num)d דקות"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
 msgstr[0] "למשך שנייה"
-msgstr[1] "למשך %s שניות"
+msgstr[1] "למשך %(num)d שניות"
 
 #: plugins/trayicon
 msgid "Next break at %s"

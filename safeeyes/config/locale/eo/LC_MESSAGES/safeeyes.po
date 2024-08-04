@@ -448,22 +448,22 @@ msgid "Enable Safe Eyes"
 msgstr "Malebligi je Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Dum %d Horo"
-msgstr[1] "Dum %d Horoj"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Dum %(num)d Horo"
+msgstr[1] "Dum %(num)d Horoj"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Dum %d Minuto"
-msgstr[1] "Dum %d Minutoj"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Dum %(num)d Minuto"
+msgstr[1] "Dum %(num)d Minutoj"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Dum %d Sekundo"
-msgstr[1] "Dum %d Sekundoj"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Dum %(num)d Sekundo"
+msgstr[1] "Dum %(num)d Sekundoj"
 
 #: plugins/trayicon
 msgid "Next break at %s"

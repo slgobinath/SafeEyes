@@ -451,25 +451,25 @@ msgid "Enable Safe Eyes"
 msgstr "Активировать Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "На %d час"
-msgstr[1] "На %d часа"
-msgstr[2] "На %d часов"
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "На %(num)d час"
+msgstr[1] "На %(num)d часа"
+msgstr[2] "На %(num)d часов"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "На %d минуту"
-msgstr[1] "На %d минуты"
-msgstr[2] "На %d минут"
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "На %(num)d минуту"
+msgstr[1] "На %(num)d минуты"
+msgstr[2] "На %(num)d минут"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "На %d секунду"
-msgstr[1] "На %d секунды"
-msgstr[2] "На %d секунд"
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "На %(num)d секунду"
+msgstr[1] "На %(num)d секунды"
+msgstr[2] "На %(num)d секунд"
 
 #: plugins/trayicon
 msgid "Next break at %s"
