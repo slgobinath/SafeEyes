@@ -293,7 +293,7 @@ msgstr "Espressione cron non valida '%s'"
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Aggiungi la/le risorse %(resource) nella/e cartella/e %(config_resource)"
+"Aggiungi la/le risorse %(resource)s nella/e cartella/e %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"

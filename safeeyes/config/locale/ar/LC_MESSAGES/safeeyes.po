@@ -286,7 +286,7 @@ msgstr "تعبير الوظيفة المجدولة غير صحيح '%s'"
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "من فضلك أضف المورد %(resource)s إلى الدليل %(config_resource)"
+msgstr "من فضلك أضف المورد %(resource)s إلى الدليل %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"

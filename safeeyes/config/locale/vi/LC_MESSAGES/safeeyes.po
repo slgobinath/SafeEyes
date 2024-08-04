@@ -289,7 +289,7 @@ msgstr "Biểu thức cron '%s' không hợp lệ"
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Vui lòng thêm tài nguyên %(resource) vào thư mục %(config_resource)"
+msgstr "Vui lòng thêm tài nguyên %(resource)s vào thư mục %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"

@@ -23,24 +23,84 @@ import polib
 import re
 import sys
 
-def has_equal_placeholders(left: str, right: str) -> bool:
-    percents = re.finditer(r'%(?P<name>\(\w+\))?(?P<format>[a-z])', left)
+def validate_placeholders(message: str) -> bool:
+    pos = 0
 
-    unnamed = defaultdict(int)
-    named = []
-    for percent in percents:
-        if percent.group('name'):
-            named.append(f"%({percent.group('name')}){percent.group('format')}")
-        else:
-            match = f"%{percent.group('format')}"
-            unnamed[match] += 1
+    success = True
+
+    count_placeholders = 0
+    count_unnamed = 0
+
+    while True:
+        index = message.find("%", pos)
+        if index == -1:
+            break
+
+        pos = index + 1
+
+        nextchar = message[pos : pos + 1]
+
+        name = None
+
+        if nextchar == "(":
+            index = message.find(")", pos)
+            if index == -1:
+                success = False
+                print(f"Unclosed parenthetical in '{message}'")
+                break
+            name = message[pos + 1 : index]
+
+            pos = index + 1
+
+        nextchar = message[pos : pos + 1]
+        if nextchar not in ["%", "s", "d", "i", "f", "F"]:
+            success = False
+            print(f"Invalid format modifier in '{message}'")
+            break
+
+        if nextchar != "%":
+            count_placeholders += 1
+            if name is None:
+                count_unnamed += 1
+
+        pos += 1
+        continue
+
+    if count_unnamed > 1:
+        success = False
+        print(f"Multiple unnamed placeholders in '{message}'")
+
+    if count_unnamed > 0 and count_placeholders > count_unnamed:
+        success = False
+        print(f"Mixing named and unnamed placeholders in '{message}'")
+
+    return success
+
+def has_equal_placeholders(left: str, right: str) -> bool:
+    def _get_placeholders(message: str) -> tuple:
+        percents = re.finditer(r"%(?P<name>\(\w+\))?(?P<format>[a-z])", message)
+
+        unnamed = defaultdict(int)
+        named = set()
+        for percent in percents:
+            if percent.group("name"):
+                named.add(f"%({percent.group('name')}){percent.group('format')}")
+            else:
+                match = f"%{percent.group('format')}"
+                unnamed[match] += 1
+        return (unnamed, named)
+
+    (left_unnamed, left_named) = _get_placeholders(left)
+    (right_unnamed, right_named) = _get_placeholders(right)
 
     # count unnamed cases (eg. %s, %d)
-    for match, count in unnamed.items():
-        if right.count(match) != count:
+    for match, count in left_unnamed.items():
+        if right_unnamed.get(match, 0) != count:
             return False
 
-    # no need to count named cases - they are optional
+    # named cases are optional - but ensure that translation does not add new ones
+    if not right_named.issubset(left_named):
+        return False
 
     return True
 
@@ -48,17 +108,23 @@ def validate_po(locale: str, path: str) -> bool:
     success = True
     po = polib.pofile(path)
     for entry in po:
-        if entry.msgstr and not has_equal_placeholders(entry.msgid, entry.msgstr):
-            print("Number of variables mismatched in " + locale)
-            print(entry.msgid + " -> " + entry.msgstr)
-            print()
-            success = False
-        for plural in entry.msgstr_plural.values():
-            if plural and not has_equal_placeholders(entry.msgid, plural):
+        if entry.msgstr:
+            if not validate_placeholders(entry.msgstr):
+                success = False
+            if not has_equal_placeholders(entry.msgid, entry.msgstr):
                 print("Number of variables mismatched in " + locale)
-                print(entry.msgid + " -> " + plural)
+                print(entry.msgid + " -> " + entry.msgstr)
                 print()
                 success = False
+        for plural in entry.msgstr_plural.values():
+            if plural:
+                if not validate_placeholders(plural):
+                    success = False
+                if not has_equal_placeholders(entry.msgid, plural):
+                    print("Number of variables mismatched in " + locale)
+                    print(entry.msgid + " -> " + plural)
+                    print()
+                    success = False
     return success
 
 success = True

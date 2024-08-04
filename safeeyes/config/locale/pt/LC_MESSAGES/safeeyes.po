@@ -292,7 +292,7 @@ msgstr "A expressão cron '%s' é inválida"
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Adicionar o recurso %(resource)s à pasta %(config_resources)s"
+msgstr "Adicionar o recurso %(resource)s à pasta %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"

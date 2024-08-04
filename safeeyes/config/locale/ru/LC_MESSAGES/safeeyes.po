@@ -290,7 +290,7 @@ msgstr "Недопустимое выражение cron '%s'"
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Пожалуйста, добавьте источник %(resource)s в папку %(config_resource)"
+msgstr "Пожалуйста, добавьте источник %(resource)s в папку %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"

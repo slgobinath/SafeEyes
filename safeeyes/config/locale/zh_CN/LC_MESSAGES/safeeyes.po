@@ -287,7 +287,7 @@ msgstr "无效的 cron 正则表达式 '%s'"
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "请将资源 %(resource) 添加到 %(config_resource) 目录"
+msgstr "请将资源 %(resource)s 添加到 %(config_resource)s 目录"
 
 # Settings dialog
 msgid "New Break"

@@ -294,7 +294,7 @@ msgstr "A expressão de cron '%s' é inválida"
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Por favor, adicione o recurso %(resource)s para a diretoria "
-"%(config_resources)s"
+"%(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
