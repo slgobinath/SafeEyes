@@ -76,7 +76,7 @@ def main():
         logging.warning('installed python\'s gettext module does not support locale.bindtextdomain. locale.bindtextdomain is required for Glade files')
 
 
-    parser = argparse.ArgumentParser(prog='safeeyes', description=_('description'))
+    parser = argparse.ArgumentParser(prog='safeeyes')
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-a', '--about', help=_('show the about dialog'), action='store_true')
     group.add_argument('-d', '--disable', help=_('disable the currently running safeeyes instance'), action='store_true')
