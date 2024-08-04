@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-02 12:09+0000\n"
+"PO-Revision-Date: 2024-08-04 21:25+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -112,7 +112,7 @@ msgstr "Licenza"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Elenco dei contributori"
 
 # Break screen
 msgid "Skip"
@@ -521,47 +521,52 @@ msgstr "Metti in pausa i media"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Limitare i salti consecutivi"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Quanti salti o rinvii sono consentiti di seguito"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
+"Limita il numero di pause che possono essere saltate o posticipate di seguito"
 
 # plugin/limitconsecutiveskipping
 msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr ""
+msgstr "%d/%d pause saltate o posticipate di seguito"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Prevenzione RSI"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Installa il servizio che fornisce le icone della barra delle applicazioni "
+"per il tuo ambiente desktop."
 
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Prossima pausa lunga alle %s"
 
 msgid "Next breaks at %s/%s"
-msgstr ""
+msgstr "Prossime pause alle %s/%s"
 
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Al plugin richiesto '%s' mancano delle dipendenze!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Si prega di installare le dipendenze o disattivare il plugin. Per nascondere "
+"questo messaggio, è anche possibile disattivare il plugin nelle impostazioni."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Clicca qui per maggiori informazioni"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Disabilita temporaneamente il plugin"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Disattivare in modo permanente"
