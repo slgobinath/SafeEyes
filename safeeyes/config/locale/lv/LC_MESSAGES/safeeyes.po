@@ -19,8 +19,9 @@ msgstr ""
 "19) ? 0 : ((n % 10 == 1 && n % 100 != 11) ? 1 : 2);\n"
 "X-Generator: Poedit 2.2\n"
 
-msgid "Tightly close your eyes"
-msgstr "Cieši aizver acis"
+# Short break
+msgid "Gently close your eyes"
+msgstr ""
 
 msgid "Roll your eyes a few times to each side"
 msgstr "Apļo acis dažas reizes uz katru pusi"
@@ -490,6 +491,9 @@ msgstr ""
 
 msgid "License:"
 msgstr ""
+
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Cieši aizver acis"
 
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Statistikas atstatīšanas intervāls (stundās)"

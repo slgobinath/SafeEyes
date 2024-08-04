@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Weblate 2.17\n"
 
 # Short break
-msgid "Tightly close your eyes"
+msgid "Gently close your eyes"
 msgstr ""
 
 # Short break

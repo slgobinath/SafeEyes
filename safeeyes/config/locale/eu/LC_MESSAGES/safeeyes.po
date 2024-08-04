@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.15.1-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Itxi begiak indarrez"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -582,3 +582,7 @@ msgstr ""
 
 msgid "License:"
 msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Itxi begiak indarrez"

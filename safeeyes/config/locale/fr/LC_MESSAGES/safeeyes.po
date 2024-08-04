@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.10.1\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Fermez bien vos yeux"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -589,6 +589,10 @@ msgstr ""
 
 msgid "License:"
 msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Fermez bien vos yeux"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
