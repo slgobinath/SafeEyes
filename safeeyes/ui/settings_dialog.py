@@ -52,11 +52,34 @@ SETTINGS_ITEM_TEXT_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_text.
 SETTINGS_ITEM_BOOL_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_bool.glade")
 
 
-class SettingsDialog:
+@Gtk.Template(filename=SETTINGS_DIALOG_GLADE)
+class SettingsDialog(Gtk.ApplicationWindow):
     """Create and initialize SettingsDialog instance."""
 
+    __gtype_name__ = "SettingsDialog"
+
+    box_short_breaks = Gtk.Template.Child()
+    box_long_breaks = Gtk.Template.Child()
+    box_plugins = Gtk.Template.Child()
+    popover = Gtk.Template.Child()
+
+    spin_short_break_duration = Gtk.Template.Child()
+    spin_long_break_duration = Gtk.Template.Child()
+    spin_short_break_interval = Gtk.Template.Child()
+    spin_long_break_interval = Gtk.Template.Child()
+    spin_time_to_prepare = Gtk.Template.Child()
+    spin_postpone_duration = Gtk.Template.Child()
+    dropdown_postpone_unit = Gtk.Template.Child()
+    spin_disable_keyboard_shortcut = Gtk.Template.Child()
+    switch_strict_break = Gtk.Template.Child()
+    switch_random_order = Gtk.Template.Child()
+    switch_postpone = Gtk.Template.Child()
+    switch_persist = Gtk.Template.Child()
+    info_bar_long_break = Gtk.Template.Child()
+
     def __init__(self, application, config, on_save_settings):
-        self.application = application
+        super().__init__(application=application)
+
         self.config = config
         self.on_save_settings = on_save_settings
         self.plugin_items = {}
@@ -65,52 +88,10 @@ class SettingsDialog:
         self.initializing = True
         self.infobar_long_break_shown = False
 
-        builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
-
-        self.window = builder.get_object("window_settings")
-        self.window.set_application(application)
-        self.box_short_breaks = builder.get_object("box_short_breaks")
-        self.box_long_breaks = builder.get_object("box_long_breaks")
-        self.box_plugins = builder.get_object("box_plugins")
-        self.popover = builder.get_object("popover")
-
-        self.spin_short_break_duration = builder.get_object("spin_short_break_duration")
-        self.spin_long_break_duration = builder.get_object("spin_long_break_duration")
-        self.spin_short_break_interval = builder.get_object("spin_short_break_interval")
-        self.spin_long_break_interval = builder.get_object("spin_long_break_interval")
-        self.spin_time_to_prepare = builder.get_object("spin_time_to_prepare")
-        self.spin_postpone_duration = builder.get_object("spin_postpone_duration")
-        self.dropdown_postpone_unit = builder.get_object("dropdown_postpone_unit")
-        self.spin_disable_keyboard_shortcut = builder.get_object(
-            "spin_disable_keyboard_shortcut"
-        )
-        self.switch_strict_break = builder.get_object("switch_strict_break")
-        self.switch_random_order = builder.get_object("switch_random_order")
-        self.switch_postpone = builder.get_object("switch_postpone")
-        self.switch_persist = builder.get_object("switch_persist")
-        self.info_bar_long_break = builder.get_object("info_bar_long_break")
         self.info_bar_long_break.hide()
-
-        self.window.connect("close-request", self.on_window_delete)
-        builder.get_object("reset_menu").connect("clicked", self.on_reset_menu_clicked)
-        self.spin_short_break_interval.connect(
-            "value-changed", self.on_spin_short_break_interval_change
-        )
-        self.info_bar_long_break.connect("close", self.on_info_bar_long_break_close)
-        self.info_bar_long_break.connect("response", self.on_info_bar_long_break_close)
-        self.spin_long_break_interval.connect(
-            "value-changed", self.on_spin_long_break_interval_change
-        )
-        builder.get_object("btn_add_break").connect("clicked", self.add_break)
 
         # Set the current values of input fields
         self.__initialize(config)
-
-        # Add event listener to postpone switch
-        self.switch_postpone.connect("state-set", self.on_switch_postpone_activate)
-        self.on_switch_postpone_activate(
-            self.switch_postpone, self.switch_postpone.get_active()
-        )
 
         self.initializing = False
 
@@ -175,6 +156,7 @@ class SettingsDialog:
         gbox.set_visible(True)
         parent_box.append(gbox)
 
+    @Gtk.Template.Callback()
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
 
@@ -201,7 +183,7 @@ class SettingsDialog:
         messagedialog.set_cancel_button(0)
         messagedialog.set_default_button(0)
 
-        messagedialog.choose(self.window, None, __confirmation_dialog_response)
+        messagedialog.choose(self, None, __confirmation_dialog_response)
 
     def __clear_children(self, widget):
         while widget.get_last_child() is not None:
@@ -228,7 +210,7 @@ class SettingsDialog:
         messagedialog.set_cancel_button(0)
         messagedialog.set_default_button(0)
 
-        messagedialog.choose(self.window, None, __confirmation_dialog_response)
+        messagedialog.choose(self, None, __confirmation_dialog_response)
 
     def __create_plugin_item(self, plugin_config):
         """Create an entry for plugin to be listed in the plugin tab."""
@@ -249,7 +231,7 @@ class SettingsDialog:
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
-        dialog = PluginSettingsDialog(self.window, plugin_config)
+        dialog = PluginSettingsDialog(self, plugin_config)
         dialog.show()
 
     def __show_break_properties_dialog(
@@ -257,7 +239,7 @@ class SettingsDialog:
     ):
         """Show the BreakProperties dialog."""
         dialog = BreakSettingsDialog(
-            self.window,
+            self,
             break_config,
             is_short,
             parent,
@@ -270,8 +252,9 @@ class SettingsDialog:
 
     def show(self):
         """Show the SettingsDialog."""
-        self.window.present()
+        super().show()
 
+    @Gtk.Template.Callback()
     def on_switch_postpone_activate(self, switch, state):
         """Event handler to the state change of the postpone switch.
 
@@ -281,6 +264,7 @@ class SettingsDialog:
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
         self.dropdown_postpone_unit.set_sensitive(self.switch_postpone.get_active())
 
+    @Gtk.Template.Callback()
     def on_spin_short_break_interval_change(self, spin_button, *value):
         """Event handler for value change of short break interval."""
         short_break_interval = self.spin_short_break_interval.get_value_as_int()
@@ -298,20 +282,23 @@ class SettingsDialog:
             self.infobar_long_break_shown = True
             self.info_bar_long_break.show()
 
+    @Gtk.Template.Callback()
     def on_spin_long_break_interval_change(self, spin_button, *value):
         """Event handler for value change of long break interval."""
         if not self.initializing and not self.infobar_long_break_shown:
             self.infobar_long_break_shown = True
             self.info_bar_long_break.show()
 
+    @Gtk.Template.Callback()
     def on_info_bar_long_break_close(self, infobar, *user_data):
         """Event handler for info bar close action."""
         self.info_bar_long_break.hide()
 
+    @Gtk.Template.Callback()
     def add_break(self, button) -> None:
         """Event handler for add break button."""
         dialog = NewBreakDialog(
-            self.window,
+            self,
             self.config,
             lambda is_short, break_config: self.__create_break_item(
                 break_config, is_short
@@ -319,6 +306,7 @@ class SettingsDialog:
         )
         dialog.show()
 
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Event handler for Settings dialog close action."""
         self.config.set(
@@ -356,7 +344,7 @@ class SettingsDialog:
                 plugin["enabled"] = self.plugin_items[plugin["id"]].is_enabled()
 
         self.on_save_settings(self.config)  # Call the provided save method
-        self.window.destroy()
+        self.destroy()
 
 
 class BreakItem:
