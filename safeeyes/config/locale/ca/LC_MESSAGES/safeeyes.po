@@ -267,14 +267,17 @@ msgid "Plugin Settings"
 msgstr "Preferències del complement"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr ""
 
@@ -283,6 +286,7 @@ msgid "Invalid cron expression '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 
@@ -363,10 +367,12 @@ msgid "Show a system notification before breaks"
 msgstr ""
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr ""
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr ""
 
@@ -435,6 +441,7 @@ msgid "Disable Safe Eyes"
 msgstr "Desactiva Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Inhabilitat fins %s"
 
@@ -447,24 +454,28 @@ msgid "Enable Safe Eyes"
 msgstr "Activa Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "Durant %(num)d hora"
 msgstr[1] "Durant %(num)d hores"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] ""
 msgstr[1] ""
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Propera pausa a les %s"
 
@@ -525,6 +536,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -536,12 +548,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 

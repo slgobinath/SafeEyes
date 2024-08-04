@@ -268,14 +268,17 @@ msgid "Plugin Settings"
 msgstr "Eklenti Ayarları"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Bu eklenti %s masaüstü ortamını desteklemiyor"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Lütfen '%s' Python modülünü kurun"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Lütfen '%s' komut satırı aracını kurunuz"
 
@@ -284,6 +287,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Geçersiz cron ifadesi '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lütfen %(resource)s kaynağını %(config_resource)s klasörüne ekleyiniz"
 
@@ -364,10 +368,12 @@ msgid "Show a system notification before breaks"
 msgstr "Molalardan önce bir sistem bildirimi göster"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "%s Saniye sonra verilecek bir kısa mola için hazır olun"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "%s Saniye sonra verilecek bir uzun mola için hazır olun"
 
@@ -439,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes'ı pasifleştir"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "%s'e kadar pasif"
 
@@ -451,24 +458,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes'ı etkinleştir"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "%(num)d Saat Boyunca"
 msgstr[1] "%(num)d Saat"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "%(num)d Dakika Boyunca"
 msgstr[1] "%(num)d Dakika"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "%(num)d Saniye Boyunca"
 msgstr[1] "%(num)d Saniye"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Sonraki mola %s'de"
 
@@ -529,6 +540,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -540,12 +552,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 

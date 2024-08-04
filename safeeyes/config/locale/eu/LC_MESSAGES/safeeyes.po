@@ -270,14 +270,17 @@ msgid "Plugin Settings"
 msgstr "Gehigarriaren ezarpenak"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Gehigarriak ez du %s ingurune-grafikoa onartzen"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Instalatu '%s' Python modulua"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Instalatu '%s' komandu-lerroko tresna"
 
@@ -286,6 +289,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Baliogabeko '%s' cron adierazpena"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Gehitu %(resource)s baliabidea %(config_resource)s direktorioan"
 
@@ -366,10 +370,12 @@ msgid "Show a system notification before breaks"
 msgstr "Erakutsi sistemako jakinarazpen bat etenaldien aurretik"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Prestatu %s segundo barru etenaldi motza egiteko"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Prestatu %s segundo barru etenaldi luzea egiteko"
 
@@ -441,6 +447,7 @@ msgid "Disable Safe Eyes"
 msgstr "Desgaitu Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "%s arte desgaituta"
 
@@ -453,24 +460,28 @@ msgid "Enable Safe Eyes"
 msgstr "Gaitu Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "Ordu %(num)dez"
 msgstr[1] "%(num)d orduz"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "Minutu %(num)dez"
 msgstr[1] "%(num)d minutuz"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "Segundo %(num)dez"
 msgstr[1] "%(num)d segundoz"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Hurrengo etenaldia: %s"
 
@@ -531,6 +542,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -542,12 +554,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 

@@ -263,14 +263,17 @@ msgid "Plugin Settings"
 msgstr "Bővítmény Beállítások"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "A Bővítmény nem támogatja a(z) %s asztali környezetet"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Kérem telepítse a '%s' Python modul-t"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Kérem telepítse a '%s' parancssori eszközt"
 
@@ -279,6 +282,7 @@ msgid "Invalid cron expression '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Kérem adja hozzá a(z) %(resource) erőforrást a %(config_resource) könyvtárhoz"
@@ -360,10 +364,12 @@ msgid "Show a system notification before breaks"
 msgstr "Mutass Rendszer Értesítést a pihenők előtt"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Pihenő következik %s másodperc múlva"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Hosszú pihenő következik %s másodperc múlva"
 
@@ -432,6 +438,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes Letiltása"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Letiltás eddig: %s"
 
@@ -444,24 +451,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes Engedélyezése"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "%(num)d Órára"
 msgstr[1] "%(num)d Órára"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "%(num)d Percre"
 msgstr[1] "%(num)d Percre"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "%(num)d Másodpercre"
 msgstr[1] "%(num)d Másodpercre"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Következő pihenő %s-kor"
 
@@ -522,6 +533,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -533,12 +545,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 

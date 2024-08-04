@@ -274,14 +274,17 @@ msgid "Plugin Settings"
 msgstr "Paramètres du greffon"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Le greffon ne prend pas en charge l’environnement de bureau %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Veuillez installer le module Python « %s »"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Veuillez installer l’outil de ligne de commande « %s »"
 
@@ -290,6 +293,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "L’expression cron « %s » est invalide"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Veuillez ajouter la ressource %(resource)s au répertoire %(config_resource)s"
@@ -371,10 +375,12 @@ msgid "Show a system notification before breaks"
 msgstr "Afficher une notification système avant les pauses"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Préparez-vous à une pause courte dans %s secondes"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Préparez-vous à une pause longue dans %s secondes"
 
@@ -448,6 +454,7 @@ msgid "Disable Safe Eyes"
 msgstr "Désactiver Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Désactivée jusqu'à %s"
 
@@ -460,24 +467,28 @@ msgid "Enable Safe Eyes"
 msgstr "Activer Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "Pendant %(num)d heure"
 msgstr[1] "Pendant %(num)d heures"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "Pendant %(num)d minute"
 msgstr[1] "Pendant %(num)d minutes"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "Pendant %(num)d seconde"
 msgstr[1] "Pendant %(num)d secondes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Prochaine pause à %s"
 
@@ -538,6 +549,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -549,12 +561,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 

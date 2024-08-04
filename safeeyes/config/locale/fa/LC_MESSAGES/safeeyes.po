@@ -267,14 +267,17 @@ msgid "Plugin Settings"
 msgstr "تنظیمات افزایه"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "افزایه از محیط میزکار %s پشتیبانی نمی‌کند"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "لطفاً پیمانهٔ %s پایتون را نصب کنید"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "لطفاً ابزار خط فرمان %s را نصب کنید"
 
@@ -283,6 +286,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "عبارت کرون نامعتبر «%s»"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "لطفا منبع %(resource)s را به شاخهٔ %(config_resource)s بیفزایید"
 
@@ -363,10 +367,12 @@ msgid "Show a system notification before breaks"
 msgstr "نمایش یک آگاهی سامانه پیش از استراحت‌ها"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "آماده برای استراحتی کوتاه در %s ثانیه"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "آماده برای استراحتی طولانی در %s ثانیه"
 
@@ -435,6 +441,7 @@ msgid "Disable Safe Eyes"
 msgstr "از کار انداختن محافظ چشم"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "از کار افتاده تا %s"
 
@@ -447,24 +454,28 @@ msgid "Enable Safe Eyes"
 msgstr "به کار انداختن محافظ چشم"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "برای ۱ ساعت"
 msgstr[1] "برای %(num)dI ساعت"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "برای ۱ دقیقه"
 msgstr[1] "برای %(num)dI دقیقه"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "برای ۱ ثانیه"
 msgstr[1] "برای %(num)dI ثانیه"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "استراحت بعدی در %s"
 
@@ -525,6 +536,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr "تعداد استراحت‌ها را که می‌توان پشت‌سرهم رد یا به تعویق انداخت محدود کن"
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "%(num)d/%(allowed)d استراحت‌ها پشت‌سرهم رد یا به تعویق افتاده‌اند"
 
@@ -534,15 +546,17 @@ msgstr "جلوگیری از آر‌ اس آی"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
-"لطفاً آیکون‌های نوار ارائه دهنده خدمات را برای محیط دسکتاپ خود نصب کنید."
+msgstr "لطفاً آیکون‌های نوار ارائه دهنده خدمات را برای محیط دسکتاپ خود نصب کنید."
 
+#, python-format
 msgid "Next long break at %s"
 msgstr "استراحت طولانی بعدی در %s"
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr "استراحت‌های بعدی در %(short)s/%(long)s"
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "افزونه موردنیاز '%s' فاقد دِپِندِنسی است!"
 

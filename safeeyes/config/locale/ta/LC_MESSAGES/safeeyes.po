@@ -270,14 +270,17 @@ msgid "Plugin Settings"
 msgstr "நீட்சி அமைப்புகள்"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "இந்த நீட்சி %s முகத்திரை சூழலை ஆதரிக்கவில்லை"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "தயவுசெய்து '%s' Python தொகுப்பை நிறுவவும்"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "தயவுசெய்து '%s' முனைய கட்டளையை நிறுவுக"
 
@@ -286,6 +289,7 @@ msgid "Invalid cron expression '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "தயவுசெய்து %(resource)s வளத்தை %(config_resource)s கோப்புறையில் சேர்க்கவும்"
 
@@ -366,10 +370,12 @@ msgid "Show a system notification before breaks"
 msgstr "இடைவேளைகளின் முன் தயார்படுத்தலுக்கான அறிவிப்பு"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "%s விநாடிகளில் குறுகிய இடைவேளைக்கு தயாராகுங்கள்"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "%s விநாடிகளில் நீண்ட இடைவேளைக்கு தயாராகுங்கள்"
 
@@ -438,6 +444,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes ஐ நிறுத்துக"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "%s வரை நிறுத்தி வைக்கப்பட்டுள்ளது"
 
@@ -450,24 +457,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes ஐ செயல்படுத்துக"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
 msgstr[0] "%(num)d மணித்தியாலத்திற்கு"
 msgstr[1] "%(num)d மணித்தியாலங்களுக்கு"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
 msgstr[0] "%(num)d நிமிடத்திற்கு"
 msgstr[1] "%(num)d நிமிடங்களுக்கு"
 
 #: plugins/trayicon
+#, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
 msgstr[0] "%(num)d வினாடிக்கு"
 msgstr[1] "%(num)d வினாடிகளுக்கு"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "அடுத்த இடைவேளை %s"
 
@@ -528,6 +539,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
+#, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
@@ -539,12 +551,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
+#, python-format
 msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
