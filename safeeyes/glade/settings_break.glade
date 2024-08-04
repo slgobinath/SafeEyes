@@ -54,7 +54,7 @@
   </object>
   <object class="GtkWindow" id="dialog_settings_break">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Properties</property>
+    <property name="title" translatable="yes">Break Settings</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -302,7 +302,7 @@
                             <property name="can_focus">True</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
-                            <property name="text" translatable="yes">0</property>
+                            <property name="text">0</property>
                             <property name="adjustment">adjustment_interval</property>
                             <property name="numeric">True</property>
                           </object>

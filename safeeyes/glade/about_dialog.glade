@@ -22,7 +22,7 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <object class="GtkTextBuffer" id="text_buffer_license">
-    <property name="text" translatable="yes">This program is free software: you can redistribute it and/or modify
+    <property name="text">This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -37,7 +37,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
   </object>
   <object class="GtkWindow" id="window_about">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Safe Eyes</property>
+    <property name="title">Safe Eyes</property>
     <property name="resizable">False</property>
     <property name="window-position">center-always</property>
     <property name="icon-name">safeeyes</property>
@@ -71,7 +71,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="valign">center</property>
                 <property name="margin-top">10</property>
                 <property name="margin-bottom">10</property>
-                <property name="label" translatable="yes">Safe Eyes 2.2.1</property>
+                <property name="label">Safe Eyes 2.2.1</property>
                 <property name="justify">center</property>
                 <attributes>
                   <attribute name="style" value="normal"/>
@@ -135,7 +135,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
             </child>
             <child>
               <object class="GtkLinkButton" id="btn_url">
-                <property name="label" translatable="yes">https://slgobinath.github.io/SafeEyes</property>
+                <property name="label">https://slgobinath.github.io/SafeEyes</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="focus-on-click">False</property>
