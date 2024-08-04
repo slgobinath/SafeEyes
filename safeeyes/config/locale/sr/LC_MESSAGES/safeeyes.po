@@ -272,7 +272,7 @@ msgstr "Подешавање додатака"
 
 # Settings dialog
 msgid "Plugin does not support %s desktop environment"
-msgstr "Додатак не подржава % радну површину"
+msgstr "Додатак не подржава %s радну површину"
 
 # Settings dialog
 msgid "Please install the Python module '%s'"
