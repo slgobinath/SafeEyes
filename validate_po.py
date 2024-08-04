@@ -17,11 +17,44 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import argparse
 from collections import defaultdict
+import glob
 import os
 import polib
 import re
 import sys
+import subprocess
+
+
+def xgettext() -> str:
+    def _xgettext(files: list, lang: str) -> str:
+        return subprocess.check_output(
+            [
+                "xgettext",
+                "--language",
+                lang,
+                "--sort-by-file",
+                "--no-wrap",
+                "-d",
+                "safeeyes",
+                "--no-location",
+                "--omit-header",
+                "-o",
+                "-",
+                "--",
+                *files,
+            ]
+        ).decode()
+
+    files_py = glob.glob("safeeyes/**/*.py", recursive=True)
+    files_glade = glob.glob("safeeyes/**/*.glade", recursive=True)
+
+    output = _xgettext(files_py, "Python")
+    output = output + _xgettext(files_glade, "Glade")
+
+    return output
+
 
 def validate_placeholders(message: str) -> bool:
     pos = 0
@@ -76,6 +109,24 @@ def validate_placeholders(message: str) -> bool:
 
     return success
 
+
+def validate_pot() -> bool:
+    success = True
+
+    new_pot_contents = xgettext()
+    new_pot = polib.pofile(new_pot_contents)
+    old_pot = polib.pofile("safeeyes/config/locale/safeeyes.pot")
+
+    for new_entry in new_pot:
+        if old_pot.find(new_entry.msgid) is None:
+            print(f"missing entry in pot: '{new_entry.msgid}'")
+            success = False
+        if not validate_placeholders(new_entry.msgid):
+            success = False
+
+    return success
+
+
 def has_equal_placeholders(left: str, right: str) -> bool:
     def _get_placeholders(message: str) -> tuple:
         percents = re.finditer(r"%(?P<name>\(\w+\))?(?P<format>[a-z])", message)
@@ -104,6 +155,7 @@ def has_equal_placeholders(left: str, right: str) -> bool:
 
     return True
 
+
 def validate_po(locale: str, path: str) -> bool:
     success = True
     po = polib.pofile(path)
@@ -127,12 +179,66 @@ def validate_po(locale: str, path: str) -> bool:
                     success = False
     return success
 
-success = True
-locales = os.listdir('safeeyes/config/locale')
-for locale in sorted(locales):
-    path = os.path.join('safeeyes/config/locale', locale, "LC_MESSAGES/safeeyes.po")
-    if os.path.isfile(path):
-        print('Validating translation %s...' % path)
-        success = validate_po(locale, path) and success
 
-sys.exit(0 if success else 1)
+def validate_po_files() -> bool:
+    success = True
+
+    locales = os.listdir("safeeyes/config/locale")
+    for locale in sorted(locales):
+        path = os.path.join("safeeyes/config/locale", locale, "LC_MESSAGES/safeeyes.po")
+        if os.path.isfile(path):
+            print("Validating translation %s..." % path)
+            success = validate_po(locale, path) and success
+
+    return success
+
+
+def validate():
+    success = True
+    success = validate_pot() and success
+    success = validate_po_files() and success
+    sys.exit(0 if success else 1)
+
+
+def extract():
+    success = True
+    new_pot_contents = xgettext()
+    new_pot = polib.pofile(new_pot_contents)
+    pot_on_disk = polib.pofile("safeeyes/config/locale/safeeyes.pot", wrapwidth=0)
+
+    for new_entry in new_pot:
+        if not validate_placeholders(new_entry.msgid):
+            success = False
+        if pot_on_disk.find(new_entry.msgid) is None:
+            pot_on_disk.append(new_entry)
+
+    if success:
+        pot_on_disk.save()
+
+    sys.exit(0 if success else 1)
+
+
+def main():
+    parser = argparse.ArgumentParser(prog="validate_po")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument(
+        "--validate", action="store_const", dest="mode", const="validate"
+    )
+    group.add_argument(
+        "--extract",
+        help="Extract strings to pot file",
+        action="store_const",
+        dest="mode",
+        const="extract",
+    )
+    parser.set_defaults(mode="validate")
+    args = parser.parse_args()
+
+    if args.mode == "validate":
+        validate()
+    elif args.mode == "extract":
+        extract()
+
+
+if __name__ == "__main__":
+    main()
