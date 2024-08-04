@@ -569,6 +569,9 @@ msgstr ""
 msgid "Disable permanently"
 msgstr ""
 
+msgid "License:"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "통계 초기화 간격 (시)"

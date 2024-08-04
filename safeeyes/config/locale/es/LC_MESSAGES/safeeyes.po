@@ -588,6 +588,9 @@ msgstr "Desactivar el complemento temporalmente"
 msgid "Disable permanently"
 msgstr "Desactivar permanentemente"
 
+msgid "License:"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Intervalo para restablecer estadísticas (en horas)"

@@ -569,3 +569,6 @@ msgstr ""
 
 msgid "Disable permanently"
 msgstr ""
+
+msgid "License:"
+msgstr ""

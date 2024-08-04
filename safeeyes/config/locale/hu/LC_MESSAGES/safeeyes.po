@@ -285,7 +285,8 @@ msgstr ""
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Kérem adja hozzá a(z) %(resource)s erőforrást a %(config_resource)s könyvtárhoz"
+"Kérem adja hozzá a(z) %(resource)s erőforrást a %(config_resource)s "
+"könyvtárhoz"
 
 # Settings dialog
 msgid "New Break"
@@ -569,4 +570,7 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""

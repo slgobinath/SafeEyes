@@ -576,6 +576,9 @@ msgstr "غیرفعال کردن موقت افزونه"
 msgid "Disable permanently"
 msgstr "غیرفعال کردن دائمی"
 
+msgid "License:"
+msgstr ""
+
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "فاصله برای تنظیم مجدد آمار (در چند ساعت)"

@@ -488,5 +488,8 @@ msgstr ""
 msgid "Disable permanently"
 msgstr ""
 
+msgid "License:"
+msgstr ""
+
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Statistikas atstatīšanas intervāls (stundās)"

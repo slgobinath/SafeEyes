@@ -577,6 +577,9 @@ msgstr ""
 msgid "Disable permanently"
 msgstr ""
 
+msgid "License:"
+msgstr ""
+
 # plugin/healthstats
 #, fuzzy
 #~ msgid "Interval to reset statistics (in hours)"
