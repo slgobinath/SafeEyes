@@ -535,8 +535,8 @@ msgstr ""
 "Limitar la cantidad de descansos que se pueden omitir o posponer seguidos"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "Se ha(n) saltado o pospuesto %d/%d pausa(s) seguida(s)"
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Se ha(n) saltado o pospuesto %(num)d/%(allowed)d pausa(s) seguida(s)"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -551,8 +551,8 @@ msgstr ""
 msgid "Next long break at %s"
 msgstr "La siguiente pausa larga es en %s"
 
-msgid "Next breaks at %s/%s"
-msgstr "Próximos descansos en %s/%s"
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Próximos descansos en %(short)s/%(long)s"
 
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "¡Al complemento requerido '%s' no tiene las dependencias!"

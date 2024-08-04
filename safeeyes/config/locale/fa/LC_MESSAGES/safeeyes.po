@@ -525,8 +525,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr "تعداد استراحت‌ها را که می‌توان پشت‌سرهم رد یا به تعویق انداخت محدود کن"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "%d/%d استراحت‌ها پشت‌سرهم رد یا به تعویق افتاده‌اند"
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "%(num)d/%(allowed)d استراحت‌ها پشت‌سرهم رد یا به تعویق افتاده‌اند"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -540,8 +540,8 @@ msgstr ""
 msgid "Next long break at %s"
 msgstr "استراحت طولانی بعدی در %s"
 
-msgid "Next breaks at %s/%s"
-msgstr "استراحت‌های بعدی در %s/%s"
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "استراحت‌های بعدی در %(short)s/%(long)s"
 
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "افزونه موردنیاز '%s' فاقد دِپِندِنسی است!"

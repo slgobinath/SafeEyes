@@ -460,7 +460,10 @@ class TrayIcon:
                         if next_is_long:
                             info_message = _('Next long break at %s') % (next_long_time)
                         else:
-                            info_message = _('Next breaks at %s/%s') % (next_time, next_long_time)
+                            info_message = _('Next breaks at %(short)s/%(long)s') % {
+                                'short': next_time,
+                                'long': next_long_time
+                            }
                     else:
                         info_message = _('Next break at %s') % (next_time)
             else:

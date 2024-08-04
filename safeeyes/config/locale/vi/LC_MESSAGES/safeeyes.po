@@ -526,7 +526,7 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -540,7 +540,7 @@ msgstr ""
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
 msgid "The required plugin '%s' is missing dependencies!"
