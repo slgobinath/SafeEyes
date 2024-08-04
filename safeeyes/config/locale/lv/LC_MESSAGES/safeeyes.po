@@ -212,12 +212,15 @@ msgstr "Pārtraukuma iestatījumi"
 msgid "Plugin Settings"
 msgstr "Spraudņu iestatījumi"
 
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Spraudnis neatbalsta %s darbvirsmas vidi"
 
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Lūdzu instalējiet Python moduli '%s'"
 
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Lūdzu instalējiet komandrindas rīku '%s'"
 
@@ -225,6 +228,7 @@ msgstr "Lūdzu instalējiet komandrindas rīku '%s'"
 msgid "Invalid cron expression '%s'"
 msgstr ""
 
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lūdzu ievietojiet artefaktu %(resource)s mapē %(config_resource)s"
 
@@ -286,9 +290,11 @@ msgstr "Paziņojumi"
 msgid "Show a system notification before breaks"
 msgstr "Rādīt sistēmas paziņojumus pirms pārtraukumiem"
 
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Gatavojies īsam pārtraukumam pēc %s sekundēm"
 
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Gatavojies garam pārtraukumam pēc %s sekundēm"
 
@@ -349,6 +355,7 @@ msgid "Disable Safe Eyes"
 msgstr "Atspējot Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Atspējots līdz %s"
 
@@ -361,27 +368,31 @@ msgid "Enable Safe Eyes"
 msgstr "Iespējot Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Uz %d stundām"
-msgstr[1] "Uz %d stundu"
-msgstr[2] "Uz %d stundām"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Uz %(num)d stundām"
+msgstr[1] "Uz %(num)d stundu"
+msgstr[2] "Uz %(num)d stundām"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Uz %d minūtēm"
-msgstr[1] "Uz %d minūti"
-msgstr[2] "Uz %d minūtēm"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Uz %(num)d minūtēm"
+msgstr[1] "Uz %(num)d minūti"
+msgstr[2] "Uz %(num)d minūtēm"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Uz %d sekundēm"
-msgstr[1] "Uz %d sekundi"
-msgstr[2] "Uz %d sekundēm"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Uz %(num)d sekundēm"
+msgstr[1] "Uz %(num)d sekundi"
+msgstr[2] "Uz %(num)d sekundēm"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Nākamais pārtraukums – %s"
 
@@ -439,7 +450,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -450,12 +462,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -471,6 +486,9 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""
 
 #~ msgid "Interval to reset statistics (in hours)"

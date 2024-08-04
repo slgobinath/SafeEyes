@@ -267,14 +267,17 @@ msgid "Plugin Settings"
 msgstr "Налаштування плагінів"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Плагін не підтримує стільничне середовище %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Будь ласка, встановіть модуль Python «%s»"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Будь ласка, встановіть засіб вказівкового рядка «%s»"
 
@@ -283,6 +286,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Неприпустимий вираз cron '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Будь ласка, додайте ресурс %(resource)s до каталогу %(config_resource)s"
@@ -365,10 +369,12 @@ msgid "Show a system notification before breaks"
 msgstr "Показувати системне сповіщення перед перервами"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Приготуйтесь до короткої перерви через %s секунд"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Приготуйтесь до довгої переви через %s секунд"
 
@@ -439,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "Вимкнути Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Вимкнено до %s"
 
@@ -451,27 +458,31 @@ msgid "Enable Safe Eyes"
 msgstr "Увімкнути Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "На %d годину"
-msgstr[1] "На %d годин"
-msgstr[2] "На %d годин"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "На %(num)d годину"
+msgstr[1] "На %(num)d годин"
+msgstr[2] "На %(num)d годин"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "На %d хвилину"
-msgstr[1] "На %d хвилин"
-msgstr[2] "На %d хвилин"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "На %(num)d хвилину"
+msgstr[1] "На %(num)d хвилин"
+msgstr[2] "На %(num)d хвилин"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "На %d секунду"
-msgstr[1] "На %d секунд"
-msgstr[2] "На %d секунд"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "На %(num)d секунду"
+msgstr[1] "На %(num)d секунд"
+msgstr[2] "На %(num)d секунд"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Наступна перерва о %s"
 
@@ -532,7 +543,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -543,12 +555,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -564,6 +579,9 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""
 
 # plugin/healthstats

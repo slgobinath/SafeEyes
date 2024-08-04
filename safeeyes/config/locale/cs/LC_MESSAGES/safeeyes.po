@@ -267,14 +267,17 @@ msgid "Plugin Settings"
 msgstr "Nastavení rozšíření"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Rozšíření nepodporuje pracovní (desktop) prostředí %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Nainstalujte si modul pro Python „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Nainstalujte si nástroj pro příkazový řádek „%s“"
 
@@ -283,6 +286,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Neplatný výraz pro plánovač (cron) „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Přidejte prostředek %(resource)s do složky %(config_resource)s"
 
@@ -364,10 +368,12 @@ msgid "Show a system notification before breaks"
 msgstr "Zobrazovat oznámení před přestávkami"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Připravte se na přestávku za %s sekund"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Připravte se na dlouhou přestávku za %s sekund"
 
@@ -438,6 +444,7 @@ msgid "Disable Safe Eyes"
 msgstr "Zablokovat Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Zablokovat do %s"
 
@@ -450,27 +457,31 @@ msgid "Enable Safe Eyes"
 msgstr "Odblokovat Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Na %d hodinu"
-msgstr[1] "Na %d hodiny"
-msgstr[2] "Na %d hodin"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Na %(num)d hodinu"
+msgstr[1] "Na %(num)d hodiny"
+msgstr[2] "Na %(num)d hodin"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Na %d minutu"
-msgstr[1] "Na %d minuty"
-msgstr[2] "Na %d minut"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Na %(num)d minutu"
+msgstr[1] "Na %(num)d minuty"
+msgstr[2] "Na %(num)d minut"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Na %d sekundu"
-msgstr[1] "Na %d sekundy"
-msgstr[2] "Na %d sekund"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Na %(num)d sekundu"
+msgstr[1] "Na %(num)d sekundy"
+msgstr[2] "Na %(num)d sekund"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Příští přestávka v %s"
 
@@ -531,7 +542,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -542,12 +554,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -563,6 +578,9 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""
 
 # plugin/healthstats

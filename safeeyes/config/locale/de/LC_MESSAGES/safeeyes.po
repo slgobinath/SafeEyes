@@ -272,14 +272,17 @@ msgid "Plugin Settings"
 msgstr "Plugin-Einstellungen"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Das Plugin unterstützt die Desktop-Umgebung %s nicht"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Bitte Python-Modul '%s' installieren"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Bitte Programm '%s' für die Kommandozeile installieren"
 
@@ -288,6 +291,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Ungültiger Cron-Ausdruck „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Bitte in Verzeichnis %(config_resource)s die Ressource %(resource)s "
@@ -371,10 +375,12 @@ msgid "Show a system notification before breaks"
 msgstr "Vor Pausen Benachrichtigung anzeigen"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Bereit für eine Pause in %s Sekunden"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Bereit für eine lange Pause in %s Sekunden"
 
@@ -443,6 +449,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes deaktivieren"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Deaktiviert bis %s"
 
@@ -455,24 +462,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes aktivieren"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Für %d Stunde"
-msgstr[1] "Für %d Stunden"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Für %(num)d Stunde"
+msgstr[1] "Für %(num)d Stunden"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d Minute lang"
-msgstr[1] "%d Minuten lang"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d Minute lang"
+msgstr[1] "%(num)d Minuten lang"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d Sekunde lang"
-msgstr[1] "%d Sekunden lang"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d Sekunde lang"
+msgstr[1] "%(num)d Sekunden lang"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Nächste Pause um %s"
 
@@ -533,7 +544,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -544,12 +556,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -566,6 +581,9 @@ msgstr ""
 
 msgid "Disable permanently"
 msgstr "Permanent deaktivieren"
+
+msgid "License:"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

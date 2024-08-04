@@ -267,14 +267,17 @@ msgid "Plugin Settings"
 msgstr "Pengaturan Plugin"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Plugin tidak mendukung %s lingkungan desktop"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Silakan lakukan pemasangan Python module '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Silakan lakukan pemasangan alat command-line '%s'"
 
@@ -283,6 +286,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Ekspresi cron tidak valid '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Silakan tambahkan sumber %(resource)s ke direktori %(config_resource)s"
 
@@ -365,10 +369,12 @@ msgid "Show a system notification before breaks"
 msgstr "Tampilkan sebuah sistem notifikasi sebelum istirahat"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Bersiap untuk istirahat singkat dalam %s detik"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Bersiap untuk istirahat panjang dalam %s detik"
 
@@ -439,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "Matikan Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Mati dalam %s"
 
@@ -451,21 +458,25 @@ msgid "Enable Safe Eyes"
 msgstr "Hidupkan Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Selama %d jam"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Selama %(num)d jam"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Selama %d menit"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Selama %(num)d menit"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Selama %d detik"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Selama %(num)d detik"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Istirahat selanjutnya pada %s"
 
@@ -526,7 +537,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -537,12 +549,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -558,6 +573,9 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""
 
 # plugin/healthstats

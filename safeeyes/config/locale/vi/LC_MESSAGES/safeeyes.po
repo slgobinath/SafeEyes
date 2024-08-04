@@ -268,14 +268,17 @@ msgid "Plugin Settings"
 msgstr "Cài đặt plugin"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Plugin không hỗ trợ Môi trường destop %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Vui lòng cài đặt Python module '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Vui lòng cài đặt công cụ dòng lệnh (command-line tool) '%s'"
 
@@ -284,8 +287,9 @@ msgid "Invalid cron expression '%s'"
 msgstr "Biểu thức cron '%s' không hợp lệ"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Vui lòng thêm tài nguyên %(resource) vào thư mục %(config_resource)"
+msgstr "Vui lòng thêm tài nguyên %(resource)s vào thư mục %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -365,10 +369,12 @@ msgid "Show a system notification before breaks"
 msgstr "Hiện một thông báo hệ thống trước khi nghỉ"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Chuẩn bị cho giờ nghỉ ngắn trong %s giây nữa"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Chuẩn bị cho giờ nghỉ dài trong %s giây nữa"
 
@@ -439,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "Tắt Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Tắt cho đến %s"
 
@@ -451,21 +458,25 @@ msgid "Enable Safe Eyes"
 msgstr "Bật Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Khoảng %d giờ"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Khoảng %(num)d giờ"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Khoảng %d phút"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Khoảng %(num)d phút"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Khoảng %d giây"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Khoảng %(num)d giây"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Lần nghỉ tiếp theo là %s"
 
@@ -526,7 +537,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -537,12 +549,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -558,4 +573,7 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""

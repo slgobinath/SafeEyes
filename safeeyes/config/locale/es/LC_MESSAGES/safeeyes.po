@@ -273,14 +273,17 @@ msgid "Plugin Settings"
 msgstr "Configuración de complementos"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "El complemento no admite el entorno de escritorio %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Instale el módulo de Python «%s»"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Instale la herramienta de línea de órdenes «%s»"
 
@@ -289,6 +292,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "La expresión de cron «%s» no es válida"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Añada el recurso %(resource)s al directorio %(config_resource)s"
 
@@ -369,10 +373,12 @@ msgid "Show a system notification before breaks"
 msgstr "Mostrar una notificacion del sistema antes de los descansos"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Listo para un breve descanso en %s segundos"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Listo para un largo descanso en %s segundos"
 
@@ -444,6 +450,7 @@ msgid "Disable Safe Eyes"
 msgstr "Desactivar Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Desactivado hasta %s"
 
@@ -456,24 +463,28 @@ msgid "Enable Safe Eyes"
 msgstr "Activar Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Por %d hora"
-msgstr[1] "Por %d horas"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Por %(num)d hora"
+msgstr[1] "Por %(num)d horas"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Por %d minuto"
-msgstr[1] "Por %d minutos"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Por %(num)d minuto"
+msgstr[1] "Por %(num)d minutos"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Por %d segundo"
-msgstr[1] "Por %d segundos"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Por %(num)d segundo"
+msgstr[1] "Por %(num)d segundos"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "El siguiente descanso será en %s"
 
@@ -535,8 +546,9 @@ msgstr ""
 "Limitar la cantidad de descansos que se pueden omitir o posponer seguidos"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "Se ha(n) saltado o pospuesto %d/%d pausa(s) seguida(s)"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Se ha(n) saltado o pospuesto %(num)d/%(allowed)d pausa(s) seguida(s)"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -548,12 +560,15 @@ msgstr ""
 "Por favor, instalea el servicio que proporciona iconos para la bandeja para "
 "tu escritorio."
 
+#, python-format
 msgid "Next long break at %s"
 msgstr "La siguiente pausa larga es en %s"
 
-msgid "Next breaks at %s/%s"
-msgstr "Próximos descansos en %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Próximos descansos en %(short)s/%(long)s"
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr "¡Al complemento requerido '%s' no tiene las dependencias!"
 
@@ -572,6 +587,9 @@ msgstr "Desactivar el complemento temporalmente"
 
 msgid "Disable permanently"
 msgstr "Desactivar permanentemente"
+
+msgid "License:"
+msgstr ""
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

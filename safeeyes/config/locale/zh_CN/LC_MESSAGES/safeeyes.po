@@ -266,14 +266,17 @@ msgid "Plugin Settings"
 msgstr "插件设置"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "插件不支持 %s 桌面环境"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "请安装Python模块“%s\""
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "请安装命令行工具”%s“"
 
@@ -282,8 +285,9 @@ msgid "Invalid cron expression '%s'"
 msgstr "无效的 cron 正则表达式 '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "请将资源 %(resource) 添加到 %(config_resource) 目录"
+msgstr "请将资源 %(resource)s 添加到 %(config_resource)s 目录"
 
 # Settings dialog
 msgid "New Break"
@@ -362,10 +366,12 @@ msgid "Show a system notification before breaks"
 msgstr "在休息之前显示系统通知"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "%s 秒后将进入一个短休息"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "%s 秒后将进入一个长休息"
 
@@ -434,6 +440,7 @@ msgid "Disable Safe Eyes"
 msgstr "暂停 Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "暂停，直到 %s"
 
@@ -446,21 +453,25 @@ msgid "Enable Safe Eyes"
 msgstr "恢复 Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d 小时"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d 小时"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d 分钟"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d 分钟"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d 秒"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d 秒"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "下次休息将在 %s"
 
@@ -521,7 +532,8 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
@@ -532,12 +544,15 @@ msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
 
+#, python-format
 msgid "Next long break at %s"
 msgstr ""
 
-msgid "Next breaks at %s/%s"
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
 msgstr ""
 
+#, python-format
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
@@ -553,6 +568,9 @@ msgid "Disable plugin temporarily"
 msgstr ""
 
 msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
 msgstr ""
 
 # plugin/healthstats
