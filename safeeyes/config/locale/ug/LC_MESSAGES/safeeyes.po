@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # Short break
-msgid "Tightly close your eyes"
+msgid "Gently close your eyes"
 msgstr ""
 
 # Short break
