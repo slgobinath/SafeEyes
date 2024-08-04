@@ -199,6 +199,7 @@ class SafeEyes(Gtk.Application):
         Listen to the tray menu quit action and stop the core, notification and the app itself.
         """
         logging.info("Quit Safe Eyes")
+        self.break_screen.close()
         self.context['state'] = State.QUIT
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
