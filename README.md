@@ -192,7 +192,7 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
     - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L83)
     - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L90)
-    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
+    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L42)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
 4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)
