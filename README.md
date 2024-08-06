@@ -86,6 +86,8 @@ sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
 
+We are looking for an official package maintainer for Fedora. Please [contact us](https://github.com/slgobinath/SafeEyes/issues/611) if you are interested.
+
 ### OpenSUSE Tumbleweed
 
 ```bash
