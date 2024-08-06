@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-07-04 20:53+0000\n"
-"Last-Translator: Sebastian Pipping <sebastian@pipping.org>\n"
+"PO-Revision-Date: 2024-07-28 15:09+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Augen fest schließen"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -59,27 +59,27 @@ msgstr "Info-Dialog anzeigen"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "Aktuelle Instanz von Safe Eyes deaktivieren"
+msgstr "aktuelle Instanz von SafeEyes deaktivieren"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "Aktuelle Instanz von Safe Eyes aktivieren"
+msgstr "aktuelle Instanz von SafeEyes aktivieren"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "Aktuelle Instanz von Safe Eyes beenden und Anwendung schließen"
+msgstr "aktuelle Instanz von SafeEyes beenden und Anwendung schließen"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "Einstellungen anzeigen"
+msgstr "Einstellungsdialog anzeigen"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "Im Debug-Modus starten"
+msgstr "SafeEyes im Debug-Modus starten"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "Status der laufenden Safe Eyes-Instanz ausgeben und beenden"
+msgstr "Status der laufenden SafeEyes-Instanz ausgeben und beenden"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -91,7 +91,7 @@ msgid ""
 "arguments."
 msgstr ""
 "Safe Eyes läuft ohne RPC-Server. Aktivieren Sie ihn, um Kommandozeilen-"
-"Befehle während der Laufzeit nutzen zu können."
+"Befehle nutzen zu können."
 
 # About dialog
 msgid "Close"
@@ -113,7 +113,7 @@ msgstr "Lizenz"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Liste der Mitwirkenden"
 
 # Break screen
 msgid "Skip"
@@ -149,7 +149,7 @@ msgstr "Pausen in zufälliger Reihenfolge anzeigen"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "Strenge Unterbrechung (ohne Möglichkeit sie zu überspringen)"
+msgstr "Strenge Pausen (ohne Möglichkeit sie zu überspringen)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -166,13 +166,12 @@ msgstr ""
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "Ohne RPC-Server werden Kommandozeilen-Befehle nicht funktionieren"
+msgstr "Ohne RPC-Server könnten Kommandozeilen-Befehle nicht funktionieren"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
-"Das längere Pausenintervall muss ein Vielfaches des kurzen Pausenintervalls "
-"betragen"
+"Längeres Pausenintervall muss ein Vielfaches des kurzen Pausenintervalls sein"
 
 # Settings dialog
 msgid "Reset"
@@ -205,7 +204,7 @@ msgstr "Sind Sie sicher, dass Sie diese Pause löschen möchten?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "Dies kann nicht rückgängig gemacht werden."
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden."
 
 # Settings dialog
 msgid "Break"
@@ -272,25 +271,29 @@ msgid "Plugin Settings"
 msgstr "Plugin-Einstellungen"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr "Das Plugin unterstützt die Desktop-Umgebung %s nicht"
+msgstr "Plugin unterstützt die Desktop-Umgebung %s nicht"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Bitte Python-Modul '%s' installieren"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
-msgstr "Bitte Programm '%s' für die Kommandozeile installieren"
+msgstr "Bitte das Kommandozeilen-Werkzeug '%s' installieren"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr "Ungültiger Cron-Ausdruck „%s“"
+msgstr "Ungültiger Cron-Ausdruck '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Bitte in Verzeichnis %(config_resource)s die Ressource %(resource)s "
+"Bitte die Ressource %(resource)s zum Verzeichnis %(config_resource)s "
 "hinzufügen"
 
 # Settings dialog
@@ -311,19 +314,19 @@ msgstr "Speichern"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "Akustischer Alarm"
+msgstr "Akustisches Signal"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr "Akustisches Signal vor und nach Pausen wiedergeben"
+msgstr "Akustisches Signal vor und nach Pausen abspielen"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "Akustisches Signal vor Pausen wiedergeben"
+msgstr "Akustisches Signal vor Pausen abspielen"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "Akustisches Signal nach Pausen wiedergeben"
+msgstr "Akustisches Signal nach Pausen abspielen"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -332,7 +335,7 @@ msgstr "Nicht stören"
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
 msgstr ""
-"Pause überspringen wenn sich aktives Fenster im Vollbild-Modus befindet"
+"Pause überspringen, wenn sich das aktive Fenster im Vollbild-Modus befindet"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -340,7 +343,7 @@ msgstr "Diese Fenster nie unterbrechen"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "Diese Fenster in jedem Fall unterbrechen"
+msgstr "Diese Fenster unabhängig ihres Zustands unterbrechen"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
@@ -348,7 +351,7 @@ msgstr "Unterbrechbare Fenster in normalen Modus umschalten"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "Nicht stören, solange das Gerät im Akkubetrieb ist"
+msgstr "Im Akkubetrieb nicht stören"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -356,7 +359,7 @@ msgstr "Gesundheitsstatistik"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "Gesundheitsstatistik anzeigen"
+msgstr "Auf Safe Eyes-Nutzung basierende Gesundheitsstatistik anzeigen"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
@@ -368,15 +371,17 @@ msgstr "Benachrichtigung"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "Vor Pausen Benachrichtigung anzeigen"
+msgstr "Vor Pausen eine System-Benachrichtigung anzeigen"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
-msgstr "Bereit für eine Pause in %s Sekunden"
+msgstr "Auf eine kurze Pause in %s Sekunden vorbereiten"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
-msgstr "Bereit für eine lange Pause in %s Sekunden"
+msgstr "Auf eine lange Pause in %s Sekunden vorbereiten"
 
 # plugin/screensaver
 msgid "Screensaver"
@@ -384,7 +389,7 @@ msgstr "Bildschirmschoner"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Nach langer Pause Bildschirm mit Bildschirmschoner sperren"
+msgstr "Nach langer Pause Bildschirm durch Bildschirmschoner sperren"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
@@ -392,11 +397,11 @@ msgstr "Benutzerdefinierter Bildschirmschoner-Befehl"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "Mindestdauer Überspringen ohne Bildschirmschoner (in Sekunden)"
+msgstr "Mindestdauer in Sekunden für Überspringen ohne Bildschirmschoner"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr "Sperrbildschirm"
+msgstr "Bildschirm sperren"
 
 # plugin/smartpause
 msgid "Smart Pause"
@@ -408,31 +413,33 @@ msgstr "Safe Eyes bei Leerlauf pausieren"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "Maximaldauer Leerlauf zum Pausieren (in Sekunden)"
+msgstr "Mindestdauer Leerlauf zum Pausieren von Safe Eyes (in Sekunden)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr "Mit Pausendauer gleiche Leerlaufdauer als Pause interpretieren"
+msgstr ""
+"Leerlaufdauer als Pause interpretieren, wenn Leerlaufdauer mindestens der "
+"nächsten Pausendauer entspricht"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "Nächste Pause verschieben, bis sich das System im Leerlauf befindet"
+msgstr "Nächste Pause aufschieben, bis sich das System im Leerlauf befindet"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "Symbol im Tray"
+msgstr "Leistensymbol"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "Symbol im Tray anzeigen"
+msgstr "Leistensymbol in Benachrichtigungsbereich anzeigen"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "Nächsten Pausen-Termin im Tray-Symbol anzeigen"
+msgstr "Nächste Pausenzeit im Leistensymbol anzeigen"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "Erlaube Safe Eyes zu deaktivieren"
+msgstr "Deaktivierung von Safe Eyes erlauben"
 
 #: plugins/trayicon
 msgid "About"
@@ -443,6 +450,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes deaktivieren"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Deaktiviert bis %s"
 
@@ -455,24 +463,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes aktivieren"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Für %d Stunde"
-msgstr[1] "Für %d Stunden"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Für %(num)d Stunde"
+msgstr[1] "Für %(num)d Stunden"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d Minute lang"
-msgstr[1] "%d Minuten lang"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d Minute lang"
+msgstr[1] "%(num)d Minuten lang"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d Sekunde lang"
-msgstr[1] "%d Sekunden lang"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d Sekunde lang"
+msgstr[1] "%(num)d Sekunden lang"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Nächste Pause um %s"
 
@@ -490,15 +502,15 @@ msgstr "Jetzt Pause machen"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Beliebige Pause"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Kurze Pause"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Lange Pause"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -506,7 +518,7 @@ msgstr "Bis zum Neustart"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "Schließen"
+msgstr "Beenden"
 
 # plugin/mediacontrol
 msgid "Media Control"
@@ -514,27 +526,76 @@ msgstr "Medienverwaltung"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "Medienwiedergabe im Pausenbildschirm anhalten"
+msgstr "Medienwiedergabe im Pausenbildschirm pausieren"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr "Medien anhalten"
+msgstr "Medien pausieren"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Aufeinanderfolgendes Überspringen begrenzen"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Wie häufig darf hintereinander aufgeschoben oder übersprungen werden"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
+"Einschränken, wie häufig hintereinander übersprungen oder aufgeschoben "
+"werden darf"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "RSI-Prävention"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Bitte installieren Sie einen Dienst, der Leistensymbole für Ihre Desktop-"
+"Umgebung bereitstellt."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Nächste lange Pause um %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Nächste Pausen um %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "Dem benötigten Plugin '%s' fehlen Abhängigkeiten!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Bitte installieren Sie die Abhängigkeiten oder schalten Sie das Plugin aus. "
+"Um diese Nachricht auszublenden, können Sie das Plugin auch in den "
+"Einstellungen deaktivieren."
+
+msgid "Click here for more information"
+msgstr "Für weitere Informationen hier klicken"
+
+msgid "Disable plugin temporarily"
+msgstr "Plugin temporär ausschalten"
+
+msgid "Disable permanently"
+msgstr "Permanent ausschalten"
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Augen fest schließen"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

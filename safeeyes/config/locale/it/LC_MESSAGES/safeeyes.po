@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 5.7-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Strizza gli occhi"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -112,7 +112,7 @@ msgstr "Licenza"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Elenco dei contributori"
 
 # Break screen
 msgid "Skip"
@@ -271,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "Preferenze delle estensioni"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "L'estensione non supporta %s l'ambiente desktop"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Devi installare il modulo Python '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Devi installare lo strumento a riga di comando '%s'"
 
@@ -287,9 +290,10 @@ msgid "Invalid cron expression '%s'"
 msgstr "Espressione cron non valida '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
-"Aggiungi la/le risorse %(resource) nella/e cartella/e %(config_resource)"
+"Aggiungi la/le risorse %(resource)s nella/e cartella/e %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -368,10 +372,12 @@ msgid "Show a system notification before breaks"
 msgstr "Mostra una notifica di sistema prima delle pause"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Pausa breve tra %s secondi"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Pausa lunga tra %s secondi"
 
@@ -442,6 +448,7 @@ msgid "Disable Safe Eyes"
 msgstr "Disabilita Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Disabilita fino a %s"
 
@@ -454,24 +461,28 @@ msgid "Enable Safe Eyes"
 msgstr "Abilita Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Per %d ora"
-msgstr[1] "Per %d ore"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Per %(num)d ora"
+msgstr[1] "Per %(num)d ore"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Per %d minuto"
-msgstr[1] "Per %d minuti"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Per %(num)d minuto"
+msgstr[1] "Per %(num)d minuti"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Per %d secondo"
-msgstr[1] "Per %d secondi"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Per %(num)d secondo"
+msgstr[1] "Per %(num)d secondi"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Prossima pausa alle ore %s"
 
@@ -521,16 +532,63 @@ msgstr "Metti in pausa i media"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Limitare i salti consecutivi"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Quanti salti o rinvii sono consentiti di seguito"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
+"Limita il numero di pause che possono essere saltate o posticipate di seguito"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "%(num)d/%(allowed)d pause saltate o posticipate di seguito"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "Prevenzione RSI"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Installa il servizio che fornisce le icone della barra delle applicazioni "
+"per il tuo ambiente desktop."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Prossima pausa lunga alle %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Prossime pause alle %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "Al plugin richiesto '%s' mancano delle dipendenze!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Si prega di installare le dipendenze o disattivare il plugin. Per nascondere "
+"questo messaggio, è anche possibile disattivare il plugin nelle impostazioni."
+
+msgid "Click here for more information"
+msgstr "Clicca qui per maggiori informazioni"
+
+msgid "Disable plugin temporarily"
+msgstr "Disabilita temporaneamente il plugin"
+
+msgid "Disable permanently"
+msgstr "Disattivare in modo permanente"
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Strizza gli occhi"

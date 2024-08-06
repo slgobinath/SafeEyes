@@ -25,13 +25,12 @@ import logging
 import os
 from threading import Timer
 
-import dbus
 import gi
-from dbus.mainloop.glib import DBusGMainLoop
 from safeeyes import utility
 from safeeyes.ui.about_dialog import AboutDialog
 from safeeyes.ui.break_screen import BreakScreen
-from safeeyes.model import State
+from safeeyes.ui.required_plugin_dialog import RequiredPluginDialog
+from safeeyes.model import State, RequiredPluginException
 from safeeyes.rpc import RPCServer
 from safeeyes.plugin_manager import PluginManager
 from safeeyes.core import SafeEyesCore
@@ -40,7 +39,7 @@ from safeeyes.ui.settings_dialog import SettingsDialog
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gio
 
-SAFE_EYES_VERSION = "2.2.1"
+SAFE_EYES_VERSION = "2.2.2"
 
 
 class SafeEyes(Gtk.Application):
@@ -48,10 +47,12 @@ class SafeEyes(Gtk.Application):
     This class represents a runnable Safe Eyes instance.
     """
 
+    required_plugin_dialog_active = False
+
     def __init__(self, system_locale, config, cli_args):
         super().__init__(
             application_id="io.github.slgobinath.SafeEyes",
-            flags=Gio.ApplicationFlags.IS_SERVICE
+            flags=Gio.ApplicationFlags.FLAGS_NONE ## This is necessary for compatibility with Ubuntu 22.04.
         )
         self.active = False
         self.break_screen = None
@@ -63,12 +64,24 @@ class SafeEyes(Gtk.Application):
         self.rpc_server = None
         self._status = ''
         self.cli_args = cli_args
+        self.system_locale = system_locale
+
+    def start(self):
+        """
+        Start Safe Eyes
+        """
+        self.run()
+
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        logging.info('Starting up Application')
 
         # Initialize the Safe Eyes Context
         self.context['version'] = SAFE_EYES_VERSION
         self.context['desktop'] = utility.desktop_environment()
         self.context['is_wayland'] = utility.is_wayland()
-        self.context['locale'] = system_locale
+        self.context['locale'] = self.system_locale
         self.context['api'] = {}
         self.context['api']['show_settings'] = lambda: utility.execute_main_thread(
             self.show_settings)
@@ -102,30 +115,29 @@ class SafeEyes(Gtk.Application):
         self.context['api']['has_breaks'] = self.safe_eyes_core.has_breaks
         self.context['api']['postpone'] = self.safe_eyes_core.postpone
         self.context['api']['get_break_time'] = self.safe_eyes_core.get_break_time
-        self.plugins_manager.init(self.context, self.config)
+
+        try:
+            self.plugins_manager.init(self.context, self.config)
+        except RequiredPluginException as e:
+            self.show_required_plugin_dialog(e.get_plugin_id(), e.get_plugin_name(), e.get_message())
+            self.required_plugin_dialog_active = True
 
         self.hold()
 
         atexit.register(self.persist_session)
 
-    def start(self):
-        """
-        Start Safe Eyes
-        """
         if self.config.get('use_rpc_server', True):
             self.__start_rpc_server()
 
-        if self.safe_eyes_core.has_breaks():
+        if not self.required_plugin_dialog_active and self.safe_eyes_core.has_breaks():
             self.active = True
             self.context['state'] = State.START
             self.plugins_manager.start()		# Call the start method of all plugins
             self.safe_eyes_core.start()
             self.handle_system_suspend()
 
-        self.run()
-
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
+    def do_activate(self):
+        logging.info('Application activated')
 
         if self.cli_args.about:
             self.show_about()
@@ -149,6 +161,31 @@ class SafeEyes(Gtk.Application):
                 self.config.clone(), self.save_settings)
             settings_dialog.show()
 
+    def show_required_plugin_dialog(self, plugin_id, plugin_name, message):
+        logging.info("Show RequiredPlugin dialog")
+        dialog = RequiredPluginDialog(
+            plugin_id,
+            plugin_name,
+            message,
+            self.quit,
+            lambda: self.disable_plugin(plugin_id)
+        )
+        dialog.show()
+
+    def disable_plugin(self, plugin_id):
+        """
+        Temporarily disable plugin, and restart SafeEyes.
+        """
+        config = self.config.clone()
+
+        for plugin in config.get('plugins'):
+            if plugin['id'] == plugin_id:
+                plugin['enabled'] = False
+
+        self.required_plugin_dialog_active = False
+
+        self.restart(config, set_active=True)
+
     def show_about(self):
         """
         Listen to tray icon About action and send the signal to About dialog.
@@ -162,6 +199,7 @@ class SafeEyes(Gtk.Application):
         Listen to the tray menu quit action and stop the core, notification and the app itself.
         """
         logging.info("Quit Safe Eyes")
+        self.break_screen.close()
         self.context['state'] = State.QUIT
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
@@ -189,14 +227,28 @@ class SafeEyes(Gtk.Application):
                 self.plugins_manager.start()
                 self.safe_eyes_core.start()
 
+    def handle_suspend_signal(self, proxy, sender, signal, parameters):
+        if signal != "PrepareForSleep":
+            return
+
+        (sleeping, ) = parameters
+
+        self.handle_suspend_callback(sleeping)
+
     def handle_system_suspend(self):
         """
         Setup system suspend listener.
         """
-        DBusGMainLoop(set_as_default=True)
-        bus = dbus.SystemBus()
-        bus.add_signal_receiver(self.handle_suspend_callback, 'PrepareForSleep',
-                                'org.freedesktop.login1.Manager', 'org.freedesktop.login1')
+        self.suspend_proxy = Gio.DBusProxy.new_for_bus_sync(
+            bus_type=Gio.BusType.SYSTEM,
+            flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
+            info=None,
+            name='org.freedesktop.login1',
+            object_path='/org/freedesktop/login1',
+            interface_name='org.freedesktop.login1.Manager',
+            cancellable=None,
+        )
+        self.suspend_proxy.connect('g-signal', self.handle_suspend_signal)
 
     def on_skipped(self):
         """
@@ -234,6 +286,9 @@ class SafeEyes(Gtk.Application):
         config.save()
         self.persist_session()
 
+        self.restart(config)
+
+    def restart(self, config, set_active=False):
         logging.info("Initialize SafeEyesCore with modified settings")
 
         if self.rpc_server is None and config.get('use_rpc_server'):
@@ -247,7 +302,17 @@ class SafeEyes(Gtk.Application):
         self.config = config
         self.safe_eyes_core.initialize(config)
         self.break_screen.initialize(config)
-        self.plugins_manager.init(self.context, self.config)
+
+        try:
+            self.plugins_manager.init(self.context, self.config)
+        except RequiredPluginException as e:
+            self.show_required_plugin_dialog(e.get_plugin_id(), e.get_plugin_name(), e.get_message())
+            self.required_plugin_dialog_active = True
+            return
+
+        if set_active:
+            self.active = True
+
         if self.active and self.safe_eyes_core.has_breaks():
             # 1 sec delay is required to give enough time for core to be stopped
             Timer(1.0, self.safe_eyes_core.start).start()
@@ -257,7 +322,7 @@ class SafeEyes(Gtk.Application):
         """
         Listen to tray icon enable action and send the signal to core.
         """
-        if not self.active and self.safe_eyes_core.has_breaks():
+        if not self.required_plugin_dialog_active and not self.active and self.safe_eyes_core.has_breaks():
             self.active = True
             self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
             self.plugins_manager.start()

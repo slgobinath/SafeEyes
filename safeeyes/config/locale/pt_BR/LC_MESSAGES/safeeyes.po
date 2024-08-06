@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.6-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Feche firmemente seus olhos"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -271,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "Definições de Plug-in"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "O plug-in não suporta o ambiente da área de trabalho %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Por favor, instale o módulo '%s' do Pynthon"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Por favor, instale a ferramenta '%s' da linha de comandos"
 
@@ -287,10 +290,11 @@ msgid "Invalid cron expression '%s'"
 msgstr "A expressão de cron '%s' é inválida"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Por favor, adicione o recurso %(resource)s para a diretoria "
-"%(config_resources)s"
+"%(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -369,10 +373,12 @@ msgid "Show a system notification before breaks"
 msgstr "Mostrar uma notificação do sistema antes da parada"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Prepare-se para uma parada curta em %s segundos"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Prepare-se para uma parada longa em %s segundos"
 
@@ -443,6 +449,7 @@ msgid "Disable Safe Eyes"
 msgstr "Desabilitar o Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Desabilitado até %s"
 
@@ -455,24 +462,28 @@ msgid "Enable Safe Eyes"
 msgstr "Habilitar o Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Para %d Hora"
-msgstr[1] "Para %d Horas"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Para %(num)d Hora"
+msgstr[1] "Para %(num)d Horas"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Para %d Minuto"
-msgstr[1] "Para %d Minutos"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Para %(num)d Minuto"
+msgstr[1] "Para %(num)d Minutos"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Para %d Segundo"
-msgstr[1] "Para %d Segundos"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Para %(num)d Segundo"
+msgstr[1] "Para %(num)d Segundos"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Próxima parada as %s"
 
@@ -533,5 +544,47 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Feche firmemente seus olhos"

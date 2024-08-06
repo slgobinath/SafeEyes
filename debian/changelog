@@ -1,3 +1,17 @@
+safeeyes (2.2.2) jammy; urgency=medium
+
+  * Fixed translations
+
+  * Fixed GTK startup error
+
+  * Fixed frozen break screen if safeeyes is closed right before a break
+
+  * Fixed safeeyes not working if stylesheet is missing
+
+  * Replaced "tightly close your eyes" with "gently close your eyes"
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 5 Aug 2024 18:04:23 -0400
+
 safeeyes (2.2.1) jammy; urgency=medium
 
   * Make limit consecutive skips to default

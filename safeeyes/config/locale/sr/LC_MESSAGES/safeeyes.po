@@ -19,8 +19,8 @@ msgstr ""
 "X-Generator: Weblate 5.1-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Чврсто затворите очи"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -271,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "Подешавање додатака"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr "Додатак не подржава % радну површину"
+msgstr "Додатак не подржава %s радну површину"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Молимо Вас, преузмите модул '%s' за Пајтон"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Молимо Вас, преузмите алатку командне-линије '%s'"
 
@@ -287,6 +290,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Неправилан формат за извршавање cron посла '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Молимо Вас, додајте ресурс %(resource)s у %(config_resource)s директоријум"
@@ -368,10 +372,12 @@ msgid "Show a system notification before breaks"
 msgstr "Покажите системско обавештење пре почетка пауза"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Спремите се за кратку паузу у року од %s секунди"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Спремите се за дугу паузу у року од %s секунди"
 
@@ -443,6 +449,7 @@ msgid "Disable Safe Eyes"
 msgstr "Онемогући Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Онемогућено до %s"
 
@@ -455,27 +462,31 @@ msgid "Enable Safe Eyes"
 msgstr "Омогући Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
+#, fuzzy, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
 msgstr[0] "сат"
 msgstr[1] "сати"
 msgstr[2] "сати"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
+#, fuzzy, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
 msgstr[0] "минут"
 msgstr[1] "минута"
 msgstr[2] "минута"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
+#, fuzzy, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
 msgstr[0] "секунда"
 msgstr[1] "секунде"
 msgstr[2] "секунди"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Наредна пауза је у %s"
 
@@ -536,5 +547,47 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Чврсто затворите очи"

@@ -48,11 +48,15 @@ It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can ch
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
-The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes for Ubuntu 22.04 and above. On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
-
+The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes **for Ubuntu 22.04 and above**. 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
+sudo apt install safeeyes
+```
+
+On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
+```bash
 sudo apt install safeeyes
 ```
 
@@ -77,7 +81,7 @@ sudo apt-get install safeeyes
 ### Fedora
 
 ```bash
-sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
+sudo dnf install python3-psutil python3-packaging cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
@@ -105,10 +109,12 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-appindicator3-0.1 or gir1.2-ayatanaappindicator3-0.1
 - gir1.2-notify-0.7
-- libappindicator-gtk3
+- python3-babel
+- python3-croniter
 - python3-psutil
+- python3-packaging
+- python3-xlib
 - xprintidle (optional)
 - wlrctl (wayland optional)
 - Python 3.10+
@@ -186,10 +192,10 @@ Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
     - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L83)
     - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L90)
-    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
+    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L42)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu release)
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
