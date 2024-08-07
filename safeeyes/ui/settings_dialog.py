@@ -151,10 +151,8 @@ class SettingsDialog(Gtk.ApplicationWindow):
             ),
         )
 
-        gbox = box.box
-
-        gbox.set_visible(True)
-        parent_box.append(gbox)
+        box.set_visible(True)
+        parent_box.append(box)
 
     @Gtk.Template.Callback()
     def on_reset_menu_clicked(self, button):
@@ -224,10 +222,8 @@ class SettingsDialog(Gtk.ApplicationWindow):
         if plugin_config.get("break_override_allowed", False):
             self.plugin_map[plugin_config["id"]] = plugin_config["meta"]["name"]
 
-        gbox = box.box
-
-        gbox.set_visible(True)
-        return gbox
+        box.set_visible(True)
+        return box
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
@@ -347,44 +343,50 @@ class SettingsDialog(Gtk.ApplicationWindow):
         self.destroy()
 
 
-class BreakItem:
+@Gtk.Template(filename=SETTINGS_BREAK_ITEM_GLADE)
+class BreakItem(Gtk.Box):
+    __gtype_name__ = "BreakItem"
+
+    lbl_name = Gtk.Template.Child()
+
     def __init__(self, break_name, on_properties, on_delete):
         super().__init__()
 
         self.on_properties = on_properties
         self.on_delete = on_delete
 
-        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
-        self.box = builder.get_object("box")
-        self.lbl_name = builder.get_object("lbl_name")
         self.lbl_name.set_label(_(break_name))
-        self.btn_properties = builder.get_object("btn_properties")
-        self.btn_properties.connect("clicked", self.on_properties_clicked)
-        self.btn_delete = builder.get_object("btn_delete")
-        self.btn_delete.connect("clicked", self.on_delete_clicked)
 
     def set_break_name(self, break_name):
         self.lbl_name.set_label(_(break_name))
 
+    @Gtk.Template.Callback()
     def on_properties_clicked(self, button):
         self.on_properties()
 
+    @Gtk.Template.Callback()
     def on_delete_clicked(self, button):
         self.on_delete()
 
 
-class PluginItem:
+@Gtk.Template(filename=SETTINGS_PLUGIN_ITEM_GLADE)
+class PluginItem(Gtk.Box):
+    __gtype_name__ = "PluginItem"
+
+    lbl_plugin_name = Gtk.Template.Child()
+    lbl_plugin_description = Gtk.Template.Child()
+    switch_enable = Gtk.Template.Child()
+    btn_properties = Gtk.Template.Child()
+    btn_disable_errored = Gtk.Template.Child()
+    btn_plugin_extra_link = Gtk.Template.Child()
+    img_plugin_icon = Gtk.Template.Child()
+
     def __init__(self, plugin_config, on_properties):
         super().__init__()
 
         self.on_properties = on_properties
         self.plugin_config = plugin_config
 
-        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
-        self.lbl_plugin_name = builder.get_object("lbl_plugin_name")
-        self.lbl_plugin_description = builder.get_object("lbl_plugin_description")
-        self.switch_enable = builder.get_object("switch_enable")
-        self.btn_properties = builder.get_object("btn_properties")
         self.lbl_plugin_name.set_label(_(plugin_config["meta"]["name"]))
         self.switch_enable.set_active(plugin_config["enabled"])
 
@@ -392,7 +394,6 @@ class PluginItem:
             message = plugin_config["meta"]["dependency_description"]
             if isinstance(message, PluginDependency):
                 self.lbl_plugin_description.set_label(_(message.message))
-                self.btn_plugin_extra_link = builder.get_object("btn_plugin_extra_link")
                 self.btn_plugin_extra_link.set_uri(message.link)
                 self.btn_plugin_extra_link.set_visible(True)
             else:
@@ -402,32 +403,29 @@ class PluginItem:
             self.switch_enable.set_sensitive(False)
             self.btn_properties.set_sensitive(False)
             if plugin_config["enabled"]:
-                self.btn_disable_errored = builder.get_object("btn_disable_errored")
                 self.btn_disable_errored.set_visible(True)
-                self.btn_disable_errored.connect("clicked", self.on_disable_errored)
         else:
             self.lbl_plugin_description.set_label(
                 _(plugin_config["meta"]["description"])
             )
             if plugin_config["settings"]:
                 self.btn_properties.set_sensitive(True)
-                self.btn_properties.connect("clicked", self.on_properties_clicked)
             else:
                 self.btn_properties.set_sensitive(False)
 
         if plugin_config["icon"]:
-            builder.get_object("img_plugin_icon").set_from_file(plugin_config["icon"])
-
-        self.box = builder.get_object("box")
+            self.img_plugin_icon.set_from_file(plugin_config["icon"])
 
     def is_enabled(self):
         return self.switch_enable.get_active()
 
+    @Gtk.Template.Callback()
     def on_disable_errored(self, button):
         """Permanently disable errored plugin."""
         self.btn_disable_errored.set_sensitive(False)
         self.switch_enable.set_active(False)
 
+    @Gtk.Template.Callback()
     def on_properties_clicked(self, button):
         if not self.plugin_config["error"] and self.plugin_config["settings"]:
             self.on_properties()

@@ -19,9 +19,9 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkBox" id="box">
+  <template parent="GtkBox" class="BreakItem">
     <property name="visible">1</property>
     <property name="margin-start">5</property>
     <property name="margin-end">5</property>
@@ -47,6 +47,7 @@
         <property name="halign">center</property>
         <property name="valign">center</property>
         <property name="icon-name">gtk-properties</property>
+        <signal name="clicked" handler="on_properties_clicked" swapped="no"/>
         <style>
           <class name="btn_circle"/>
         </style>
@@ -59,10 +60,11 @@
         <property name="halign">center</property>
         <property name="valign">center</property>
         <property name="icon-name">edit-delete</property>
+        <signal name="clicked" handler="on_delete_clicked" swapped="no"/>
         <style>
           <class name="btn_circle"/>
         </style>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
