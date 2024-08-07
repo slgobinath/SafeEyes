@@ -421,7 +421,7 @@ class PluginSettingsDialog:
                     self.__load_int_item(
                         setting["label"],
                         setting["id"],
-                        setting["safeeyes_config"],
+                        config["active_plugin_config"],
                         setting.get("min", 0),
                         setting.get("max", 120),
                     )
@@ -429,13 +429,13 @@ class PluginSettingsDialog:
             elif setting["type"].upper() == "TEXT":
                 box_settings.append(
                     self.__load_text_item(
-                        setting["label"], setting["id"], setting["safeeyes_config"]
+                        setting["label"], setting["id"], config["active_plugin_config"]
                     )
                 )
             elif setting["type"].upper() == "BOOL":
                 box_settings.append(
                     self.__load_bool_item(
-                        setting["label"], setting["id"], setting["safeeyes_config"]
+                        setting["label"], setting["id"], config["active_plugin_config"]
                     )
                 )
 
@@ -450,9 +450,7 @@ class PluginSettingsDialog:
         spin_value.set_value(settings[key])
         box = builder.get_object("box")
         box.set_visible(True)
-        self.property_controls.append(
-            {"key": key, "settings": settings, "value": spin_value.get_value}
-        )
+        self.property_controls.append({"key": key, "value": spin_value.get_value})
         return box
 
     def __load_text_item(self, name, key, settings):
@@ -463,9 +461,7 @@ class PluginSettingsDialog:
         txt_value.set_text(settings[key])
         box = builder.get_object("box")
         box.set_visible(True)
-        self.property_controls.append(
-            {"key": key, "settings": settings, "value": txt_value.get_text}
-        )
+        self.property_controls.append({"key": key, "value": txt_value.get_text})
         return box
 
     def __load_bool_item(self, name, key, settings):
@@ -476,17 +472,15 @@ class PluginSettingsDialog:
         switch_value.set_active(settings[key])
         box = builder.get_object("box")
         box.set_visible(True)
-        self.property_controls.append(
-            {"key": key, "settings": settings, "value": switch_value.get_active}
-        )
+        self.property_controls.append({"key": key, "value": switch_value.get_active})
         return box
 
     def on_window_delete(self, *args):
         """Event handler for Properties dialog close action."""
         for property_control in self.property_controls:
-            property_control["settings"][property_control["key"]] = property_control[
-                "value"
-            ]()
+            self.config["active_plugin_config"][property_control["key"]] = (
+                property_control["value"]()
+            )
         self.window.destroy()
 
     def show(self):
