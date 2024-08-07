@@ -59,7 +59,7 @@ class SettingsDialog:
         self.application = application
         self.config = config
         self.on_save_settings = on_save_settings
-        self.plugin_switches = {}
+        self.plugin_items = {}
         self.plugin_map = {}
         self.last_short_break_interval = config.get("short_break_interval")
         self.initializing = True
@@ -238,63 +238,25 @@ class SettingsDialog:
 
     def __create_plugin_item(self, plugin_config):
         """Create an entry for plugin to be listed in the plugin tab."""
-        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
-        lbl_plugin_name = builder.get_object("lbl_plugin_name")
-        lbl_plugin_description = builder.get_object("lbl_plugin_description")
-        switch_enable = builder.get_object("switch_enable")
-        btn_properties = builder.get_object("btn_properties")
-        lbl_plugin_name.set_label(_(plugin_config["meta"]["name"]))
-        switch_enable.set_active(plugin_config["enabled"])
-        if plugin_config["error"]:
-            message = plugin_config["meta"]["dependency_description"]
-            if isinstance(message, PluginDependency):
-                lbl_plugin_description.set_label(_(message.message))
-                btn_plugin_extra_link = builder.get_object("btn_plugin_extra_link")
-                btn_plugin_extra_link.set_label(_("Click here for more information"))
-                btn_plugin_extra_link.set_uri(message.link)
-                btn_plugin_extra_link.set_visible(True)
-            else:
-                lbl_plugin_description.set_label(_(message))
-            lbl_plugin_name.set_sensitive(False)
-            lbl_plugin_description.set_sensitive(False)
-            switch_enable.set_sensitive(False)
-            btn_properties.set_sensitive(False)
-            if plugin_config["enabled"]:
-                btn_disable_errored = builder.get_object("btn_disable_errored")
-                btn_disable_errored.set_visible(True)
-                btn_disable_errored.connect(
-                    "clicked",
-                    lambda button: self.__disable_errored_plugin(button, plugin_config),
-                )
+        box = PluginItem(
+            plugin_config,
+            on_properties=lambda: self.__show_plugins_properties_dialog(plugin_config),
+        )
 
-        else:
-            lbl_plugin_description.set_label(_(plugin_config["meta"]["description"]))
-            if plugin_config["settings"]:
-                btn_properties.set_sensitive(True)
-                btn_properties.connect(
-                    "clicked",
-                    lambda button: self.__show_plugins_properties_dialog(plugin_config),
-                )
-            else:
-                btn_properties.set_sensitive(False)
-        self.plugin_switches[plugin_config["id"]] = switch_enable
+        self.plugin_items[plugin_config["id"]] = box
+
         if plugin_config.get("break_override_allowed", False):
             self.plugin_map[plugin_config["id"]] = plugin_config["meta"]["name"]
-        if plugin_config["icon"]:
-            builder.get_object("img_plugin_icon").set_from_file(plugin_config["icon"])
-        box = builder.get_object("box")
-        box.set_visible(True)
-        return box
+
+        gbox = box.box
+
+        gbox.set_visible(True)
+        return gbox
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
         dialog = PluginSettingsDialog(self.window, plugin_config)
         dialog.show()
-
-    def __disable_errored_plugin(self, button, plugin_config):
-        """Permanently disable errored plugin."""
-        button.set_sensitive(False)
-        self.plugin_switches[plugin_config["id"]].set_active(False)
 
     def __show_break_properties_dialog(
         self, break_config, is_short, parent, on_close, on_add, on_remove
@@ -396,11 +358,71 @@ class SettingsDialog:
         self.config.set("allow_postpone", self.switch_postpone.get_active())
         self.config.set("persist_state", self.switch_persist.get_active())
         for plugin in self.config.get("plugins"):
-            if plugin["id"] in self.plugin_switches:
-                plugin["enabled"] = self.plugin_switches[plugin["id"]].get_active()
+            if plugin["id"] in self.plugin_items:
+                plugin["enabled"] = self.plugin_items[plugin["id"]].is_enabled()
 
         self.on_save_settings(self.config)  # Call the provided save method
         self.window.destroy()
+
+
+class PluginItem:
+    def __init__(self, plugin_config, on_properties):
+        super().__init__()
+
+        self.on_properties = on_properties
+        self.plugin_config = plugin_config
+
+        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
+        self.lbl_plugin_name = builder.get_object("lbl_plugin_name")
+        self.lbl_plugin_description = builder.get_object("lbl_plugin_description")
+        self.switch_enable = builder.get_object("switch_enable")
+        self.btn_properties = builder.get_object("btn_properties")
+        self.lbl_plugin_name.set_label(_(plugin_config["meta"]["name"]))
+        self.switch_enable.set_active(plugin_config["enabled"])
+
+        if plugin_config["error"]:
+            message = plugin_config["meta"]["dependency_description"]
+            if isinstance(message, PluginDependency):
+                self.lbl_plugin_description.set_label(_(message.message))
+                self.btn_plugin_extra_link = builder.get_object("btn_plugin_extra_link")
+                self.btn_plugin_extra_link.set_uri(message.link)
+                self.btn_plugin_extra_link.set_visible(True)
+            else:
+                self.lbl_plugin_description.set_label(_(message))
+            self.lbl_plugin_name.set_sensitive(False)
+            self.lbl_plugin_description.set_sensitive(False)
+            self.switch_enable.set_sensitive(False)
+            self.btn_properties.set_sensitive(False)
+            if plugin_config["enabled"]:
+                self.btn_disable_errored = builder.get_object("btn_disable_errored")
+                self.btn_disable_errored.set_visible(True)
+                self.btn_disable_errored.connect("clicked", self.on_disable_errored)
+        else:
+            self.lbl_plugin_description.set_label(
+                _(plugin_config["meta"]["description"])
+            )
+            if plugin_config["settings"]:
+                self.btn_properties.set_sensitive(True)
+                self.btn_properties.connect("clicked", self.on_properties_clicked)
+            else:
+                self.btn_properties.set_sensitive(False)
+
+        if plugin_config["icon"]:
+            builder.get_object("img_plugin_icon").set_from_file(plugin_config["icon"])
+
+        self.box = builder.get_object("box")
+
+    def is_enabled(self):
+        return self.switch_enable.get_active()
+
+    def on_disable_errored(self, button):
+        """Permanently disable errored plugin."""
+        self.btn_disable_errored.set_sensitive(False)
+        self.switch_enable.set_active(False)
+
+    def on_properties_clicked(self, button):
+        if not self.plugin_config["error"] and self.plugin_config["settings"]:
+            self.on_properties()
 
 
 class PluginSettingsDialog:
