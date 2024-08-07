@@ -186,6 +186,14 @@ For more details, please check the issue: [#329](https://github.com/slgobinath/S
 
 Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
 
+## Local development
+
+When adding new translatable strings in the source code, make sure to run `python validate_po.py --extract` to add them to the translation template. You will need to install `python3-polib` for this.
+
+Examples for translatable strings are `_("This is a string")` in Python code, or `<property name="label" translatable="yes">This is a label</property>` in Glade/xml files.
+
+To ensure the new strings are well-formed, you can use `python validate_po.py --validate`.
+
 ## How to Release?
 
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
