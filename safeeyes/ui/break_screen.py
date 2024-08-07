@@ -154,7 +154,7 @@ class BreakScreen:
         i = 0
 
         for monitor in monitors:
-            w = BreakScreenWindow(
+            window = BreakScreenWindow(
                 self.application,
                 message,
                 image_path,
@@ -167,8 +167,6 @@ class BreakScreen:
                 self.on_skip_clicked,
             )
 
-            window = w.window
-
             if self.context["is_wayland"]:
                 # Note: in theory, this could also be used on X11
                 # however, that already has its own implementation below
@@ -179,7 +177,7 @@ class BreakScreen:
 
             window.set_title("SafeEyes-" + str(i))
 
-            self.windows.append(w)
+            self.windows.append(window)
 
             if self.context["desktop"] == "kde":
                 # Fix flickering screen in KDE by setting opacity to 1
@@ -298,15 +296,25 @@ class BreakScreen:
     def __destroy_all_screens(self):
         """Close all the break screens."""
         for win in self.windows:
-            win.window.destroy()
+            win.destroy()
         del self.windows[:]
 
 
-class BreakScreenWindow:
+@Gtk.Template(filename=BREAK_SCREEN_GLADE)
+class BreakScreenWindow(Gtk.Window):
     """This class manages the UI for the break screen window.
 
     Each instance is a single window, covering a single monitor.
     """
+
+    __gtype_name__ = "BreakScreenWindow"
+
+    lbl_message = Gtk.Template.Child()
+    lbl_count = Gtk.Template.Child()
+    lbl_widget = Gtk.Template.Child()
+    img_break = Gtk.Template.Child()
+    box_buttons = Gtk.Template.Child()
+    toolbar = Gtk.Template.Child()
 
     def __init__(
         self,
@@ -321,21 +329,9 @@ class BreakScreenWindow:
         show_skip,
         on_skip,
     ):
+        super().__init__(application=application)
+
         self.on_close = on_close
-
-        builder = Gtk.Builder()
-        builder.add_from_file(BREAK_SCREEN_GLADE)
-
-        self.window = builder.get_object("window_main")
-        self.window.set_application(application)
-        self.window.connect("close-request", self.on_window_delete)
-
-        lbl_message = builder.get_object("lbl_message")
-        self.lbl_count = builder.get_object("lbl_count")
-        lbl_widget = builder.get_object("lbl_widget")
-        img_break = builder.get_object("img_break")
-        box_buttons = builder.get_object("box_buttons")
-        toolbar = builder.get_object("toolbar")
 
         for tray_action in tray_actions:
             # TODO: apparently, this would be better served with an icon theme
@@ -350,7 +346,7 @@ class BreakScreenWindow:
                 tray_action,
             )
             toolbar_button.set_tooltip_text(_(tray_action.name))
-            toolbar.append(toolbar_button)
+            self.toolbar.append(toolbar_button)
             toolbar_button.show()
 
         # Add the buttons
@@ -360,7 +356,7 @@ class BreakScreenWindow:
             btn_postpone.get_style_context().add_class("btn_postpone")
             btn_postpone.connect("clicked", on_postpone)
             btn_postpone.set_visible(True)
-            box_buttons.append(btn_postpone)
+            self.box_buttons.append(btn_postpone)
 
         if show_skip:
             # Add the skip button
@@ -368,13 +364,13 @@ class BreakScreenWindow:
             btn_skip.get_style_context().add_class("btn_skip")
             btn_skip.connect("clicked", on_skip)
             btn_skip.set_visible(True)
-            box_buttons.append(btn_skip)
+            self.box_buttons.append(btn_skip)
 
         # Set values
         if image_path:
-            img_break.set_from_file(image_path)
-        lbl_message.set_label(message)
-        lbl_widget.set_markup(widget)
+            self.img_break.set_from_file(image_path)
+        self.lbl_message.set_label(message)
+        self.lbl_widget.set_markup(widget)
 
     def set_count_down(self, count):
         self.lbl_count.set_text(count)
@@ -389,6 +385,7 @@ class BreakScreenWindow:
             tray_action.reset()
         tray_action.action()
 
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Window close event handler."""
         logging.info("Closing the break screen")

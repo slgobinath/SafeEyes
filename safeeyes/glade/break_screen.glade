@@ -18,12 +18,13 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeyees">
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkWindow" id="window_main">
+  <template parent="GtkWindow" class="BreakScreenWindow">
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <property name="decorated">0</property>
     <property name="deletable">0</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no"/>
     <child>
       <object class="GtkGrid" id="grid1">
         <property name="row_homogeneous">1</property>
@@ -174,5 +175,5 @@
     <style>
       <class name="window_main"/>
     </style>
-  </object>
+  </template>
 </interface>
