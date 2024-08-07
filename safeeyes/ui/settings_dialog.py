@@ -476,18 +476,20 @@ class BoolItem:
         return self.switch_value.get_active()
 
 
-class PluginSettingsDialog:
+@Gtk.Template(filename=SETTINGS_DIALOG_PLUGIN_GLADE)
+class PluginSettingsDialog(Gtk.Window):
     """Builds a settings dialog based on the configuration of a plugin."""
 
+    __gtype_name__ = "PluginSettingsDialog"
+
+    box_settings = Gtk.Template.Child()
+
     def __init__(self, parent, config):
+        super().__init__(transient_for=parent)
+
         self.config = config
         self.property_controls = []
 
-        builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
-        self.window = builder.get_object("dialog_settings_plugin")
-        self.window.set_transient_for(parent)
-        box_settings = builder.get_object("box_settings")
-        self.window.set_title(_("Plugin Settings"))
         for setting in config.get("settings"):
             if setting["type"].upper() == "INT":
                 box = IntItem(
@@ -508,25 +510,38 @@ class PluginSettingsDialog:
                 continue
 
             self.property_controls.append({"key": setting["id"], "box": box})
-            box_settings.append(box.box)
+            self.box_settings.append(box.box)
 
-        self.window.connect("close-request", self.on_window_delete)
-
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Event handler for Properties dialog close action."""
         for property_control in self.property_controls:
             self.config["active_plugin_config"][property_control["key"]] = (
                 property_control["box"].get_value()
             )
-        self.window.destroy()
+        self.destroy()
 
     def show(self):
         """Show the Properties dialog."""
-        self.window.present()
+        self.present()
 
 
-class BreakSettingsDialog:
+@Gtk.Template(filename=SETTINGS_DIALOG_BREAK_GLADE)
+class BreakSettingsDialog(Gtk.Window):
     """Builds a settings dialog based on the configuration of a plugin."""
+
+    __gtype_name__ = "BreakSettingsDialog"
+
+    txt_break = Gtk.Template.Child()
+    switch_override_interval = Gtk.Template.Child()
+    switch_override_duration = Gtk.Template.Child()
+    switch_override_plugins = Gtk.Template.Child()
+    spin_interval = Gtk.Template.Child()
+    spin_duration = Gtk.Template.Child()
+    btn_image = Gtk.Template.Child()
+    cmb_type = Gtk.Template.Child()
+    grid_plugins = Gtk.Template.Child()
+    lst_break_types = Gtk.Template.Child()
 
     def __init__(
         self,
@@ -539,6 +554,8 @@ class BreakSettingsDialog:
         on_add,
         on_remove,
     ):
+        super().__init__(transient_for=parent)
+
         self.break_config = break_config
         self.parent_config = parent_config
         self.plugin_check_buttons = {}
@@ -547,34 +564,16 @@ class BreakSettingsDialog:
         self.on_add = on_add
         self.on_remove = on_remove
 
-        builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
-        self.window = builder.get_object("dialog_settings_break")
-        self.window.set_transient_for(parent)
-        self.txt_break = builder.get_object("txt_break")
-        self.switch_override_interval = builder.get_object("switch_override_interval")
-        self.switch_override_duration = builder.get_object("switch_override_duration")
-        self.switch_override_plugins = builder.get_object("switch_override_plugins")
-        self.spin_interval = builder.get_object("spin_interval")
-        self.spin_duration = builder.get_object("spin_duration")
-        self.btn_image = builder.get_object("btn_image")
-        self.cmb_type = builder.get_object("cmb_type")
-
-        grid_plugins = builder.get_object("grid_plugins")
-        list_types = builder.get_object("lst_break_types")
-
         interval_overriden = break_config.get("interval", None) is not None
         duration_overriden = break_config.get("duration", None) is not None
         plugins_overriden = break_config.get("plugins", None) is not None
 
         # Set the values
-        self.window.set_title(_("Break Settings"))
         self.txt_break.set_text(_(break_config["name"]))
         self.switch_override_interval.set_active(interval_overriden)
         self.switch_override_duration.set_active(duration_overriden)
         self.switch_override_plugins.set_active(plugins_overriden)
         self.cmb_type.set_active(0 if is_short else 1)
-        list_types[0][0] = _(list_types[0][0])
-        list_types[1][0] = _(list_types[1][0])
 
         if interval_overriden:
             self.spin_interval.set_value(break_config["interval"])
@@ -596,7 +595,7 @@ class BreakSettingsDialog:
         for plugin_id in plugin_map.keys():
             chk_button = Gtk.CheckButton.new_with_label(_(plugin_map[plugin_id]))
             self.plugin_check_buttons[plugin_id] = chk_button
-            grid_plugins.attach(chk_button, row, col, 1, 1)
+            self.grid_plugins.attach(chk_button, row, col, 1, 1)
             if plugins_overriden:
                 chk_button.set_active(plugin_id in break_config["plugins"])
             else:
@@ -613,18 +612,6 @@ class BreakSettingsDialog:
             image = Gtk.Image.new_from_pixbuf(pixbuf)
             self.btn_image.set_child(image)
 
-        self.window.connect("close-request", self.on_window_delete)
-        self.btn_image.connect("clicked", self.select_image)
-
-        self.switch_override_interval.connect(
-            "state-set", self.on_switch_override_interval_activate
-        )
-        self.switch_override_duration.connect(
-            "state-set", self.on_switch_override_duration_activate
-        )
-        self.switch_override_plugins.connect(
-            "state-set", self.on_switch_override_plugins_activate
-        )
         self.on_switch_override_interval_activate(
             self.switch_override_interval, self.switch_override_interval.get_active()
         )
@@ -635,19 +622,23 @@ class BreakSettingsDialog:
             self.switch_override_plugins, self.switch_override_plugins.get_active()
         )
 
+    @Gtk.Template.Callback()
     def on_switch_override_interval_activate(self, switch_button, state):
         """switch_override_interval state change event handler."""
         self.spin_interval.set_sensitive(state)
 
+    @Gtk.Template.Callback()
     def on_switch_override_duration_activate(self, switch_button, state):
         """switch_override_duration state change event handler."""
         self.spin_duration.set_sensitive(state)
 
+    @Gtk.Template.Callback()
     def on_switch_override_plugins_activate(self, switch_button, state):
         """switch_override_plugins state change event handler."""
         for chk_box in self.plugin_check_buttons.values():
             chk_box.set_sensitive(state)
 
+    @Gtk.Template.Callback()
     def select_image(self, button):
         """Show a file chooser dialog and let the user to select an image."""
         dialog = Gtk.FileDialog()
@@ -661,7 +652,7 @@ class BreakSettingsDialog:
         filters.append(png_filter)
         dialog.set_filters(filters)
 
-        dialog.open(self.window, None, self.select_image_callback)
+        dialog.open(self, None, self.select_image_callback)
 
     def select_image_callback(self, dialog, result):
         response = None
@@ -683,6 +674,7 @@ class BreakSettingsDialog:
             self.break_config.pop("image", None)
             self.btn_image.set_icon_name("gtk-missing-image")
 
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Event handler for Properties dialog close action."""
         break_name = self.txt_break.get_text().strip()
@@ -719,41 +711,34 @@ class BreakSettingsDialog:
             self.on_add(not self.is_short, self.break_config)
         else:
             self.on_close(self.break_config)
-        self.window.destroy()
+        self.destroy()
 
     def show(self):
         """Show the Properties dialog."""
-        self.window.present()
+        self.present()
 
 
-class NewBreakDialog:
+@Gtk.Template(filename=SETTINGS_DIALOG_NEW_BREAK_GLADE)
+class NewBreakDialog(Gtk.Window):
     """Builds a new break dialog."""
 
+    __gtype_name__ = "NewBreakDialog"
+
+    txt_break = Gtk.Template.Child()
+    cmb_type = Gtk.Template.Child()
+
     def __init__(self, parent, parent_config, on_add):
+        super().__init__(transient_for=parent)
+
         self.parent_config = parent_config
         self.on_add = on_add
 
-        builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
-        self.window = builder.get_object("dialog_new_break")
-        self.window.set_transient_for(parent)
-        self.txt_break = builder.get_object("txt_break")
-        self.cmb_type = builder.get_object("cmb_type")
-        list_types = builder.get_object("lst_break_types")
-
-        list_types[0][0] = _(list_types[0][0])
-        list_types[1][0] = _(list_types[1][0])
-
-        self.window.connect("close-request", self.on_window_delete)
-        builder.get_object("btn_discard").connect("clicked", self.discard)
-        builder.get_object("btn_save").connect("clicked", self.save)
-
-        # Set the values
-        self.window.set_title(_("New Break"))
-
+    @Gtk.Template.Callback()
     def discard(self, button):
         """Close the dialog."""
-        self.window.destroy()
+        self.destroy()
 
+    @Gtk.Template.Callback()
     def save(self, button):
         """Event handler for Properties dialog close action."""
         break_config = {"name": self.txt_break.get_text().strip()}
@@ -764,12 +749,13 @@ class NewBreakDialog:
         else:
             self.parent_config.get("long_breaks").append(break_config)
             self.on_add(False, break_config)
-        self.window.destroy()
+        self.destroy()
 
+    @Gtk.Template.Callback()
     def on_window_delete(self, *args):
         """Event handler for dialog close action."""
-        self.window.destroy()
+        self.destroy()
 
     def show(self):
         """Show the Properties dialog."""
-        self.window.present()
+        self.present()

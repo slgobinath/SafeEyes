@@ -19,7 +19,7 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="adjustment_duration">
     <property name="lower">1</property>
@@ -47,7 +47,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkWindow" id="dialog_settings_break">
+  <template parent="GtkWindow" class="BreakSettingsDialog">
     <property name="title" translatable="yes">Break Settings</property>
     <property name="resizable">0</property>
     <property name="modal">1</property>
@@ -55,6 +55,7 @@
     <property name="default-height">50</property>
     <property name="destroy-with-parent">1</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no" />
     <child>
       <object class="GtkBox" id="box_settings">
         <property name="visible">1</property>
@@ -134,6 +135,7 @@
                         <property name="can-focus">1</property>
                         <property name="receives-default">1</property>
                         <property name="icon-name">gtk-missing-image</property>
+                        <signal name="clicked" handler="select_image" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -179,6 +181,7 @@
                             <property name="can-focus">1</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
+                            <signal name="state-set" handler="on_switch_override_interval_activate" swapped="no"/>
                           </object>
                         </child>
                       </object>
@@ -250,6 +253,7 @@
                             <property name="can-focus">1</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
+                            <signal name="state-set" handler="on_switch_override_duration_activate" swapped="no"/>
                           </object>
                         </child>
                       </object>
@@ -322,6 +326,7 @@
                             <property name="can-focus">1</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
+                            <signal name="state-set" handler="on_switch_override_plugins_activate" swapped="no"/>
                           </object>
                         </child>
                       </object>
@@ -347,5 +352,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
