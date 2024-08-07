@@ -150,36 +150,30 @@ class SettingsDialog:
         parent_box = self.box_long_breaks
         if is_short:
             parent_box = self.box_short_breaks
-        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
-        box = builder.get_object("box")
-        lbl_name = builder.get_object("lbl_name")
-        lbl_name.set_label(_(break_config["name"]))
-        btn_properties = builder.get_object("btn_properties")
-        btn_properties.connect(
-            "clicked",
-            lambda button: self.__show_break_properties_dialog(
+
+        box = BreakItem(
+            break_name=break_config["name"],
+            on_properties=lambda: self.__show_break_properties_dialog(
                 break_config,
                 is_short,
                 self.config,
-                lambda cfg: lbl_name.set_label(_(cfg["name"])),
+                lambda cfg: box.set_break_name(cfg["name"]),
                 lambda is_short, break_config: self.__create_break_item(
                     break_config, is_short
                 ),
                 lambda: parent_box.remove(box),
             ),
-        )
-        btn_delete = builder.get_object("btn_delete")
-        btn_delete.connect(
-            "clicked",
-            lambda button: self.__delete_break(
+            on_delete=lambda: self.__delete_break(
                 break_config,
                 is_short,
                 lambda: parent_box.remove(box),
             ),
         )
-        box.set_visible(True)
-        parent_box.append(box)
-        return box
+
+        gbox = box.box
+
+        gbox.set_visible(True)
+        parent_box.append(gbox)
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
@@ -363,6 +357,32 @@ class SettingsDialog:
 
         self.on_save_settings(self.config)  # Call the provided save method
         self.window.destroy()
+
+
+class BreakItem:
+    def __init__(self, break_name, on_properties, on_delete):
+        super().__init__()
+
+        self.on_properties = on_properties
+        self.on_delete = on_delete
+
+        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
+        self.box = builder.get_object("box")
+        self.lbl_name = builder.get_object("lbl_name")
+        self.lbl_name.set_label(_(break_name))
+        self.btn_properties = builder.get_object("btn_properties")
+        self.btn_properties.connect("clicked", self.on_properties_clicked)
+        self.btn_delete = builder.get_object("btn_delete")
+        self.btn_delete.connect("clicked", self.on_delete_clicked)
+
+    def set_break_name(self, break_name):
+        self.lbl_name.set_label(_(break_name))
+
+    def on_properties_clicked(self, button):
+        self.on_properties()
+
+    def on_delete_clicked(self, button):
+        self.on_delete()
 
 
 class PluginItem:
