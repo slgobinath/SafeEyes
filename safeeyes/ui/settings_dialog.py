@@ -431,44 +431,53 @@ class PluginItem(Gtk.Box):
             self.on_properties()
 
 
-class IntItem:
+@Gtk.Template(filename=SETTINGS_ITEM_INT_GLADE)
+class IntItem(Gtk.Box):
+    __gtype_name__ = "IntItem"
+
+    lbl_name = Gtk.Template.Child()
+    spin_value = Gtk.Template.Child()
+
     def __init__(self, name, value, min_value, max_value):
         super().__init__()
 
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        self.spin_value = builder.get_object("spin_value")
+        self.lbl_name.set_label(_(name))
         self.spin_value.set_range(min_value, max_value)
         self.spin_value.set_value(value)
-        self.box = builder.get_object("box")
 
     def get_value(self):
         return self.spin_value.get_value()
 
 
-class TextItem:
+@Gtk.Template(filename=SETTINGS_ITEM_TEXT_GLADE)
+class TextItem(Gtk.Box):
+    __gtype_name__ = "TextItem"
+
+    lbl_name = Gtk.Template.Child()
+    txt_value = Gtk.Template.Child()
+
     def __init__(self, name, value):
         super().__init__()
 
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        self.txt_value = builder.get_object("txt_value")
+        self.lbl_name.set_label(_(name))
         self.txt_value.set_text(value)
-        self.box = builder.get_object("box")
 
     def get_value(self):
         return self.txt_value.get_text()
 
 
-class BoolItem:
+@Gtk.Template(filename=SETTINGS_ITEM_BOOL_GLADE)
+class BoolItem(Gtk.Box):
+    __gtype_name__ = "BoolItem"
+
+    lbl_name = Gtk.Template.Child()
+    switch_value = Gtk.Template.Child()
+
     def __init__(self, name, value):
         super().__init__()
 
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        self.switch_value = builder.get_object("switch_value")
+        self.lbl_name.set_label(_(name))
         self.switch_value.set_active(value)
-        self.box = builder.get_object("box")
 
     def get_value(self):
         return self.switch_value.get_active()
@@ -508,7 +517,7 @@ class PluginSettingsDialog(Gtk.Window):
                 continue
 
             self.property_controls.append({"key": setting["id"], "box": box})
-            self.box_settings.append(box.box)
+            self.box_settings.append(box)
 
     @Gtk.Template.Callback()
     def on_window_delete(self, *args):
