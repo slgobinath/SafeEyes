@@ -1,0 +1,17 @@
+target-version = "py310"
+
+# gettext
+builtins = ["_"]
+
+[lint]
+select = ["E", "W", "F", "D2", "D3", "D4"]
+ignore = [
+    # PyGObject needs require_version before imports
+    "E402",
+
+    # these are disabled for now, but should probably be cleaned up at some point
+    "D205", "D401", "D404",
+]
+
+[lint.pydocstyle]
+convention = "numpy"
