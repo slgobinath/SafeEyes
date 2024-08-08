@@ -713,26 +713,6 @@ def open_session():
     return session
 
 
-def create_gtk_builder(glade_file):
-    """Create a Gtk builder and load the glade file."""
-    from safeeyes.translations import translate as _
-
-    builder = Gtk.Builder()
-    builder.set_translation_domain("safeeyes")
-    builder.add_from_file(glade_file)
-    # Tranlslate all sub components
-    for obj in builder.get_objects():
-        if hasattr(obj, "get_label"):
-            label = obj.get_label()
-            if label is not None:
-                obj.set_label(_(label))
-        elif hasattr(obj, "get_title"):
-            title = obj.get_title()
-            if title is not None:
-                obj.set_title(_(title))
-    return builder
-
-
 def load_and_scale_image(
     path: str, width: int, height: int
 ) -> typing.Optional[Gtk.Image]:
