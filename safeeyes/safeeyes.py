@@ -38,7 +38,7 @@ from safeeyes.ui.settings_dialog import SettingsDialog
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gio
 
-SAFE_EYES_VERSION = "2.2.1"
+SAFE_EYES_VERSION = "2.2.2"
 
 
 class SafeEyes(Gtk.Application):
@@ -49,7 +49,8 @@ class SafeEyes(Gtk.Application):
     def __init__(self, system_locale, config, cli_args):
         super().__init__(
             application_id="io.github.slgobinath.SafeEyes",
-            flags=Gio.ApplicationFlags.IS_SERVICE,
+            # This is necessary for compatibility with Ubuntu 22.04.
+            flags=Gio.ApplicationFlags.FLAGS_NONE,
         )
         self.active = False
         self.break_screen = None
@@ -61,12 +62,22 @@ class SafeEyes(Gtk.Application):
         self.rpc_server = None
         self._status = ""
         self.cli_args = cli_args
+        self.system_locale = system_locale
+
+    def start(self):
+        """Start Safe Eyes."""
+        self.run()
+
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        logging.info("Starting up Application")
 
         # Initialize the Safe Eyes Context
         self.context["version"] = SAFE_EYES_VERSION
         self.context["desktop"] = utility.desktop_environment()
         self.context["is_wayland"] = utility.is_wayland()
-        self.context["locale"] = system_locale
+        self.context["locale"] = self.system_locale
         self.context["api"] = {}
         self.context["api"]["show_settings"] = lambda: utility.execute_main_thread(
             self.show_settings
@@ -121,8 +132,6 @@ class SafeEyes(Gtk.Application):
 
         atexit.register(self.persist_session)
 
-    def start(self):
-        """Start Safe Eyes."""
         if self.config.get("use_rpc_server", True):
             self.__start_rpc_server()
 
@@ -133,10 +142,8 @@ class SafeEyes(Gtk.Application):
             self.safe_eyes_core.start()
             self.handle_system_suspend()
 
-        self.run()
-
-    def do_startup(self):
-        Gtk.Application.do_startup(self)
+    def do_activate(self):
+        logging.info("Application activated")
 
         if self.cli_args.about:
             self.show_about()
@@ -195,6 +202,7 @@ class SafeEyes(Gtk.Application):
         and the app itself.
         """
         logging.info("Quit Safe Eyes")
+        self.break_screen.close()
         self.context["state"] = State.QUIT
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
