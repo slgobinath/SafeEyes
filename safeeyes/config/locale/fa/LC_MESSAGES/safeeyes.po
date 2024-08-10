@@ -114,6 +114,10 @@ msgstr "پروانه"
 msgid "List of Contributors"
 msgstr "لیست مشارکت‌کنندگان"
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "ردکن"
