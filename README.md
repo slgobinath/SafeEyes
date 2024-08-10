@@ -79,12 +79,14 @@ sudo apt-get install safeeyes
 ```
 
 ### Fedora
-
+ If you want to use Smart Pause plugin, install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
 ```bash
 sudo dnf install python3-psutil python3-packaging cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
+
+We are looking for an official package maintainer for Fedora. Please [contact us](https://github.com/slgobinath/SafeEyes/issues/611) if you are interested.
 
 ### OpenSUSE Tumbleweed
 
@@ -183,6 +185,14 @@ For more details, please check the issue: [#329](https://github.com/slgobinath/S
 ## Third-party Plugins
 
 Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
+
+## Local development
+
+When adding new translatable strings in the source code, make sure to run `python validate_po.py --extract` to add them to the translation template. You will need to install `python3-polib` for this.
+
+Examples for translatable strings are `_("This is a string")` in Python code, or `<property name="label" translatable="yes">This is a label</property>` in Glade/xml files.
+
+To ensure the new strings are well-formed, you can use `python validate_po.py --validate`.
 
 ## How to Release?
 

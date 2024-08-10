@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-26 20:27+0000\n"
+"PO-Revision-Date: 2024-08-05 23:09+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/es/>\n"
@@ -593,7 +593,7 @@ msgid "Disable permanently"
 msgstr "Desactivar permanentemente"
 
 msgid "License:"
-msgstr ""
+msgstr "Licencia:"
 
 # Short break
 #~ msgid "Tightly close your eyes"

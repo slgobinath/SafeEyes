@@ -52,7 +52,7 @@ class SafeEyes(Gtk.Application):
     def __init__(self, system_locale, config, cli_args):
         super().__init__(
             application_id="io.github.slgobinath.SafeEyes",
-            flags=Gio.ApplicationFlags.DEFAULT_FLAGS
+            flags=Gio.ApplicationFlags.FLAGS_NONE ## This is necessary for compatibility with Ubuntu 22.04.
         )
         self.active = False
         self.break_screen = None
