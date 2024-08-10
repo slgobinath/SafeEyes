@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-28 15:09+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2024-08-10 19:39+0000\n"
+"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Schließe sanft deine Augen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -591,7 +591,7 @@ msgid "Disable permanently"
 msgstr "Permanent ausschalten"
 
 msgid "License:"
-msgstr ""
+msgstr "Lizenz:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
