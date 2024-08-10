@@ -207,6 +207,23 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="position">1</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkLinkButton" id="btn_url2">
+                <property name="label" translatable="yes">Help us translate this app</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="focus-on-click">False</property>
+                <property name="receives-default">True</property>
+                <property name="halign">center</property>
+                <property name="relief">none</property>
+                <property name="uri">https://hosted.weblate.org/engage/safe-eyes/</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
