@@ -43,7 +43,7 @@ Safe Eyes is available on the official repositories of many popular the distribu
     <img src="https://repology.org/badge/vertical-allrepos/safeeyes.svg" alt="Packaging status" align="right">
 </a>
 
-It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
+It is also available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
 
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
