@@ -210,6 +210,12 @@ To ensure the new strings are well-formed, you can use `python validate_po.py --
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
 
+## How you can help improving translation of Safe Eyes
+
+First check if translations for your language are already available on [Weblate](https://hosted.weblate.org/engage/safe-eyes/), which is the cloud based translation platform we use. 
+
+- If the language is already there, feel free to add new translations or improve the existing ones.
+- If it is not there, please [open an issue](https://github.com/slgobinath/SafeEyes/issues) in Github so that we can add your language to Weblate.
 
 ## License
 
