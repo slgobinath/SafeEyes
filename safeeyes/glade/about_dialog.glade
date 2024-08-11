@@ -216,7 +216,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="receives-default">True</property>
                 <property name="halign">center</property>
                 <property name="relief">none</property>
-                <property name="uri">https://hosted.weblate.org/engage/safe-eyes/</property>
+                <property name="uri">https://github.com/slgobinath/SafeEyes?tab=readme-ov-file#how-you-can-help-improving-translation-of-safe-eyes</property>
               </object>
               <packing>
                 <property name="expand">False</property>
