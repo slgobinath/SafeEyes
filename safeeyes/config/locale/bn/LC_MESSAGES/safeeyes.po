@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"PO-Revision-Date: 2024-08-16 15:09+0000\n"
+"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
+"Language-Team: Bengali <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/bn/>\n"
 "Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Weblate 5.7\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -42,11 +43,11 @@ msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr ""
+msgstr "একটু জল খেয়ে নিন"
 
 # Long break
 msgid "Walk for a while"
-msgstr ""
+msgstr "একটু হেঁটে আসুন"
 
 # Long break
 msgid "Lean back at your seat and relax"
@@ -82,7 +83,7 @@ msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr ""
+msgstr "Safe Eyes চলছে না"
 
 # RPC not enabled message
 msgid ""
@@ -103,7 +104,7 @@ msgstr ""
 
 # About dialog
 msgid "License"
-msgstr ""
+msgstr "অনুমতিপত্র"
 
 # About dialog
 msgid "List of Contributors"
