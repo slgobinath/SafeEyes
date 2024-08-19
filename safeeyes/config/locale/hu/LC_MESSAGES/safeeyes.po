@@ -110,6 +110,10 @@ msgstr "Licensz"
 msgid "List of Contributors"
 msgstr ""
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Kihagyás"

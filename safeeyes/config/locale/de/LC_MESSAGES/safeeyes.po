@@ -115,6 +115,10 @@ msgstr "Lizenz"
 msgid "List of Contributors"
 msgstr "Liste der Mitwirkenden"
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Überspringen"
@@ -549,7 +553,8 @@ msgstr ""
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr "%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
+msgstr ""
+"%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
