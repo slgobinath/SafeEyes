@@ -425,6 +425,7 @@ class TrayAction:
 class PluginDependency:
     message: str
     link: str|None = None
+    retryable: bool = False
 
 class RequiredPluginException(Exception):
     def __init__(self, plugin_id, plugin_name: str, message: str|PluginDependency):

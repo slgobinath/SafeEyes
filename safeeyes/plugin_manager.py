@@ -57,13 +57,12 @@ import os
 import sys
 
 from safeeyes import utility
-from safeeyes.model import RequiredPluginException
+from safeeyes.model import PluginDependency, RequiredPluginException
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
 
 HORIZONTAL_LINE_LENGTH = 64
-
 
 class PluginManager:
     """
@@ -98,6 +97,27 @@ class PluginManager:
         for plugin in self.__plugins.values():
             plugin.init_plugin(context, config)
         return True
+
+    def needs_retry(self):
+        return self.get_retryable_error() is not None
+
+    def get_retryable_error(self):
+        for plugin in self.__plugins.values():
+            if plugin.required_plugin and plugin.errored and plugin.enabled:
+                if isinstance(plugin.last_error, PluginDependency) and plugin.last_error.retryable:
+                    return RequiredPluginException(
+                        plugin.id,
+                        plugin.get_name(),
+                        plugin.last_error
+                    )
+
+        return None
+
+    def retry_errored_plugins(self):
+        for plugin in self.__plugins.values():
+            if plugin.required_plugin and plugin.errored and plugin.enabled:
+                if isinstance(plugin.last_error, PluginDependency) and plugin.last_error.retryable:
+                    plugin.reload_errored()
 
     def start(self):
         """
@@ -235,7 +255,8 @@ class LoadedPlugin:
 
             if message:
                 self.errored = True
-                if self.required_plugin:
+                self.last_error = message
+                if self.required_plugin and not (isinstance(message, PluginDependency) and message.retryable):
                     raise RequiredPluginException(
                         plugin['id'],
                         plugin_config['meta']['name'],
@@ -262,9 +283,9 @@ class LoadedPlugin:
         if self.enabled or self.break_override_allowed:
             plugin_path = os.path.join(self.plugin_dir, self.id)
             message = utility.check_plugin_dependencies(
-                plugin['id'],
+                self.id,
                 self.plugin_config,
-                plugin.get('settings', {}),
+                self.config,
                 plugin_path
             )
 
@@ -278,6 +299,35 @@ class LoadedPlugin:
             if not self.errored and self.module is None:
                 # No longer errored, import the module now
                 self._import_plugin()
+
+
+    def reload_errored(self):
+        if not self.errored:
+            return
+
+        if self.enabled or self.break_override_allowed:
+            plugin_path = os.path.join(self.plugin_dir, self.id)
+            message = utility.check_plugin_dependencies(
+                self.id,
+                self.plugin_config,
+                self.config,
+                plugin_path
+            )
+
+            if message:
+                self.errored = True
+                self.last_error = message
+            elif self.errored:
+                self.errored = False
+                self.last_error = None
+
+            if not self.errored and self.module is None:
+                # No longer errored, import the module now
+                self._import_plugin()
+
+
+    def get_name(self):
+        return self.plugin_config['meta']['name']
 
     def _import_plugin(self):
         if self.errored:
