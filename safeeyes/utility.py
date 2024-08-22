@@ -385,7 +385,7 @@ def initialize_safeeyes():
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
-    os.chmod(CONFIG_FILE_PATH, 0o777)
+    os.chmod(CONFIG_FILE_PATH, 0o666)
 
     create_user_stylesheet_if_missing()
 
@@ -404,7 +404,7 @@ def create_user_stylesheet_if_missing():
     # Copy the new style sheet
     if not os.path.isfile(STYLE_SHEET_PATH):
         shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-        os.chmod(STYLE_SHEET_PATH, 0o777)
+        os.chmod(STYLE_SHEET_PATH, 0o666)
 
 
 def create_startup_entry(force=False):
@@ -523,8 +523,8 @@ def reset_config():
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
     # Add write permission (e.g. if original file was stored in /nix/store)
-    os.chmod(CONFIG_FILE_PATH, 0o777)
-    os.chmod(STYLE_SHEET_PATH, 0o777)
+    os.chmod(CONFIG_FILE_PATH, 0o666)
+    os.chmod(STYLE_SHEET_PATH, 0o666)
 
     create_startup_entry()
 
@@ -533,7 +533,7 @@ def replace_style_sheet():
     """Replace the user style sheet by system style sheet."""
     delete(STYLE_SHEET_PATH)
     shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-    os.chmod(STYLE_SHEET_PATH, 0o777)
+    os.chmod(STYLE_SHEET_PATH, 0o666)
 
 
 def initialize_logging(debug):

@@ -94,6 +94,10 @@ msgstr "Licence"
 msgid "List of Contributors"
 msgstr ""
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 msgid "Skip"
 msgstr "Izlaist"
 

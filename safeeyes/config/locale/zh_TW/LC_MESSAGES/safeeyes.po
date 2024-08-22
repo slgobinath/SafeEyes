@@ -110,6 +110,10 @@ msgstr "授權"
 msgid "List of Contributors"
 msgstr ""
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "跳過"

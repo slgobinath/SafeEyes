@@ -114,6 +114,10 @@ msgstr "Licenza"
 msgid "List of Contributors"
 msgstr "Elenco dei contributori"
 
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
 # Break screen
 msgid "Skip"
 msgstr "Salta"
