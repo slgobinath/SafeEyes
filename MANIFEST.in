@@ -3,4 +3,6 @@ include README.md
 
 graft safeeyes
 
+prune safeeyes/tests
+
 global-exclude *.py[cod]
