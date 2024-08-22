@@ -78,3 +78,8 @@ enable_error_code = [
     "ignore-without-code",
     "possibly-undefined"
 ]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
