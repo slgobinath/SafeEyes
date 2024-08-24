@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-01-11 15:55+0000\n"
+"PO-Revision-Date: 2024-08-24 17:09+0000\n"
 "Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Fermez doucement les yeux"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -113,7 +113,7 @@ msgstr "Licence"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Liste des contributeurs"
 
 # About dialog
 msgid "Help us translate this app"
@@ -510,15 +510,15 @@ msgstr "Prendre une pause maintenant"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "N’importe quelle pause"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Pause courte"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Pause longue"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -542,57 +542,61 @@ msgstr "Mettre le contenu multimédia en pause"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Limiter les sauts de pause consécutifs"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Nombre de sauts ou de reports autorisés d’affilée"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "Limiter le nombre de pauses sautées ou reportées d’affilée"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "%(num)d/%(allowed)d pauses sautées ou reportées d’affilée"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Prévention des lésions attribuables au travail répétitif"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Installez le service qui fournit les icônes de la barre d’état pour votre "
+"environnement de bureau."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Prochaine pause longue à %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Prochaines pauses à %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Il manque des dépendances pour le greffon « %s » nécessaire"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Installez les dépendances ou désactivez le greffon. Pour ne plus afficher ce "
+"message, vous pouvez aussi désactiver le greffon dans les paramètres."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Cliquer ici pour plus de précisions"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Désactivation temporaire du greffon"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Désactivation permanente"
 
 msgid "License:"
-msgstr ""
+msgstr "Licence :"
 
 # Short break
 #~ msgid "Tightly close your eyes"
