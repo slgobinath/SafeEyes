@@ -33,7 +33,9 @@ from unittest import mock
 class TestSafeEyesCore:
     @pytest.fixture(autouse=True)
     def set_time(self, time_machine):
-        time_machine.move_to(datetime.datetime.fromisoformat("2024-08-25T13:00"))
+        time_machine.move_to(
+            datetime.datetime.fromisoformat("2024-08-25T13:00:00+00:00"), tick=False
+        )
 
     @pytest.fixture(autouse=True)
     def monkeypatch_translations(self, monkeypatch):
@@ -45,7 +47,7 @@ class TestSafeEyesCore:
         )
 
     @pytest.fixture
-    def sequential_threading(self, monkeypatch):
+    def sequential_threading(self, monkeypatch, time_machine):
         # executes instantly
         # TODO: separate thread?
         monkeypatch.setattr(
@@ -60,6 +62,9 @@ class TestSafeEyesCore:
             running = True
             condvar_in = threading.Condition()
             condvar_out = threading.Condition()
+
+            def __init__(self, time_machine):
+                self.time_machine = time_machine
 
             def background_thread(self):
                 while True:
@@ -87,6 +92,7 @@ class TestSafeEyesCore:
                 if self.thread is threading.current_thread():
                     with self.condvar_out:
                         self.condvar_out.notify()
+                    self.time_machine.shift(delta=datetime.timedelta(seconds=time))
                     with self.condvar_in:
                         success = self.condvar_in.wait(1)
                         if not success:
@@ -125,7 +131,7 @@ class TestSafeEyesCore:
                 if self.thread:
                     self.thread.join(1)
 
-        handle = Handle()
+        handle = Handle(time_machine=time_machine)
 
         monkeypatch.setattr(core.utility, "start_thread", handle.utility_start_thread)
 
@@ -206,7 +212,7 @@ class TestSafeEyesCore:
 
         # start __scheduler_job
         sequential_threading.next()
-        # FIXME: sleep is needed so code reaches the Condition
+        # FIXME: sleep is needed so code reaches the waiting_condition
         sleep(0.1)
         assert context["state"] == model.State.WAITING
 
@@ -231,59 +237,48 @@ class TestSafeEyesCore:
 
         logging.debug("done")
 
-    def test_actual(self, sequential_threading, time_machine):
-        context = {
-            "session": {},
-        }
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "pre_break_warning_time": 10,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
+    def run_next_break(
+        self,
+        sequential_threading,
+        time_machine,
+        safe_eyes_core,
+        context,
+        break_duration,
+        break_interval,
+        pre_break_warning_time,
+        break_name_translated,
+    ):
+        """Run one entire cycle of safe_eyes_core.
+
+        It must be waiting for __scheduler_job to run. (This is the equivalent of
+        State.WAITING).
+        That means it must either be just started, or have finished the previous cycle.
+        """
         on_update_next_break = mock.Mock()
         on_pre_break = mock.Mock(return_value=True)
         on_start_break = mock.Mock(return_value=True)
         start_break = mock.Mock()
         on_count_down = mock.Mock()
-        safe_eyes_core = core.SafeEyesCore(context)
+
         safe_eyes_core.on_update_next_break += on_update_next_break
         safe_eyes_core.on_pre_break += on_pre_break
         safe_eyes_core.on_start_break += on_start_break
         safe_eyes_core.start_break += start_break
         safe_eyes_core.on_count_down += on_count_down
 
-        safe_eyes_core.initialize(config)
-
-        safe_eyes_core.start()
-
         # start __scheduler_job
         sequential_threading.next()
-        # FIXME: sleep is needed so code reaches the Condition
+        # FIXME: sleep is needed so code reaches the waiting_condition
         sleep(0.1)
         assert context["state"] == model.State.WAITING
 
         on_update_next_break.assert_called_once()
         assert isinstance(on_update_next_break.call_args[0][0], model.Break)
-        assert on_update_next_break.call_args[0][0].name == "translated!: break 1"
+        assert on_update_next_break.call_args[0][0].name == break_name_translated
         on_update_next_break.reset_mock()
 
         with safe_eyes_core.lock:
-            time_machine.shift(delta=datetime.timedelta(minutes=15))
+            time_machine.shift(delta=datetime.timedelta(minutes=break_interval))
 
             with safe_eyes_core.waiting_condition:
                 logging.debug("notify")
@@ -297,16 +292,16 @@ class TestSafeEyesCore:
 
         on_pre_break.assert_called_once()
         assert isinstance(on_pre_break.call_args[0][0], model.Break)
-        assert on_pre_break.call_args[0][0].name == "translated!: break 1"
+        assert on_pre_break.call_args[0][0].name == break_name_translated
         on_pre_break.reset_mock()
 
         # start __wait_until_prepare
         sequential_threading.next()
 
-        # FIXME: sleep is needed so code reaches the Condition
+        # FIXME: sleep is needed so code reaches the waiting_condition
         sleep(0.1)
         with safe_eyes_core.lock:
-            time_machine.shift(delta=datetime.timedelta(seconds=10))
+            time_machine.shift(delta=datetime.timedelta(seconds=pre_break_warning_time))
 
             with safe_eyes_core.waiting_condition:
                 logging.debug("notify")
@@ -325,18 +320,18 @@ class TestSafeEyesCore:
 
         on_start_break.assert_called_once()
         assert isinstance(on_start_break.call_args[0][0], model.Break)
-        assert on_start_break.call_args[0][0].name == "translated!: break 1"
+        assert on_start_break.call_args[0][0].name == break_name_translated
         on_start_break.reset_mock()
 
         start_break.assert_called_once()
         assert isinstance(start_break.call_args[0][0], model.Break)
-        assert start_break.call_args[0][0].name == "translated!: break 1"
+        assert start_break.call_args[0][0].name == break_name_translated
         start_break.reset_mock()
 
         assert context["state"] == model.State.BREAK
 
         # continue sleep in __start_break
-        for i in range(config["short_break_duration"] - 1):
+        for i in range(break_duration - 1):
             sequential_threading.wait()
             sequential_threading.next()
 
@@ -345,15 +340,132 @@ class TestSafeEyesCore:
         logging.debug("done waiting for end of __start_break")
 
         on_count_down.assert_called()
-        assert on_count_down.call_count == 15
+        assert on_count_down.call_count == break_duration
         on_count_down.reset_mock()
 
         assert context["state"] == model.State.BREAK
 
+    def assert_datetime(self, string):
+        if not string.endswith("+00:00"):
+            string += "+00:00"
+        assert datetime.datetime.now(
+            datetime.timezone.utc
+        ) == datetime.datetime.fromisoformat(string)
+
+    def test_actual(self, sequential_threading, time_machine):
+        context = {
+            "session": {},
+        }
+        short_break_duration = 15  # seconds
+        short_break_interval = 15  # minutes
+        pre_break_warning_time = 10  # seconds
+        long_break_duration = 60  # seconds
+        long_break_interval = 75  # minutes
+        config = {
+            "short_breaks": [
+                {"name": "break 1"},
+                {"name": "break 2"},
+                {"name": "break 3"},
+                {"name": "break 4"},
+            ],
+            "long_breaks": [
+                {"name": "long break 1"},
+                {"name": "long break 2"},
+                {"name": "long break 3"},
+            ],
+            "short_break_interval": short_break_interval,
+            "long_break_interval": long_break_interval,
+            "long_break_duration": long_break_duration,
+            "short_break_duration": short_break_duration,
+            "pre_break_warning_time": pre_break_warning_time,
+            "random_order": False,
+            "postpone_duration": 5,
+        }
+
+        self.assert_datetime("2024-08-25T13:00:00")
+
+        safe_eyes_core = core.SafeEyesCore(context)
+
+        safe_eyes_core.initialize(config)
+
+        safe_eyes_core.start()
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            short_break_interval,
+            pre_break_warning_time,
+            "translated!: break 1",
+        )
+
+        self.assert_datetime("2024-08-25T13:15:25")
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            short_break_interval,
+            pre_break_warning_time,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T13:30:50")
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            short_break_interval,
+            pre_break_warning_time,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T13:46:15")
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            short_break_interval,
+            pre_break_warning_time,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T14:01:40")
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            long_break_interval,
+            pre_break_warning_time,
+            "translated!: long break 1",
+        )
+
+        # self.assert_datetime("2024-08-25T14:16:40")
+
+        self.run_next_break(
+            sequential_threading,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            short_break_interval,
+            pre_break_warning_time,
+            "translated!: break 1",
+        )
+
         safe_eyes_core.stop()
 
-        on_update_next_break.assert_not_called()
-        on_pre_break.assert_not_called()
-        on_start_break.assert_not_called()
-        start_break.assert_not_called()
         assert context["state"] == model.State.STOPPED
