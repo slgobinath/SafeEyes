@@ -186,94 +186,6 @@ class TestSafeEyesCore:
         if handle:
             handle.stop()
 
-    def test_create_empty(self):
-        context = {}
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
-        safe_eyes_core = core.SafeEyesCore(context)
-        safe_eyes_core.initialize(config)
-
-    def test_start_empty(self, sequential_threading):
-        context = {}
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
-        on_update_next_break = mock.Mock()
-        safe_eyes_core = core.SafeEyesCore(context)
-        safe_eyes_core.on_update_next_break += mock
-
-        safe_eyes_core.initialize(config)
-
-        safe_eyes_core.start()
-        safe_eyes_core.stop()
-
-        on_update_next_break.assert_not_called()
-
-    def test_start(self, sequential_threading, time_machine):
-        context = {
-            "session": {},
-        }
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
-        on_update_next_break = mock.Mock()
-        safe_eyes_core = core.SafeEyesCore(context)
-        safe_eyes_core.on_update_next_break += on_update_next_break
-
-        safe_eyes_core.initialize(config)
-
-        sequential_threading_handle = sequential_threading(safe_eyes_core)
-
-        safe_eyes_core.start()
-
-        # start __scheduler_job
-        sequential_threading_handle.next()
-
-        assert context["state"] == model.State.WAITING
-
-        on_update_next_break.assert_called_once()
-        assert isinstance(on_update_next_break.call_args[0][0], model.Break)
-        assert on_update_next_break.call_args[0][0].name == "translated!: break 1"
-        on_update_next_break.reset_mock()
-
-        # wait for end of __scheduler_job - we cannot stop while waiting on the condvar
-        # this just moves us into waiting for __wait_until_prepare to start
-        sequential_threading_handle.next()
-
-        safe_eyes_core.stop()
-        assert context["state"] == model.State.STOPPED
-
     def run_next_break(
         self,
         sequential_threading_handle,
@@ -368,6 +280,94 @@ class TestSafeEyesCore:
         assert datetime.datetime.now(
             datetime.timezone.utc
         ) == datetime.datetime.fromisoformat(string)
+
+    def test_create_empty(self):
+        context = {}
+        config = {
+            "short_breaks": [],
+            "long_breaks": [],
+            "short_break_interval": 15,
+            "long_break_interval": 75,
+            "long_break_duration": 60,
+            "short_break_duration": 15,
+            "random_order": False,
+            "postpone_duration": 5,
+        }
+        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core.initialize(config)
+
+    def test_start_empty(self, sequential_threading):
+        context = {}
+        config = {
+            "short_breaks": [],
+            "long_breaks": [],
+            "short_break_interval": 15,
+            "long_break_interval": 75,
+            "long_break_duration": 60,
+            "short_break_duration": 15,
+            "random_order": False,
+            "postpone_duration": 5,
+        }
+        on_update_next_break = mock.Mock()
+        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core.on_update_next_break += mock
+
+        safe_eyes_core.initialize(config)
+
+        safe_eyes_core.start()
+        safe_eyes_core.stop()
+
+        on_update_next_break.assert_not_called()
+
+    def test_start(self, sequential_threading, time_machine):
+        context = {
+            "session": {},
+        }
+        config = {
+            "short_breaks": [
+                {"name": "break 1"},
+                {"name": "break 2"},
+                {"name": "break 3"},
+                {"name": "break 4"},
+            ],
+            "long_breaks": [
+                {"name": "long break 1"},
+                {"name": "long break 2"},
+                {"name": "long break 3"},
+            ],
+            "short_break_interval": 15,
+            "long_break_interval": 75,
+            "long_break_duration": 60,
+            "short_break_duration": 15,
+            "random_order": False,
+            "postpone_duration": 5,
+        }
+        on_update_next_break = mock.Mock()
+        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core.on_update_next_break += on_update_next_break
+
+        safe_eyes_core.initialize(config)
+
+        sequential_threading_handle = sequential_threading(safe_eyes_core)
+
+        safe_eyes_core.start()
+
+        # start __scheduler_job
+        sequential_threading_handle.next()
+
+        assert context["state"] == model.State.WAITING
+
+        on_update_next_break.assert_called_once()
+        assert isinstance(on_update_next_break.call_args[0][0], model.Break)
+        assert on_update_next_break.call_args[0][0].name == "translated!: break 1"
+        on_update_next_break.reset_mock()
+
+        # wait for end of __scheduler_job - we cannot stop while waiting on the condvar
+        # this just moves us into waiting for __wait_until_prepare to start
+        sequential_threading_handle.next()
+
+        safe_eyes_core.stop()
+        assert context["state"] == model.State.STOPPED
 
     def test_full_run_with_defaults(self, sequential_threading, time_machine):
         context = {
