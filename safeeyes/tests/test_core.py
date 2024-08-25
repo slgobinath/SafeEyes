@@ -488,3 +488,115 @@ class TestSafeEyesCore:
         safe_eyes_core.stop()
 
         assert context["state"] == model.State.STOPPED
+
+    def test_long_duration_is_bigger_than_short_interval(
+        self, sequential_threading, time_machine
+    ):
+        """Example taken from https://github.com/slgobinath/SafeEyes/issues/640."""
+        context = {
+            "session": {},
+        }
+        short_break_duration = 300  # seconds = 5min
+        short_break_interval = 25  # minutes
+        pre_break_warning_time = 10  # seconds
+        long_break_duration = 1800  # seconds = 30min
+        long_break_interval = 100  # minutes
+        config = {
+            "short_breaks": [
+                {"name": "break 1"},
+                {"name": "break 2"},
+                {"name": "break 3"},
+                {"name": "break 4"},
+            ],
+            "long_breaks": [
+                {"name": "long break 1"},
+                {"name": "long break 2"},
+                {"name": "long break 3"},
+            ],
+            "short_break_interval": short_break_interval,
+            "long_break_interval": long_break_interval,
+            "long_break_duration": long_break_duration,
+            "short_break_duration": short_break_duration,
+            "pre_break_warning_time": pre_break_warning_time,
+            "random_order": False,
+            "postpone_duration": 5,
+        }
+
+        self.assert_datetime("2024-08-25T13:00:00")
+
+        safe_eyes_core = core.SafeEyesCore(context)
+
+        sequential_threading_handle = sequential_threading(safe_eyes_core)
+
+        safe_eyes_core.initialize(config)
+
+        safe_eyes_core.start()
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+        )
+
+        # Time passed: 30m 10s
+        # 25min short_break_interval, 10 seconds pre_break_warning_time,
+        # 5 minutes short_break_duration
+        self.assert_datetime("2024-08-25T13:30:10")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T14:00:20")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T14:30:30")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            "translated!: long break 1",
+        )
+
+        # Time passed: 55min 10s
+        # 25min short_break_interval (from previous, as long_break_interval must be
+        # multiple)
+        # 10 seconds pre_break_warning_time, 30 minute long_break_duration
+        self.assert_datetime("2024-08-25T15:25:40")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        # Time passed: 30m 10s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T15:55:50")
+
+        safe_eyes_core.stop()
+
+        assert context["state"] == model.State.STOPPED
