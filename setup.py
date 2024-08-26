@@ -38,24 +38,22 @@ class BuildMoSubCommand(Command):
 
         files = {}
 
-        localedir = 'safeeyes/config/locale'
-        po_dirs = [localedir + '/' + l + '/LC_MESSAGES/'
-                   for l in next(os.walk(localedir))[1]]
+        localedir = Path('safeeyes/config/locale')
+        po_dirs = [l.joinpath('LC_MESSAGES') for l in localedir.iterdir() if l.is_dir()]
         for po_dir in po_dirs:
             po_files = [f
-                        for f in next(os.walk(po_dir))[2]
-                        if os.path.splitext(f)[1] == '.po']
+                        for f in po_dir.iterdir()
+                        if f.is_file() and f.suffix == '.po']
             for po_file in po_files:
-                filename, _ = os.path.splitext(po_file)
-                mo_file = filename + '.mo'
+                mo_file = po_file.with_suffix(".mo")
 
-                source_file = po_dir + po_file
+                source_file = po_file
+                build_file = mo_file
 
-                build_file = po_dir + mo_file
                 if not self.editable_mode:
-                    build_file = os.path.join(self.build_lib, build_file)
+                    build_file = Path(self.build_lib).joinpath(build_file)
 
-                files[build_file] = source_file
+                files[str(build_file)] = str(source_file)
 
         self.files = files
         return files
