@@ -4,13 +4,13 @@ import os
 
 from pathlib import Path
 from setuptools import Command, setup
-from setuptools.command.build import build as orig_build
+from setuptools.command.build import build as OriginalBuildCommand
 
-class build(orig_build):
-    sub_commands = [('build_mo', None), *orig_build.sub_commands]
+class BuildCommand(OriginalBuildCommand):
+    sub_commands = [('build_mo', None), *OriginalBuildCommand.sub_commands]
 
 
-class build_mo(Command):
+class BuildMoSubCommand(Command):
     description = 'Compile .po files into .mo files'
 
     files = None
@@ -22,7 +22,6 @@ class build_mo(Command):
 
     def finalize_options(self):
         self.set_undefined_options("build_py", ("build_lib", "build_lib"))
-        pass
 
     def run(self):
         files = self._get_files()
@@ -72,5 +71,5 @@ class build_mo(Command):
 
 
 setup(
-    cmdclass={'build': build, 'build_mo': build_mo}
+    cmdclass={'build': BuildCommand, 'build_mo': BuildMoSubCommand}
 )
