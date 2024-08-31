@@ -102,7 +102,7 @@ sudo apk add safeeyes
 ```
 
 ### Flatpak
-
+**Warning**: Many plugins and features don't work well in the flatpak. We recommend that you use one of the native packages listed above. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes.
 ```bash
 flatpak install flathub io.github.slgobinath.SafeEyes
 ```
