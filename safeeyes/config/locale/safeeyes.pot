@@ -557,3 +557,9 @@ msgstr ""
 
 msgid "License:"
 msgstr ""
+
+msgid "Reset Settings"
+msgstr ""
+
+msgid "Confirm Reset"
+msgstr ""

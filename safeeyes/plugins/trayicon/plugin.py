@@ -582,11 +582,24 @@ class TrayIcon:
             },
             {
                 'id': 7,
+                'label': _('Reset Settings'),
+                'enabled': not self.menu_locked,
+                'children-display': 'submenu',
+                'children': [
+                    {
+                        'id': 12,
+                        'label': _('Confirm Reset'),
+                        'callback': utility.reset_config,
+                    },
+                ]
+            },
+            {
+                'id': 8,
                 'label': _('About'),
                 'callback': self.show_about,
             },
             {
-                'id': 8,
+                'id': 9,
                 'label': _('Quit'),
                 'enabled': not self.menu_locked,
                 'callback': self.quit_safe_eyes,
