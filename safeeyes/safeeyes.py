@@ -37,7 +37,7 @@ from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog
 
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, Gio, GLib
 
 SAFE_EYES_VERSION = "2.2.2"
 
@@ -48,6 +48,7 @@ class SafeEyes(Gtk.Application):
     """
 
     required_plugin_dialog_active = False
+    retry_errored_plugins_count = 0
 
     def __init__(self, system_locale, config, cli_args):
         super().__init__(
@@ -119,8 +120,7 @@ class SafeEyes(Gtk.Application):
         try:
             self.plugins_manager.init(self.context, self.config)
         except RequiredPluginException as e:
-            self.show_required_plugin_dialog(e.get_plugin_id(), e.get_plugin_name(), e.get_message())
-            self.required_plugin_dialog_active = True
+            self.show_required_plugin_dialog(e)
 
         self.hold()
 
@@ -129,7 +129,7 @@ class SafeEyes(Gtk.Application):
         if self.config.get('use_rpc_server', True):
             self.__start_rpc_server()
 
-        if not self.required_plugin_dialog_active and self.safe_eyes_core.has_breaks():
+        if not self.plugins_manager.needs_retry() and not self.required_plugin_dialog_active and self.safe_eyes_core.has_breaks():
             self.active = True
             self.context['state'] = State.START
             self.plugins_manager.start()		# Call the start method of all plugins
@@ -138,6 +138,9 @@ class SafeEyes(Gtk.Application):
 
     def do_activate(self):
         logging.info('Application activated')
+
+        if self.plugins_manager.needs_retry():
+            GLib.timeout_add_seconds(1, self._retry_errored_plugins)
 
         if self.cli_args.about:
             self.show_about()
@@ -150,6 +153,32 @@ class SafeEyes(Gtk.Application):
         elif self.cli_args.take_break:
             self.take_break()
 
+
+    def _retry_errored_plugins(self):
+        if not self.plugins_manager.needs_retry():
+            return
+
+        logging.info(f"Retry loading errored plugin")
+        self.plugins_manager.retry_errored_plugins()
+
+        error = self.plugins_manager.get_retryable_error()
+
+        if error is None:
+            # success
+            self.restart(self.config, set_active=True)
+            return
+
+        # errored again
+        if self.retry_errored_plugins_count >= 3:
+            self.show_required_plugin_dialog(error)
+            return
+
+        timeout = pow(2, self.retry_errored_plugins_count)
+        self.retry_errored_plugins_count += 1
+
+        GLib.timeout_add_seconds(timeout, self._retry_errored_plugins)
+
+
     def show_settings(self):
         """
         Listen to tray icon Settings action and send the signal to Settings dialog.
@@ -161,12 +190,14 @@ class SafeEyes(Gtk.Application):
                 self.config.clone(), self.save_settings)
             settings_dialog.show()
 
-    def show_required_plugin_dialog(self, plugin_id, plugin_name, message):
+    def show_required_plugin_dialog(self, error: RequiredPluginException):
+        self.required_plugin_dialog_active = True
+
         logging.info("Show RequiredPlugin dialog")
         dialog = RequiredPluginDialog(
-            plugin_id,
-            plugin_name,
-            message,
+            error.get_plugin_id(),
+            error.get_plugin_name(),
+            error.get_message(),
             self.quit,
             lambda: self.disable_plugin(plugin_id)
         )
@@ -306,8 +337,7 @@ class SafeEyes(Gtk.Application):
         try:
             self.plugins_manager.init(self.context, self.config)
         except RequiredPluginException as e:
-            self.show_required_plugin_dialog(e.get_plugin_id(), e.get_plugin_name(), e.get_message())
-            self.required_plugin_dialog_active = True
+            self.show_required_plugin_dialog(e)
             return
 
         if set_active:

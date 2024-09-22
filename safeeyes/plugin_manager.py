@@ -57,13 +57,12 @@ import os
 import sys
 
 from safeeyes import utility
-from safeeyes.model import RequiredPluginException
+from safeeyes.model import PluginDependency, RequiredPluginException
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
 
 HORIZONTAL_LINE_LENGTH = 64
-
 
 class PluginManager:
     """
@@ -73,17 +72,6 @@ class PluginManager:
     def __init__(self):
         logging.info('Load all the plugins')
         self.__plugins = {}
-        self.__plugins_on_init = []
-        self.__plugins_on_start = []
-        self.__plugins_on_stop = []
-        self.__plugins_on_exit = []
-        self.__plugins_on_pre_break = []
-        self.__plugins_on_start_break = []
-        self.__plugins_on_stop_break = []
-        self.__plugins_on_countdown = []
-        self.__plugins_update_next_break = []
-        self.__widget_plugins = []
-        self.__tray_actions_plugins = []
         self.last_break = None
         self.horizontal_line = '─' * HORIZONTAL_LINE_LENGTH
 
@@ -94,7 +82,8 @@ class PluginManager:
         # Load the plugins
         for plugin in config.get('plugins'):
             try:
-                self.__load_plugin(plugin)
+                loaded_plugin = LoadedPlugin(plugin)
+                self.__plugins[loaded_plugin.id] = loaded_plugin
             except RequiredPluginException as e:
                 raise e
             except BaseException as e:
@@ -105,42 +94,62 @@ class PluginManager:
                 logging.error('Error in loading the plugin %s: %s', plugin['id'], e)
                 continue
         # Initialize the plugins
-        for plugin in self.__plugins_on_init:
-            plugin['module'].init(context, config, plugin['config'])
+        for plugin in self.__plugins.values():
+            plugin.init_plugin(context, config)
         return True
+
+    def needs_retry(self):
+        return self.get_retryable_error() is not None
+
+    def get_retryable_error(self):
+        for plugin in self.__plugins.values():
+            if plugin.required_plugin and plugin.errored and plugin.enabled:
+                if isinstance(plugin.last_error, PluginDependency) and plugin.last_error.retryable:
+                    return RequiredPluginException(
+                        plugin.id,
+                        plugin.get_name(),
+                        plugin.last_error
+                    )
+
+        return None
+
+    def retry_errored_plugins(self):
+        for plugin in self.__plugins.values():
+            if plugin.required_plugin and plugin.errored and plugin.enabled:
+                if isinstance(plugin.last_error, PluginDependency) and plugin.last_error.retryable:
+                    plugin.reload_errored()
 
     def start(self):
         """
         Execute the on_start() function of plugins.
         """
-        for plugin in self.__plugins_on_start:
-            plugin['module'].on_start()
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method("on_start")
         return True
 
     def stop(self):
         """
         Execute the on_stop() function of plugins.
         """
-        for plugin in self.__plugins_on_stop:
-            plugin['module'].on_stop()
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method("on_stop")
         return True
 
     def exit(self):
         """
         Execute the on_exit() function of plugins.
         """
-        for plugin in self.__plugins_on_exit:
-            plugin['module'].on_exit()
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method("on_exit")
         return True
 
     def pre_break(self, break_obj):
         """
         Execute the on_pre_break(break_obj) function of plugins.
         """
-        for plugin in self.__plugins_on_pre_break:
-            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
-                if plugin['module'].on_pre_break(break_obj):
-                    return False
+        for plugin in self.__plugins.values():
+            if plugin.call_plugin_method_break_obj("on_pre_break", 1, break_obj):
+                return False
         return True
 
     def start_break(self, break_obj):
@@ -148,10 +157,9 @@ class PluginManager:
         Execute the start_break(break_obj) function of plugins.
         """
         self.last_break = break_obj
-        for plugin in self.__plugins_on_start_break:
-            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
-                if plugin['module'].on_start_break(break_obj):
-                    return False
+        for plugin in self.__plugins.values():
+            if plugin.call_plugin_method_break_obj("on_start_break", 1, break_obj):
+                return False
 
         return True
 
@@ -159,24 +167,22 @@ class PluginManager:
         """
         Execute the stop_break() function of plugins.
         """
-        for plugin in self.__plugins_on_stop_break:
-            if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
-                plugin['module'].on_stop_break()
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method("on_stop_break")
 
     def countdown(self, countdown, seconds):
         """
         Execute the on_countdown(countdown, seconds) function of plugins.
         """
-        for plugin in self.__plugins_on_countdown:
-            if self.last_break.plugin_enabled(plugin['id'], plugin['enabled']):
-                plugin['module'].on_countdown(countdown, seconds)
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method("on_countdown", 2, countdown, seconds)
 
     def update_next_break(self, break_obj, break_time):
         """
         Execute the update_next_break(break_time) function of plugins.
         """
-        for plugin in self.__plugins_update_next_break:
-            plugin['module'].update_next_break(break_obj, break_time)
+        for plugin in self.__plugins.values():
+            plugin.call_plugin_method_break_obj("update_next_break", 2, break_obj, break_time)
         return True
 
     def get_break_screen_widgets(self, break_obj):
@@ -185,18 +191,20 @@ class PluginManager:
         The widget is generated by calling the get_widget_title and get_widget_content functions of plugins.
         """
         widget = ''
-        for plugin in self.__widget_plugins:
-            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
-                try:
-                    title = plugin['module'].get_widget_title(break_obj).upper().strip()
-                    if title == '':
-                        continue
-                    content = plugin['module'].get_widget_content(break_obj)
-                    if content == '':
-                        continue
-                    widget += '<b>{}</b>\n{}\n{}\n\n\n'.format(title, self.horizontal_line, content)
-                except BaseException:
+        for plugin in self.__plugins.values():
+            try:
+                title = plugin.call_plugin_method_break_obj("get_widget_title", 1, break_obj)
+                if title is None or not isinstance(title, str) or title == '':
                     continue
+                content = plugin.call_plugin_method_break_obj("get_widget_content", 1, break_obj)
+                if content is None or not isinstance(content, str) or content == '':
+                    continue
+                title = title.upper().strip()
+                if title == '':
+                    continue
+                widget += '<b>{}</b>\n{}\n{}\n\n\n'.format(title, self.horizontal_line, content)
+            except BaseException:
+                continue
         return widget.strip()
 
     def get_break_screen_tray_actions(self, break_obj):
@@ -204,151 +212,186 @@ class PluginManager:
         Return Tray Actions.
         """
         actions = []
-        for plugin in self.__tray_actions_plugins:
-            if break_obj.plugin_enabled(plugin['id'], plugin['enabled']):
-                action = plugin['module'].get_tray_action(break_obj)
-                if action:
-                    actions.append(action)
+        for plugin in self.__plugins.values():
+            action = plugin.call_plugin_method_break_obj("get_tray_action", 1, break_obj)
+            if action:
+                actions.append(action)
 
         return actions
 
-    def __load_plugin(self, plugin):
-        """
-        Load the given plugin.
-        """
-        plugin_enabled = plugin['enabled']
-        if plugin['id'] in self.__plugins and not plugin_enabled:
-            # A disabled plugin but that was loaded earlier
-            plugin_obj = self.__plugins[plugin['id']]
-            if plugin_obj['enabled']:
-                # Previously enabled but now disabled
-                plugin_obj['enabled'] = False
-                utility.remove_if_exists(self.__plugins_on_start, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_stop, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_exit, plugin_obj)
-                utility.remove_if_exists(self.__plugins_update_next_break, plugin_obj)
-                # Call the plugin.disable method if available
-                if utility.has_method(plugin_obj['module'], 'disable'):
-                    plugin_obj['module'].disable()
-                logging.info("Successfully unloaded the plugin '%s'", plugin['id'])
 
-            if not plugin_obj['break_override_allowed']:
-                # Remaining methods also should be removed
-                utility.remove_if_exists(self.__plugins_on_init, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_pre_break, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_start_break, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_stop_break, plugin_obj)
-                utility.remove_if_exists(self.__plugins_on_countdown, plugin_obj)
-                utility.remove_if_exists(self.__widget_plugins, plugin_obj)
-                utility.remove_if_exists(self.__tray_actions_plugins, plugin_obj)
-                del self.__plugins[plugin['id']]
+class LoadedPlugin:
+    # state of the plugin
+    enabled: bool = False
+    break_override_allowed: bool = False
+    errored: bool = False
+    required_plugin: bool = False
+
+    # misc data
+    # FIXME: rename to plugin_config to plugin_json? plugin_config and config are easy to confuse
+    config = None
+    plugin_config = None
+    plugin_dir = None
+    module = None
+    last_error = None
+    id = None
+
+    def __init__(self, plugin):
+        (plugin_config, plugin_dir) = self._load_config_json(plugin['id'])
+
+        self.id = plugin['id']
+        self.plugin_config = plugin_config
+        self.plugin_dir = plugin_dir
+        self.enabled = plugin["enabled"]
+        self.break_override_allowed = plugin_config.get('break_override_allowed', False)
+        self.required_plugin = plugin_config.get("required_plugin", False)
+
+        self.config = dict(plugin.get('settings', {}))
+        self.config['path'] = os.path.join(plugin_dir, plugin['id'])
+
+        if self.enabled or self.break_override_allowed:
+            plugin_path = os.path.join(plugin_dir, self.id)
+            message = utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path)
+
+            if message:
+                self.errored = True
+                self.last_error = message
+                if self.required_plugin and not (isinstance(message, PluginDependency) and message.retryable):
+                    raise RequiredPluginException(
+                        plugin['id'],
+                        plugin_config['meta']['name'],
+                        message
+                    )
+                return
+
+            self._import_plugin()
+
+
+    def reload_config(self, plugin):
+        if self.enabled and not plugin["enabled"]:
+            self.enabled = False
+            if not self.errored and utility.has_method(self.module, 'disable'):
+                self.module.disable()
+
+        if not self.enabled and plugin["enabled"]:
+            self.enabled = True
+
+        # Update the config
+        self.config = dict(plugin.get('settings', {}))
+        self.config['path'] = os.path.join(self.plugin_dir, plugin['id'])
+
+        if self.enabled or self.break_override_allowed:
+            plugin_path = os.path.join(self.plugin_dir, self.id)
+            message = utility.check_plugin_dependencies(
+                self.id,
+                self.plugin_config,
+                self.config,
+                plugin_path
+            )
+
+            if message:
+                self.errored = True
+                self.last_error = message
+            elif self.errored:
+                self.errored = False
+                self.last_error = None
+
+            if not self.errored and self.module is None:
+                # No longer errored, import the module now
+                self._import_plugin()
+
+
+    def reload_errored(self):
+        if not self.errored:
             return
 
+        if self.enabled or self.break_override_allowed:
+            plugin_path = os.path.join(self.plugin_dir, self.id)
+            message = utility.check_plugin_dependencies(
+                self.id,
+                self.plugin_config,
+                self.config,
+                plugin_path
+            )
+
+            if message:
+                self.errored = True
+                self.last_error = message
+            elif self.errored:
+                self.errored = False
+                self.last_error = None
+
+            if not self.errored and self.module is None:
+                # No longer errored, import the module now
+                self._import_plugin()
+
+
+    def get_name(self):
+        return self.plugin_config['meta']['name']
+
+    def _import_plugin(self):
+        if self.errored:
+            # do not try to import errored plugin
+            return
+
+        self.module = importlib.import_module((self.id + '.plugin'))
+        logging.info("Successfully loaded %s", str(self.module))
+
+        if utility.has_method(self.module, 'enable'):
+            self.module.enable()
+
+    def _load_config_json(self, plugin_id):
         # Look for plugin.py
-        if os.path.isfile(os.path.join(utility.SYSTEM_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+        if os.path.isfile(os.path.join(utility.SYSTEM_PLUGINS_DIR, plugin_id, 'plugin.py')):
             plugin_dir = utility.SYSTEM_PLUGINS_DIR
-        elif os.path.isfile(os.path.join(utility.USER_PLUGINS_DIR, plugin['id'], 'plugin.py')):
+        elif os.path.isfile(os.path.join(utility.USER_PLUGINS_DIR, plugin_id, 'plugin.py')):
             plugin_dir = utility.USER_PLUGINS_DIR
         else:
-            logging.error('plugin.py not found for the plugin: %s', plugin['id'])
-            return
+            raise Exception('plugin.py not found for the plugin: %s', plugin_id)
         # Look for config.json
-        plugin_path = os.path.join(plugin_dir, plugin['id'])
+        plugin_path = os.path.join(plugin_dir, plugin_id)
         plugin_config_path = os.path.join(plugin_path, 'config.json')
         if not os.path.isfile(plugin_config_path):
-            logging.error('config.json not found for the plugin: %s', plugin['id'])
-            return
+            raise Exception('config.json not found for the plugin: %s', plugin_id)
         plugin_config = utility.load_json(plugin_config_path)
         if plugin_config is None:
+            raise Exception('config.json empty/invalid for the plugin: %s', plugin_id)
+
+        return (plugin_config, plugin_dir)
+
+    def init_plugin(self, context, safeeyes_config):
+        if self.errored:
             return
+        if self.break_override_allowed or self.enabled:
+            if utility.has_method(self.module, 'init', 3):
+                self.module.init(context, safeeyes_config, self.config)
 
-        if plugin_enabled or plugin_config.get('break_override_allowed', False):
-            if plugin['id'] in self.__plugins:
-                # The plugin is already enabled or partially loaded due to break_override_allowed
+    def call_plugin_method_break_obj(self, method_name: str, num_args, break_obj, *args, **kwargs):
+        if self.errored:
+            return None
 
-                # Validate the dependencies again
-                if utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path):
-                    plugin_obj['enabled'] = False
-                    utility.remove_if_exists(self.__plugins_on_start, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_stop, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_exit, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_update_next_break, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_init, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_pre_break, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_start_break, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_stop_break, plugin_obj)
-                    utility.remove_if_exists(self.__plugins_on_countdown, plugin_obj)
-                    utility.remove_if_exists(self.__widget_plugins, plugin_obj)
-                    utility.remove_if_exists(self.__tray_actions_plugins, plugin_obj)
-                    del self.__plugins[plugin['id']]
+        enabled = False
+        if self.break_override_allowed:
+            enabled = break_obj.plugin_enabled(self.id, self.enabled)
+        else:
+            enabled = self.enabled
 
-                # Use the existing plugin object
-                plugin_obj = self.__plugins[plugin['id']]
+        if enabled:
+            return self._call_plugin_method_internal(method_name, num_args, break_obj, *args, **kwargs)
 
-                # Update the config
-                plugin_obj['config'] = dict(plugin.get('settings', {}))
-                plugin_obj['config']['path'] = os.path.join(plugin_dir, plugin['id'])
+        return None
 
-                if plugin_obj['enabled']:
-                    # Already loaded completely
-                    return
-                # Plugin was partially loaded due to break_override_allowed
-                if plugin_enabled:
-                    # Load the rest of the methods
-                    plugin_obj['enabled'] = True
-                    module = plugin_obj['module']
-                    self.__init_plugin(module, plugin_obj)
-            else:
-                # This is the first time to load the plugin
-                # Check for dependencies
-                message = utility.check_plugin_dependencies(plugin['id'], plugin_config, plugin.get('settings', {}), plugin_path)
-                if message:
-                    if plugin_config.get('required_plugin', False):
-                        raise RequiredPluginException(
-                            plugin['id'],
-                            plugin_config['meta']['name'],
-                            message
-                        )
-                    return
+    def call_plugin_method(self, method_name: str, num_args=0, *args, **kwargs):
+        if self.errored:
+            return None
 
-                # Load the plugin module
-                module = importlib.import_module((plugin['id'] + '.plugin'))
-                logging.info("Successfully loaded %s", str(module))
-                plugin_obj = {'id': plugin['id'], 'module': module, 'config': dict(plugin.get(
-                    'settings', {})), 'enabled': plugin_enabled,
-                              'break_override_allowed': plugin_config.get('break_override_allowed', False)}
-                # Inject the plugin directory into the config
-                plugin_obj['config']['path'] = os.path.join(plugin_dir, plugin['id'])
-                self.__plugins[plugin['id']] = plugin_obj
-                if utility.has_method(module, 'enable'):
-                    module.enable()
-                if plugin_enabled:
-                    self.__init_plugin(module, plugin_obj)
-                if utility.has_method(module, 'init', 3):
-                    self.__plugins_on_init.append(plugin_obj)
-                if utility.has_method(module, 'on_pre_break', 1):
-                    self.__plugins_on_pre_break.append(plugin_obj)
-                if utility.has_method(module, 'on_start_break', 1):
-                    self.__plugins_on_start_break.append(plugin_obj)
-                if utility.has_method(module, 'on_stop_break', 0):
-                    self.__plugins_on_stop_break.append(plugin_obj)
-                if utility.has_method(module, 'on_countdown', 2):
-                    self.__plugins_on_countdown.append(plugin_obj)
-                if utility.has_method(module, 'get_widget_title', 1) and utility.has_method(module,
-                                                                                            'get_widget_content', 1):
-                    self.__widget_plugins.append(plugin_obj)
-                if utility.has_method(module, 'get_tray_action', 1):
-                    self.__tray_actions_plugins.append(plugin_obj)
+        if self.enabled:
+            return self._call_plugin_method_internal(method_name, num_args, *args, **kwargs)
 
-    def __init_plugin(self, module, plugin_obj):
-        """
-        Collect mandatory methods from the plugin and add them to the life cycle methods list.
-        """
-        if utility.has_method(module, 'on_start'):
-            self.__plugins_on_start.append(plugin_obj)
-        if utility.has_method(module, 'on_stop'):
-            self.__plugins_on_stop.append(plugin_obj)
-        if utility.has_method(module, 'on_exit'):
-            self.__plugins_on_exit.append(plugin_obj)
-        if utility.has_method(module, 'update_next_break', 2):
-            self.__plugins_update_next_break.append(plugin_obj)
+        return None
+
+    def _call_plugin_method_internal(self, method_name: str, num_args=0, *args, **kwargs):
+        # FIXME: cache if method exists
+        if utility.has_method(self.module, method_name, num_args):
+            return getattr(self.module, method_name)(*args, **kwargs)
+        return None
