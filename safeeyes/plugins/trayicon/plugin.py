@@ -514,7 +514,7 @@ class TrayIcon:
                 disable_items.append({
                     'id': disable_option_dynamic_id,
                     'label': label,
-                    'callback': lambda: self.on_disable_clicked(time_in_minutes),
+                    'callback': lambda time_in_minutes=time_in_minutes: self.on_disable_clicked(time_in_minutes),
                 })
 
                 disable_option_dynamic_id += 1
