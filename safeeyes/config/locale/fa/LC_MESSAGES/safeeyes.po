@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-28 15:09+0000\n"
-"Last-Translator: Parsa Nobahari <parsa.nobahari@gmail.com>\n"
+"PO-Revision-Date: 2024-09-20 00:40+0000\n"
+"Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
 "Language: fa\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "چشمانتان را آرام ببندید"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -116,7 +116,7 @@ msgstr "لیست مشارکت‌کنندگان"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "کمک به ترجمهٔ این کاره"
 
 # Break screen
 msgid "Skip"
@@ -581,7 +581,7 @@ msgid "Disable permanently"
 msgstr "غیرفعال کردن دائمی"
 
 msgid "License:"
-msgstr ""
+msgstr "پروانه:"
 
 # Short break
 #~ msgid "Tightly close your eyes"

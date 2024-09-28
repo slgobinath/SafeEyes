@@ -407,6 +407,7 @@ class TrayAction:
 class PluginDependency:
     message: str
     link: str | None = None
+    retryable: bool = False
 
 
 class RequiredPluginException(Exception):

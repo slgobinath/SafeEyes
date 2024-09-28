@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-08-08 21:25+0000\n"
-"Last-Translator: calbasi <joan@calbasi.net>\n"
+"PO-Revision-Date: 2024-09-27 12:16+0000\n"
+"Last-Translator: Andrés Martínez <sitoxplex@gmail.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ca/>\n"
 "Language: ca\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Tanqueu els ulls suaument"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -90,6 +90,8 @@ msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
 msgstr ""
+"Safe Eyes s'està executant sense un servidor RPC. Engegueu-lo per usar els "
+"arguments de la línia de comandaments."
 
 # About dialog
 msgid "Close"
@@ -111,11 +113,11 @@ msgstr "Llicència"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Llista de col·laboradors"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "Ajuda'ns a traduir aquesta aplicació"
 
 # Break screen
 msgid "Skip"
@@ -139,7 +141,7 @@ msgstr "Temps per preparar-se per a una pausa (en segons)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "Període d'inhabilitació de les dreceres de teclat (en segons)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
@@ -159,19 +161,21 @@ msgstr "Permet posposar les pauses"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "Persisteix l'estat intern"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr ""
+msgstr "Empra el servidor RPC per a rebre els comandaments del temps d'execució"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
+msgstr "Sense el servidor RPC, és possible que els comandaments no funcionen"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
 msgstr ""
+"Cal que l'interval de pauses llargues siga múltiple de l'interval de pauses "
+"curtes"
 
 # Settings dialog
 msgid "Reset"
@@ -196,7 +200,7 @@ msgstr "Pauses llargues"
 
 # Settings dialog
 msgid "Delete"
-msgstr "Suprimeix"
+msgstr "Esborra"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
@@ -240,7 +244,7 @@ msgstr "Trieu"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "Si us plau, trieu una imatge"
+msgstr "Trieu una imatge"
 
 # Settings dialog
 msgid "Duration"
@@ -273,26 +277,26 @@ msgstr "Preferències del complement"
 # Settings dialog
 #, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "El complement no admet l'entorn d'escriptori %s"
 
 # Settings dialog
 #, python-format
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "Instal·leu el mòdul de Python '%s'"
 
 # Settings dialog
 #, python-format
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "Instal·leu la ferramenta de la línia de comandament '%s'"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "Expressió cron no vàlida '%s'"
 
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "Afegiu el recurs %(resource)s al directori %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -316,15 +320,15 @@ msgstr "Alerta audible"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "Reprodueix una alerta audible abans i després de les pauses"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "Reprodueix una alerta audible abans de les pauses"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "Reprodueix una alerta audible després de les pauses"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
@@ -332,23 +336,23 @@ msgstr "No molesteu"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "Omet la pausa si la finestra activa està en mode pantalla completa"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "No interrompis aquestes finestres mai"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "Interromp aquestes finestres independentment del seu estat"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "Canviar les finestres interruptibles al mode normal"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "No molestar quan s'utilitza la bateria"
 
 # plugin/healthstats
 msgid "Health Statistics"
@@ -356,24 +360,24 @@ msgstr "Estadístiques de salut"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "Mostra estadístiques de com useu Safe Eyes"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "Interval de reinici de les estadístiques (expressió cron)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "Notificació"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "Mostra una notificació del sistema abans de les pauses"
 
 # plugin/notification
 #, python-format
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "Preparat per a una pausa breu en %s segons"
 
 # plugin/notification
 #, python-format

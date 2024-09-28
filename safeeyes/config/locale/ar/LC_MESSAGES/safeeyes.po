@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-26 11:09+0000\n"
-"Last-Translator: RDWN IT <raraja701@gmail.com>\n"
+"PO-Revision-Date: 2024-09-17 01:09+0000\n"
+"Last-Translator: Barman Anonymous Please <barman-object-knee@duck.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "أغمض عينيك بلطف"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -40,7 +40,7 @@ msgstr "اغمز بعينيك"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "ركّز على نقطة في المدى البعيد"
+msgstr "ركّز على نقطة بعيدة"
 
 # Short break
 msgid "Have some water"
@@ -76,7 +76,7 @@ msgstr "إظهار لوحة اﻹعدادات"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "ابدأ عيون سليمة في وضع التنقيح"
+msgstr "ابدأ safeeyes في وضع التنقيح (debug)"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
@@ -109,11 +109,11 @@ msgstr "الرخصة"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "قائمة المساهمين"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "ساعدنا في ترجمة هذا التطبيق"
 
 # Break screen
 msgid "Skip"
@@ -539,36 +539,36 @@ msgstr "أوقِف الوسائط"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "تقييد التخطي المتتالي"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "عدد مرات التخطي أو التأجيل المسموح بها على التوالي"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "حدد عدد فترات الاستراحة التي يمكن تخطيها أو تأجيلها على التوالي"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "تم تخطي أو تأجيل %(num)d/%(allowed)d من فترات الاستراحة على التوالي"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "الوقاية من الإصابات الناتجة عن الإجهاد المتكرر للعينين"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "يرجى تثبيت خدمة توفر أيقونات في علبة النظام لبيئة سطح المكتب الخاصة بك."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "الاستراحة الطويلة القادمة في %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "الاستراحة القادمة في %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
