@@ -160,14 +160,9 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="focus-on-click">False</property>
                 <property name="receives-default">True</property>
                 <property name="halign">center</property>
-                <property name="relief">none</property>
+                <property name="has-frame">0</property>
                 <property name="uri">https://github.com/slgobinath/SafeEyes?tab=readme-ov-file#how-you-can-help-improving-translation-of-safe-eyes</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
         </child>
