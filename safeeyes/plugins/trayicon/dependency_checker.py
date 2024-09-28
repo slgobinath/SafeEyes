@@ -20,27 +20,32 @@ from safeeyes import utility
 from safeeyes.model import PluginDependency
 
 import gi
-gi.require_version('Gio', '2.0')
+
+gi.require_version("Gio", "2.0")
 from gi.repository import Gio
+
 
 def validate(plugin_config, plugin_settings):
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,
         flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
         info=None,
-        name='org.freedesktop.DBus',
-        object_path='/org/freedesktop/DBus',
-        interface_name='org.freedesktop.DBus',
+        name="org.freedesktop.DBus",
+        object_path="/org/freedesktop/DBus",
+        interface_name="org.freedesktop.DBus",
         cancellable=None,
     )
 
-    if dbus_proxy.NameHasOwner('(s)', 'org.kde.StatusNotifierWatcher'):
+    if dbus_proxy.NameHasOwner("(s)", "org.kde.StatusNotifierWatcher"):
         return None
     else:
         return PluginDependency(
-            message=_("Please install service providing tray icons for your desktop environment."),
+            message=_(
+                "Please install service providing tray icons for your desktop"
+                " environment."
+            ),
             link="https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon",
-            retryable=True
+            retryable=True,
         )
 
     command = None
