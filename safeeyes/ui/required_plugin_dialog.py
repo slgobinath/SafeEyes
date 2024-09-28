@@ -40,7 +40,7 @@ class RequiredPluginDialog:
         builder = utility.create_gtk_builder(REQUIRED_PLUGIN_DIALOG_GLADE)
         self.window = builder.get_object('window_required_plugin')
 
-        self.window.connect("delete-event", self.on_window_delete)
+        self.window.connect("close-request", self.on_window_delete)
         builder.get_object('btn_close').connect('clicked', self.on_close_clicked)
         builder.get_object('btn_disable_plugin').connect('clicked', self.on_disable_plugin_clicked)
 
@@ -64,7 +64,7 @@ class RequiredPluginDialog:
         """
         Show the dialog.
         """
-        self.window.show_all()
+        self.window.present()
 
     def on_window_delete(self, *args):
         """
