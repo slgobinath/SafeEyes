@@ -171,7 +171,7 @@ def init(ctx, safeeyes_config, plugin_config):
     long_break_duration = safeeyes_config.get('long_break_duration')
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context['desktop'] == 'gnome' and context['is_wayland']
-    use_swayidle = context['desktop'] == 'sway'
+    use_swayidle = context['desktop'] != 'gnome' and context['is_wayland']
 
 
 def __start_idle_monitor():
