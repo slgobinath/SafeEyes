@@ -25,8 +25,8 @@ import os
 import re
 import gi
 from safeeyes.model import TrayAction
-gi.require_version('Gtk', '4.0')
-from gi.repository import Gtk, Gio
+gi.require_version('Gio', '2.0')
+from gi.repository import Gio
 
 tray_icon_path = None
 
