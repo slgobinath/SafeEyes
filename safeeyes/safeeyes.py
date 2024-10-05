@@ -313,8 +313,27 @@ class SafeEyes:
         """
         Reset the scheduled time of the next break but not total break status like if a long break is due soon.
         """
-        self.disable_safeeyes(None, False)
-        self.enable_safeeyes(scheduled_next_break_time=-1, reset_breaks=True)
+        
+        # Stop the Safe Eyes core
+        if self.active:
+            self.plugins_manager.stop()
+            self.safe_eyes_core.stop()
+
+        if self.rpc_server is None and self.config.get('use_rpc_server'):
+            #  # RPC server wasn't running but now enabled
+            self.__start_rpc_server()
+        elif self.rpc_server is not None and not self.config.get('use_rpc_server'):
+            #  # RPC server was running but now disabled
+            self.__stop_rpc_server()
+
+        # Restart the core and initialize the components
+        self.safe_eyes_core.initialize(self.config)
+        self.break_screen.initialize(self.config)
+        self.plugins_manager.init(self.context, self.config)
+        if self.active and self.safe_eyes_core.has_breaks():
+            # 1 sec delay is required to give enough time for core to be stopped
+            Timer(1.0, self.safe_eyes_core.start).start()
+            self.plugins_manager.start()
 
     def persist_session(self):
         """
