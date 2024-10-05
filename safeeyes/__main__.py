@@ -107,6 +107,8 @@ def main():
     group.add_argument('-t', '--take-break', help=_('Take a break now').lower(), action='store_true')
     parser.add_argument('--debug', help=_('start safeeyes in debug mode'), action='store_true')
     parser.add_argument('--status', help=_('print the status of running safeeyes instance and exit'), action='store_true')
+    parser.add_argument('--reset', help=_('Reset the scheduled time of the next break but not total break status like if a long break is due soon.'), action='store_true')
+    # sajt. Noh, sikerült implementálnom ezt a feature-t. Viszont nem jöttem rá arra, hogy hogyan kell úgy futtatni a programomat, hogy éljen is benne ez, mert még mindig a régi verzió működését kapom úgy látom. :/ a python3 -m safeeyes paranccsal futtattam és a --reset opciónak nyoma sehol. Mondjuk a smartpause plugin az meg átállt az új működésre szóval lehet h más a baj.
     parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
     args = parser.parse_args()
 
@@ -135,6 +137,8 @@ def main():
             rpc_client.take_break()
         elif args.status:
             print(rpc_client.status())
+        elif args.reset:
+            rpc_client.reset()
         elif args.quit:
             rpc_client.quit()
         else:

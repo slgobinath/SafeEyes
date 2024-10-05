@@ -6,3 +6,5 @@ python3 setup.py sdist bdist_wheel
 twine upload --repository pypitest dist/safeeyes*.tar.gz
 clear >$(tty)
 twine upload --repository pypitest dist/safeeyes*.whl
+
+read x;

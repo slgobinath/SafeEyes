@@ -40,6 +40,7 @@ class RPCServer:
         self.__server.register_function(context['api']['disable_safeeyes'], 'disable_safeeyes')
         self.__server.register_function(context['api']['take_break'], 'take_break')
         self.__server.register_function(context['api']['status'], 'status')
+        self.__server.register_function(context['api']['reset'], 'reset')
         self.__server.register_function(context['api']['quit'], 'quit')
 
     def start(self):
@@ -92,7 +93,7 @@ class RPCClient:
         """
         Disable Safe Eyes.
         """
-        self.proxy.disable_safeeyes(None)
+        self.proxy.disable_safeeyes(None, False)
 
     def take_break(self):
         """
@@ -105,6 +106,12 @@ class RPCClient:
         Return the status of Safe Eyes
         """
         return self.proxy.status()
+
+    def reset(self):
+        """
+        Reset the scheduled time of the next break but not total break status like if a long break is due soon.
+        """
+        return self.proxy.reset()
 
     def quit(self):
         """

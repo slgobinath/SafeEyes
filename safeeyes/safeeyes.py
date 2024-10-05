@@ -71,9 +71,11 @@ class SafeEyes:
             self.show_about)
         self.context['api']['enable_safeeyes'] = lambda next_break_time=-1, reset_breaks=False: \
             utility.execute_main_thread(self.enable_safeeyes, next_break_time, reset_breaks)
-        self.context['api']['disable_safeeyes'] = lambda status: utility.execute_main_thread(
-            self.disable_safeeyes, status)
+        self.context['api']['disable_safeeyes'] = lambda status, is_resting: \
+            utility.execute_main_thread(self.disable_safeeyes, status, is_resting)
+                # fixed a bug.
         self.context['api']['status'] = self.status
+        self.context['api']['reset'] = self.reset
         self.context['api']['quit'] = lambda: utility.execute_main_thread(
             self.quit)
         if self.config.get('persist_state'):
@@ -306,6 +308,13 @@ class SafeEyes:
         Return the status of Safe Eyes.
         """
         return self._status
+
+    def reset(self):
+        """
+        Reset the scheduled time of the next break but not total break status like if a long break is due soon.
+        """
+        self.disable_safeeyes(None, False)
+        self.enable_safeeyes(scheduled_next_break_time=-1, reset_breaks=True)
 
     def persist_session(self):
         """
