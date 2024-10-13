@@ -55,7 +55,7 @@ def init(ctx, safeeyes_config, plugin_config):
             'total_resets': 0,
         }
 
-        session = context['session']['plugin'].get('healthstats', {}) | defaults
+        session = context['session']['plugin'].get('healthstats', {}) or defaults
         if 'no_of_breaks' in session:
             # Ignore old format session.
             session = defaults
