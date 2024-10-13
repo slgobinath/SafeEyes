@@ -24,6 +24,7 @@ import logging
 import random
 from enum import Enum
 from dataclasses import dataclass
+from typing import Optional, Union
 
 from packaging.version import parse
 
@@ -424,11 +425,11 @@ class TrayAction:
 @dataclass
 class PluginDependency:
     message: str
-    link: str|None = None
+    link: Optional[str] = None
     retryable: bool = False
 
 class RequiredPluginException(Exception):
-    def __init__(self, plugin_id, plugin_name: str, message: str|PluginDependency):
+    def __init__(self, plugin_id, plugin_name: str, message: Union[str, PluginDependency]):
         if isinstance(message, PluginDependency):
             msg = message.message
         else:
