@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-10-11 21:39+0000\n"
-"Last-Translator: Moo <hazap@hotmail.com>\n"
+"PO-Revision-Date: 2024-10-14 06:16+0000\n"
+"Last-Translator: openSUSE Lietuviškai <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
 "Language: lt\n"
@@ -537,57 +537,60 @@ msgstr "Pristabdyti mediją"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Apriboti nuoseklų praleidinėjimą"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Kiek leidžiama praleisti arba atidėti kartų iš eilės"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "Apriboti, kiek kartų galima iš eilės praleisti arba atidėti pertraukų"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "Paeiliui praleistos arba atidėtos pertraukos: %(num)d/%(allowed)d"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Apsaugokite savo akis nuo įtampos"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Prašome įdiegti savo darbalaukio aplinkos sistemos ženkliukų dėklo paslaugą."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Kita ilga pertrauka: %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Kitos pertraukos: %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Reikalingam papildiniui „%s“ trūksta priklausomybių!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Prašome įdiegti priklausomybes arba pašalinti papildinį. Norėdami paslėpti "
+"šį pranešimą, taip pat galite išjungti šį papildinį nuostatose."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Norėdami sužinoti daugiau, spauskite čia"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Laikinai išjungti papildinį"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Išjungti visam laikui"
 
 msgid "License:"
-msgstr ""
+msgstr "Licencija:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
