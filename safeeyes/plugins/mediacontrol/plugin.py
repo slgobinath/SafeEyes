@@ -25,8 +25,8 @@ import os
 import re
 import gi
 from safeeyes.model import TrayAction
-gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gio
+gi.require_version('Gio', '2.0')
+from gi.repository import Gio
 
 tray_icon_path = None
 
@@ -90,5 +90,5 @@ def get_tray_action(break_obj):
     if players:
         return TrayAction.build("Pause media",
                                 tray_icon_path,
-                                Gtk.STOCK_MEDIA_PAUSE,
+                                "media-playback-pause",
                                 lambda: __pause_players(players))
