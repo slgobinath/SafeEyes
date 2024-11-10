@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-05-23 09:32+0000\n"
+"PO-Revision-Date: 2024-11-11 13:00+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/he/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.7-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "לעצום את העיניים בעדינות"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,11 +110,11 @@ msgstr "רישיון"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "רשימת תורמים"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "נשמח לסיוע בתרגום היישום הזה"
 
 # Break screen
 msgid "Skip"
@@ -495,15 +495,15 @@ msgstr "לקחת הפסקה עכשיו"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "כל הפסקה שהיא"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "הפסקה קצרה"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "הפסקה ארוכה"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -527,57 +527,59 @@ msgstr "השהיית מדיה"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "הגבלת דילוג מחזורי"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "כמה דילוגים או השהיות מותר ברצף"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "הגבלת כמות ההפסקות שאפשר לדלג או להשהות ברצף"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "דילגת או השהית %(num)d/%(allowed)d הפסקות ברצף"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "מניעת פציעת מאמץ חוזרני"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "נא להתקין שירות שמספק סמלי שורת מערכת לסביבת שולחן העבודה שלך."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "ההפסקה הארוכה הבאה ב־%s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "ההפסקות הבאות ב־%(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "לתוסף ההכרחי ‚%s’ חסרות תלויות!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"נא להתקין את התלויות או להשבית את התוסף. כדי להסתיר את ההודעה הזאת ניתן גם "
+"להשבית את התוסף בהגדרות."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "לחיצה כאן תציג מידע נוסף"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "השבתת תוסף זמנית"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "השבתה לצמיתות"
 
 msgid "License:"
-msgstr ""
+msgstr "רישיון:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
