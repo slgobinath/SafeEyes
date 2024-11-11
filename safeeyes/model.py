@@ -23,6 +23,8 @@ This module contains the entity classes used by Safe Eyes and its plugins.
 import logging
 import random
 from enum import Enum
+from dataclasses import dataclass
+from typing import Optional, Union
 
 from packaging.version import parse
 
@@ -419,3 +421,31 @@ class TrayAction:
             return TrayAction(name, icon_id, action, True)
         else:
             return TrayAction(name, icon_path, action, False)
+
+@dataclass
+class PluginDependency:
+    message: str
+    link: Optional[str] = None
+    retryable: bool = False
+
+class RequiredPluginException(Exception):
+    def __init__(self, plugin_id, plugin_name: str, message: Union[str, PluginDependency]):
+        if isinstance(message, PluginDependency):
+            msg = message.message
+        else:
+            msg = message
+
+        super().__init__(msg)
+
+        self.plugin_id = plugin_id
+        self.plugin_name = plugin_name
+        self.message = message
+
+    def get_plugin_id(self):
+        return self.plugin_id
+
+    def get_plugin_name(self):
+        return self.plugin_name
+
+    def get_message(self):
+        return self.message

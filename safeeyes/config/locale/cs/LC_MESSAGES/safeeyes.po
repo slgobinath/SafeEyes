@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-10-31 16:04+0000\n"
-"Last-Translator: Kryštof Jelínek <krystof186@gmail.com>\n"
+"PO-Revision-Date: 2024-08-27 19:09+0000\n"
+"Last-Translator: vikdevelop <super-vik1@protonmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Zavřete oči"
+msgid "Gently close your eyes"
+msgstr "Jemně zavřete své oči"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -109,6 +109,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Licence"
+
+# About dialog
+msgid "List of Contributors"
+msgstr "Seznam přispěvatelů"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Pomozte nám přeložit tuto aplikaci"
 
 # Break screen
 msgid "Skip"
@@ -263,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "Nastavení rozšíření"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Rozšíření nepodporuje pracovní (desktop) prostředí %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Nainstalujte si modul pro Python „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Nainstalujte si nástroj pro příkazový řádek „%s“"
 
@@ -279,6 +290,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Neplatný výraz pro plánovač (cron) „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Přidejte prostředek %(resource)s do složky %(config_resource)s"
 
@@ -360,10 +372,12 @@ msgid "Show a system notification before breaks"
 msgstr "Zobrazovat oznámení před přestávkami"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Připravte se na přestávku za %s sekund"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Připravte se na dlouhou přestávku za %s sekund"
 
@@ -434,6 +448,7 @@ msgid "Disable Safe Eyes"
 msgstr "Zablokovat Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Zablokovat do %s"
 
@@ -446,27 +461,31 @@ msgid "Enable Safe Eyes"
 msgstr "Odblokovat Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Na %d hodinu"
-msgstr[1] "Na %d hodiny"
-msgstr[2] "Na %d hodin"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Na %(num)d hodinu"
+msgstr[1] "Na %(num)d hodiny"
+msgstr[2] "Na %(num)d hodin"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Na %d minutu"
-msgstr[1] "Na %d minuty"
-msgstr[2] "Na %d minut"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Na %(num)d minutu"
+msgstr[1] "Na %(num)d minuty"
+msgstr[2] "Na %(num)d minut"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Na %d sekundu"
-msgstr[1] "Na %d sekundy"
-msgstr[2] "Na %d sekund"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Na %(num)d sekundu"
+msgstr[1] "Na %(num)d sekundy"
+msgstr[2] "Na %(num)d sekund"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Příští přestávka v %s"
 
@@ -484,15 +503,15 @@ msgstr "Udělat si přestávku"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Jakákoliv přestávka"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Krátká přestávka"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Dlouhá přestávka"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -513,6 +532,68 @@ msgstr "Pozastavit přehrávače médií z obrazovky přestávky"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pozastavit média"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "Omezení po sobě jdoucích přeskočení"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "Kolik přeskočení nebo odložení je povoleno v řadě za sebou"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr "Omezit počet přestávek, které lze vynechat nebo odložit za sebou"
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Vynechané nebo odložené %(num)d/%(allowed)d přestávky za sebou"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "Prevence poranění z opakovaného namáhání (RSI)"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+"Nainstalujte prosím službu poskytující ikony na panelu pro vaše desktopové "
+"prostředí."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Další dlouhá přestávka za %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Další přestávky za %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "Požadovanému zásuvnému modulu '%s' chybí závislosti!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Nainstalujte prosím požadované závislosti nebo zakažte tento zásuvný modul. "
+"Pro skrytí této zprávy, můžete také deaktivovat zásuvný modul v nastavení."
+
+msgid "Click here for more information"
+msgstr "Klikněte zde pro více informací"
+
+msgid "Disable plugin temporarily"
+msgstr "Zakázat zásuvný modul dočasně"
+
+msgid "Disable permanently"
+msgstr "Zakázat permanentně"
+
+msgid "License:"
+msgstr "Licence:"
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Zavřete oči"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

@@ -6,487 +6,486 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-01-30 14:01+0000\n"
-"Last-Translator: 麋悟BigELK176 <bigelk176@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
-"safe-eyes/translations/zh_Hant/>\n"
-"Language: zh_TW\n"
+"PO-Revision-Date: 2024-08-16 15:09+0000\n"
+"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
+"Language-Team: Bengali <https://hosted.weblate.org/projects/safe-eyes/"
+"translations/bn/>\n"
+"Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Weblate 5.7\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "আলতো করে চোখ বন্ধ করুন"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "左右滾動您的眼珠"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr "順時針方向旋轉您的眼睛"
+msgstr ""
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "以逆時針方向旋轉您的眼睛"
+msgstr ""
 
 # Short break
 msgid "Blink your eyes"
-msgstr "眨您的眼睛"
+msgstr ""
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr "聚焦於遠處的一個點"
+msgstr ""
 
 # Short break
 msgid "Have some water"
-msgstr "喝點水"
+msgstr "একটু জল খেয়ে নিন"
 
 # Long break
 msgid "Walk for a while"
-msgstr "起來走一會"
+msgstr "একটু হেঁটে আসুন"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "向後靠在椅背放鬆一下"
+msgstr ""
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr "顯示關於對話方塊"
+msgstr ""
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr "停用目前正在執行的 safeeyes 事例"
+msgstr ""
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr "啟用目前正在執行的 safeeyes 事例"
+msgstr ""
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr "離開目前正在執行的 safeeyes 事例"
+msgstr ""
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr "顯示設定視窗"
+msgstr ""
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr "以除錯模式開啓 safeeyes"
+msgstr ""
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
+msgstr ""
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes 未啟動"
+msgstr "Safe Eyes চলছে না"
 
 # RPC not enabled message
 msgid ""
 "Safe Eyes is running without an RPC server. Turn it on to use command-line "
 "arguments."
-msgstr "Safe Eyes 運行中不使用 RPC 伺服器。使用終端指令參數進行開啟。"
+msgstr ""
 
 # About dialog
 msgid "Close"
-msgstr "關閉"
+msgstr ""
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "描述"
+msgstr ""
 
 # About dialog
 msgid "License"
-msgstr "授權"
+msgstr "অনুমতিপত্র"
 
 # About dialog
 msgid "List of Contributors"
 msgstr ""
 
-# About dialog
-msgid "Help us translate this app"
+# Break screen
+msgid "Skip"
 msgstr ""
 
 # Break screen
-msgid "Skip"
-msgstr "跳過"
-
-# Break screen
 msgid "Postpone"
-msgstr "延遲"
+msgstr ""
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr "休息時長（秒）"
+msgstr ""
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "休息間隔（分鐘）"
+msgstr ""
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "休息前準備時間（秒）"
+msgstr ""
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr "鍵盤快速鍵停用期間(秒)"
+msgstr ""
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr "推遲休息時長（分鐘）"
+msgstr ""
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "顯示休息隨機順序"
+msgstr ""
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "強制休息（無法跳過）"
+msgstr ""
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "允許推遲休息"
+msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "維持內部計算狀態"
+msgstr ""
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "使用 RPC 伺服器來接收運行時指令"
+msgstr ""
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
-msgstr "不使用 RPC 伺服器，終端指令可能法作用"
+msgstr ""
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "長休息間隔須為短休息間隔的倍數"
+msgstr ""
 
 # Settings dialog
 msgid "Reset"
-msgstr "重設"
+msgstr ""
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "確定重設為預設設定？"
+msgstr ""
 
 # Settings dialog
 msgid "Options"
-msgstr "選項"
+msgstr ""
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "短休息"
+msgstr ""
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "長休息"
+msgstr ""
 
 # Settings dialog
 msgid "Delete"
-msgstr "刪除"
+msgstr ""
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "確定刪除此休息？"
+msgstr ""
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr "無法取消動作。"
+msgstr ""
 
 # Settings dialog
 msgid "Break"
-msgstr "休息"
+msgstr ""
 
 # Settings dialog
 msgid "Breaks"
-msgstr "休息"
+msgstr ""
 
 # Settings dialog
 msgid "Plugins"
-msgstr "外掛"
+msgstr ""
 
 # Settings dialog
 msgid "Type"
-msgstr "類型"
+msgstr ""
 
 # Settings dialog
 msgid "Short"
-msgstr "短"
+msgstr ""
 
 # Settings dialog
 msgid "Long"
-msgstr "長"
+msgstr ""
 
 # Settings dialog
 msgid "Image"
-msgstr "圖片"
+msgstr ""
 
 # Settings dialog
 msgid "Select"
-msgstr "選擇"
+msgstr ""
 
 # Settings dialog
 msgid "Please select an image"
-msgstr "請選擇一張照片"
+msgstr ""
 
 # Settings dialog
 msgid "Duration"
-msgstr "期間"
+msgstr ""
 
 # Settings dialog
 msgid "Time to wait"
-msgstr "等侯時間"
+msgstr ""
 
 # Settings dialog
 msgid "Override"
-msgstr "覆蓋"
+msgstr ""
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr "時間（秒）"
+msgstr "সময় (সেকেন্ডে)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr "時間（分）"
+msgstr "সময় (মিনিটে)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr "休息設定"
+msgstr ""
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr "外掛設定"
+msgstr ""
 
 # Settings dialog
 #, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr "外掛未支持 %s 桌機環境"
+msgstr ""
 
 # Settings dialog
 #, python-format
 msgid "Please install the Python module '%s'"
-msgstr "請安裝 Python 模組 '%s'"
+msgstr ""
 
 # Settings dialog
 #, python-format
 msgid "Please install the command-line tool '%s'"
-msgstr "請安裝終端指令工具 '%s'"
+msgstr ""
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr "無效的 cron 表述式 '%s'"
+msgstr ""
 
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "請將資源 %(resource)s 加入至 %(config_resource)s 的路徑"
+msgstr ""
 
 # Settings dialog
 msgid "New Break"
-msgstr "新建休息"
+msgstr ""
 
 # Settings dialog
 msgid "Remove"
-msgstr "移除"
+msgstr ""
 
 # Settings dialog
 msgid "Discard"
-msgstr "拋棄"
+msgstr ""
 
 # Settings dialog
 msgid "Save"
-msgstr "儲存"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr "音響提示"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr "在休息前後播放音響提示"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr "在休息之前播放音響提示"
+msgstr ""
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr "在休息之後播放音響提示"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr "勿擾模式"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "全螢幕模式作用時跳過休息"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr "任何時間下不要中斷這些視窗"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr "無論任何狀態下中斷這些視窗"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr "將可以中斷的視窗切換到正常模式"
+msgstr ""
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr "使用電池時不要打擾"
+msgstr ""
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr "健康統計"
+msgstr ""
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr "依您使用 Safe Eyes 方式來顯示統計"
+msgstr ""
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr "重設統計的時間 (cron expr)"
+msgstr ""
 
 # plugin/notification
 msgid "Notification"
-msgstr "通知"
+msgstr ""
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr "在休息之前顯示系統通知"
+msgstr ""
 
 # plugin/notification
 #, python-format
 msgid "Ready for a short break in %s seconds"
-msgstr "在 %s 秒後準備進入一個短休息"
+msgstr ""
 
 # plugin/notification
 #, python-format
 msgid "Ready for a long break in %s seconds"
-msgstr "在 %s 秒後準備進入一個長休息"
+msgstr ""
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr "螢幕保護"
+msgstr ""
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "在長休息之後啟動螢幕保護之前進行鎖定螢幕"
+msgstr ""
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr "自訂螢幕保護指令"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "不使用螢幕保護時進行跳過的最短時間(秒)"
+msgstr ""
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr "鎖定螢幕"
+msgstr ""
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr "智慧暫停"
+msgstr ""
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr "如果系統閒置時則暫停 Safe Eyes"
+msgstr ""
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr "暫停 Safe Eyes 的最短閒置時間(秒)"
+msgstr ""
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr "將系統閒置時間視為下一個休息的期間"
+msgstr ""
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "延後下次休息直到系統進入閒置"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "面板圖示"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "在通知區域顯示面板圖示"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "在面板圖示中顯示下次休息時間"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "允許關閉 Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 msgid "About"
-msgstr "關於"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "關閉 Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 #, python-format
 msgid "Disabled until %s"
-msgstr "關閉直到 %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "關閉直到重新啟動"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "開啟 Safe Eyes"
+msgstr ""
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
-msgstr[0] "%(num)d 小時"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
-msgstr[0] "%(num)d 分鐘"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
-msgstr[0] "%(num)d 秒"
+msgstr[0] ""
+msgstr[1] ""
 
 #: plugins/trayicon
 #, python-format
 msgid "Next break at %s"
-msgstr "下次休息在 %s"
+msgstr ""
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "無休息等待使用"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr "設定"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr "立即休息"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Any break"
@@ -502,23 +501,23 @@ msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr "直到重新啟動"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "退出"
+msgstr ""
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr "多媒體控制"
+msgstr ""
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr "休息畫面起暫停多媒體播放"
+msgstr ""
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr "暫停多媒體"
+msgstr ""
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
@@ -573,11 +572,3 @@ msgstr ""
 
 msgid "License:"
 msgstr ""
-
-# Short break
-#~ msgid "Tightly close your eyes"
-#~ msgstr "閉上您的眼睛休息一會"
-
-# plugin/healthstats
-#~ msgid "Interval to reset statistics (in hours)"
-#~ msgstr "重置數據間隔（時）"

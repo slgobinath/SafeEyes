@@ -25,6 +25,7 @@ jobs:
         run: |
           python3 -m pip install --upgrade pip setuptools wheel
           python3 -m pip install polib
+          sudo apt-get install -y gettext
 
       - name: Check translations
         run: |

@@ -6,21 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-11-26 00:02+0000\n"
-"Last-Translator: Almaz Mannanov <AlmazWorks@gmail.com>\n"
+"PO-Revision-Date: 2024-09-06 22:09+0000\n"
+"Last-Translator: AircGroup <imartime@yandex.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.2.1-rc\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Плотно закройте глаза"
+msgid "Gently close your eyes"
+msgstr "Аккуратно закройте глаза"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,6 +110,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Лицензия"
+
+# About dialog
+msgid "List of Contributors"
+msgstr "Список участников проекта"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Помоги нам перевести приложение"
 
 # Break screen
 msgid "Skip"
@@ -265,14 +273,17 @@ msgid "Plugin Settings"
 msgstr "Настройки дополнений"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Дополнение не поддерживает окружение рабочего стола: %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Пожалуйста, установите модуль Python: %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Пожалуйста, установите инструмент командной строки '%s'"
 
@@ -281,8 +292,9 @@ msgid "Invalid cron expression '%s'"
 msgstr "Недопустимое выражение cron '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr "Пожалуйста, добавьте источник %(resource)s в папку %(config_resource)"
+msgstr "Пожалуйста, добавьте источник %(resource)s в папку %(config_resource)s"
 
 # Settings dialog
 msgid "New Break"
@@ -361,10 +373,12 @@ msgid "Show a system notification before breaks"
 msgstr "Показывать системные уведомления перед перерывами"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Приготовьтесь к короткому перерыву через %s секунд"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Приготовьтесь к длинному перерыву через %s секунд"
 
@@ -435,6 +449,7 @@ msgid "Disable Safe Eyes"
 msgstr "Отключить Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Отключено до %s"
 
@@ -447,27 +462,31 @@ msgid "Enable Safe Eyes"
 msgstr "Активировать Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "На %d час"
-msgstr[1] "На %d часа"
-msgstr[2] "На %d часов"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "На %(num)d час"
+msgstr[1] "На %(num)d часа"
+msgstr[2] "На %(num)d часов"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "На %d минуту"
-msgstr[1] "На %d минуты"
-msgstr[2] "На %d минут"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "На %(num)d минуту"
+msgstr[1] "На %(num)d минуты"
+msgstr[2] "На %(num)d минут"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "На %d секунду"
-msgstr[1] "На %d секунды"
-msgstr[2] "На %d секунд"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "На %(num)d секунду"
+msgstr[1] "На %(num)d секунды"
+msgstr[2] "На %(num)d секунд"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Следующий перерыв в %s"
 
@@ -485,15 +504,15 @@ msgstr "Отдохнуть сейчас"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Сделайте перерыв на что угодно"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Небольшой перерыв"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Долгий перерыв"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -514,6 +533,68 @@ msgstr "Приостановить воспроизведение медиапл
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Приостановить воспроизведение"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "Ограничение пропусков подряд"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "Сколько пропусков или переносов разрешено подряд"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr "Какое количество перерывов можно пропустить или отложить подряд"
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Пропущенные или отложенные %(num)d/%(allowed)d перерывы подряд"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "Профилактика RSI"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+"Пожалуйста, установите ПО предоставляющий иконки в трее для вашего рабочего "
+"стола."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Следующий длительный перерыв в %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Следующие перерывы %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "В требуемом плагине '%s' отсутствуют зависимости!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Пожалуйста, установите зависимости или отключите плагин. Чтобы скрыть это "
+"сообщение, вы также можете отключить плагин в настройках."
+
+msgid "Click here for more information"
+msgstr "Нажмите здесь для получения дополнительной информации"
+
+msgid "Disable plugin temporarily"
+msgstr "Временно отключите плагин"
+
+msgid "Disable permanently"
+msgstr "Отключить навсегда"
+
+msgid "License:"
+msgstr "Лицензия:"
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Плотно закройте глаза"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

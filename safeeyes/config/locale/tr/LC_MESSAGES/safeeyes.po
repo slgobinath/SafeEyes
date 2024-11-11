@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-06-28 17:09+0000\n"
+"PO-Revision-Date: 2024-09-02 07:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/tr/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Gözlerinizi sıkıca kapatın"
+msgid "Gently close your eyes"
+msgstr "Yavaşça gözlerinizi kapatın"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,6 +110,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Lisans"
+
+# About dialog
+msgid "List of Contributors"
+msgstr "Katkıda Bulunanların Listesi"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Bu uygulamayı çevirmemize yardım edin"
 
 # Break screen
 msgid "Skip"
@@ -264,14 +272,17 @@ msgid "Plugin Settings"
 msgstr "Eklenti Ayarları"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Bu eklenti %s masaüstü ortamını desteklemiyor"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Lütfen '%s' Python modülünü kurun"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Lütfen '%s' komut satırı aracını kurunuz"
 
@@ -280,6 +291,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Geçersiz cron ifadesi '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Lütfen %(resource)s kaynağını %(config_resource)s klasörüne ekleyiniz"
 
@@ -360,10 +372,12 @@ msgid "Show a system notification before breaks"
 msgstr "Molalardan önce bir sistem bildirimi göster"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "%s Saniye sonra verilecek bir kısa mola için hazır olun"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "%s Saniye sonra verilecek bir uzun mola için hazır olun"
 
@@ -435,6 +449,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes'ı pasifleştir"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "%s'e kadar pasif"
 
@@ -447,24 +462,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes'ı etkinleştir"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d Saat Boyunca"
-msgstr[1] "%d Saat"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d Saat Boyunca"
+msgstr[1] "%(num)d Saat"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d Dakika Boyunca"
-msgstr[1] "%d Dakika"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d Dakika Boyunca"
+msgstr[1] "%(num)d Dakika"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d Saniye Boyunca"
-msgstr[1] "%d Saniye"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d Saniye Boyunca"
+msgstr[1] "%(num)d Saniye"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Sonraki mola %s'de"
 
@@ -511,6 +530,67 @@ msgstr "Ortam oynatıcıları ara ekrandan duraklat"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Ortamı duraklat"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "Ardışık Geçmeyi Sınırla"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "Arka arkaya kaç geçmeye veya ertelemeye izin verilir"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+"Arka arkaya kaç molanın geçilebileceğini veya ertelenebileceğini sınırlayın"
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Arka arkaya %(num)d/%(allowed)d mola geçildi veya ertelendi"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "Tekrarlayan zorlanma yaralanmalarının önlenmesi"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr "Lütfen masaüstü ortamınız için tepsi simgeleri sağlayan hizmeti kurun."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Sonraki uzun mola: %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Sonraki mola: %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "Gerekli '%s' eklentisinin bağımlılıkları eksik!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Lütfen bağımlılıkları kurun veya eklentiyi devre dışı bırakın. Bu mesajı "
+"gizlemek için eklentiyi ayarlardan da devre dışı bırakabilirsiniz."
+
+msgid "Click here for more information"
+msgstr "Daha fazla bilgi için buraya tıklayın"
+
+msgid "Disable plugin temporarily"
+msgstr "Eklentiyi geçici olarak devre dışı bırak"
+
+msgid "Disable permanently"
+msgstr "Kalıcı olarak devre dışı bırak"
+
+msgid "License:"
+msgstr "Lisans:"
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Gözlerinizi sıkıca kapatın"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

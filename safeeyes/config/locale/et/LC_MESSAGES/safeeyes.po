@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.5\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Sulge silmad"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -109,6 +109,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Litsents"
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -263,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "Plugina seaded"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Plugin ei toeta aknahaldurit %s"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Palun paigalda järgnev Pythoni moodul: '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Palun paigalda järgnev käsurea tööriist: '%s'"
 
@@ -279,6 +290,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Vigane croni väljend '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Palun lisa ressurss %(resource)s kataloogi %(config_resource)s"
 
@@ -359,10 +371,12 @@ msgid "Show a system notification before breaks"
 msgstr "Süsteemiteavituste kuvamine enne pausi"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Lühike paus %s sekundi pärast"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Pikk paus %s sekundi pärast"
 
@@ -431,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "Peata Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Peatatud kuni %s"
 
@@ -443,24 +458,28 @@ msgid "Enable Safe Eyes"
 msgstr "Käivita Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d-ks tunniks"
-msgstr[1] "%d-ks tunniks"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d-ks tunniks"
+msgstr[1] "%(num)d-ks tunniks"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d-ks minutiks"
-msgstr[1] "%d-ks minutiks"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d-ks minutiks"
+msgstr[1] "%(num)d-ks minutiks"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d-ks sekundiks"
-msgstr[1] "%d-ks sekundiks"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d-ks sekundiks"
+msgstr[1] "%(num)d-ks sekundiks"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Järgmine paus %s"
 
@@ -507,6 +526,64 @@ msgstr "Peata meediapleiereid pausikuvalt"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Peata meedia"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Sulge silmad"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

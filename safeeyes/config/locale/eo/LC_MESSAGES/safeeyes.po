@@ -19,8 +19,8 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Streĉe malfermu viajn okulojn"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -108,6 +108,14 @@ msgstr "Priskribo"
 # About dialog
 msgid "License"
 msgstr "Licenco"
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -262,14 +270,17 @@ msgid "Plugin Settings"
 msgstr "Kromaĵaj Agordoj"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Kromaĵo ne subtenas %s-fenestrilon"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Bonvolu instali la modulo de Python '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Bonvolu instali la ilo de komanda linio '%s'"
 
@@ -278,6 +289,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Nevalida esprimo de cron '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 "Bonvolu aldoni la rimedon %(resource)s al %(config_resource)s-dosierujo"
@@ -359,10 +371,12 @@ msgid "Show a system notification before breaks"
 msgstr "Montri sisteman sciigon antaŭ paŭzoj"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Preta por mallonga paŭzo en %s sekundoj"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Preta por longa paŭzo en %s sekundoj"
 
@@ -432,6 +446,7 @@ msgid "Disable Safe Eyes"
 msgstr "Malebligi je Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Malebligita ĝis %s"
 
@@ -444,24 +459,28 @@ msgid "Enable Safe Eyes"
 msgstr "Malebligi je Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Dum %d Horo"
-msgstr[1] "Dum %d Horoj"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Dum %(num)d Horo"
+msgstr[1] "Dum %(num)d Horoj"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Dum %d Minuto"
-msgstr[1] "Dum %d Minutoj"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Dum %(num)d Minuto"
+msgstr[1] "Dum %(num)d Minutoj"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Dum %d Sekundo"
-msgstr[1] "Dum %d Sekundoj"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Dum %(num)d Sekundo"
+msgstr[1] "Dum %(num)d Sekundoj"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Sekva paŭzo je %s"
 
@@ -508,6 +527,64 @@ msgstr "Paŭzi plurmediajn ludilojn ene de la paŭza ekrano"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Paŭzi aŭdovidaĵon"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Streĉe malfermu viajn okulojn"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.7.2-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "ಕಣ್ಣನ್ನು ಗಟ್ಟಿಯಾಗಿ ಮುಚ್ಚಿರಿ"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -107,6 +107,14 @@ msgstr "ವಿವರಣೆ"
 # About dialog
 msgid "License"
 msgstr "ಪರವಾನಿಗೆ"
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -261,14 +269,17 @@ msgid "Plugin Settings"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr ""
 
@@ -277,6 +288,7 @@ msgid "Invalid cron expression '%s'"
 msgstr ""
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr ""
 
@@ -357,10 +369,12 @@ msgid "Show a system notification before breaks"
 msgstr ""
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr ""
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr ""
 
@@ -429,6 +443,7 @@ msgid "Disable Safe Eyes"
 msgstr ""
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr ""
 
@@ -441,21 +456,25 @@ msgid "Enable Safe Eyes"
 msgstr ""
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
 msgstr[0] ""
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
 msgstr[0] ""
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
 msgstr[0] ""
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr ""
 
@@ -502,3 +521,61 @@ msgstr ""
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "ಕಣ್ಣನ್ನು ಗಟ್ಟಿಯಾಗಿ ಮುಚ್ಚಿರಿ"

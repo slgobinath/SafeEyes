@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.5-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Sluit je ogen goed"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,6 +110,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Licentie"
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -268,14 +276,17 @@ msgid "Plugin Settings"
 msgstr "Plug-in-instellingen"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "De plug-in biedt geen ondersteuning voor de %s-bureaubladomgeving"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Installeer de Python-module '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Installeer het terminalprogramma '%s'"
 
@@ -284,6 +295,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Ongeldige cron-uitdrukking '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Voeg de bron %(resource)s toe aan de %(config_resource)s-map"
 
@@ -365,10 +377,12 @@ msgid "Show a system notification before breaks"
 msgstr "Systeemmelding tonen voorafgaand aan pauzes"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Bereid je voor op een korte pauze over %s seconden"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Bereid je voor op een lange pauze over %s seconden"
 
@@ -437,6 +451,7 @@ msgid "Disable Safe Eyes"
 msgstr "Safe Eyes uitschakelen"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Uitgeschakeld tot %s"
 
@@ -449,24 +464,28 @@ msgid "Enable Safe Eyes"
 msgstr "Safe Eyes inschakelen"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "Voor %d uur"
-msgstr[1] "Voor %d uur"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "Voor %(num)d uur"
+msgstr[1] "Voor %(num)d uur"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "Voor %d minuut"
-msgstr[1] "Voor %d minuten"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "Voor %(num)d minuut"
+msgstr[1] "Voor %(num)d minuten"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "Voor %d seconde"
-msgstr[1] "Voor %d seconden"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "Voor %(num)d seconde"
+msgstr[1] "Voor %(num)d seconden"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Volgende pauze over %s"
 
@@ -513,6 +532,64 @@ msgstr "Mediaspelers pauzeren via het pauzescherm"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Media pauzeren"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Sluit je ogen goed"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

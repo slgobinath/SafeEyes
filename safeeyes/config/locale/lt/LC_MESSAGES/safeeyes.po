@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-02 12:09+0000\n"
+"PO-Revision-Date: 2024-10-14 06:16+0000\n"
 "Last-Translator: openSUSE Lietuviškai <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/lt/>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && ("
 "n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Stipriai užsimerkite"
+msgid "Gently close your eyes"
+msgstr "Švelniai užsimerkite"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,6 +110,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "Licencija"
+
+# About dialog
+msgid "List of Contributors"
+msgstr "Talkininkų sąrašas"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Padėkite mums išversti šią programą"
 
 # Break screen
 msgid "Skip"
@@ -265,14 +273,17 @@ msgid "Plugin Settings"
 msgstr "Papildinio nuostatos"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Papildinys nepalaiko %s darbalaukio aplinkos"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Įdiekite Python modulį „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Įdiekite komandų eilutės įrankį „%s“"
 
@@ -281,6 +292,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Neteisingas cron reiškinys „%s“"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Pridėkite išteklių %(resource)s į %(config_resource)s katalogą"
 
@@ -361,10 +373,12 @@ msgid "Show a system notification before breaks"
 msgstr "Prieš pertraukas rodyti sistemos pranešimą"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Pasiruoškite trumpai pertraukai po %s sekundžių"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Pasiruoškite ilgai pertraukai po %s sekundžių"
 
@@ -436,6 +450,7 @@ msgid "Disable Safe Eyes"
 msgstr "Išjungti Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Išjungta iki %s"
 
@@ -448,27 +463,31 @@ msgid "Enable Safe Eyes"
 msgstr "Įjungti Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d valandai"
-msgstr[1] "%d valandoms"
-msgstr[2] "%d valandų"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d valandai"
+msgstr[1] "%(num)d valandoms"
+msgstr[2] "%(num)d valandų"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d minutei"
-msgstr[1] "%d minutėms"
-msgstr[2] "%d minučių"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d minutei"
+msgstr[1] "%(num)d minutėms"
+msgstr[2] "%(num)d minučių"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d sekundei"
-msgstr[1] "%d sekundėms"
-msgstr[2] "%d sekundžių"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d sekundei"
+msgstr[1] "%(num)d sekundėms"
+msgstr[2] "%(num)d sekundžių"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Kita pertrauka %s"
 
@@ -515,6 +534,67 @@ msgstr "Pristabdyti medijos leistuves iš pertraukos ekrano"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "Pristabdyti mediją"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "Apriboti nuoseklų praleidinėjimą"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "Kiek leidžiama praleisti arba atidėti kartų iš eilės"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr "Apriboti, kiek kartų galima iš eilės praleisti arba atidėti pertraukų"
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Paeiliui praleistos arba atidėtos pertraukos: %(num)d/%(allowed)d"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "Apsaugokite savo akis nuo įtampos"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+"Prašome įdiegti savo darbalaukio aplinkos sistemos ženkliukų dėklo paslaugą."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "Kita ilga pertrauka: %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "Kitos pertraukos: %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "Reikalingam papildiniui „%s“ trūksta priklausomybių!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"Prašome įdiegti priklausomybes arba pašalinti papildinį. Norėdami paslėpti "
+"šį pranešimą, taip pat galite išjungti šį papildinį nuostatose."
+
+msgid "Click here for more information"
+msgstr "Norėdami sužinoti daugiau, spauskite čia"
+
+msgid "Disable plugin temporarily"
+msgstr "Laikinai išjungti papildinį"
+
+msgid "Disable permanently"
+msgstr "Išjungti visam laikui"
+
+msgid "License:"
+msgstr "Licencija:"
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Stipriai užsimerkite"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
