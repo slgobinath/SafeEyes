@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-08-24 17:09+0000\n"
+"PO-Revision-Date: 2024-11-12 23:00+0000\n"
 "Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -117,7 +117,7 @@ msgstr "Liste des contributeurs"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "Aidez-nous à traduire cette appli"
 
 # Break screen
 msgid "Skip"
@@ -526,7 +526,7 @@ msgstr "Jusqu’au redémarrage"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr "Fermer"
+msgstr "Quitter"
 
 # plugin/mediacontrol
 msgid "Media Control"
