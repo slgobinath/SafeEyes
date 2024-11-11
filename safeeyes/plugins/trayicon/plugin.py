@@ -65,6 +65,7 @@ class TrayIcon:
         self.idle_condition = threading.Condition()
         self.lock = threading.Lock()
         self.allow_disabling = plugin_config['allow_disabling']
+        self.allow_forced_disabling = plugin_config.get('allow_forced_disabling', False)
         self.animate = False
 
         # Construct the tray icon
@@ -356,14 +357,14 @@ class TrayIcon:
         """
         This method is called by the core to prevent user from disabling Safe Eyes after the notification.
         """
-        if self.active:
+        if self.active and not self.allow_forced_disabling:
             self.menu.set_sensitive(False)
 
     def unlock_menu(self):
         """
         This method is called by the core to activate the menu after the the break.
         """
-        if self.active:
+        if self.active and not self.allow_forced_disabling:
             self.menu.set_sensitive(True)
 
     def disable_ui(self):

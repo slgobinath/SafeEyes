@@ -2,7 +2,7 @@
     "meta": {
         "name": "Tray Icon",
         "description": "Show a tray icon in the notification area",
-        "version": "0.0.3"
+        "version": "0.0.4"
     },
     "dependencies": {
         "python_modules": [],
@@ -29,6 +29,12 @@
             "label": "Allow disabling Safe Eyes",
             "type": "BOOL",
             "default": true
+        },
+        {
+            "id": "allow_forced_disabling",
+            "label": "Allow disabling Safe Eyes even when strict mode is enabled",
+            "type": "BOOL",
+            "default": false
         },
         {
             "id": "disable_options",
