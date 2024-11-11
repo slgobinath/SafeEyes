@@ -11,6 +11,7 @@
         "desktop_environments": [],
         "resources": []
     },
+    "required_plugin": true,
     "settings": [
         {
             "id": "show_time_in_tray",

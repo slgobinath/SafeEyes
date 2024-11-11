@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-07-07 10:18+0000\n"
+"PO-Revision-Date: 2024-09-20 00:40+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.13.1-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "محکم چشمانتان را ببندید"
+msgid "Gently close your eyes"
+msgstr "چشمانتان را آرام ببندید"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,9 +110,17 @@ msgstr ""
 msgid "License"
 msgstr "پروانه"
 
+# About dialog
+msgid "List of Contributors"
+msgstr "لیست مشارکت‌کنندگان"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "کمک به ترجمهٔ این کاره"
+
 # Break screen
 msgid "Skip"
-msgstr "پرش"
+msgstr "ردکن"
 
 # Break screen
 msgid "Postpone"
@@ -144,7 +152,7 @@ msgstr "نمایش استراحت‌ها به ترتیب کاتوره‌ای"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "استراحت قاطع ( بدون راهی برای پرش از استراحت)"
+msgstr "استراحت قاطع ( راهی برای ردکردن از استراحت نباشد)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
@@ -263,14 +271,17 @@ msgid "Plugin Settings"
 msgstr "تنظیمات افزایه"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "افزایه از محیط میزکار %s پشتیبانی نمی‌کند"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "لطفاً پیمانهٔ %s پایتون را نصب کنید"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "لطفاً ابزار خط فرمان %s را نصب کنید"
 
@@ -279,6 +290,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "عبارت کرون نامعتبر «%s»"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "لطفا منبع %(resource)s را به شاخهٔ %(config_resource)s بیفزایید"
 
@@ -320,7 +332,7 @@ msgstr "مزاحم نشوید"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr "اگر پنجره فعال در حالت تمام صفحه است ، از پرش صرف نظر کنید"
+msgstr "اگر پنجره فعال در حالت تمام‌صفحه است، از ردکردن صرف نظر کنید"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
@@ -359,10 +371,12 @@ msgid "Show a system notification before breaks"
 msgstr "نمایش یک آگاهی سامانه پیش از استراحت‌ها"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "آماده برای استراحتی کوتاه در %s ثانیه"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "آماده برای استراحتی طولانی در %s ثانیه"
 
@@ -380,7 +394,7 @@ msgstr "دستور محافظ صفحه نمایش سفارشی"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr "کمینهٔ ثانیه‌ها برای پرش بدون محافظ صفحه"
+msgstr "حداقل ثانیه‌ها برای ردکردن بدون محافظ صفحه"
 
 # plugin/screensaver
 msgid "Lock screen"
@@ -431,6 +445,7 @@ msgid "Disable Safe Eyes"
 msgstr "از کار انداختن محافظ چشم"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "از کار افتاده تا %s"
 
@@ -443,24 +458,28 @@ msgid "Enable Safe Eyes"
 msgstr "به کار انداختن محافظ چشم"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
 msgstr[0] "برای ۱ ساعت"
-msgstr[1] "برای %Id ساعت"
+msgstr[1] "برای %(num)dI ساعت"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
 msgstr[0] "برای ۱ دقیقه"
-msgstr[1] "برای %Id دقیقه"
+msgstr[1] "برای %(num)dI دقیقه"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
 msgstr[0] "برای ۱ ثانیه"
-msgstr[1] "برای %dI ثانیه"
+msgstr[1] "برای %(num)dI ثانیه"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "استراحت بعدی در %s"
 
@@ -478,15 +497,15 @@ msgstr "اکنون استراحت کنید"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "هر استراحتی"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "استراحت کوتاه"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "استراحت طولانی"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -507,6 +526,66 @@ msgstr "مکث پخش‌کننده‌های رسانه در صفحهٔ استر�
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "مکث رسانه"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr "محدود‌کردن ردکردن بیش‌از‌حد"
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr "چقدر پشت‌سرهم ردکردن یا به تعویق انداختن مجاز است"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr "تعداد استراحت‌ها را که می‌توان پشت‌سرهم رد یا به تعویق انداخت محدود کن"
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "%(num)d/%(allowed)d استراحت‌ها پشت‌سرهم رد یا به تعویق افتاده‌اند"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "جلوگیری از آر‌ اس آی"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr "لطفاً آیکون‌های نوار ارائه دهنده خدمات را برای محیط دسکتاپ خود نصب کنید."
+
+#, python-format
+msgid "Next long break at %s"
+msgstr "استراحت طولانی بعدی در %s"
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr "استراحت‌های بعدی در %(short)s/%(long)s"
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr "افزونه موردنیاز '%s' فاقد دِپِندِنسی است!"
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+"لطفاً دِپِندِنسی ها را نصب کنید یا افزونه را غیرفعال کنید. برای مخفی کردن این "
+"پیام، می توانید افزونه را در تنظیمات غیرفعال کنید."
+
+msgid "Click here for more information"
+msgstr "برای اطلاعات بیشتر اینجا کلیک کنید"
+
+msgid "Disable plugin temporarily"
+msgstr "غیرفعال کردن موقت افزونه"
+
+msgid "Disable permanently"
+msgstr "غیرفعال کردن دائمی"
+
+msgid "License:"
+msgstr "پروانه:"
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "محکم چشمانتان را ببندید"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

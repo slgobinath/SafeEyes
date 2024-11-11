@@ -18,8 +18,8 @@ msgstr ""
 "X-Generator: Weblate 4.16-dev\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "눈을 꼭 감으세요"
+msgid "Gently close your eyes"
+msgstr ""
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -107,6 +107,14 @@ msgstr "설명"
 # About dialog
 msgid "License"
 msgstr "라이선스"
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -261,14 +269,17 @@ msgid "Plugin Settings"
 msgstr "부가기능 설정"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "부가기능이 %s 데스크톱 환경을 지원하지 않습니다"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "'%s' 파이썬 모듈을 설치해주세요"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "'%s' 명령줄 도구를 설치해주세요"
 
@@ -277,6 +288,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "잘못된 크론 표현식 '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "%(resource)s를 %(config_resource)s 디렉토리에 추가해주세요"
 
@@ -357,10 +369,12 @@ msgid "Show a system notification before breaks"
 msgstr "휴식 전 시스템 알림 표시"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "%s초 안에 짧은 휴식 준비"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "%s초 안에 긴 휴식 준비"
 
@@ -429,6 +443,7 @@ msgid "Disable Safe Eyes"
 msgstr "세이프 아이즈 비활성화"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "%s까지 비활성화됨"
 
@@ -441,21 +456,25 @@ msgid "Enable Safe Eyes"
 msgstr "세이프 아이즈 활성화"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "%d시간"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "%(num)d시간"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "%d분"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "%(num)d분"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "%d초"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "%(num)d초"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "%s에 다음 휴식"
 
@@ -502,6 +521,64 @@ msgstr "휴식 상태일 때 미디어 플레이어 일시 정지"
 # plugin/mediacontrol
 msgid "Pause media"
 msgstr "미디어 일시 정지"
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "눈을 꼭 감으세요"
 
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"

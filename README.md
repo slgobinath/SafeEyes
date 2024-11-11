@@ -1,4 +1,4 @@
-<img src="safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
+<img src="https://raw.githubusercontent.com/slgobinath/SafeEyes/master/safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
 
 # Safe Eyes
 
@@ -39,20 +39,24 @@ optional arguments:
 
 Safe Eyes is available on the official repositories of many popular the distributions.
 
-[![Packaging status](https://repology.org/badge/vertical-allrepos/safeeyes.svg)](https://repology.org/project/safeeyes/versions)
+<a href="https://repology.org/project/safeeyes/versions">
+    <img src="https://repology.org/badge/vertical-allrepos/safeeyes.svg" alt="Packaging status" align="right">
+</a>
 
-
-It is also available in Ubuntu PPA, Arch AUR, Gentoo and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
-
+It is also available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any installation source and install on any Linux system with Python 3.
 
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
-The official Safe Eyes PPA hosts the latest version of safeeyes for Ubuntu 22.04 and above. On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
-
+The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes **for Ubuntu 22.04 and above**. 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
+sudo apt install safeeyes
+```
+
+On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories.
+```bash
 sudo apt install safeeyes
 ```
 
@@ -75,12 +79,14 @@ sudo apt-get install safeeyes
 ```
 
 ### Fedora
-
+ If you want to use Smart Pause plugin, install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
 ```bash
-sudo dnf install libappindicator-gtk3 python3-psutil cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
+sudo dnf install python3-psutil python3-packaging cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
 sudo pip3 install safeeyes
 sudo gtk-update-icon-cache /usr/share/icons/hicolor
 ```
+
+We are looking for an official package maintainer for Fedora. Please [contact us](https://github.com/slgobinath/SafeEyes/issues/611) if you are interested.
 
 ### OpenSUSE Tumbleweed
 
@@ -96,7 +102,7 @@ sudo apk add safeeyes
 ```
 
 ### Flatpak
-
+**Warning**: Many plugins and features don't work well in the flatpak. We recommend that you use one of the native packages listed above. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes.
 ```bash
 flatpak install flathub io.github.slgobinath.SafeEyes
 ```
@@ -105,12 +111,15 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-appindicator3-0.1 or gir1.2-ayatanaappindicator3-0.1
 - gir1.2-notify-0.7
-- libappindicator-gtk3
+- python3-babel
+- python3-croniter
 - python3-psutil
+- python3-packaging
+- python3-xlib
 - xprintidle (optional)
 - wlrctl (wayland optional)
+- Python 3.10+
 
 **To install Safe Eyes:**
 
@@ -177,22 +186,36 @@ For more details, please check the issue: [#329](https://github.com/slgobinath/S
 
 Thirdparty plugins are available at another GitHub repository: [safeeyes-plugins](https://github.com/slgobinath/safeeyes-plugins). More details about how to write your own plugin and how to install third-party plugin are available there.
 
+## Local development
+
+When adding new translatable strings in the source code, make sure to run `python validate_po.py --extract` to add them to the translation template. You will need to install `python3-polib` for this.
+
+Examples for translatable strings are `_("This is a string")` in Python code, or `<property name="label" translatable="yes">This is a label</property>` in Glade/xml files.
+
+To ensure the new strings are well-formed, you can use `python validate_po.py --validate`.
+
 ## How to Release?
 
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L81)
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L88)
-    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L43)
-    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L50)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L83)
+    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L90)
+    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L42)
+    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu release)
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
 
+## How you can help improving translation of Safe Eyes
+
+First check if translations for your language are already available on [Weblate](https://hosted.weblate.org/engage/safe-eyes/), which is the cloud based translation platform we use. 
+
+- If the language is already there, feel free to add new translations or improve the existing ones.
+- If it is not there, please [open an issue](https://github.com/slgobinath/SafeEyes/issues) in Github so that we can add your language to Weblate.
 
 ## License
 

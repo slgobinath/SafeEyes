@@ -21,8 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build
-          pip install wheel
+          pip install build wheel
 
       - name: Get Current Version
         run: |
@@ -50,7 +49,7 @@ jobs:
           token: ${{ secrets.GH_API_SECRET }}
 
       - name: Build Python Package
-        run: rm -Rf build *.egg-info/ && python3 setup.py sdist bdist_wheel
+        run: rm -rf build *.egg-info/ && python3 -m build
 
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@v1.6.4

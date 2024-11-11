@@ -90,6 +90,10 @@
     color: #9B9B9B;
 }
 
+.btn_plugin_extra_link {
+    padding-left: 0px;
+}
+
 .info_bar_long_break {
     opacity: 0.9;
     border-radius: 5px;

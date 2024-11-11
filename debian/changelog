@@ -1,3 +1,31 @@
+safeeyes (2.2.2) jammy; urgency=medium
+
+  * Fixed translations
+
+  * Fixed GTK startup error
+
+  * Fixed frozen break screen if safeeyes is closed right before a break
+
+  * Fixed safeeyes not working if stylesheet is missing
+
+  * Replaced "tightly close your eyes" with "gently close your eyes"
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Mon, 5 Aug 2024 18:04:23 -0400
+
+safeeyes (2.2.1) jammy; urgency=medium
+
+  * Make limit consecutive skips to default
+
+  * Add list of contributors to About page
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 14 Jul 2024 16:15:54 -0400
+
+safeeyes (2.2.0) jammy; urgency=medium
+
+  * Limit consecutive skips
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 14 Jul 2024 09:30:12 -0400
+
 safeeyes (2.1.9) noble; urgency=medium
 
   * Fix crash in smartpause

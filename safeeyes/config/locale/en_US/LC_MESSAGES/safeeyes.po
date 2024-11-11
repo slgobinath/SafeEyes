@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2021-07-04 07:32+0000\n"
-"Last-Translator: J. Lavoie <j.lavoie@net-c.ca>\n"
+"PO-Revision-Date: 2024-08-07 15:09+0000\n"
+"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
 "Language-Team: English (United States) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/en_US/>\n"
 "Language: en_US\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.8-dev\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
-msgid "Tightly close your eyes"
-msgstr "Tightly close your eyes"
+msgid "Gently close your eyes"
+msgstr "Gently close your eyes"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -110,6 +110,14 @@ msgstr ""
 # About dialog
 msgid "License"
 msgstr "License"
+
+# About dialog
+msgid "List of Contributors"
+msgstr "List of Contributors"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -264,14 +272,17 @@ msgid "Plugin Settings"
 msgstr "Plugin Settings"
 
 # Settings dialog
+#, python-format
 msgid "Plugin does not support %s desktop environment"
 msgstr "Plugin does not support %s desktop environment"
 
 # Settings dialog
+#, python-format
 msgid "Please install the Python module '%s'"
 msgstr "Please install the Python module '%s'"
 
 # Settings dialog
+#, python-format
 msgid "Please install the command-line tool '%s'"
 msgstr "Please install the command-line tool '%s'"
 
@@ -280,6 +291,7 @@ msgid "Invalid cron expression '%s'"
 msgstr "Invalid cron expression “%s”"
 
 # Settings dialog
+#, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
 msgstr "Please add the resource %(resource)s to %(config_resource)s directory"
 
@@ -360,10 +372,12 @@ msgid "Show a system notification before breaks"
 msgstr "Show a system notification before breaks"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a short break in %s seconds"
 msgstr "Ready for a short break in %s seconds"
 
 # plugin/notification
+#, python-format
 msgid "Ready for a long break in %s seconds"
 msgstr "Ready for a long break in %s seconds"
 
@@ -432,6 +446,7 @@ msgid "Disable Safe Eyes"
 msgstr "Disable Safe Eyes"
 
 #: plugins/trayicon
+#, python-format
 msgid "Disabled until %s"
 msgstr "Disabled until %s"
 
@@ -444,24 +459,28 @@ msgid "Enable Safe Eyes"
 msgstr "Enable Safe Eyes"
 
 #: plugins/trayicon
-msgid "For %d Hour"
-msgid_plural "For %d Hours"
-msgstr[0] "For %d Hour"
-msgstr[1] "For %d Hours"
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] "For %(num)d Hour"
+msgstr[1] "For %(num)d Hours"
 
 #: plugins/trayicon
-msgid "For %d Minute"
-msgid_plural "For %d Minutes"
-msgstr[0] "For %d Minute"
-msgstr[1] "For %d Minutes"
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] "For %(num)d Minute"
+msgstr[1] "For %(num)d Minutes"
 
 #: plugins/trayicon
-msgid "For %d Second"
-msgid_plural "For %d Seconds"
-msgstr[0] "For %d Second"
-msgstr[1] "For %d Seconds"
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] "For %(num)d Second"
+msgstr[1] "For %(num)d Seconds"
 
 #: plugins/trayicon
+#, python-format
 msgid "Next break at %s"
 msgstr "Next break at %s"
 
@@ -509,10 +528,6 @@ msgstr "Pause media players from the break screen"
 msgid "Pause media"
 msgstr "Pause media"
 
-# plugin/healthstats
-#~ msgid "Interval to reset statistics (in hours)"
-#~ msgstr "Interval to reset statistics (in hours)"
-
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
 msgstr "Limit Consecutive Skipping"
@@ -526,5 +541,51 @@ msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr "Limit how many breaks can be skipped or postponed in a row"
 
 # plugin/limitconsecutiveskipping
-msgid "Skipped or postponed %d/%d breaks in a row"
-msgstr "Skipped or postponed %d/%d breaks in a row"
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr "RSI Prevention"
+
+msgid ""
+"Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+# Short break
+#~ msgid "Tightly close your eyes"
+#~ msgstr "Tightly close your eyes"
+
+# plugin/healthstats
+#~ msgid "Interval to reset statistics (in hours)"
+#~ msgstr "Interval to reset statistics (in hours)"

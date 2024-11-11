@@ -22,12 +22,11 @@ Media Control plugin lets users to pause currently playing media player from the
 
 import logging
 import os
-import dbus
 import re
 import gi
 from safeeyes.model import TrayAction
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, Gio
 
 tray_icon_path = None
 
@@ -37,13 +36,31 @@ def __active_players():
     List of all media players which are playing now.
     """
     players = []
-    bus = dbus.SessionBus()
 
-    for service in bus.list_names():
+    dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
+        bus_type=Gio.BusType.SESSION,
+        flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
+        info=None,
+        name='org.freedesktop.DBus',
+        object_path='/org/freedesktop/DBus',
+        interface_name='org.freedesktop.DBus',
+        cancellable=None,
+    )
+
+    for service in dbus_proxy.ListNames():
         if re.match('org.mpris.MediaPlayer2.', service):
-            player = bus.get_object(service, "/org/mpris/MediaPlayer2")
-            interface = dbus.Interface(player, 'org.freedesktop.DBus.Properties')
-            status = str(interface.Get('org.mpris.MediaPlayer2.Player', 'PlaybackStatus')).lower()
+            player = Gio.DBusProxy.new_for_bus_sync(
+                bus_type=Gio.BusType.SESSION,
+                flags=Gio.DBusProxyFlags.NONE,
+                info=None,
+                name=service,
+                object_path='/org/mpris/MediaPlayer2',
+                interface_name='org.mpris.MediaPlayer2.Player',
+                cancellable=None,
+            )
+
+            status = player.get_cached_property('PlaybackStatus').unpack().lower()
+
             if status == "playing":
                 players.append(player)
     return players
@@ -54,8 +71,7 @@ def __pause_players(players):
     Pause all playing media players using dbus.
     """
     for player in players:
-        interface = dbus.Interface(player, dbus_interface='org.mpris.MediaPlayer2.Player')
-        interface.Pause()
+        player.Pause()
 
 
 def init(ctx, safeeyes_config, plugin_config):

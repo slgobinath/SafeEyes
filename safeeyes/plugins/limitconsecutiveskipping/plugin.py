@@ -95,5 +95,8 @@ def get_widget_content(break_obj):
     if not enabled:
         return ""
 
-    return _('Skipped or postponed %d/%d breaks in a row') % (no_of_skipped_breaks, no_allowed_skips)
+    return _('Skipped or postponed %(num)d/%(allowed)d breaks in a row') % {
+        'num': no_of_skipped_breaks,
+        'allowed': no_allowed_skips
+    }
 
