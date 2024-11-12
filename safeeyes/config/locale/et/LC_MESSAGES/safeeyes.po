@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-18 00:50+0000\n"
-"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
+"PO-Revision-Date: 2024-11-12 23:00+0000\n"
+"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 5.9-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Sulge õrnalt oma silmad"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -103,7 +103,7 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"Safe Eyes aitab vähendada arvutiga töötamisel silmade väsimust, tuletades "
+"Safe Eyes aitab arvutiga töötamisel vähendada silmade väsimust, tuletades "
 "meelde puhkepause"
 
 # About dialog
@@ -112,11 +112,11 @@ msgstr "Litsents"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Kaasautorite loend"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "Aita meil seda rakendust tõlkida"
 
 # Break screen
 msgid "Skip"
@@ -128,7 +128,7 @@ msgstr "Lükka edasi"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr "Pausi kestvus (sekundites)"
+msgstr "Pausi kestus (sekundites)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
@@ -244,7 +244,7 @@ msgstr "Palun vali pilt"
 
 # Settings dialog
 msgid "Duration"
-msgstr "Kestvus"
+msgstr "Kestus"
 
 # Settings dialog
 msgid "Time to wait"
@@ -256,11 +256,11 @@ msgstr "Muuda vaikimisi seadeid"
 
 # Settings dialog
 msgid "Time (in seconds)"
-msgstr "Kestvus (sekundites)"
+msgstr "Kestus (sekundites)"
 
 # Settings dialog
 msgid "Time (in minutes)"
-msgstr "Kestvus (minutites)"
+msgstr "Kestus (minutites)"
 
 # Settings dialog
 msgid "Break Settings"
@@ -497,15 +497,15 @@ msgstr "Tee nüüd paus"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Iga puhkepaus"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Lühike puhkepaus"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Pikk puhkepaus"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -529,57 +529,61 @@ msgstr "Peata meedia"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Piira järjest vahelejätmisi"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Kui mitu edasilükkamist või vahelejätmist võid järjest teha"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "Kui mitu pausi võid järjest vahele jätta või edasi lükata"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "Järjest vahelejäetud või edasilükatatud %(num)d/%(allowed)d pausi"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "RSI ennetus"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Palun paigalda teenus, mis võimaldab sinu töölauakeskkonnas kasutada "
+"süsteemisalve."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Järgmine pikk puhkepaus %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Järgmised puhkepausid %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Vajalikul „%s“ pluginal puuduvad sõltuvad komponendid!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Palun lisa vajalikud komponendid või lülita plugin välja. Viimast saad teha "
+"seadistustest ja sellega ei teki enam ka antud teadet."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Lisateabeks klõpsi siin"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Lülita plugin ajutiselt välja"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Lülita püsivalt välja"
 
 msgid "License:"
-msgstr ""
+msgstr "Litsents:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
