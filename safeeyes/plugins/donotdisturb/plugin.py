@@ -18,7 +18,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Skip Fullscreen plugin skips the break if the active window is fullscreen.
-NOTE: Do not remove the unused import 'GdkX11' because it is required in Ubuntu 14.04
 """
 
 import os
@@ -27,10 +26,9 @@ import re
 import subprocess
 
 import gi
-gi.require_version('Gdk', '3.0')
-from gi.repository import Gdk
-from gi.repository import GdkX11  # noqa F401
+gi.require_version('Gio', '2.0')
 from gi.repository import Gio
+import Xlib
 from safeeyes import utility
 
 context = None
@@ -63,36 +61,59 @@ def is_active_window_skipped_xorg(pre_break):
     This method must be executed by the main thread. If not, it will cause random failure.
     """
     logging.info('Searching for full-screen application')
-    screen = Gdk.Screen.get_default()
 
-    active_window = screen.get_active_window()
+    x11_display = Xlib.display.Display()
+    active_window = x11_display.get_input_focus().focus
+
     if active_window:
-        active_xid = str(active_window.get_xid())
-        cmdlist = ['xprop', '-root', '-notype', '-id',
-                   active_xid, 'WM_CLASS', '_NET_WM_STATE']
+        NET_WM_STATE = x11_display.intern_atom("_NET_WM_STATE")
+        NET_WM_STATE_FULLSCREEN = x11_display.intern_atom("_NET_WM_STATE_FULLSCREEN")
 
-        try:
-            stdout = subprocess.check_output(cmdlist).decode('utf-8')
-        except subprocess.CalledProcessError:
-            logging.warning('Error in finding full-screen application')
-        else:
-            if stdout:
-                is_fullscreen = 'FULLSCREEN' in stdout
-                # Extract the process name
-                process_names = re.findall('"(.+?)"', stdout)
-                if process_names:
-                    process_name = process_names[1].lower()
-                    if _window_class_matches(process_name, skip_break_window_classes):
-                        return True
-                    elif _window_class_matches(process_name, take_break_window_classes):
-                        if is_fullscreen and unfullscreen_allowed and not pre_break:
-                            try:
-                                active_window.unfullscreen()
-                            except BaseException as e:
-                                logging.error('Error in unfullscreen the window ' + process_name, exc_info=e)
-                        return False
+        props = active_window.get_full_property(NET_WM_STATE, Xlib.Xatom.ATOM)
+        is_fullscreen = props.value and NET_WM_STATE_FULLSCREEN in props.value.tolist()
 
-                return is_fullscreen
+        process_names = active_window.get_wm_class()
+
+        if is_fullscreen:
+            logging.info("fullscreen window found")
+
+        if process_names:
+            process_name = process_names[1].lower()
+            if _window_class_matches(process_name, skip_break_window_classes):
+                logging.info("found uninterruptible window")
+                return True
+            elif _window_class_matches(process_name, take_break_window_classes):
+                logging.info("found interruptible window")
+                if is_fullscreen and unfullscreen_allowed and not pre_break:
+                    logging.info("interrupting interruptible window")
+                    try:
+                        # To change the fullscreen state, we cannot simply set the property - we must send a ClientMessage event
+                        # See https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html#id-1.6.8
+                        root_window = x11_display.screen().root
+
+                        cm_event = Xlib.protocol.event.ClientMessage(
+                            window = active_window,
+                            client_type = NET_WM_STATE,
+                            data = (32, [
+                                0, # _NET_WM_STATE_REMOVE
+                                NET_WM_STATE_FULLSCREEN,
+                                0, # other property, must be 0
+                                1, # source indication
+                                0 # must be 0
+                            ])
+                        )
+
+                        mask = Xlib.X.SubstructureRedirectMask | Xlib.X.SubstructureNotifyMask
+
+                        root_window.send_event(cm_event, event_mask = mask)
+
+                        x11_display.sync()
+
+                    except BaseException as e:
+                        logging.error('Error in unfullscreen the window ' + process_name, exc_info=e)
+                return False
+
+        return is_fullscreen
 
     return False
 
