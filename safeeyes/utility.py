@@ -38,13 +38,13 @@ from pathlib import Path
 import babel.core
 import babel.dates
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 from packaging.version import parse
 
-gi.require_version('Gdk', '3.0')
+gi.require_version('Gdk', '4.0')
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get('HOME') or os.path.expanduser('~')
@@ -654,7 +654,7 @@ def create_gtk_builder(glade_file):
     builder.add_from_file(glade_file)
     # Tranlslate all sub components
     for obj in builder.get_objects():
-        if (not isinstance(obj, Gtk.SeparatorMenuItem)) and hasattr(obj, "get_label"):
+        if hasattr(obj, "get_label"):
             label = obj.get_label()
             if label is not None:
                 obj.set_label(_(label))
