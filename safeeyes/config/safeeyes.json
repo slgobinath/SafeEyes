@@ -65,7 +65,7 @@
         {
             "id": "audiblealert",
             "enabled": true,
-            "version": "0.0.3",
+            "version": "0.0.4",
             "settings": {
                 "pre_break_alert": true,
                 "post_break_alert": true
@@ -79,6 +79,7 @@
                 "show_time_in_tray": false,
                 "show_long_time_in_tray": false,
                 "allow_disabling": true,
+                "allow_forced_disabling": false,
                 "disable_options": [{
                         "time": 30,
                         "unit": "minute"
