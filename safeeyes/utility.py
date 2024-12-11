@@ -265,7 +265,7 @@ def desktop_environment():
     env = 'unknown'
     if desktop_session is not None:
         desktop_session = desktop_session.lower()
-        if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde']:
+        if desktop_session in ['gnome', 'unity', 'budgie-desktop', 'cinnamon', 'mate', 'xfce4', 'lxde', 'pantheon', 'fluxbox', 'blackbox', 'openbox', 'icewm', 'jwm', 'afterstep', 'trinity', 'kde', 'hyprland']:
             env = desktop_session
         elif desktop_session.startswith('xubuntu') or (current_desktop is not None and 'xfce' in current_desktop):
             env = 'xfce'
