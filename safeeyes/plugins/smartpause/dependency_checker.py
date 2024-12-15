@@ -25,6 +25,11 @@ def validate(plugin_config, plugin_settings):
         command = "dbus-send"
     elif utility.DESKTOP_ENVIRONMENT == "sway":
         command = "swayidle"
+    elif utility.IS_WAYLAND:
+        if not utility.module_exist("pywayland"):
+            return _("Please install the Python module '%s'") % "pywayland"
+        # no command needed with pywayland
+        return None
     else:
         command = "xprintidle"
     if not utility.command_exist(command):
