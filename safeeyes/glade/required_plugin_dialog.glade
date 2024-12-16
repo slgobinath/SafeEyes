@@ -20,7 +20,7 @@
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="window_required_plugin">
     <property name="title" translatable="1">Safe Eyes - Error</property>
     <property name="resizable">0</property>
@@ -71,7 +71,10 @@
             </child>
             <child>
               <object class="GtkLabel" id="lbl_main">
-                <property name="margin">5</property>
+                <property name="margin-top">5</property>
+                <property name="margin-bottom">5</property>
+                <property name="margin-start">5</property>
+                <property name="margin-end">5</property>
                 <property name="wrap">1</property>
                 <property name="justify">center</property>
                 <property name="max-width-chars">60</property>
