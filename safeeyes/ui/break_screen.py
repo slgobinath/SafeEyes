@@ -255,7 +255,6 @@ class BreakScreen:
         Lock the keyboard to prevent the user from using keyboard shortcuts (X11 only)
         """
         if self.is_wayland:
-            logging.warning("Keyboard locking is not supported in Wayland.")
             return
 
         logging.info("Lock the keyboard")
