@@ -281,9 +281,6 @@ class BreakScreen:
         """
         Release the locked keyboard.
         """
-        if self.context['is_wayland']:
-            return
-
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
         self.display.ungrab_keyboard(X.CurrentTime)
