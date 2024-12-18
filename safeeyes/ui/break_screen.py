@@ -55,9 +55,8 @@ class BreakScreen:
         self.shortcut_disable_time = 2
         self.strict_break = False
         self.windows = []
-        self.is_wayland = os.environ.get('XDG_SESSION_TYPE') == 'wayland'
 
-        if not self.is_wayland:
+        if not self.context['is_wayland']:
             self.display = Display()
 
         # Initialize the theme
@@ -135,7 +134,7 @@ class BreakScreen:
         Hide the break screen from active window and destroy all other windows
         """
         logging.info("Close the break screen(s)")
-        if not self.is_wayland:
+        if not self.context['is_wayland']:
             self.__release_keyboard()
 
         # Destroy other windows if exists
@@ -154,7 +153,7 @@ class BreakScreen:
         Show an empty break screen on all screens.
         """
         # Lock the keyboard
-        if not self.is_wayland:
+        if not self.context['is_wayland']:
             utility.start_thread(self.__lock_keyboard)
         else:
             # TODO: Wayland keyboard locking
@@ -254,9 +253,6 @@ class BreakScreen:
         """
         Lock the keyboard to prevent the user from using keyboard shortcuts (X11 only)
         """
-        if self.is_wayland:
-            return
-
         logging.info("Lock the keyboard")
         self.lock_keyboard = True
 
@@ -285,7 +281,7 @@ class BreakScreen:
         """
         Release the locked keyboard.
         """
-        if self.is_wayland:
+        if self.context['is_wayland']:
             return
 
         logging.info("Unlock the keyboard")
