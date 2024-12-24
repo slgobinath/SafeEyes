@@ -19,7 +19,7 @@
 import datetime
 from safeeyes.model import BreakType
 import gi
-gi.require_version('Gtk', '3.0')
+gi.require_version('Gtk', '4.0')
 from gi.repository import Gio, GLib
 import logging
 from safeeyes import utility
