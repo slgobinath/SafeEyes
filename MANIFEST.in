@@ -1,2 +1,8 @@
 include LICENSES/GPL-3.0-or-later.txt
 include README.md
+
+graft safeeyes
+
+prune safeeyes/tests
+
+global-exclude *.py[cod]
