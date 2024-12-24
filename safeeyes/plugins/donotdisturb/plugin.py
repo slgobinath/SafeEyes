@@ -194,9 +194,9 @@ def on_start_break(break_obj):
         if utility.DESKTOP_ENVIRONMENT == 'gnome':
             skip_break = is_idle_inhibited_gnome()
         else:
-            skip_break = is_active_window_skipped_wayland(True)
+            skip_break = is_active_window_skipped_wayland(False)
     else:
-        skip_break = is_active_window_skipped_xorg(True)
+        skip_break = is_active_window_skipped_xorg(False)
     if dnd_while_on_battery and not skip_break:
         skip_break = is_on_battery()
     return skip_break
