@@ -1,3 +1,24 @@
+safeeyes (2.2.3) jammy; urgency=medium
+
+  * Translations
+
+  * Make config and stylesheet files non-executable
+
+  * Retry loading trayicon plugin to fix races on startup
+
+  * Fix "Show next break time in tray icon" for desktops support tray icons
+    with labels
+
+  * Fix next break time in tray icon when disabling SafeEyes
+
+  * Make SafeEyes compatible with Python 3.6 again
+
+  * Add 'hyprland' to the list of recognized desktop sessions
+
+  * Remove hard dependency on X11
+
+ -- Mel Dafert <m@dafert.at>  Wed, 25 Dec 2024 11:46:00 +0000
+
 safeeyes (2.2.2) jammy; urgency=medium
 
   * Fixed translations
