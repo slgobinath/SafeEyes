@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-28 15:09+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2024-09-21 15:40+0000\n"
+"Last-Translator: Erik Michelson <opensource@erik.michelson.eu>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Schließe sanft deine Augen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -114,6 +114,10 @@ msgstr "Lizenz"
 # About dialog
 msgid "List of Contributors"
 msgstr "Liste der Mitwirkenden"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Hilf mit die Anwendung zu übersetzen"
 
 # Break screen
 msgid "Skip"
@@ -549,7 +553,8 @@ msgstr ""
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr "%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
+msgstr ""
+"%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -591,7 +596,7 @@ msgid "Disable permanently"
 msgstr "Permanent ausschalten"
 
 msgid "License:"
-msgstr ""
+msgstr "Lizenz:"
 
 # Short break
 #~ msgid "Tightly close your eyes"

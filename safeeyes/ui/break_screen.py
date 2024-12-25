@@ -44,7 +44,7 @@ class BreakScreen:
     def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
         self.context = context
         self.count_labels = []
-        self.display = Display()
+        self.display = None
         self.enable_postpone = False
         self.enable_shortcut = False
         self.is_pretified = False
@@ -55,6 +55,9 @@ class BreakScreen:
         self.shortcut_disable_time = 2
         self.strict_break = False
         self.windows = []
+
+        if not self.context['is_wayland']:
+            self.display = Display()
 
         # Initialize the theme
         css_provider = Gtk.CssProvider()
@@ -131,7 +134,8 @@ class BreakScreen:
         Hide the break screen from active window and destroy all other windows
         """
         logging.info("Close the break screen(s)")
-        self.__release_keyboard()
+        if not self.context['is_wayland']:
+            self.__release_keyboard()
 
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
@@ -149,7 +153,11 @@ class BreakScreen:
         Show an empty break screen on all screens.
         """
         # Lock the keyboard
-        utility.start_thread(self.__lock_keyboard)
+        if not self.context['is_wayland']:
+            utility.start_thread(self.__lock_keyboard)
+        else:
+            # TODO: Wayland keyboard locking
+            logging.warning("Keyboard locking not yet implemented for Wayland.")
 
         display = Gdk.Display.get_default()
         screen = display.get_default_screen()
@@ -243,7 +251,7 @@ class BreakScreen:
 
     def __lock_keyboard(self):
         """
-        Lock the keyboard to prevent the user from using keyboard shortcuts
+        Lock the keyboard to prevent the user from using keyboard shortcuts (X11 only)
         """
         logging.info("Lock the keyboard")
         self.lock_keyboard = True

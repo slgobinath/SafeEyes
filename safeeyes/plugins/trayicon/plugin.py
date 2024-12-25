@@ -49,6 +49,12 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml("""
         <property name="Status" type="s" access="read"/>
         <signal name="NewIcon"/>
         <signal name="NewTooltip"/>
+
+        <property name="XAyatanaLabel" type="s" access="read"/>
+        <signal name="XAyatanaNewLabel">
+            <arg type="s" name="label" direction="out" />
+            <arg type="s" name="guide" direction="out" />
+        </signal>
     </interface>
 </node>""").interfaces[0]
 
@@ -346,6 +352,7 @@ class StatusNotifierItemService(DBusService):
     IconName = 'io.github.slgobinath.SafeEyes-enabled'
     IconThemePath = ''
     ToolTip = ('', [], 'Safe Eyes', '')
+    XAyatanaLabel = ""
     ItemIsMenu = True
     Menu = None
 
@@ -396,6 +403,14 @@ class StatusNotifierItemService(DBusService):
 
         self.emit_signal(
             'NewTooltip'
+        )
+
+    def set_xayatanalabel(self, label):
+        self.XAyatanaLabel = label
+
+        self.emit_signal(
+            "XAyatanaNewLabel",
+            (label, "")
         )
 
 class TrayIcon:
@@ -514,7 +529,7 @@ class TrayIcon:
                 disable_items.append({
                     'id': disable_option_dynamic_id,
                     'label': label,
-                    'callback': lambda: self.on_disable_clicked(time_in_minutes),
+                    'callback': lambda time_in_minutes=time_in_minutes: self.on_disable_clicked(time_in_minutes),
                 })
 
                 disable_option_dynamic_id += 1
@@ -611,6 +626,7 @@ class TrayIcon:
             description = ''
 
         self.sni_service.set_tooltip('Safe Eyes', description)
+        self.sni_service.set_xayatanalabel(description)
 
     def quit_safe_eyes(self):
         """

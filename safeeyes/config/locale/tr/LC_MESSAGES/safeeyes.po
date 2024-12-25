@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-06-28 17:09+0000\n"
+"PO-Revision-Date: 2024-09-02 07:09+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language-Team: Turkish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/tr/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Yavaşça gözlerinizi kapatın"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -113,7 +113,11 @@ msgstr "Lisans"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Katkıda Bulunanların Listesi"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Bu uygulamayı çevirmemize yardım edin"
 
 # Break screen
 msgid "Skip"
@@ -529,57 +533,60 @@ msgstr "Ortamı duraklat"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Ardışık Geçmeyi Sınırla"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Arka arkaya kaç geçmeye veya ertelemeye izin verilir"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
+"Arka arkaya kaç molanın geçilebileceğini veya ertelenebileceğini sınırlayın"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "Arka arkaya %(num)d/%(allowed)d mola geçildi veya ertelendi"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Tekrarlayan zorlanma yaralanmalarının önlenmesi"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "Lütfen masaüstü ortamınız için tepsi simgeleri sağlayan hizmeti kurun."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Sonraki uzun mola: %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Sonraki mola: %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Gerekli '%s' eklentisinin bağımlılıkları eksik!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Lütfen bağımlılıkları kurun veya eklentiyi devre dışı bırakın. Bu mesajı "
+"gizlemek için eklentiyi ayarlardan da devre dışı bırakabilirsiniz."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Daha fazla bilgi için buraya tıklayın"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Eklentiyi geçici olarak devre dışı bırak"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Kalıcı olarak devre dışı bırak"
 
 msgid "License:"
-msgstr ""
+msgstr "Lisans:"
 
 # Short break
 #~ msgid "Tightly close your eyes"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-07-10 11:09+0000\n"
-"Last-Translator: menom <menom1@protonmail.com>\n"
+"PO-Revision-Date: 2024-11-02 20:00+0000\n"
+"Last-Translator: Milan Šalka <salka.milan@googlemail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/sk/>\n"
 "Language: sk\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.8.2\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Jemne zavrite oči"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -113,7 +113,11 @@ msgstr "Licencia"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Zoznam Prispievateľov"
+
+# About dialog
+msgid "Help us translate this app"
+msgstr "Pomôžte nám preložiť túto aplikáciu"
 
 # Break screen
 msgid "Skip"
@@ -529,57 +533,61 @@ msgstr "Pozastaviť média"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Limit Konzekutívne lyžovanie"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Koľko preskokov alebo odložiek je povolené v rade"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "Limit, koľko prestávky je možné preskočiť alebo odložiť v rade"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "Sklo alebo odložené %(num)d/%(allowed)d prestávky v rade"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Prevencia RSI"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Prosím, nainštalujte službu poskytujúce zásobníkové ikony pre vaše "
+"desktopové prostredie."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Najdlhšia prestávka na %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Ďalšie prestávky na %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "Požadovaný plugin '%s chýba závislosti!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Prosím, nainštalujte záhady alebo vypnúť plugin. Ak chcete skryť túto "
+"správu, môžete tiež deaktivovať plugin v nastavení."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Kliknite tu pre viac informácií"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Disable plugin dočasne"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Zakázať trvalo"
 
 msgid "License:"
-msgstr ""
+msgstr "Licencia:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
