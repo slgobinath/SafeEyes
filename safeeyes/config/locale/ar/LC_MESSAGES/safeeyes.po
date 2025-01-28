@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-09-17 01:09+0000\n"
-"Last-Translator: Barman Anonymous Please <barman-object-knee@duck.com>\n"
+"PO-Revision-Date: 2025-01-29 10:02+0000\n"
+"Last-Translator: knowcart <knowcart@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -572,24 +572,26 @@ msgstr "الاستراحة القادمة في %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "أن اﻻضافة %s المطلوبة تحتاج الى مكتبات مفقودة!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"فضلا حمل المكتبات اللازمة او عطل اﻻضافة. كى تخفى هذة الرسالة، بأمكانك ايضا "
+"تعطيل اﻻضافة من اﻻعدادات."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "انقر هنا للمزيد من المعلومات"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "تعطيل مؤقت"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "تعطيل دائم"
 
 msgid "License:"
-msgstr ""
+msgstr "الترخيص:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
