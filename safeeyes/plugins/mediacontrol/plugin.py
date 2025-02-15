@@ -59,10 +59,16 @@ def __active_players():
                 cancellable=None,
             )
 
-            status = player.get_cached_property('PlaybackStatus').unpack().lower()
+            playbackstatus = player.get_cached_property("PlaybackStatus")
 
-            if status == "playing":
-                players.append(player)
+            if playbackstatus is not None:
+                status = playbackstatus.unpack().lower()
+
+                if status == "playing":
+                    players.append(player)
+            else:
+                logging.warning(f"Failed to get PlaybackStatus for {service}")
+
     return players
 
 
