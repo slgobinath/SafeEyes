@@ -19,7 +19,6 @@
 
 import logging
 import os
-import threading
 import time
 
 import gi
@@ -157,10 +156,6 @@ class BreakScreen:
         i = 0
 
         for monitor in monitors:
-            monitor_gemoetry = monitor.get_geometry()
-            x = monitor_gemoetry.x
-            y = monitor_gemoetry.y
-
             builder = Gtk.Builder()
             builder.add_from_file(BREAK_SCREEN_GLADE)
 

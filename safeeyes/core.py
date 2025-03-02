@@ -24,7 +24,6 @@ import threading
 import time
 
 from safeeyes import utility
-from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook

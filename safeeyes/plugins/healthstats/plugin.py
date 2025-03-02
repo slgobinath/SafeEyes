@@ -168,7 +168,8 @@ def _get_next_reset_time():
         next_reset_time = cron.get_next(datetime.datetime)
         session["next_reset_time"] = next_reset_time.strftime("%Y-%m-%d %H:%M:%S")
         logging.debug("Health stats will be reset at " + session["next_reset_time"])
-    except:
+    except:  # noqa E722
+        # TODO: consider catching Exception here instead of bare except
         logging.error("Error in statistics reset expression: " + statistics_reset_cron)
         next_reset_time = None
 

@@ -22,7 +22,6 @@ application.
 
 import atexit
 import logging
-import os
 from threading import Timer
 from importlib import metadata
 
@@ -201,6 +200,8 @@ class SafeEyes(Gtk.Application):
         self.required_plugin_dialog_active = True
 
         logging.info("Show RequiredPlugin dialog")
+        plugin_id = error.get_plugin_id()
+
         dialog = RequiredPluginDialog(
             error.get_plugin_id(),
             error.get_plugin_name(),

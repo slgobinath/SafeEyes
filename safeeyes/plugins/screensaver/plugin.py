@@ -20,7 +20,6 @@
 after long breaks.
 """
 
-import gi
 import logging
 import os
 
