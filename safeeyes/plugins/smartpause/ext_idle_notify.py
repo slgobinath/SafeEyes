@@ -52,12 +52,14 @@ class ExtIdleNotify:
         self._thread.join()
 
     def run(self):
-        self._thread = threading.Thread(target=self._run, name="ExtIdleNotify", daemon=False)
+        self._thread = threading.Thread(
+            target=self._run, name="ExtIdleNotify", daemon=False
+        )
         self._thread.start()
 
     def _run(self):
         reg = self._display.get_registry()
-        reg.dispatcher['global'] = self._global_handler
+        reg.dispatcher["global"] = self._global_handler
 
         while self._running:
             self._display.dispatch(block=True)
@@ -65,7 +67,7 @@ class ExtIdleNotify:
         self._display.disconnect()
 
     def _global_handler(self, reg, id_num, iface_name, version):
-        if iface_name == 'wl_seat':
+        if iface_name == "wl_seat":
             self._seat = reg.bind(id_num, WlSeat, version)
         if iface_name == "ext_idle_notifier_v1":
             self._idle_notifier = reg.bind(id_num, ExtIdleNotifierV1, version)
@@ -73,9 +75,13 @@ class ExtIdleNotify:
         if self._idle_notifier and self._seat and not self._notifier_set:
             self._notifier_set = True
             timeout_sec = 1
-            self._notification = self._idle_notifier.get_idle_notification(timeout_sec * 1000, self._seat)
-            self._notification.dispatcher['idled'] = self._idle_notifier_handler
-            self._notification.dispatcher['resumed'] = self._idle_notifier_resume_handler
+            self._notification = self._idle_notifier.get_idle_notification(
+                timeout_sec * 1000, self._seat
+            )
+            self._notification.dispatcher["idled"] = self._idle_notifier_handler
+            self._notification.dispatcher["resumed"] = (
+                self._idle_notifier_resume_handler
+            )
 
     def _idle_notifier_handler(self, notification):
         self._idle_since = datetime.datetime.now()
@@ -89,5 +95,3 @@ class ExtIdleNotify:
 
         result = datetime.datetime.now() - self._idle_since
         return result.total_seconds()
-
-
