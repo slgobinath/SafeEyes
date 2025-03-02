@@ -21,7 +21,6 @@ import logging
 import subprocess
 import threading
 import re
-import os
 
 from safeeyes import utility
 from safeeyes.model import State

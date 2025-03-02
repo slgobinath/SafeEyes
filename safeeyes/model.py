@@ -192,7 +192,6 @@ class BreakQueue:
             return self.__short_queue is None and self.__long_queue is None
 
     def __next_short(self):
-        longs  = self.__long_queue
         shorts = self.__short_queue
         break_obj = shorts[self.__current_short]
         self.context["break_type"] = "short"

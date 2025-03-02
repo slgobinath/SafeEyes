@@ -18,16 +18,12 @@
 
 # This file is heavily inspired by https://github.com/juienpro/easyland/blob/efc26a0b22d7bdbb0f8436183428f7036da4662a/src/easyland/idle.py
 
-import logging
 import threading
 import datetime
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
-from pywayland.protocol.ext_idle_notify_v1 import (
-    ExtIdleNotificationV1,
-    ExtIdleNotifierV1
-)
+from pywayland.protocol.ext_idle_notify_v1 import ExtIdleNotifierV1
 
 
 class ExtIdleNotify:

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import os
 
 from pathlib import Path
 from setuptools import Command, setup
@@ -40,7 +39,7 @@ class BuildMoSubCommand(Command):
         files = {}
 
         localedir = Path("safeeyes/config/locale")
-        po_dirs = [l.joinpath("LC_MESSAGES") for l in localedir.iterdir() if l.is_dir()]
+        po_dirs = [d.joinpath("LC_MESSAGES") for d in localedir.iterdir() if d.is_dir()]
         for po_dir in po_dirs:
             po_files = [
                 f for f in po_dir.iterdir() if f.is_file() and f.suffix == ".po"
