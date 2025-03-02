@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2019-03-04 09:58+0000\n"
-"Last-Translator: Gobinath L <lgobi20@gmail.com>\n"
+"PO-Revision-Date: 2025-03-02 01:26+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ta/>\n"
 "Language: ta\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5\n"
+"X-Generator: Weblate 5.10.3-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "கண்களை மெதுவாக மூடு"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -113,11 +113,11 @@ msgstr "மென்பொருள் உரிமம்"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "பங்களிப்பாளர்களின் பட்டியல்"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "இந்த பயன்பாட்டை மொழிபெயர்க்க எங்களுக்கு உதவுங்கள்"
 
 # Break screen
 msgid "Skip"
@@ -290,7 +290,7 @@ msgstr "தயவுசெய்து '%s' முனைய கட்டளை�
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "தவறான க்ரோன் வெளிப்பாடு '%s'"
 
 # Settings dialog
 #, python-format
@@ -363,7 +363,7 @@ msgstr "Safe Eyes பயன்பாடு அடிப்படையிலா�
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "புள்ளிவிவரங்களை மீட்டமைக்கும் இடைவெளி (CRON வெளிப்பாடு)"
 
 # plugin/notification
 msgid "Notification"
@@ -500,15 +500,15 @@ msgstr "சுயவிருப்பிலான இடைவேளை"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "எந்த இடைவெளியும்"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "சிறு இடைவேளை"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "நீண்ட இடைவெளி"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -532,57 +532,60 @@ msgstr "பல்லூடகத்தை இடைநிறுத்து"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "தொடர்ச்சியான ச்கிப்பிங்கைக் கட்டுப்படுத்துங்கள்"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "ஒரு வரிசையில் எத்தனை ச்கிப்ச் அல்லது போச்ட்போன்கள் அனுமதிக்கப்படுகின்றன"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "ஒரு வரிசையில் எத்தனை இடைவெளிகளைத் தவிர்க்கலாம் அல்லது ஒத்திவைக்கலாம்"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
+"ஒரு வரிசையில் %(num)d/ %(allowed)d இடைவெளிகளைத் தவிர்க்கவும் அல்லது ஒத்திவைக்கவும்"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "ஆர்.எச்.ஐ தடுப்பு"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "உங்கள் டெச்க்டாப் சூழலுக்கான தட்டு ஐகான்களை வழங்கும் சேவையை நிறுவவும்."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "அடுத்த நீண்ட இடைவெளி %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "அடுத்தது %(short)s/ %(long)s உடைக்கிறது"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "தேவையான சொருகி '%s' சார்புகளைக் காணவில்லை!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"தயவுசெய்து சார்புகளை நிறுவவும் அல்லது சொருகி முடக்கவும். இந்த செய்தியை மறைக்க, நீங்கள் "
+"அமைப்புகளில் சொருகி செயலிழக்கச் செய்யலாம்."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "மேலும் தகவலுக்கு இங்கே சொடுக்கு செய்க"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "தற்காலிகமாக சொருகி முடக்கு"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "நிரந்தரமாக முடக்கு"
 
 msgid "License:"
-msgstr ""
+msgstr "உரிமம்:"
 
 # Short break
 #~ msgid "Tightly close your eyes"
