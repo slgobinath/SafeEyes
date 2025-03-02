@@ -6,12 +6,13 @@ from pathlib import Path
 from setuptools import Command, setup
 from setuptools.command.build import build as OriginalBuildCommand
 
+
 class BuildCommand(OriginalBuildCommand):
-    sub_commands = [('build_mo', None), *OriginalBuildCommand.sub_commands]
+    sub_commands = [("build_mo", None), *OriginalBuildCommand.sub_commands]
 
 
 class BuildMoSubCommand(Command):
-    description = 'Compile .po files into .mo files'
+    description = "Compile .po files into .mo files"
 
     files = None
 
@@ -30,7 +31,7 @@ class BuildMoSubCommand(Command):
             if not self.editable_mode:
                 # Parent directory required for msgfmt to work correctly
                 Path(build_file).parent.mkdir(parents=True, exist_ok=True)
-            self.spawn(['msgfmt', source_file, '-o', build_file])
+            self.spawn(["msgfmt", source_file, "-o", build_file])
 
     def _get_files(self):
         if self.files is not None:
@@ -38,12 +39,12 @@ class BuildMoSubCommand(Command):
 
         files = {}
 
-        localedir = Path('safeeyes/config/locale')
-        po_dirs = [l.joinpath('LC_MESSAGES') for l in localedir.iterdir() if l.is_dir()]
+        localedir = Path("safeeyes/config/locale")
+        po_dirs = [l.joinpath("LC_MESSAGES") for l in localedir.iterdir() if l.is_dir()]
         for po_dir in po_dirs:
-            po_files = [f
-                        for f in po_dir.iterdir()
-                        if f.is_file() and f.suffix == '.po']
+            po_files = [
+                f for f in po_dir.iterdir() if f.is_file() and f.suffix == ".po"
+            ]
             for po_file in po_files:
                 mo_file = po_file.with_suffix(".mo")
 
@@ -65,9 +66,7 @@ class BuildMoSubCommand(Command):
         return self._get_files().keys()
 
     def get_source_files(self):
-        return  self._get_files().values()
+        return self._get_files().values()
 
 
-setup(
-    cmdclass={'build': BuildCommand, 'build_mo': BuildMoSubCommand}
-)
+setup(cmdclass={"build": BuildCommand, "build_mo": BuildMoSubCommand})

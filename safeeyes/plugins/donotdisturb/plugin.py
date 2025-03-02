@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-Skip Fullscreen plugin skips the break if the active window is fullscreen.
-"""
+"""Skip Fullscreen plugin skips the break if the active window is fullscreen."""
 
 import os
 import logging
@@ -26,7 +24,8 @@ import re
 import subprocess
 
 import gi
-gi.require_version('Gio', '2.0')
+
+gi.require_version("Gio", "2.0")
 from gi.repository import Gio
 import Xlib
 from safeeyes import utility
@@ -39,7 +38,7 @@ dnd_while_on_battery = False
 
 
 def is_active_window_skipped_wayland(pre_break):
-    cmdlist = ['wlrctl', 'toplevel', 'find', 'state:fullscreen']
+    cmdlist = ["wlrctl", "toplevel", "find", "state:fullscreen"]
     try:
         process = subprocess.Popen(cmdlist, stdout=subprocess.PIPE)
         process.communicate()[0]
@@ -48,19 +47,22 @@ def is_active_window_skipped_wayland(pre_break):
         elif process.returncode == 1:
             return False
         elif process.returncode == 127:
-            logging.warning('Could not find wlrctl needed to detect fullscreen under wayland')
+            logging.warning(
+                "Could not find wlrctl needed to detect fullscreen under wayland"
+            )
             return False
     except subprocess.CalledProcessError:
-        logging.warning('Error in finding full-screen application')
+        logging.warning("Error in finding full-screen application")
     return False
 
 
 def is_active_window_skipped_xorg(pre_break):
+    """Check for full-screen applications.
+
+    This method must be executed by the main thread. If not, it will
+    cause random failure.
     """
-    Check for full-screen applications.
-    This method must be executed by the main thread. If not, it will cause random failure.
-    """
-    logging.info('Searching for full-screen application')
+    logging.info("Searching for full-screen application")
 
     x11_display = Xlib.display.Display()
     active_window = x11_display.get_input_focus().focus
@@ -87,30 +89,40 @@ def is_active_window_skipped_xorg(pre_break):
                 if is_fullscreen and unfullscreen_allowed and not pre_break:
                     logging.info("interrupting interruptible window")
                     try:
-                        # To change the fullscreen state, we cannot simply set the property - we must send a ClientMessage event
+                        # To change the fullscreen state, we cannot simply set the
+                        # property - we must send a ClientMessage event
                         # See https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html#id-1.6.8
                         root_window = x11_display.screen().root
 
                         cm_event = Xlib.protocol.event.ClientMessage(
-                            window = active_window,
-                            client_type = NET_WM_STATE,
-                            data = (32, [
-                                0, # _NET_WM_STATE_REMOVE
-                                NET_WM_STATE_FULLSCREEN,
-                                0, # other property, must be 0
-                                1, # source indication
-                                0 # must be 0
-                            ])
+                            window=active_window,
+                            client_type=NET_WM_STATE,
+                            data=(
+                                32,
+                                [
+                                    0,  # _NET_WM_STATE_REMOVE
+                                    NET_WM_STATE_FULLSCREEN,
+                                    0,  # other property, must be 0
+                                    1,  # source indication
+                                    0,  # must be 0
+                                ],
+                            ),
                         )
 
-                        mask = Xlib.X.SubstructureRedirectMask | Xlib.X.SubstructureNotifyMask
+                        mask = (
+                            Xlib.X.SubstructureRedirectMask
+                            | Xlib.X.SubstructureNotifyMask
+                        )
 
-                        root_window.send_event(cm_event, event_mask = mask)
+                        root_window.send_event(cm_event, event_mask=mask)
 
                         x11_display.sync()
 
                     except BaseException as e:
-                        logging.error('Error in unfullscreen the window ' + process_name, exc_info=e)
+                        logging.error(
+                            "Error in unfullscreen the window " + process_name,
+                            exc_info=e,
+                        )
                 return False
 
         return is_fullscreen
@@ -119,23 +131,21 @@ def is_active_window_skipped_xorg(pre_break):
 
 
 def is_idle_inhibited_gnome():
-    """
-    GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
+    """GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
     fullscreen windows, but GNOME does expose whether idle actions like
-    starting a screensaver are inhibited, which is a close approximation if
-    not a better metric.
+    starting a screensaver are inhibited, which is a close approximation if not
+    a better metric.
     """
-
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,
         flags=Gio.DBusProxyFlags.NONE,
         info=None,
-        name='org.gnome.SessionManager',
-        object_path='/org/gnome/SessionManager',
-        interface_name='org.gnome.SessionManager',
+        name="org.gnome.SessionManager",
+        object_path="/org/gnome/SessionManager",
+        interface_name="org.gnome.SessionManager",
         cancellable=None,
     )
-    result = dbus_proxy.get_cached_property('InhibitedActions').unpack()
+    result = dbus_proxy.get_cached_property("InhibitedActions").unpack()
 
     # The result is a bitfield, documented here:
     # https://gitlab.gnome.org/GNOME/gnome-session/-/blob/9aa419397b7f6d42bee6e66cc5c5aad12902fba0/gnome-session/org.gnome.SessionManager.xml#L155
@@ -148,27 +158,28 @@ def _window_class_matches(window_class: str, classes: list) -> bool:
 
 
 def is_on_battery():
-    """
-    Check if the computer is running on battery.
-    """
+    """Check if the computer is running on battery."""
     on_battery = False
-    available_power_sources = os.listdir('/sys/class/power_supply')
-    logging.info('Looking for battery status in available power sources: %s' % str(
-        available_power_sources))
+    available_power_sources = os.listdir("/sys/class/power_supply")
+    logging.info(
+        "Looking for battery status in available power sources: %s"
+        % str(available_power_sources)
+    )
     for power_source in available_power_sources:
-        if 'BAT' in power_source:
+        if "BAT" in power_source:
             # Found battery
             battery_status = os.path.join(
-                '/sys/class/power_supply', power_source, 'status')
+                "/sys/class/power_supply", power_source, "status"
+            )
             if os.path.isfile(battery_status):
                 # Additional check to confirm that the status file exists
                 try:
-                    with open(battery_status, 'r') as status_file:
+                    with open(battery_status, "r") as status_file:
                         status = status_file.read()
                         if status:
-                            on_battery = 'discharging' in status.lower()
+                            on_battery = "discharging" in status.lower()
                 except BaseException:
-                    logging.error('Failed to read %s' % battery_status)
+                    logging.error("Failed to read %s" % battery_status)
             break
     return on_battery
 
@@ -179,12 +190,16 @@ def init(ctx, safeeyes_config, plugin_config):
     global take_break_window_classes
     global unfullscreen_allowed
     global dnd_while_on_battery
-    logging.debug('Initialize Skip Fullscreen plugin')
+    logging.debug("Initialize Skip Fullscreen plugin")
     context = ctx
-    skip_break_window_classes = _normalize_window_classes(plugin_config['skip_break_windows'])
-    take_break_window_classes = _normalize_window_classes(plugin_config['take_break_windows'])
-    unfullscreen_allowed = plugin_config['unfullscreen']
-    dnd_while_on_battery = plugin_config['while_on_battery']
+    skip_break_window_classes = _normalize_window_classes(
+        plugin_config["skip_break_windows"]
+    )
+    take_break_window_classes = _normalize_window_classes(
+        plugin_config["take_break_windows"]
+    )
+    unfullscreen_allowed = plugin_config["unfullscreen"]
+    dnd_while_on_battery = plugin_config["while_on_battery"]
 
 
 def _normalize_window_classes(classes_as_str: str):
@@ -192,11 +207,9 @@ def _normalize_window_classes(classes_as_str: str):
 
 
 def on_pre_break(break_obj):
-    """
-    Lifecycle method executes before the pre-break period.
-    """
+    """Lifecycle method executes before the pre-break period."""
     if utility.IS_WAYLAND:
-        if utility.DESKTOP_ENVIRONMENT == 'gnome':
+        if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()
         else:
             skip_break = is_active_window_skipped_wayland(True)
@@ -208,11 +221,9 @@ def on_pre_break(break_obj):
 
 
 def on_start_break(break_obj):
-    """
-    Lifecycle method executes just before the break.
-    """
+    """Lifecycle method executes just before the break."""
     if utility.IS_WAYLAND:
-        if utility.DESKTOP_ENVIRONMENT == 'gnome':
+        if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()
         else:
             skip_break = is_active_window_skipped_wayland(False)
