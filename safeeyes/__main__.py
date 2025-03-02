@@ -41,6 +41,7 @@ def __running():
     Check if SafeEyes is already running.
     """
     process_count = 0
+    current_user = psutil.Process().username()
     for proc in psutil.process_iter():
         if not proc.cmdline:
             continue
@@ -53,9 +54,10 @@ def __running():
                 # In older versions cmdline was a list object
                 cmd_line = proc.cmdline
             if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
-                process_count += 1
-                if process_count > 1:
-                    return True
+                if proc.username() == current_user:
+                    process_count += 1
+                    if process_count > 1:
+                        return True
 
         # Ignore if process does not exist or does not have command line args
         except (IndexError, psutil.NoSuchProcess):
