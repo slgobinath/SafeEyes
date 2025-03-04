@@ -9,7 +9,7 @@ Homepage: https://github.com/slgobinath/SafeEyes/
 
 Package: safeeyes
 Architecture: all
-Depends: ${misc:Depends}, ${python3:Depends}, python3 (>= 3.10.0), python3-xlib, gir1.2-notify-0.7, python3-babel, x11-utils, xprintidle, alsa-utils, python3-psutil, python3-croniter, python3-packaging
+Depends: ${misc:Depends}, ${python3:Depends}, python3 (>= 3.10.0), python3-xlib, gir1.2-notify-0.7, python3-babel, x11-utils, xprintidle, alsa-utils, python3-psutil, python3-croniter, python3-packaging, gir1.2-gtk-4.0
 Description: Prevent eye strain with Safe Eyes – an essential screen break reminder.
  Safe Eyes is a simple tool to remind you to take periodic breaks for your eyes. This is essential for anyone spending more time on the computer to avoid eye strain and other physical problems.
  .
