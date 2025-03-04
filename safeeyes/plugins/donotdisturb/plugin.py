@@ -71,7 +71,7 @@ def is_active_window_skipped_xorg(pre_break):
         NET_WM_STATE_FULLSCREEN = x11_display.intern_atom("_NET_WM_STATE_FULLSCREEN")
 
         props = active_window.get_full_property(NET_WM_STATE, Xlib.Xatom.ATOM)
-        is_fullscreen = props.value and NET_WM_STATE_FULLSCREEN in props.value.tolist()
+        is_fullscreen = props and props.value and NET_WM_STATE_FULLSCREEN in props.value.tolist()
 
         process_names = active_window.get_wm_class()
 
