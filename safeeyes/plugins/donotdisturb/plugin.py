@@ -63,15 +63,39 @@ def is_active_window_skipped_xorg(pre_break):
     """
     logging.info("Searching for full-screen application")
 
+    def get_window_property(window, prop, proptype):
+        result = window.get_full_property(prop, proptype)
+        if result:
+            return result.value
+
+        return None
+
+    def get_active_window(x11_display):
+        """Get active window using EWMH hints.
+
+        Returns None if there is no active window.
+        This always returns None if the window manager does not use EWMH hints.
+        However, GTK3 also used this method to get the active window.
+        """
+        root = x11_display.screen().root
+        NET_ACTIVE_WINDOW = x11_display.intern_atom("_NET_ACTIVE_WINDOW")
+
+        active_windows = get_window_property(root, NET_ACTIVE_WINDOW, Xlib.Xatom.WINDOW)
+        if active_windows and active_windows[0]:
+            active_window = active_windows[0]
+            return x11_display.create_resource_object('window', active_window)
+        return None
+
     x11_display = Xlib.display.Display()
-    active_window = x11_display.get_input_focus().focus
+
+    active_window = get_active_window(x11_display)
 
     if active_window:
         NET_WM_STATE = x11_display.intern_atom("_NET_WM_STATE")
         NET_WM_STATE_FULLSCREEN = x11_display.intern_atom("_NET_WM_STATE_FULLSCREEN")
 
-        props = active_window.get_full_property(NET_WM_STATE, Xlib.Xatom.ATOM)
-        is_fullscreen = props and props.value and NET_WM_STATE_FULLSCREEN in props.value.tolist()
+        props = get_window_property(active_window, NET_WM_STATE, Xlib.Xatom.ATOM)
+        is_fullscreen = props and NET_WM_STATE_FULLSCREEN in props.tolist()
 
         process_names = active_window.get_wm_class()
 
