@@ -38,12 +38,13 @@ import babel.dates
 import gi
 
 gi.require_version("Gtk", "4.0")
+gi.require_version("Gdk", "4.0")
+
+from gi.repository import Gdk
 from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 from packaging.version import parse
-
-gi.require_version("Gdk", "4.0")
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get("HOME") or os.path.expanduser("~")
@@ -370,6 +371,14 @@ def merge_configs(new_config, old_config):
     new_config = new_config.copy()
     new_config.update(old_config)
     return new_config
+
+
+def load_css_file(style_sheet_path, priority):
+    css_provider = Gtk.CssProvider()
+    css_provider.load_from_path(style_sheet_path)
+
+    display = Gdk.Display.get_default()
+    Gtk.StyleContext.add_provider_for_display(display, css_provider, priority)
 
 
 def initialize_safeeyes():
