@@ -327,8 +327,6 @@ class Config:
                             self.__user_config, self.__system_config
                         )
                         self.__user_config = self.__system_config
-                        # Update the style sheet
-                        utility.replace_style_sheet()
 
             utility.merge_plugins(self.__user_config)
             self.save()
