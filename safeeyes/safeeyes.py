@@ -170,7 +170,9 @@ class SafeEyes(Gtk.Application):
             utility.SYSTEM_STYLE_SHEET_PATH, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
         utility.load_css_file(
-            utility.CUSTOM_STYLE_SHEET_PATH, Gtk.STYLE_PROVIDER_PRIORITY_USER
+            utility.CUSTOM_STYLE_SHEET_PATH,
+            Gtk.STYLE_PROVIDER_PRIORITY_USER,
+            required=False,
         )
 
     def _retry_errored_plugins(self):

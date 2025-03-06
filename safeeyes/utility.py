@@ -388,7 +388,12 @@ def sha256sum(filename):
     return h.hexdigest()
 
 
-def load_css_file(style_sheet_path, priority):
+def load_css_file(style_sheet_path, priority, required=True):
+    if not os.path.isfile(style_sheet_path):
+        if required:
+            logging.warning("Failed loading required stylesheet")
+        return
+
     css_provider = Gtk.CssProvider()
     css_provider.load_from_path(style_sheet_path)
 
