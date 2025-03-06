@@ -83,7 +83,7 @@ def is_active_window_skipped_xorg(pre_break):
         active_windows = get_window_property(root, NET_ACTIVE_WINDOW, Xlib.Xatom.WINDOW)
         if active_windows and active_windows[0]:
             active_window = active_windows[0]
-            return x11_display.create_resource_object('window', active_window)
+            return x11_display.create_resource_object("window", active_window)
         return None
 
     x11_display = Xlib.display.Display()
