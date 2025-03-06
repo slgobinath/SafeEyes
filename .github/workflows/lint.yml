@@ -9,4 +9,7 @@ jobs:
     steps:
       - name: Check out source repository
         uses: actions/checkout@v3
-      - uses: chartboost/ruff-action@v1
+      - uses: astral-sh/ruff-action@v3
+        # this runs `ruff check`
+      - run: ruff format --check
+        # this runs `ruff format --check`, additionally
