@@ -19,6 +19,7 @@
 """This module contains utility functions for Safe Eyes and its plugins."""
 
 import errno
+import hashlib
 import inspect
 import importlib
 import json
@@ -56,7 +57,10 @@ STYLE_SHEET_DIRECTORY = os.path.join(CONFIG_DIRECTORY, "style")
 CONFIG_FILE_PATH = os.path.join(CONFIG_DIRECTORY, "safeeyes.json")
 CONFIG_RESOURCE = os.path.join(CONFIG_DIRECTORY, "resource")
 SESSION_FILE_PATH = os.path.join(CONFIG_DIRECTORY, "session.json")
-STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, "safeeyes_style.css")
+OLD_STYLE_SHEET_PATH = os.path.join(STYLE_SHEET_DIRECTORY, "safeeyes_style.css")
+CUSTOM_STYLE_SHEET_PATH = os.path.join(
+    STYLE_SHEET_DIRECTORY, "safeeyes_custom_style.css"
+)
 SYSTEM_CONFIG_FILE_PATH = os.path.join(BIN_DIRECTORY, "config/safeeyes.json")
 SYSTEM_STYLE_SHEET_PATH = os.path.join(BIN_DIRECTORY, "config/style/safeeyes_style.css")
 LOG_FILE_PATH = os.path.join(HOME_DIRECTORY, "safeeyes.log")
@@ -373,6 +377,17 @@ def merge_configs(new_config, old_config):
     return new_config
 
 
+def sha256sum(filename):
+    """Get the sha256 hash of the given file."""
+    h = hashlib.sha256()
+    b = bytearray(128 * 1024)
+    mv = memoryview(b)
+    with open(filename, "rb", buffering=0) as f:
+        for n in iter(lambda: f.readinto(mv), 0):
+            h.update(mv[:n])
+    return h.hexdigest()
+
+
 def load_css_file(style_sheet_path, priority):
     css_provider = Gtk.CssProvider()
     css_provider.load_from_path(style_sheet_path)
@@ -382,7 +397,7 @@ def load_css_file(style_sheet_path, priority):
 
 
 def initialize_safeeyes():
-    """Create the config file and style sheet in XDG_CONFIG_HOME(or
+    """Create the config file in XDG_CONFIG_HOME(or
     ~/.config)/safeeyes directory.
     """
     logging.info("Copy the config files to XDG_CONFIG_HOME(or ~/.config)/safeeyes")
@@ -397,8 +412,6 @@ def initialize_safeeyes():
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
     os.chmod(CONFIG_FILE_PATH, 0o666)
 
-    create_user_stylesheet_if_missing()
-
     # initialize_safeeyes gets called when the configuration file is not present, which
     # happens just after installation or manual deletion of
     # .config/safeeyes/safeeyes.json file. In these cases, we want to force the creation
@@ -406,15 +419,38 @@ def initialize_safeeyes():
     create_startup_entry(force=True)
 
 
-def create_user_stylesheet_if_missing():
+def cleanup_old_user_stylesheet():
     # Create the XDG_CONFIG_HOME(or ~/.config)/safeeyes/style directory
     if not os.path.isdir(STYLE_SHEET_DIRECTORY):
         mkdir(STYLE_SHEET_DIRECTORY)
 
-    # Copy the new style sheet
-    if not os.path.isfile(STYLE_SHEET_PATH):
-        shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-        os.chmod(STYLE_SHEET_PATH, 0o666)
+    # Delete the old stylesheet, unless it has customizations
+    if os.path.isfile(OLD_STYLE_SHEET_PATH):
+        hash = sha256sum(OLD_STYLE_SHEET_PATH)
+        old_default_versions = [
+            # 2.2.3
+            "fdc2a305613ae4eeb269650452789d35df3df5bdf1c56eb576cd5ebac70a6f09",
+            # 2.1.0 - 2.2.2
+            "fbde048fc234db757461971a7542df43a467869035ca3d05ff9b236ca250e4c5",
+            # 2.0.9
+            "70ca55c12d83ad7a6a4e1c5e7758a38617a43f5d32f28709ede75426d3186713",
+            # 2.0.7 - 2.0.8
+            "7a15f985e0da6d92c8a62d49ce151781e6d423f87e66d205cc1dc4536e369e19",
+            # 2.0.6 and earlier
+            "f26621a883e323ca7685a4adba25027e70daa471e0db4a21c261e6c15caaa5ee",
+        ]
+        if hash in old_default_versions:
+            logging.info("Deleting old stylesheet containing default content")
+            delete(OLD_STYLE_SHEET_PATH)
+        else:
+            # Stylesheet was likely customized, don't delete but warn
+            logging.warning(
+                _(
+                    "Old stylesheet found at '%(old)s', ignoring. For custom styles, "
+                    "create a new stylesheet in '%(new)s' instead.",
+                )
+                % {"old": OLD_STYLE_SHEET_PATH, "new": CUSTOM_STYLE_SHEET_PATH}
+            )
 
 
 def create_startup_entry(force=False):
@@ -526,24 +562,14 @@ def initialize_platform():
 def reset_config():
     # Remove the ~/.config/safeeyes/safeeyes.json and safeeyes_style.css
     delete(CONFIG_FILE_PATH)
-    delete(STYLE_SHEET_PATH)
 
     # Copy the safeeyes.json and safeeyes_style.css
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
-    shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
 
     # Add write permission (e.g. if original file was stored in /nix/store)
     os.chmod(CONFIG_FILE_PATH, 0o666)
-    os.chmod(STYLE_SHEET_PATH, 0o666)
 
     create_startup_entry()
-
-
-def replace_style_sheet():
-    """Replace the user style sheet by system style sheet."""
-    delete(STYLE_SHEET_PATH)
-    shutil.copy2(SYSTEM_STYLE_SHEET_PATH, STYLE_SHEET_PATH)
-    os.chmod(STYLE_SHEET_PATH, 0o666)
 
 
 def initialize_logging(debug):
