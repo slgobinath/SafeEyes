@@ -194,6 +194,8 @@ Examples for translatable strings are `_("This is a string")` in Python code, or
 
 To ensure the new strings are well-formed, you can use `python validate_po.py --validate`.
 
+To ensure that the coding and formatting guidelines are followed, install [ruff](https://docs.astral.sh/ruff/) and run `ruff check` and `ruff format --check` to check for issues, as well as `ruff check --fix` and `ruff format` to autofix them.
+
 ## How to Release?
 
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
