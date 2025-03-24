@@ -30,5 +30,8 @@ A clear and concise description of what you expected to happen.
 **Debug Log**
 Run the Safe Eyes using `safeeyes --debug` command attach the ~/safeeyes.log` file.
 
+**Configuration**
+Attach the configuration file, usually found in `~/.config/safeeyes/safeeyes.json`.
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
