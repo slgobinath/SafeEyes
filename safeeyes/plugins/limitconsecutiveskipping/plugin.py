@@ -82,7 +82,7 @@ def get_widget_title(break_obj):
     return _("Limit Consecutive Skipping")
 
 
-def get_widget_content(break_obj):
+def get_widget_content(break_obj) -> None:
     """Return the statistics."""
     # Check if the plugin is enabled
     if not enabled:
