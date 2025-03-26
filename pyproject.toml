@@ -46,3 +46,35 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include=["safeeyes*"]
+
+[dependency-groups]
+dev = [
+    {include-group = "lint"},
+    {include-group = "scripts"},
+    {include-group = "types"}
+]
+lint = [
+    "ruff==0.11.2"
+]
+scripts = [
+    "polib==1.2.0"
+]
+types = [
+    "mypy==1.15.0",
+    "PyGObject-stubs==2.13.0",
+    "types-croniter==5.0.1.20250322",
+    "types-psutil==7.0.0.20250218",
+    "types-python-xlib==0.33.0.20240407"
+]
+
+[tool.mypy]
+# catch typos in configuration file
+warn_unused_configs = true
+disallow_any_unimported = true
+#check_untyped_defs = true
+warn_unused_ignores = true
+warn_unreachable = true
+enable_error_code = [
+    "ignore-without-code",
+    "possibly-undefined"
+]
