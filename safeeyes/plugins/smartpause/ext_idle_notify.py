@@ -78,7 +78,10 @@ class ExtIdleNotify:
             # unfortunately, this seems like the best way to make sure that dispatch
             # doesn't block potentially forever (up to multiple seconds in my usage)
             read, _w, _x = select.select((display_fd, self._r_channel), (), ())
+
             if self._r_channel in read:
+                # the channel was written to, which means stop() was called
+                # at this point, self._running should be false as well
                 break
 
             if display_fd in read:
