@@ -130,7 +130,7 @@ def main():
     utility.initialize_logging(args.debug)
     utility.initialize_platform()
     config = Config()
-    utility.create_user_stylesheet_if_missing()
+    utility.cleanup_old_user_stylesheet()
 
     if __running():
         logging.info("Safe Eyes is already running")
