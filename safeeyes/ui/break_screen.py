@@ -23,6 +23,7 @@ import time
 
 import gi
 from safeeyes import utility
+import Xlib
 from Xlib.display import Display
 from Xlib.display import X
 
@@ -30,6 +31,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gdk
 from gi.repository import GLib
 from gi.repository import Gtk
+from gi.repository import GdkX11
 
 BREAK_SCREEN_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/break_screen.glade")
 
@@ -218,6 +220,9 @@ class BreakScreen:
             window.fullscreen_on_monitor(monitor)
             window.present()
 
+            if not self.context["is_wayland"]:
+                self.__window_set_keep_above_x11(window)
+
             if self.context["is_wayland"]:
                 # this may or may not be granted by the window system
                 window.get_surface().inhibit_system_shortcuts(None)
@@ -228,6 +233,41 @@ class BreakScreen:
         """Update the countdown on all break screens."""
         for label in self.count_labels:
             label.set_text(count)
+
+    def __window_set_keep_above_x11(self, window):
+        """Use EWMH hints to keep window above and on all desktops."""
+        NET_WM_STATE = self.x11_display.intern_atom("_NET_WM_STATE")
+        NET_WM_STATE_ABOVE = self.x11_display.intern_atom("_NET_WM_STATE_ABOVE")
+        NET_WM_STATE_STICKY = self.x11_display.intern_atom("_NET_WM_STATE_STICKY")
+
+        # To change the _NET_WM_STATE, we cannot simply set the
+        # property - we must send a ClientMessage event
+        # See https://specifications.freedesktop.org/wm-spec/1.3/ar01s05.html#id-1.6.8
+        root_window = self.x11_display.screen().root
+
+        xid = GdkX11.X11Surface.get_xid(window.get_surface())
+
+        root_window.send_event(
+            Xlib.protocol.event.ClientMessage(
+                window=xid,
+                client_type=NET_WM_STATE,
+                data=(
+                    32,
+                    [
+                        1,  # _NET_WM_STATE_ADD
+                        NET_WM_STATE_ABOVE,
+                        NET_WM_STATE_STICKY,  # other property
+                        1,  # source indication
+                        0,  # must be 0
+                    ],
+                ),
+            ),
+            event_mask=(
+                Xlib.X.SubstructureRedirectMask | Xlib.X.SubstructureNotifyMask
+            ),
+        )
+
+        self.x11_display.sync()
 
     def __lock_keyboard_x11(self):
         """Lock the keyboard to prevent the user from using keyboard shortcuts.
