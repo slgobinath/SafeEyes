@@ -99,7 +99,8 @@ sudo zypper install safeeyes
 ```bash
 sudo apk add safeeyes
 ```
-## Chrome OS
+
+### Chrome OS
 [Enable the Linux container](https://support.google.com/chromebook/answer/9145439?hl=en) (which is actually Debian), and install Safe Eyes with
 ```
 sudo apt install safeeyes
