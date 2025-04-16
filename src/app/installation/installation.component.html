@@ -18,12 +18,12 @@
       </code></pre>
     </mat-tab>
     <mat-tab label="Fedora">
-        If you want to use Smart Pause plugin, install the latest <code>xprintidle</code> from: <a href="https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/">alonid/xprintidle</a>
+        Available on <a href="https://copr.fedorainfracloud.org/coprs/praiskup/safeeyes/">praiskup/safeeyes</a>
         <pre><code>
-          sudo dnf install libappindicator-gtk3 python3-psutil
-          sudo pip3 install safeeyes
-          sudo gtk-update-icon-cache /usr/share/icons/hicolor
-      </code></pre>
+          sudo dnf -y copr enable praiskup/safeeyes
+          sudo dnf -y install python3-safeeyes
+        </code></pre>
+        For Smart Pause plugin, you may have to, install the latest <code>xprintidle</code> from: <a href="https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/">alonid/xprintidle</a>
     </mat-tab>
     <mat-tab label="Gentoo">
         <pre><code>
