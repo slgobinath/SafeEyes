@@ -82,8 +82,8 @@ sudo apt-get install safeeyes
 Available on the [praiskup/safeeyes](https://copr.fedorainfracloud.org/coprs/praiskup/safeeyes/) COPR maintained by @praiksup
 
 ```bash
-$ dnf -y copr enable praiskup/safeeyes
-$ dnf -y install python3-safeeyes
+sudo dnf -y copr enable praiskup/safeeyes
+sudo dnf -y install python3-safeeyes
 ```
 For smart pause plugin, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
 
