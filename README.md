@@ -99,6 +99,12 @@ sudo zypper install safeeyes
 ```bash
 sudo apk add safeeyes
 ```
+## Chrome OS
+[Enable the Linux container](https://support.google.com/chromebook/answer/9145439?hl=en) (which is actually Debian), and install Safe Eyes with
+```
+sudo apt install safeeyes
+```
+While no tray icon is available, if you run the app, it will function in the background and will show breaks as usual. You can also change the settings by clicking on the Safe Eyes icon from the menu while the app is running, or by running the command `safeeyes -s`.
 
 ### Flatpak
 **Warning**: Many plugins and features don't work well in the flatpak. We recommend that you use one of the native packages listed above. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes.
