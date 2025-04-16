@@ -79,14 +79,13 @@ sudo apt-get install safeeyes
 ```
 
 ### Fedora
- If you want to use Smart Pause plugin, install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
-```bash
-sudo dnf install python3-psutil python3-packaging cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
-sudo pip3 install safeeyes
-sudo gtk-update-icon-cache /usr/share/icons/hicolor
-```
+Available on the [praiskup/safeeyes](https://copr.fedorainfracloud.org/coprs/praiskup/safeeyes/) COPR maintained by @praiksup
 
-We are looking for an official package maintainer for Fedora. Please [contact us](https://github.com/slgobinath/SafeEyes/issues/611) if you are interested.
+```bash
+$ dnf -y copr enable praiskup/safeeyes
+$ dnf -y install python3-safeeyes
+```
+For smart pause plugin, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
 
 ### OpenSUSE Tumbleweed
 
