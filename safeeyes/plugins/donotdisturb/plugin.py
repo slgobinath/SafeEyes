@@ -30,8 +30,8 @@ import Xlib
 from safeeyes import utility
 
 context = None
-skip_break_window_classes = []
-take_break_window_classes = []
+skip_break_window_classes: list[str] = []
+take_break_window_classes: list[str] = []
 unfullscreen_allowed = True
 dnd_while_on_battery = False
 
