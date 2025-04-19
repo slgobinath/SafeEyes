@@ -43,7 +43,7 @@ class BreakScreen:
     interface.
     """
 
-    def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
+    def __init__(self, context, on_skipped, on_postponed):
         self.context = context
         self.count_labels = []
         self.x11_display = None
@@ -60,15 +60,6 @@ class BreakScreen:
 
         if not self.context["is_wayland"]:
             self.x11_display = Display()
-
-        # Initialize the theme
-        css_provider = Gtk.CssProvider()
-        css_provider.load_from_path(style_sheet_path)
-
-        display = Gdk.Display.get_default()
-        Gtk.StyleContext.add_provider_for_display(
-            display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
 
     def initialize(self, config):
         """Initialize the internal properties from configuration."""
