@@ -202,6 +202,10 @@ To ensure the new strings are well-formed, you can use `python validate_po.py --
 
 To ensure that the coding and formatting guidelines are followed, install [ruff](https://docs.astral.sh/ruff/) and run `ruff check` and `ruff format --check` to check for issues, as well as `ruff check --fix` and `ruff format` to autofix them.
 
+To ensure that any types are correct, install [mypy](https://github.com/python/mypy) and run `mypy safeeyes`.
+
+The last three checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+
 ## How to Release?
 
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
