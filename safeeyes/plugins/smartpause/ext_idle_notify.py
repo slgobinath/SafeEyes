@@ -41,6 +41,19 @@ class ExtIdleNotify:
     _idle_since = None
 
     def __init__(self):
+        # Note that this creates a new connection to the wayland compositor.
+        # This is not an issue per se, but does mean that the compositor sees this as
+        # a new, separate client, that just happens to run in the same process as
+        # the SafeEyes gtk application.
+        # (This is not a problem, currently. swayidle does the same, it even runs in a
+        # separate process.)
+        # If in the future, a compositor decides to lock down ext-idle-notify-v1 to
+        # clients somehow, and we need to share the connection to wl_display with gtk
+        # (which might require some hacks, or FFI code), we might run into other issues
+        # described in this mailing thread:
+        # https://lists.freedesktop.org/archives/wayland-devel/2019-March/040344.html
+        # The best thing would be, of course, for gtk to gain native support for
+        # ext-idle-notify-v1.
         self._display = Display()
         self._display.connect()
         self._r_channel, self._w_channel = os.pipe()
