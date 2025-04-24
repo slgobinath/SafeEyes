@@ -20,6 +20,8 @@
 
 import threading
 import datetime
+import os
+import select
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
@@ -33,19 +35,26 @@ class ExtIdleNotify:
     _notifier_set = False
     _running = True
     _thread = None
+    _r_channel = None
+    _w_channel = None
 
     _idle_since = None
 
     def __init__(self):
         self._display = Display()
         self._display.connect()
+        self._r_channel, self._w_channel = os.pipe()
 
     def stop(self):
         self._running = False
+        # write anything, just to wake up the channel
+        os.write(self._w_channel, b"!")
         self._notification.destroy()
         self._notification = None
         self._seat = None
         self._thread.join()
+        os.close(self._r_channel)
+        os.close(self._w_channel)
 
     def run(self):
         self._thread = threading.Thread(
@@ -57,8 +66,26 @@ class ExtIdleNotify:
         reg = self._display.get_registry()
         reg.dispatcher["global"] = self._global_handler
 
+        display_fd = self._display.get_fd()
+
         while self._running:
-            self._display.dispatch(block=True)
+            self._display.flush()
+
+            # this blocks until either there are new events in self._display
+            # (retrieved using dispatch())
+            # or until there are events in self._r_channel - which means that stop()
+            # was called
+            # unfortunately, this seems like the best way to make sure that dispatch
+            # doesn't block potentially forever (up to multiple seconds in my usage)
+            read, _w, _x = select.select((display_fd, self._r_channel), (), ())
+
+            if self._r_channel in read:
+                # the channel was written to, which means stop() was called
+                # at this point, self._running should be false as well
+                break
+
+            if display_fd in read:
+                self._display.dispatch(block=True)
 
         self._display.disconnect()
 
