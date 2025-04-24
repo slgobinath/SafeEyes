@@ -41,11 +41,11 @@ class AboutDialog(Gtk.ApplicationWindow):
 
     __gtype_name__ = "AboutDialog"
 
-    lbl_decription = Gtk.Template.Child()
-    lbl_license = Gtk.Template.Child()
-    lbl_app_name = Gtk.Template.Child()
+    lbl_decription: Gtk.Label = Gtk.Template.Child()
+    lbl_license: Gtk.Label = Gtk.Template.Child()
+    lbl_app_name: Gtk.Label = Gtk.Template.Child()
 
-    def __init__(self, application, version):
+    def __init__(self, application: Gtk.Application, version: str):
         super().__init__(application=application)
 
         self.lbl_decription.set_label(
@@ -59,16 +59,16 @@ class AboutDialog(Gtk.ApplicationWindow):
         # Set the version at the runtime
         self.lbl_app_name.set_label("Safe Eyes " + version)
 
-    def show(self):
+    def show(self) -> None:
         """Show the About dialog."""
         self.present()
 
     @Gtk.Template.Callback()
-    def on_window_delete(self, *args):
+    def on_window_delete(self, *args) -> None:
         """Window close event handler."""
         self.destroy()
 
     @Gtk.Template.Callback()
-    def on_close_clicked(self, *args):
+    def on_close_clicked(self, *args) -> None:
         """Close button click event handler."""
         self.destroy()
