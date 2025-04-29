@@ -372,9 +372,10 @@ class SettingsDialog:
         """Event handler for warning bar close action."""
         self.warn_bar_rpc_server.hide()
 
-    def add_break(self, button):
+    def add_break(self, button) -> None:
         """Event handler for add break button."""
         dialog = NewBreakDialog(
+            self.application,
             self.config,
             lambda is_short, break_config: self.__create_break_item(
                 break_config, is_short
