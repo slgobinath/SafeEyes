@@ -33,9 +33,10 @@ class AboutDialog:
     license and the GitHub url.
     """
 
-    def __init__(self, version):
+    def __init__(self, application, version):
         builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
         self.window = builder.get_object("window_about")
+        self.window.set_application(application)
 
         self.window.connect("close-request", self.on_window_delete)
         builder.get_object("btn_close").connect("clicked", self.on_close_clicked)

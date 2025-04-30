@@ -145,6 +145,8 @@ python3 -m safeeyes
 
 Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
 
+Note that on Wayland, this may still not be enough to get window icons working properly, as Wayland requires the .desktop file to match the running application, which is hard to do when running from source. If at all possible, prefer using an installed package.
+
 
 ### Install in a virtual environment
 
@@ -175,6 +177,8 @@ Some Linux systems like CentOS do not have matching dependencies available in th
     ```
 
 For more details, please check the issue: [#329](https://github.com/slgobinath/SafeEyes/issues/329)
+
+This method has the same caveats about icons/window icons as running from source.
 
 ## Features
 

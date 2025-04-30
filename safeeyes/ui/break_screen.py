@@ -43,7 +43,10 @@ class BreakScreen:
     interface.
     """
 
-    def __init__(self, context, on_skipped, on_postponed, style_sheet_path):
+    def __init__(
+        self, application, context, on_skipped, on_postponed, style_sheet_path
+    ):
+        self.application = application
         self.context = context
         self.count_labels = []
         self.x11_display = None
@@ -162,6 +165,7 @@ class BreakScreen:
             builder.add_from_file(BREAK_SCREEN_GLADE)
 
             window = builder.get_object("window_main")
+            window.set_application(self.application)
             window.connect("close-request", self.on_window_delete)
             window.set_title("SafeEyes-" + str(i))
             lbl_message = builder.get_object("lbl_message")

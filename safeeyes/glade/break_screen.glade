@@ -21,7 +21,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="window_main">
-    <property name="icon_name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <property name="decorated">0</property>
     <property name="deletable">0</property>
     <child>

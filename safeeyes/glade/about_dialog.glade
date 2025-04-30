@@ -38,7 +38,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
   <object class="GtkWindow" id="window_about">
     <property name="title">Safe Eyes</property>
     <property name="resizable">0</property>
-    <property name="icon-name">safeeyes</property>
+    <property name="icon-name">io.github.slgobinath.SafeEyes</property>
     <child>
       <object class="GtkBox" id="layout_box">
         <property name="visible">1</property>
