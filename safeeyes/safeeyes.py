@@ -104,12 +104,11 @@ class SafeEyes(Gtk.Application):
         else:
             self.context["session"] = {"plugin": {}}
 
+        # Initialize the theme
+        self._initialize_styles()
+
         self.break_screen = BreakScreen(
-            self,
-            self.context,
-            self.on_skipped,
-            self.on_postponed,
-            utility.STYLE_SHEET_PATH,
+            self, self.context, self.on_skipped, self.on_postponed
         )
         self.break_screen.initialize(self.config)
         self.plugins_manager = PluginManager()
@@ -165,6 +164,16 @@ class SafeEyes(Gtk.Application):
             self.show_settings()
         elif self.cli_args.take_break:
             self.take_break()
+
+    def _initialize_styles(self):
+        utility.load_css_file(
+            utility.SYSTEM_STYLE_SHEET_PATH, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+        utility.load_css_file(
+            utility.CUSTOM_STYLE_SHEET_PATH,
+            Gtk.STYLE_PROVIDER_PRIORITY_USER,
+            required=False,
+        )
 
     def _retry_errored_plugins(self):
         if not self.plugins_manager.needs_retry():
