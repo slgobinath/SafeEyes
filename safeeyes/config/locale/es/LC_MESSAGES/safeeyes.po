@@ -595,6 +595,12 @@ msgstr "Desactivar permanentemente"
 msgid "License:"
 msgstr "Licencia:"
 
+#, python-format
+msgid ""
+"Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
+"stylesheet in '%(new)s' instead."
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Cierre fuertemente los ojos"

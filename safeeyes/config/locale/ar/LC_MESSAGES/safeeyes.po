@@ -560,7 +560,8 @@ msgstr "الوقاية من الإصابات الناتجة عن الإجهاد 
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr "يرجى تثبيت خدمة توفر أيقونات في علبة النظام لبيئة سطح المكتب الخاصة بك."
+msgstr ""
+"يرجى تثبيت خدمة توفر أيقونات في علبة النظام لبيئة سطح المكتب الخاصة بك."
 
 #, python-format
 msgid "Next long break at %s"
@@ -592,6 +593,12 @@ msgstr "تعطيل دائم"
 
 msgid "License:"
 msgstr "الترخيص:"
+
+#, python-format
+msgid ""
+"Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
+"stylesheet in '%(new)s' instead."
+msgstr ""
 
 # Short break
 #~ msgid "Tightly close your eyes"

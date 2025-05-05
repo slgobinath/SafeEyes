@@ -583,6 +583,12 @@ msgstr "غیرفعال کردن دائمی"
 msgid "License:"
 msgstr "پروانه:"
 
+#, python-format
+msgid ""
+"Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
+"stylesheet in '%(new)s' instead."
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "محکم چشمانتان را ببندید"

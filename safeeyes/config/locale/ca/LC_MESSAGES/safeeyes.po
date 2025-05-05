@@ -165,7 +165,8 @@ msgstr "Persisteix l'estat intern"
 
 # Settings dialog
 msgid "Use RPC server to receive runtime commands"
-msgstr "Empra el servidor RPC per a rebre els comandaments del temps d'execució"
+msgstr ""
+"Empra el servidor RPC per a rebre els comandaments del temps d'execució"
 
 # Settings dialog
 msgid "Without the RPC server, command-line commands may not work"
@@ -594,6 +595,12 @@ msgstr "Desactiva'l permanentment"
 
 msgid "License:"
 msgstr "Llicència:"
+
+#, python-format
+msgid ""
+"Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
+"stylesheet in '%(new)s' instead."
+msgstr ""
 
 # Short break
 #~ msgid "Tightly close your eyes"
