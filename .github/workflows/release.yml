@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.GH_API_SECRET }}
 
       - name: Publish to PyPi
-        uses: pypa/gh-action-pypi-publish@v1.6.4
+        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc # 1.12.4
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
 
