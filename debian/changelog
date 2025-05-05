@@ -1,3 +1,19 @@
+safeeyes (3.0.0b1) noble; urgency=medium
+
+  * Update to GTK4
+
+  * Improved Wayland support (keyboard locking, idle detection, window icons,
+    fullscreen)
+
+  * Internal refactoring (linting, formatting, typechecking on CI)
+
+  * Improved handling of custom user stylesheets: always fall back to internal
+    styles, with a lower priority
+
+  * Translations
+
+ -- Mel Dafert <m@dafert.at>  Mon, 05 May 2025 11:30:00 +0000
+
 safeeyes (2.2.3) jammy; urgency=medium
 
   * Translations
