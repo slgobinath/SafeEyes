@@ -52,7 +52,8 @@ exclude=["safeeyes.tests*"]
 dev = [
     {include-group = "lint"},
     {include-group = "scripts"},
-    {include-group = "types"}
+    {include-group = "tests"},
+    {include-group = "types"},
 ]
 lint = [
     "ruff==0.11.2"
@@ -66,6 +67,9 @@ types = [
     "types-croniter==5.0.1.20250322",
     "types-psutil==7.0.0.20250218",
     "types-python-xlib==0.33.0.20240407"
+]
+tests = [
+    "pytest==8.4.5",
 ]
 
 [tool.mypy]
