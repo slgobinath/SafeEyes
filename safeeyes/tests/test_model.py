@@ -1,7 +1,7 @@
 # Safe Eyes is a utility to remind you to take break frequently
 # to protect your eyes from eye strain.
 
-# Copyright (C) 2017  Gobinath
+# Copyright (C) 2025  Mel Dafert <m@dafert.at>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
