@@ -31,6 +31,9 @@ jobs:
           field: project.version
         id: get_current_version
 
+      - name: Build Python Package
+        run: rm -rf build *.egg-info/ && python3 -m build
+
       - name: Create Tag
         uses: mathieudutour/github-tag-action@v6.1
         with:
@@ -49,9 +52,6 @@ jobs:
           tag_name: 'v${{steps.get_current_version.outputs.value}}'
           body: ${{steps.build_changelog.outputs.changelog}}
           token: ${{ secrets.GH_API_SECRET }}
-
-      - name: Build Python Package
-        run: rm -rf build *.egg-info/ && python3 -m build
 
       - name: Publish to PyPi
         uses: pypa/gh-action-pypi-publish@v1.6.4
