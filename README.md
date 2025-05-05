@@ -79,14 +79,13 @@ sudo apt-get install safeeyes
 ```
 
 ### Fedora
- If you want to use Smart Pause plugin, install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
-```bash
-sudo dnf install python3-psutil python3-packaging cairo-devel python3-devel gobject-introspection-devel cairo-gobject-devel
-sudo pip3 install safeeyes
-sudo gtk-update-icon-cache /usr/share/icons/hicolor
-```
+Available on the [praiskup/safeeyes](https://copr.fedorainfracloud.org/coprs/praiskup/safeeyes/) COPR maintained by @praiksup
 
-We are looking for an official package maintainer for Fedora. Please [contact us](https://github.com/slgobinath/SafeEyes/issues/611) if you are interested.
+```bash
+sudo dnf -y copr enable praiskup/safeeyes
+sudo dnf -y install python3-safeeyes
+```
+For smart pause plugin, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
 
 ### OpenSUSE Tumbleweed
 
@@ -100,6 +99,13 @@ sudo zypper install safeeyes
 ```bash
 sudo apk add safeeyes
 ```
+
+### Chrome OS
+[Enable the Linux container](https://support.google.com/chromebook/answer/9145439?hl=en) (which is actually Debian), and install Safe Eyes with
+```
+sudo apt install safeeyes
+```
+While no tray icon is available, if you run the app, it will function in the background and will show breaks as usual. You can also change the settings by clicking on the Safe Eyes icon from the menu while the app is running, or by running the command `safeeyes -s`.
 
 ### Flatpak
 **Warning**: Many plugins and features don't work well in the flatpak. We recommend that you use one of the native packages listed above. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes.
@@ -139,6 +145,8 @@ python3 -m safeeyes
 
 Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. When you run Safe Eyes from source without, some icons may not appear.
 
+Note that on Wayland, this may still not be enough to get window icons working properly, as Wayland requires the .desktop file to match the running application, which is hard to do when running from source. If at all possible, prefer using an installed package.
+
 
 ### Install in a virtual environment
 
@@ -170,6 +178,8 @@ Some Linux systems like CentOS do not have matching dependencies available in th
 
 For more details, please check the issue: [#329](https://github.com/slgobinath/SafeEyes/issues/329)
 
+This method has the same caveats about icons/window icons as running from source.
+
 ## Features
 
 - Remind you to take breaks with exercises to reduce RSI
@@ -194,15 +204,20 @@ Examples for translatable strings are `_("This is a string")` in Python code, or
 
 To ensure the new strings are well-formed, you can use `python validate_po.py --validate`.
 
+To ensure that the coding and formatting guidelines are followed, install [ruff](https://docs.astral.sh/ruff/) and run `ruff check` and `ruff format --check` to check for issues, as well as `ruff check --fix` and `ruff format` to autofix them.
+
+To ensure that any types are correct, install [mypy](https://github.com/python/mypy) and run `mypy safeeyes`.
+
+The last three checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+
 ## How to Release?
 
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L82)
-    - [setup.py](https://github.com/slgobinath/SafeEyes/blob/master/setup.py#L89)
-    - [safeeyes.py](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/safeeyes.py#L42)
+    - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L4)
+    - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L35)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
 4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)

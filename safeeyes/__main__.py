@@ -16,9 +16,10 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"""Safe Eyes is a utility to remind you to take break frequently to protect
+your eyes from eye strain.
 """
-Safe Eyes is a utility to remind you to take break frequently to protect your eyes from eye strain.
-"""
+
 import argparse
 import gettext
 import locale
@@ -33,14 +34,13 @@ from safeeyes.safeeyes import SafeEyes
 from safeeyes.safeeyes import SAFE_EYES_VERSION
 from safeeyes.rpc import RPCClient
 
-gettext.install('safeeyes', utility.LOCALE_PATH)
+gettext.install("safeeyes", utility.LOCALE_PATH)
 
 
 def __running():
-    """
-    Check if SafeEyes is already running.
-    """
+    """Check if SafeEyes is already running."""
     process_count = 0
+    current_user = psutil.Process().username()
     for proc in psutil.process_iter():
         if not proc.cmdline:
             continue
@@ -52,10 +52,13 @@ def __running():
             else:
                 # In older versions cmdline was a list object
                 cmd_line = proc.cmdline
-            if ('python3' in cmd_line[0] or 'python' in cmd_line[0]) and ('safeeyes' in cmd_line[1] or 'safeeyes' in cmd_line):
-                process_count += 1
-                if process_count > 1:
-                    return True
+            if ("python3" in cmd_line[0] or "python" in cmd_line[0]) and (
+                "safeeyes" in cmd_line[1] or "safeeyes" in cmd_line
+            ):
+                if proc.username() == current_user:
+                    process_count += 1
+                    if process_count > 1:
+                        return True
 
         # Ignore if process does not exist or does not have command line args
         except (IndexError, psutil.NoSuchProcess):
@@ -64,45 +67,84 @@ def __running():
 
 
 def main():
-    """
-    Start the Safe Eyes.
-    """
-    system_locale = gettext.translation('safeeyes', localedir=utility.LOCALE_PATH, languages=[utility.system_locale(), 'en_US'], fallback=True)
+    """Start the Safe Eyes."""
+    system_locale = gettext.translation(
+        "safeeyes",
+        localedir=utility.LOCALE_PATH,
+        languages=[utility.system_locale(), "en_US"],
+        fallback=True,
+    )
     system_locale.install()
     try:
         # locale.bindtextdomain is required for Glade files
-        locale.bindtextdomain('safeeyes', utility.LOCALE_PATH)
+        locale.bindtextdomain("safeeyes", utility.LOCALE_PATH)
     except AttributeError:
-        logging.warning('installed python\'s gettext module does not support locale.bindtextdomain. locale.bindtextdomain is required for Glade files')
+        logging.warning(
+            "installed python's gettext module does not support locale.bindtextdomain."
+            " locale.bindtextdomain is required for Glade files"
+        )
 
-
-    parser = argparse.ArgumentParser(prog='safeeyes')
+    parser = argparse.ArgumentParser(prog="safeeyes")
     group = parser.add_mutually_exclusive_group()
-    group.add_argument('-a', '--about', help=_('show the about dialog'), action='store_true')
-    group.add_argument('-d', '--disable', help=_('disable the currently running safeeyes instance'), action='store_true')
-    group.add_argument('-e', '--enable', help=_('enable the currently running safeeyes instance'), action='store_true')
-    group.add_argument('-q', '--quit', help=_('quit the running safeeyes instance and exit'), action='store_true')
-    group.add_argument('-s', '--settings', help=_('show the settings dialog'), action='store_true')
-    group.add_argument('-t', '--take-break', help=_('Take a break now').lower(), action='store_true')
-    parser.add_argument('--debug', help=_('start safeeyes in debug mode'), action='store_true')
-    parser.add_argument('--status', help=_('print the status of running safeeyes instance and exit'), action='store_true')
-    parser.add_argument('--version', action='version', version='%(prog)s ' + SAFE_EYES_VERSION)
+    group.add_argument(
+        "-a", "--about", help=_("show the about dialog"), action="store_true"
+    )
+    group.add_argument(
+        "-d",
+        "--disable",
+        help=_("disable the currently running safeeyes instance"),
+        action="store_true",
+    )
+    group.add_argument(
+        "-e",
+        "--enable",
+        help=_("enable the currently running safeeyes instance"),
+        action="store_true",
+    )
+    group.add_argument(
+        "-q",
+        "--quit",
+        help=_("quit the running safeeyes instance and exit"),
+        action="store_true",
+    )
+    group.add_argument(
+        "-s", "--settings", help=_("show the settings dialog"), action="store_true"
+    )
+    group.add_argument(
+        "-t", "--take-break", help=_("Take a break now").lower(), action="store_true"
+    )
+    parser.add_argument(
+        "--debug", help=_("start safeeyes in debug mode"), action="store_true"
+    )
+    parser.add_argument(
+        "--status",
+        help=_("print the status of running safeeyes instance and exit"),
+        action="store_true",
+    )
+    parser.add_argument(
+        "--version", action="version", version="%(prog)s " + SAFE_EYES_VERSION
+    )
     args = parser.parse_args()
 
     # Initialize the logging
     utility.initialize_logging(args.debug)
     utility.initialize_platform()
     config = Config()
-    utility.create_user_stylesheet_if_missing()
+    utility.cleanup_old_user_stylesheet()
 
     if __running():
         logging.info("Safe Eyes is already running")
         if not config.get("use_rpc_server", True):
             # RPC sever is disabled
-            print(_('Safe Eyes is running without an RPC server. Turn it on to use command-line arguments.'))
+            print(
+                _(
+                    "Safe Eyes is running without an RPC server. Turn it on to use"
+                    " command-line arguments."
+                )
+            )
             sys.exit(0)
             return
-        rpc_client = RPCClient(config.get('rpc_port'))
+        rpc_client = RPCClient(config.get("rpc_port"))
         if args.about:
             rpc_client.show_about()
         elif args.disable:
@@ -123,7 +165,7 @@ def main():
         sys.exit(0)
     else:
         if args.status:
-            print(_('Safe Eyes is not running'))
+            print(_("Safe Eyes is not running"))
             sys.exit(0)
         elif not args.quit:
             logging.info("Starting Safe Eyes")
@@ -131,6 +173,6 @@ def main():
             safe_eyes.start()
 
 
-if __name__ == '__main__':
-    signal.signal(signal.SIGINT, signal.SIG_DFL)    # Handle Ctrl + C
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, signal.SIG_DFL)  # Handle Ctrl + C
     main()

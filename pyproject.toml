@@ -1,0 +1,80 @@
+[project]
+name = "safeeyes"
+version = "3.0.0b1"
+description = "Protect your eyes from eye strain using this continuous breaks reminder."
+keywords = ["linux utility health eye-strain safe-eyes"]
+readme = "README.md"
+authors = [
+    {name = "Gobinath Loganathan", email = "slgobinath@gmail.com"},
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications :: GTK",
+    "Environment :: Other Environment",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "pywayland",
+    "PyGObject",
+    "babel",
+    "psutil",
+    "packaging",
+    "python-xlib",
+]
+requires-python = ">=3.10"
+
+[project.urls]
+Homepage = "https://github.com/slgobinath/SafeEyes"
+Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0b1.tar.gz"
+
+[project.scripts]
+safeeyes = "safeeyes.__main__:main"
+
+[project.optional-dependencies]
+healthstats = ["croniter"]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include=["safeeyes*"]
+
+[dependency-groups]
+dev = [
+    {include-group = "lint"},
+    {include-group = "scripts"},
+    {include-group = "types"}
+]
+lint = [
+    "ruff==0.11.2"
+]
+scripts = [
+    "polib==1.2.0"
+]
+types = [
+    "mypy==1.15.0",
+    "PyGObject-stubs==2.13.0",
+    "types-croniter==5.0.1.20250322",
+    "types-psutil==7.0.0.20250218",
+    "types-python-xlib==0.33.0.20240407"
+]
+
+[tool.mypy]
+# catch typos in configuration file
+warn_unused_configs = true
+disallow_any_unimported = true
+#check_untyped_defs = true
+warn_unused_ignores = true
+warn_unreachable = true
+enable_error_code = [
+    "ignore-without-code",
+    "possibly-undefined"
+]

@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-This module creates the AboutDialog which shows the version and license.
-"""
+"""This module creates the AboutDialog which shows the version and license."""
 
 import os
 
@@ -28,35 +26,40 @@ ABOUT_DIALOG_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/about_dialog.gla
 
 
 class AboutDialog:
-    """
-    AboutDialog reads the about_dialog.glade and build the user interface using that file.
-    It shows the application name with version, a small description, license and the GitHub url.
+    """AboutDialog reads the about_dialog.glade and build the user interface
+    using that file.
+
+    It shows the application name with version, a small description,
+    license and the GitHub url.
     """
 
-    def __init__(self, version):
+    def __init__(self, application, version):
         builder = utility.create_gtk_builder(ABOUT_DIALOG_GLADE)
-        builder.connect_signals(self)
-        self.window = builder.get_object('window_about')
-        builder.get_object('lbl_decription').set_label(_("Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"))
-        builder.get_object('lbl_license').set_label(_('License') + ':')
+        self.window = builder.get_object("window_about")
+        self.window.set_application(application)
+
+        self.window.connect("close-request", self.on_window_delete)
+        builder.get_object("btn_close").connect("clicked", self.on_close_clicked)
+
+        builder.get_object("lbl_decription").set_label(
+            _(
+                "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding"
+                " you to take breaks while you're working long hours at the computer"
+            )
+        )
+        builder.get_object("lbl_license").set_label(_("License") + ":")
 
         # Set the version at the runtime
-        builder.get_object('lbl_app_name').set_label('Safe Eyes ' + version)
+        builder.get_object("lbl_app_name").set_label("Safe Eyes " + version)
 
     def show(self):
-        """
-        Show the About dialog.
-        """
-        self.window.show_all()
+        """Show the About dialog."""
+        self.window.present()
 
     def on_window_delete(self, *args):
-        """
-        Window close event handler.
-        """
+        """Window close event handler."""
         self.window.destroy()
 
     def on_close_clicked(self, *args):
-        """
-        Close button click event handler.
-        """
+        """Close button click event handler."""
         self.window.destroy()

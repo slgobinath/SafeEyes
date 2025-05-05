@@ -16,9 +16,7 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-SafeEyesCore provides the core functionalities of Safe Eyes.
-"""
+"""SafeEyesCore provides the core functionalities of Safe Eyes."""
 
 import datetime
 import logging
@@ -26,7 +24,6 @@ import threading
 import time
 
 from safeeyes import utility
-from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook
@@ -34,14 +31,10 @@ from safeeyes.model import State
 
 
 class SafeEyesCore:
-    """
-    Core of Safe Eyes runs the scheduler and notifies the breaks.
-    """
+    """Core of Safe Eyes runs the scheduler and notifies the breaks."""
 
     def __init__(self, context):
-        """
-        Create an instance of SafeEyesCore and initialize the variables.
-        """
+        """Create an instance of SafeEyesCore and initialize the variables."""
         self.break_queue = None
         self.postpone_duration = 0
         self.default_postpone_duration = 0
@@ -65,26 +58,24 @@ class SafeEyesCore:
         self.waiting_condition = threading.Condition()
         self.lock = threading.Lock()
         self.context = context
-        self.context['skipped'] = False
-        self.context['postponed'] = False
-        self.context['skip_button_disabled'] = False
-        self.context['postpone_button_disabled'] = False
-        self.context['state'] = State.WAITING
+        self.context["skipped"] = False
+        self.context["postponed"] = False
+        self.context["skip_button_disabled"] = False
+        self.context["postpone_button_disabled"] = False
+        self.context["state"] = State.WAITING
 
     def initialize(self, config):
-        """
-        Initialize the internal properties from configuration
-        """
+        """Initialize the internal properties from configuration."""
         logging.info("Initialize the core")
-        self.pre_break_warning_time = config.get('pre_break_warning_time')
+        self.pre_break_warning_time = config.get("pre_break_warning_time")
         self.break_queue = BreakQueue(config, self.context)
-        self.default_postpone_duration = config.get('postpone_duration') * 60   # Convert to seconds
+        self.default_postpone_duration = (
+            config.get("postpone_duration") * 60
+        )  # Convert to seconds
         self.postpone_duration = self.default_postpone_duration
 
     def start(self, next_break_time=-1, reset_breaks=False):
-        """
-        Start Safe Eyes is it is not running already.
-        """
+        """Start Safe Eyes is it is not running already."""
         if self.break_queue.is_empty():
             return
         with self.lock:
@@ -99,9 +90,7 @@ class SafeEyesCore:
                 utility.start_thread(self.__scheduler_job)
 
     def stop(self, is_resting=False):
-        """
-        Stop Safe Eyes if it is running.
-        """
+        """Stop Safe Eyes if it is running."""
         with self.lock:
             if not self.running:
                 return
@@ -111,59 +100,54 @@ class SafeEyesCore:
             # Stop the break thread
             self.waiting_condition.acquire()
             self.running = False
-            if self.context['state'] != State.QUIT:
-                self.context['state'] = State.RESTING if (is_resting) else State.STOPPED
+            if self.context["state"] != State.QUIT:
+                self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
             self.waiting_condition.notify_all()
             self.waiting_condition.release()
 
     def skip(self):
-        """
-        User skipped the break using Skip button
-        """
-        self.context['skipped'] = True
+        """User skipped the break using Skip button."""
+        self.context["skipped"] = True
 
     def postpone(self, duration=-1):
-        """
-        User postponed the break using Postpone button
-        """
+        """User postponed the break using Postpone button."""
         if duration > 0:
             self.postpone_duration = duration
         else:
             self.postpone_duration = self.default_postpone_duration
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
-        self.context['postponed'] = True
+        self.context["postponed"] = True
 
-    def get_break_time(self, break_type = None):
-        """
-        Returns the next break time
-        """
+    def get_break_time(self, break_type=None):
+        """Returns the next break time."""
         break_obj = self.break_queue.get_break(break_type)
         if not break_obj:
             return False
-        time = self.scheduled_next_break_time + datetime.timedelta(minutes=break_obj.time - self.break_queue.get_break().time)
+        time = self.scheduled_next_break_time + datetime.timedelta(
+            minutes=break_obj.time - self.break_queue.get_break().time
+        )
         return time
 
-    def take_break(self, break_type = None):
-        """
-        Calling this method stops the scheduler and show the next break screen
+    def take_break(self, break_type=None):
+        """Calling this method stops the scheduler and show the next break
+        screen.
         """
         if self.break_queue.is_empty():
             return
-        if not self.context['state'] == State.WAITING:
+        if not self.context["state"] == State.WAITING:
             return
         utility.start_thread(self.__take_break, break_type=break_type)
 
-    def has_breaks(self, break_type = None):
-        """
-        Check whether Safe Eyes has breaks or not. Use the break_type to check for either short or long break.
+    def has_breaks(self, break_type=None):
+        """Check whether Safe Eyes has breaks or not.
+
+        Use the break_type to check for either short or long break.
         """
         return not self.break_queue.is_empty(break_type)
 
-    def __take_break(self, break_type = None):
-        """
-        Show the next break screen
-        """
-        logging.info('Take a break due to external request')
+    def __take_break(self, break_type=None):
+        """Show the next break screen."""
+        logging.info("Take a break due to external request")
 
         with self.lock:
             if not self.running:
@@ -184,40 +168,51 @@ class SafeEyesCore:
         utility.execute_main_thread(self.__fire_start_break)
 
     def __scheduler_job(self):
-        """
-        Scheduler task to execute during every interval
-        """
+        """Scheduler task to execute during every interval."""
         if not self.running:
             return
 
         current_time = datetime.datetime.now()
         current_timestamp = current_time.timestamp()
 
-        if self.context['state'] == State.RESTING and self.paused_time > -1:
+        if self.context["state"] == State.RESTING and self.paused_time > -1:
             # Safe Eyes was resting
             paused_duration = int(current_timestamp - self.paused_time)
             self.paused_time = -1
-            if paused_duration > self.break_queue.get_break(BreakType.LONG_BREAK).duration:
-                logging.info('Skip next long break due to the pause %ds longer than break duration', paused_duration)
+            if (
+                paused_duration
+                > self.break_queue.get_break(BreakType.LONG_BREAK).duration
+            ):
+                logging.info(
+                    "Skip next long break due to the pause %ds longer than break"
+                    " duration",
+                    paused_duration,
+                )
                 # Skip the next long break
                 self.break_queue.reset()
 
-        if self.context['postponed']:
+        if self.context["postponed"]:
             # Previous break was postponed
-            logging.info('Prepare for postponed break')
+            logging.info("Prepare for postponed break")
             time_to_wait = self.postpone_duration
-            self.context['postponed'] = False
+            self.context["postponed"] = False
         elif current_timestamp < self.scheduled_next_break_timestamp:
             # Non-standard break was set.
-            time_to_wait = round(self.scheduled_next_break_timestamp - current_timestamp)
+            time_to_wait = round(
+                self.scheduled_next_break_timestamp - current_timestamp
+            )
             self.scheduled_next_break_timestamp = -1
         else:
             # Use next break, convert to seconds
             time_to_wait = self.break_queue.get_break().time * 60
 
-        self.scheduled_next_break_time = current_time + datetime.timedelta(seconds=time_to_wait)
-        self.context['state'] = State.WAITING
-        utility.execute_main_thread(self.__fire_on_update_next_break, self.scheduled_next_break_time)
+        self.scheduled_next_break_time = current_time + datetime.timedelta(
+            seconds=time_to_wait
+        )
+        self.context["state"] = State.WAITING
+        utility.execute_main_thread(
+            self.__fire_on_update_next_break, self.scheduled_next_break_time
+        )
 
         # Wait for the pre break warning period
         logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
@@ -230,16 +225,12 @@ class SafeEyesCore:
         utility.execute_main_thread(self.__fire_pre_break)
 
     def __fire_on_update_next_break(self, next_break_time):
-        """
-        Pass the next break information to the registered listeners.
-        """
+        """Pass the next break information to the registered listeners."""
         self.on_update_next_break.fire(self.break_queue.get_break(), next_break_time)
 
     def __fire_pre_break(self):
-        """
-        Show the notification and start the break after the notification.
-        """
-        self.context['state'] = State.PRE_BREAK
+        """Show the notification and start the break after the notification."""
+        self.context["state"] = State.PRE_BREAK
         if not self.on_pre_break.fire(self.break_queue.get_break()):
             # Plugins wanted to ignore this break
             self.__start_next_break()
@@ -247,7 +238,9 @@ class SafeEyesCore:
         utility.start_thread(self.__wait_until_prepare)
 
     def __wait_until_prepare(self):
-        logging.info("Wait for %d seconds before the break", self.pre_break_warning_time)
+        logging.info(
+            "Wait for %d seconds before the break", self.pre_break_warning_time
+        )
         # Wait for the pre break warning period
         self.__wait_for(self.pre_break_warning_time)
         if not self.running:
@@ -265,11 +258,14 @@ class SafeEyesCore:
             # Plugins want to ignore this break
             self.__start_next_break()
             return
-        if self.context['postponed']:
+        if self.context["postponed"]:
             # Plugins want to postpone this break
-            self.context['postponed'] = False
+            self.context["postponed"] = False
             # Update the next break time
-            self.scheduled_next_break_time = self.scheduled_next_break_time + datetime.timedelta(seconds=self.postpone_duration)
+            self.scheduled_next_break_time = (
+                self.scheduled_next_break_time
+                + datetime.timedelta(seconds=self.postpone_duration)
+            )
             self.__fire_on_update_next_break(self.scheduled_next_break_time)
             # Wait in user thread
             utility.start_thread(self.__postpone_break)
@@ -278,43 +274,44 @@ class SafeEyesCore:
             utility.start_thread(self.__start_break)
 
     def __start_break(self):
-        """
-        Start the break screen.
-        """
-        self.context['state'] = State.BREAK
+        """Start the break screen."""
+        self.context["state"] = State.BREAK
         break_obj = self.break_queue.get_break()
         countdown = break_obj.duration
         total_break_time = countdown
 
-        while countdown and self.running and not self.context['skipped'] and not self.context['postponed']:
+        while (
+            countdown
+            and self.running
+            and not self.context["skipped"]
+            and not self.context["postponed"]
+        ):
             seconds = total_break_time - countdown
             self.on_count_down.fire(countdown, seconds)
-            time.sleep(1)    # Sleep for 1 second
+            time.sleep(1)  # Sleep for 1 second
             countdown -= 1
         utility.execute_main_thread(self.__fire_stop_break)
 
     def __fire_stop_break(self):
         # Loop terminated because of timeout (not skipped) -> Close the break alert
-        if not self.context['skipped'] and not self.context['postponed']:
+        if not self.context["skipped"] and not self.context["postponed"]:
             logging.info("Break is terminated automatically")
             self.on_stop_break.fire()
 
         # Reset the skipped flag
-        self.context['skipped'] = False
-        self.context['skip_button_disabled'] = False
-        self.context['postpone_button_disabled'] = False
+        self.context["skipped"] = False
+        self.context["skip_button_disabled"] = False
+        self.context["postpone_button_disabled"] = False
         self.__start_next_break()
 
     def __wait_for(self, duration):
-        """
-        Wait until someone wake up or the timeout happens.
-        """
+        """Wait until someone wake up or the timeout happens."""
         self.waiting_condition.acquire()
         self.waiting_condition.wait(duration)
         self.waiting_condition.release()
 
     def __start_next_break(self):
-        if not self.context['postponed']:
+        if not self.context["postponed"]:
             self.break_queue.next()
 
         if self.running:
