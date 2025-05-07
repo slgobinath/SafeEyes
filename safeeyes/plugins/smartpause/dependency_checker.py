@@ -17,6 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from safeeyes import utility
+from safeeyes.translations import translate as _
 
 
 def validate(plugin_config, plugin_settings):

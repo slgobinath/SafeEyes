@@ -34,6 +34,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 from safeeyes import utility
+from safeeyes.translations import translate as _
 
 
 class Break:
