@@ -1,1 +1,306 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Safe Eyes</title><base href="https://slgobinath.github.io/SafeEyes/"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/x-icon" href="favicon.ico"><link href="styles.dc1e6a7f0d8c4f5d24ba.bundle.css" rel="stylesheet"/></head><body><app-root></app-root><script type="text/javascript" src="inline.318b50c57b4eba3d437b.bundle.js"></script><script type="text/javascript" src="polyfills.d148f71a177bd0c116e9.bundle.js"></script><script type="text/javascript" src="main.205c915f9e3c958274d4.bundle.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeEyes - Protect your eyes from eye strain</title>
+    <meta name="description" content="SafeEyes is a free and open source tool that protects your eyes from eye strain by reminding you to take breaks while working on the computer.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="images/safeeyes.png" alt="SafeEyes Logo" class="logo-img">
+                    <h1>SafeEyes</h1>
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
+                    <li><a href="#contribute">Contribute</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Protect Your Eyes From Eye Strain</h2>
+                <p>SafeEyes is a simple, beautiful, and extensible break reminder that helps prevent eye strain when working long hours at the computer.</p>
+                <a href="#installation" class="btn">Install Now</a>
+                <a href="https://github.com/slgobinath/SafeEyes" class="btn btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+                <div class="hero-image">
+                    <img src="images/safeeyes_1.png" alt="SafeEyes Screenshot" class="screenshot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Break Reminders</h3>
+                    <p>Reminds you to take breaks with exercises to reduce RSI (Repetitive Strain Injury).</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Keyboard Control</h3>
+                    <p>Option to disable keyboard during breaks to ensure you actually take them.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bell-slash"></i>
+                    <h3>Smart Pause</h3>
+                    <p>Automatically pauses if the system is idle, avoiding unnecessary interruptions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>Multi-screen Support</h3>
+                    <p>Works seamlessly across multiple monitors.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Customizable UI</h3>
+                    <p>Personalize the user interface to match your preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-plug"></i>
+                    <h3>Plugin Support</h3>
+                    <p>Extend functionality with plugins to suit your needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="installation" class="installation">
+        <div class="container">
+            <h2 class="section-title">Installation Guide</h2>
+            <p class="section-description">Safe Eyes is available on the official repositories of many popular Linux distributions. It is also available in Ubuntu PPA, Arch AUR and Python PyPI. Choose any installation source below for your Linux system.</p>
+            
+            <div class="tabs">
+                <div class="tab-header">
+                    <div class="tab-btn active" data-tab="ubuntu">Ubuntu/Linux Mint</div>
+                    <div class="tab-btn" data-tab="arch">Arch</div>
+                    <div class="tab-btn" data-tab="debian">Debian</div>
+                    <div class="tab-btn" data-tab="fedora">Fedora</div>
+                    <div class="tab-btn" data-tab="opensuse">OpenSUSE</div>
+                    <div class="tab-btn" data-tab="flatpak">Flatpak</div>
+                    <div class="tab-btn" data-tab="other">Other Linux</div>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="ubuntu">
+                        <h3>Ubuntu, Linux Mint and other Ubuntu Derivatives</h3>
+                        <p>The <a href="https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes" target="_blank">Official PPA for Safe Eyes</a> hosts the latest version of safeeyes for Ubuntu 22.04 and above.</p>
+                        <div class="code-block">
+                            <pre><code>sudo add-apt-repository ppa:safeeyes-team/safeeyes
+sudo apt update
+sudo apt install safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#ubuntu-code">Copy</button>
+                        </div>
+                        <p>On older versions of Ubuntu, an older version of Safe Eyes is available on the official repositories:</p>
+                        <div class="code-block">
+                            <pre><code>sudo apt install safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#ubuntu-old-code">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="arch">
+                        <h3>Arch Linux</h3>
+                        <div class="code-block">
+                            <pre><code>yay -S safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#arch-code">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="debian">
+                        <h3>Debian</h3>
+                        <div class="code-block">
+                            <pre><code>sudo apt-get install safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#debian-code">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="fedora">
+                        <h3>Fedora</h3>
+                        <p>Available on the <a href="https://copr.fedorainfracloud.org/coprs/praiskup/safeeyes/" target="_blank">praiskup/safeeyes</a> COPR maintained by @praiksup</p>
+                        <div class="code-block">
+                            <pre><code>sudo dnf -y copr enable praiskup/safeeyes
+sudo dnf -y install python3-safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#fedora-code">Copy</button>
+                        </div>
+                        <p>For smart pause plugin, you may have to install the latest xprintidle from: <a href="https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/" target="_blank">alonid/xprintidle</a></p>
+                    </div>
+                    
+                    <div class="tab-pane" id="opensuse">
+                        <h3>OpenSUSE Tumbleweed</h3>
+                        <div class="code-block">
+                            <pre><code>sudo zypper refresh
+sudo zypper install safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#opensuse-code">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="flatpak">
+                        <h3>Flatpak</h3>
+                        <p><strong>Warning:</strong> Many plugins and features don't work well in the flatpak. We recommend that you use one of the native packages listed above. Flatpak-only bugs should be reported at <a href="https://github.com/flathub/io.github.slgobinath.SafeEyes" target="_blank">flathub/io.github.slgobinath.SafeEyes</a>.</p>
+                        <div class="code-block">
+                            <pre><code>flatpak install flathub io.github.slgobinath.SafeEyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#flatpak-code">Copy</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="other">
+                        <h3>Other Linux & Run from source</h3>
+                        <p>Ensure to meet the following dependencies:</p>
+                        <ul>
+                            <li>gir1.2-notify-0.7</li>
+                            <li>python3-babel</li>
+                            <li>python3-croniter</li>
+                            <li>python3-psutil</li>
+                            <li>python3-packaging</li>
+                            <li>python3-xlib</li>
+                            <li>xprintidle (optional)</li>
+                            <li>wlrctl (wayland optional)</li>
+                            <li>Python 3.10+</li>
+                        </ul>
+                        <p>To install Safe Eyes:</p>
+                        <div class="code-block">
+                            <pre><code>sudo pip3 install safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#pip-code">Copy</button>
+                        </div>
+                        <p>After installation, restart your system to update the icons.</p>
+                        <p>To run from source:</p>
+                        <div class="code-block">
+                            <pre><code>git clone https://github.com/slgobinath/SafeEyes.git
+cd SafeEyes
+python3 -m safeeyes</code></pre>
+                            <button class="copy-btn" data-clipboard-target="#source-code">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="usage" class="usage">
+        <div class="container">
+            <h2 class="section-title">Usage</h2>
+            <div class="usage-content">
+                <h3>Command-line Arguments</h3>
+                <div class="code-block wide">
+                    <pre><code>usage: safeeyes [-h] [-a | -d | -e | -q | -s | -t] [--debug] [--version]
+
+Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to
+take breaks while you're working long hours at the computer.
+
+optional arguments:
+  -h, --help        show this help message and exit
+  -a, --about       show the about dialog
+  -d, --disable     disable the currently running safeeyes instance
+  -e, --enable      enable the currently running safeeyes instance
+  -q, --quit        quit the running safeeyes instance and exit
+  -s, --settings    show the settings dialog
+  -t, --take-break  take a break now
+  --debug           start safeeyes in debug mode
+  --status          print the status of running safeeyes instance and exit
+  --version         show program's version number and exit</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <h2 class="section-title">Screenshots</h2>
+            <div class="screenshot-gallery">
+                <div class="screenshot-item">
+                    <img src="images/safeeyes_2.png" alt="SafeEyes Screenshot 1" class="gallery-img">
+                    <p>Break reminder with exercises</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/safeeyes_3.png" alt="SafeEyes Screenshot 2" class="gallery-img">
+                    <p>Settings panel</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/safeeyes_4.png" alt="SafeEyes Screenshot 3" class="gallery-img">
+                    <p>Break schedule configuration</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/safeeyes_5.png" alt="SafeEyes Screenshot 4" class="gallery-img">
+                    <p>Plugin management</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="images/safeeyes_6.png" alt="SafeEyes Screenshot 5" class="gallery-img">
+                    <p>System tray integration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contribute" class="contribute">
+        <div class="container">
+            <h2 class="section-title">Contribute</h2>
+            <div class="contribute-content">
+                <div class="contribute-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Develop</h3>
+                    <p>Contribute to the code by fixing bugs or adding new features. Check out the <a href="https://github.com/slgobinath/SafeEyes" target="_blank">GitHub repository</a>.</p>
+                </div>
+                <div class="contribute-card">
+                    <i class="fas fa-language"></i>
+                    <h3>Translate</h3>
+                    <p>Help improve translations on <a href="https://hosted.weblate.org/engage/safe-eyes/" target="_blank">Weblate</a>. If your language is not available, <a href="https://github.com/slgobinath/SafeEyes/issues" target="_blank">open an issue</a>.</p>
+                </div>
+                <div class="contribute-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>Report Issues</h3>
+                    <p>Found a bug? Report it on the <a href="https://github.com/slgobinath/SafeEyes/issues" target="_blank">issue tracker</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-logo-header">
+                        <img src="images/safeeyes.png" alt="SafeEyes Logo" class="footer-logo-img">
+                        <h3>SafeEyes</h3>
+                    </div>
+                    <p>Protect your eyes from eye strain</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="https://github.com/slgobinath/SafeEyes" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/slgobinath/SafeEyes/issues" target="_blank">Issues</a></li>
+                        <li><a href="https://hosted.weblate.org/engage/safe-eyes/" target="_blank">Translations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-license">
+                    <h4>License</h4>
+                    <p>GNU General Public License v3</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SafeEyes. Website last updated: May 6, 2025.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
