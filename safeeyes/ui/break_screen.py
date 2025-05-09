@@ -59,6 +59,7 @@ class BreakScreen:
         self.shortcut_disable_time = 2
         self.strict_break = False
         self.windows = []
+        self.button_widgets = []
         self.show_skip_button = False
         self.show_postpone_button = False
 
@@ -106,15 +107,20 @@ class BreakScreen:
 
     def on_skip_clicked(self, button):
         """Skip button press event handler."""
-        self.skip_break()
+
+        if self.enable_shortcut:
+            self.skip_break()
 
     def on_postpone_clicked(self, button):
         """Postpone button press event handler."""
-        self.postpone_break()
+
+        if self.enable_shortcut:
+            self.postpone_break()
 
     def show_count_down(self, countdown, seconds):
         """Show/update the count down on all screens."""
         self.enable_shortcut = self.shortcut_disable_time <= seconds
+        self.__set_button_widgets_sensitive()
         mins, secs = divmod(countdown, 60)
         timeformat = "{:02d}:{:02d}".format(mins, secs)
         GLib.idle_add(lambda: self.__update_count_down(timeformat))
@@ -138,6 +144,10 @@ class BreakScreen:
 
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
+
+    def __set_button_widgets_sensitive(self):
+        for button in self.button_widgets:
+            button.set_sensitive(self.enable_shortcut)
 
     def __tray_action(self, button, tray_action):
         """Tray action handler.
@@ -215,7 +225,9 @@ class BreakScreen:
                 btn_postpone.get_style_context().add_class("btn_postpone")
                 btn_postpone.connect("clicked", self.on_postpone_clicked)
                 btn_postpone.set_visible(True)
+                btn_postpone.set_sensitive(self.enable_shortcut)
                 box_buttons.append(btn_postpone)
+                self.button_widgets.append(btn_postpone)
 
             if self.show_skip_button:
                 # Add the skip button
@@ -223,7 +235,9 @@ class BreakScreen:
                 btn_skip.get_style_context().add_class("btn_skip")
                 btn_skip.connect("clicked", self.on_skip_clicked)
                 btn_skip.set_visible(True)
+                btn_postpone.set_sensitive(self.enable_shortcut)
                 box_buttons.append(btn_skip)
+                self.button_widgets.append(btn_skip)
 
             # Set values
             if image_path:
@@ -354,3 +368,4 @@ class BreakScreen:
             win.destroy()
         del self.windows[:]
         del self.count_labels[:]
+        del self.button_widgets[:]
