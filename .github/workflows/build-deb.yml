@@ -1,0 +1,40 @@
+name: Build Debian Package
+
+on:
+  push:
+    branches: [ release ]
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    name: Build Debian Package
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3-stdeb fakeroot dpkg-dev debhelper dh-python python3 python3-packaging python3-setuptools
+
+      - name: Build .deb package
+        run: |
+          DPKG_DEB_COMPRESSOR_TYPE=xz dpkg-buildpackage -us -uc -nc
+          mv ../*.deb .
+
+      - name: Upload .deb to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "*.deb"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Save .deb as workflow artifact
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb-package
+          path: "*.deb"
