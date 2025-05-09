@@ -15,12 +15,8 @@ The website is designed to be hosted on GitHub Pages and provides information ab
 
 To deploy this website to GitHub Pages:
 
-1. Push this repository to GitHub under your account
-2. Go to the repository settings on GitHub
-3. Navigate to the "Pages" section
-4. Under "Source", select "main" branch
-5. Click "Save"
-6. Your site will be published at `https://[your-username].github.io/SafeEyes/`
+1. Push this repository on GitHub
+6. GitHub will automatically build it on https://slgobinath.github.io/SafeEyes/
 
 ## Local Development
 
