@@ -71,6 +71,17 @@ class BreakScreen:
         self.enable_postpone = config.get("allow_postpone", False)
         self.keycode_shortcut_postpone = config.get("shortcut_postpone", 65)
         self.keycode_shortcut_skip = config.get("shortcut_skip", 9)
+
+        if self.context["is_wayland"] and (
+            self.keycode_shortcut_postpone != 65 or self.keycode_shortcut_skip != 9
+        ):
+            logging.warning(
+                _(
+                    "Customizing the postpone and skip shortcuts does not work on "
+                    "Wayland."
+                )
+            )
+
         self.shortcut_disable_time = config.get("shortcut_disable_time", 2)
         self.strict_break = config.get("strict_break", False)
 
