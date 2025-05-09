@@ -1,50 +1,40 @@
-name: Build and Upload DEB Package
+name: Build Debian Package
 
 on:
   push:
     branches: [ release ]
-  workflow_dispatch:   # Allows manual triggering from GitHub UI
+  workflow_dispatch:
 
 jobs:
-  build_deb:
-    name: Build and Upload DEB Package
-    runs-on: ubuntu-latest
+  build-deb:
+    name: Build Debian Package
+    runs-on: ubuntu-24.04
+
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GH_API_SECRET }}
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.10"
-
-      - name: Install build tools
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-stdeb fakeroot dpkg-dev \
-            debhelper dh-python python3 python3-packaging python3-setuptools
+          sudo apt-get install -y python3-stdeb fakeroot dpkg-dev debhelper dh-python python3 python3-packaging python3-setuptools
 
-      - name: Build DEB package
+      - name: Build .deb package
         run: |
-          python3 setup.py --command-packages=stdeb.command bdist_deb
+          DPKG_DEB_COMPRESSOR_TYPE=xz dpkg-buildpackage -us -uc -nc
+          mv ../*.deb .
 
-      - name: Find DEB package
-        id: find_deb
-        run: |
-          echo "deb_path=$(find deb_dist -name '*.deb' | head -n1)" >> $GITHUB_OUTPUT
-
-      - name: Get Current Version
-        id: get_version
-        uses: SebRollen/toml-action@v1.2.0
+      - name: Upload .deb to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
         with:
-          file: "pyproject.toml"
-          field: project.version
+          files: "*.deb"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload DEB to Release
-        uses: softprops/action-gh-release@v1
+      - name: Save .deb as workflow artifact
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: 'v${{ steps.get_version.outputs.value }}'
-          files: ${{ steps.find_deb.outputs.deb_path }}
-          token: ${{ secrets.GH_API_SECRET }}
+          name: deb-package
+          path: "*.deb"
