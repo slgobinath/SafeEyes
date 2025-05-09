@@ -1,0 +1,50 @@
+name: Build and Upload DEB Package
+
+on:
+  push:
+    branches: [ release ]
+  workflow_dispatch:   # Allows manual triggering from GitHub UI
+
+jobs:
+  build_deb:
+    name: Build and Upload DEB Package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_API_SECRET }}
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-stdeb fakeroot dpkg-dev \
+            debhelper dh-python python3 python3-packaging python3-setuptools
+
+      - name: Build DEB package
+        run: |
+          python3 setup.py --command-packages=stdeb.command bdist_deb
+
+      - name: Find DEB package
+        id: find_deb
+        run: |
+          echo "deb_path=$(find deb_dist -name '*.deb' | head -n1)" >> $GITHUB_OUTPUT
+
+      - name: Get Current Version
+        id: get_version
+        uses: SebRollen/toml-action@v1.2.0
+        with:
+          file: "pyproject.toml"
+          field: project.version
+
+      - name: Upload DEB to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: 'v${{ steps.get_version.outputs.value }}'
+          files: ${{ steps.find_deb.outputs.deb_path }}
+          token: ${{ secrets.GH_API_SECRET }}
