@@ -305,13 +305,13 @@ class BreakScreen:
                 if self.enable_shortcut and event.type == X.KeyPress:
                     if (
                         event.detail == self.keycode_shortcut_skip
-                        and not self.strict_break
+                        and self.show_skip_button
                     ):
                         self.skip_break()
                         break
                     elif (
-                        self.enable_postpone
-                        and event.detail == self.keycode_shortcut_postpone
+                        event.detail == self.keycode_shortcut_postpone
+                        and self.show_postpone_button
                     ):
                         self.postpone_break()
                         break
