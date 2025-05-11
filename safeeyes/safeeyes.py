@@ -32,7 +32,6 @@ from safeeyes.ui.about_dialog import AboutDialog
 from safeeyes.ui.break_screen import BreakScreen
 from safeeyes.ui.required_plugin_dialog import RequiredPluginDialog
 from safeeyes.model import State, RequiredPluginException
-from safeeyes.rpc import RPCServer
 from safeeyes.plugin_manager import PluginManager
 from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog
@@ -62,7 +61,6 @@ class SafeEyes(Gtk.Application):
         self.context: typing.Any = {}
         self.plugins_manager = None
         self.settings_dialog_active = False
-        self.rpc_server = None
         self._status = ""
         self.system_locale = system_locale
 
@@ -285,9 +283,6 @@ class SafeEyes(Gtk.Application):
 
         atexit.register(self.persist_session)
 
-        if self.config.get("use_rpc_server", True):
-            self.__start_rpc_server()
-
         if (
             not self.plugins_manager.needs_retry()
             and not self.required_plugin_dialog_active
@@ -396,7 +391,6 @@ class SafeEyes(Gtk.Application):
         self.plugins_manager.stop()
         self.safe_eyes_core.stop()
         self.plugins_manager.exit()
-        self.__stop_rpc_server()
         self.persist_session()
 
         self.release()
@@ -481,13 +475,6 @@ class SafeEyes(Gtk.Application):
 
     def restart(self, config, set_active=False):
         logging.info("Initialize SafeEyesCore with modified settings")
-
-        if self.rpc_server is None and config.get("use_rpc_server"):
-            # RPC server wasn't running but now enabled
-            self.__start_rpc_server()
-        elif self.rpc_server is not None and not config.get("use_rpc_server"):
-            # RPC server was running but now disabled
-            self.__stop_rpc_server()
 
         # Restart the core and initialize the components
         self.config = config
@@ -575,13 +562,3 @@ class SafeEyes(Gtk.Application):
             utility.write_json(utility.SESSION_FILE_PATH, self.context["session"])
         else:
             utility.delete(utility.SESSION_FILE_PATH)
-
-    def __start_rpc_server(self):
-        if self.rpc_server is None:
-            self.rpc_server = RPCServer(self.config.get("rpc_port"), self.context)
-            self.rpc_server.start()
-
-    def __stop_rpc_server(self):
-        if self.rpc_server is not None:
-            self.rpc_server.stop()
-            self.rpc_server = None
