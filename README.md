@@ -122,7 +122,6 @@ Ensure to meet the following dependencies:
 - python3-babel
 - python3-croniter
 - python3-gi
-- python3-psutil
 - python3-packaging
 - python3-xlib
 - python3-pywayland (optional for KDE/other wayland)

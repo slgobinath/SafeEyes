@@ -24,7 +24,6 @@ dependencies = [
     "pywayland",
     "PyGObject",
     "babel",
-    "psutil",
     "packaging",
     "python-xlib",
 ]
@@ -65,7 +64,6 @@ types = [
     "mypy==1.15.0",
     "PyGObject-stubs==2.13.0",
     "types-croniter==5.0.1.20250322",
-    "types-psutil==7.0.0.20250218",
     "types-python-xlib==0.33.0.20240407",
     {include-group = "tests"},
 ]

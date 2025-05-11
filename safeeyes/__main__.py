@@ -23,39 +23,9 @@ your eyes from eye strain.
 import signal
 import sys
 
-import psutil
 from safeeyes import translations
 from safeeyes.model import Config
 from safeeyes.safeeyes import SafeEyes
-
-
-def __running():
-    """Check if SafeEyes is already running."""
-    process_count = 0
-    current_user = psutil.Process().username()
-    for proc in psutil.process_iter():
-        if not proc.cmdline:
-            continue
-        try:
-            # Check if safeeyes is in process arguments
-            if callable(proc.cmdline):
-                # Latest psutil has cmdline function
-                cmd_line = proc.cmdline()
-            else:
-                # In older versions cmdline was a list object
-                cmd_line = proc.cmdline
-            if ("python3" in cmd_line[0] or "python" in cmd_line[0]) and (
-                "safeeyes" in cmd_line[1] or "safeeyes" in cmd_line
-            ):
-                if proc.username() == current_user:
-                    process_count += 1
-                    if process_count > 1:
-                        return True
-
-        # Ignore if process does not exist or does not have command line args
-        except (IndexError, psutil.NoSuchProcess):
-            pass
-    return False
 
 
 def main():
