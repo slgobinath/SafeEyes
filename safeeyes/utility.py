@@ -46,7 +46,6 @@ from gi.repository import Gtk
 from gi.repository import GLib
 from gi.repository import GdkPixbuf
 from packaging.version import parse
-from safeeyes.translations import translate as _
 
 BIN_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 HOME_DIRECTORY = os.environ.get("HOME") or os.path.expanduser("~")
@@ -181,6 +180,8 @@ def delete(file_path):
 
 def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
     """Check the plugin dependencies."""
+    from safeeyes.translations import translate as _
+
     # Check the desktop environment
     if plugin_config["dependencies"]["desktop_environments"]:
         # Plugin has restrictions on desktop environments
@@ -449,6 +450,8 @@ def cleanup_old_user_stylesheet():
             logging.info("Deleting old stylesheet containing default content")
             delete(OLD_STYLE_SHEET_PATH)
         else:
+            from safeeyes.translations import translate as _
+
             # Stylesheet was likely customized, don't delete but warn
             logging.warning(
                 _(
@@ -711,6 +714,8 @@ def open_session():
 
 def create_gtk_builder(glade_file):
     """Create a Gtk builder and load the glade file."""
+    from safeeyes.translations import translate as _
+
     builder = Gtk.Builder()
     builder.set_translation_domain("safeeyes")
     builder.add_from_file(glade_file)
