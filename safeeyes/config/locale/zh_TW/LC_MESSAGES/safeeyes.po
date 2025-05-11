@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-01-30 14:01+0000\n"
-"Last-Translator: 麋悟BigELK176 <bigelk176@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
-"safe-eyes/translations/zh_Hant/>\n"
+"PO-Revision-Date: 2025-05-11 07:01+0000\n"
+"Last-Translator: 麋麓 BigELK176 <BigELK176@gmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "輕柔閉起您的眼睛"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -108,11 +108,11 @@ msgstr "授權"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "貢獻者名單"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "協助我們翻譯應用程式"
 
 # Break screen
 msgid "Skip"
@@ -144,7 +144,7 @@ msgstr "推遲休息時長（分鐘）"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "顯示休息隨機順序"
+msgstr "以隨機順序顯示休息"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
@@ -490,15 +490,15 @@ msgstr "立即休息"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "任何休息"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "短暫休息"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "長時休息"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -522,57 +522,57 @@ msgstr "暫停多媒體"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "限制連續跳過"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "連續允許多少個跳過或延遲"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "限制可以連續跳過或延遲多少次休息"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "跳過或延遲 %(num)d/%(allowed)d 個休息"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "RSI 預防"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "請安裝為桌面環境提供系統匣圖示的服務。"
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "下次長時休息於 %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "下次休息於 %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "所要求的插件 '%s' 是缺少的依賴項目！"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
-msgstr ""
+msgstr "請安裝依賴項目或停用插件。要隱藏此訊息，也可以在設置中停用插件。"
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "在此點按查看更多資訊"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "暫時停用外掛插件"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "永久停用"
 
 msgid "License:"
-msgstr ""
+msgstr "授權："
 
 #, python-format
 msgid ""
