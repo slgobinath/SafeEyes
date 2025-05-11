@@ -80,6 +80,12 @@ class SafeEyes(Gtk.Application):
             ("disable", "d", _("disable the currently running safeeyes instance")),
             ("enable", "e", _("enable the currently running safeeyes instance")),
             ("quit", "q", _("quit the running safeeyes instance and exit")),
+            # special handling
+            (
+                "status",
+                None,
+                _("print the status of running safeeyes instance and exit"),
+            ),
             # toggle
             ("debug", None, _("start safeeyes in debug mode")),
             # TODO: translate
@@ -143,6 +149,12 @@ class SafeEyes(Gtk.Application):
         if is_remote:
             logging.info("Remote instance")
 
+            if options.contains("status"):
+                # fall through the default handling
+                # this will call do_command_line on the primary instance
+                # where we will handle this
+                return -1
+
             if options.contains("quit"):
                 self.activate_action("quit", None)
                 return 0
@@ -176,6 +188,7 @@ class SafeEyes(Gtk.Application):
             if (
                 options.contains("enable")
                 or options.contains("disable")
+                or options.contains("status")
                 or options.contains("quit")
             ):
                 print(_("Safe Eyes is not running"))
@@ -188,6 +201,13 @@ class SafeEyes(Gtk.Application):
         Gtk.Application.do_command_line(self, command_line)
 
         cli = command_line.get_options_dict().end().unpack()
+
+        if cli.get("status"):
+            # this is only invoked remotely
+            # this code runs in the primary instance, but will print to the output
+            # of the remote instance
+            command_line.print_literal(self.status())
+            return 0
 
         logging.info("Handle primary command line")
 
