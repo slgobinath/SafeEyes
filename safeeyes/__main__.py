@@ -20,18 +20,13 @@
 your eyes from eye strain.
 """
 
-import argparse
-import logging
 import signal
 import sys
 
 import psutil
-from safeeyes import utility, translations
-from safeeyes.translations import translate as _
+from safeeyes import translations
 from safeeyes.model import Config
 from safeeyes.safeeyes import SafeEyes
-from safeeyes.safeeyes import SAFE_EYES_VERSION
-from safeeyes.rpc import RPCClient
 
 
 def __running():
@@ -67,93 +62,10 @@ def main():
     """Start the Safe Eyes."""
     system_locale = translations.setup()
 
-    parser = argparse.ArgumentParser(prog="safeeyes")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument(
-        "-a", "--about", help=_("show the about dialog"), action="store_true"
-    )
-    group.add_argument(
-        "-d",
-        "--disable",
-        help=_("disable the currently running safeeyes instance"),
-        action="store_true",
-    )
-    group.add_argument(
-        "-e",
-        "--enable",
-        help=_("enable the currently running safeeyes instance"),
-        action="store_true",
-    )
-    group.add_argument(
-        "-q",
-        "--quit",
-        help=_("quit the running safeeyes instance and exit"),
-        action="store_true",
-    )
-    group.add_argument(
-        "-s", "--settings", help=_("show the settings dialog"), action="store_true"
-    )
-    group.add_argument(
-        "-t", "--take-break", help=_("Take a break now").lower(), action="store_true"
-    )
-    parser.add_argument(
-        "--debug", help=_("start safeeyes in debug mode"), action="store_true"
-    )
-    parser.add_argument(
-        "--status",
-        help=_("print the status of running safeeyes instance and exit"),
-        action="store_true",
-    )
-    parser.add_argument(
-        "--version", action="version", version="%(prog)s " + SAFE_EYES_VERSION
-    )
-    args = parser.parse_args()
-
-    # Initialize the logging
-    utility.initialize_logging(args.debug)
-    utility.initialize_platform()
     config = Config.load()
-    utility.cleanup_old_user_stylesheet()
 
-    if __running():
-        logging.info("Safe Eyes is already running")
-        if not config.get("use_rpc_server", True):
-            # RPC sever is disabled
-            print(
-                _(
-                    "Safe Eyes is running without an RPC server. Turn it on to use"
-                    " command-line arguments."
-                )
-            )
-            sys.exit(0)
-            return
-        rpc_client = RPCClient(config.get("rpc_port"))
-        if args.about:
-            rpc_client.show_about()
-        elif args.disable:
-            rpc_client.disable_safeeyes()
-        elif args.enable:
-            rpc_client.enable_safeeyes()
-        elif args.settings:
-            rpc_client.show_settings()
-        elif args.take_break:
-            rpc_client.take_break()
-        elif args.status:
-            print(rpc_client.status())
-        elif args.quit:
-            rpc_client.quit()
-        else:
-            # Default behavior is opening settings
-            rpc_client.show_settings()
-        sys.exit(0)
-    else:
-        if args.status:
-            print(_("Safe Eyes is not running"))
-            sys.exit(0)
-        elif not args.quit:
-            logging.info("Starting Safe Eyes")
-            safe_eyes = SafeEyes(system_locale, config, args)
-            safe_eyes.start()
+    safe_eyes = SafeEyes(system_locale, config)
+    safe_eyes.run(sys.argv)
 
 
 if __name__ == "__main__":
