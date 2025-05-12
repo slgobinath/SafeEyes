@@ -32,5 +32,5 @@ jobs:
           python-version: '3.13'
       - run: sudo apt-get install -y libwayland-dev libcairo2-dev libgirepository-2.0-dev
       - run: uv pip install -r pyproject.toml
-      - run: uv pip install --group types
+      - run: uv pip install --group types --group tests
       - run: mypy safeeyes
