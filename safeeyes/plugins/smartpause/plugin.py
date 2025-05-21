@@ -52,6 +52,7 @@ swayidle_active = 0
 
 ext_idle_notify_lock = threading.Lock()
 ext_idle_notification_obj = None
+ext_idle_notify_unsupported: bool = False
 
 
 # swayidle
@@ -101,12 +102,17 @@ def __swayidle_idle_time():
 
 # ext idle
 def __start_ext_idle_monitor():
-    global ext_idle_notification_obj
+    global ext_idle_notification_obj, ext_idle_notify_unsupported
 
     from .ext_idle_notify import ExtIdleNotify
 
     ext_idle_notification_obj = ExtIdleNotify()
-    ext_idle_notification_obj.run()
+    try:
+        ext_idle_notification_obj.run()
+    except BaseException:
+        logging.warning("Unable to get idle time, ext-idle-notify-v1 not supported.")
+        ext_idle_notify_unsupported = True
+        ext_idle_notification_obj = None
 
 
 def __stop_ext_idle_monitor():
@@ -119,8 +125,11 @@ def __stop_ext_idle_monitor():
 
 
 def __ext_idle_idle_time():
-    global ext_idle_notification_obj
+    global ext_idle_notification_obj, ext_idle_notify_unsupported
     with ext_idle_notify_lock:
+        if ext_idle_notify_unsupported:
+            return 0
+
         if ext_idle_notification_obj is None:
             __start_ext_idle_monitor()
         else:
