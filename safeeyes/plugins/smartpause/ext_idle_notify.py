@@ -22,6 +22,7 @@ import threading
 import datetime
 import os
 import select
+import typing
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
@@ -29,18 +30,31 @@ from pywayland.protocol.ext_idle_notify_v1 import ExtIdleNotifierV1
 
 
 class ExtIdleNotify:
-    _idle_notifier = None
-    _seat = None
-    _notification = None
-    _notifier_set = False
-    _running = True
+    _ext_idle_notify_internal: typing.Optional["ExtIdleNotifyInternal"] = None
     _thread = None
-    _r_channel = None
-    _w_channel = None
 
-    _idle_since = None
+    _r_channel_started: int
+    _w_channel_started: int
+
+    _r_channel_stop: int
+    _w_channel_stop: int
 
     def __init__(self):
+        self._r_channel_started, self._w_channel_started = os.pipe()
+        self._r_channel_stop, self._w_channel_stop = os.pipe()
+
+    def run(self):
+        self._thread = threading.Thread(
+            target=self._run, name="ExtIdleNotify", daemon=False
+        )
+        self._thread.start()
+
+        result = os.read(self._r_channel_started, 1)
+
+        if result == b"0":
+            raise Exception("ext-idle-notify-v1 not supported")
+
+    def _run(self):
         # Note that this creates a new connection to the wayland compositor.
         # This is not an issue per se, but does mean that the compositor sees this as
         # a new, separate client, that just happens to run in the same process as
@@ -54,70 +68,118 @@ class ExtIdleNotify:
         # https://lists.freedesktop.org/archives/wayland-devel/2019-March/040344.html
         # The best thing would be, of course, for gtk to gain native support for
         # ext-idle-notify-v1.
-        self._display = Display()
-        self._display.connect()
-        self._r_channel, self._w_channel = os.pipe()
+        with Display() as display:
+            self._ext_idle_notify_internal = ExtIdleNotifyInternal(
+                display, self._r_channel_stop, self._w_channel_started
+            )
+            self._ext_idle_notify_internal.run()
+            self._ext_idle_notify_internal = None
 
     def stop(self):
-        self._running = False
         # write anything, just to wake up the channel
-        os.write(self._w_channel, b"!")
-        self._notification.destroy()
-        self._notification = None
-        self._seat = None
-        self._thread.join()
-        os.close(self._r_channel)
-        os.close(self._w_channel)
+        if self._thread is not None:
+            os.write(self._w_channel_stop, b"!")
+            self._thread.join()
+            self._thread = None
+            os.close(self._r_channel_stop)
+            os.close(self._w_channel_stop)
 
-    def run(self):
-        self._thread = threading.Thread(
-            target=self._run, name="ExtIdleNotify", daemon=False
-        )
-        self._thread.start()
+            os.close(self._r_channel_started)
+            os.close(self._w_channel_started)
 
-    def _run(self):
+    def get_idle_time_seconds(self):
+        if self._ext_idle_notify_internal is None:
+            return 0
+
+        return self._ext_idle_notify_internal.get_idle_time_seconds()
+
+
+class ExtIdleNotifyInternal:
+    """This runs in the thread, and is only alive while the display exists.
+
+    Split out into a separate object to simplify lifetime handling.
+    """
+
+    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
+    _display: Display
+    _r_channel_stop: int
+    _w_channel_started: int
+    _seat: typing.Optional[WlSeat] = None
+
+    _idle_since = None
+
+    def __init__(
+        self, display: Display, r_channel_stop: int, w_channel_started: int
+    ) -> None:
+        self._display = display
+        self._r_channel_stop = r_channel_stop
+        self._w_channel_started = w_channel_started
+
+    def run(self) -> None:
         reg = self._display.get_registry()
         reg.dispatcher["global"] = self._global_handler
 
+        self._display.roundtrip()
+
+        while self._seat is None:
+            self._display.dispatch(block=True)
+
+        if self._idle_notifier is None:
+            self._seat = None
+
+            self._display.roundtrip()
+
+            # communicate to the outer thread that the compositor does not
+            # implement the ext-idle-notify-v1 protocol
+            os.write(self._w_channel_started, b"0")
+
+            return
+
+        os.write(self._w_channel_started, b"1")
+
+        timeout_sec = 1
+        # note that the typing doesn't work correctly here - it always says that
+        # get_idle_notification is not defined
+        notification = self._idle_notifier.get_idle_notification(  # type: ignore[attr-defined]
+            timeout_sec * 1000, self._seat
+        )
+        notification.dispatcher["idled"] = self._idle_notifier_handler
+        notification.dispatcher["resumed"] = self._idle_notifier_resume_handler
+
         display_fd = self._display.get_fd()
 
-        while self._running:
+        while True:
             self._display.flush()
 
             # this blocks until either there are new events in self._display
             # (retrieved using dispatch())
-            # or until there are events in self._r_channel - which means that stop()
-            # was called
+            # or until there are events in self._r_channel_stop - which means that
+            # stop() was called
             # unfortunately, this seems like the best way to make sure that dispatch
             # doesn't block potentially forever (up to multiple seconds in my usage)
-            read, _w, _x = select.select((display_fd, self._r_channel), (), ())
+            read, _w, _x = select.select((display_fd, self._r_channel_stop), (), ())
 
-            if self._r_channel in read:
+            if self._r_channel_stop in read:
                 # the channel was written to, which means stop() was called
-                # at this point, self._running should be false as well
                 break
 
             if display_fd in read:
                 self._display.dispatch(block=True)
 
-        self._display.disconnect()
+        self._display.roundtrip()
+
+        notification.destroy()
+
+        self._display.roundtrip()
+
+        self._seat = None
+        self._idle_notifier = None
 
     def _global_handler(self, reg, id_num, iface_name, version):
         if iface_name == "wl_seat":
             self._seat = reg.bind(id_num, WlSeat, version)
         if iface_name == "ext_idle_notifier_v1":
             self._idle_notifier = reg.bind(id_num, ExtIdleNotifierV1, version)
-
-        if self._idle_notifier and self._seat and not self._notifier_set:
-            self._notifier_set = True
-            timeout_sec = 1
-            self._notification = self._idle_notifier.get_idle_notification(
-                timeout_sec * 1000, self._seat
-            )
-            self._notification.dispatcher["idled"] = self._idle_notifier_handler
-            self._notification.dispatcher["resumed"] = (
-                self._idle_notifier_resume_handler
-            )
 
     def _idle_notifier_handler(self, notification):
         self._idle_since = datetime.datetime.now()
