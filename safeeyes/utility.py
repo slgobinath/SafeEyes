@@ -362,12 +362,9 @@ def command_exist(command):
 
 
 def module_exist(module):
-    """Check wther the given Python module exists or not."""
-    try:
-        importlib.util.find_spec(module)
-        return True
-    except ImportError:
-        return False
+    """Check whether the given Python module exists or not."""
+    module_spec = importlib.util.find_spec(module)
+    return module_spec is not None
 
 
 def merge_configs(new_config, old_config):
