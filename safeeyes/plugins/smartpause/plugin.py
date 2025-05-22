@@ -39,7 +39,6 @@ disable_safeeyes = None
 smart_pause_activated = False
 idle_start_time = None
 next_break_time = None
-next_break_duration = 0
 short_break_interval = 0
 waiting_time = 2
 is_wayland_and_gnome = False
@@ -195,7 +194,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global postpone
     global idle_time
     global short_break_interval
-    global long_break_duration
     global waiting_time
     global postpone_if_active
     global is_wayland_and_gnome
@@ -211,7 +209,6 @@ def init(ctx, safeeyes_config, plugin_config):
     short_break_interval = (
         safeeyes_config.get("short_break_interval") * 60
     )  # Convert to seconds
-    long_break_duration = safeeyes_config.get("long_break_duration")
     waiting_time = min(2, idle_time)  # If idle time is 1 sec, wait only 1 sec
     is_wayland_and_gnome = context["desktop"] == "gnome" and context["is_wayland"]
     use_swayidle = context["desktop"] == "sway"
@@ -301,9 +298,7 @@ def on_stop():
 def update_next_break(break_obj, dateTime):
     """Update the next break time."""
     global next_break_time
-    global next_break_duration
     next_break_time = dateTime
-    next_break_duration = break_obj.duration
 
 
 def on_start_break(break_obj):
