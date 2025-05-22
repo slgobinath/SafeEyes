@@ -6,8 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-29 10:02+0000\n"
-"Last-Translator: knowcart <knowcart@gmail.com>\n"
+"PO-Revision-Date: 2025-05-22 09:20+0000\n"
+"Last-Translator: abdelbasset jabrane "
+"<naminio201@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -250,7 +251,7 @@ msgstr "وقت الانتظار"
 
 # Settings dialog
 msgid "Override"
-msgstr "تجاوز"
+msgstr "استبدال"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -599,6 +600,8 @@ msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"تم العثور على ورقة الأنماط القديمة في '%(old)s'، تم تجاهلها. بالنسبة للأنماط "
+"المخصصة، قم بإنشاء ورقة أنماط جديدة في '%(new)s' بدلاً من ذلك."
 
 # Short break
 #~ msgid "Tightly close your eyes"
