@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-10 15:50+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
+"PO-Revision-Date: 2025-05-27 10:01+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/nl/>\n"
 "Language: nl\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Sluit langzaam je ogen"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "Rol je oogballen een paar keer heen en weer"
+msgstr "Rol je ogen een paar keer heen en weer"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
@@ -113,11 +113,11 @@ msgstr "Licentie"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Lijst met bijdragers"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "Helpen met vertalen"
 
 # Break screen
 msgid "Skip"
@@ -503,15 +503,15 @@ msgstr "Neem nu een pauze"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Iedere pauze"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Korte pauze"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Lange pauze"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -535,63 +535,69 @@ msgstr "Media pauzeren"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Aantal keer overslaan beperken"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Geef aan hoe vaak pauzen mogen worden overgeslagen of uitgesteld"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
 msgstr ""
+"Geef aan hoeveel pauzes achter elkaar mogen worden uitgesteld of overgeslagen"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "%(num)d/%(allowed)d pauzes achter elkaar uitgesteld of overgeslagen"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "RSI voorkomen"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Installeer de werkomgevingsdienst voor het tonen van systeemvakpictogrammen."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Volgende lange pauze: %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Volgende pauzes: %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "De afhankelijkheden van de vereist plug-in ‘%s’ ontbreken!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Installeer de afhankelijkheden van deze plug-in. Dit bericht kan worden "
+"verborgen door de plug-in uit te schakelen."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Klik voor meer informatie"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Plug-in tijdelijk uitschakelen"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Permanent uitschakelen"
 
 msgid "License:"
-msgstr ""
+msgstr "Licentie:"
 
 #, python-format
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"Er is een oud stijlblad aangetroffen: ‘%(old)s’. Dit stijlblad wordt "
+"genegeerd. Nieuwe stijlen kunnen worden aangemaakt in ‘%(new)s’."
 
 # Short break
 #~ msgid "Tightly close your eyes"
