@@ -24,6 +24,7 @@ import os
 
 from safeeyes import utility
 from safeeyes.model import PluginDependency
+from safeeyes.translations import translate as _
 
 REQUIRED_PLUGIN_DIALOG_GLADE = os.path.join(
     utility.BIN_DIRECTORY, "glade/required_plugin_dialog.glade"
