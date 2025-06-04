@@ -21,6 +21,7 @@ import logging
 import typing
 
 from safeeyes.model import State
+from safeeyes.context import Context
 
 from .interface import IdleMonitorInterface
 from .gnome_dbus import IdleMonitorGnomeDBus
@@ -31,7 +32,7 @@ from .x11 import IdleMonitorX11
 Safe Eyes smart pause plugin
 """
 
-context = None
+context: Context
 idle_time: float = 0
 enable_safeeyes = None
 disable_safeeyes = None
@@ -60,7 +61,7 @@ def _on_idle() -> None:
     global smart_pause_activated
     global idle_start_time
 
-    if context["state"] == State.WAITING:  # type: ignore[index]
+    if context["state"] == State.WAITING:
         smart_pause_activated = True
         idle_start_time = datetime.datetime.now() - datetime.timedelta(
             seconds=idle_time
@@ -73,15 +74,12 @@ def _on_resumed() -> None:
     global smart_pause_activated
     global idle_start_time
 
-    if (
-        context["state"] == State.RESTING  # type: ignore[index]
-        and idle_start_time is not None
-    ):
+    if context["state"] == State.RESTING and idle_start_time is not None:
         logging.info("Resume Safe Eyes due to user activity")
         smart_pause_activated = False
         idle_period = datetime.datetime.now() - idle_start_time
         idle_seconds = idle_period.total_seconds()
-        context["idle_period"] = idle_seconds  # type: ignore[index]
+        context["idle_period"] = idle_seconds
         if idle_seconds < short_break_interval:
             # Credit back the idle time
             if next_break_time is not None:
@@ -281,7 +279,7 @@ def disable() -> None:
     global idle_monitor
 
     # Remove the idle_period
-    context.pop("idle_period", None)  # type: ignore[union-attr]
+    context.pop("idle_period", None)
 
     if idle_monitor is not None:
         idle_monitor.stop()
