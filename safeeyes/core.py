@@ -29,6 +29,8 @@ from safeeyes.model import EventHook
 from safeeyes.model import State
 from safeeyes.model import Config
 
+from safeeyes.context import Context
+
 import gi
 
 gi.require_version("GLib", "2.0")
@@ -45,6 +47,7 @@ class SafeEyesCore:
     postpone_duration: int = 0
     default_postpone_duration: int = 0
     pre_break_warning_time: int = 0
+    context: Context
 
     _break_queue: typing.Optional[BreakQueue] = None
 
@@ -62,7 +65,7 @@ class SafeEyesCore:
     # set to true when a break was requested
     _take_break_now: bool = False
 
-    def __init__(self, context) -> None:
+    def __init__(self, context: Context) -> None:
         """Create an instance of SafeEyesCore and initialize the variables."""
         # This event is fired before <time-to-prepare> for a break
         self.on_pre_break = EventHook()
@@ -77,11 +80,7 @@ class SafeEyesCore:
         # This event is fired when deciding the next break time
         self.on_update_next_break = EventHook()
         self.context = context
-        self.context["skipped"] = False
-        self.context["postponed"] = False
-        self.context["skip_button_disabled"] = False
-        self.context["postpone_button_disabled"] = False
-        self.context["state"] = State.WAITING
+        self.context.state = State.WAITING
 
     def initialize(self, config: Config):
         """Initialize the internal properties from configuration."""
@@ -116,14 +115,14 @@ class SafeEyesCore:
         self.paused_time = datetime.datetime.now().timestamp()
         # Stop the break thread
         self.running = False
-        if self.context["state"] != State.QUIT:
-            self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
+        if self.context.state != State.QUIT:
+            self.context.state = State.RESTING if (is_resting) else State.STOPPED
 
         self.__wakeup_scheduler()
 
     def skip(self) -> None:
         """User skipped the break using Skip button."""
-        self.context["skipped"] = True
+        self.context.skipped = True
 
     def postpone(self, duration=-1) -> None:
         """User postponed the break using Postpone button."""
@@ -132,7 +131,7 @@ class SafeEyesCore:
         else:
             self.postpone_duration = self.default_postpone_duration
         logging.debug("Postpone the break for %d seconds", self.postpone_duration)
-        self.context["postponed"] = True
+        self.context.postponed = True
 
     def get_break_time(
         self, break_type: typing.Optional[BreakType] = None
@@ -154,7 +153,7 @@ class SafeEyesCore:
         """
         if self._break_queue is None:
             return
-        if not self.context["state"] == State.WAITING:
+        if not self.context.state == State.WAITING:
             return
 
         if break_type is not None and self._break_queue.get_break().type != break_type:
@@ -189,7 +188,7 @@ class SafeEyesCore:
         current_time = datetime.datetime.now()
         current_timestamp = current_time.timestamp()
 
-        if self.context["state"] == State.RESTING and self.paused_time > -1:
+        if self.context.state == State.RESTING and self.paused_time > -1:
             # Safe Eyes was resting
             paused_duration = int(current_timestamp - self.paused_time)
             self.paused_time = -1
@@ -203,11 +202,11 @@ class SafeEyesCore:
                 # Skip the next long break
                 self._break_queue.skip_long_break()
 
-        if self.context["postponed"]:
+        if self.context.postponed:
             # Previous break was postponed
             logging.info("Prepare for postponed break")
             time_to_wait = self.postpone_duration
-            self.context["postponed"] = False
+            self.context.postponed = False
         elif current_timestamp < self.scheduled_next_break_timestamp:
             # Non-standard break was set.
             time_to_wait = round(
@@ -221,7 +220,7 @@ class SafeEyesCore:
         self.scheduled_next_break_time = current_time + datetime.timedelta(
             seconds=time_to_wait
         )
-        self.context["state"] = State.WAITING
+        self.context.state = State.WAITING
         self.__fire_on_update_next_break(self.scheduled_next_break_time)
 
         # Wait for the pre break warning period
@@ -262,7 +261,7 @@ class SafeEyesCore:
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
-        self.context["state"] = State.PRE_BREAK
+        self.context.state = State.PRE_BREAK
         proceed = self.__fire_hook(self.on_pre_break, self._break_queue.get_break())
         if not proceed:
             # Plugins wanted to ignore this break
@@ -298,9 +297,9 @@ class SafeEyesCore:
             # Plugins want to ignore this break
             self.__start_next_break()
             return
-        if self.context["postponed"]:
+        if self.context.postponed:
             # Plugins want to postpone this break
-            self.context["postponed"] = False
+            self.context.postponed = False
 
             if self.scheduled_next_break_time is None:
                 raise Exception("this should never happen")
@@ -322,7 +321,7 @@ class SafeEyesCore:
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
-        self.context["state"] = State.BREAK
+        self.context.state = State.BREAK
         break_obj = self._break_queue.get_break()
         self._taking_break = break_obj
         self._countdown = break_obj.duration
@@ -340,8 +339,8 @@ class SafeEyesCore:
         if (
             self._countdown > 0
             and self.running
-            and not self.context["skipped"]
-            and not self.context["postponed"]
+            and not self.context.skipped
+            and not self.context.postponed
         ):
             countdown = self._countdown
             self._countdown -= 1
@@ -359,14 +358,14 @@ class SafeEyesCore:
 
     def __fire_stop_break(self) -> None:
         # Loop terminated because of timeout (not skipped) -> Close the break alert
-        if not self.context["skipped"] and not self.context["postponed"]:
+        if not self.context.skipped and not self.context.postponed:
             logging.info("Break is terminated automatically")
             self.__fire_hook(self.on_stop_break)
 
         # Reset the skipped flag
-        self.context["skipped"] = False
-        self.context["skip_button_disabled"] = False
-        self.context["postpone_button_disabled"] = False
+        self.context.skipped = False
+        self.context.skip_button_disabled = False
+        self.context.postpone_button_disabled = False
         self.__start_next_break()
 
     def __wait_for(
@@ -440,7 +439,7 @@ class SafeEyesCore:
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
-        if not self.context["postponed"]:
+        if not self.context.postponed:
             self._break_queue.next()
 
         if self.running:

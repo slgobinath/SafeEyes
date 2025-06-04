@@ -82,6 +82,11 @@ class Context(MutableMapping):
     session: dict[str, typing.Any]
     state: State
 
+    skipped: bool = False
+    postponed: bool = False
+    skip_button_disabled: bool = False
+    postpone_button_disabled: bool = False
+
     ext: dict
 
     def __init__(
