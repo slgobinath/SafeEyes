@@ -22,11 +22,10 @@ application.
 
 import atexit
 import logging
-import typing
 from importlib import metadata
 
 import gi
-from safeeyes import utility
+from safeeyes import context, utility
 from safeeyes.ui.about_dialog import AboutDialog
 from safeeyes.ui.break_screen import BreakScreen
 from safeeyes.ui.required_plugin_dialog import RequiredPluginDialog
@@ -47,19 +46,20 @@ class SafeEyes(Gtk.Application):
 
     required_plugin_dialog_active = False
     retry_errored_plugins_count = 0
+    context: context.Context
+    break_screen: BreakScreen
+    safe_eyes_core: SafeEyesCore
+    plugins_manager: PluginManager
+    system_locale: str
 
-    def __init__(self, system_locale, config) -> None:
+    def __init__(self, system_locale: str, config) -> None:
         super().__init__(
             application_id="io.github.slgobinath.SafeEyes",
             flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
         )
 
         self.active = False
-        self.break_screen = None
-        self.safe_eyes_core = None
         self.config = config
-        self.context: typing.Any = {}
-        self.plugins_manager = None
         self.settings_dialog_active = False
         self._status = ""
         self.system_locale = system_locale
@@ -219,39 +219,23 @@ class SafeEyes(Gtk.Application):
 
         return 0
 
-    def do_startup(self):
+    def do_startup(self) -> None:
         Gtk.Application.do_startup(self)
 
         logging.info("Starting up Application")
 
         # Initialize the Safe Eyes Context
-        self.context["version"] = SAFE_EYES_VERSION
-        self.context["desktop"] = utility.desktop_environment()
-        self.context["is_wayland"] = utility.is_wayland()
-        self.context["locale"] = self.system_locale
-        self.context["api"] = {}
-        self.context["api"]["show_settings"] = lambda: utility.execute_main_thread(
-            self.show_settings
-        )
-        self.context["api"]["show_about"] = lambda: utility.execute_main_thread(
-            self.show_about
-        )
-        self.context["api"]["enable_safeeyes"] = (
-            lambda next_break_time=-1: utility.execute_main_thread(
-                self.enable_safeeyes, next_break_time
-            )
-        )
-        self.context["api"]["disable_safeeyes"] = (
-            lambda status=None, is_resting=False: utility.execute_main_thread(
-                self.disable_safeeyes, status, is_resting
-            )
-        )
-        self.context["api"]["status"] = self.status
-        self.context["api"]["quit"] = lambda: utility.execute_main_thread(self.quit)
         if self.config.get("persist_state"):
-            self.context["session"] = utility.open_session()
+            session = utility.open_session()
         else:
-            self.context["session"] = {"plugin": {}}
+            session = {"plugin": {}}
+
+        self.context = context.Context(
+            api=context.API(self),
+            locale=self.system_locale,
+            version=SAFE_EYES_VERSION,
+            session=session,
+        )
 
         # Initialize the theme
         self._initialize_styles()
@@ -269,10 +253,6 @@ class SafeEyes(Gtk.Application):
         self.safe_eyes_core.on_stop_break += self.stop_break
         self.safe_eyes_core.on_update_next_break += self.update_next_break
         self.safe_eyes_core.initialize(self.config)
-        self.context["api"]["take_break"] = self.take_break
-        self.context["api"]["has_breaks"] = self.safe_eyes_core.has_breaks
-        self.context["api"]["postpone"] = self.safe_eyes_core.postpone
-        self.context["api"]["get_break_time"] = self.safe_eyes_core.get_break_time
 
         try:
             self.plugins_manager.init(self.context, self.config)
@@ -289,7 +269,7 @@ class SafeEyes(Gtk.Application):
             and self.safe_eyes_core.has_breaks()
         ):
             self.active = True
-            self.context["state"] = State.START
+            self.context.state = State.START
             self.plugins_manager.start()  # Call the start method of all plugins
             self.safe_eyes_core.start()
             self.handle_system_suspend()

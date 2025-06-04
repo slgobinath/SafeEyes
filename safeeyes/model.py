@@ -38,6 +38,9 @@ from gi.repository import Gtk
 from safeeyes import utility
 from safeeyes.translations import translate as _
 
+if typing.TYPE_CHECKING:
+    from safeeyes.context import Context
+
 
 class BreakType(Enum):
     """Type of Safe Eyes breaks."""
@@ -105,9 +108,12 @@ class BreakQueue:
     __is_random_order: bool
     __long_queue: typing.Optional[list[Break]]
     __short_queue: typing.Optional[list[Break]]
+    context: "Context"
 
     @classmethod
-    def create(cls, config: "Config", context) -> typing.Optional["BreakQueue"]:
+    def create(
+        cls, config: "Config", context: "Context"
+    ) -> typing.Optional["BreakQueue"]:
         short_break_time = config.get("short_break_interval")
         long_break_time = config.get("long_break_interval")
         is_random_order = config.get("random_order")
@@ -142,7 +148,7 @@ class BreakQueue:
 
     def __init__(
         self,
-        context,
+        context: "Context",
         short_break_time: int,
         long_break_time: int,
         is_random_order: bool,
@@ -166,7 +172,7 @@ class BreakQueue:
         self.__set_next_break()
 
         # Restore the last break from session
-        last_break = context["session"].get("break")
+        last_break = context.session.get("break")
         if last_break is not None:
             current_break = self.get_break()
             if last_break != current_break.name:
@@ -247,7 +253,7 @@ class BreakQueue:
             break_obj = self.__next_short()
 
         self.__current_break = break_obj
-        self.context["session"]["break"] = self.__current_break.name
+        self.context.session["break"] = self.__current_break.name
 
     def skip_long_break(self) -> None:
         if not (self.__short_queue and self.__long_queue):
@@ -265,7 +271,7 @@ class BreakQueue:
             # we could decrement the __current_long counter, but then we'd need to
             # handle wraparound and possibly randomizing, which seems complicated
             self.__current_break = self.__next_short()
-            self.context["session"]["break"] = self.__current_break.name
+            self.context.session["break"] = self.__current_break.name
 
     def is_empty(self, break_type: BreakType) -> bool:
         """Check if the given break type is empty or not."""
@@ -283,7 +289,7 @@ class BreakQueue:
             raise Exception("this may only be called when there are short breaks")
 
         break_obj = shorts[self.__current_short]
-        self.context["break_type"] = "short"
+        self.context.ext["break_type"] = "short"
 
         # Update the index to next
         self.__current_short = (self.__current_short + 1) % len(shorts)
@@ -297,7 +303,7 @@ class BreakQueue:
             raise Exception("this may only be called when there are long breaks")
 
         break_obj = longs[self.__current_long]
-        self.context["break_type"] = "long"
+        self.context.ext["break_type"] = "long"
 
         # Update the index to next
         self.__current_long = (self.__current_long + 1) % len(longs)
