@@ -39,42 +39,6 @@ from safeeyes import utility
 from safeeyes.translations import translate as _
 
 
-class Break:
-    """An entity class which represents a break."""
-
-    def __init__(self, break_type, name, time, duration, image, plugins):
-        self.type = break_type
-        self.name = name
-        self.duration = duration
-        self.image = image
-        self.plugins = plugins
-        self.time = time
-        self.next = None
-
-    def __str__(self):
-        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(
-            self.name, self.type, self.duration
-        )
-
-    def __repr__(self):
-        return str(self)
-
-    def is_long_break(self):
-        """Check whether this break is a long break."""
-        return self.type == BreakType.LONG_BREAK
-
-    def is_short_break(self):
-        """Check whether this break is a short break."""
-        return self.type == BreakType.SHORT_BREAK
-
-    def plugin_enabled(self, plugin_id, is_plugin_enabled):
-        """Check whether this break supports the given plugin."""
-        if self.plugins:
-            return plugin_id in self.plugins
-        else:
-            return is_plugin_enabled
-
-
 class BreakType(Enum):
     """Type of Safe Eyes breaks."""
 
@@ -82,12 +46,68 @@ class BreakType(Enum):
     LONG_BREAK = 2
 
 
+class Break:
+    """An entity class which represents a break."""
+
+    type: BreakType
+    name: str
+    time: int
+    duration: int
+    image: typing.Optional[str]  # path
+    plugins: dict
+
+    def __init__(
+        self,
+        break_type: BreakType,
+        name: str,
+        time: int,
+        duration: int,
+        image: typing.Optional[str],
+        plugins: dict,
+    ):
+        self.type = break_type
+        self.name = name
+        self.duration = duration
+        self.image = image
+        self.plugins = plugins
+        self.time = time
+
+    def __str__(self) -> str:
+        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(
+            self.name, self.type, self.duration
+        )
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    def is_long_break(self) -> bool:
+        """Check whether this break is a long break."""
+        return self.type == BreakType.LONG_BREAK
+
+    def is_short_break(self) -> bool:
+        """Check whether this break is a short break."""
+        return self.type == BreakType.SHORT_BREAK
+
+    def plugin_enabled(self, plugin_id: str, is_plugin_enabled: bool) -> bool:
+        """Check whether this break supports the given plugin."""
+        if self.plugins:
+            return plugin_id in self.plugins
+        else:
+            return is_plugin_enabled
+
+
 class BreakQueue:
-    def __init__(self, config, context):
+    __current_break: typing.Optional[Break] = None
+    __current_long: int = 0
+    __current_short: int = 0
+    __short_break_time: int
+    __long_break_time: int
+    __is_random_order: bool
+    __long_queue: typing.Optional[list[Break]]
+    __short_queue: typing.Optional[list[Break]]
+
+    def __init__(self, config: "Config", context) -> None:
         self.context = context
-        self.__current_break = None
-        self.__current_long = 0
-        self.__current_short = 0
         self.__short_break_time = config.get("short_break_interval")
         self.__long_break_time = config.get("long_break_interval")
         self.__is_random_order = config.get("random_order")
@@ -106,7 +126,15 @@ class BreakQueue:
                     while brk != current_break and brk.name != last_break:
                         brk = self.next()
 
-    def get_break(self, break_type=None):
+    def get_break(self) -> Break:
+        if self.__current_break is None:
+            self.__current_break = self.next()
+
+        return self.__current_break
+
+    def get_break_with_type(
+        self, break_type: typing.Optional[BreakType] = None
+    ) -> typing.Optional[Break]:
         if self.__current_break is None:
             self.__current_break = self.next()
 
@@ -122,32 +150,38 @@ class BreakQueue:
             return None
         return self.__short_queue[self.__current_short]
 
-    def is_long_break(self):
+    def is_long_break(self) -> bool:
         return (
             self.__current_break is not None
             and self.__current_break.type == BreakType.LONG_BREAK
         )
 
-    def next(self, break_type=None):
+    def next(self, break_type: typing.Optional[BreakType] = None) -> Break:
         break_obj = None
         shorts = self.__short_queue
         longs = self.__long_queue
 
         # Reset break that has just ended
         if self.is_long_break():
-            self.__current_break.time = self.__long_break_time
+            # __current_break is checked by is_long_break
+            self.__current_break.time = self.__long_break_time  # type: ignore[union-attr]
             if self.__current_long == 0 and self.__is_random_order:
                 # Shuffle queue
                 self.__build_longs()
         elif self.__current_break:
             # Reduce the break time from the next long break (default)
             if longs:
+                if shorts is None:
+                    raise Exception(
+                        "this may not happen, either short or long breaks must be"
+                        " defined"
+                    )
                 longs[self.__current_long].time -= shorts[self.__current_short].time
             if self.__current_short == 0 and self.__is_random_order:
                 self.__build_shorts()
 
         if self.is_empty():
-            return None
+            raise Exception("this should never be called when the queue is empty")
 
         if shorts is None:
             break_obj = self.__next_long()
@@ -166,14 +200,16 @@ class BreakQueue:
 
         return break_obj
 
-    def reset(self):
-        for break_object in self.__short_queue:
-            break_object.time = self.__short_break_time
+    def reset(self) -> None:
+        if self.__short_queue:
+            for break_object in self.__short_queue:
+                break_object.time = self.__short_break_time
 
-        for break_object in self.__long_queue:
-            break_object.time = self.__long_break_time
+        if self.__long_queue:
+            for break_object in self.__long_queue:
+                break_object.time = self.__long_break_time
 
-    def is_empty(self, break_type=None):
+    def is_empty(self, break_type=None) -> bool:
         """Check if the given break type is empty or not.
 
         If the break_type is None, check for both short and long breaks.
@@ -185,8 +221,12 @@ class BreakQueue:
         else:
             return self.__short_queue is None and self.__long_queue is None
 
-    def __next_short(self):
+    def __next_short(self) -> Break:
         shorts = self.__short_queue
+
+        if shorts is None:
+            raise Exception("this may only be called when there are short breaks")
+
         break_obj = shorts[self.__current_short]
         self.context["break_type"] = "short"
 
@@ -195,8 +235,12 @@ class BreakQueue:
 
         return break_obj
 
-    def __next_long(self):
+    def __next_long(self) -> Break:
         longs = self.__long_queue
+
+        if longs is None:
+            raise Exception("this may only be called when there are long breaks")
+
         break_obj = longs[self.__current_long]
         self.context["break_type"] = "long"
 
@@ -205,7 +249,9 @@ class BreakQueue:
 
         return break_obj
 
-    def __build_queue(self, break_type, break_configs, break_time, break_duration):
+    def __build_queue(
+        self, break_type, break_configs, break_time, break_duration
+    ) -> typing.Optional[list[Break]]:
         """Build a queue of breaks."""
         size = len(break_configs)
 
@@ -218,8 +264,8 @@ class BreakQueue:
         else:
             breaks_order = break_configs
 
-        queue = [None] * size
-        for i, break_config in enumerate(breaks_order):
+        queue: list[Break] = []
+        for break_config in breaks_order:
             name = _(break_config["name"])
             duration = break_config.get("duration", break_duration)
             image = break_config.get("image")
@@ -232,11 +278,11 @@ class BreakQueue:
                 continue
 
             break_obj = Break(break_type, name, interval, duration, image, plugins)
-            queue[i] = break_obj
+            queue.append(break_obj)
 
         return queue
 
-    def __build_shorts(self):
+    def __build_shorts(self) -> None:
         self.__short_queue = self.__build_queue(
             BreakType.SHORT_BREAK,
             self.__config.get("short_breaks"),
@@ -244,7 +290,7 @@ class BreakQueue:
             self.__config.get("short_break_duration"),
         )
 
-    def __build_longs(self):
+    def __build_longs(self) -> None:
         self.__long_queue = self.__build_queue(
             BreakType.LONG_BREAK,
             self.__config.get("long_breaks"),

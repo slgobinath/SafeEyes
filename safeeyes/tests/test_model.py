@@ -30,7 +30,7 @@ class TestBreak:
             time=15,
             duration=15,
             image=None,
-            plugins=None,
+            plugins={},
         )
 
         assert b.is_short_break()
@@ -43,7 +43,7 @@ class TestBreak:
             time=75,
             duration=60,
             image=None,
-            plugins=None,
+            plugins={},
         )
 
         assert not b.is_short_break()
@@ -72,8 +72,11 @@ class TestBreakQueue:
         assert bq.is_empty()
         assert bq.is_empty(model.BreakType.LONG_BREAK)
         assert bq.is_empty(model.BreakType.SHORT_BREAK)
-        assert bq.next() is None
-        assert bq.get_break() is None
+
+        with pytest.raises(Exception, match="this should never be called"):
+            bq.next()
+        with pytest.raises(Exception, match="this should never be called"):
+            bq.get_break()
 
     def get_bq_only_short(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
