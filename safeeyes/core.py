@@ -43,7 +43,7 @@ class SafeEyesCore:
     default_postpone_duration: int = 0
     pre_break_warning_time: int = 0
 
-    _break_queue: BreakQueue
+    _break_queue: typing.Optional[BreakQueue] = None
 
     def __init__(self, context) -> None:
         """Create an instance of SafeEyesCore and initialize the variables."""
@@ -72,7 +72,7 @@ class SafeEyesCore:
         """Initialize the internal properties from configuration."""
         logging.info("Initialize the core")
         self.pre_break_warning_time = config.get("pre_break_warning_time")
-        self._break_queue = BreakQueue(config, self.context)
+        self._break_queue = BreakQueue.create(config, self.context)
         self.default_postpone_duration = (
             config.get("postpone_duration") * 60
         )  # Convert to seconds
@@ -80,7 +80,7 @@ class SafeEyesCore:
 
     def start(self, next_break_time=-1, reset_breaks=False) -> None:
         """Start Safe Eyes is it is not running already."""
-        if self._break_queue.is_empty():
+        if self._break_queue is None:
             logging.info("No breaks defined, not starting the core")
             return
         with self.lock:
@@ -127,6 +127,8 @@ class SafeEyesCore:
         self, break_type: typing.Optional[BreakType] = None
     ) -> typing.Optional[datetime.datetime]:
         """Returns the next break time."""
+        if self._break_queue is None:
+            return None
         break_obj = self._break_queue.get_break_with_type(break_type)
         if not break_obj or self.scheduled_next_break_time is None:
             return None
@@ -139,7 +141,7 @@ class SafeEyesCore:
         """Calling this method stops the scheduler and show the next break
         screen.
         """
-        if self._break_queue.is_empty():
+        if self._break_queue is None:
             return
         if not self.context["state"] == State.WAITING:
             return
@@ -150,11 +152,21 @@ class SafeEyesCore:
 
         Use the break_type to check for either short or long break.
         """
+        if self._break_queue is None:
+            return False
+
+        if break_type is None:
+            return True
+
         return not self._break_queue.is_empty(break_type)
 
     def __take_break(self, break_type: typing.Optional[BreakType] = None) -> None:
         """Show the next break screen."""
         logging.info("Take a break due to external request")
+
+        if self._break_queue is None:
+            # This will only be called by self.take_break, which checks this
+            return
 
         with self.lock:
             if not self.running:
@@ -177,6 +189,10 @@ class SafeEyesCore:
     def __scheduler_job(self) -> None:
         """Scheduler task to execute during every interval."""
         if not self.running:
+            return
+
+        if self._break_queue is None:
+            # This will only be called by methods which check this
             return
 
         current_time = datetime.datetime.now()
@@ -233,10 +249,16 @@ class SafeEyesCore:
 
     def __fire_on_update_next_break(self, next_break_time: datetime.datetime) -> None:
         """Pass the next break information to the registered listeners."""
+        if self._break_queue is None:
+            # This will only be called by methods which check this
+            return
         self.on_update_next_break.fire(self._break_queue.get_break(), next_break_time)
 
     def __fire_pre_break(self) -> None:
         """Show the notification and start the break after the notification."""
+        if self._break_queue is None:
+            # This will only be called by methods which check this
+            return
         self.context["state"] = State.PRE_BREAK
         if not self.on_pre_break.fire(self._break_queue.get_break()):
             # Plugins wanted to ignore this break
@@ -259,6 +281,9 @@ class SafeEyesCore:
         utility.execute_main_thread(self.__fire_start_break)
 
     def __fire_start_break(self) -> None:
+        if self._break_queue is None:
+            # This will only be called by methods which check this
+            return
         break_obj = self._break_queue.get_break()
         # Show the break screen
         if not self.on_start_break.fire(break_obj):
@@ -286,6 +311,9 @@ class SafeEyesCore:
 
     def __start_break(self) -> None:
         """Start the break screen."""
+        if self._break_queue is None:
+            # This will only be called by methods which check this
+            return
         self.context["state"] = State.BREAK
         break_obj = self._break_queue.get_break()
         countdown = break_obj.duration
@@ -322,6 +350,9 @@ class SafeEyesCore:
         self.waiting_condition.release()
 
     def __start_next_break(self) -> None:
+        if self._break_queue is None:
+            # This will only be called by methods which check this
+            return
         if not self.context["postponed"]:
             self._break_queue.next()
 
