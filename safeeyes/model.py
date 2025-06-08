@@ -96,15 +96,6 @@ class BreakQueue:
         self.__build_longs()
         self.__build_shorts()
 
-        # Interface guarantees that short_interval >= 1
-        # And that long_interval is a multiple of short_interval
-        short_interval = config.get("short_break_interval")
-        long_interval = config.get("long_break_interval")
-        self.__cycle_len = int(long_interval / short_interval)
-        # To count every long break as a cycle in .next() if there are no short breaks
-        if self.__short_queue is None:
-            self.__cycle_len = 1
-
         # Restore the last break from session
         if not self.is_empty():
             last_break = context["session"].get("break")
