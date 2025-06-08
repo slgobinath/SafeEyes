@@ -97,7 +97,7 @@ class Break:
 
 
 class BreakQueue:
-    __current_break: typing.Optional[Break] = None
+    __current_break: Break
     __current_long: int = 0
     __current_short: int = 0
     __short_break_time: int
@@ -162,6 +162,9 @@ class BreakQueue:
         self.__short_queue = short_queue
         self.__long_queue = long_queue
 
+        # load first break
+        self.__set_next_break()
+
         # Restore the last break from session
         last_break = context["session"].get("break")
         if last_break is not None:
@@ -172,17 +175,11 @@ class BreakQueue:
                     brk = self.next()
 
     def get_break(self) -> Break:
-        if self.__current_break is None:
-            self.__current_break = self.next()
-
         return self.__current_break
 
     def get_break_with_type(
         self, break_type: typing.Optional[BreakType] = None
     ) -> typing.Optional[Break]:
-        if self.__current_break is None:
-            self.__current_break = self.next()
-
         if break_type is None or self.__current_break.type == break_type:
             return self.__current_break
 
@@ -196,25 +193,27 @@ class BreakQueue:
         return self.__short_queue[self.__current_short]
 
     def is_long_break(self) -> bool:
-        return (
-            self.__current_break is not None
-            and self.__current_break.type == BreakType.LONG_BREAK
-        )
+        return self.__current_break.type == BreakType.LONG_BREAK
 
     def next(self, break_type: typing.Optional[BreakType] = None) -> Break:
-        break_obj = None
+        """Advance to the next break, and return that break.
+
+        If break_type is given, advance to the next break with that type.
+        If the last break in the queue is reached, this resets the internal index to
+        the first break again, and shuffle if needed.
+        """
         shorts = self.__short_queue
         longs = self.__long_queue
+        previous_break = self.__current_break
 
         # Reset break that has just ended
-        if self.is_long_break():
-            # __current_break is checked by is_long_break
-            self.__current_break.time = self.__long_break_time  # type: ignore[union-attr]
+        if previous_break.is_long_break():
+            previous_break.time = self.__long_break_time
             if self.__current_long == 0 and self.__is_random_order:
                 # Shuffle queue
                 if self.__long_queue is not None:
                     random.shuffle(self.__long_queue)
-        elif self.__current_break:
+        else:
             # Reduce the break time from the next long break (default)
             if longs:
                 if shorts is None:
@@ -226,6 +225,14 @@ class BreakQueue:
             if self.__current_short == 0 and self.__is_random_order:
                 if self.__short_queue is not None:
                     random.shuffle(self.__short_queue)
+
+        self.__set_next_break(break_type)
+
+        return self.__current_break
+
+    def __set_next_break(self, break_type: typing.Optional[BreakType] = None) -> None:
+        shorts = self.__short_queue
+        longs = self.__long_queue
 
         if shorts is None:
             break_obj = self.__next_long()
@@ -241,8 +248,6 @@ class BreakQueue:
 
         self.__current_break = break_obj
         self.context["session"]["break"] = self.__current_break.name
-
-        return break_obj
 
     def reset(self) -> None:
         if self.__short_queue:
