@@ -106,25 +106,70 @@ class BreakQueue:
     __long_queue: typing.Optional[list[Break]]
     __short_queue: typing.Optional[list[Break]]
 
-    def __init__(self, config: "Config", context) -> None:
-        self.context = context
-        self.__short_break_time = config.get("short_break_interval")
-        self.__long_break_time = config.get("long_break_interval")
-        self.__is_random_order = config.get("random_order")
-        self.__config = config
+    @classmethod
+    def create(cls, config: "Config", context) -> typing.Optional["BreakQueue"]:
+        short_break_time = config.get("short_break_interval")
+        long_break_time = config.get("long_break_interval")
+        is_random_order = config.get("random_order")
 
-        self.__build_longs()
-        self.__build_shorts()
+        short_queue = cls.__build_queue(
+            BreakType.SHORT_BREAK,
+            config.get("short_breaks"),
+            short_break_time,
+            config.get("short_break_duration"),
+            is_random_order,
+        )
+
+        long_queue = cls.__build_queue(
+            BreakType.LONG_BREAK,
+            config.get("long_breaks"),
+            long_break_time,
+            config.get("long_break_duration"),
+            is_random_order,
+        )
+
+        if short_queue is None and long_queue is None:
+            return None
+
+        return cls(
+            context,
+            short_break_time,
+            long_break_time,
+            is_random_order,
+            short_queue,
+            long_queue,
+        )
+
+    def __init__(
+        self,
+        context,
+        short_break_time: int,
+        long_break_time: int,
+        is_random_order: bool,
+        short_queue: typing.Optional[list[Break]],
+        long_queue: typing.Optional[list[Break]],
+    ) -> None:
+        """Constructor for BreakQueue. Do not call this directly.
+
+        Instead, use BreakQueue.create() instead.
+        short_queue and long_queue must not both be None, and must not be an empty
+        list.
+        """
+        self.context = context
+        self.__short_break_time = short_break_time
+        self.__long_break_time = long_break_time
+        self.__is_random_order = is_random_order
+        self.__short_queue = short_queue
+        self.__long_queue = long_queue
 
         # Restore the last break from session
-        if not self.is_empty():
-            last_break = context["session"].get("break")
-            if last_break is not None:
-                current_break = self.get_break()
-                if last_break != current_break.name:
+        last_break = context["session"].get("break")
+        if last_break is not None:
+            current_break = self.get_break()
+            if last_break != current_break.name:
+                brk = self.next()
+                while brk != current_break and brk.name != last_break:
                     brk = self.next()
-                    while brk != current_break and brk.name != last_break:
-                        brk = self.next()
 
     def get_break(self) -> Break:
         if self.__current_break is None:
@@ -167,7 +212,8 @@ class BreakQueue:
             self.__current_break.time = self.__long_break_time  # type: ignore[union-attr]
             if self.__current_long == 0 and self.__is_random_order:
                 # Shuffle queue
-                self.__build_longs()
+                if self.__long_queue is not None:
+                    random.shuffle(self.__long_queue)
         elif self.__current_break:
             # Reduce the break time from the next long break (default)
             if longs:
@@ -178,10 +224,8 @@ class BreakQueue:
                     )
                 longs[self.__current_long].time -= shorts[self.__current_short].time
             if self.__current_short == 0 and self.__is_random_order:
-                self.__build_shorts()
-
-        if self.is_empty():
-            raise Exception("this should never be called when the queue is empty")
+                if self.__short_queue is not None:
+                    random.shuffle(self.__short_queue)
 
         if shorts is None:
             break_obj = self.__next_long()
@@ -209,17 +253,14 @@ class BreakQueue:
             for break_object in self.__long_queue:
                 break_object.time = self.__long_break_time
 
-    def is_empty(self, break_type=None) -> bool:
-        """Check if the given break type is empty or not.
-
-        If the break_type is None, check for both short and long breaks.
-        """
+    def is_empty(self, break_type: BreakType) -> bool:
+        """Check if the given break type is empty or not."""
         if break_type == BreakType.SHORT_BREAK:
             return self.__short_queue is None
         elif break_type == BreakType.LONG_BREAK:
             return self.__long_queue is None
         else:
-            return self.__short_queue is None and self.__long_queue is None
+            typing.assert_never(break_type)
 
     def __next_short(self) -> Break:
         shorts = self.__short_queue
@@ -249,8 +290,13 @@ class BreakQueue:
 
         return break_obj
 
+    @staticmethod
     def __build_queue(
-        self, break_type, break_configs, break_time, break_duration
+        break_type: BreakType,
+        break_configs: list[dict],
+        break_time: int,
+        break_duration: int,
+        is_random_order: bool,
     ) -> typing.Optional[list[Break]]:
         """Build a queue of breaks."""
         size = len(break_configs)
@@ -259,7 +305,7 @@ class BreakQueue:
             # No breaks
             return None
 
-        if self.__is_random_order:
+        if is_random_order:
             breaks_order = random.sample(break_configs, size)
         else:
             breaks_order = break_configs
@@ -280,23 +326,10 @@ class BreakQueue:
             break_obj = Break(break_type, name, interval, duration, image, plugins)
             queue.append(break_obj)
 
+        if len(queue) == 0:
+            return None
+
         return queue
-
-    def __build_shorts(self) -> None:
-        self.__short_queue = self.__build_queue(
-            BreakType.SHORT_BREAK,
-            self.__config.get("short_breaks"),
-            self.__short_break_time,
-            self.__config.get("short_break_duration"),
-        )
-
-    def __build_longs(self) -> None:
-        self.__long_queue = self.__build_queue(
-            BreakType.LONG_BREAK,
-            self.__config.get("long_breaks"),
-            self.__long_break_time,
-            self.__config.get("long_break_duration"),
-        )
 
 
 class State(Enum):

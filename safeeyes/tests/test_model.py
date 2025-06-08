@@ -67,16 +67,9 @@ class TestBreakQueue:
 
         context: dict[str, typing.Any] = {}
 
-        bq = model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
 
-        assert bq.is_empty()
-        assert bq.is_empty(model.BreakType.LONG_BREAK)
-        assert bq.is_empty(model.BreakType.SHORT_BREAK)
-
-        with pytest.raises(Exception, match="this should never be called"):
-            bq.next()
-        with pytest.raises(Exception, match="this should never be called"):
-            bq.get_break()
+        assert bq is None
 
     def get_bq_only_short(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -109,7 +102,11 @@ class TestBreakQueue:
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def get_bq_only_long(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -142,7 +139,11 @@ class TestBreakQueue:
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def get_bq_full(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -180,12 +181,15 @@ class TestBreakQueue:
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def test_create_only_short(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_only_short(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.SHORT_BREAK)
         assert bq.is_empty(model.BreakType.LONG_BREAK)
 
@@ -254,7 +258,6 @@ class TestBreakQueue:
     def test_create_only_long(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_only_long(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.LONG_BREAK)
         assert bq.is_empty(model.BreakType.SHORT_BREAK)
 
@@ -321,7 +324,6 @@ class TestBreakQueue:
     def test_create_full(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_full(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.LONG_BREAK)
         assert not bq.is_empty(model.BreakType.SHORT_BREAK)
 
