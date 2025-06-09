@@ -70,7 +70,6 @@ class SafeEyesCore:
         # This event is fired when deciding the next break time
         self.on_update_next_break = EventHook()
         self.waiting_condition = threading.Condition()
-        self.lock = threading.Lock()
         self.context = context
         self.context["skipped"] = False
         self.context["postponed"] = False
@@ -95,31 +94,29 @@ class SafeEyesCore:
         if self._break_queue is None:
             logging.info("No breaks defined, not starting the core")
             return
-        with self.lock:
-            if not self.running:
-                logging.info("Start Safe Eyes core")
-                if reset_breaks:
-                    logging.info("Reset breaks to start from the beginning")
-                    self._break_queue.reset()
+        if not self.running:
+            logging.info("Start Safe Eyes core")
+            if reset_breaks:
+                logging.info("Reset breaks to start from the beginning")
+                self._break_queue.reset()
 
-                self.running = True
-                self.scheduled_next_break_timestamp = int(next_break_time)
-                utility.start_thread(self.__scheduler_job)
+            self.running = True
+            self.scheduled_next_break_timestamp = int(next_break_time)
+            utility.start_thread(self.__scheduler_job)
 
     def stop(self, is_resting=False) -> None:
         """Stop Safe Eyes if it is running."""
-        with self.lock:
-            if not self.running:
-                return
+        if not self.running:
+            return
 
-            logging.info("Stop Safe Eyes core")
-            self.paused_time = datetime.datetime.now().timestamp()
-            # Stop the break thread
-            self.running = False
-            if self.context["state"] != State.QUIT:
-                self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
+        logging.info("Stop Safe Eyes core")
+        self.paused_time = datetime.datetime.now().timestamp()
+        # Stop the break thread
+        self.running = False
+        if self.context["state"] != State.QUIT:
+            self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
 
-            self.__wakeup_scheduler()
+        self.__wakeup_scheduler()
 
     def skip(self) -> None:
         """User skipped the break using Skip button."""
