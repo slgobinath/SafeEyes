@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-16 20:02+0000\n"
-"Last-Translator: jan madsen <jsm@janz.dk>\n"
+"PO-Revision-Date: 2025-06-20 06:03+0000\n"
+"Last-Translator: lalala <lalala_233@qq.com>\n"
 "Language-Team: Danish <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/da/>\n"
 "Language: da\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.2-dev\n"
+"X-Generator: Weblate 5.12.1\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -532,7 +532,7 @@ msgstr ""
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Hvor mange spring eller udsættelser er tilladt i træk"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
