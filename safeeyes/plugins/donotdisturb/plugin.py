@@ -229,29 +229,24 @@ def _normalize_window_classes(classes_as_str: str):
     return [w.lower() for w in classes_as_str.split()]
 
 
-def on_pre_break(break_obj):
-    """Lifecycle method executes before the pre-break period."""
+def __should_skip_break(pre_break: bool) -> bool:
     if utility.IS_WAYLAND:
         if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()
         else:
-            skip_break = is_active_window_skipped_wayland(True)
+            skip_break = is_active_window_skipped_wayland(pre_break)
     else:
-        skip_break = is_active_window_skipped_xorg(True)
+        skip_break = is_active_window_skipped_xorg(pre_break)
     if dnd_while_on_battery and not skip_break:
         skip_break = is_on_battery()
     return skip_break
+
+
+def on_pre_break(break_obj):
+    """Lifecycle method executes before the pre-break period."""
+    return __should_skip_break(pre_break=True)
 
 
 def on_start_break(break_obj):
     """Lifecycle method executes just before the break."""
-    if utility.IS_WAYLAND:
-        if utility.DESKTOP_ENVIRONMENT == "gnome":
-            skip_break = is_idle_inhibited_gnome()
-        else:
-            skip_break = is_active_window_skipped_wayland(False)
-    else:
-        skip_break = is_active_window_skipped_xorg(False)
-    if dnd_while_on_battery and not skip_break:
-        skip_break = is_on_battery()
-    return skip_break
+    return __should_skip_break(pre_break=False)
