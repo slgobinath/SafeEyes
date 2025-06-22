@@ -176,6 +176,32 @@ def is_idle_inhibited_gnome():
     return bool(result & 0b1000)
 
 
+def is_idle_inhibited_kde() -> bool:
+    """KDE Plasma doesn't work with wlrctl, and there is no way to enumerate
+    fullscreen windows, but KDE does expose a non-standard Inhibited property on
+    org.freedesktop.Notifications, which does communicate the Do Not Disturb status
+    on KDE.
+    This is also only an approximation, but comes pretty close.
+    """
+    dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
+        bus_type=Gio.BusType.SESSION,
+        flags=Gio.DBusProxyFlags.NONE,
+        info=None,
+        name="org.freedesktop.Notifications",
+        object_path="/org/freedesktop/Notifications",
+        interface_name="org.freedesktop.Notifications",
+        cancellable=None,
+    )
+    prop = dbus_proxy.get_cached_property("Inhibited")
+
+    if prop is None:
+        return False
+
+    result = prop.unpack()
+
+    return result
+
+
 def _window_class_matches(window_class: str, classes: list) -> bool:
     return any(map(lambda w: w in classes, window_class.split()))
 
@@ -233,12 +259,18 @@ def __should_skip_break(pre_break: bool) -> bool:
     if utility.IS_WAYLAND:
         if utility.DESKTOP_ENVIRONMENT == "gnome":
             skip_break = is_idle_inhibited_gnome()
+        elif utility.DESKTOP_ENVIRONMENT == "kde":
+            skip_break = is_idle_inhibited_kde()
         else:
             skip_break = is_active_window_skipped_wayland(pre_break)
     else:
         skip_break = is_active_window_skipped_xorg(pre_break)
     if dnd_while_on_battery and not skip_break:
         skip_break = is_on_battery()
+
+    if skip_break:
+        logging.info("Skipping break due to donotdisturb")
+
     return skip_break
 
 
