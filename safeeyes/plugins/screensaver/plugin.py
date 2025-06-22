@@ -33,6 +33,7 @@ lock_screen_command = None
 min_seconds = 0
 seconds_passed = 0
 tray_icon_path = None
+icon_lock_later_path = None
 
 
 def __lock_screen_command():
@@ -102,9 +103,13 @@ def __lock_screen_command():
     return None
 
 
-def __lock_screen():
+def __lock_screen_later():
     global user_locked_screen
     user_locked_screen = True
+
+
+def __lock_screen_now() -> None:
+    utility.execute_command(lock_screen_command)
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -113,10 +118,14 @@ def init(ctx, safeeyes_config, plugin_config):
     global lock_screen_command
     global min_seconds
     global tray_icon_path
+    global icon_lock_later_path
     logging.debug("Initialize Screensaver plugin")
     context = ctx
     min_seconds = plugin_config["min_seconds"]
     tray_icon_path = os.path.join(plugin_config["path"], "resource/lock.png")
+    icon_lock_later_path = os.path.join(
+        plugin_config["path"], "resource/rotation-lock-symbolic.svg"
+    )
     if plugin_config["command"]:
         lock_screen_command = plugin_config["command"].split()
     else:
@@ -147,10 +156,22 @@ def on_stop_break():
     min_seconds.
     """
     if user_locked_screen or (lock_screen and seconds_passed >= min_seconds):
-        utility.execute_command(lock_screen_command)
+        __lock_screen_now()
 
 
-def get_tray_action(break_obj):
-    return TrayAction.build(
-        "Lock screen", tray_icon_path, "dialog-password", __lock_screen
-    )
+def get_tray_action(break_obj) -> list[TrayAction]:
+    return [
+        TrayAction.build(
+            "Lock screen now",
+            tray_icon_path,
+            "system-lock-screen",
+            __lock_screen_now,
+            single_use=False,
+        ),
+        TrayAction.build(
+            "Lock screen after break",
+            icon_lock_later_path,
+            "dialog-password",
+            __lock_screen_later,
+        ),
+    ]
