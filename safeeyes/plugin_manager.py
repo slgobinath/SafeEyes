@@ -56,8 +56,8 @@ The plugin.py can additionally have the following methods:
  - get_widget_content(break_obj)
     Returns content of this plugin's widget on the break screen
     If this is used, it must also use get_widget_title to work correctly
- - get_tray_action(break_obj) -> TrayAction
-    Display a button on the break screen's tray that triggers an action
+ - get_tray_action(break_obj) -> TrayAction | list[TrayAction]
+    Display button(s) on the break screen's tray that triggers an action
 
 This method is unused:
  - description()
@@ -70,7 +70,7 @@ import os
 import sys
 
 from safeeyes import utility
-from safeeyes.model import PluginDependency, RequiredPluginException
+from safeeyes.model import Break, PluginDependency, RequiredPluginException, TrayAction
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
@@ -219,15 +219,19 @@ class PluginManager:
                 continue
         return widget.strip()
 
-    def get_break_screen_tray_actions(self, break_obj):
+    def get_break_screen_tray_actions(self, break_obj: Break) -> list[TrayAction]:
         """Return Tray Actions."""
         actions = []
         for plugin in self.__plugins.values():
             action = plugin.call_plugin_method_break_obj(
                 "get_tray_action", 1, break_obj
             )
-            if action:
+            if isinstance(action, TrayAction):
                 actions.append(action)
+            elif isinstance(action, list):
+                for a in action:
+                    if isinstance(a, TrayAction):
+                        actions.append(a)
 
         return actions
 
