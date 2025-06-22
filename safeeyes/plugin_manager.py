@@ -24,9 +24,7 @@ A plugin must have the following directory structure:
     |- plugin.py
     |- icon.png (Optional)
 
-The plugin.py can have following methods but all are optional:
- - description()
-    If a custom description has to be displayed, use this function
+The plugin.py can have following lifecycle methods but all are optional:
  - init(context, safeeyes_config, plugin_config)
     Initialize the plugin. Will be called after loading and after every changes in
     configuration
@@ -50,6 +48,20 @@ The plugin.py can have following methods but all are optional:
     Executes once the plugin.py is loaded as a module
  - disable()
     Executes if the plugin is disabled at the runtime by the user
+
+The plugin.py can additionally have the following methods:
+ - get_widget_title(break_obj)
+    Returns title of this plugin's widget on the break screen
+    If this is used, it must also use get_widget_content to work correctly
+ - get_widget_content(break_obj)
+    Returns content of this plugin's widget on the break screen
+    If this is used, it must also use get_widget_title to work correctly
+ - get_tray_action(break_obj) -> TrayAction
+    Display a button on the break screen's tray that triggers an action
+
+This method is unused:
+ - description()
+    If a custom description has to be displayed, use this function
 """
 
 import importlib
