@@ -477,13 +477,19 @@ class TrayAction:
     __toolbar_buttons: list[Gtk.Button]
 
     def __init__(
-        self, name: str, icon: str, action: typing.Callable, system_icon: bool
+        self,
+        name: str,
+        icon: str,
+        action: typing.Callable,
+        system_icon: bool,
+        single_use: bool,
     ) -> None:
         self.name = name
         self.__icon = icon
         self.action = action
         self.system_icon = system_icon
         self.__toolbar_buttons = []
+        self.single_use = single_use
 
     def get_icon(self) -> Gtk.Image:
         if not self.system_icon:
@@ -510,13 +516,14 @@ class TrayAction:
         icon_path: typing.Optional[str],
         icon_id: str,
         action: typing.Callable,
+        single_use: bool = True,
     ) -> "TrayAction":
         if icon_path is not None:
             image = utility.load_and_scale_image(icon_path, 12, 12)
             if image is not None:
-                return TrayAction(name, icon_path, action, False)
+                return TrayAction(name, icon_path, action, False, single_use)
 
-        return TrayAction(name, icon_id, action, True)
+        return TrayAction(name, icon_id, action, True, single_use)
 
 
 @dataclass

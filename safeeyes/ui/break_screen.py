@@ -23,6 +23,7 @@ import time
 
 import gi
 from safeeyes import utility
+from safeeyes.model import TrayAction
 from safeeyes.translations import translate as _
 import Xlib
 from Xlib.display import Display
@@ -139,13 +140,14 @@ class BreakScreen:
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
 
-    def __tray_action(self, button, tray_action):
+    def __tray_action(self, button, tray_action: TrayAction):
         """Tray action handler.
 
-        Hides all toolbar buttons for this action and call the action
-        provided by the plugin.
+        Hides all toolbar buttons for this action, if it is single use,
+        and call the action provided by the plugin.
         """
-        tray_action.reset()
+        if tray_action.single_use:
+            tray_action.reset()
         tray_action.action()
 
     def __show_break_screen(self, message, image_path, widget, tray_actions):
