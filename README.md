@@ -118,16 +118,19 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 Ensure to meet the following dependencies:
 
 - gir1.2-notify-0.7
+- gir1.2-gtk-4.0
 - python3-babel
 - python3-croniter
+- python3-gi
 - python3-psutil
 - python3-packaging
 - python3-xlib
-- xprintidle (optional)
-- wlrctl (wayland optional)
+- python3-pywayland (optional for KDE/other wayland)
+- xprintidle (optional for X11)
+- wlrctl (optional for wayland/wlroots)
 - Python 3.10+
 
-**To install Safe Eyes:**
+**To install Safe Eyes from PyPI:**
 
 ```bash
 sudo pip3 install safeeyes
