@@ -32,6 +32,7 @@ from safeeyes.ui.break_screen import BreakScreen
 from safeeyes.ui.required_plugin_dialog import RequiredPluginDialog
 from safeeyes.model import State, RequiredPluginException
 from safeeyes.rpc import RPCServer
+from safeeyes.translations import translate as _
 from safeeyes.plugin_manager import PluginManager
 from safeeyes.core import SafeEyesCore
 from safeeyes.ui.settings_dialog import SettingsDialog

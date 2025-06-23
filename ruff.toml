@@ -1,8 +1,5 @@
 target-version = "py310"
 
-# gettext
-builtins = ["_"]
-
 [lint]
 select = ["E", "W", "F", "D2", "D3", "D4"]
 ignore = [
