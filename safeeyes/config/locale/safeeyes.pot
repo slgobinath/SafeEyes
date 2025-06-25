@@ -119,10 +119,6 @@ msgid "Time to prepare for a break (in seconds)"
 msgstr ""
 
 # Settings dialog
-msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
-
-# Settings dialog
 msgid "Postponement duration (in minutes)"
 msgstr ""
 
@@ -569,4 +565,7 @@ msgid "Safe Eyes - Error"
 msgstr ""
 
 msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Skipping/postponing disabled period (in seconds)"
 msgstr ""

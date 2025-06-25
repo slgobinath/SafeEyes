@@ -83,6 +83,8 @@ class BreakScreen:
                 )
             )
 
+        # TODO: shortcut_disable_time should be renamed
+        # it used to be just about keyboard shortcuts - now it also controls whether the buttons are locked
         self.shortcut_disable_time = config.get("shortcut_disable_time", 2)
         self.strict_break = config.get("strict_break", False)
 
