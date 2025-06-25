@@ -26,7 +26,6 @@ import logging
 from safeeyes import utility
 from safeeyes.translations import translate as _
 import threading
-import time
 import typing
 
 """
@@ -429,6 +428,9 @@ class StatusNotifierItemService(DBusService):
 class TrayIcon:
     """Create and show the tray icon along with the tray menu."""
 
+    _animation_timeout_id: typing.Optional[int] = None
+    _animation_icon_enabled: bool = False
+
     def __init__(self, context, plugin_config):
         self.context = context
         self.on_show_settings = context["api"]["show_settings"]
@@ -446,7 +448,6 @@ class TrayIcon:
         self.idle_condition = threading.Condition()
         self.lock = threading.Lock()
         self.allow_disabling = plugin_config["allow_disabling"]
-        self.animate = False
         self.menu_locked = False
 
         session_bus = Gio.bus_get_sync(Gio.BusType.SESSION)
@@ -785,35 +786,37 @@ class TrayIcon:
             if not self.active:
                 utility.execute_main_thread(self.on_enable_clicked)
 
-    def start_animation(self):
-        if not self.active or not self.animate:
-            return
-        utility.execute_main_thread(
-            lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
-        )
-        time.sleep(0.5)
-        utility.execute_main_thread(
-            lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
-        )
-        if self.animate and self.active:
-            time.sleep(0.5)
-            if self.animate and self.active:
-                utility.start_thread(self.start_animation)
+    def start_animation(self) -> None:
+        if self._animation_timeout_id is not None:
+            self.stop_animation()
 
-    def stop_animation(self):
-        self.animate = False
-        if self.active:
-            utility.execute_main_thread(
-                lambda: self.sni_service.set_icon(
-                    "io.github.slgobinath.SafeEyes-enabled"
-                )
-            )
+        self._animation_icon_enabled = False
+
+        self._animation_timeout_id = GLib.timeout_add(500, self._do_animate)
+
+    def _do_animate(self) -> bool:
+        if not self.active:
+            self._animation_timeout_id = None
+            return GLib.SOURCE_REMOVE
+
+        if self._animation_icon_enabled:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
         else:
-            utility.execute_main_thread(
-                lambda: self.sni_service.set_icon(
-                    "io.github.slgobinath.SafeEyes-disabled"
-                )
-            )
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
+
+        self._animation_icon_enabled = not self._animation_icon_enabled
+
+        return GLib.SOURCE_CONTINUE
+
+    def stop_animation(self) -> None:
+        if self._animation_timeout_id is not None:
+            GLib.source_remove(self._animation_timeout_id)
+            self._animation_timeout_id = None
+
+        if self.active:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
+        else:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
 
 
 def init(ctx, safeeyes_cfg, plugin_config):
@@ -839,7 +842,6 @@ def on_pre_break(break_obj):
     """Disable the menu if strict_break is enabled."""
     if safeeyes_config.get("strict_break"):
         tray_icon.lock_menu()
-    tray_icon.animate = True
     tray_icon.start_animation()
 
 
