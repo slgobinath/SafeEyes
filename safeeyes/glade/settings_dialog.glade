@@ -447,7 +447,7 @@
                                       <object class="GtkLabel" id="lbl_shortcuts">
                                         <property name="visible">1</property>
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Keyboard shortcuts disabled period (in seconds)</property>
+                                        <property name="label" translatable="yes">Skipping/postponing disabled period (in seconds)</property>
                                       </object>
                                     </child>
                                     <child>
