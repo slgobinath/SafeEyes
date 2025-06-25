@@ -120,7 +120,7 @@ class BreakScreen:
     def show_count_down(self, countdown, seconds):
         """Show/update the count down on all screens."""
         self.enable_shortcut = self.shortcut_disable_time <= seconds
-        self.__set_button_widgets_sensitive()
+        GLib.idle_add(lambda: self.__set_button_widgets_sensitive())
         mins, secs = divmod(countdown, 60)
         timeformat = "{:02d}:{:02d}".format(mins, secs)
         GLib.idle_add(lambda: self.__update_count_down(timeformat))
@@ -145,9 +145,10 @@ class BreakScreen:
         # Destroy other windows if exists
         GLib.idle_add(lambda: self.__destroy_all_screens())
 
-    def __set_button_widgets_sensitive(self):
+    def __set_button_widgets_sensitive(self) -> None:
         for button in self.button_widgets:
-            button.set_sensitive(self.enable_shortcut)
+            if button.get_sensitive() != self.enable_shortcut:
+                button.set_sensitive(self.enable_shortcut)
 
     def __tray_action(self, button, tray_action):
         """Tray action handler.
