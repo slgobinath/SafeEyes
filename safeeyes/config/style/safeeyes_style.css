@@ -43,6 +43,11 @@
     color: black;
 }
 
+.btn_skip:disabled {
+    color: grey;
+    border-color: grey;
+}
+
 .btn_postpone {
     color: white;
     font-size: 10pt;
@@ -60,6 +65,11 @@
 .btn_postpone:hover {
     background: white;
     color: black;
+}
+
+.btn_postpone:disabled {
+    color: grey;
+    border-color: grey;
 }
 
 .lbl_message {
