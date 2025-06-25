@@ -23,7 +23,6 @@ application.
 import atexit
 import logging
 import typing
-from threading import Timer
 from importlib import metadata
 
 import gi
@@ -492,8 +491,7 @@ class SafeEyes(Gtk.Application):
             self.active = True
 
         if self.active and self.safe_eyes_core.has_breaks():
-            # 1 sec delay is required to give enough time for core to be stopped
-            Timer(1.0, self.safe_eyes_core.start).start()
+            self.safe_eyes_core.start()
             self.plugins_manager.start()
 
     def enable_safeeyes(self, scheduled_next_break_time=-1, reset_breaks=False):
