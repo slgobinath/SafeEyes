@@ -24,13 +24,27 @@ from safeeyes import model
 
 class TestBreak:
     def test_break_short(self) -> None:
-        b = model.Break(model.BreakType.SHORT_BREAK, "test break", 15, 15, None, None)
+        b = model.Break(
+            break_type=model.BreakType.SHORT_BREAK,
+            name="test break",
+            time=15,
+            duration=15,
+            image=None,
+            plugins=None,
+        )
 
         assert b.is_short_break()
         assert not b.is_long_break()
 
     def test_break_long(self) -> None:
-        b = model.Break(model.BreakType.LONG_BREAK, "long break", 75, 60, None, None)
+        b = model.Break(
+            break_type=model.BreakType.LONG_BREAK,
+            name="long break",
+            time=75,
+            duration=60,
+            image=None,
+            plugins=None,
+        )
 
         assert not b.is_short_break()
         assert b.is_long_break()
