@@ -211,7 +211,12 @@ To ensure that the coding and formatting guidelines are followed, install [ruff]
 
 To ensure that any types are correct, install [mypy](https://github.com/python/mypy) and run `mypy safeeyes`.
 
-The last three checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+To ensure that the tests still pass, install [pytest](https://docs.pytest.org/en/stable/) and run `pytest`.
+
+The last four checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+
+It is also possible to use dependency groups to install the needed dependencies. When using a new enough version of pip, run `pip install --group types` to install all dependencies to run the type check.
+The available dependency groups can be found in the `pyproject.toml` file.
 
 ## How to Release?
 
