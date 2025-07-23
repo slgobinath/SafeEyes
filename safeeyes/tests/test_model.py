@@ -52,15 +52,18 @@ class TestBreak:
 
 class TestBreakQueue:
     def test_create_empty(self) -> None:
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [],
+                "long_breaks": [],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": False,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {}
 
@@ -82,19 +85,22 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-            ],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                ],
+                "long_breaks": [],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},
@@ -112,19 +118,22 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},
@@ -142,24 +151,27 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},

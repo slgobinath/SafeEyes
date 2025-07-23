@@ -112,7 +112,7 @@ def main():
     # Initialize the logging
     utility.initialize_logging(args.debug)
     utility.initialize_platform()
-    config = Config()
+    config = Config.load()
     utility.cleanup_old_user_stylesheet()
 
     if __running():
