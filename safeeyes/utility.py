@@ -98,7 +98,10 @@ def get_resource_path(resource_name):
 def start_thread(target_function, **args):
     """Execute the function in a separate thread."""
     thread = threading.Thread(
-        target=target_function, name="WorkThread", daemon=False, kwargs=args
+        target=target_function,
+        name=f"WorkThread {target_function.__qualname__}",
+        daemon=False,
+        kwargs=args,
     )
     thread.start()
 
