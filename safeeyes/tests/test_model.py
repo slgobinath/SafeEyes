@@ -30,7 +30,7 @@ class TestBreak:
             time=15,
             duration=15,
             image=None,
-            plugins=None,
+            plugins={},
         )
 
         assert b.is_short_break()
@@ -43,7 +43,7 @@ class TestBreak:
             time=75,
             duration=60,
             image=None,
-            plugins=None,
+            plugins={},
         )
 
         assert not b.is_short_break()
@@ -52,25 +52,24 @@ class TestBreak:
 
 class TestBreakQueue:
     def test_create_empty(self) -> None:
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [],
+                "long_breaks": [],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": False,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {}
 
-        bq = model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
 
-        assert bq.is_empty()
-        assert bq.is_empty(model.BreakType.LONG_BREAK)
-        assert bq.is_empty(model.BreakType.SHORT_BREAK)
-        assert bq.next() is None
-        assert bq.get_break() is None
+        assert bq is None
 
     def get_bq_only_short(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -82,25 +81,32 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-            ],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                ],
+                "long_breaks": [],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def get_bq_only_long(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -112,25 +118,32 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def get_bq_full(
         self, monkeypatch: pytest.MonkeyPatch, random_seed: typing.Optional[int] = None
@@ -142,35 +155,41 @@ class TestBreakQueue:
             model, "_", lambda message: "translated!: " + message, raising=False
         )
 
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": random_seed is not None,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": random_seed is not None,
+            },
+            system_config={},
+        )
 
         context: dict[str, typing.Any] = {
             "session": {},
         }
 
-        return model.BreakQueue(config, context)
+        bq = model.BreakQueue.create(config, context)
+
+        assert bq is not None
+
+        return bq
 
     def test_create_only_short(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_only_short(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.SHORT_BREAK)
         assert bq.is_empty(model.BreakType.LONG_BREAK)
 
@@ -208,18 +227,37 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_only_short(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: break 3"
+        breaks = []
+        breaks.append(bq.get_break().name)
+        breaks.append(bq.next().name)
+        breaks.append(bq.next().name)
 
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: break 1"
+        assert sorted(breaks) == [
+            "translated!: break 1",
+            "translated!: break 2",
+            "translated!: break 3",
+        ]
+
+        prev_breaks = breaks
+
+        for i in range(3):
+            breaks = []
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+
+            assert sorted(breaks) == [
+                "translated!: break 1",
+                "translated!: break 2",
+                "translated!: break 3",
+            ]
+
+            assert prev_breaks != breaks
+            prev_breaks = breaks
 
     def test_create_only_long(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_only_long(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.LONG_BREAK)
         assert bq.is_empty(model.BreakType.SHORT_BREAK)
 
@@ -255,18 +293,37 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_only_long(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: long break 3"
+        breaks = []
+        breaks.append(bq.get_break().name)
+        breaks.append(bq.next().name)
+        breaks.append(bq.next().name)
 
-        assert bq.next().name == "translated!: long break 2"
-        assert bq.next().name == "translated!: long break 1"
-        assert bq.next().name == "translated!: long break 3"
-        assert bq.next().name == "translated!: long break 1"
+        assert sorted(breaks) == [
+            "translated!: long break 1",
+            "translated!: long break 2",
+            "translated!: long break 3",
+        ]
+
+        prev_breaks = breaks
+
+        for i in range(3):
+            breaks = []
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+
+            assert sorted(breaks) == [
+                "translated!: long break 1",
+                "translated!: long break 2",
+                "translated!: long break 3",
+            ]
+
+            assert prev_breaks != breaks
+            prev_breaks = breaks
 
     def test_create_full(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_full(monkeypatch)
 
-        assert not bq.is_empty()
         assert not bq.is_empty(model.BreakType.LONG_BREAK)
         assert not bq.is_empty(model.BreakType.SHORT_BREAK)
 
@@ -331,20 +388,55 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_full(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: break 1"
+        first = True
 
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 3"
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 2"
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 1"
+        prev_breaks: list[list[str]] = []
+        prev_long_breaks: list[list[str]] = []
+
+        for i in range(5):
+            long_breaks = []
+            for i in range(3):
+                breaks = []
+                if first:
+                    first = False
+                    breaks.append(bq.get_break().name)
+                else:
+                    breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                long_breaks.append(bq.next().name)
+
+                # assert that we used all breaks in this iteration
+                assert sorted(breaks) == [
+                    "translated!: break 1",
+                    "translated!: break 2",
+                    "translated!: break 3",
+                    "translated!: break 4",
+                ]
+
+                # assert that not all the iterations are exactly the same order
+                # (this may happen randomly sometimes of course - at least one
+                # should be different)
+                assert self.at_least_one_different(prev_breaks, breaks)
+                prev_breaks.append(breaks)
+
+            assert sorted(long_breaks) == [
+                "translated!: long break 1",
+                "translated!: long break 2",
+                "translated!: long break 3",
+            ]
+            assert self.at_least_one_different(prev_long_breaks, long_breaks)
+            prev_long_breaks.append(long_breaks)
+
+    def at_least_one_different(
+        self, previous: list[list[str]], current: list[str]
+    ) -> bool:
+        if len(previous) == 0:
+            return True
+
+        for prev in previous:
+            if prev != current:
+                return True
+
+        return False

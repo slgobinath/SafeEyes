@@ -20,11 +20,13 @@
 plugins.
 """
 
+import copy
 import logging
 import random
 from enum import Enum
 from dataclasses import dataclass
 from typing import Optional, Union
+import typing
 
 from packaging.version import parse
 
@@ -37,42 +39,6 @@ from safeeyes import utility
 from safeeyes.translations import translate as _
 
 
-class Break:
-    """An entity class which represents a break."""
-
-    def __init__(self, break_type, name, time, duration, image, plugins):
-        self.type = break_type
-        self.name = name
-        self.duration = duration
-        self.image = image
-        self.plugins = plugins
-        self.time = time
-        self.next = None
-
-    def __str__(self):
-        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(
-            self.name, self.type, self.duration
-        )
-
-    def __repr__(self):
-        return str(self)
-
-    def is_long_break(self):
-        """Check whether this break is a long break."""
-        return self.type == BreakType.LONG_BREAK
-
-    def is_short_break(self):
-        """Check whether this break is a short break."""
-        return self.type == BreakType.SHORT_BREAK
-
-    def plugin_enabled(self, plugin_id, is_plugin_enabled):
-        """Check whether this break supports the given plugin."""
-        if self.plugins:
-            return plugin_id in self.plugins
-        else:
-            return is_plugin_enabled
-
-
 class BreakType(Enum):
     """Type of Safe Eyes breaks."""
 
@@ -80,43 +46,140 @@ class BreakType(Enum):
     LONG_BREAK = 2
 
 
+class Break:
+    """An entity class which represents a break."""
+
+    type: BreakType
+    name: str
+    time: int
+    duration: int
+    image: typing.Optional[str]  # path
+    plugins: dict
+
+    def __init__(
+        self,
+        break_type: BreakType,
+        name: str,
+        time: int,
+        duration: int,
+        image: typing.Optional[str],
+        plugins: dict,
+    ):
+        self.type = break_type
+        self.name = name
+        self.duration = duration
+        self.image = image
+        self.plugins = plugins
+        self.time = time
+
+    def __str__(self) -> str:
+        return 'Break: {{name: "{}", type: {}, duration: {}}}\n'.format(
+            self.name, self.type, self.duration
+        )
+
+    def __repr__(self) -> str:
+        return str(self)
+
+    def is_long_break(self) -> bool:
+        """Check whether this break is a long break."""
+        return self.type == BreakType.LONG_BREAK
+
+    def is_short_break(self) -> bool:
+        """Check whether this break is a short break."""
+        return self.type == BreakType.SHORT_BREAK
+
+    def plugin_enabled(self, plugin_id: str, is_plugin_enabled: bool) -> bool:
+        """Check whether this break supports the given plugin."""
+        if self.plugins:
+            return plugin_id in self.plugins
+        else:
+            return is_plugin_enabled
+
+
 class BreakQueue:
-    def __init__(self, config, context):
+    __current_break: Break
+    __current_long: int = 0
+    __current_short: int = 0
+    __short_break_time: int
+    __long_break_time: int
+    __is_random_order: bool
+    __long_queue: typing.Optional[list[Break]]
+    __short_queue: typing.Optional[list[Break]]
+
+    @classmethod
+    def create(cls, config: "Config", context) -> typing.Optional["BreakQueue"]:
+        short_break_time = config.get("short_break_interval")
+        long_break_time = config.get("long_break_interval")
+        is_random_order = config.get("random_order")
+
+        short_queue = cls.__build_queue(
+            BreakType.SHORT_BREAK,
+            config.get("short_breaks"),
+            short_break_time,
+            config.get("short_break_duration"),
+            is_random_order,
+        )
+
+        long_queue = cls.__build_queue(
+            BreakType.LONG_BREAK,
+            config.get("long_breaks"),
+            long_break_time,
+            config.get("long_break_duration"),
+            is_random_order,
+        )
+
+        if short_queue is None and long_queue is None:
+            return None
+
+        return cls(
+            context,
+            short_break_time,
+            long_break_time,
+            is_random_order,
+            short_queue,
+            long_queue,
+        )
+
+    def __init__(
+        self,
+        context,
+        short_break_time: int,
+        long_break_time: int,
+        is_random_order: bool,
+        short_queue: typing.Optional[list[Break]],
+        long_queue: typing.Optional[list[Break]],
+    ) -> None:
+        """Constructor for BreakQueue. Do not call this directly.
+
+        Instead, use BreakQueue.create() instead.
+        short_queue and long_queue must not both be None, and must not be an empty
+        list.
+        """
         self.context = context
-        self.__current_break = None
-        self.__current_long = 0
-        self.__current_short = 0
-        self.__short_break_time = config.get("short_break_interval")
-        self.__long_break_time = config.get("long_break_interval")
-        self.__is_random_order = config.get("random_order")
-        self.__config = config
+        self.__short_break_time = short_break_time
+        self.__long_break_time = long_break_time
+        self.__is_random_order = is_random_order
+        self.__short_queue = short_queue
+        self.__long_queue = long_queue
 
-        self.__build_longs()
-        self.__build_shorts()
-
-        # Interface guarantees that short_interval >= 1
-        # And that long_interval is a multiple of short_interval
-        short_interval = config.get("short_break_interval")
-        long_interval = config.get("long_break_interval")
-        self.__cycle_len = int(long_interval / short_interval)
-        # To count every long break as a cycle in .next() if there are no short breaks
-        if self.__short_queue is None:
-            self.__cycle_len = 1
+        # load first break
+        self.__set_next_break()
 
         # Restore the last break from session
-        if not self.is_empty():
-            last_break = context["session"].get("break")
-            if last_break is not None:
-                current_break = self.get_break()
-                if last_break != current_break.name:
+        last_break = context["session"].get("break")
+        if last_break is not None:
+            current_break = self.get_break()
+            if last_break != current_break.name:
+                brk = self.next()
+                while brk != current_break and brk.name != last_break:
                     brk = self.next()
-                    while brk != current_break and brk.name != last_break:
-                        brk = self.next()
 
-    def get_break(self, break_type=None):
-        if self.__current_break is None:
-            self.__current_break = self.next()
+    def get_break(self) -> Break:
+        return self.__current_break
 
+    def get_break_with_type(
+        self, break_type: typing.Optional[BreakType] = None
+    ) -> typing.Optional[Break]:
         if break_type is None or self.__current_break.type == break_type:
             return self.__current_break
 
@@ -129,32 +192,47 @@ class BreakQueue:
             return None
         return self.__short_queue[self.__current_short]
 
-    def is_long_break(self):
-        return (
-            self.__current_break is not None
-            and self.__current_break.type == BreakType.LONG_BREAK
-        )
+    def is_long_break(self) -> bool:
+        return self.__current_break.type == BreakType.LONG_BREAK
 
-    def next(self, break_type=None):
-        break_obj = None
+    def next(self, break_type: typing.Optional[BreakType] = None) -> Break:
+        """Advance to the next break, and return that break.
+
+        If break_type is given, advance to the next break with that type.
+        If the last break in the queue is reached, this resets the internal index to
+        the first break again, and shuffle if needed.
+        """
         shorts = self.__short_queue
         longs = self.__long_queue
+        previous_break = self.__current_break
 
         # Reset break that has just ended
-        if self.is_long_break():
-            self.__current_break.time = self.__long_break_time
+        if previous_break.is_long_break():
+            previous_break.time = self.__long_break_time
             if self.__current_long == 0 and self.__is_random_order:
                 # Shuffle queue
-                self.__build_longs()
-        elif self.__current_break:
+                if self.__long_queue is not None:
+                    random.shuffle(self.__long_queue)
+        else:
             # Reduce the break time from the next long break (default)
             if longs:
+                if shorts is None:
+                    raise Exception(
+                        "this may not happen, either short or long breaks must be"
+                        " defined"
+                    )
                 longs[self.__current_long].time -= shorts[self.__current_short].time
             if self.__current_short == 0 and self.__is_random_order:
-                self.__build_shorts()
+                if self.__short_queue is not None:
+                    random.shuffle(self.__short_queue)
 
-        if self.is_empty():
-            return None
+        self.__set_next_break(break_type)
+
+        return self.__current_break
+
+    def __set_next_break(self, break_type: typing.Optional[BreakType] = None) -> None:
+        shorts = self.__short_queue
+        longs = self.__long_queue
 
         if shorts is None:
             break_obj = self.__next_long()
@@ -171,29 +249,30 @@ class BreakQueue:
         self.__current_break = break_obj
         self.context["session"]["break"] = self.__current_break.name
 
-        return break_obj
+    def reset(self) -> None:
+        if self.__short_queue:
+            for break_object in self.__short_queue:
+                break_object.time = self.__short_break_time
 
-    def reset(self):
-        for break_object in self.__short_queue:
-            break_object.time = self.__short_break_time
+        if self.__long_queue:
+            for break_object in self.__long_queue:
+                break_object.time = self.__long_break_time
 
-        for break_object in self.__long_queue:
-            break_object.time = self.__long_break_time
-
-    def is_empty(self, break_type=None):
-        """Check if the given break type is empty or not.
-
-        If the break_type is None, check for both short and long breaks.
-        """
+    def is_empty(self, break_type: BreakType) -> bool:
+        """Check if the given break type is empty or not."""
         if break_type == BreakType.SHORT_BREAK:
             return self.__short_queue is None
         elif break_type == BreakType.LONG_BREAK:
             return self.__long_queue is None
         else:
-            return self.__short_queue is None and self.__long_queue is None
+            typing.assert_never(break_type)
 
-    def __next_short(self):
+    def __next_short(self) -> Break:
         shorts = self.__short_queue
+
+        if shorts is None:
+            raise Exception("this may only be called when there are short breaks")
+
         break_obj = shorts[self.__current_short]
         self.context["break_type"] = "short"
 
@@ -202,8 +281,12 @@ class BreakQueue:
 
         return break_obj
 
-    def __next_long(self):
+    def __next_long(self) -> Break:
         longs = self.__long_queue
+
+        if longs is None:
+            raise Exception("this may only be called when there are long breaks")
+
         break_obj = longs[self.__current_long]
         self.context["break_type"] = "long"
 
@@ -212,7 +295,14 @@ class BreakQueue:
 
         return break_obj
 
-    def __build_queue(self, break_type, break_configs, break_time, break_duration):
+    @staticmethod
+    def __build_queue(
+        break_type: BreakType,
+        break_configs: list[dict],
+        break_time: int,
+        break_duration: int,
+        is_random_order: bool,
+    ) -> typing.Optional[list[Break]]:
         """Build a queue of breaks."""
         size = len(break_configs)
 
@@ -220,13 +310,13 @@ class BreakQueue:
             # No breaks
             return None
 
-        if self.__is_random_order:
+        if is_random_order:
             breaks_order = random.sample(break_configs, size)
         else:
             breaks_order = break_configs
 
-        queue = [None] * size
-        for i, break_config in enumerate(breaks_order):
+        queue: list[Break] = []
+        for break_config in breaks_order:
             name = _(break_config["name"])
             duration = break_config.get("duration", break_duration)
             image = break_config.get("image")
@@ -239,25 +329,12 @@ class BreakQueue:
                 continue
 
             break_obj = Break(break_type, name, interval, duration, image, plugins)
-            queue[i] = break_obj
+            queue.append(break_obj)
+
+        if len(queue) == 0:
+            return None
 
         return queue
-
-    def __build_shorts(self):
-        self.__short_queue = self.__build_queue(
-            BreakType.SHORT_BREAK,
-            self.__config.get("short_breaks"),
-            self.__short_break_time,
-            self.__config.get("short_break_duration"),
-        )
-
-    def __build_longs(self):
-        self.__long_queue = self.__build_queue(
-            BreakType.LONG_BREAK,
-            self.__config.get("long_breaks"),
-            self.__long_break_time,
-            self.__config.get("long_break_duration"),
-        )
 
 
 class State(Enum):
@@ -297,45 +374,63 @@ class EventHook:
 class Config:
     """The configuration of Safe Eyes."""
 
-    def __init__(self, init=True):
+    __user_config: dict[str, typing.Any]
+    __system_config: dict[str, typing.Any]
+
+    @classmethod
+    def load(cls) -> "Config":
         # Read the config files
-        self.__user_config = utility.load_json(utility.CONFIG_FILE_PATH)
-        self.__system_config = utility.load_json(utility.SYSTEM_CONFIG_FILE_PATH)
+        user_config = utility.load_json(utility.CONFIG_FILE_PATH)
+        system_config = utility.load_json(utility.SYSTEM_CONFIG_FILE_PATH)
         # If there any breaking changes in long_breaks, short_breaks or any other keys,
-        # use the __force_upgrade list
-        self.__force_upgrade = []
-        # self.__force_upgrade = ['long_breaks', 'short_breaks']
+        # use the force_upgrade_keys list
+        force_upgrade_keys: list[str] = []
+        # force_upgrade_keys = ['long_breaks', 'short_breaks']
 
-        if init:
-            # if create_startup_entry finds a broken autostart symlink, it will repair
-            # it
-            utility.create_startup_entry(force=False)
-            if self.__user_config is None:
-                utility.initialize_safeeyes()
-                self.__user_config = self.__system_config
-                self.save()
+        # if create_startup_entry finds a broken autostart symlink, it will repair
+        # it
+        utility.create_startup_entry(force=False)
+        if user_config is None:
+            utility.initialize_safeeyes()
+            user_config = copy.deepcopy(system_config)
+            cfg = cls(user_config, system_config)
+            cfg.save()
+            return cfg
+        else:
+            system_config_version = system_config["meta"]["config_version"]
+            meta_obj = user_config.get("meta", None)
+            if meta_obj is None:
+                # Corrupted user config
+                user_config = copy.deepcopy(system_config)
             else:
-                system_config_version = self.__system_config["meta"]["config_version"]
-                meta_obj = self.__user_config.get("meta", None)
-                if meta_obj is None:
-                    # Corrupted user config
-                    self.__user_config = self.__system_config
-                else:
-                    user_config_version = str(meta_obj.get("config_version", "0.0.0"))
-                    if parse(user_config_version) != parse(system_config_version):
-                        # Update the user config
-                        self.__merge_dictionary(
-                            self.__user_config, self.__system_config
-                        )
-                        self.__user_config = self.__system_config
+                user_config_version = str(meta_obj.get("config_version", "0.0.0"))
+                if parse(user_config_version) != parse(system_config_version):
+                    # Update the user config
+                    new_user_config = copy.deepcopy(system_config)
+                    cls.__merge_dictionary(
+                        user_config, new_user_config, force_upgrade_keys
+                    )
+                    user_config = new_user_config
 
-            utility.merge_plugins(self.__user_config)
-            self.save()
+        utility.merge_plugins(user_config)
 
-    def __merge_dictionary(self, old_dict, new_dict):
+        cfg = cls(user_config, system_config)
+        cfg.save()
+        return cfg
+
+    def __init__(
+        self,
+        user_config: dict[str, typing.Any],
+        system_config: dict[str, typing.Any],
+    ):
+        self.__user_config = user_config
+        self.__system_config = system_config
+
+    @classmethod
+    def __merge_dictionary(cls, old_dict, new_dict, force_upgrade_keys: list[str]):
         """Merge the dictionaries."""
         for key in new_dict:
-            if key == "meta" or key in self.__force_upgrade:
+            if key == "meta" or key in force_upgrade_keys:
                 continue
             if key in old_dict:
                 new_value = new_dict[key]
@@ -343,15 +438,18 @@ class Config:
                 if type(new_value) is type(old_value):
                     # Both properties have same type
                     if isinstance(new_value, dict):
-                        self.__merge_dictionary(old_value, new_value)
+                        cls.__merge_dictionary(old_value, new_value, force_upgrade_keys)
                     else:
                         new_dict[key] = old_value
 
-    def clone(self):
-        config = Config(init=False)
+    def clone(self) -> "Config":
+        config = Config(
+            user_config=copy.deepcopy(self.__user_config),
+            system_config=self.__system_config,
+        )
         return config
 
-    def save(self):
+    def save(self) -> None:
         """Save the configuration to file."""
         utility.write_json(utility.CONFIG_FILE_PATH, self.__user_config)
 
