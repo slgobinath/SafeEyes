@@ -223,13 +223,33 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_only_short(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: break 3"
+        breaks = []
+        breaks.append(bq.get_break().name)
+        breaks.append(bq.next().name)
+        breaks.append(bq.next().name)
 
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: break 1"
+        assert sorted(breaks) == [
+            "translated!: break 1",
+            "translated!: break 2",
+            "translated!: break 3",
+        ]
+
+        prev_breaks = breaks
+
+        for i in range(3):
+            breaks = []
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+
+            assert sorted(breaks) == [
+                "translated!: break 1",
+                "translated!: break 2",
+                "translated!: break 3",
+            ]
+
+            assert prev_breaks != breaks
+            prev_breaks = breaks
 
     def test_create_only_long(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_only_long(monkeypatch)
@@ -270,13 +290,33 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_only_long(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: long break 3"
+        breaks = []
+        breaks.append(bq.get_break().name)
+        breaks.append(bq.next().name)
+        breaks.append(bq.next().name)
 
-        assert bq.next().name == "translated!: long break 2"
-        assert bq.next().name == "translated!: long break 1"
-        assert bq.next().name == "translated!: long break 3"
-        assert bq.next().name == "translated!: long break 1"
+        assert sorted(breaks) == [
+            "translated!: long break 1",
+            "translated!: long break 2",
+            "translated!: long break 3",
+        ]
+
+        prev_breaks = breaks
+
+        for i in range(3):
+            breaks = []
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+            breaks.append(bq.next().name)
+
+            assert sorted(breaks) == [
+                "translated!: long break 1",
+                "translated!: long break 2",
+                "translated!: long break 3",
+            ]
+
+            assert prev_breaks != breaks
+            prev_breaks = breaks
 
     def test_create_full(self, monkeypatch: pytest.MonkeyPatch) -> None:
         bq = self.get_bq_full(monkeypatch)
@@ -346,20 +386,55 @@ class TestBreakQueue:
         random_seed = 5
         bq = self.get_bq_full(monkeypatch, random_seed)
 
-        next = bq.get_break()
-        assert next.name == "translated!: break 1"
+        first = True
 
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 3"
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 2"
-        assert bq.next().name == "translated!: break 2"
-        assert bq.next().name == "translated!: break 4"
-        assert bq.next().name == "translated!: break 1"
-        assert bq.next().name == "translated!: break 3"
-        assert bq.next().name == "translated!: long break 1"
+        prev_breaks: list[list[str]] = []
+        prev_long_breaks: list[list[str]] = []
+
+        for i in range(5):
+            long_breaks = []
+            for i in range(3):
+                breaks = []
+                if first:
+                    first = False
+                    breaks.append(bq.get_break().name)
+                else:
+                    breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                breaks.append(bq.next().name)
+                long_breaks.append(bq.next().name)
+
+                # assert that we used all breaks in this iteration
+                assert sorted(breaks) == [
+                    "translated!: break 1",
+                    "translated!: break 2",
+                    "translated!: break 3",
+                    "translated!: break 4",
+                ]
+
+                # assert that not all the iterations are exactly the same order
+                # (this may happen randomly sometimes of course - at least one
+                # should be different)
+                assert self.at_least_one_different(prev_breaks, breaks)
+                prev_breaks.append(breaks)
+
+            assert sorted(long_breaks) == [
+                "translated!: long break 1",
+                "translated!: long break 2",
+                "translated!: long break 3",
+            ]
+            assert self.at_least_one_different(prev_long_breaks, long_breaks)
+            prev_long_breaks.append(long_breaks)
+
+    def at_least_one_different(
+        self, previous: list[list[str]], current: list[str]
+    ) -> bool:
+        if len(previous) == 0:
+            return True
+
+        for prev in previous:
+            if prev != current:
+                return True
+
+        return False
