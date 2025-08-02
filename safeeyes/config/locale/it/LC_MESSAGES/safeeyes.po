@@ -601,6 +601,15 @@ msgstr ""
 "Vecchio foglio di stile trovato in '%(old)s', ignorando. Per stili "
 "personalizzati, crea un nuovo foglio di stile in %(new)s invece."
 
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Strizza gli occhi"

@@ -587,6 +587,15 @@ msgid ""
 "stylesheet in '%(new)s' instead."
 msgstr ""
 
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "לעצום עיניים היטב"

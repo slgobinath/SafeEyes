@@ -603,6 +603,15 @@ msgstr ""
 "تم العثور على ورقة الأنماط القديمة في '%(old)s'، تم تجاهلها. بالنسبة للأنماط "
 "المخصصة، قم بإنشاء ورقة أنماط جديدة في '%(new)s' بدلاً من ذلك."
 
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "أغلق عينيك بشدّة"

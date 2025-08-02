@@ -578,8 +578,18 @@ msgstr "授權："
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
-msgstr "在 '%(old)s' 發現舊的樣式表，已忽略。若需自訂樣式，請在 '%(new)s' "
-"中建立新的樣式表。"
+msgstr ""
+"在 '%(old)s' 發現舊的樣式表，已忽略。若需自訂樣式，請在 '%(new)s' 中建立新的"
+"樣式表。"
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
 
 # Short break
 #~ msgid "Tightly close your eyes"
