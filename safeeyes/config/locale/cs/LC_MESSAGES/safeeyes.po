@@ -599,6 +599,15 @@ msgstr ""
 "Starý soubor stylů nalezen na adrese '%(old)s', ignorování. Pro vlastní "
 "styly vytvořte místo toho nový soubor stylů v '%(new)s'."
 
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Zavřete oči"

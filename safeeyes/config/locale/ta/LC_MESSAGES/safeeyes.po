@@ -595,6 +595,15 @@ msgstr ""
 "புறக்கணித்து, '%(old)s' இல் காணப்படும் பழைய பாணிதாள். தனிப்பயன் பாணிகளுக்கு, அதற்குப் "
 "பதிலாக '%(new)s' இல் புதிய பாணிதாளை உருவாக்கவும்."
 
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "உங்கள் கண்களை இறுக்கமாக மூடுங்கள்"
