@@ -69,6 +69,7 @@ types = [
 ]
 tests = [
     "pytest==8.3.5",
+    "time-machine==2.16.0",
 ]
 
 [tool.mypy]
