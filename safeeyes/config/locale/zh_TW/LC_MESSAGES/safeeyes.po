@@ -85,12 +85,6 @@ msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes 未啟動"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr "Safe Eyes 運行中不使用 RPC 伺服器。使用終端指令參數進行開啟。"
-
 # About dialog
 msgid "Close"
 msgstr "關閉"
@@ -157,14 +151,6 @@ msgstr "允許推遲休息"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "維持內部計算狀態"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "使用 RPC 伺服器來接收運行時指令"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "不使用 RPC 伺服器，終端指令可能法作用"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

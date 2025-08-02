@@ -85,14 +85,6 @@ msgstr "print the status of running safeeyes instance and exit"
 msgid "Safe Eyes is not running"
 msgstr "הגנה על העיניים אינה פעילה"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"הגנה על העיניים מופעלת ללא שרת RPC. יש להפעיל אותו כדי להשתמש במשתנים משורת "
-"הפקודה."
-
 # About dialog
 msgid "Close"
 msgstr "סגירה"
@@ -159,14 +151,6 @@ msgstr "לאפשר לעכב הפסקות"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "לשמור על המצב הפנימי"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "להשתמש בשרת RPC כדי לקבל פקודות זמן ריצה"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "ללא שרת RPC, פקודות שורת פקודה עשויות לא לעבוד"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

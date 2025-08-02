@@ -122,7 +122,6 @@ Ensure to meet the following dependencies:
 - python3-babel
 - python3-croniter
 - python3-gi
-- python3-psutil
 - python3-packaging
 - python3-xlib
 - python3-pywayland (optional for KDE/other wayland)
@@ -191,7 +190,6 @@ This method has the same caveats about icons/window icons as running from source
 - Smart pause if system is idle
 - Multi-screen support
 - Customizable user interface
-- RPC API to control externally
 - Command-line arguments to control the running instance
 - Customizable using plug-ins
 

@@ -86,14 +86,6 @@ msgstr "montri la staton de la rulanta apero de safeeyes kaj eliri"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nun ne rulas"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes estas rulanta sen RPC-servilo. Ŝaltu ĝin por uzi komandliniajn "
-"argumentojn."
-
 # About dialog
 msgid "Close"
 msgstr "Malfemi"
@@ -160,14 +152,6 @@ msgstr "Lasi prokrasti paŭzojn"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Daŭri la internan staton"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Uzi RPC-servilon por ricevi rultempajn komandojn"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Sen la RPC-servilo, komandliniaj komandoj eble ne funkcias"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

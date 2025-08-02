@@ -85,14 +85,6 @@ msgstr "mostrar el estado del ejemplar de safeeyes en ejecución y salir"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes no se está ejecutando"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes está funcionando sin un servidor RPC. Actívelo para usar "
-"argumentos de línea de órdenes."
-
 # About dialog
 msgid "Close"
 msgstr "Cerrar"
@@ -161,16 +153,6 @@ msgstr "Permitir posponer los descansos"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Estado interno persistente"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Utilizar el servidor RPC para recibir órdenes en tiempo de ejecución"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"Sin el servidor RPC, las órdenes ejecutadas en el terminal pueden no "
-"funcionar"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

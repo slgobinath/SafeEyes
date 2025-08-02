@@ -19,8 +19,8 @@
 """Translation setup and helpers."""
 
 import locale
-import logging
 import gettext
+import sys
 from safeeyes import utility
 
 _translations = gettext.NullTranslations()
@@ -38,9 +38,10 @@ def setup():
         # locale.bindtextdomain is required for Glade files
         locale.bindtextdomain("safeeyes", utility.LOCALE_PATH)
     except AttributeError:
-        logging.warning(
+        print(
             "installed python's gettext module does not support locale.bindtextdomain."
-            " locale.bindtextdomain is required for Glade files"
+            " locale.bindtextdomain is required for Glade files",
+            file=sys.stderr,
         )
 
     return _translations

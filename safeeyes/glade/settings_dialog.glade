@@ -488,40 +488,6 @@
                                     </child>
                                   </object>
                                 </child>
-                                <child>
-                                  <object class="GtkInfoBar" id="warn_bar_rpc_server">
-                                    <property name="visible">0</property>
-                                    <property name="message-type">warning</property>
-                                    <property name="hexpand">1</property>
-                                    <property name="vexpand">1</property>
-                                    <property name="show-close-button">1</property>
-                                    <style>
-                                      <class name="warn_bar_rpc_server"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkBox" id="box15">
-                                    <property name="visible">1</property>
-                                    <property name="spacing">5</property>
-                                    <property name="homogeneous">1</property>
-                                    <child>
-                                      <object class="GtkLabel" id="lbl_toggle_rpc_server">
-                                        <property name="visible">1</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Use RPC server to receive runtime commands</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSwitch" id="switch_rpc_server">
-                                        <property name="visible">1</property>
-                                        <property name="can-focus">1</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
                               </object>
                             </child>
                             <child type="label">

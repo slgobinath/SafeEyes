@@ -64,7 +64,6 @@ class SettingsDialog:
         self.last_short_break_interval = config.get("short_break_interval")
         self.initializing = True
         self.infobar_long_break_shown = False
-        self.warn_bar_rpc_server_shown = False
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_GLADE)
 
@@ -88,11 +87,8 @@ class SettingsDialog:
         self.switch_random_order = builder.get_object("switch_random_order")
         self.switch_postpone = builder.get_object("switch_postpone")
         self.switch_persist = builder.get_object("switch_persist")
-        self.switch_rpc_server = builder.get_object("switch_rpc_server")
         self.info_bar_long_break = builder.get_object("info_bar_long_break")
-        self.warn_bar_rpc_server = builder.get_object("warn_bar_rpc_server")
         self.info_bar_long_break.hide()
-        self.warn_bar_rpc_server.hide()
 
         self.window.connect("close-request", self.on_window_delete)
         builder.get_object("reset_menu").connect("clicked", self.on_reset_menu_clicked)
@@ -104,8 +100,6 @@ class SettingsDialog:
         self.spin_long_break_interval.connect(
             "value-changed", self.on_spin_long_break_interval_change
         )
-        self.warn_bar_rpc_server.connect("close", self.on_warn_bar_rpc_server_close)
-        self.warn_bar_rpc_server.connect("response", self.on_warn_bar_rpc_server_close)
         builder.get_object("btn_add_break").connect("clicked", self.add_break)
 
         # Set the current values of input fields
@@ -115,11 +109,6 @@ class SettingsDialog:
         self.switch_postpone.connect("state-set", self.on_switch_postpone_activate)
         self.on_switch_postpone_activate(
             self.switch_postpone, self.switch_postpone.get_active()
-        )
-        # Add event listener to RPC server switch
-        self.switch_rpc_server.connect("state-set", self.on_switch_rpc_server_activate)
-        self.on_switch_rpc_server_activate(
-            self.switch_rpc_server, self.switch_rpc_server.get_active()
         )
 
         self.initializing = False
@@ -148,7 +137,6 @@ class SettingsDialog:
         self.switch_random_order.set_active(config.get("random_order"))
         self.switch_postpone.set_active(config.get("allow_postpone"))
         self.switch_persist.set_active(config.get("persist_state"))
-        self.switch_rpc_server.set_active(config.get("use_rpc_server"))
         self.infobar_long_break_shown = False
 
     def __create_break_item(self, break_config, is_short):
@@ -357,22 +345,6 @@ class SettingsDialog:
         """Event handler for info bar close action."""
         self.info_bar_long_break.hide()
 
-    def on_switch_rpc_server_activate(self, switch, enabled):
-        """Event handler to the state change of the rpc server switch.
-
-        Show or hide the self.warn_bar_rpc_server based on the state of
-        the rpc server.
-        """
-        if not self.initializing and not enabled and not self.warn_bar_rpc_server_shown:
-            self.warn_bar_rpc_server_shown = True
-            self.warn_bar_rpc_server.show()
-        if enabled:
-            self.warn_bar_rpc_server.hide()
-
-    def on_warn_bar_rpc_server_close(self, warnbar, *user_data):
-        """Event handler for warning bar close action."""
-        self.warn_bar_rpc_server.hide()
-
     def add_break(self, button) -> None:
         """Event handler for add break button."""
         dialog = NewBreakDialog(
@@ -412,7 +384,6 @@ class SettingsDialog:
         self.config.set("random_order", self.switch_random_order.get_active())
         self.config.set("allow_postpone", self.switch_postpone.get_active())
         self.config.set("persist_state", self.switch_persist.get_active())
-        self.config.set("use_rpc_server", self.switch_rpc_server.get_active())
         for plugin in self.config.get("plugins"):
             if plugin["id"] in self.plugin_switches:
                 plugin["enabled"] = self.plugin_switches[plugin["id"]].get_active()

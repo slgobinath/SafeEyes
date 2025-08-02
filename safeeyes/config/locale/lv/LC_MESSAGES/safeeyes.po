@@ -71,12 +71,6 @@ msgstr "drukāt darbojošās safeeyes instances statusu un iziet"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nav palaists"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-
 msgid "Close"
 msgstr "Aizvērt"
 
@@ -131,14 +125,6 @@ msgstr "Ļaut atlikt pārtraukumus"
 
 msgid "Persist the internal state"
 msgstr "Saglabāt iekšējo stāvokli"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
 
 msgid "Long break interval must be a multiple of short break interval"
 msgstr "Garā pārtraukuma laikam jādalās ar īsā pārtraukuma laiku"

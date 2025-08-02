@@ -85,14 +85,6 @@ msgstr "Popis argumentu příkazového řádku"
 msgid "Safe Eyes is not running"
 msgstr "Stavová zpráva"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes je spuštěné s tím, že RPC server je vypnutý. Aby bylo možné "
-"používat argumenty příkazového řádku, je třeba RPC server zapnout."
-
 # About dialog
 msgid "Close"
 msgstr "Zavřít"
@@ -161,14 +153,6 @@ msgstr "Umožnit přeskakování přestávek"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Zachovat vnitřní stav"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Použít RPC server pro obdržení příkazů za chodu"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Bez RPC serveru, argumenty na příkazovém řádku nemusí fungovat"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
