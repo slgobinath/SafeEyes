@@ -30,7 +30,7 @@ jobs:
       - name: Install OS dependencies
         run: |
           sudo apt-get update -yy
-          sudo apt-get install -yy --no-install-recommends libcairo2-dev libgirepository-2.0-dev gir1.2-gtk-4.0
+          sudo apt-get install -yy --no-install-recommends libwayland-dev libcairo2-dev libgirepository-2.0-dev gir1.2-gtk-4.0
       - run: uv pip install -r pyproject.toml
       - run: uv pip install --group tests
       - run: pytest
