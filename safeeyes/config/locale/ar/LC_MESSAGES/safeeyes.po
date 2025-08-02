@@ -87,12 +87,6 @@ msgstr "أظهر حالة برنامج safeeyes المشتغل حاليا و أ�
 msgid "Safe Eyes is not running"
 msgstr "SafeEyes لا يعمل"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr "يعمل Safe Eyes الآن دون خادوم RPC. شغِّله لكي تستعمل معطيات سطر الأوامر."
-
 # About dialog
 msgid "Close"
 msgstr "أغلق"
@@ -159,14 +153,6 @@ msgstr "مكّن تأخير الاستراحات"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "ثبّت الحالة الداخلية"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "استعمل خادوم RPC لاستقبال الأوامر في وقت التشغيل"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "قد لا تعمل أوامر سطر الأوامر من غير خادوم RPC"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

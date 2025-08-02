@@ -86,14 +86,6 @@ msgstr "вывести статус запущенного экземпляра 
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes не запущен"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Программа Safe Eyes запущена без RPC сервера. Для использования аргументов "
-"командной строки запустите RPC сервер."
-
 # About dialog
 msgid "Close"
 msgstr "Закрыть"
@@ -162,14 +154,6 @@ msgstr "Разрешить откладывание перерывов"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Сохранять внутреннее состояние"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Используйте RPC сервер для получения команд во время работы приложения"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Без RPC сервера команды из командной строки могут не сработать"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

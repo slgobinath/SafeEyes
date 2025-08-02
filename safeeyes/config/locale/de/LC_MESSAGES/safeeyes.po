@@ -85,14 +85,6 @@ msgstr "Status der laufenden SafeEyes-Instanz ausgeben und beenden"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes wird nicht ausgeführt"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes läuft ohne RPC-Server. Aktivieren Sie ihn, um Kommandozeilen-"
-"Befehle nutzen zu können."
-
 # About dialog
 msgid "Close"
 msgstr "Schließen"
@@ -162,15 +154,6 @@ msgstr "Aufschieben von Pausen zulassen"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Internen Zustand beibehalten"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-"RPC-Server benutzen, um Befehle während der Laufzeit empfangen zu können"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Ohne RPC-Server könnten Kommandozeilen-Befehle nicht funktionieren"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

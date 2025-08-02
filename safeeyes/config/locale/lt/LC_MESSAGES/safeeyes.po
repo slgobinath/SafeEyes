@@ -86,14 +86,6 @@ msgstr "išvesti paleisto safeeyes egzemplioriaus būseną ir išeiti"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nėra paleista"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes veikia be RPC serverio. Įjunkite jį norėdami naudoti komandų "
-"eilutės argumentus."
-
 # About dialog
 msgid "Close"
 msgstr "Užverti"
@@ -162,14 +154,6 @@ msgstr "Leisti atidėti pertraukas"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Išlaikyti vidinę būseną"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Naudoti RPC serverį, siekiant gauti vykdymo aplinkos komandas"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Be RPC serverio, komandų eilutės komandos gali neveikti"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

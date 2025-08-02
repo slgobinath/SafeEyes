@@ -85,14 +85,6 @@ msgstr "vypíše, či safeeyes beží a skončí"
 msgid "Safe Eyes is not running"
 msgstr "SafeEyes nebeží"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes je spustený bez RPC serveru. Zapnite ho pre použitie argumentov v "
-"príkazovom riadku."
-
 # About dialog
 msgid "Close"
 msgstr "Zavrieť"
@@ -162,14 +154,6 @@ msgstr "Povoliť odkladanie prestávok"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Zachovať vnútorný stav"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Použiť RPC server na prijatie spúšťacích príkazov"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Bez RPC serveru príkazy v príkazovom riadku nemusia fungovať"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

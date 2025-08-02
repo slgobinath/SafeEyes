@@ -85,14 +85,6 @@ msgstr "ಚಾಲನೆಯಲ್ಲಿರುವ ಸೇಫ್ಐಸ್ ಸ್ಥ�
 msgid "Safe Eyes is not running"
 msgstr "ಸೇಫ್‌ಐಸ್ ನೆಡುಯುತ್ತಿಲ್ಲ"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"RPC ಸರ್ವರ್ ಇಲ್ಲದೆ ಸೇಫ್ಐಸ್ ಚಾಲನೆಯಲ್ಲಿದೆ. ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ಬಳಸಲು ಅದನ್ನು ಆನ್ "
-"ಮಾಡಿ."
-
 # About dialog
 msgid "Close"
 msgstr "ಮುಚ್ಚಿರಿ"
@@ -158,14 +150,6 @@ msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
 
 # Settings dialog

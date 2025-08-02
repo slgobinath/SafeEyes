@@ -85,14 +85,6 @@ msgstr "print status for at køre Safe Eyes instans og afslut"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes kører ikke"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes kører med RPC-server deaktiveret. Aktivér RPC-serveren for at "
-"bruge kommandolinjeargumenter."
-
 # About dialog
 msgid "Close"
 msgstr "Luk"
@@ -159,14 +151,6 @@ msgstr "Tillad at udskyde pauser"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Fortsætter i interntilstand"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Brug RPC-server til at modtage runtime-kommandoer"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Uden RPC-serveren fungerer kommandolinjekommandoer muligvis ikke"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

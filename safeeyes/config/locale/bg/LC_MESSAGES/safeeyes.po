@@ -85,12 +85,6 @@ msgstr ""
 msgid "Safe Eyes is not running"
 msgstr ""
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-
 # About dialog
 msgid "Close"
 msgstr "Затваряне"
@@ -156,14 +150,6 @@ msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
 
 # Settings dialog

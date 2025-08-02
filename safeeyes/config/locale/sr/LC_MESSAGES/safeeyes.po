@@ -86,14 +86,6 @@ msgstr "Одштампајте статус тренутне сесије safeey
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes није укључен"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes ради без RPC (Remote Procedure Call) сервера. Укључите га како "
-"бисте користили командне-линије."
-
 # About dialog
 msgid "Close"
 msgstr "Затворите"
@@ -162,14 +154,6 @@ msgstr "Дозволи одлагање пауза"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Задржи интерни статус"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Користите RPC сервер како бисте примили runtime команде"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Без RPC сервера, унос путем командних-линија можда неће бити успешан"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"

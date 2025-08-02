@@ -85,15 +85,6 @@ msgstr "skriv ut status for kjørende Øyetrygg-instans og avslutt"
 msgid "Safe Eyes is not running"
 msgstr "Øyetrygg kjører ikke"
 
-# RPC not enabled message
-#, fuzzy
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Øyetrygg kjører uten RPC-tjener. Slå den på for å bruke kommandolinje-"
-"argumenter."
-
 # About dialog
 msgid "Close"
 msgstr "Lukk"
@@ -160,14 +151,6 @@ msgstr "Tillat utsettelse av pauser"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Fortsett i inngangstilstand"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Bruk RPC-tjener for å motta kjøremiljøkommandoer"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Uten RPC-tjeneren, vil ikke kommandolinje-argumenter virke"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
