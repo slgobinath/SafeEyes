@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-05-12 09:03+0000\n"
-"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
+"PO-Revision-Date: 2025-08-04 20:02+0000\n"
+"Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -579,12 +579,14 @@ msgstr ""
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
 msgstr ""
+"Edasilükkamise ja vahelejätmise kiirklahvide kohendamine ei toimi Waylandi "
+"puhul."
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - viga"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "Nõutaval pluginal on sõltuvused puudu!"
 
 # Short break
 #~ msgid "Tightly close your eyes"
