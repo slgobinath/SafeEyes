@@ -46,6 +46,9 @@ class SafeEyesCore:
 
     _break_queue: typing.Optional[BreakQueue] = None
 
+    # set while __fire_hook is running
+    _firing_hook: bool = False
+
     # set while taking a break
     _countdown: typing.Optional[int] = 0
     _taking_break: typing.Optional[Break] = None
@@ -191,7 +194,7 @@ class SafeEyesCore:
 
         if break_type is not None and self._break_queue.get_break().type != break_type:
             self._break_queue.next(break_type)
-        utility.execute_main_thread(self.__do_start_break)
+        self.__do_start_break()
 
     def __scheduler_job(self) -> None:
         """Scheduler task to execute during every interval."""
@@ -238,9 +241,7 @@ class SafeEyesCore:
             seconds=time_to_wait
         )
         self.context["state"] = State.WAITING
-        utility.execute_main_thread(
-            self.__fire_on_update_next_break, self.scheduled_next_break_time
-        )
+        self.__fire_on_update_next_break(self.scheduled_next_break_time)
 
         # Wait for the pre break warning period
         if self.postpone_unit == "seconds":
@@ -255,7 +256,9 @@ class SafeEyesCore:
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
-        self.on_update_next_break.fire(self._break_queue.get_break(), next_break_time)
+        self.__fire_hook(
+            self.on_update_next_break, self._break_queue.get_break(), next_break_time
+        )
 
     def __do_pre_break(self) -> None:
         logging.info("Pre-break waiting is over")
@@ -265,7 +268,7 @@ class SafeEyesCore:
             # blocking
             return
 
-        utility.execute_main_thread(self.__fire_pre_break)
+        self.__fire_pre_break()
 
     def __fire_pre_break(self) -> None:
         """Show the notification and start the break after the notification."""
@@ -273,7 +276,8 @@ class SafeEyesCore:
             # This will only be called by methods which check this
             return
         self.context["state"] = State.PRE_BREAK
-        if not self.on_pre_break.fire(self._break_queue.get_break()):
+        proceed = self.__fire_hook(self.on_pre_break, self._break_queue.get_break())
+        if not proceed:
             # Plugins wanted to ignore this break
             self.__start_next_break()
             return
@@ -297,7 +301,8 @@ class SafeEyesCore:
             return
         break_obj = self._break_queue.get_break()
         # Show the break screen
-        if not self.on_start_break.fire(break_obj):
+        proceed = self.__fire_hook(self.on_start_break, break_obj)
+        if not proceed:
             # Plugins want to ignore this break
             self.__start_next_break()
             return
@@ -317,7 +322,7 @@ class SafeEyesCore:
             # Wait in user thread
             utility.start_thread(self.__postpone_break)
         else:
-            self.start_break.fire(break_obj)
+            self.__fire_hook(self.start_break, break_obj)
             utility.start_thread(self.__start_break)
 
     def __start_break(self) -> None:
@@ -347,20 +352,20 @@ class SafeEyesCore:
 
             total_break_time = self._taking_break.duration
             seconds = total_break_time - countdown
-            self.on_count_down.fire(countdown, seconds)
+            self.__fire_hook(self.on_count_down, countdown, seconds)
             # Sleep for 1 second
             self.__wait_for(1, self.__cycle_break_countdown)
         else:
             self._countdown = None
             self._taking_break = None
 
-            utility.execute_main_thread(self.__fire_stop_break)
+            self.__fire_stop_break()
 
     def __fire_stop_break(self) -> None:
         # Loop terminated because of timeout (not skipped) -> Close the break alert
         if not self.context["skipped"] and not self.context["postponed"]:
             logging.info("Break is terminated automatically")
-            self.on_stop_break.fire()
+            self.__fire_hook(self.on_stop_break)
 
         # Reset the skipped flag
         self.context["skipped"] = False
@@ -383,9 +388,38 @@ class SafeEyesCore:
             if not self.running:
                 return
 
-            utility.execute_main_thread(callback)
+            callback()
 
         utility.start_thread(inner)
+
+    def __fire_hook(
+        self,
+        hook: EventHook,
+        *args,
+        **kwargs,
+    ) -> bool:
+        if self._firing_hook:
+            raise Exception("this should not be called reentrantly")
+
+        self._firing_hook = True
+
+        # run hook on main thread, but block the caller until it's done
+        event = threading.Event()
+        proceed = False
+
+        def run_method(hook: EventHook, *args, **kwargs) -> None:
+            nonlocal event
+            nonlocal proceed
+            proceed = hook.fire(*args, **kwargs)
+            event.set()
+
+        utility.execute_main_thread(lambda: run_method(hook, *args, **kwargs))
+
+        event.wait()
+
+        self._firing_hook = False
+
+        return proceed
 
     def __start_next_break(self) -> None:
         if self._break_queue is None:
