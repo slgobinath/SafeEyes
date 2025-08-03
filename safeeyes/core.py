@@ -25,6 +25,7 @@ import time
 import typing
 
 from safeeyes import utility
+from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook
@@ -44,6 +45,10 @@ class SafeEyesCore:
     pre_break_warning_time: int = 0
 
     _break_queue: typing.Optional[BreakQueue] = None
+
+    # set while taking a break
+    _countdown: typing.Optional[int] = 0
+    _taking_break: typing.Optional[Break] = None
 
     def __init__(self, context) -> None:
         """Create an instance of SafeEyesCore and initialize the variables."""
@@ -326,20 +331,35 @@ class SafeEyesCore:
             return
         self.context["state"] = State.BREAK
         break_obj = self._break_queue.get_break()
-        countdown = break_obj.duration
-        total_break_time = countdown
+        self._taking_break = break_obj
+        self._countdown = break_obj.duration
 
-        while (
-            countdown
+        self.__cycle_break_countdown()
+
+    def __cycle_break_countdown(self) -> None:
+        if self._taking_break is None or self._countdown is None:
+            raise Exception("countdown running without countdown or break")
+
+        if (
+            self._countdown > 0
             and self.running
             and not self.context["skipped"]
             and not self.context["postponed"]
         ):
+            countdown = self._countdown
+            self._countdown -= 1
+
+            total_break_time = self._taking_break.duration
             seconds = total_break_time - countdown
             self.on_count_down.fire(countdown, seconds)
-            time.sleep(1)  # Sleep for 1 second
-            countdown -= 1
-        utility.execute_main_thread(self.__fire_stop_break)
+            # Sleep for 1 second
+            self.__wait_for(1)
+            utility.start_thread(self.__cycle_break_countdown)
+        else:
+            self._countdown = None
+            self._taking_break = None
+
+            utility.execute_main_thread(self.__fire_stop_break)
 
     def __fire_stop_break(self) -> None:
         # Loop terminated because of timeout (not skipped) -> Close the break alert
