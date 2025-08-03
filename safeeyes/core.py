@@ -448,4 +448,4 @@ class SafeEyesCore:
 
         if self.running:
             # Schedule the break again
-            self.__scheduler_job()
+            self.__wait_for(0, self.__scheduler_job)
