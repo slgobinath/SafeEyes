@@ -113,12 +113,11 @@ class SafeEyesCore:
             logging.info("Stop Safe Eyes core")
             self.paused_time = datetime.datetime.now().timestamp()
             # Stop the break thread
-            self.waiting_condition.acquire()
             self.running = False
             if self.context["state"] != State.QUIT:
                 self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
-            self.waiting_condition.notify_all()
-            self.waiting_condition.release()
+
+            self.__wakeup_scheduler()
 
     def skip(self) -> None:
         """User skipped the break using Skip button."""
@@ -185,10 +184,8 @@ class SafeEyesCore:
             logging.info("Stop the scheduler")
 
             # Stop the break thread
-            self.waiting_condition.acquire()
             self.running = False
-            self.waiting_condition.notify_all()
-            self.waiting_condition.release()
+            self.__wakeup_scheduler()
             time.sleep(1)  # Wait for 1 sec to ensure the scheduler is dead
             self.running = True
 
@@ -420,6 +417,12 @@ class SafeEyesCore:
         self._firing_hook = False
 
         return proceed
+
+    def __wakeup_scheduler(self) -> None:
+        # wakeup scheduler
+        self.waiting_condition.acquire()
+        self.waiting_condition.notify_all()
+        self.waiting_condition.release()
 
     def __start_next_break(self) -> None:
         if self._break_queue is None:
