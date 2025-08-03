@@ -325,7 +325,6 @@ class SettingsDialog:
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
         self.dropdown_postpone_unit.set_sensitive(self.switch_postpone.get_active())
 
-
     def on_spin_short_break_interval_change(self, spin_button, *value):
         """Event handler for value change of short break interval."""
         short_break_interval = self.spin_short_break_interval.get_value_as_int()
@@ -385,7 +384,8 @@ class SettingsDialog:
             "postpone_duration", self.spin_postpone_duration.get_value_as_int()
         )
         self.config.set(
-            "postpone_unit", self.dropdown_postpone_unit.get_selected_item().get_string()
+            "postpone_unit",
+            self.dropdown_postpone_unit.get_selected_item().get_string(),
         )
         self.config.set(
             "shortcut_disable_time",
