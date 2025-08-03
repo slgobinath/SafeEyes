@@ -186,7 +186,7 @@ class SafeEyesCore:
 
         if break_type is not None and self._break_queue.get_break().type != break_type:
             self._break_queue.next(break_type)
-        utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__do_start_break)
 
     def __scheduler_job(self) -> None:
         """Scheduler task to execute during every interval."""
@@ -280,13 +280,13 @@ class SafeEyesCore:
         self.__wait_for(self.pre_break_warning_time)
         if not self.running:
             return
-        utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__do_start_break)
 
     def __postpone_break(self) -> None:
         self.__wait_for(self.postpone_duration)
-        utility.execute_main_thread(self.__fire_start_break)
+        utility.execute_main_thread(self.__do_start_break)
 
-    def __fire_start_break(self) -> None:
+    def __do_start_break(self) -> None:
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
