@@ -248,9 +248,7 @@ class SafeEyesCore:
         else:
             logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
 
-        self.__wait_for(time_to_wait)
-
-        self.__do_pre_break()
+        self.__wait_for(time_to_wait, self.__do_pre_break)
 
     def __fire_on_update_next_break(self, next_break_time: datetime.datetime) -> None:
         """Pass the next break information to the registered listeners."""
@@ -286,16 +284,14 @@ class SafeEyesCore:
             "Wait for %d seconds before the break", self.pre_break_warning_time
         )
         # Wait for the pre break warning period
-        self.__wait_for(self.pre_break_warning_time)
-        if not self.running:
-            return
-        utility.execute_main_thread(self.__do_start_break)
+        self.__wait_for(self.pre_break_warning_time, self.__do_start_break)
 
     def __postpone_break(self) -> None:
-        self.__wait_for(self.postpone_duration)
-        utility.execute_main_thread(self.__do_start_break)
+        self.__wait_for(self.postpone_duration, self.__do_start_break)
 
     def __do_start_break(self) -> None:
+        if not self.running:
+            return
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
@@ -353,8 +349,7 @@ class SafeEyesCore:
             seconds = total_break_time - countdown
             self.on_count_down.fire(countdown, seconds)
             # Sleep for 1 second
-            self.__wait_for(1)
-            utility.start_thread(self.__cycle_break_countdown)
+            self.__wait_for(1, self.__cycle_break_countdown)
         else:
             self._countdown = None
             self._taking_break = None
@@ -373,11 +368,24 @@ class SafeEyesCore:
         self.context["postpone_button_disabled"] = False
         self.__start_next_break()
 
-    def __wait_for(self, duration: int) -> None:
+    def __wait_for(
+        self,
+        duration: int,
+        callback: typing.Callable[[], None],
+    ) -> None:
         """Wait until someone wake up or the timeout happens."""
-        self.waiting_condition.acquire()
-        self.waiting_condition.wait(duration)
-        self.waiting_condition.release()
+
+        def inner() -> None:
+            self.waiting_condition.acquire()
+            self.waiting_condition.wait(duration)
+            self.waiting_condition.release()
+
+            if not self.running:
+                return
+
+            utility.execute_main_thread(callback)
+
+        utility.start_thread(inner)
 
     def __start_next_break(self) -> None:
         if self._break_queue is None:
