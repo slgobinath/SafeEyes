@@ -21,7 +21,6 @@
 import datetime
 import logging
 import threading
-import time
 import typing
 
 from safeeyes import utility
@@ -52,6 +51,9 @@ class SafeEyesCore:
     # set while taking a break
     _countdown: typing.Optional[int] = 0
     _taking_break: typing.Optional[Break] = None
+
+    # set to true when a break was requested
+    _take_break_now: bool = False
 
     def __init__(self, context) -> None:
         """Create an instance of SafeEyesCore and initialize the variables."""
@@ -154,7 +156,13 @@ class SafeEyesCore:
             return
         if not self.context["state"] == State.WAITING:
             return
-        utility.start_thread(self.__take_break, break_type=break_type)
+
+        if break_type is not None and self._break_queue.get_break().type != break_type:
+            self._break_queue.next(break_type)
+
+        self._take_break_now = True
+
+        self.__wakeup_scheduler()
 
     def has_breaks(self, break_type: typing.Optional[BreakType] = None) -> bool:
         """Check whether Safe Eyes has breaks or not.
@@ -168,30 +176,6 @@ class SafeEyesCore:
             return True
 
         return not self._break_queue.is_empty(break_type)
-
-    def __take_break(self, break_type: typing.Optional[BreakType] = None) -> None:
-        """Show the next break screen."""
-        logging.info("Take a break due to external request")
-
-        if self._break_queue is None:
-            # This will only be called by self.take_break, which checks this
-            return
-
-        with self.lock:
-            if not self.running:
-                return
-
-            logging.info("Stop the scheduler")
-
-            # Stop the break thread
-            self.running = False
-            self.__wakeup_scheduler()
-            time.sleep(1)  # Wait for 1 sec to ensure the scheduler is dead
-            self.running = True
-
-        if break_type is not None and self._break_queue.get_break().type != break_type:
-            self._break_queue.next(break_type)
-        self.__do_start_break()
 
     def __scheduler_job(self) -> None:
         """Scheduler task to execute during every interval."""
@@ -258,6 +242,12 @@ class SafeEyesCore:
         )
 
     def __do_pre_break(self) -> None:
+        if self._take_break_now:
+            self._take_break_now = False
+            logging.info("Take a break due to external request")
+            self.__do_start_break()
+            return
+
         logging.info("Pre-break waiting is over")
 
         if not self.running:
@@ -291,6 +281,10 @@ class SafeEyesCore:
         self.__wait_for(self.postpone_duration, self.__do_start_break)
 
     def __do_start_break(self) -> None:
+        if self._take_break_now:
+            # already taking a break now, ignore
+            self._take_break_now = False
+
         if not self.running:
             return
         if self._break_queue is None:
@@ -337,6 +331,10 @@ class SafeEyesCore:
     def __cycle_break_countdown(self) -> None:
         if self._taking_break is None or self._countdown is None:
             raise Exception("countdown running without countdown or break")
+
+        if self._take_break_now:
+            logging.warning("Break requested while already taking a break")
+            self._take_break_now = False
 
         if (
             self._countdown > 0
