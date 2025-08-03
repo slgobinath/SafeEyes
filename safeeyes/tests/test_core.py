@@ -225,21 +225,6 @@ class TestSafeEyesCore:
             datetime.timezone.utc
         ) == datetime.datetime.fromisoformat(string)
 
-    def test_create_empty(self):
-        context = {}
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
-        safe_eyes_core = core.SafeEyesCore(context)
-        safe_eyes_core.initialize(config)
-
     def test_start_empty(self, sequential_threading: SequentialThreadingFixture):
         context: dict[str, typing.Any] = {}
         config = model.Config(
