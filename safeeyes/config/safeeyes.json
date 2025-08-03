@@ -11,6 +11,7 @@
     "short_break_duration": 15,
     "persist_state": false,
     "postpone_duration": 5,
+    "postpone_unit": "minutes",
     "shortcut_disable_time": 2,
     "shortcut_skip": 9,
     "shortcut_postpone": 65,
