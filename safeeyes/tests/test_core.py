@@ -16,17 +16,43 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from collections import deque
 import datetime
-import logging
 import pytest
+import typing
 
 from safeeyes import core
 from safeeyes import model
 
-import threading
-
 from unittest import mock
+
+
+class SafeEyesCoreHandle:
+    callback: typing.Optional[typing.Tuple[typing.Callable, int]] = None
+
+    def __init__(self, safe_eyes_core: core.SafeEyesCore, time_machine):
+        self.time_machine = time_machine
+        self.safe_eyes_core = safe_eyes_core
+
+    def timeout_add_seconds(self, duration: int, callback: typing.Callable) -> int:
+        if self.callback is not None:
+            raise Exception("only one callback supported. need to make this smarter")
+        self.callback = (callback, duration)
+        print(f"callback registered for {callback} and {duration}")
+        return 1
+
+    def next(self):
+        assert self.callback
+
+        (callback, duration) = self.callback
+        self.callback = None
+        self.time_machine.shift(delta=datetime.timedelta(seconds=duration))
+        print(f"shift to {datetime.datetime.now()}")
+        callback()
+
+
+SequentialThreadingFixture: typing.TypeAlias = typing.Callable[
+    [core.SafeEyesCore], SafeEyesCoreHandle
+]
 
 
 class TestSafeEyesCore:
@@ -46,7 +72,9 @@ class TestSafeEyesCore:
         )
 
     @pytest.fixture
-    def sequential_threading(self, monkeypatch, time_machine):
+    def sequential_threading(
+        self, monkeypatch: pytest.MonkeyPatch, time_machine
+    ) -> typing.Generator[SequentialThreadingFixture]:
         """This fixture allows stopping threads at any point.
 
         It is hard-coded for SafeEyesCore, the handle class returned by the fixture must
@@ -61,130 +89,30 @@ class TestSafeEyesCore:
         """
         # executes instantly, on the same thread
         # no need to switch threads, as we don't use any gtk things
-        monkeypatch.setattr(
-            core.utility,
-            "execute_main_thread",
-            lambda target_function, *args, **kwargs: target_function(*args, **kwargs),
-        )
+        handle: typing.Optional["SafeEyesCoreHandle"] = None
 
-        handle = None
-
-        def utility_start_thread(target_function, **kwargs):
-            if not handle:
-                raise Exception("handle must be initialized before first thread")
-            handle.utility_start_thread(target_function, **kwargs)
-
-        def time_sleep(time):
+        def timeout_add_seconds(duration, callback) -> int:
             if not handle:
                 raise Exception("handle must be initialized before first sleep call")
-            handle.sleep(time)
+            return handle.timeout_add_seconds(duration, callback)
 
-        monkeypatch.setattr(core.utility, "start_thread", utility_start_thread)
+        def source_remove(source_id: int) -> None:
+            pass
 
-        monkeypatch.setattr(core.time, "sleep", time_sleep)
+        monkeypatch.setattr(core.GLib, "timeout_add_seconds", timeout_add_seconds)
+        monkeypatch.setattr(core.GLib, "source_remove", source_remove)
 
-        class PatchedCondition(threading.Condition):
-            def __init__(self, handle):
-                super().__init__()
-                self.handle = handle
+        def create_handle(safe_eyes_core: core.SafeEyesCore) -> SafeEyesCoreHandle:
+            nonlocal time_machine
+            nonlocal handle
+            if handle:
+                raise Exception("only one handle is allowed per test call")
 
-            def wait(self, timeout):
-                self.handle.wait_condvar(timeout)
+            handle = SafeEyesCoreHandle(safe_eyes_core, time_machine)
 
-        class Handle:
-            thread = None
-            task_queue = deque()
-            running = True
-            condvar_in = threading.Condition()
-            condvar_out = threading.Condition()
+            return handle
 
-            def __init__(self, safe_eyes_core):
-                nonlocal handle
-                nonlocal time_machine
-                if handle:
-                    raise Exception("only one handle is allowed per test call")
-                handle = self
-                self.time_machine = time_machine
-                self.safe_eyes_core = safe_eyes_core
-                self.safe_eyes_core.waiting_condition = PatchedCondition(self)
-
-            def background_thread(self):
-                while True:
-                    with self.condvar_in:
-                        success = self.condvar_in.wait(1)
-                        if not success:
-                            raise Exception("thread timed out")
-
-                    if not self.running:
-                        break
-
-                    if self.task_queue:
-                        (target_function, kwargs) = self.task_queue.popleft()
-                        logging.debug(f"thread started {target_function}")
-                        target_function(**kwargs)
-                        logging.debug(f"thread finished {target_function}")
-
-                    with self.condvar_out:
-                        self.condvar_out.notify()
-
-            def sleep(self, time):
-                if self.thread is threading.current_thread():
-                    with self.condvar_out:
-                        self.condvar_out.notify()
-                    self.time_machine.shift(delta=datetime.timedelta(seconds=time))
-                    with self.condvar_in:
-                        success = self.condvar_in.wait(1)
-                        if not success:
-                            raise Exception("thread timed out")
-
-            def wait_condvar(self, time):
-                if self.thread is not threading.current_thread():
-                    raise Exception("waiting on condition may only happen in thread")
-
-                with self.condvar_out:
-                    self.condvar_out.notify()
-                self.time_machine.shift(delta=datetime.timedelta(seconds=time))
-                with self.condvar_in:
-                    success = self.condvar_in.wait(1)
-                    if not success:
-                        raise Exception("thread timed out")
-
-            def utility_start_thread(self, target_function, **kwargs):
-                self.task_queue.append((target_function, kwargs))
-
-                if self.thread is None:
-                    self.thread = threading.Thread(
-                        target=self.background_thread,
-                        name="SequentialThreadingRunner",
-                        daemon=False,
-                        kwargs=kwargs,
-                    )
-                    self.thread.start()
-
-            def next(self):
-                assert self.thread
-
-                with self.condvar_in:
-                    self.condvar_in.notify()
-
-                # wait until done:
-                with self.condvar_out:
-                    success = self.condvar_out.wait(1)
-                    if not success:
-                        raise Exception("thread timed out")
-
-            def stop(self):
-                self.running = False
-                with self.condvar_in:
-                    self.condvar_in.notify()
-
-                if self.thread:
-                    self.thread.join(1)
-
-        yield Handle
-
-        if handle:
-            handle.stop()
+        yield create_handle
 
     def run_next_break(
         self,
@@ -194,28 +122,36 @@ class TestSafeEyesCore:
         context,
         break_duration,
         break_name_translated,
+        initial: bool = False,
     ):
         """Run one entire cycle of safe_eyes_core.
 
-        It must be waiting for __scheduler_job to run. (This is the equivalent of
-        State.WAITING).
-        That means it must either be just started, or have finished the previous cycle.
+        If initial is True, it must not be started yet.
+        If initial is False, it must be in the state where __scheduler_job is about to
+        be called again.
+        This means it is in the BREAK state, but the break has ended and on_stop_break
+        was already called.
         """
         on_update_next_break = mock.Mock()
         on_pre_break = mock.Mock(return_value=True)
         on_start_break = mock.Mock(return_value=True)
         start_break = mock.Mock()
         on_count_down = mock.Mock()
+        on_stop_break = mock.Mock()
 
         safe_eyes_core.on_update_next_break += on_update_next_break
         safe_eyes_core.on_pre_break += on_pre_break
         safe_eyes_core.on_start_break += on_start_break
         safe_eyes_core.start_break += start_break
         safe_eyes_core.on_count_down += on_count_down
+        safe_eyes_core.on_stop_break += on_stop_break
 
-        # start __scheduler_job
-        sequential_threading_handle.next()
-        # wait until it reaches the condvar
+        if initial:
+            safe_eyes_core.start()
+        else:
+            assert context["state"] == model.State.BREAK
+
+            sequential_threading_handle.next()
 
         assert context["state"] == model.State.WAITING
 
@@ -236,18 +172,10 @@ class TestSafeEyesCore:
         on_pre_break.reset_mock()
 
         # start __wait_until_prepare
-        sequential_threading_handle.next()
-
-        # wait until it reaches the condvar
-        # continue after condvar
-        sequential_threading_handle.next()
-        # end of __wait_until_prepare
-
-        # start __start_break
-        sequential_threading_handle.next()
-
         # first sleep in __start_break
         sequential_threading_handle.next()
+
+        assert context["state"] == model.State.BREAK
 
         on_start_break.assert_called_once()
         assert isinstance(on_start_break.call_args[0][0], model.Break)
@@ -262,8 +190,10 @@ class TestSafeEyesCore:
         assert context["state"] == model.State.BREAK
 
         # continue sleep in __start_break
-        for i in range(break_duration - 2):
+        for i in range(break_duration - 1):
             sequential_threading_handle.next()
+
+        assert context["state"] == model.State.BREAK
 
         sequential_threading_handle.next()
         # end of __start_break
@@ -271,6 +201,10 @@ class TestSafeEyesCore:
         on_count_down.assert_called()
         assert on_count_down.call_count == break_duration
         on_count_down.reset_mock()
+
+        on_stop_break.assert_called()
+        assert on_stop_break.call_count == 1
+        on_stop_break.reset_mock()
 
         assert context["state"] == model.State.BREAK
 
@@ -352,9 +286,6 @@ class TestSafeEyesCore:
 
         safe_eyes_core.start()
 
-        # start __scheduler_job
-        sequential_threading_handle.next()
-
         assert context["state"] == model.State.WAITING
 
         on_update_next_break.assert_called_once()
@@ -407,8 +338,6 @@ class TestSafeEyesCore:
 
         safe_eyes_core.initialize(config)
 
-        safe_eyes_core.start()
-
         self.run_next_break(
             sequential_threading_handle,
             time_machine,
@@ -416,6 +345,7 @@ class TestSafeEyesCore:
             context,
             short_break_duration,
             "translated!: break 1",
+            initial=True,
         )
 
         # Time passed: 15min 25s
@@ -530,8 +460,6 @@ class TestSafeEyesCore:
 
         safe_eyes_core.initialize(config)
 
-        safe_eyes_core.start()
-
         self.run_next_break(
             sequential_threading_handle,
             time_machine,
@@ -539,6 +467,7 @@ class TestSafeEyesCore:
             context,
             short_break_duration,
             "translated!: break 1",
+            initial=True,
         )
 
         # Time passed: 30m 10s
