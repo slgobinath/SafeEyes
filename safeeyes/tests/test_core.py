@@ -23,13 +23,21 @@ import typing
 from safeeyes import core
 from safeeyes import model
 
+from time_machine import TimeMachineFixture
+
 from unittest import mock
 
 
 class SafeEyesCoreHandle:
     callback: typing.Optional[typing.Tuple[typing.Callable, int]] = None
+    safe_eyes_core: core.SafeEyesCore
+    time_machine: TimeMachineFixture
 
-    def __init__(self, safe_eyes_core: core.SafeEyesCore, time_machine):
+    def __init__(
+        self,
+        safe_eyes_core: core.SafeEyesCore,
+        time_machine: TimeMachineFixture,
+    ):
         self.time_machine = time_machine
         self.safe_eyes_core = safe_eyes_core
 
@@ -40,7 +48,7 @@ class SafeEyesCoreHandle:
         print(f"callback registered for {callback} and {duration}")
         return 1
 
-    def next(self):
+    def next(self) -> None:
         assert self.callback
 
         (callback, duration) = self.callback
@@ -63,7 +71,7 @@ class TestSafeEyesCore:
         )
 
     @pytest.fixture(autouse=True)
-    def monkeypatch_translations(self, monkeypatch):
+    def monkeypatch_translations(self, monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setattr(
             core, "_", lambda message: "translated!: " + message, raising=False
         )
@@ -73,7 +81,9 @@ class TestSafeEyesCore:
 
     @pytest.fixture
     def sequential_threading(
-        self, monkeypatch: pytest.MonkeyPatch, time_machine
+        self,
+        monkeypatch: pytest.MonkeyPatch,
+        time_machine: TimeMachineFixture,
     ) -> typing.Generator[SequentialThreadingFixture]:
         """This fixture allows stopping threads at any point.
 
@@ -116,12 +126,12 @@ class TestSafeEyesCore:
 
     def run_next_break(
         self,
-        sequential_threading_handle,
-        time_machine,
-        safe_eyes_core,
+        sequential_threading_handle: SafeEyesCoreHandle,
+        time_machine: TimeMachineFixture,
+        safe_eyes_core: core.SafeEyesCore,
         context,
-        break_duration,
-        break_name_translated,
+        break_duration: int,
+        break_name_translated: str,
         initial: bool = False,
     ):
         """Run one entire cycle of safe_eyes_core.
@@ -208,7 +218,7 @@ class TestSafeEyesCore:
 
         assert context["state"] == model.State.BREAK
 
-    def assert_datetime(self, string):
+    def assert_datetime(self, string: str):
         if not string.endswith("+00:00"):
             string += "+00:00"
         assert datetime.datetime.now(
@@ -230,18 +240,21 @@ class TestSafeEyesCore:
         safe_eyes_core = core.SafeEyesCore(context)
         safe_eyes_core.initialize(config)
 
-    def test_start_empty(self, sequential_threading):
-        context = {}
-        config = {
-            "short_breaks": [],
-            "long_breaks": [],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
+    def test_start_empty(self, sequential_threading: SequentialThreadingFixture):
+        context: dict[str, typing.Any] = {}
+        config = model.Config(
+            user_config={
+                "short_breaks": [],
+                "long_breaks": [],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
         on_update_next_break = mock.Mock()
         safe_eyes_core = core.SafeEyesCore(context)
         safe_eyes_core.on_update_next_break += mock
@@ -253,29 +266,32 @@ class TestSafeEyesCore:
 
         on_update_next_break.assert_not_called()
 
-    def test_start(self, sequential_threading, time_machine):
-        context = {
+    def test_start(self, sequential_threading: SequentialThreadingFixture):
+        context: dict[str, typing.Any] = {
             "session": {},
         }
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": 15,
-            "long_break_interval": 75,
-            "long_break_duration": 60,
-            "short_break_duration": 15,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": 15,
+                "long_break_interval": 75,
+                "long_break_duration": 60,
+                "short_break_duration": 15,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
         on_update_next_break = mock.Mock()
         safe_eyes_core = core.SafeEyesCore(context)
         safe_eyes_core.on_update_next_break += on_update_next_break
@@ -300,8 +316,12 @@ class TestSafeEyesCore:
         safe_eyes_core.stop()
         assert context["state"] == model.State.STOPPED
 
-    def test_full_run_with_defaults(self, sequential_threading, time_machine):
-        context = {
+    def test_full_run_with_defaults(
+        self,
+        sequential_threading: SequentialThreadingFixture,
+        time_machine: TimeMachineFixture,
+    ):
+        context: dict[str, typing.Any] = {
             "session": {},
         }
         short_break_duration = 15  # seconds
@@ -309,26 +329,29 @@ class TestSafeEyesCore:
         pre_break_warning_time = 10  # seconds
         long_break_duration = 60  # seconds
         long_break_interval = 75  # minutes
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": short_break_interval,
-            "long_break_interval": long_break_interval,
-            "long_break_duration": long_break_duration,
-            "short_break_duration": short_break_duration,
-            "pre_break_warning_time": pre_break_warning_time,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": short_break_interval,
+                "long_break_interval": long_break_interval,
+                "long_break_duration": long_break_duration,
+                "short_break_duration": short_break_duration,
+                "pre_break_warning_time": pre_break_warning_time,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
 
         self.assert_datetime("2024-08-25T13:00:00")
 
@@ -420,10 +443,12 @@ class TestSafeEyesCore:
         assert context["state"] == model.State.STOPPED
 
     def test_long_duration_is_bigger_than_short_interval(
-        self, sequential_threading, time_machine
+        self,
+        sequential_threading: SequentialThreadingFixture,
+        time_machine: TimeMachineFixture,
     ):
         """Example taken from https://github.com/slgobinath/SafeEyes/issues/640."""
-        context = {
+        context: dict[str, typing.Any] = {
             "session": {},
         }
         short_break_duration = 300  # seconds = 5min
@@ -431,26 +456,29 @@ class TestSafeEyesCore:
         pre_break_warning_time = 10  # seconds
         long_break_duration = 1800  # seconds = 30min
         long_break_interval = 100  # minutes
-        config = {
-            "short_breaks": [
-                {"name": "break 1"},
-                {"name": "break 2"},
-                {"name": "break 3"},
-                {"name": "break 4"},
-            ],
-            "long_breaks": [
-                {"name": "long break 1"},
-                {"name": "long break 2"},
-                {"name": "long break 3"},
-            ],
-            "short_break_interval": short_break_interval,
-            "long_break_interval": long_break_interval,
-            "long_break_duration": long_break_duration,
-            "short_break_duration": short_break_duration,
-            "pre_break_warning_time": pre_break_warning_time,
-            "random_order": False,
-            "postpone_duration": 5,
-        }
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": short_break_interval,
+                "long_break_interval": long_break_interval,
+                "long_break_duration": long_break_duration,
+                "short_break_duration": short_break_duration,
+                "pre_break_warning_time": pre_break_warning_time,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
 
         self.assert_datetime("2024-08-25T13:00:00")
 
