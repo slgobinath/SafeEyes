@@ -245,13 +245,7 @@ class SafeEyesCore:
 
         self.__wait_for(time_to_wait)
 
-        logging.info("Pre-break waiting is over")
-
-        if not self.running:
-            # This can be reached if another thread changed running while __wait_for was
-            # blocking
-            return  # type: ignore[unreachable]
-        utility.execute_main_thread(self.__fire_pre_break)
+        self.__do_pre_break()
 
     def __fire_on_update_next_break(self, next_break_time: datetime.datetime) -> None:
         """Pass the next break information to the registered listeners."""
@@ -259,6 +253,16 @@ class SafeEyesCore:
             # This will only be called by methods which check this
             return
         self.on_update_next_break.fire(self._break_queue.get_break(), next_break_time)
+
+    def __do_pre_break(self) -> None:
+        logging.info("Pre-break waiting is over")
+
+        if not self.running:
+            # This can be reached if another thread changed running while __wait_for was
+            # blocking
+            return
+
+        utility.execute_main_thread(self.__fire_pre_break)
 
     def __fire_pre_break(self) -> None:
         """Show the notification and start the break after the notification."""
