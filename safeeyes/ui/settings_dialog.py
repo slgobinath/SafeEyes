@@ -146,7 +146,7 @@ class SettingsDialog:
         self.infobar_long_break_shown = False
 
     def __create_break_item(self, break_config, is_short):
-        """Create an entry for break  be listed in the break tab."""
+        """Create an entry for break to be listed in the break tab."""
         parent_box = self.box_long_breaks
         if is_short:
             parent_box = self.box_short_breaks

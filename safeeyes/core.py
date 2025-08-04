@@ -75,7 +75,7 @@ class SafeEyesCore:
         self._break_queue = BreakQueue.create(config, self.context)
         self.default_postpone_duration = int(config.get("postpone_duration"))
         self.postpone_unit = config.get("postpone_unit")
-        if self.postpone_unit == "minutes":
+        if self.postpone_unit != "seconds":
             self.default_postpone_duration *= 60
 
         self.postpone_duration = self.default_postpone_duration
@@ -238,10 +238,10 @@ class SafeEyesCore:
         )
 
         # Wait for the pre break warning period
-        if self.postpone_unit == "minutes":
-            logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
-        else:
+        if self.postpone_unit == "seconds":
             logging.info("Waiting for %d seconds until next break", time_to_wait)
+        else:
+            logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
 
         self.__wait_for(time_to_wait)
 
