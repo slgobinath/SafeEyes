@@ -45,6 +45,11 @@ def play_sound(resource_name):
         path = utility.get_resource_path(resource_name)
         if path is None:
             return
+    except BaseException:
+        logging.error("Failed to load resource %s", resource_name)
+        return
+
+    if utility.command_exist("ffplay"):  # ffmpeg
         utility.execute_command(
             "ffplay",
             [
@@ -57,9 +62,9 @@ def play_sound(resource_name):
                 str(volume),
             ],
         )
-
-    except BaseException:
-        logging.error("Failed to play audible alert %s", resource_name)
+    elif utility.command_exist("pw-play"):  # pipewire
+        pwvol = volume / 100  # 0 = silent, 1.0 = 100% volume
+        utility.execute_command("pw-play", ["--volume", str(pwvol), path])
 
 
 def init(ctx, safeeyes_config, plugin_config):
