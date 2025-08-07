@@ -6,7 +6,7 @@
     },
     "dependencies": {
         "python_modules": [],
-        "shell_commands": ["aplay"],
+        "shell_commands": ["ffplay"],
         "operating_systems": [],
         "desktop_environments": [],
         "resources": ["on_pre_break.wav", "on_stop_break.wav"]

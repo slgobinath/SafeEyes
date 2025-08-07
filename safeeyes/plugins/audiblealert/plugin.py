@@ -42,7 +42,9 @@ def play_sound(resource_name):
         path = utility.get_resource_path(resource_name)
         if path is None:
             return
-        utility.execute_command("aplay", ["-q", path])
+        utility.execute_command(
+            "ffplay", [path, "-nodisp", "-nostats", "-hide_banner", "-autoexit"]
+        )
 
     except BaseException:
         logging.error("Failed to play audible alert %s", resource_name)
