@@ -26,6 +26,7 @@ from safeeyes import utility
 context = None
 pre_break_alert = False
 post_break_alert = False
+volume: int = 100
 
 
 def play_sound(resource_name):
@@ -36,16 +37,34 @@ def play_sound(resource_name):
         resource_name {string} -- name of the wav file resource
 
     """
-    logging.info("Playing audible alert %s", resource_name)
+    global volume
+
+    logging.info("Playing audible alert %s at volume %s%%", resource_name, volume)
     try:
         # Open the sound file
         path = utility.get_resource_path(resource_name)
         if path is None:
             return
-        utility.execute_command("aplay", ["-q", path])
-
     except BaseException:
-        logging.error("Failed to play audible alert %s", resource_name)
+        logging.error("Failed to load resource %s", resource_name)
+        return
+
+    if utility.command_exist("ffplay"):  # ffmpeg
+        utility.execute_command(
+            "ffplay",
+            [
+                path,
+                "-nodisp",
+                "-nostats",
+                "-hide_banner",
+                "-autoexit",
+                "-volume",
+                str(volume),
+            ],
+        )
+    elif utility.command_exist("pw-play"):  # pipewire
+        pwvol = volume / 100  # 0 = silent, 1.0 = 100% volume
+        utility.execute_command("pw-play", ["--volume", str(pwvol), path])
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -53,10 +72,16 @@ def init(ctx, safeeyes_config, plugin_config):
     global context
     global pre_break_alert
     global post_break_alert
+    global volume
     logging.debug("Initialize Audible Alert plugin")
     context = ctx
     pre_break_alert = plugin_config["pre_break_alert"]
     post_break_alert = plugin_config["post_break_alert"]
+    volume = int(plugin_config.get("volume", 100))
+    if volume > 100:
+        volume = 100
+    if volume < 0:
+        volume = 0
 
 
 def on_pre_break(break_obj):
