@@ -412,28 +412,46 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="box10">
-                                    <property name="visible">1</property>
                                     <property name="spacing">5</property>
-                                    <property name="homogeneous">1</property>
+                                    <property name="visible">1</property>
                                     <child>
                                       <object class="GtkLabel" id="lbl_postpone_duration">
-                                        <property name="visible">1</property>
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Postponement duration (in minutes)</property>
+                                        <property name="label" translatable="yes">Postponement duration in</property>
+                                        <property name="visible">1</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkDropDown" id="dropdown_postpone_unit">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="hexpand">true</property>
+                                        <property name="vexpand">false</property>
+                                        <property name="selected">0</property>
+                                        <property name="model">
+                                          <object class="GtkStringList">
+                                            <items>
+                                              <item translatable="yes">minutes</item>
+                                              <item translatable="yes">seconds</item>
+                                            </items>
+                                          </object>
+                                        </property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spin_postpone_duration">
-                                        <property name="visible">1</property>
-                                        <property name="can-focus">1</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                        <property name="text">1</property>
                                         <property name="adjustment">adjust_postpone_duration</property>
+                                        <property name="can-focus">1</property>
                                         <property name="climb-rate">1</property>
+                                        <property name="halign">end</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="hexpand-set">True</property>
                                         <property name="numeric">1</property>
+                                        <property name="text">1</property>
                                         <property name="update-policy">if-valid</property>
+                                        <property name="valign">center</property>
                                         <property name="value">1</property>
+                                        <property name="visible">1</property>
                                       </object>
                                     </child>
                                   </object>

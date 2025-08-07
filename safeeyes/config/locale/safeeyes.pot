@@ -558,3 +558,12 @@ msgstr ""
 
 msgid "A required plugin is missing dependencies!"
 msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""

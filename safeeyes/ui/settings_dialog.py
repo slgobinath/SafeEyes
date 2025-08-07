@@ -80,6 +80,7 @@ class SettingsDialog:
         self.spin_long_break_interval = builder.get_object("spin_long_break_interval")
         self.spin_time_to_prepare = builder.get_object("spin_time_to_prepare")
         self.spin_postpone_duration = builder.get_object("spin_postpone_duration")
+        self.dropdown_postpone_unit = builder.get_object("dropdown_postpone_unit")
         self.spin_disable_keyboard_shortcut = builder.get_object(
             "spin_disable_keyboard_shortcut"
         )
@@ -130,6 +131,11 @@ class SettingsDialog:
         self.spin_long_break_interval.set_value(config.get("long_break_interval"))
         self.spin_time_to_prepare.set_value(config.get("pre_break_warning_time"))
         self.spin_postpone_duration.set_value(config.get("postpone_duration"))
+        # Set the active item in the dropdown based on the postpone unit
+        if config.get("postpone_unit") == "seconds":
+            self.dropdown_postpone_unit.set_selected(1)
+        else:
+            self.dropdown_postpone_unit.set_selected(0)
         self.spin_disable_keyboard_shortcut.set_value(
             config.get("shortcut_disable_time")
         )
@@ -317,6 +323,7 @@ class SettingsDialog:
         state of the postpone switch.
         """
         self.spin_postpone_duration.set_sensitive(self.switch_postpone.get_active())
+        self.dropdown_postpone_unit.set_sensitive(self.switch_postpone.get_active())
 
     def on_spin_short_break_interval_change(self, spin_button, *value):
         """Event handler for value change of short break interval."""
@@ -375,6 +382,10 @@ class SettingsDialog:
         )
         self.config.set(
             "postpone_duration", self.spin_postpone_duration.get_value_as_int()
+        )
+        self.config.set(
+            "postpone_unit",
+            self.dropdown_postpone_unit.get_selected_item().get_string(),
         )
         self.config.set(
             "shortcut_disable_time",
