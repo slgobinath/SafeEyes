@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-06-18 10:01+0000\n"
+"PO-Revision-Date: 2025-08-13 13:01+0000\n"
 "Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.1\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -584,13 +584,13 @@ msgstr ""
 "styly vytvořte místo toho nový soubor stylů v '%(new)s'."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "Přizpůsobení zkratek pro odložení a přeskočení nefunguje na Waylandu."
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Chyba - Safe Eyes"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "Požadovanému doplňku chybí závislosti!"
 
 # Short break
 #~ msgid "Tightly close your eyes"
