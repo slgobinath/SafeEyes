@@ -20,16 +20,19 @@
 
 import datetime
 import logging
-import threading
-import time
 import typing
 
-from safeeyes import utility
+from safeeyes.model import Break
 from safeeyes.model import BreakType
 from safeeyes.model import BreakQueue
 from safeeyes.model import EventHook
 from safeeyes.model import State
 from safeeyes.model import Config
+
+import gi
+
+gi.require_version("GLib", "2.0")
+from gi.repository import GLib
 
 
 class SafeEyesCore:
@@ -45,6 +48,20 @@ class SafeEyesCore:
 
     _break_queue: typing.Optional[BreakQueue] = None
 
+    # set while __wait_for is running
+    _timeout_id: typing.Optional[int] = None
+    _callback: typing.Optional[typing.Callable[[], None]] = None
+
+    # set while __fire_hook is running
+    _firing_hook: bool = False
+
+    # set while taking a break
+    _countdown: typing.Optional[int] = 0
+    _taking_break: typing.Optional[Break] = None
+
+    # set to true when a break was requested
+    _take_break_now: bool = False
+
     def __init__(self, context) -> None:
         """Create an instance of SafeEyesCore and initialize the variables."""
         # This event is fired before <time-to-prepare> for a break
@@ -59,8 +76,6 @@ class SafeEyesCore:
         self.on_stop_break = EventHook()
         # This event is fired when deciding the next break time
         self.on_update_next_break = EventHook()
-        self.waiting_condition = threading.Condition()
-        self.lock = threading.Lock()
         self.context = context
         self.context["skipped"] = False
         self.context["postponed"] = False
@@ -85,32 +100,29 @@ class SafeEyesCore:
         if self._break_queue is None:
             logging.info("No breaks defined, not starting the core")
             return
-        with self.lock:
-            if not self.running:
-                logging.info("Start Safe Eyes core")
-                if reset_breaks:
-                    logging.info("Reset breaks to start from the beginning")
-                    self._break_queue.reset()
+        if not self.running:
+            logging.info("Start Safe Eyes core")
+            if reset_breaks:
+                logging.info("Reset breaks to start from the beginning")
+                self._break_queue.reset()
 
-                self.running = True
-                self.scheduled_next_break_timestamp = int(next_break_time)
-                utility.start_thread(self.__scheduler_job)
+            self.running = True
+            self.scheduled_next_break_timestamp = int(next_break_time)
+            self.__scheduler_job()
 
     def stop(self, is_resting=False) -> None:
         """Stop Safe Eyes if it is running."""
-        with self.lock:
-            if not self.running:
-                return
+        if not self.running:
+            return
 
-            logging.info("Stop Safe Eyes core")
-            self.paused_time = datetime.datetime.now().timestamp()
-            # Stop the break thread
-            self.waiting_condition.acquire()
-            self.running = False
-            if self.context["state"] != State.QUIT:
-                self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
-            self.waiting_condition.notify_all()
-            self.waiting_condition.release()
+        logging.info("Stop Safe Eyes core")
+        self.paused_time = datetime.datetime.now().timestamp()
+        # Stop the break thread
+        self.running = False
+        if self.context["state"] != State.QUIT:
+            self.context["state"] = State.RESTING if (is_resting) else State.STOPPED
+
+        self.__wakeup_scheduler()
 
     def skip(self) -> None:
         """User skipped the break using Skip button."""
@@ -147,7 +159,13 @@ class SafeEyesCore:
             return
         if not self.context["state"] == State.WAITING:
             return
-        utility.start_thread(self.__take_break, break_type=break_type)
+
+        if break_type is not None and self._break_queue.get_break().type != break_type:
+            self._break_queue.next(break_type)
+
+        self._take_break_now = True
+
+        self.__wakeup_scheduler()
 
     def has_breaks(self, break_type: typing.Optional[BreakType] = None) -> bool:
         """Check whether Safe Eyes has breaks or not.
@@ -161,32 +179,6 @@ class SafeEyesCore:
             return True
 
         return not self._break_queue.is_empty(break_type)
-
-    def __take_break(self, break_type: typing.Optional[BreakType] = None) -> None:
-        """Show the next break screen."""
-        logging.info("Take a break due to external request")
-
-        if self._break_queue is None:
-            # This will only be called by self.take_break, which checks this
-            return
-
-        with self.lock:
-            if not self.running:
-                return
-
-            logging.info("Stop the scheduler")
-
-            # Stop the break thread
-            self.waiting_condition.acquire()
-            self.running = False
-            self.waiting_condition.notify_all()
-            self.waiting_condition.release()
-            time.sleep(1)  # Wait for 1 sec to ensure the scheduler is dead
-            self.running = True
-
-        if break_type is not None and self._break_queue.get_break().type != break_type:
-            self._break_queue.next(break_type)
-        utility.execute_main_thread(self.__fire_start_break)
 
     def __scheduler_job(self) -> None:
         """Scheduler task to execute during every interval."""
@@ -233,9 +225,7 @@ class SafeEyesCore:
             seconds=time_to_wait
         )
         self.context["state"] = State.WAITING
-        utility.execute_main_thread(
-            self.__fire_on_update_next_break, self.scheduled_next_break_time
-        )
+        self.__fire_on_update_next_break(self.scheduled_next_break_time)
 
         # Wait for the pre break warning period
         if self.postpone_unit == "seconds":
@@ -243,22 +233,32 @@ class SafeEyesCore:
         else:
             logging.info("Waiting for %d minutes until next break", (time_to_wait / 60))
 
-        self.__wait_for(time_to_wait)
-
-        logging.info("Pre-break waiting is over")
-
-        if not self.running:
-            # This can be reached if another thread changed running while __wait_for was
-            # blocking
-            return  # type: ignore[unreachable]
-        utility.execute_main_thread(self.__fire_pre_break)
+        self.__wait_for(time_to_wait, self.__do_pre_break)
 
     def __fire_on_update_next_break(self, next_break_time: datetime.datetime) -> None:
         """Pass the next break information to the registered listeners."""
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
-        self.on_update_next_break.fire(self._break_queue.get_break(), next_break_time)
+        self.__fire_hook(
+            self.on_update_next_break, self._break_queue.get_break(), next_break_time
+        )
+
+    def __do_pre_break(self) -> None:
+        if self._take_break_now:
+            self._take_break_now = False
+            logging.info("Take a break due to external request")
+            self.__do_start_break()
+            return
+
+        logging.info("Pre-break waiting is over")
+
+        if not self.running:
+            # This can be reached if another thread changed running while __wait_for was
+            # blocking
+            return
+
+        self.__fire_pre_break()
 
     def __fire_pre_break(self) -> None:
         """Show the notification and start the break after the notification."""
@@ -266,33 +266,38 @@ class SafeEyesCore:
             # This will only be called by methods which check this
             return
         self.context["state"] = State.PRE_BREAK
-        if not self.on_pre_break.fire(self._break_queue.get_break()):
+        proceed = self.__fire_hook(self.on_pre_break, self._break_queue.get_break())
+        if not proceed:
             # Plugins wanted to ignore this break
             self.__start_next_break()
             return
-        utility.start_thread(self.__wait_until_prepare)
+
+        self.__wait_until_prepare()
 
     def __wait_until_prepare(self) -> None:
         logging.info(
             "Wait for %d seconds before the break", self.pre_break_warning_time
         )
         # Wait for the pre break warning period
-        self.__wait_for(self.pre_break_warning_time)
-        if not self.running:
-            return
-        utility.execute_main_thread(self.__fire_start_break)
+        self.__wait_for(self.pre_break_warning_time, self.__do_start_break)
 
     def __postpone_break(self) -> None:
-        self.__wait_for(self.postpone_duration)
-        utility.execute_main_thread(self.__fire_start_break)
+        self.__wait_for(self.postpone_duration, self.__do_start_break)
 
-    def __fire_start_break(self) -> None:
+    def __do_start_break(self) -> None:
+        if self._take_break_now:
+            # already taking a break now, ignore
+            self._take_break_now = False
+
+        if not self.running:
+            return
         if self._break_queue is None:
             # This will only be called by methods which check this
             return
         break_obj = self._break_queue.get_break()
         # Show the break screen
-        if not self.on_start_break.fire(break_obj):
+        proceed = self.__fire_hook(self.on_start_break, break_obj)
+        if not proceed:
             # Plugins want to ignore this break
             self.__start_next_break()
             return
@@ -310,10 +315,10 @@ class SafeEyesCore:
             )
             self.__fire_on_update_next_break(self.scheduled_next_break_time)
             # Wait in user thread
-            utility.start_thread(self.__postpone_break)
+            self.__postpone_break()
         else:
-            self.start_break.fire(break_obj)
-            utility.start_thread(self.__start_break)
+            self.__fire_hook(self.start_break, break_obj)
+            self.__start_break()
 
     def __start_break(self) -> None:
         """Start the break screen."""
@@ -322,26 +327,44 @@ class SafeEyesCore:
             return
         self.context["state"] = State.BREAK
         break_obj = self._break_queue.get_break()
-        countdown = break_obj.duration
-        total_break_time = countdown
+        self._taking_break = break_obj
+        self._countdown = break_obj.duration
 
-        while (
-            countdown
+        self.__cycle_break_countdown()
+
+    def __cycle_break_countdown(self) -> None:
+        if self._taking_break is None or self._countdown is None:
+            raise Exception("countdown running without countdown or break")
+
+        if self._take_break_now:
+            logging.warning("Break requested while already taking a break")
+            self._take_break_now = False
+
+        if (
+            self._countdown > 0
             and self.running
             and not self.context["skipped"]
             and not self.context["postponed"]
         ):
+            countdown = self._countdown
+            self._countdown -= 1
+
+            total_break_time = self._taking_break.duration
             seconds = total_break_time - countdown
-            self.on_count_down.fire(countdown, seconds)
-            time.sleep(1)  # Sleep for 1 second
-            countdown -= 1
-        utility.execute_main_thread(self.__fire_stop_break)
+            self.__fire_hook(self.on_count_down, countdown, seconds)
+            # Sleep for 1 second
+            self.__wait_for(1, self.__cycle_break_countdown)
+        else:
+            self._countdown = None
+            self._taking_break = None
+
+            self.__fire_stop_break()
 
     def __fire_stop_break(self) -> None:
         # Loop terminated because of timeout (not skipped) -> Close the break alert
         if not self.context["skipped"] and not self.context["postponed"]:
             logging.info("Break is terminated automatically")
-            self.on_stop_break.fire()
+            self.__fire_hook(self.on_stop_break)
 
         # Reset the skipped flag
         self.context["skipped"] = False
@@ -349,11 +372,72 @@ class SafeEyesCore:
         self.context["postpone_button_disabled"] = False
         self.__start_next_break()
 
-    def __wait_for(self, duration: int) -> None:
+    def __wait_for(
+        self,
+        duration: int,
+        callback: typing.Callable[[], None],
+    ) -> None:
         """Wait until someone wake up or the timeout happens."""
-        self.waiting_condition.acquire()
-        self.waiting_condition.wait(duration)
-        self.waiting_condition.release()
+        if self._callback is not None or self._timeout_id is not None:
+            raise Exception("this should not be called reentrantly")
+
+        self._callback = callback
+        self._timeout_id = GLib.timeout_add_seconds(duration, self.__on_wakeup)
+
+    def __on_wakeup(self) -> bool:
+        if self._callback is None or self._timeout_id is None:
+            raise Exception("Woken up but no callback")
+
+        callback = self._callback
+
+        self._timeout_id = None
+        self._callback = None
+
+        callback()
+
+        # This signals that the callback should only be called once
+        return GLib.SOURCE_REMOVE
+
+    def __fire_hook(
+        self,
+        hook: EventHook,
+        *args,
+        **kwargs,
+    ) -> bool:
+        if self._firing_hook:
+            raise Exception("this should not be called reentrantly")
+
+        self._firing_hook = True
+
+        proceed = hook.fire(*args, **kwargs)
+
+        self._firing_hook = False
+
+        return proceed
+
+    def __wakeup_scheduler(self) -> None:
+        if (self._callback is None) != (self._timeout_id is None):
+            # either both are set or none are set
+            raise Exception("This should never happen")
+
+        if (self._callback is None) and not self._firing_hook:
+            # neither is set - not running
+            raise Exception("trying to queue action while core is not running")
+        elif (self._callback is not None) and self._firing_hook:
+            # both are set
+            raise Exception("This should never happen")
+
+        if self._callback is not None and self._timeout_id is not None:
+            callback = self._callback
+
+            GLib.source_remove(self._timeout_id)
+            self._timeout_id = None
+            self._callback = None
+
+            callback()
+        elif self._firing_hook:
+            # plugin is running
+            pass
 
     def __start_next_break(self) -> None:
         if self._break_queue is None:
@@ -364,4 +448,4 @@ class SafeEyesCore:
 
         if self.running:
             # Schedule the break again
-            utility.start_thread(self.__scheduler_job)
+            self.__scheduler_job()
