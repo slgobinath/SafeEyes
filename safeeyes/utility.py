@@ -31,6 +31,7 @@ import sys
 import shutil
 import subprocess
 import threading
+import typing
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -732,7 +733,9 @@ def create_gtk_builder(glade_file):
     return builder
 
 
-def load_and_scale_image(path, width, height):
+def load_and_scale_image(
+    path: str, width: int, height: int
+) -> typing.Optional[Gtk.Image]:
     if not os.path.isfile(path):
         return None
     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(

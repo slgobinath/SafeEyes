@@ -474,21 +474,32 @@ class Config:
 class TrayAction:
     """Data object wrapping name, icon and action."""
 
-    def __init__(self, name, icon, action, system_icon):
+    __toolbar_buttons: list[Gtk.Button]
+
+    def __init__(
+        self,
+        name: str,
+        icon: str,
+        action: typing.Callable,
+        system_icon: bool,
+        single_use: bool,
+    ) -> None:
         self.name = name
         self.__icon = icon
         self.action = action
         self.system_icon = system_icon
         self.__toolbar_buttons = []
+        self.single_use = single_use
 
-    def get_icon(self):
-        if self.system_icon:
-            image = Gtk.Image.new_from_icon_name(self.__icon)
-            return image
-        else:
+    def get_icon(self) -> Gtk.Image:
+        if not self.system_icon:
             image = utility.load_and_scale_image(self.__icon, 16, 16)
-            image.show()
-            return image
+            if image is not None:
+                image.show()
+                return image
+
+        image = Gtk.Image.new_from_icon_name(self.__icon)
+        return image
 
     def add_toolbar_button(self, button):
         self.__toolbar_buttons.append(button)
@@ -499,12 +510,20 @@ class TrayAction:
         self.__toolbar_buttons.clear()
 
     @classmethod
-    def build(cls, name, icon_path, icon_id, action):
-        image = utility.load_and_scale_image(icon_path, 12, 12)
-        if image is None:
-            return TrayAction(name, icon_id, action, True)
-        else:
-            return TrayAction(name, icon_path, action, False)
+    def build(
+        cls,
+        name: str,
+        icon_path: typing.Optional[str],
+        icon_id: str,
+        action: typing.Callable,
+        single_use: bool = True,
+    ) -> "TrayAction":
+        if icon_path is not None:
+            image = utility.load_and_scale_image(icon_path, 12, 12)
+            if image is not None:
+                return TrayAction(name, icon_path, action, False, single_use)
+
+        return TrayAction(name, icon_id, action, True, single_use)
 
 
 @dataclass
