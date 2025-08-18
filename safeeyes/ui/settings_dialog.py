@@ -184,11 +184,11 @@ class SettingsDialog:
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
 
-        def __confirmation_dialog_response(dialog, result):
+        def __confirmation_dialog_response(dialog, result) -> None:
             response_id = dialog.choose_finish(result)
             if response_id == 1:
                 utility.reset_config()
-                self.config = Config()
+                self.config = Config.load()
                 # Remove breaks from the container
                 self.__clear_children(self.box_short_breaks)
                 self.__clear_children(self.box_long_breaks)
