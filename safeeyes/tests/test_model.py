@@ -437,9 +437,8 @@ class TestBreakQueue:
 
         bq.skip_long_break()
 
-        assert bq.get_break().name == "translated!: long break 2"
+        assert bq.get_break().name == "translated!: break 1"
 
-        assert bq.next().name == "translated!: break 1"
         assert bq.next().name == "translated!: break 2"
         assert bq.next().name == "translated!: break 3"
         assert bq.next().name == "translated!: break 4"

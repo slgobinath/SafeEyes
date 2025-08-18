@@ -874,8 +874,7 @@ class TestSafeEyesCore:
         """Test idling for longer than long break time, right before the next long
         break.
 
-        FIXME: this test is broken, it should not work this way. Instead of just
-        skipping the long break, it skips all the short breaks too.
+        This used to skip all the short breaks too.
         """
         context: dict[str, typing.Any] = {
             "session": {},
@@ -986,15 +985,11 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             safe_eyes_core,
             context,
-            long_break_duration,
-            "translated!: long break 1",
+            short_break_duration,
+            "translated!: break 1",
         )
 
-        # Time passed: 16min 10s
-        # 15min short_break_interval (from previous, as long_break_interval must be
-        # multiple)
-        # 10 seconds pre_break_warning_time, 1 minute long_break_duration
-        self.assert_datetime("2024-08-25T15:18:55")
+        self.assert_datetime("2024-08-25T14:18:10")
 
         self.run_next_break(
             sequential_threading_handle,
@@ -1002,13 +997,46 @@ class TestSafeEyesCore:
             safe_eyes_core,
             context,
             short_break_duration,
-            "translated!: break 1",
+            "translated!: break 2",
         )
 
-        # Time passed: 15min 25s
-        # 15min short_break_interval, 10 seconds pre_break_warning_time,
-        # 15 seconds short_break_duration
-        self.assert_datetime("2024-08-25T15:34:20")
+        self.assert_datetime("2024-08-25T14:33:35")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T14:49:00")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T15:04:25")
+
+        # note that long break 1 was skipped, and we went directly to long break 2
+        # there's a note in BreakQueue.skip_long_break, we could fix it if needed, but
+        # it seems too much effort to be worth it right now
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            "translated!: long break 2",
+        )
+
+        self.assert_datetime("2024-08-25T15:20:35")
 
         safe_eyes_core.stop()
 
