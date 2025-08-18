@@ -47,6 +47,11 @@ class SafeEyesCoreHandle:
         self.callback = (callback, duration)
         return 1
 
+    def source_remove(self, source_id: int) -> None:
+        if self.callback is None:
+            raise Exception("no callback registered")
+        self.callback = None
+
     def next(self) -> None:
         assert self.callback
 
@@ -105,7 +110,9 @@ class TestSafeEyesCore:
             return handle.timeout_add_seconds(duration, callback)
 
         def source_remove(source_id: int) -> None:
-            pass
+            if not handle:
+                raise Exception("handle must be initialized before first call")
+            handle.source_remove(source_id)
 
         monkeypatch.setattr(core.GLib, "timeout_add_seconds", timeout_add_seconds)
         monkeypatch.setattr(core.GLib, "source_remove", source_remove)
