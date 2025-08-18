@@ -249,7 +249,7 @@ class BreakQueue:
         self.__current_break = break_obj
         self.context["session"]["break"] = self.__current_break.name
 
-    def reset(self) -> None:
+    def skip_long_break(self) -> None:
         if self.__short_queue:
             for break_object in self.__short_queue:
                 break_object.time = self.__short_break_time

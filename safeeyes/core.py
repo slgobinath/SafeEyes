@@ -201,7 +201,7 @@ class SafeEyesCore:
                     paused_duration,
                 )
                 # Skip the next long break
-                self._break_queue.reset()
+                self._break_queue.skip_long_break()
 
         if self.context["postponed"]:
             # Previous break was postponed
