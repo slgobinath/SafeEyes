@@ -95,16 +95,13 @@ class SafeEyesCore:
 
         self.postpone_duration = self.default_postpone_duration
 
-    def start(self, next_break_time=-1, reset_breaks=False) -> None:
+    def start(self, next_break_time=-1) -> None:
         """Start Safe Eyes is it is not running already."""
         if self._break_queue is None:
             logging.info("No breaks defined, not starting the core")
             return
         if not self.running:
             logging.info("Start Safe Eyes core")
-            if reset_breaks:
-                logging.info("Reset breaks to start from the beginning")
-                self._break_queue.reset()
 
             self.running = True
             self.scheduled_next_break_timestamp = int(next_break_time)

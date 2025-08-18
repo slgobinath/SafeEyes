@@ -237,8 +237,8 @@ class SafeEyes(Gtk.Application):
             self.show_about
         )
         self.context["api"]["enable_safeeyes"] = (
-            lambda next_break_time=-1, reset_breaks=False: utility.execute_main_thread(
-                self.enable_safeeyes, next_break_time, reset_breaks
+            lambda next_break_time=-1: utility.execute_main_thread(
+                self.enable_safeeyes, next_break_time
             )
         )
         self.context["api"]["disable_safeeyes"] = (
@@ -494,7 +494,7 @@ class SafeEyes(Gtk.Application):
             self.safe_eyes_core.start()
             self.plugins_manager.start()
 
-    def enable_safeeyes(self, scheduled_next_break_time=-1, reset_breaks=False):
+    def enable_safeeyes(self, scheduled_next_break_time=-1):
         """Listen to tray icon enable action and send the signal to core."""
         if (
             not self.required_plugin_dialog_active
@@ -502,7 +502,7 @@ class SafeEyes(Gtk.Application):
             and self.safe_eyes_core.has_breaks()
         ):
             self.active = True
-            self.safe_eyes_core.start(scheduled_next_break_time, reset_breaks)
+            self.safe_eyes_core.start(scheduled_next_break_time)
             self.plugins_manager.start()
 
     def disable_safeeyes(self, status=None, is_resting=False):
