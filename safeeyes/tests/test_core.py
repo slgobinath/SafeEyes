@@ -299,6 +299,7 @@ class TestSafeEyesCore:
                 "short_break_duration": 15,
                 "random_order": False,
                 "postpone_duration": 5,
+                "pre_break_warning_time": 10,  # seconds
             },
             system_config={},
         )
