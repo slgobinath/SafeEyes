@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-04 20:02+0000\n"
+"PO-Revision-Date: 2025-08-19 19:02+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -589,17 +589,17 @@ msgid "A required plugin is missing dependencies!"
 msgstr "Nõutaval pluginal on sõltuvused puudu!"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "Edasilükkamise kestus"
 
 msgid "minutes"
-msgstr ""
+msgstr "minuti pärast"
 
 msgid "seconds"
-msgstr ""
+msgstr "sekundi pärast"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "Palun paigalda mõni käsureaprogrammidest: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
