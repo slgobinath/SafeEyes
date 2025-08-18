@@ -580,6 +580,19 @@ msgstr ""
 msgid "A required plugin is missing dependencies!"
 msgstr ""
 
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Szorosan csukd be a szemed"

@@ -588,6 +588,19 @@ msgstr "Safe Eyes - viga"
 msgid "A required plugin is missing dependencies!"
 msgstr "Nõutaval pluginal on sõltuvused puudu!"
 
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Sulge silmad"
