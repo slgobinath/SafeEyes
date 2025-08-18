@@ -45,7 +45,6 @@ class SafeEyesCoreHandle:
         if self.callback is not None:
             raise Exception("only one callback supported. need to make this smarter")
         self.callback = (callback, duration)
-        print(f"callback registered for {callback} and {duration}")
         return 1
 
     def next(self) -> None:
@@ -54,7 +53,6 @@ class SafeEyesCoreHandle:
         (callback, duration) = self.callback
         self.callback = None
         self.time_machine.shift(delta=datetime.timedelta(seconds=duration))
-        print(f"shift to {datetime.datetime.now()}")
         callback()
 
 
