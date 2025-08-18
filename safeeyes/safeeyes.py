@@ -346,14 +346,13 @@ class SafeEyes(Gtk.Application):
             )
             settings_dialog.show()
 
-    def show_required_plugin_dialog(self, error: RequiredPluginException):
+    def show_required_plugin_dialog(self, error: RequiredPluginException) -> None:
         self.required_plugin_dialog_active = True
 
         logging.info("Show RequiredPlugin dialog")
         plugin_id = error.get_plugin_id()
 
         dialog = RequiredPluginDialog(
-            error.get_plugin_id(),
             error.get_plugin_name(),
             error.get_message(),
             self.quit,

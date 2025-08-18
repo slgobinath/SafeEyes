@@ -22,6 +22,7 @@ required plugin.
 
 import os
 import gi
+import typing
 
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
@@ -43,12 +44,17 @@ class RequiredPluginDialog(Gtk.ApplicationWindow):
 
     __gtype_name__ = "RequiredPluginDialog"
 
-    lbl_header = Gtk.Template.Child()
-    lbl_message = Gtk.Template.Child()
-    btn_extra_link = Gtk.Template.Child()
+    lbl_header: Gtk.Label = Gtk.Template.Child()
+    lbl_message: Gtk.Label = Gtk.Template.Child()
+    btn_extra_link: Gtk.LinkButton = Gtk.Template.Child()
 
     def __init__(
-        self, plugin_id, plugin_name, message, on_quit, on_disable_plugin, application
+        self,
+        plugin_name: str,
+        message: typing.Union[str, PluginDependency],
+        on_quit: typing.Callable[[], None],
+        on_disable_plugin: typing.Callable[[], None],
+        application: Gtk.Application,
     ):
         super().__init__(application=application)
 
@@ -61,27 +67,28 @@ class RequiredPluginDialog(Gtk.ApplicationWindow):
 
         if isinstance(message, PluginDependency):
             self.lbl_message.set_label(_(message.message))
-            self.btn_extra_link.set_uri(message.link)
+            if message.link is not None:
+                self.btn_extra_link.set_uri(message.link)
             self.btn_extra_link.set_visible(True)
         else:
             self.lbl_message.set_label(_(message))
 
-    def show(self):
+    def show(self) -> None:
         """Show the dialog."""
         self.present()
 
     @Gtk.Template.Callback()
-    def on_window_delete(self, *args):
+    def on_window_delete(self, *args) -> None:
         """Window close event handler."""
         self.destroy()
         self.on_quit()
 
     @Gtk.Template.Callback()
-    def on_close_clicked(self, *args):
+    def on_close_clicked(self, *args) -> None:
         self.destroy()
         self.on_quit()
 
     @Gtk.Template.Callback()
-    def on_disable_plugin_clicked(self, *args):
+    def on_disable_plugin_clicked(self, *args) -> None:
         self.destroy()
         self.on_disable_plugin()
