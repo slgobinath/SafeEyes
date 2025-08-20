@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-07-13 16:01+0000\n"
+"PO-Revision-Date: 2025-08-21 09:01+0000\n"
 "Last-Translator: cas9 <cas9@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -585,26 +585,26 @@ msgstr ""
 "personalizzati, crea un nuovo foglio di stile in %(new)s invece."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - Errore"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "Un plugin necessario manca di dipendenze!"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "Durata del rinvio in"
 
 msgid "minutes"
-msgstr ""
+msgstr "minuti"
 
 msgid "seconds"
-msgstr ""
+msgstr "secondi"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "Prego installa uno degli strumenti da riga di comando: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
