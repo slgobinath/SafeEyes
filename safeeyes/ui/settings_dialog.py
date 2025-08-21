@@ -288,7 +288,7 @@ class SettingsDialog:
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
-        dialog = PluginSettingsDialog(self.application, plugin_config)
+        dialog = PluginSettingsDialog(self.window, plugin_config)
         dialog.show()
 
     def __disable_errored_plugin(self, button, plugin_config):
@@ -301,7 +301,7 @@ class SettingsDialog:
     ):
         """Show the BreakProperties dialog."""
         dialog = BreakSettingsDialog(
-            self.application,
+            self.window,
             break_config,
             is_short,
             parent,
@@ -355,7 +355,7 @@ class SettingsDialog:
     def add_break(self, button) -> None:
         """Event handler for add break button."""
         dialog = NewBreakDialog(
-            self.application,
+            self.window,
             self.config,
             lambda is_short, break_config: self.__create_break_item(
                 break_config, is_short
@@ -406,13 +406,13 @@ class SettingsDialog:
 class PluginSettingsDialog:
     """Builds a settings dialog based on the configuration of a plugin."""
 
-    def __init__(self, application, config):
+    def __init__(self, parent, config):
         self.config = config
         self.property_controls = []
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_PLUGIN_GLADE)
         self.window = builder.get_object("dialog_settings_plugin")
-        self.window.set_application(application)
+        self.window.set_transient_for(parent)
         box_settings = builder.get_object("box_settings")
         self.window.set_title(_("Plugin Settings"))
         for setting in config.get("settings"):
@@ -493,7 +493,7 @@ class BreakSettingsDialog:
 
     def __init__(
         self,
-        application,
+        parent,
         break_config,
         is_short,
         parent_config,
@@ -512,7 +512,7 @@ class BreakSettingsDialog:
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_BREAK_GLADE)
         self.window = builder.get_object("dialog_settings_break")
-        self.window.set_application(application)
+        self.window.set_transient_for(parent)
         self.txt_break = builder.get_object("txt_break")
         self.switch_override_interval = builder.get_object("switch_override_interval")
         self.switch_override_duration = builder.get_object("switch_override_duration")
@@ -692,13 +692,13 @@ class BreakSettingsDialog:
 class NewBreakDialog:
     """Builds a new break dialog."""
 
-    def __init__(self, application, parent_config, on_add):
+    def __init__(self, parent, parent_config, on_add):
         self.parent_config = parent_config
         self.on_add = on_add
 
         builder = utility.create_gtk_builder(SETTINGS_DIALOG_NEW_BREAK_GLADE)
         self.window = builder.get_object("dialog_new_break")
-        self.window.set_application(application)
+        self.window.set_transient_for(parent)
         self.txt_break = builder.get_object("txt_break")
         self.cmb_type = builder.get_object("cmb_type")
         list_types = builder.get_object("lst_break_types")
