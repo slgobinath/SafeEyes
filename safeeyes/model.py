@@ -249,14 +249,23 @@ class BreakQueue:
         self.__current_break = break_obj
         self.context["session"]["break"] = self.__current_break.name
 
-    def reset(self) -> None:
-        if self.__short_queue:
-            for break_object in self.__short_queue:
-                break_object.time = self.__short_break_time
+    def skip_long_break(self) -> None:
+        if not (self.__short_queue and self.__long_queue):
+            return
 
-        if self.__long_queue:
-            for break_object in self.__long_queue:
-                break_object.time = self.__long_break_time
+        for break_object in self.__short_queue:
+            break_object.time = self.__short_break_time
+
+        for break_object in self.__long_queue:
+            break_object.time = self.__long_break_time
+
+        if self.__current_break.type == BreakType.LONG_BREAK:
+            # Note: this skips the long break, meaning the following long break
+            # won't be the current one, but the next one after
+            # we could decrement the __current_long counter, but then we'd need to
+            # handle wraparound and possibly randomizing, which seems complicated
+            self.__current_break = self.__next_short()
+            self.context["session"]["break"] = self.__current_break.name
 
     def is_empty(self, break_type: BreakType) -> bool:
         """Check if the given break type is empty or not."""

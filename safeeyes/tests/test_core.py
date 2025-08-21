@@ -45,8 +45,12 @@ class SafeEyesCoreHandle:
         if self.callback is not None:
             raise Exception("only one callback supported. need to make this smarter")
         self.callback = (callback, duration)
-        print(f"callback registered for {callback} and {duration}")
         return 1
+
+    def source_remove(self, source_id: int) -> None:
+        if self.callback is None:
+            raise Exception("no callback registered")
+        self.callback = None
 
     def next(self) -> None:
         assert self.callback
@@ -54,7 +58,6 @@ class SafeEyesCoreHandle:
         (callback, duration) = self.callback
         self.callback = None
         self.time_machine.shift(delta=datetime.timedelta(seconds=duration))
-        print(f"shift to {datetime.datetime.now()}")
         callback()
 
 
@@ -107,7 +110,9 @@ class TestSafeEyesCore:
             return handle.timeout_add_seconds(duration, callback)
 
         def source_remove(source_id: int) -> None:
-            pass
+            if not handle:
+                raise Exception("handle must be initialized before first call")
+            handle.source_remove(source_id)
 
         monkeypatch.setattr(core.GLib, "timeout_add_seconds", timeout_add_seconds)
         monkeypatch.setattr(core.GLib, "source_remove", source_remove)
@@ -143,18 +148,8 @@ class TestSafeEyesCore:
         was already called.
         """
         on_update_next_break = mock.Mock()
-        on_pre_break = mock.Mock(return_value=True)
-        on_start_break = mock.Mock(return_value=True)
-        start_break = mock.Mock()
-        on_count_down = mock.Mock()
-        on_stop_break = mock.Mock()
 
         safe_eyes_core.on_update_next_break += on_update_next_break
-        safe_eyes_core.on_pre_break += on_pre_break
-        safe_eyes_core.on_start_break += on_start_break
-        safe_eyes_core.start_break += start_break
-        safe_eyes_core.on_count_down += on_count_down
-        safe_eyes_core.on_stop_break += on_stop_break
 
         if initial:
             safe_eyes_core.start()
@@ -169,6 +164,36 @@ class TestSafeEyesCore:
         assert isinstance(on_update_next_break.call_args[0][0], model.Break)
         assert on_update_next_break.call_args[0][0].name == break_name_translated
         on_update_next_break.reset_mock()
+
+        self.run_next_break_from_waiting_state(
+            sequential_threading_handle,
+            safe_eyes_core,
+            context,
+            break_duration,
+            break_name_translated,
+        )
+
+    def run_next_break_from_waiting_state(
+        self,
+        sequential_threading_handle: SafeEyesCoreHandle,
+        safe_eyes_core: core.SafeEyesCore,
+        context,
+        break_duration: int,
+        break_name_translated: str,
+    ) -> None:
+        on_pre_break = mock.Mock(return_value=True)
+        on_start_break = mock.Mock(return_value=True)
+        start_break = mock.Mock()
+        on_count_down = mock.Mock()
+        on_stop_break = mock.Mock()
+
+        safe_eyes_core.on_pre_break += on_pre_break
+        safe_eyes_core.on_start_break += on_start_break
+        safe_eyes_core.start_break += start_break
+        safe_eyes_core.on_count_down += on_count_down
+        safe_eyes_core.on_stop_break += on_stop_break
+
+        assert context["state"] == model.State.WAITING
 
         # continue after condvar
         sequential_threading_handle.next()
@@ -274,6 +299,7 @@ class TestSafeEyesCore:
                 "short_break_duration": 15,
                 "random_order": False,
                 "postpone_duration": 5,
+                "pre_break_warning_time": 10,  # seconds
             },
             system_config={},
         )
@@ -538,6 +564,479 @@ class TestSafeEyesCore:
         # 15min short_break_interval, 10 seconds pre_break_warning_time,
         # 15 seconds short_break_duration
         self.assert_datetime("2024-08-25T15:55:50")
+
+        safe_eyes_core.stop()
+
+        assert context["state"] == model.State.STOPPED
+
+    def test_idle(
+        self,
+        sequential_threading: SequentialThreadingFixture,
+        time_machine: TimeMachineFixture,
+    ):
+        """Test idling for short amount of time."""
+        context: dict[str, typing.Any] = {
+            "session": {},
+        }
+        short_break_duration = 15  # seconds
+        short_break_interval = 15  # minutes
+        pre_break_warning_time = 10  # seconds
+        long_break_duration = 60  # seconds
+        long_break_interval = 75  # minutes
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": short_break_interval,
+                "long_break_interval": long_break_interval,
+                "long_break_duration": long_break_duration,
+                "short_break_duration": short_break_duration,
+                "pre_break_warning_time": pre_break_warning_time,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
+
+        self.assert_datetime("2024-08-25T13:00:00")
+
+        safe_eyes_core = core.SafeEyesCore(context)
+
+        sequential_threading_handle = sequential_threading(safe_eyes_core)
+
+        safe_eyes_core.initialize(config)
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+            initial=True,
+        )
+
+        # Time passed: 15min 25s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T13:15:25")
+
+        # idle, simulate behaviour of smartpause plugin
+        idle_seconds = 30
+        idle_period = datetime.timedelta(seconds=idle_seconds)
+
+        safe_eyes_core.stop(is_resting=True)
+
+        assert context["state"] == model.State.RESTING
+
+        time_machine.shift(delta=idle_period)
+
+        assert safe_eyes_core.scheduled_next_break_time is not None
+        next_break = safe_eyes_core.scheduled_next_break_time + idle_period
+
+        safe_eyes_core.start(next_break_time=next_break.timestamp())
+
+        self.assert_datetime("2024-08-25T13:15:55")
+
+        self.run_next_break_from_waiting_state(
+            sequential_threading_handle,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T13:31:20")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T13:46:45")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T14:02:10")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            "translated!: long break 1",
+        )
+
+        # Time passed: 16min 10s
+        # 15min short_break_interval (from previous, as long_break_interval must be
+        # multiple)
+        # 10 seconds pre_break_warning_time, 1 minute long_break_duration
+        self.assert_datetime("2024-08-25T14:18:20")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+        )
+
+        # Time passed: 15min 25s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T14:33:45")
+
+        safe_eyes_core.stop()
+
+        assert context["state"] == model.State.STOPPED
+
+    def test_idle_skip_long(
+        self,
+        sequential_threading: SequentialThreadingFixture,
+        time_machine: TimeMachineFixture,
+    ):
+        """Test idling for longer than long break time."""
+        context: dict[str, typing.Any] = {
+            "session": {},
+        }
+        short_break_duration = 15  # seconds
+        short_break_interval = 15  # minutes
+        pre_break_warning_time = 10  # seconds
+        long_break_duration = 60  # seconds
+        long_break_interval = 75  # minutes
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": short_break_interval,
+                "long_break_interval": long_break_interval,
+                "long_break_duration": long_break_duration,
+                "short_break_duration": short_break_duration,
+                "pre_break_warning_time": pre_break_warning_time,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
+
+        self.assert_datetime("2024-08-25T13:00:00")
+
+        safe_eyes_core = core.SafeEyesCore(context)
+
+        sequential_threading_handle = sequential_threading(safe_eyes_core)
+
+        safe_eyes_core.initialize(config)
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+            initial=True,
+        )
+
+        # Time passed: 15min 25s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T13:15:25")
+
+        # idle, simulate behaviour of smartpause plugin
+        idle_seconds = 65
+        idle_period = datetime.timedelta(seconds=idle_seconds)
+
+        safe_eyes_core.stop(is_resting=True)
+
+        assert context["state"] == model.State.RESTING
+
+        time_machine.shift(delta=idle_period)
+
+        assert safe_eyes_core.scheduled_next_break_time is not None
+        next_break = safe_eyes_core.scheduled_next_break_time + idle_period
+
+        safe_eyes_core.start(next_break_time=next_break.timestamp())
+
+        self.assert_datetime("2024-08-25T13:16:30")
+
+        self.run_next_break_from_waiting_state(
+            sequential_threading_handle,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T13:31:55")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T13:47:20")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T14:02:45")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+        )
+
+        self.assert_datetime("2024-08-25T14:18:10")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            "translated!: long break 1",
+        )
+
+        # Time passed: 16min 10s
+        # 15min short_break_interval (from previous, as long_break_interval must be
+        # multiple)
+        # 10 seconds pre_break_warning_time, 1 minute long_break_duration
+        self.assert_datetime("2024-08-25T14:34:20")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        # Time passed: 15min 25s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T14:49:45")
+
+        safe_eyes_core.stop()
+
+        assert context["state"] == model.State.STOPPED
+
+    def test_idle_skip_long_before_long(
+        self,
+        sequential_threading: SequentialThreadingFixture,
+        time_machine: TimeMachineFixture,
+    ):
+        """Test idling for longer than long break time, right before the next long
+        break.
+
+        This used to skip all the short breaks too.
+        """
+        context: dict[str, typing.Any] = {
+            "session": {},
+        }
+        short_break_duration = 15  # seconds
+        short_break_interval = 15  # minutes
+        pre_break_warning_time = 10  # seconds
+        long_break_duration = 60  # seconds
+        long_break_interval = 75  # minutes
+        config = model.Config(
+            user_config={
+                "short_breaks": [
+                    {"name": "break 1"},
+                    {"name": "break 2"},
+                    {"name": "break 3"},
+                    {"name": "break 4"},
+                ],
+                "long_breaks": [
+                    {"name": "long break 1"},
+                    {"name": "long break 2"},
+                    {"name": "long break 3"},
+                ],
+                "short_break_interval": short_break_interval,
+                "long_break_interval": long_break_interval,
+                "long_break_duration": long_break_duration,
+                "short_break_duration": short_break_duration,
+                "pre_break_warning_time": pre_break_warning_time,
+                "random_order": False,
+                "postpone_duration": 5,
+            },
+            system_config={},
+        )
+
+        self.assert_datetime("2024-08-25T13:00:00")
+
+        safe_eyes_core = core.SafeEyesCore(context)
+
+        sequential_threading_handle = sequential_threading(safe_eyes_core)
+
+        safe_eyes_core.initialize(config)
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+            initial=True,
+        )
+
+        # Time passed: 15min 25s
+        # 15min short_break_interval, 10 seconds pre_break_warning_time,
+        # 15 seconds short_break_duration
+        self.assert_datetime("2024-08-25T13:15:25")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T13:30:50")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T13:46:15")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T14:01:40")
+
+        # idle, simulate behaviour of smartpause plugin
+        idle_seconds = 65
+        idle_period = datetime.timedelta(seconds=idle_seconds)
+
+        safe_eyes_core.stop(is_resting=True)
+
+        assert context["state"] == model.State.RESTING
+
+        time_machine.shift(delta=idle_period)
+
+        assert safe_eyes_core.scheduled_next_break_time is not None
+        next_break = safe_eyes_core.scheduled_next_break_time + idle_period
+
+        safe_eyes_core.start(next_break_time=next_break.timestamp())
+
+        self.assert_datetime("2024-08-25T14:02:45")
+
+        self.run_next_break_from_waiting_state(
+            sequential_threading_handle,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 1",
+        )
+
+        self.assert_datetime("2024-08-25T14:18:10")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 2",
+        )
+
+        self.assert_datetime("2024-08-25T14:33:35")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 3",
+        )
+
+        self.assert_datetime("2024-08-25T14:49:00")
+
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            short_break_duration,
+            "translated!: break 4",
+        )
+
+        self.assert_datetime("2024-08-25T15:04:25")
+
+        # note that long break 1 was skipped, and we went directly to long break 2
+        # there's a note in BreakQueue.skip_long_break, we could fix it if needed, but
+        # it seems too much effort to be worth it right now
+        self.run_next_break(
+            sequential_threading_handle,
+            time_machine,
+            safe_eyes_core,
+            context,
+            long_break_duration,
+            "translated!: long break 2",
+        )
+
+        self.assert_datetime("2024-08-25T15:20:35")
 
         safe_eyes_core.stop()
 

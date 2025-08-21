@@ -384,6 +384,66 @@ class TestBreakQueue:
         assert bq.next().name == "translated!: break 4"
         assert bq.next().name == "translated!: long break 1"
 
+    def test_skip_long_break(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        bq = self.get_bq_full(monkeypatch)
+
+        next = bq.get_break()
+        assert next.name == "translated!: break 1"
+        assert not bq.is_long_break()
+
+        assert bq.next().name == "translated!: break 2"
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: long break 1"
+        assert bq.is_long_break()
+        assert bq.next().name == "translated!: break 1"
+        assert not bq.is_long_break()
+        assert bq.next().name == "translated!: break 2"
+
+        bq.skip_long_break()
+
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: break 1"
+        assert bq.next().name == "translated!: long break 2"
+        assert bq.next().name == "translated!: break 2"
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: break 1"
+        assert bq.next().name == "translated!: long break 3"
+
+    def test_skip_long_break_before_long_break(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        bq = self.get_bq_full(monkeypatch)
+
+        next = bq.get_break()
+        assert next.name == "translated!: break 1"
+        assert not bq.is_long_break()
+
+        assert bq.next().name == "translated!: break 2"
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: long break 1"
+        assert bq.is_long_break()
+        assert bq.next().name == "translated!: break 1"
+        assert not bq.is_long_break()
+        assert bq.next().name == "translated!: break 2"
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: long break 2"
+
+        assert bq.get_break().name == "translated!: long break 2"
+
+        bq.skip_long_break()
+
+        assert bq.get_break().name == "translated!: break 1"
+
+        assert bq.next().name == "translated!: break 2"
+        assert bq.next().name == "translated!: break 3"
+        assert bq.next().name == "translated!: break 4"
+        assert bq.next().name == "translated!: long break 3"
+
     def test_full_next_break_random(self, monkeypatch: pytest.MonkeyPatch) -> None:
         random_seed = 5
         bq = self.get_bq_full(monkeypatch, random_seed)
