@@ -459,27 +459,25 @@ class PluginSettingsDialog:
         self.window.set_title(_("Plugin Settings"))
         for setting in config.get("settings"):
             if setting["type"].upper() == "INT":
-                box_settings.append(
-                    self.__load_int_item(
-                        setting["label"],
-                        setting["id"],
-                        config["active_plugin_config"],
-                        setting.get("min", 0),
-                        setting.get("max", 120),
-                    )
+                box = self.__load_int_item(
+                    setting["label"],
+                    setting["id"],
+                    config["active_plugin_config"],
+                    setting.get("min", 0),
+                    setting.get("max", 120),
                 )
             elif setting["type"].upper() == "TEXT":
-                box_settings.append(
-                    self.__load_text_item(
-                        setting["label"], setting["id"], config["active_plugin_config"]
-                    )
+                box = self.__load_text_item(
+                    setting["label"], setting["id"], config["active_plugin_config"]
                 )
             elif setting["type"].upper() == "BOOL":
-                box_settings.append(
-                    self.__load_bool_item(
-                        setting["label"], setting["id"], config["active_plugin_config"]
-                    )
+                box = self.__load_bool_item(
+                    setting["label"], setting["id"], config["active_plugin_config"]
                 )
+            else:
+                continue
+
+            box_settings.append(box)
 
         self.window.connect("close-request", self.on_window_delete)
 
