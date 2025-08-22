@@ -1,4 +1,10 @@
-safeeyes (3.0.0b3) noble; urgency=medium
+safeeyes (3.0.0b5) noble; urgency=medium
+
+  * Re-release due to broken github action
+
+ -- Mel Dafert <m@dafert.at>  Fri, 22 Aug 2025 19:50:00 +0000
+
+safeeyes (3.0.0b4) noble; urgency=medium
 
   * Wayland support: break screen shortcuts, window activation, donotdisturb
     detection
