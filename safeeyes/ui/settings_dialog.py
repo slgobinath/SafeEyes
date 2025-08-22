@@ -59,7 +59,7 @@ class SettingsDialog:
         self.application = application
         self.config = config
         self.on_save_settings = on_save_settings
-        self.plugin_switches = {}
+        self.plugin_items = {}
         self.plugin_map = {}
         self.last_short_break_interval = config.get("short_break_interval")
         self.initializing = True
@@ -150,36 +150,30 @@ class SettingsDialog:
         parent_box = self.box_long_breaks
         if is_short:
             parent_box = self.box_short_breaks
-        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
-        box = builder.get_object("box")
-        lbl_name = builder.get_object("lbl_name")
-        lbl_name.set_label(_(break_config["name"]))
-        btn_properties = builder.get_object("btn_properties")
-        btn_properties.connect(
-            "clicked",
-            lambda button: self.__show_break_properties_dialog(
+
+        box = BreakItem(
+            break_name=break_config["name"],
+            on_properties=lambda: self.__show_break_properties_dialog(
                 break_config,
                 is_short,
                 self.config,
-                lambda cfg: lbl_name.set_label(_(cfg["name"])),
+                lambda cfg: box.set_break_name(cfg["name"]),
                 lambda is_short, break_config: self.__create_break_item(
                     break_config, is_short
                 ),
                 lambda: parent_box.remove(box),
             ),
-        )
-        btn_delete = builder.get_object("btn_delete")
-        btn_delete.connect(
-            "clicked",
-            lambda button: self.__delete_break(
+            on_delete=lambda: self.__delete_break(
                 break_config,
                 is_short,
                 lambda: parent_box.remove(box),
             ),
         )
-        box.set_visible(True)
-        parent_box.append(box)
-        return box
+
+        gbox = box.box
+
+        gbox.set_visible(True)
+        parent_box.append(gbox)
 
     def on_reset_menu_clicked(self, button):
         self.popover.hide()
@@ -238,63 +232,25 @@ class SettingsDialog:
 
     def __create_plugin_item(self, plugin_config):
         """Create an entry for plugin to be listed in the plugin tab."""
-        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
-        lbl_plugin_name = builder.get_object("lbl_plugin_name")
-        lbl_plugin_description = builder.get_object("lbl_plugin_description")
-        switch_enable = builder.get_object("switch_enable")
-        btn_properties = builder.get_object("btn_properties")
-        lbl_plugin_name.set_label(_(plugin_config["meta"]["name"]))
-        switch_enable.set_active(plugin_config["enabled"])
-        if plugin_config["error"]:
-            message = plugin_config["meta"]["dependency_description"]
-            if isinstance(message, PluginDependency):
-                lbl_plugin_description.set_label(_(message.message))
-                btn_plugin_extra_link = builder.get_object("btn_plugin_extra_link")
-                btn_plugin_extra_link.set_label(_("Click here for more information"))
-                btn_plugin_extra_link.set_uri(message.link)
-                btn_plugin_extra_link.set_visible(True)
-            else:
-                lbl_plugin_description.set_label(_(message))
-            lbl_plugin_name.set_sensitive(False)
-            lbl_plugin_description.set_sensitive(False)
-            switch_enable.set_sensitive(False)
-            btn_properties.set_sensitive(False)
-            if plugin_config["enabled"]:
-                btn_disable_errored = builder.get_object("btn_disable_errored")
-                btn_disable_errored.set_visible(True)
-                btn_disable_errored.connect(
-                    "clicked",
-                    lambda button: self.__disable_errored_plugin(button, plugin_config),
-                )
+        box = PluginItem(
+            plugin_config,
+            on_properties=lambda: self.__show_plugins_properties_dialog(plugin_config),
+        )
 
-        else:
-            lbl_plugin_description.set_label(_(plugin_config["meta"]["description"]))
-            if plugin_config["settings"]:
-                btn_properties.set_sensitive(True)
-                btn_properties.connect(
-                    "clicked",
-                    lambda button: self.__show_plugins_properties_dialog(plugin_config),
-                )
-            else:
-                btn_properties.set_sensitive(False)
-        self.plugin_switches[plugin_config["id"]] = switch_enable
+        self.plugin_items[plugin_config["id"]] = box
+
         if plugin_config.get("break_override_allowed", False):
             self.plugin_map[plugin_config["id"]] = plugin_config["meta"]["name"]
-        if plugin_config["icon"]:
-            builder.get_object("img_plugin_icon").set_from_file(plugin_config["icon"])
-        box = builder.get_object("box")
-        box.set_visible(True)
-        return box
+
+        gbox = box.box
+
+        gbox.set_visible(True)
+        return gbox
 
     def __show_plugins_properties_dialog(self, plugin_config):
         """Show the PluginProperties dialog."""
         dialog = PluginSettingsDialog(self.window, plugin_config)
         dialog.show()
-
-    def __disable_errored_plugin(self, button, plugin_config):
-        """Permanently disable errored plugin."""
-        button.set_sensitive(False)
-        self.plugin_switches[plugin_config["id"]].set_active(False)
 
     def __show_break_properties_dialog(
         self, break_config, is_short, parent, on_close, on_add, on_remove
@@ -396,11 +352,140 @@ class SettingsDialog:
         self.config.set("allow_postpone", self.switch_postpone.get_active())
         self.config.set("persist_state", self.switch_persist.get_active())
         for plugin in self.config.get("plugins"):
-            if plugin["id"] in self.plugin_switches:
-                plugin["enabled"] = self.plugin_switches[plugin["id"]].get_active()
+            if plugin["id"] in self.plugin_items:
+                plugin["enabled"] = self.plugin_items[plugin["id"]].is_enabled()
 
         self.on_save_settings(self.config)  # Call the provided save method
         self.window.destroy()
+
+
+class BreakItem:
+    def __init__(self, break_name, on_properties, on_delete):
+        super().__init__()
+
+        self.on_properties = on_properties
+        self.on_delete = on_delete
+
+        builder = utility.create_gtk_builder(SETTINGS_BREAK_ITEM_GLADE)
+        self.box = builder.get_object("box")
+        self.lbl_name = builder.get_object("lbl_name")
+        self.lbl_name.set_label(_(break_name))
+        self.btn_properties = builder.get_object("btn_properties")
+        self.btn_properties.connect("clicked", self.on_properties_clicked)
+        self.btn_delete = builder.get_object("btn_delete")
+        self.btn_delete.connect("clicked", self.on_delete_clicked)
+
+    def set_break_name(self, break_name):
+        self.lbl_name.set_label(_(break_name))
+
+    def on_properties_clicked(self, button):
+        self.on_properties()
+
+    def on_delete_clicked(self, button):
+        self.on_delete()
+
+
+class PluginItem:
+    def __init__(self, plugin_config, on_properties):
+        super().__init__()
+
+        self.on_properties = on_properties
+        self.plugin_config = plugin_config
+
+        builder = utility.create_gtk_builder(SETTINGS_PLUGIN_ITEM_GLADE)
+        self.lbl_plugin_name = builder.get_object("lbl_plugin_name")
+        self.lbl_plugin_description = builder.get_object("lbl_plugin_description")
+        self.switch_enable = builder.get_object("switch_enable")
+        self.btn_properties = builder.get_object("btn_properties")
+        self.lbl_plugin_name.set_label(_(plugin_config["meta"]["name"]))
+        self.switch_enable.set_active(plugin_config["enabled"])
+
+        if plugin_config["error"]:
+            message = plugin_config["meta"]["dependency_description"]
+            if isinstance(message, PluginDependency):
+                self.lbl_plugin_description.set_label(_(message.message))
+                self.btn_plugin_extra_link = builder.get_object("btn_plugin_extra_link")
+                self.btn_plugin_extra_link.set_uri(message.link)
+                self.btn_plugin_extra_link.set_visible(True)
+            else:
+                self.lbl_plugin_description.set_label(_(message))
+            self.lbl_plugin_name.set_sensitive(False)
+            self.lbl_plugin_description.set_sensitive(False)
+            self.switch_enable.set_sensitive(False)
+            self.btn_properties.set_sensitive(False)
+            if plugin_config["enabled"]:
+                self.btn_disable_errored = builder.get_object("btn_disable_errored")
+                self.btn_disable_errored.set_visible(True)
+                self.btn_disable_errored.connect("clicked", self.on_disable_errored)
+        else:
+            self.lbl_plugin_description.set_label(
+                _(plugin_config["meta"]["description"])
+            )
+            if plugin_config["settings"]:
+                self.btn_properties.set_sensitive(True)
+                self.btn_properties.connect("clicked", self.on_properties_clicked)
+            else:
+                self.btn_properties.set_sensitive(False)
+
+        if plugin_config["icon"]:
+            builder.get_object("img_plugin_icon").set_from_file(plugin_config["icon"])
+
+        self.box = builder.get_object("box")
+
+    def is_enabled(self):
+        return self.switch_enable.get_active()
+
+    def on_disable_errored(self, button):
+        """Permanently disable errored plugin."""
+        self.btn_disable_errored.set_sensitive(False)
+        self.switch_enable.set_active(False)
+
+    def on_properties_clicked(self, button):
+        if not self.plugin_config["error"] and self.plugin_config["settings"]:
+            self.on_properties()
+
+
+class IntItem:
+    def __init__(self, name, value, min_value, max_value):
+        super().__init__()
+
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
+        builder.get_object("lbl_name").set_label(_(name))
+        self.spin_value = builder.get_object("spin_value")
+        self.spin_value.set_range(min_value, max_value)
+        self.spin_value.set_value(value)
+        self.box = builder.get_object("box")
+
+    def get_value(self):
+        return self.spin_value.get_value()
+
+
+class TextItem:
+    def __init__(self, name, value):
+        super().__init__()
+
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
+        builder.get_object("lbl_name").set_label(_(name))
+        self.txt_value = builder.get_object("txt_value")
+        self.txt_value.set_text(value)
+        self.box = builder.get_object("box")
+
+    def get_value(self):
+        return self.txt_value.get_text()
+
+
+class BoolItem:
+    def __init__(self, name, value):
+        super().__init__()
+
+        builder = utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
+        builder.get_object("lbl_name").set_label(_(name))
+        self.switch_value = builder.get_object("switch_value")
+        self.switch_value.set_active(value)
+        self.box = builder.get_object("box")
+
+    def get_value(self):
+        return self.switch_value.get_active()
 
 
 class PluginSettingsDialog:
@@ -417,69 +502,33 @@ class PluginSettingsDialog:
         self.window.set_title(_("Plugin Settings"))
         for setting in config.get("settings"):
             if setting["type"].upper() == "INT":
-                box_settings.append(
-                    self.__load_int_item(
-                        setting["label"],
-                        setting["id"],
-                        config["active_plugin_config"],
-                        setting.get("min", 0),
-                        setting.get("max", 120),
-                    )
+                box = IntItem(
+                    setting["label"],
+                    config["active_plugin_config"][setting["id"]],
+                    setting.get("min", 0),
+                    setting.get("max", 120),
                 )
             elif setting["type"].upper() == "TEXT":
-                box_settings.append(
-                    self.__load_text_item(
-                        setting["label"], setting["id"], config["active_plugin_config"]
-                    )
+                box = TextItem(
+                    setting["label"], config["active_plugin_config"][setting["id"]]
                 )
             elif setting["type"].upper() == "BOOL":
-                box_settings.append(
-                    self.__load_bool_item(
-                        setting["label"], setting["id"], config["active_plugin_config"]
-                    )
+                box = BoolItem(
+                    setting["label"], config["active_plugin_config"][setting["id"]]
                 )
+            else:
+                continue
+
+            self.property_controls.append({"key": setting["id"], "box": box})
+            box_settings.append(box.box)
 
         self.window.connect("close-request", self.on_window_delete)
-
-    def __load_int_item(self, name, key, settings, min_value, max_value):
-        """Load the UI control for int property."""
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_INT_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        spin_value = builder.get_object("spin_value")
-        spin_value.set_range(min_value, max_value)
-        spin_value.set_value(settings[key])
-        box = builder.get_object("box")
-        box.set_visible(True)
-        self.property_controls.append({"key": key, "value": spin_value.get_value})
-        return box
-
-    def __load_text_item(self, name, key, settings):
-        """Load the UI control for text property."""
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_TEXT_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        txt_value = builder.get_object("txt_value")
-        txt_value.set_text(settings[key])
-        box = builder.get_object("box")
-        box.set_visible(True)
-        self.property_controls.append({"key": key, "value": txt_value.get_text})
-        return box
-
-    def __load_bool_item(self, name, key, settings):
-        """Load the UI control for boolean property."""
-        builder = utility.create_gtk_builder(SETTINGS_ITEM_BOOL_GLADE)
-        builder.get_object("lbl_name").set_label(_(name))
-        switch_value = builder.get_object("switch_value")
-        switch_value.set_active(settings[key])
-        box = builder.get_object("box")
-        box.set_visible(True)
-        self.property_controls.append({"key": key, "value": switch_value.get_active})
-        return box
 
     def on_window_delete(self, *args):
         """Event handler for Properties dialog close action."""
         for property_control in self.property_controls:
             self.config["active_plugin_config"][property_control["key"]] = (
-                property_control["value"]()
+                property_control["box"].get_value()
             )
         self.window.destroy()
 
