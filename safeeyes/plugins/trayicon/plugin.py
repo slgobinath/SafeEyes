@@ -26,7 +26,6 @@ import logging
 from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.translations import translate as _
-import threading
 import typing
 
 """
@@ -440,6 +439,8 @@ class TrayIcon:
     _animation_timeout_id: typing.Optional[int] = None
     _animation_icon_enabled: bool = False
 
+    _resume_timeout_id: typing.Optional[int] = None
+
     def __init__(self, context: Context, plugin_config):
         self.context = context
         self.on_show_settings = context.api.show_settings
@@ -454,8 +455,6 @@ class TrayIcon:
         self.date_time = None
         self.active = True
         self.wakeup_time = None
-        self.idle_condition = threading.Condition()
-        self.lock = threading.Lock()
         self.allow_disabling = plugin_config["allow_disabling"]
         self.menu_locked = False
 
@@ -663,12 +662,9 @@ class TrayIcon:
 
         This action terminates the application.
         """
-        with self.lock:
-            self.active = True
-            # Notify all schedulers
-            self.idle_condition.acquire()
-            self.idle_condition.notify_all()
-            self.idle_condition.release()
+        self.active = True
+        self.__clear_resume_timer()
+
         self.quit()
 
     def show_settings(self) -> None:
@@ -720,13 +716,9 @@ class TrayIcon:
         This action enables the application if it is currently disabled.
         """
         if not self.active:
-            with self.lock:
-                self.enable_ui()
-                self.enable_safeeyes()
-                # Notify all schedulers
-                self.idle_condition.acquire()
-                self.idle_condition.notify_all()
-                self.idle_condition.release()
+            self.enable_ui()
+            self.enable_safeeyes()
+            self.__clear_resume_timer()
 
     def on_disable_clicked(self, time_to_wait):
         """Handle the menu actions of all the sub menus of 'Disable Safe Eyes'.
@@ -746,7 +738,9 @@ class TrayIcon:
                 )
                 info = _("Disabled until %s") % utility.format_time(self.wakeup_time)
                 self.disable_safeeyes(info)
-                utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
+                self._resume_timeout_id = GLib.timeout_add_seconds(
+                    time_to_wait * 60, self.__resume
+                )
             self.update_menu()
 
     def lock_menu(self):
@@ -783,17 +777,19 @@ class TrayIcon:
             self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
             self.update_menu()
 
-    def __schedule_resume(self, time_minutes):
-        """Schedule a local timer to enable Safe Eyes after the given
-        timeout.
-        """
-        self.idle_condition.acquire()
-        self.idle_condition.wait(time_minutes * 60)  # Convert to seconds
-        self.idle_condition.release()
+    def __resume(self):
+        """Reenable Safe Eyes after the given timeout."""
+        if not self.active:
+            self.on_enable_clicked()
 
-        with self.lock:
-            if not self.active:
-                utility.execute_main_thread(self.on_enable_clicked)
+        self._resume_timeout_id = None
+
+        return GLib.SOURCE_REMOVE
+
+    def __clear_resume_timer(self):
+        if self._resume_timeout_id is not None:
+            GLib.source_remove(self._resume_timeout_id)
+            self._resume_timeout_id = None
 
     def start_animation(self) -> None:
         if self._animation_timeout_id is not None:
