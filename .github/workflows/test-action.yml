@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     name: test-toml-action
     steps:
+      - name: Check out source repository
+        uses: actions/checkout@v3
       - name: Get Current Version
         uses: deltragon/toml-action@9858d6baada20622d2f4dd175aff33d0c82f0515
         with:
