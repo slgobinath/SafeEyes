@@ -24,6 +24,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gio, GLib
 import logging
 from safeeyes import utility
+from safeeyes.context import Context
 from safeeyes.translations import translate as _
 import threading
 import typing
@@ -32,7 +33,6 @@ import typing
 Safe Eyes tray icon plugin
 """
 
-context = None
 tray_icon = None
 safeeyes_config = None
 
@@ -440,16 +440,16 @@ class TrayIcon:
     _animation_timeout_id: typing.Optional[int] = None
     _animation_icon_enabled: bool = False
 
-    def __init__(self, context, plugin_config):
+    def __init__(self, context: Context, plugin_config):
         self.context = context
-        self.on_show_settings = context["api"]["show_settings"]
-        self.on_show_about = context["api"]["show_about"]
-        self.quit = context["api"]["quit"]
-        self.enable_safeeyes = context["api"]["enable_safeeyes"]
-        self.disable_safeeyes = context["api"]["disable_safeeyes"]
-        self.take_break = context["api"]["take_break"]
-        self.has_breaks = context["api"]["has_breaks"]
-        self.get_break_time = context["api"]["get_break_time"]
+        self.on_show_settings = context.api.show_settings
+        self.on_show_about = context.api.show_about
+        self.quit = context.api.quit
+        self.enable_safeeyes = context.api.enable_safeeyes
+        self.disable_safeeyes = context.api.disable_safeeyes
+        self.take_break = context.api.take_break
+        self.has_breaks = context.api.has_breaks
+        self.get_break_time = context.api.get_break_time
         self.plugin_config = plugin_config
         self.date_time = None
         self.active = True
@@ -830,14 +830,12 @@ class TrayIcon:
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """Initialize the tray icon."""
-    global context
     global tray_icon
     global safeeyes_config
     logging.debug("Initialize Tray Icon plugin")
-    context = ctx
     safeeyes_config = safeeyes_cfg
     if not tray_icon:
-        tray_icon = TrayIcon(context, plugin_config)
+        tray_icon = TrayIcon(ctx, plugin_config)
     else:
         tray_icon.initialize(plugin_config)
 
