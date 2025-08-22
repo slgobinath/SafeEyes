@@ -192,7 +192,7 @@ class DBusMenuService(DBusService):
     # TODO: replace dict here with more exact typing for item
     idToItems: dict[str, dict] = {}
 
-    def __init__(self, session_bus, context, items):
+    def __init__(self, session_bus, items):
         super().__init__(
             interface_info=MENU_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -374,7 +374,7 @@ class StatusNotifierItemService(DBusService):
     ItemIsMenu = True
     Menu = None
 
-    def __init__(self, session_bus, context, menu_items):
+    def __init__(self, session_bus, menu_items):
         super().__init__(
             interface_info=SNI_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -383,7 +383,7 @@ class StatusNotifierItemService(DBusService):
 
         self.bus = session_bus
 
-        self._menu = DBusMenuService(session_bus, context, menu_items)
+        self._menu = DBusMenuService(session_bus, menu_items)
         self.Menu = self._menu.DBUS_SERVICE_PATH
 
     def register(self):
@@ -453,7 +453,7 @@ class TrayIcon:
         session_bus = Gio.bus_get_sync(Gio.BusType.SESSION)
 
         self.sni_service = StatusNotifierItemService(
-            session_bus, context, menu_items=self.get_items()
+            session_bus, menu_items=self.get_items()
         )
         self.sni_service.register()
 
