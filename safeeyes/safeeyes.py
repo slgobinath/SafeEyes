@@ -358,12 +358,16 @@ class SafeEyes(Gtk.Application):
 
         self.restart(config, set_active=True)
 
-    def show_about(self):
+    def show_about(self, activation_token: typing.Optional[str] = None):
         """Listen to tray icon About action and send the signal to About
         dialog.
         """
         logging.info("Show About dialog")
         about_dialog = AboutDialog(self, SAFE_EYES_VERSION)
+
+        if activation_token is not None:
+            about_dialog.set_startup_id(activation_token)
+
         about_dialog.show()
 
     def quit(self):

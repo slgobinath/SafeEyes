@@ -678,12 +678,12 @@ class TrayIcon:
         """
         self.on_show_settings(self.sni_service.last_activation_token)
 
-    def show_about(self):
+    def show_about(self) -> None:
         """Handle About menu action.
 
         This action shows the About dialog.
         """
-        self.on_show_about()
+        self.on_show_about(self.sni_service.last_activation_token)
 
     def next_break_time(self, dateTime):
         """Update the next break time to be displayed in the menu and
