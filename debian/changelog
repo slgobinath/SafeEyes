@@ -1,5 +1,26 @@
 safeeyes (3.0.0b3) noble; urgency=medium
 
+  * Wayland support: break screen shortcuts, window activation, donotdisturb
+    detection
+
+  * Feature: Add option to postpone breaks by seconds rather than minutes
+
+  * Feature: screensaver: add tray action to lock screen now
+
+  * smartpause: Performance/Battery life improvements
+
+  * replace RPC server with native GTK commandline integration
+
+  * Internal refactoring to improve thread safety
+
+  * Internal: automated tests using pytest
+
+  * Internal: typechecking improvement
+
+ -- Mel Dafert <m@dafert.at>  Fri, 22 Aug 2025 11:30:00 +0000
+
+safeeyes (3.0.0b3) noble; urgency=medium
+
   * Re-release due to broken github action
 
  -- Mel Dafert <m@dafert.at>  Mon, 05 May 2025 13:30:00 +0000
