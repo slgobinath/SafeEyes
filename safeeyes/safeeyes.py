@@ -23,6 +23,7 @@ application.
 import atexit
 import logging
 from importlib import metadata
+import typing
 
 import gi
 from safeeyes import context, utility
@@ -52,6 +53,8 @@ class SafeEyes(Gtk.Application):
     plugins_manager: PluginManager
     system_locale: str
 
+    _settings_dialog: typing.Optional[SettingsDialog] = None
+
     def __init__(self, system_locale: str, config) -> None:
         super().__init__(
             application_id="io.github.slgobinath.SafeEyes",
@@ -60,7 +63,6 @@ class SafeEyes(Gtk.Application):
 
         self.active = False
         self.config = config
-        self.settings_dialog_active = False
         self._status = ""
         self.system_locale = system_locale
 
@@ -314,17 +316,20 @@ class SafeEyes(Gtk.Application):
 
         GLib.timeout_add_seconds(timeout, self._retry_errored_plugins)
 
-    def show_settings(self):
+    def show_settings(self, activation_token: typing.Optional[str] = None) -> None:
         """Listen to tray icon Settings action and send the signal to Settings
         dialog.
         """
-        if not self.settings_dialog_active:
+        if self._settings_dialog is None:
             logging.info("Show Settings dialog")
-            self.settings_dialog_active = True
-            settings_dialog = SettingsDialog(
+            self._settings_dialog = SettingsDialog(
                 self, self.config.clone(), self.save_settings
             )
-            settings_dialog.show()
+
+        if activation_token is not None:
+            self._settings_dialog.set_startup_id(activation_token)
+
+        self._settings_dialog.show()
 
     def show_required_plugin_dialog(self, error: RequiredPluginException) -> None:
         self.required_plugin_dialog_active = True
@@ -435,7 +440,7 @@ class SafeEyes(Gtk.Application):
         """Listen to Settings dialog Save action and write to the config
         file.
         """
-        self.settings_dialog_active = False
+        self._settings_dialog = None
 
         if self.config == config:
             # Config is not modified

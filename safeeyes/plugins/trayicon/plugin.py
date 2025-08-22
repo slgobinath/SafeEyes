@@ -53,6 +53,10 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
         <signal name="NewIcon"/>
         <signal name="NewTooltip"/>
 
+        <method name="ProvideXdgActivationToken">
+            <arg name="token" type="s" direction="in"/>
+        </method>
+
         <property name="XAyatanaLabel" type="s" access="read"/>
         <signal name="XAyatanaNewLabel">
             <arg type="s" name="label" direction="out" />
@@ -374,6 +378,8 @@ class StatusNotifierItemService(DBusService):
     ItemIsMenu = True
     Menu = None
 
+    last_activation_token: typing.Optional[str] = None
+
     def __init__(self, session_bus, menu_items):
         super().__init__(
             interface_info=SNI_NODE_INFO,
@@ -423,6 +429,9 @@ class StatusNotifierItemService(DBusService):
         self.XAyatanaLabel = label
 
         self.emit_signal("XAyatanaNewLabel", (label, ""))
+
+    def ProvideXdgActivationToken(self, token: str) -> None:
+        self.last_activation_token = token
 
 
 class TrayIcon:
@@ -662,12 +671,12 @@ class TrayIcon:
             self.idle_condition.release()
         self.quit()
 
-    def show_settings(self):
+    def show_settings(self) -> None:
         """Handle Settings menu action.
 
         This action shows the Settings dialog.
         """
-        self.on_show_settings()
+        self.on_show_settings(self.sni_service.last_activation_token)
 
     def show_about(self):
         """Handle About menu action.
