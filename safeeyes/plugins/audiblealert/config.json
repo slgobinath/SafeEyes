@@ -2,11 +2,11 @@
     "meta": {
         "name": "Audible Alert",
         "description": "Play audible alert before and after breaks",
-        "version": "0.0.3"
+        "version": "0.0.4"
     },
     "dependencies": {
         "python_modules": [],
-        "shell_commands": ["aplay"],
+        "shell_commands": [],
         "operating_systems": [],
         "desktop_environments": [],
         "resources": ["on_pre_break.wav", "on_stop_break.wav"]
@@ -22,6 +22,14 @@
         "label": "Play audible alert after breaks",
         "type": "BOOL",
         "default": true
+    },
+    {
+        "id": "volume",
+        "label": "Alert volume",
+        "type": "INT",
+        "default": 100,
+        "max": 100,
+        "min": 0
     }],
     "break_override_allowed": true
 }

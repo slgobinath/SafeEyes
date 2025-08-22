@@ -1,6 +1,6 @@
 {
     "meta": {
-        "config_version": "6.0.3"
+        "config_version": "6.0.4"
     },
     "random_order": true,
     "allow_postpone": false,
@@ -11,8 +11,7 @@
     "short_break_duration": 15,
     "persist_state": false,
     "postpone_duration": 5,
-    "use_rpc_server": true,
-    "rpc_port": 7200,
+    "postpone_unit": "minutes",
     "shortcut_disable_time": 2,
     "shortcut_skip": 9,
     "shortcut_postpone": 65,

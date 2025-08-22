@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-09-06 22:09+0000\n"
-"Last-Translator: AircGroup <imartime@yandex.ru>\n"
+"PO-Revision-Date: 2025-05-12 09:03+0000\n"
+"Last-Translator: Sergey Ponomarev <stokito@gmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -86,14 +86,6 @@ msgstr "вывести статус запущенного экземпляра 
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes не запущен"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Программа Safe Eyes запущена без RPC сервера. Для использования аргументов "
-"командной строки запустите RPC сервер."
-
 # About dialog
 msgid "Close"
 msgstr "Закрыть"
@@ -162,14 +154,6 @@ msgstr "Разрешить откладывание перерывов"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Сохранять внутреннее состояние"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Используйте RPC сервер для получения команд во время работы приложения"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Без RPC сервера команды из командной строки могут не сработать"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -596,6 +580,31 @@ msgstr "Лицензия:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"Найдена старая таблица стилей на '%(old)s' и будет игнорироваться. Для "
+"пользовательских стилей вместо этого создайте новую таблицу стилей в "
+"'%(new)s'."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

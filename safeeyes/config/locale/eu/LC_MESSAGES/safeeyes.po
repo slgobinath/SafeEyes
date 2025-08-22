@@ -85,14 +85,6 @@ msgstr "inprimatu uneko safeeyes instantziaren egoera eta irten"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes ez dago martxan"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"RPC zerbitzaririk gabe ari da exekutatzen Safe Eyes. Piztu zerbitzaria "
-"komando-lerroko argumentuak erabiltzeko."
-
 # About dialog
 msgid "Close"
 msgstr "Itxi"
@@ -161,15 +153,6 @@ msgstr "Baimendu etenaldiak atzeratzea"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Eutsi barruko egoerari"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Erabili RPC zerbitzaria exekuzio-denboraren komanduak jasotzeko"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"RPC zerbitzaririk gabe, komandu-lineako komanduek ez dute funtzionatuko"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -591,6 +574,28 @@ msgstr ""
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

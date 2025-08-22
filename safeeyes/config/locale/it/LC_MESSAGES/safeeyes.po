@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-08-27 19:09+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
+"PO-Revision-Date: 2025-08-21 09:01+0000\n"
+"Last-Translator: cas9 <cas9@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -84,14 +84,6 @@ msgstr "stampa lo stato di esecuzione di Safe Eyes ed esci"
 # Status message
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes non è avviato"
-
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes è in esecuzione senza un server RPC. Apri Safe Eyes per utilizzare "
-"la linea di comando."
 
 # About dialog
 msgid "Close"
@@ -162,15 +154,6 @@ msgstr "Consenti di posporre le pause"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Persistenza dello stato interno"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Utilizza il server RPC per ricevere i comandi"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"Senza il server RPC, i comandi a riga di comando non possono funzionare"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -598,6 +581,30 @@ msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"Vecchio foglio di stile trovato in '%(old)s', ignorando. Per stili "
+"personalizzati, crea un nuovo foglio di stile in %(new)s invece."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr "Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
+
+msgid "Safe Eyes - Error"
+msgstr "Safe Eyes - Errore"
+
+msgid "A required plugin is missing dependencies!"
+msgstr "Un plugin necessario manca di dipendenze!"
+
+msgid "Postponement duration in"
+msgstr "Durata del rinvio in"
+
+msgid "minutes"
+msgstr "minuti"
+
+msgid "seconds"
+msgstr "secondi"
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr "Prego installa uno degli strumenti da riga di comando: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"

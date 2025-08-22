@@ -6,8 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-11-12 23:00+0000\n"
-"Last-Translator: AO Localisation Lab <ao@localizationlab.org>\n"
+"PO-Revision-Date: 2025-08-19 19:02+0000\n"
+"Last-Translator: AO Localisation Lab "
+"<ao_localization_lab@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
 "Language: fr\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -84,14 +85,6 @@ msgstr "imprimer l’état de l’instance safeeyes en cours et fermer"
 # Status message
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes n’est pas en fonction"
-
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes est en fonction alors que le serveur RPC est désactivé. Activez le "
-"serveur RPC afin d’utiliser des arguments en ligne de commande."
 
 # About dialog
 msgid "Close"
@@ -162,16 +155,6 @@ msgstr "Permettre le report des pauses"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Conserver l’état interne"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Utiliser le serveur RPC pour recevoir des commandes d’exécution"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"Sans le serveur RPC, les commandes en ligne de commande pourraient ne pas "
-"fonctionner"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -603,6 +586,33 @@ msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"Une ancienne feuille de style a été trouvée dans « %(old)s », elle sera "
+"ignorée. Pour des styles personnalisés, créez plutôt une nouvelle feuille de "
+"style dans « %(new)s »."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+"La personnalisation des raccourcis pour reporter et ignorer ne fonctionne "
+"pas sous Wayland."
+
+msgid "Safe Eyes - Error"
+msgstr "Safe Eyes – Erreur"
+
+msgid "A required plugin is missing dependencies!"
+msgstr "Des dépendances manquent pour un greffon nécessaire"
+
+msgid "Postponement duration in"
+msgstr "Durée du report en"
+
+msgid "minutes"
+msgstr "minutes"
+
+msgid "seconds"
+msgstr "secondes"
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr "Installez l’un des outils de ligne de commande : %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"

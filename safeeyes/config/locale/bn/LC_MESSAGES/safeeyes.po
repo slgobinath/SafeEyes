@@ -85,12 +85,6 @@ msgstr ""
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes চলছে না"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-
 # About dialog
 msgid "Close"
 msgstr ""
@@ -156,14 +150,6 @@ msgstr ""
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
 msgstr ""
 
 # Settings dialog
@@ -581,4 +567,26 @@ msgstr ""
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-11-12 23:00+0000\n"
-"Last-Translator: Priit Jõerüüt <hwlate@joeruut.com>\n"
+"PO-Revision-Date: 2025-08-19 19:02+0000\n"
+"Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
 "Language: et\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9-dev\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -85,14 +85,6 @@ msgstr "väljasta hetkel töötava safeeyes instantsi staatus ja välju"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes ei tööta hetkel"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes töötab RPC serverita. Käsurea parameetrite kasutamiseks lülita ta "
-"sisse."
-
 # About dialog
 msgid "Close"
 msgstr "Sulge"
@@ -161,14 +153,6 @@ msgstr "Pauside edasilükkamine lubatud"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Sisemise seisundi säilitamine"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Kasuta RPC serverit käitusaja käskude vastuvõtuks"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Käsurea parameetrid ei pruugi töötada RPC serverita"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -590,6 +574,32 @@ msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"Vana ja eiratav laaditabel leidub siin: „%(old)s“. Kui tahad välimust oma "
+"käe järgi sättida, siis tee laaditabel pigem siia: „%(new)s“."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+"Edasilükkamise ja vahelejätmise kiirklahvide kohendamine ei toimi Waylandi "
+"puhul."
+
+msgid "Safe Eyes - Error"
+msgstr "Safe Eyes - viga"
+
+msgid "A required plugin is missing dependencies!"
+msgstr "Nõutaval pluginal on sõltuvused puudu!"
+
+msgid "Postponement duration in"
+msgstr "Edasilükkamise kestus"
+
+msgid "minutes"
+msgstr "minuti pärast"
+
+msgid "seconds"
+msgstr "sekundi pärast"
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr "Palun paigalda mõni käsureaprogrammidest: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"

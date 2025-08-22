@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2025-04-21 15:01+0000\n"
+"PO-Revision-Date: 2025-07-04 15:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ta/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.1-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -86,14 +86,6 @@ msgstr "இயங்கும் Safe Eyes நிலையை காண்பி
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes தற்போது இயங்கவில்லை"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes RPC சேவையகமின்றி இயங்குகிறது.முனையக் கட்டளைகளைப் பயன்படுத்த RPC சேவையகத்தை "
-"இயக்கவும்."
-
 # About dialog
 msgid "Close"
 msgstr "மூடு"
@@ -162,14 +154,6 @@ msgstr "இடைவேளையை ஒத்திவைக்க அனும�
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "உள்ளக நிலையை தக்கவைத்து கொள்ளவும்"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "இயக்க நேர கட்டளைகளைப் பெற RPC சேவையகத்தைப் செயற்படுத்தவும்"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "RPC சேவையகம் இல்லாமல், முனைய கட்டளைகள் இயங்காது"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -591,6 +575,30 @@ msgstr "உரிமம்:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"புறக்கணித்து, '%(old)s' இல் காணப்படும் பழைய பாணிதாள். தனிப்பயன் பாணிகளுக்கு, அதற்குப் "
+"பதிலாக '%(new)s' இல் புதிய பாணிதாளை உருவாக்கவும்."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

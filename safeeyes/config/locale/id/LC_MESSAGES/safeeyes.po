@@ -85,14 +85,6 @@ msgstr "cetak status menjalankan instance safeeyes dan keluar"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes tidak berjalan"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes berjalan tanpa server RPC. Aktifkan untuk menggunakan command-line "
-"arguments."
-
 # About dialog
 msgid "Close"
 msgstr "Tutup"
@@ -159,14 +151,6 @@ msgstr "Izinkan penundaan istirahat"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Pertahankan kondisi internal"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Gunakan server RPC untuk menerima perintah runtime"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Tanpa server RPC, perintah command-line mungkin tidak akan berfungsi"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -586,6 +570,28 @@ msgstr ""
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

@@ -99,29 +99,9 @@
     border-radius: 5px;
 }
 
-.warn_bar_rpc_server {
-    opacity: 0.9;
-    border-radius: 5px;
-}
 
 .toolbar {
     background: black;
     opacity: 0.9;
-    border-color: transparent;
-}
-
-.btn_menu {
-    border-width: 0px;
-    border-radius: 0px;
-    border-image: None;
-    background: white;
-    border-color: transparent;
-}
-
-.btn_menu:hover {
-    border-width: 0px;
-    border-radius: 0px;
-    border-image: None;
-    background: whitesmoke;
     border-color: transparent;
 }

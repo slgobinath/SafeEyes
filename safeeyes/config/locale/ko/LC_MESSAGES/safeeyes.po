@@ -85,14 +85,6 @@ msgstr "실행 중인 세이프아이즈 객체를 종료하고 상태 출력"
 msgid "Safe Eyes is not running"
 msgstr "세이프 아이즈가 실행 중이 아닙니다"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"세이프 아이즈가 RPC 서버없이 실행 중입니다. 명령줄 인수를 사용하려면 켜주세"
-"요."
-
 # About dialog
 msgid "Close"
 msgstr "닫기"
@@ -159,14 +151,6 @@ msgstr "휴식 미루기 허용"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "내부 상태 유지"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "RPC 서버를 사용해 런타임 명령 수신"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "RPC 서버가 없으면 명령줄 명령이 작동하지 않을 수 있습니다"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -580,6 +564,28 @@ msgstr ""
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

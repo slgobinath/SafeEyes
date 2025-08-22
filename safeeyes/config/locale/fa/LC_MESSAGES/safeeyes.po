@@ -85,14 +85,6 @@ msgstr "چاپ وضعیت نمونهٔ محافظ چشم در جال اجرا و
 msgid "Safe Eyes is not running"
 msgstr "محافظ چشم اجرا نمی‌شود"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"محافظ چشم دارد بدون کارساز RPC اجرا می‌شود. برای استفاده از آرگومان‌های خط "
-"فرمان، روشنش کنید."
-
 # About dialog
 msgid "Close"
 msgstr "بستن"
@@ -161,14 +153,6 @@ msgstr "اجازه به تعویق استراحت‌ها"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "ادامه وضعیت داخلی"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "استفاده از کارساز RPC برای دریافت دستورات زمان اجرا"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "بدون کارساز RPC ممکن است دستورات خط فرمان نکنند"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -587,6 +571,28 @@ msgstr "پروانه:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

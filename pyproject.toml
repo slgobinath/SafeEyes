@@ -1,6 +1,6 @@
 [project]
 name = "safeeyes"
-version = "3.0.0b3"
+version = "3.0.0b4"
 description = "Protect your eyes from eye strain using this continuous breaks reminder."
 keywords = ["linux utility health eye-strain safe-eyes"]
 readme = "README.md"
@@ -24,7 +24,6 @@ dependencies = [
     "pywayland",
     "PyGObject",
     "babel",
-    "psutil",
     "packaging",
     "python-xlib",
 ]
@@ -32,7 +31,7 @@ requires-python = ">=3.10"
 
 [project.urls]
 Homepage = "https://github.com/slgobinath/SafeEyes"
-Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0b3.tar.gz"
+Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0b4.tar.gz"
 
 [project.scripts]
 safeeyes = "safeeyes.__main__:main"
@@ -46,12 +45,14 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include=["safeeyes*"]
+exclude=["safeeyes.tests*"]
 
 [dependency-groups]
 dev = [
     {include-group = "lint"},
     {include-group = "scripts"},
-    {include-group = "types"}
+    {include-group = "tests"},
+    {include-group = "types"},
 ]
 lint = [
     "ruff==0.11.2"
@@ -63,8 +64,12 @@ types = [
     "mypy==1.15.0",
     "PyGObject-stubs==2.13.0",
     "types-croniter==5.0.1.20250322",
-    "types-psutil==7.0.0.20250218",
-    "types-python-xlib==0.33.0.20240407"
+    "types-python-xlib==0.33.0.20240407",
+    {include-group = "tests"},
+]
+tests = [
+    "pytest==8.3.5",
+    "time-machine==2.16.0",
 ]
 
 [tool.mypy]
@@ -77,4 +82,9 @@ warn_unreachable = true
 enable_error_code = [
     "ignore-without-code",
     "possibly-undefined"
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
 ]

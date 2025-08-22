@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-09-21 15:40+0000\n"
-"Last-Translator: Erik Michelson <opensource@erik.michelson.eu>\n"
+"PO-Revision-Date: 2025-05-16 02:01+0000\n"
+"Last-Translator: Christian Rodriguez Benthake <chris.ben9@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/de/>\n"
 "Language: de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -84,14 +84,6 @@ msgstr "Status der laufenden SafeEyes-Instanz ausgeben und beenden"
 # Status message
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes wird nicht ausgeführt"
-
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes läuft ohne RPC-Server. Aktivieren Sie ihn, um Kommandozeilen-"
-"Befehle nutzen zu können."
 
 # About dialog
 msgid "Close"
@@ -162,15 +154,6 @@ msgstr "Aufschieben von Pausen zulassen"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Internen Zustand beibehalten"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr ""
-"RPC-Server benutzen, um Befehle während der Laufzeit empfangen zu können"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Ohne RPC-Server könnten Kommandozeilen-Befehle nicht funktionieren"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -602,6 +585,30 @@ msgstr "Lizenz:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"Altes Stylesheet unter '%(old)s' gefunden, wird ignoriert. Erstelle "
+"stattdessen für eigene Styles ein neues Stylesheet in '%(new)s'."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

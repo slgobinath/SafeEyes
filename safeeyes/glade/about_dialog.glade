@@ -35,10 +35,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</property>
   </object>
-  <object class="GtkWindow" id="window_about">
+  <template parent="GtkApplicationWindow" class="AboutDialog">
     <property name="title">Safe Eyes</property>
     <property name="resizable">0</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no" />
     <child>
       <object class="GtkBox" id="layout_box">
         <property name="visible">1</property>
@@ -63,7 +64,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
                 <property name="valign">center</property>
                 <property name="margin-top">10</property>
                 <property name="margin-bottom">10</property>
-                <property name="label">Safe Eyes 3.0.0b3</property>
+                <property name="label">Safe Eyes 3.0.0b4</property>
                 <property name="justify">center</property>
                 <property name="hexpand">1</property>
                 <property name="vexpand">1</property>
@@ -144,6 +145,7 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
             </child>
             <child>
               <object class="GtkButton" id="btn_close">
+                <signal name="clicked" handler="on_close_clicked" swapped="no" />
                 <property name="label" translatable="yes">Close</property>
                 <property name="visible">1</property>
                 <property name="can-focus">1</property>
@@ -168,5 +170,5 @@ along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.</pr
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

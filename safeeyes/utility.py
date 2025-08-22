@@ -31,6 +31,7 @@ import sys
 import shutil
 import subprocess
 import threading
+import typing
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
@@ -97,7 +98,10 @@ def get_resource_path(resource_name):
 def start_thread(target_function, **args):
     """Execute the function in a separate thread."""
     thread = threading.Thread(
-        target=target_function, name="WorkThread", daemon=False, kwargs=args
+        target=target_function,
+        name=f"WorkThread {target_function.__qualname__}",
+        daemon=False,
+        kwargs=args,
     )
     thread.start()
 
@@ -177,6 +181,8 @@ def delete(file_path):
 
 def check_plugin_dependencies(plugin_id, plugin_config, plugin_settings, plugin_path):
     """Check the plugin dependencies."""
+    from safeeyes.translations import translate as _
+
     # Check the desktop environment
     if plugin_config["dependencies"]["desktop_environments"]:
         # Plugin has restrictions on desktop environments
@@ -253,8 +259,8 @@ def load_plugins_config(safeeyes_config):
         config["id"] = plugin["id"]
         config["icon"] = icon
         config["enabled"] = plugin["enabled"]
-        for setting in config["settings"]:
-            setting["safeeyes_config"] = plugin["settings"]
+        config["active_plugin_config"] = plugin.get("settings")
+
         configs.append(config)
     return configs
 
@@ -362,12 +368,9 @@ def command_exist(command):
 
 
 def module_exist(module):
-    """Check wther the given Python module exists or not."""
-    try:
-        importlib.util.find_spec(module)
-        return True
-    except ImportError:
-        return False
+    """Check whether the given Python module exists or not."""
+    module_spec = importlib.util.find_spec(module)
+    return module_spec is not None
 
 
 def merge_configs(new_config, old_config):
@@ -448,6 +451,8 @@ def cleanup_old_user_stylesheet():
             logging.info("Deleting old stylesheet containing default content")
             delete(OLD_STYLE_SHEET_PATH)
         else:
+            from safeeyes.translations import translate as _
+
             # Stylesheet was likely customized, don't delete but warn
             logging.warning(
                 _(
@@ -536,7 +541,7 @@ def initialize_platform():
             logging.error("Failed to create desktop entry at %s" % desktop_entry)
 
     # Add links for all icons
-    for path, _, filenames in os.walk(SYSTEM_ICONS):
+    for path, _dirnames, filenames in os.walk(SYSTEM_ICONS):
         for filename in filenames:
             system_icon = os.path.join(path, filename)
             local_icon = os.path.join(
@@ -708,25 +713,9 @@ def open_session():
     return session
 
 
-def create_gtk_builder(glade_file):
-    """Create a Gtk builder and load the glade file."""
-    builder = Gtk.Builder()
-    builder.set_translation_domain("safeeyes")
-    builder.add_from_file(glade_file)
-    # Tranlslate all sub components
-    for obj in builder.get_objects():
-        if hasattr(obj, "get_label"):
-            label = obj.get_label()
-            if label is not None:
-                obj.set_label(_(label))
-        elif hasattr(obj, "get_title"):
-            title = obj.get_title()
-            if title is not None:
-                obj.set_title(_(title))
-    return builder
-
-
-def load_and_scale_image(path, width, height):
+def load_and_scale_image(
+    path: str, width: int, height: int
+) -> typing.Optional[Gtk.Image]:
     if not os.path.isfile(path):
         return None
     pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(

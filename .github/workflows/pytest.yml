@@ -1,0 +1,36 @@
+# Workflow to run pytest
+name: pytest
+
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+env:
+  UV_SYSTEM_PYTHON: 1
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+
+jobs:
+  pytest:
+    name: pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@22695119d769bdb6f7032ad67b9bca0ef8c4a174 # v5.4.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: ''
+          cache-suffix: '3.13'
+      - name: Setup Python
+        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5.5.0
+        with:
+          python-version: '3.13'
+      - name: Install OS dependencies
+        run: |
+          sudo apt-get update -yy
+          sudo apt-get install -yy --no-install-recommends libwayland-dev libcairo2-dev libgirepository-2.0-dev gir1.2-gtk-4.0
+      - run: uv pip install -r pyproject.toml
+      - run: uv pip install --group tests
+      - run: pytest

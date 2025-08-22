@@ -24,15 +24,14 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gio, GLib
 import logging
 from safeeyes import utility
-import threading
-import time
+from safeeyes.context import Context
+from safeeyes.translations import translate as _
 import typing
 
 """
 Safe Eyes tray icon plugin
 """
 
-context = None
 tray_icon = None
 safeeyes_config = None
 
@@ -52,6 +51,10 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
         <property name="Status" type="s" access="read"/>
         <signal name="NewIcon"/>
         <signal name="NewTooltip"/>
+
+        <method name="ProvideXdgActivationToken">
+            <arg name="token" type="s" direction="in"/>
+        </method>
 
         <property name="XAyatanaLabel" type="s" access="read"/>
         <signal name="XAyatanaNewLabel">
@@ -192,7 +195,7 @@ class DBusMenuService(DBusService):
     # TODO: replace dict here with more exact typing for item
     idToItems: dict[str, dict] = {}
 
-    def __init__(self, session_bus, context, items):
+    def __init__(self, session_bus, items):
         super().__init__(
             interface_info=MENU_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -374,7 +377,9 @@ class StatusNotifierItemService(DBusService):
     ItemIsMenu = True
     Menu = None
 
-    def __init__(self, session_bus, context, menu_items):
+    last_activation_token: typing.Optional[str] = None
+
+    def __init__(self, session_bus, menu_items):
         super().__init__(
             interface_info=SNI_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -383,7 +388,7 @@ class StatusNotifierItemService(DBusService):
 
         self.bus = session_bus
 
-        self._menu = DBusMenuService(session_bus, context, menu_items)
+        self._menu = DBusMenuService(session_bus, menu_items)
         self.Menu = self._menu.DBUS_SERVICE_PATH
 
     def register(self):
@@ -424,34 +429,39 @@ class StatusNotifierItemService(DBusService):
 
         self.emit_signal("XAyatanaNewLabel", (label, ""))
 
+    def ProvideXdgActivationToken(self, token: str) -> None:
+        self.last_activation_token = token
+
 
 class TrayIcon:
     """Create and show the tray icon along with the tray menu."""
 
-    def __init__(self, context, plugin_config):
+    _animation_timeout_id: typing.Optional[int] = None
+    _animation_icon_enabled: bool = False
+
+    _resume_timeout_id: typing.Optional[int] = None
+
+    def __init__(self, context: Context, plugin_config):
         self.context = context
-        self.on_show_settings = context["api"]["show_settings"]
-        self.on_show_about = context["api"]["show_about"]
-        self.quit = context["api"]["quit"]
-        self.enable_safeeyes = context["api"]["enable_safeeyes"]
-        self.disable_safeeyes = context["api"]["disable_safeeyes"]
-        self.take_break = context["api"]["take_break"]
-        self.has_breaks = context["api"]["has_breaks"]
-        self.get_break_time = context["api"]["get_break_time"]
+        self.on_show_settings = context.api.show_settings
+        self.on_show_about = context.api.show_about
+        self.quit = context.api.quit
+        self.enable_safeeyes = context.api.enable_safeeyes
+        self.disable_safeeyes = context.api.disable_safeeyes
+        self.take_break = context.api.take_break
+        self.has_breaks = context.api.has_breaks
+        self.get_break_time = context.api.get_break_time
         self.plugin_config = plugin_config
         self.date_time = None
         self.active = True
         self.wakeup_time = None
-        self.idle_condition = threading.Condition()
-        self.lock = threading.Lock()
         self.allow_disabling = plugin_config["allow_disabling"]
-        self.animate = False
         self.menu_locked = False
 
         session_bus = Gio.bus_get_sync(Gio.BusType.SESSION)
 
         self.sni_service = StatusNotifierItemService(
-            session_bus, context, menu_items=self.get_items()
+            session_bus, menu_items=self.get_items()
         )
         self.sni_service.register()
 
@@ -652,27 +662,24 @@ class TrayIcon:
 
         This action terminates the application.
         """
-        with self.lock:
-            self.active = True
-            # Notify all schedulers
-            self.idle_condition.acquire()
-            self.idle_condition.notify_all()
-            self.idle_condition.release()
+        self.active = True
+        self.__clear_resume_timer()
+
         self.quit()
 
-    def show_settings(self):
+    def show_settings(self) -> None:
         """Handle Settings menu action.
 
         This action shows the Settings dialog.
         """
-        self.on_show_settings()
+        self.on_show_settings(self.sni_service.last_activation_token)
 
-    def show_about(self):
+    def show_about(self) -> None:
         """Handle About menu action.
 
         This action shows the About dialog.
         """
-        self.on_show_about()
+        self.on_show_about(self.sni_service.last_activation_token)
 
     def next_break_time(self, dateTime):
         """Update the next break time to be displayed in the menu and
@@ -709,13 +716,9 @@ class TrayIcon:
         This action enables the application if it is currently disabled.
         """
         if not self.active:
-            with self.lock:
-                self.enable_ui()
-                self.enable_safeeyes()
-                # Notify all schedulers
-                self.idle_condition.acquire()
-                self.idle_condition.notify_all()
-                self.idle_condition.release()
+            self.enable_ui()
+            self.enable_safeeyes()
+            self.__clear_resume_timer()
 
     def on_disable_clicked(self, time_to_wait):
         """Handle the menu actions of all the sub menus of 'Disable Safe Eyes'.
@@ -735,7 +738,9 @@ class TrayIcon:
                 )
                 info = _("Disabled until %s") % utility.format_time(self.wakeup_time)
                 self.disable_safeeyes(info)
-                utility.start_thread(self.__schedule_resume, time_minutes=time_to_wait)
+                self._resume_timeout_id = GLib.timeout_add_seconds(
+                    time_to_wait * 60, self.__resume
+                )
             self.update_menu()
 
     def lock_menu(self):
@@ -772,59 +777,61 @@ class TrayIcon:
             self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
             self.update_menu()
 
-    def __schedule_resume(self, time_minutes):
-        """Schedule a local timer to enable Safe Eyes after the given
-        timeout.
-        """
-        self.idle_condition.acquire()
-        self.idle_condition.wait(time_minutes * 60)  # Convert to seconds
-        self.idle_condition.release()
+    def __resume(self):
+        """Reenable Safe Eyes after the given timeout."""
+        if not self.active:
+            self.on_enable_clicked()
 
-        with self.lock:
-            if not self.active:
-                utility.execute_main_thread(self.on_enable_clicked)
+        self._resume_timeout_id = None
 
-    def start_animation(self):
-        if not self.active or not self.animate:
-            return
-        utility.execute_main_thread(
-            lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
-        )
-        time.sleep(0.5)
-        utility.execute_main_thread(
-            lambda: self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
-        )
-        if self.animate and self.active:
-            time.sleep(0.5)
-            if self.animate and self.active:
-                utility.start_thread(self.start_animation)
+        return GLib.SOURCE_REMOVE
 
-    def stop_animation(self):
-        self.animate = False
-        if self.active:
-            utility.execute_main_thread(
-                lambda: self.sni_service.set_icon(
-                    "io.github.slgobinath.SafeEyes-enabled"
-                )
-            )
+    def __clear_resume_timer(self):
+        if self._resume_timeout_id is not None:
+            GLib.source_remove(self._resume_timeout_id)
+            self._resume_timeout_id = None
+
+    def start_animation(self) -> None:
+        if self._animation_timeout_id is not None:
+            self.stop_animation()
+
+        self._animation_icon_enabled = False
+
+        self._animation_timeout_id = GLib.timeout_add(500, self._do_animate)
+
+    def _do_animate(self) -> bool:
+        if not self.active:
+            self._animation_timeout_id = None
+            return GLib.SOURCE_REMOVE
+
+        if self._animation_icon_enabled:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
         else:
-            utility.execute_main_thread(
-                lambda: self.sni_service.set_icon(
-                    "io.github.slgobinath.SafeEyes-disabled"
-                )
-            )
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
+
+        self._animation_icon_enabled = not self._animation_icon_enabled
+
+        return GLib.SOURCE_CONTINUE
+
+    def stop_animation(self) -> None:
+        if self._animation_timeout_id is not None:
+            GLib.source_remove(self._animation_timeout_id)
+            self._animation_timeout_id = None
+
+        if self.active:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
+        else:
+            self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
 
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """Initialize the tray icon."""
-    global context
     global tray_icon
     global safeeyes_config
     logging.debug("Initialize Tray Icon plugin")
-    context = ctx
     safeeyes_config = safeeyes_cfg
     if not tray_icon:
-        tray_icon = TrayIcon(context, plugin_config)
+        tray_icon = TrayIcon(ctx, plugin_config)
     else:
         tray_icon.initialize(plugin_config)
 
@@ -838,7 +845,6 @@ def on_pre_break(break_obj):
     """Disable the menu if strict_break is enabled."""
     if safeeyes_config.get("strict_break"):
         tray_icon.lock_menu()
-    tray_icon.animate = True
     tray_icon.start_animation()
 
 

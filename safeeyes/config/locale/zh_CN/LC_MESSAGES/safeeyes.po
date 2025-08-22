@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-06-27 00:57+0000\n"
-"Last-Translator: aerowolf <aerowolf@tom.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"safe-eyes/translations/zh_Hans/>\n"
+"PO-Revision-Date: 2025-08-18 08:50+0000\n"
+"Last-Translator: lalala <lalala_233@qq.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
+"projects/safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6-rc\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "轻轻闭上眼睛"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -85,13 +85,6 @@ msgstr "显示Safe Eyes运行状态后退出"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes 没有运行"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes 正在没有RPC服务器的情况下运行。打开RPC服务器可以使用命令行参数。"
-
 # About dialog
 msgid "Close"
 msgstr "关闭"
@@ -111,11 +104,11 @@ msgstr "许可"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "贡献者列表"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "帮助我们翻译这个软件"
 
 # Break screen
 msgid "Skip"
@@ -160,14 +153,6 @@ msgstr "允许推迟休息"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "支持内部状态"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "使用RPC服务器接收运行时命令"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "没有RPC服务器，命令行命令可能无法正常工作"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -493,15 +478,15 @@ msgstr "立即休息"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "下一个休息"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "短休息"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "长休息"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -525,62 +510,86 @@ msgstr "暂停媒体"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "连续跳过限制"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "允许连续跳过或推迟的次数"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "限制连续跳过或推迟的次数"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "连续跳过或推迟休息 %(num)d/%(allowed)d 次"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "RSI 预防"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "请为您的桌面环境安装提供托盘图标的服务。"
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "下次长休息在 %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "下次休息在 %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "所需插件 '%s' 缺少依赖项！"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
-msgstr ""
+msgstr "请安装依赖项或禁用该插件。要隐藏此消息，您还可以在设置中停用该插件。"
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "点击此处了解更多信息"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "临时禁用插件"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "永久禁用"
 
 msgid "License:"
-msgstr ""
+msgstr "许可："
 
 #, python-format
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"在 '%(old)s' 发现旧版样式表，已忽略。若需自定义样式，请在 '%(new)s' 创建新版"
+"样式表。"
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr "自定义推迟和跳过快捷键在 Wayland 上不起作用。"
+
+msgid "Safe Eyes - Error"
+msgstr "Safe Eyes - 错误"
+
+msgid "A required plugin is missing dependencies!"
+msgstr "所需插件缺少依赖项！"
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

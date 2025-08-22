@@ -17,13 +17,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from safeeyes import utility
+from safeeyes.translations import translate as _
 
 
 def validate(plugin_config, plugin_settings):
     command = None
-    if utility.DESKTOP_ENVIRONMENT == "gnome" and utility.IS_WAYLAND:
-        command = "dbus-send"
-    elif utility.DESKTOP_ENVIRONMENT == "sway":
+    if utility.DESKTOP_ENVIRONMENT == "sway":
         command = "swayidle"
     elif utility.IS_WAYLAND:
         if not utility.module_exist("pywayland"):

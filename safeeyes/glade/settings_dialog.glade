@@ -19,7 +19,7 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="adjust_disable_keyboard_shortcut_duration">
     <property name="upper">15</property>
@@ -77,6 +77,7 @@
             <property name="receives-default">1</property>
             <property name="hexpand">1</property>
             <property name="vexpand">1</property>
+            <signal name="clicked" handler="on_reset_menu_clicked" swapped="no"/>
             <style>
               <class name="btn_menu"/>
             </style>
@@ -85,11 +86,12 @@
       </object>
     </child>
   </object>
-  <object class="GtkApplicationWindow" id="window_settings">
+  <template parent="GtkApplicationWindow" class="SettingsDialog">
     <property name="title">Safe Eyes</property>
     <property name="default-width">450</property>
     <property name="default-height">650</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no" />
     <child>
       <object class="GtkStack" id="stack">
         <property name="visible">1</property>
@@ -151,6 +153,7 @@
                                         <property name="numeric">1</property>
                                         <property name="update-policy">if-valid</property>
                                         <property name="value">1</property>
+                                        <signal name="value-changed" handler="on_spin_short_break_interval_change" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
@@ -212,6 +215,8 @@
                                     <property name="show-close-button">1</property>
                                     <property name="hexpand">1</property>
                                     <property name="vexpand">1</property>
+                                    <signal name="close" handler="on_info_bar_long_break_close" swapped="no"/>
+                                    <signal name="response" handler="on_info_bar_long_break_close" swapped="no"/>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="spacing">16</property>
@@ -261,6 +266,7 @@
                                         <property name="wrap">1</property>
                                         <property name="update-policy">if-valid</property>
                                         <property name="value">1</property>
+                                        <signal name="value-changed" handler="on_spin_long_break_interval_change" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
@@ -406,34 +412,53 @@
                                         <property name="can-focus">1</property>
                                         <property name="halign">end</property>
                                         <property name="valign">center</property>
+                                        <signal name="state-set" handler="on_switch_postpone_activate" swapped="no"/>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="box10">
-                                    <property name="visible">1</property>
                                     <property name="spacing">5</property>
-                                    <property name="homogeneous">1</property>
+                                    <property name="visible">1</property>
                                     <child>
                                       <object class="GtkLabel" id="lbl_postpone_duration">
-                                        <property name="visible">1</property>
                                         <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Postponement duration (in minutes)</property>
+                                        <property name="label" translatable="yes">Postponement duration in</property>
+                                        <property name="visible">1</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkDropDown" id="dropdown_postpone_unit">
+                                        <property name="halign">start</property>
+                                        <property name="valign">center</property>
+                                        <property name="hexpand">true</property>
+                                        <property name="vexpand">false</property>
+                                        <property name="selected">0</property>
+                                        <property name="model">
+                                          <object class="GtkStringList">
+                                            <items>
+                                              <item translatable="yes">minutes</item>
+                                              <item translatable="yes">seconds</item>
+                                            </items>
+                                          </object>
+                                        </property>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkSpinButton" id="spin_postpone_duration">
-                                        <property name="visible">1</property>
-                                        <property name="can-focus">1</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                        <property name="text">1</property>
                                         <property name="adjustment">adjust_postpone_duration</property>
+                                        <property name="can-focus">1</property>
                                         <property name="climb-rate">1</property>
+                                        <property name="halign">end</property>
+                                        <property name="hexpand">True</property>
+                                        <property name="hexpand-set">True</property>
                                         <property name="numeric">1</property>
+                                        <property name="text">1</property>
                                         <property name="update-policy">if-valid</property>
+                                        <property name="valign">center</property>
                                         <property name="value">1</property>
+                                        <property name="visible">1</property>
                                       </object>
                                     </child>
                                   </object>
@@ -480,40 +505,6 @@
                                     </child>
                                     <child>
                                       <object class="GtkSwitch" id="switch_persist">
-                                        <property name="visible">1</property>
-                                        <property name="can-focus">1</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkInfoBar" id="warn_bar_rpc_server">
-                                    <property name="visible">0</property>
-                                    <property name="message-type">warning</property>
-                                    <property name="hexpand">1</property>
-                                    <property name="vexpand">1</property>
-                                    <property name="show-close-button">1</property>
-                                    <style>
-                                      <class name="warn_bar_rpc_server"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkBox" id="box15">
-                                    <property name="visible">1</property>
-                                    <property name="spacing">5</property>
-                                    <property name="homogeneous">1</property>
-                                    <child>
-                                      <object class="GtkLabel" id="lbl_toggle_rpc_server">
-                                        <property name="visible">1</property>
-                                        <property name="halign">start</property>
-                                        <property name="label" translatable="yes">Use RPC server to receive runtime commands</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSwitch" id="switch_rpc_server">
                                         <property name="visible">1</property>
                                         <property name="can-focus">1</property>
                                         <property name="halign">end</property>
@@ -640,6 +631,7 @@
                         <property name="receives-default">1</property>
                         <property name="halign">end</property>
                         <property name="icon-name">gtk-add</property>
+                        <signal name="clicked" handler="add_break" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -727,5 +719,5 @@
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

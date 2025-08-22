@@ -6,8 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-29 10:02+0000\n"
-"Last-Translator: knowcart <knowcart@gmail.com>\n"
+"PO-Revision-Date: 2025-05-22 09:20+0000\n"
+"Last-Translator: abdelbasset jabrane "
+"<naminio201@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.10-dev\n"
+"X-Generator: Weblate 5.12-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -86,12 +87,6 @@ msgstr "أظهر حالة برنامج safeeyes المشتغل حاليا و أ�
 msgid "Safe Eyes is not running"
 msgstr "SafeEyes لا يعمل"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr "يعمل Safe Eyes الآن دون خادوم RPC. شغِّله لكي تستعمل معطيات سطر الأوامر."
-
 # About dialog
 msgid "Close"
 msgstr "أغلق"
@@ -158,14 +153,6 @@ msgstr "مكّن تأخير الاستراحات"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "ثبّت الحالة الداخلية"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "استعمل خادوم RPC لاستقبال الأوامر في وقت التشغيل"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "قد لا تعمل أوامر سطر الأوامر من غير خادوم RPC"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -250,7 +237,7 @@ msgstr "وقت الانتظار"
 
 # Settings dialog
 msgid "Override"
-msgstr "تجاوز"
+msgstr "استبدال"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -598,6 +585,30 @@ msgstr "الترخيص:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"تم العثور على ورقة الأنماط القديمة في '%(old)s'، تم تجاهلها. بالنسبة للأنماط "
+"المخصصة، قم بإنشاء ورقة أنماط جديدة في '%(new)s' بدلاً من ذلك."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

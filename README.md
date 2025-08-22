@@ -118,16 +118,18 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 Ensure to meet the following dependencies:
 
 - gir1.2-notify-0.7
+- gir1.2-gtk-4.0
 - python3-babel
 - python3-croniter
-- python3-psutil
+- python3-gi
 - python3-packaging
 - python3-xlib
-- xprintidle (optional)
-- wlrctl (wayland optional)
+- python3-pywayland (optional for KDE/other wayland)
+- xprintidle (optional for X11)
+- wlrctl (optional for wayland/wlroots)
 - Python 3.10+
 
-**To install Safe Eyes:**
+**To install Safe Eyes from PyPI:**
 
 ```bash
 sudo pip3 install safeeyes
@@ -188,7 +190,6 @@ This method has the same caveats about icons/window icons as running from source
 - Smart pause if system is idle
 - Multi-screen support
 - Customizable user interface
-- RPC API to control externally
 - Command-line arguments to control the running instance
 - Customizable using plug-ins
 
@@ -208,7 +209,12 @@ To ensure that the coding and formatting guidelines are followed, install [ruff]
 
 To ensure that any types are correct, install [mypy](https://github.com/python/mypy) and run `mypy safeeyes`.
 
-The last three checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+To ensure that the tests still pass, install [pytest](https://docs.pytest.org/en/stable/) and run `pytest`.
+
+The last four checks are also run in CI, so a PR must pass all the tests for it to be mmerged.
+
+It is also possible to use dependency groups to install the needed dependencies. When using a new enough version of pip, run `pip install --group types` to install all dependencies to run the type check.
+The available dependency groups can be found in the `pyproject.toml` file.
 
 ## How to Release?
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-04-18 10:26+0000\n"
-"Last-Translator: José Vieira <jvieira33@sapo.pt>\n"
+"PO-Revision-Date: 2025-06-21 16:03+0000\n"
+"Last-Translator: Victor Viriato <josevviriato@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/pt/>\n"
 "Language: pt\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr ""
+msgstr "Feche seus olhos suavemente"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -85,14 +85,6 @@ msgstr "mostrar o estado de execução do Safe Eyes e sair"
 msgid "Safe Eyes is not running"
 msgstr "O Safe Eyes não está em execução"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"O Safe Eyes está em execução sem um servidor RPC (interno). Acionar um "
-"servidor RPC para usar argumentos de linha de comando."
-
 # About dialog
 msgid "Close"
 msgstr "Fechar"
@@ -113,11 +105,11 @@ msgstr "Licença"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "Lista de Contribuidores"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "Ajude-nos a traduzir esse app"
 
 # Break screen
 msgid "Skip"
@@ -162,15 +154,6 @@ msgstr "Permitir adiamento de pausas"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Manter o estado interno"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Utilizar um servidor RPC (interno) para receber comandos de runtime"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr ""
-"Sem o servidor RPC, os comandos da linha de comandos podem não funcionar"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -501,15 +484,15 @@ msgstr "Fazer uma pausa agora"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "Qualquer pausa"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "Pausa curta"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "Pausa longa"
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -533,62 +516,90 @@ msgstr "Suspender a reprodução"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "Limitar Pulos Consecutivos"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "Quantos pulos ou adiantamentos são permitidos em sequência"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "Limitar quantas pausas podem ser puladas ou adiadas em sequência"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "%(num)d%(allowed)d pausas seguidas ignoradas ou adiadas"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "Prevenção de LER"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
 msgstr ""
+"Por favor, instale um serviço que forneça ícones na bandeja do sistema para "
+"o seu ambiente de desktop."
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "Próxima pausa longa as %s"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "Próximas pausas as %(short)s%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "O plugin necessário '%s' está faltando dependências!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
+"Por favor, instale as dependências ou desative o plugin. Para ocultar essa "
+"mensagem, você também pode desativar o plugin nas configurações."
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "Clique aqui para mais informações"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "Desativar plugin temporariamente"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "Desativar permanentemente"
 
 msgid "License:"
-msgstr ""
+msgstr "Licença:"
 
 #, python-format
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+"Folha de estilos antiga encontrada em %(old)s, ignorando. Para estilos "
+"personalizados, crie uma nova folha de estilos em%(new)s."
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break

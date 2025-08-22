@@ -85,14 +85,6 @@ msgstr "in trạng thái chạy phiên bản Safe Eyes và thoát"
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes không hoạt động"
 
-# RPC not enabled message
-msgid ""
-"Safe Eyes is running without an RPC server. Turn it on to use command-line "
-"arguments."
-msgstr ""
-"Safe Eyes đang chạy mà không có máy chủ RPC. Bạn hãy bật nó lên để sử dụng "
-"tham số dòng lệnh nhé."
-
 # About dialog
 msgid "Close"
 msgstr "Đóng"
@@ -162,14 +154,6 @@ msgstr "Cho phép tạm hoãn nghỉ ngơi"
 # Settings dialog
 msgid "Persist the internal state"
 msgstr "Duy trì nội trạng thái"
-
-# Settings dialog
-msgid "Use RPC server to receive runtime commands"
-msgstr "Sử dụng máy chủ RPC để nhận lệnh thời gian chạy"
-
-# Settings dialog
-msgid "Without the RPC server, command-line commands may not work"
-msgstr "Nếu không có máy chủ RPC, các lệnh dòng lệnh có thể không hoạt động"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
@@ -586,6 +570,28 @@ msgstr ""
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
 # Short break
