@@ -33,7 +33,6 @@ from Xlib import X
 
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gdk
-from gi.repository import GLib
 from gi.repository import Gtk
 from gi.repository import GdkX11
 
@@ -121,7 +120,7 @@ class BreakScreen:
         self.enable_shortcut = self.shortcut_disable_time <= seconds
         mins, secs = divmod(countdown, 60)
         timeformat = "{:02d}:{:02d}".format(mins, secs)
-        GLib.idle_add(lambda: self.__update_count_down(timeformat))
+        self.__update_count_down(timeformat)
 
     def show_message(
         self, break_obj: Break, widget: str, tray_actions: list[TrayAction] = []
@@ -130,9 +129,7 @@ class BreakScreen:
         message = break_obj.name
         image_path = break_obj.image
         self.enable_shortcut = self.shortcut_disable_time <= 0
-        GLib.idle_add(
-            lambda: self.__show_break_screen(message, image_path, widget, tray_actions)
-        )
+        self.__show_break_screen(message, image_path, widget, tray_actions)
 
     def close(self) -> None:
         """Hide the break screen from active window and destroy all other
