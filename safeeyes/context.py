@@ -21,7 +21,7 @@ import datetime
 import typing
 
 from safeeyes import utility
-from safeeyes.model import State
+from safeeyes.model import BreakType, State
 
 if typing.TYPE_CHECKING:
     from safeeyes.safeeyes import SafeEyes
@@ -60,8 +60,8 @@ class API:
     def quit(self) -> None:
         utility.execute_main_thread(self._application.quit)
 
-    def take_break(self, break_type=None) -> None:
-        self._application.take_break(break_type)
+    def take_break(self, break_type: typing.Optional[BreakType] = None) -> None:
+        utility.execute_main_thread(self._application.take_break, break_type)
 
     def has_breaks(self, break_type=None) -> bool:
         return self._application.safe_eyes_core.has_breaks(break_type)

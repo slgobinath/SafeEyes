@@ -30,7 +30,7 @@ from safeeyes import context, utility
 from safeeyes.ui.about_dialog import AboutDialog
 from safeeyes.ui.break_screen import BreakScreen
 from safeeyes.ui.required_plugin_dialog import RequiredPluginDialog
-from safeeyes.model import State, RequiredPluginException
+from safeeyes.model import BreakType, State, RequiredPluginException
 from safeeyes.translations import translate as _
 from safeeyes.plugin_manager import PluginManager
 from safeeyes.core import SafeEyesCore
@@ -536,9 +536,9 @@ class SafeEyes(Gtk.Application):
         self.plugins_manager.stop_break()
         return True
 
-    def take_break(self, break_type=None):
+    def take_break(self, break_type: typing.Optional[BreakType] = None) -> None:
         """Take a break now."""
-        utility.execute_main_thread(self.safe_eyes_core.take_break, break_type)
+        self.safe_eyes_core.take_break(break_type)
 
     def status(self):
         """Return the status of Safe Eyes."""
