@@ -266,7 +266,7 @@ class SettingsDialog(Gtk.ApplicationWindow):
 
     def show(self) -> None:
         """Show the SettingsDialog."""
-        super().show()
+        self.present()
 
     @Gtk.Template.Callback()
     def on_switch_postpone_activate(self, switch, state) -> None:

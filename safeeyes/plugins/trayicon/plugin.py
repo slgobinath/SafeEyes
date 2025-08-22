@@ -24,6 +24,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gio, GLib
 import logging
 from safeeyes import utility
+from safeeyes.context import Context
 from safeeyes.translations import translate as _
 import threading
 import typing
@@ -32,7 +33,6 @@ import typing
 Safe Eyes tray icon plugin
 """
 
-context = None
 tray_icon = None
 safeeyes_config = None
 
@@ -52,6 +52,10 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
         <property name="Status" type="s" access="read"/>
         <signal name="NewIcon"/>
         <signal name="NewTooltip"/>
+
+        <method name="ProvideXdgActivationToken">
+            <arg name="token" type="s" direction="in"/>
+        </method>
 
         <property name="XAyatanaLabel" type="s" access="read"/>
         <signal name="XAyatanaNewLabel">
@@ -192,7 +196,7 @@ class DBusMenuService(DBusService):
     # TODO: replace dict here with more exact typing for item
     idToItems: dict[str, dict] = {}
 
-    def __init__(self, session_bus, context, items):
+    def __init__(self, session_bus, items):
         super().__init__(
             interface_info=MENU_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -374,7 +378,9 @@ class StatusNotifierItemService(DBusService):
     ItemIsMenu = True
     Menu = None
 
-    def __init__(self, session_bus, context, menu_items):
+    last_activation_token: typing.Optional[str] = None
+
+    def __init__(self, session_bus, menu_items):
         super().__init__(
             interface_info=SNI_NODE_INFO,
             object_path=self.DBUS_SERVICE_PATH,
@@ -383,7 +389,7 @@ class StatusNotifierItemService(DBusService):
 
         self.bus = session_bus
 
-        self._menu = DBusMenuService(session_bus, context, menu_items)
+        self._menu = DBusMenuService(session_bus, menu_items)
         self.Menu = self._menu.DBUS_SERVICE_PATH
 
     def register(self):
@@ -424,6 +430,9 @@ class StatusNotifierItemService(DBusService):
 
         self.emit_signal("XAyatanaNewLabel", (label, ""))
 
+    def ProvideXdgActivationToken(self, token: str) -> None:
+        self.last_activation_token = token
+
 
 class TrayIcon:
     """Create and show the tray icon along with the tray menu."""
@@ -431,16 +440,16 @@ class TrayIcon:
     _animation_timeout_id: typing.Optional[int] = None
     _animation_icon_enabled: bool = False
 
-    def __init__(self, context, plugin_config):
+    def __init__(self, context: Context, plugin_config):
         self.context = context
-        self.on_show_settings = context["api"]["show_settings"]
-        self.on_show_about = context["api"]["show_about"]
-        self.quit = context["api"]["quit"]
-        self.enable_safeeyes = context["api"]["enable_safeeyes"]
-        self.disable_safeeyes = context["api"]["disable_safeeyes"]
-        self.take_break = context["api"]["take_break"]
-        self.has_breaks = context["api"]["has_breaks"]
-        self.get_break_time = context["api"]["get_break_time"]
+        self.on_show_settings = context.api.show_settings
+        self.on_show_about = context.api.show_about
+        self.quit = context.api.quit
+        self.enable_safeeyes = context.api.enable_safeeyes
+        self.disable_safeeyes = context.api.disable_safeeyes
+        self.take_break = context.api.take_break
+        self.has_breaks = context.api.has_breaks
+        self.get_break_time = context.api.get_break_time
         self.plugin_config = plugin_config
         self.date_time = None
         self.active = True
@@ -453,7 +462,7 @@ class TrayIcon:
         session_bus = Gio.bus_get_sync(Gio.BusType.SESSION)
 
         self.sni_service = StatusNotifierItemService(
-            session_bus, context, menu_items=self.get_items()
+            session_bus, menu_items=self.get_items()
         )
         self.sni_service.register()
 
@@ -662,19 +671,19 @@ class TrayIcon:
             self.idle_condition.release()
         self.quit()
 
-    def show_settings(self):
+    def show_settings(self) -> None:
         """Handle Settings menu action.
 
         This action shows the Settings dialog.
         """
-        self.on_show_settings()
+        self.on_show_settings(self.sni_service.last_activation_token)
 
-    def show_about(self):
+    def show_about(self) -> None:
         """Handle About menu action.
 
         This action shows the About dialog.
         """
-        self.on_show_about()
+        self.on_show_about(self.sni_service.last_activation_token)
 
     def next_break_time(self, dateTime):
         """Update the next break time to be displayed in the menu and
@@ -821,14 +830,12 @@ class TrayIcon:
 
 def init(ctx, safeeyes_cfg, plugin_config):
     """Initialize the tray icon."""
-    global context
     global tray_icon
     global safeeyes_config
     logging.debug("Initialize Tray Icon plugin")
-    context = ctx
     safeeyes_config = safeeyes_cfg
     if not tray_icon:
-        tray_icon = TrayIcon(context, plugin_config)
+        tray_icon = TrayIcon(ctx, plugin_config)
     else:
         tray_icon.initialize(plugin_config)
 

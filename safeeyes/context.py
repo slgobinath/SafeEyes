@@ -40,11 +40,11 @@ class API:
         """This is soft-deprecated - it is preferred to access the property."""
         return getattr(self, key)
 
-    def show_settings(self) -> None:
-        utility.execute_main_thread(self._application.show_settings)
+    def show_settings(self, activation_token: typing.Optional[str] = None) -> None:
+        utility.execute_main_thread(self._application.show_settings, activation_token)
 
-    def show_about(self) -> None:
-        utility.execute_main_thread(self._application.show_about)
+    def show_about(self, activation_token: typing.Optional[str] = None) -> None:
+        utility.execute_main_thread(self._application.show_about, activation_token)
 
     def enable_safeeyes(self, next_break_time=-1) -> None:
         utility.execute_main_thread(self._application.enable_safeeyes, next_break_time)
