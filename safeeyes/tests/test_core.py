@@ -20,6 +20,7 @@ import datetime
 import pytest
 import typing
 
+from safeeyes import context
 from safeeyes import core
 from safeeyes import model
 
@@ -134,7 +135,7 @@ class TestSafeEyesCore:
         sequential_threading_handle: SafeEyesCoreHandle,
         time_machine: TimeMachineFixture,
         safe_eyes_core: core.SafeEyesCore,
-        context,
+        ctx: context.Context,
         break_duration: int,
         break_name_translated: str,
         initial: bool = False,
@@ -154,11 +155,11 @@ class TestSafeEyesCore:
         if initial:
             safe_eyes_core.start()
         else:
-            assert context["state"] == model.State.BREAK
+            assert ctx["state"] == model.State.BREAK
 
             sequential_threading_handle.next()
 
-        assert context["state"] == model.State.WAITING
+        assert ctx["state"] == model.State.WAITING
 
         on_update_next_break.assert_called_once()
         assert isinstance(on_update_next_break.call_args[0][0], model.Break)
@@ -168,7 +169,7 @@ class TestSafeEyesCore:
         self.run_next_break_from_waiting_state(
             sequential_threading_handle,
             safe_eyes_core,
-            context,
+            ctx,
             break_duration,
             break_name_translated,
         )
@@ -177,7 +178,7 @@ class TestSafeEyesCore:
         self,
         sequential_threading_handle: SafeEyesCoreHandle,
         safe_eyes_core: core.SafeEyesCore,
-        context,
+        ctx: context.Context,
         break_duration: int,
         break_name_translated: str,
     ) -> None:
@@ -193,13 +194,13 @@ class TestSafeEyesCore:
         safe_eyes_core.on_count_down += on_count_down
         safe_eyes_core.on_stop_break += on_stop_break
 
-        assert context["state"] == model.State.WAITING
+        assert ctx["state"] == model.State.WAITING
 
         # continue after condvar
         sequential_threading_handle.next()
         # end of __scheduler_job
 
-        assert context["state"] == model.State.PRE_BREAK
+        assert ctx["state"] == model.State.PRE_BREAK
 
         on_pre_break.assert_called_once()
         assert isinstance(on_pre_break.call_args[0][0], model.Break)
@@ -210,7 +211,7 @@ class TestSafeEyesCore:
         # first sleep in __start_break
         sequential_threading_handle.next()
 
-        assert context["state"] == model.State.BREAK
+        assert ctx["state"] == model.State.BREAK
 
         on_start_break.assert_called_once()
         assert isinstance(on_start_break.call_args[0][0], model.Break)
@@ -222,13 +223,13 @@ class TestSafeEyesCore:
         assert start_break.call_args[0][0].name == break_name_translated
         start_break.reset_mock()
 
-        assert context["state"] == model.State.BREAK
+        assert ctx["state"] == model.State.BREAK
 
         # continue sleep in __start_break
         for i in range(break_duration - 1):
             sequential_threading_handle.next()
 
-        assert context["state"] == model.State.BREAK
+        assert ctx["state"] == model.State.BREAK
 
         sequential_threading_handle.next()
         # end of __start_break
@@ -241,7 +242,7 @@ class TestSafeEyesCore:
         assert on_stop_break.call_count == 1
         on_stop_break.reset_mock()
 
-        assert context["state"] == model.State.BREAK
+        assert ctx["state"] == model.State.BREAK
 
     def assert_datetime(self, string: str):
         if not string.endswith("+00:00"):
@@ -251,7 +252,9 @@ class TestSafeEyesCore:
         ) == datetime.datetime.fromisoformat(string)
 
     def test_start_empty(self, sequential_threading: SequentialThreadingFixture):
-        context: dict[str, typing.Any] = {}
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         config = model.Config(
             user_config={
                 "short_breaks": [],
@@ -266,7 +269,7 @@ class TestSafeEyesCore:
             system_config={},
         )
         on_update_next_break = mock.Mock()
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
         safe_eyes_core.on_update_next_break += mock
 
         safe_eyes_core.initialize(config)
@@ -277,9 +280,9 @@ class TestSafeEyesCore:
         on_update_next_break.assert_not_called()
 
     def test_start(self, sequential_threading: SequentialThreadingFixture):
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         config = model.Config(
             user_config={
                 "short_breaks": [
@@ -304,7 +307,7 @@ class TestSafeEyesCore:
             system_config={},
         )
         on_update_next_break = mock.Mock()
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
         safe_eyes_core.on_update_next_break += on_update_next_break
 
         safe_eyes_core.initialize(config)
@@ -313,7 +316,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.start()
 
-        assert context["state"] == model.State.WAITING
+        assert ctx["state"] == model.State.WAITING
 
         on_update_next_break.assert_called_once()
         assert isinstance(on_update_next_break.call_args[0][0], model.Break)
@@ -325,16 +328,16 @@ class TestSafeEyesCore:
         sequential_threading_handle.next()
 
         safe_eyes_core.stop()
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED
 
     def test_full_run_with_defaults(
         self,
         sequential_threading: SequentialThreadingFixture,
         time_machine: TimeMachineFixture,
     ):
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         short_break_duration = 15  # seconds
         short_break_interval = 15  # minutes
         pre_break_warning_time = 10  # seconds
@@ -366,7 +369,7 @@ class TestSafeEyesCore:
 
         self.assert_datetime("2024-08-25T13:00:00")
 
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
 
         sequential_threading_handle = sequential_threading(safe_eyes_core)
 
@@ -376,7 +379,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
             initial=True,
@@ -391,7 +394,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -402,7 +405,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -413,7 +416,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -424,7 +427,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             long_break_duration,
             "translated!: long break 1",
         )
@@ -439,7 +442,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
         )
@@ -451,7 +454,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop()
 
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED
 
     def test_long_duration_is_bigger_than_short_interval(
         self,
@@ -459,9 +462,9 @@ class TestSafeEyesCore:
         time_machine: TimeMachineFixture,
     ):
         """Example taken from https://github.com/slgobinath/SafeEyes/issues/640."""
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         short_break_duration = 300  # seconds = 5min
         short_break_interval = 25  # minutes
         pre_break_warning_time = 10  # seconds
@@ -493,7 +496,7 @@ class TestSafeEyesCore:
 
         self.assert_datetime("2024-08-25T13:00:00")
 
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
 
         sequential_threading_handle = sequential_threading(safe_eyes_core)
 
@@ -503,7 +506,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
             initial=True,
@@ -518,7 +521,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -529,7 +532,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -540,7 +543,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             long_break_duration,
             "translated!: long break 1",
         )
@@ -555,7 +558,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -567,7 +570,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop()
 
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED
 
     def test_idle(
         self,
@@ -575,9 +578,9 @@ class TestSafeEyesCore:
         time_machine: TimeMachineFixture,
     ):
         """Test idling for short amount of time."""
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         short_break_duration = 15  # seconds
         short_break_interval = 15  # minutes
         pre_break_warning_time = 10  # seconds
@@ -609,7 +612,7 @@ class TestSafeEyesCore:
 
         self.assert_datetime("2024-08-25T13:00:00")
 
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
 
         sequential_threading_handle = sequential_threading(safe_eyes_core)
 
@@ -619,7 +622,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
             initial=True,
@@ -636,7 +639,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop(is_resting=True)
 
-        assert context["state"] == model.State.RESTING
+        assert ctx["state"] == model.State.RESTING
 
         time_machine.shift(delta=idle_period)
 
@@ -650,7 +653,7 @@ class TestSafeEyesCore:
         self.run_next_break_from_waiting_state(
             sequential_threading_handle,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -661,7 +664,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -672,7 +675,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -683,7 +686,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             long_break_duration,
             "translated!: long break 1",
         )
@@ -698,7 +701,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
         )
@@ -710,7 +713,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop()
 
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED
 
     def test_idle_skip_long(
         self,
@@ -718,9 +721,9 @@ class TestSafeEyesCore:
         time_machine: TimeMachineFixture,
     ):
         """Test idling for longer than long break time."""
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         short_break_duration = 15  # seconds
         short_break_interval = 15  # minutes
         pre_break_warning_time = 10  # seconds
@@ -752,7 +755,7 @@ class TestSafeEyesCore:
 
         self.assert_datetime("2024-08-25T13:00:00")
 
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
 
         sequential_threading_handle = sequential_threading(safe_eyes_core)
 
@@ -762,7 +765,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
             initial=True,
@@ -779,7 +782,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop(is_resting=True)
 
-        assert context["state"] == model.State.RESTING
+        assert ctx["state"] == model.State.RESTING
 
         time_machine.shift(delta=idle_period)
 
@@ -793,7 +796,7 @@ class TestSafeEyesCore:
         self.run_next_break_from_waiting_state(
             sequential_threading_handle,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -804,7 +807,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -815,7 +818,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -826,7 +829,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
         )
@@ -837,7 +840,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             long_break_duration,
             "translated!: long break 1",
         )
@@ -852,7 +855,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -864,7 +867,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop()
 
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED
 
     def test_idle_skip_long_before_long(
         self,
@@ -876,9 +879,9 @@ class TestSafeEyesCore:
 
         This used to skip all the short breaks too.
         """
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
         short_break_duration = 15  # seconds
         short_break_interval = 15  # minutes
         pre_break_warning_time = 10  # seconds
@@ -910,7 +913,7 @@ class TestSafeEyesCore:
 
         self.assert_datetime("2024-08-25T13:00:00")
 
-        safe_eyes_core = core.SafeEyesCore(context)
+        safe_eyes_core = core.SafeEyesCore(ctx)
 
         sequential_threading_handle = sequential_threading(safe_eyes_core)
 
@@ -920,7 +923,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
             initial=True,
@@ -935,7 +938,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -946,7 +949,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -957,7 +960,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -970,7 +973,7 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop(is_resting=True)
 
-        assert context["state"] == model.State.RESTING
+        assert ctx["state"] == model.State.RESTING
 
         time_machine.shift(delta=idle_period)
 
@@ -984,7 +987,7 @@ class TestSafeEyesCore:
         self.run_next_break_from_waiting_state(
             sequential_threading_handle,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 1",
         )
@@ -995,7 +998,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 2",
         )
@@ -1006,7 +1009,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 3",
         )
@@ -1017,7 +1020,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             short_break_duration,
             "translated!: break 4",
         )
@@ -1031,7 +1034,7 @@ class TestSafeEyesCore:
             sequential_threading_handle,
             time_machine,
             safe_eyes_core,
-            context,
+            ctx,
             long_break_duration,
             "translated!: long break 2",
         )
@@ -1040,4 +1043,4 @@ class TestSafeEyesCore:
 
         safe_eyes_core.stop()
 
-        assert context["state"] == model.State.STOPPED
+        assert ctx["state"] == model.State.STOPPED

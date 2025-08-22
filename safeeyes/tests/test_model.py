@@ -19,7 +19,8 @@
 import pytest
 import random
 import typing
-from safeeyes import model
+from unittest import mock
+from safeeyes import context, model
 
 
 class TestBreak:
@@ -65,9 +66,11 @@ class TestBreakQueue:
             system_config={},
         )
 
-        context: dict[str, typing.Any] = {}
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
 
-        bq = model.BreakQueue.create(config, context)
+        bq = model.BreakQueue.create(config, ctx)
 
         assert bq is None
 
@@ -98,11 +101,11 @@ class TestBreakQueue:
             system_config={},
         )
 
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
 
-        bq = model.BreakQueue.create(config, context)
+        bq = model.BreakQueue.create(config, ctx)
 
         assert bq is not None
 
@@ -135,11 +138,11 @@ class TestBreakQueue:
             system_config={},
         )
 
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
 
-        bq = model.BreakQueue.create(config, context)
+        bq = model.BreakQueue.create(config, ctx)
 
         assert bq is not None
 
@@ -177,11 +180,11 @@ class TestBreakQueue:
             system_config={},
         )
 
-        context: dict[str, typing.Any] = {
-            "session": {},
-        }
+        ctx = context.Context(
+            api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
+        )
 
-        bq = model.BreakQueue.create(config, context)
+        bq = model.BreakQueue.create(config, ctx)
 
         assert bq is not None
 

@@ -24,6 +24,7 @@ import typing
 
 import gi
 from safeeyes import utility
+from safeeyes.context import Context
 from safeeyes.model import Break, Config, TrayAction
 from safeeyes.translations import translate as _
 import Xlib
@@ -50,7 +51,7 @@ class BreakScreen:
     def __init__(
         self,
         application: Gtk.Application,
-        context,
+        context: Context,
         on_skipped: typing.Callable[[], None],
         on_postponed: typing.Callable[[], None],
     ):
@@ -70,7 +71,7 @@ class BreakScreen:
         self.show_skip_button = False
         self.show_postpone_button = False
 
-        if not self.context["is_wayland"]:
+        if not self.context.is_wayland:
             self.x11_display = Display()
 
     def initialize(self, config: Config) -> None:
@@ -80,7 +81,7 @@ class BreakScreen:
         self.keycode_shortcut_postpone = config.get("shortcut_postpone", 65)
         self.keycode_shortcut_skip = config.get("shortcut_skip", 9)
 
-        if self.context["is_wayland"] and (
+        if self.context.is_wayland and (
             self.keycode_shortcut_postpone != 65 or self.keycode_shortcut_skip != 9
         ):
             logging.warning(
@@ -138,7 +139,7 @@ class BreakScreen:
         windows.
         """
         logging.info("Close the break screen(s)")
-        if not self.context["is_wayland"]:
+        if not self.context.is_wayland:
             self.__release_keyboard_x11()
 
         # Destroy other windows if exists
@@ -153,7 +154,7 @@ class BreakScreen:
     ) -> None:
         """Show an empty break screen on all screens."""
         # Lock the keyboard
-        if not self.context["is_wayland"]:
+        if not self.context.is_wayland:
             utility.start_thread(self.__lock_keyboard_x11)
 
         display = Gdk.Display.get_default()
@@ -188,7 +189,7 @@ class BreakScreen:
                 self.on_skip_clicked,
             )
 
-            if self.context["is_wayland"]:
+            if self.context.is_wayland:
                 # Note: in theory, this could also be used on X11
                 # however, that already has its own implementation below
                 controller = Gtk.EventControllerKey()
@@ -200,7 +201,7 @@ class BreakScreen:
 
             self.windows.append(window)
 
-            if self.context["desktop"] == "kde":
+            if self.context.desktop == "kde":
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
@@ -212,10 +213,10 @@ class BreakScreen:
             # shortcut
             window.set_focus(None)
 
-            if not self.context["is_wayland"]:
+            if not self.context.is_wayland:
                 self.__window_set_keep_above_x11(window)
 
-            if self.context["is_wayland"]:
+            if self.context.is_wayland:
                 # this may or may not be granted by the window system
                 surface = window.get_surface()
                 if surface is not None:
