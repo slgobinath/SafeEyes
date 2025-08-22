@@ -19,9 +19,9 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkWindow" id="dialog_settings_plugin">
+  <template parent="GtkWindow" class="PluginSettingsDialog">
     <property name="title" translatable="yes">Plugin Settings</property>
     <property name="resizable">0</property>
     <property name="modal">1</property>
@@ -29,6 +29,7 @@
     <property name="default-height">10</property>
     <property name="destroy-with-parent">1</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no" />
     <child>
       <object class="GtkBox" id="box_settings">
         <property name="visible">1</property>
@@ -39,5 +40,5 @@
         <property name="homogeneous">1</property>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

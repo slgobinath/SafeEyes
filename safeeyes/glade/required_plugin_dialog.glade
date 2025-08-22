@@ -19,12 +19,13 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
-  <object class="GtkWindow" id="window_required_plugin">
+  <template parent="GtkApplicationWindow" class="RequiredPluginDialog">
     <property name="title" translatable="1">Safe Eyes - Error</property>
     <property name="resizable">0</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no"/>
     <child>
       <object class="GtkBox" id="layout_box">
         <property name="margin-start">5</property>
@@ -105,16 +106,18 @@
                 <property name="label" translatable="1">Quit</property>
                 <property name="receives-default">1</property>
                 <property name="vexpand">1</property>
+                <signal name="clicked" handler="on_close_clicked" swapped="no"/>
               </object>
             </child>
             <child>
               <object class="GtkButton" id="btn_disable_plugin">
                 <property name="label" translatable="1">Disable plugin temporarily</property>
+                <signal name="clicked" handler="on_disable_plugin_clicked" swapped="no"/>
               </object>
             </child>
           </object>
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>

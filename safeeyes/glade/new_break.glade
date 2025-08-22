@@ -19,7 +19,7 @@
 ~ You should have received a copy of the GNU General Public License
 ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<interface>
+<interface domain="safeeyes">
   <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="adjustment_duration">
     <property name="upper">100</property>
@@ -40,7 +40,7 @@
       </row>
     </data>
   </object>
-  <object class="GtkWindow" id="dialog_new_break">
+  <template parent="GtkWindow" class="NewBreakDialog">
     <property name="title" translatable="yes">New Break</property>
     <property name="resizable">0</property>
     <property name="modal">1</property>
@@ -48,6 +48,7 @@
     <property name="default-height">50</property>
     <property name="destroy-with-parent">1</property>
     <property name="icon-name">io.github.slgobinath.SafeEyes</property>
+    <signal name="close-request" handler="on_window_delete" swapped="no" />
     <child>
       <object class="GtkBox" id="box_settings">
         <property name="visible">1</property>
@@ -130,6 +131,7 @@
                 <property name="visible">1</property>
                 <property name="can-focus">1</property>
                 <property name="receives-default">1</property>
+                <signal name="clicked" handler="discard" swapped="no"/>
               </object>
             </child>
             <child>
@@ -138,11 +140,12 @@
                 <property name="visible">1</property>
                 <property name="can-focus">1</property>
                 <property name="receives-default">1</property>
+                <signal name="clicked" handler="save" swapped="no"/>
               </object>
             </child>
           </object>
         </child>
       </object>
     </child>
-  </object>
+  </template>
 </interface>
