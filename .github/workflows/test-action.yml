@@ -1,0 +1,18 @@
+name: Test toml action
+
+on: [push, pull_request]
+
+jobs:
+  test-toml-action:
+    runs-on: ubuntu-latest
+    name: test-toml-action
+    steps:
+      - name: Get Current Version
+        uses: deltragon/toml-action@9858d6baada20622d2f4dd175aff33d0c82f0515
+        with:
+          file: "pyproject.toml"
+          field: project.version
+        id: get_current_version
+      - name: Get the output time
+        run: echo "The version was ${{ steps.get_current_version.outputs.value }}"
+
