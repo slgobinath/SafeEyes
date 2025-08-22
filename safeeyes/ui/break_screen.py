@@ -143,7 +143,7 @@ class BreakScreen:
             self.__release_keyboard_x11()
 
         # Destroy other windows if exists
-        GLib.idle_add(lambda: self.__destroy_all_screens())
+        self.__destroy_all_screens()
 
     def __show_break_screen(
         self,
@@ -298,17 +298,20 @@ class BreakScreen:
                         event.detail == self.keycode_shortcut_skip
                         and self.show_skip_button
                     ):
-                        self.skip_break()
+                        utility.execute_main_thread(lambda: self.skip_break())
                         break
                     elif (
                         event.detail == self.keycode_shortcut_postpone
                         and self.show_postpone_button
                     ):
-                        self.postpone_break()
+                        utility.execute_main_thread(lambda: self.postpone_break())
                         break
             else:
                 # Reduce the CPU usage by sleeping for a second
                 time.sleep(1)
+
+        self.x11_display.ungrab_keyboard(X.CurrentTime)
+        self.x11_display.flush()
 
     def on_key_pressed_wayland(
         self, event_controller_key, keyval, keycode, state
@@ -325,13 +328,8 @@ class BreakScreen:
 
     def __release_keyboard_x11(self) -> None:
         """Release the locked keyboard."""
-        if self.x11_display is None:
-            return
-
         logging.info("Unlock the keyboard")
         self.lock_keyboard = False
-        self.x11_display.ungrab_keyboard(X.CurrentTime)
-        self.x11_display.flush()
 
     def __destroy_all_screens(self) -> None:
         """Close all the break screens."""
