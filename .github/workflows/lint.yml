@@ -13,3 +13,10 @@ jobs:
         # this runs `ruff check`
       - run: ruff format --check
         # this runs `ruff format --check`, additionally
+  lint-appstream:
+    runs-on: ubuntu-latest
+    name: appstream
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v3
+      - run: appstreamcli validate safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml
