@@ -1,3 +1,9 @@
+safeeyes (3.0.0b6) noble; urgency=medium
+
+  * Re-release due to broken github action
+
+ -- Mel Dafert <m@dafert.at>  Sun, 24 Aug 2025 10:30:00 +0000
+
 safeeyes (3.0.0b5) noble; urgency=medium
 
   * Re-release due to broken github action
