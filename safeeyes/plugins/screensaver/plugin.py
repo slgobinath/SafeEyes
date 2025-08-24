@@ -22,6 +22,7 @@ after long breaks.
 
 import logging
 import os
+import typing
 
 from safeeyes import utility
 from safeeyes.model import TrayAction
@@ -36,7 +37,7 @@ tray_icon_path = None
 icon_lock_later_path = None
 
 
-def __lock_screen_command():
+def __lock_screen_command() -> typing.Optional[list[str]]:
     """Function tries to detect the screensaver command based on the current
     envinroment.
 
@@ -94,10 +95,10 @@ def __lock_screen_command():
                 "/org/gnome/ScreenSaver",
                 "org.gnome.ScreenSaver.Lock",
             ]
-        elif os.environ.get("GNOME_DESKTOP_SESSION_ID"):
-            if "deprecated" not in os.environ.get(
-                "GNOME_DESKTOP_SESSION_ID"
-            ) and utility.command_exist("gnome-screensaver-command"):
+        elif gd_session := os.environ.get("GNOME_DESKTOP_SESSION_ID"):
+            if "deprecated" not in gd_session and utility.command_exist(
+                "gnome-screensaver-command"
+            ):
                 # Gnome 2
                 return ["gnome-screensaver-command", "--lock"]
     return None
