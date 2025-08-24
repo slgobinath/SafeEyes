@@ -27,7 +27,7 @@ from safeeyes import utility
 from safeeyes.model import TrayAction
 
 context = None
-lock_screen = False
+is_long_break: bool = False
 user_locked_screen = False
 lock_screen_command = None
 min_seconds = 0
@@ -134,15 +134,15 @@ def init(ctx, safeeyes_config, plugin_config):
 
 def on_start_break(break_obj):
     """Determine the break type and only if it is a long break, enable the
-    lock_screen flag.
+    is_long_break flag.
     """
-    global lock_screen
+    global is_long_break
     global seconds_passed
     global user_locked_screen
     user_locked_screen = False
     seconds_passed = 0
     if lock_screen_command:
-        lock_screen = break_obj.is_long_break()
+        is_long_break = break_obj.is_long_break()
 
 
 def on_countdown(countdown, seconds):
@@ -155,7 +155,7 @@ def on_stop_break():
     """Lock the screen after a long break if the user has not skipped within
     min_seconds.
     """
-    if user_locked_screen or (lock_screen and seconds_passed >= min_seconds):
+    if user_locked_screen or (is_long_break and seconds_passed >= min_seconds):
         __lock_screen_now()
 
 
