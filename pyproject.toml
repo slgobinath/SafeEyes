@@ -1,6 +1,6 @@
 [project]
 name = "safeeyes"
-version = "3.0.0b6"
+version = "3.0.0"
 description = "Protect your eyes from eye strain using this continuous breaks reminder."
 keywords = ["linux utility health eye-strain safe-eyes"]
 readme = "README.md"
@@ -31,7 +31,7 @@ requires-python = ">=3.10"
 
 [project.urls]
 Homepage = "https://github.com/slgobinath/SafeEyes"
-Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0b6.tar.gz"
+Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0.tar.gz"
 
 [project.scripts]
 safeeyes = "safeeyes.__main__:main"
