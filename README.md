@@ -157,7 +157,7 @@ Some Linux systems like CentOS do not have matching dependencies available in th
 1. Install the necessary dependencies for CentOS 7
 
     ```bash
-    sudo yum install python3-devel dbus dbus-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel gobject-introspection-devel cairo-gobject-devel
+    sudo yum install python3-devel cairo cairo-devel cairomm-devel libjpeg-turbo-devel pango pango-devel pangomm pangomm-devel gobject-introspection-devel cairo-gobject-devel
     ```
 
 2. Create a virtual environment in your home folder
