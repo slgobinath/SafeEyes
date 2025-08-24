@@ -22,31 +22,39 @@ after long breaks.
 
 import logging
 import os
+import typing
+
+import gi
+
+gi.require_version("Gio", "2.0")
+from gi.repository import Gio
 
 from safeeyes import utility
 from safeeyes.model import TrayAction
 
 context = None
-lock_screen = False
+is_long_break: bool = False
 user_locked_screen = False
-lock_screen_command = None
+lock_screen_command: typing.Union[list[str], typing.Callable[[], None], None] = None
 min_seconds = 0
 seconds_passed = 0
 tray_icon_path = None
 icon_lock_later_path = None
 
 
-def __lock_screen_command():
+def __lock_screen_command() -> typing.Union[list[str], typing.Callable[[], None], None]:
     """Function tries to detect the screensaver command based on the current
     envinroment.
 
+    Returns either a command to execute or function to call.
+
     Possible results:
-        Gnome, Unity, Budgie:		['gnome-screensaver-command', '--lock']
+        Modern GNOME:               DBus: org.gnome.ScreenSaver.Lock
+        Old Gnome, Unity, Budgie:	['gnome-screensaver-command', '--lock']
         Cinnamon:					['cinnamon-screensaver-command', '--lock']
         Pantheon, LXDE:				['light-locker-command', '--lock']
         Mate:						['mate-screensaver-command', '--lock']
-        KDE:						['qdbus', 'org.freedesktop.ScreenSaver',
-                                    '/ScreenSaver', 'Lock']
+        KDE:						DBus: org.freedesktop.ScreenSaver.Lock
         XFCE:						['xflock4']
         Otherwise:					None
     """
@@ -63,6 +71,7 @@ def __lock_screen_command():
         elif desktop_session == "cinnamon" and utility.command_exist(
             "cinnamon-screensaver-command"
         ):
+            # This calls org.cinnamon.ScreenSaver.Lock internally
             return ["cinnamon-screensaver-command", "--lock"]
         elif (
             desktop_session == "pantheon" or desktop_session.startswith("lubuntu")
@@ -71,6 +80,8 @@ def __lock_screen_command():
         elif desktop_session == "mate" and utility.command_exist(
             "mate-screensaver-command"
         ):
+            # This calls org.mate.ScreenSaver.Lock internally
+            # However, it warns not to rely on that
             return ["mate-screensaver-command", "--lock"]
         elif (
             desktop_session == "kde"
@@ -78,7 +89,14 @@ def __lock_screen_command():
             or desktop_session.startswith("kubuntu")
             or os.environ.get("KDE_FULL_SESSION") == "true"
         ):
-            return ["qdbus", "org.freedesktop.ScreenSaver", "/ScreenSaver", "Lock"]
+            # Note that this is unfortunately a non-standard KDE extension.
+            # See https://gitlab.gnome.org/GNOME/gnome-settings-daemon/-/issues/632
+            # for details.
+            return lambda: __lock_screen_dbus(
+                destination="org.freedesktop.ScreenSaver",
+                path="/ScreenSaver",
+                method="Lock",
+            )
         elif (
             desktop_session in ["gnome", "unity", "budgie-desktop"]
             or desktop_session.startswith("ubuntu")
@@ -87,20 +105,32 @@ def __lock_screen_command():
             if utility.command_exist("gnome-screensaver-command"):
                 return ["gnome-screensaver-command", "--lock"]
             # From Gnome 3.8 no gnome-screensaver-command
-            return [
-                "dbus-send",
-                "--type=method_call",
-                "--dest=org.gnome.ScreenSaver",
-                "/org/gnome/ScreenSaver",
-                "org.gnome.ScreenSaver.Lock",
-            ]
-        elif os.environ.get("GNOME_DESKTOP_SESSION_ID"):
-            if "deprecated" not in os.environ.get(
-                "GNOME_DESKTOP_SESSION_ID"
-            ) and utility.command_exist("gnome-screensaver-command"):
+            return lambda: __lock_screen_dbus(
+                destination="org.gnome.ScreenSaver",
+                path="/org/gnome/ScreenSaver",
+                method="Lock",
+            )
+        elif gd_session := os.environ.get("GNOME_DESKTOP_SESSION_ID"):
+            if "deprecated" not in gd_session and utility.command_exist(
+                "gnome-screensaver-command"
+            ):
                 # Gnome 2
                 return ["gnome-screensaver-command", "--lock"]
     return None
+
+
+def __lock_screen_dbus(destination: str, path: str, method: str) -> None:
+    """This assumes that the interface is the same as the destination."""
+    dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
+        bus_type=Gio.BusType.SESSION,
+        flags=Gio.DBusProxyFlags.DO_NOT_LOAD_PROPERTIES,
+        info=None,
+        name=destination,
+        object_path=path,
+        interface_name=destination,
+    )
+
+    dbus_proxy.call_sync(method, None, Gio.DBusCallFlags.NONE, -1)
 
 
 def __lock_screen_later():
@@ -109,7 +139,15 @@ def __lock_screen_later():
 
 
 def __lock_screen_now() -> None:
-    utility.execute_command(lock_screen_command)
+    global lock_screen_command
+
+    if lock_screen_command is None:
+        return
+
+    if isinstance(lock_screen_command, list):
+        utility.execute_command(lock_screen_command)
+    else:
+        lock_screen_command()
 
 
 def init(ctx, safeeyes_config, plugin_config):
@@ -134,15 +172,15 @@ def init(ctx, safeeyes_config, plugin_config):
 
 def on_start_break(break_obj):
     """Determine the break type and only if it is a long break, enable the
-    lock_screen flag.
+    is_long_break flag.
     """
-    global lock_screen
+    global is_long_break
     global seconds_passed
     global user_locked_screen
     user_locked_screen = False
     seconds_passed = 0
-    if lock_screen_command:
-        lock_screen = break_obj.is_long_break()
+
+    is_long_break = break_obj.is_long_break()
 
 
 def on_countdown(countdown, seconds):
@@ -155,7 +193,7 @@ def on_stop_break():
     """Lock the screen after a long break if the user has not skipped within
     min_seconds.
     """
-    if user_locked_screen or (lock_screen and seconds_passed >= min_seconds):
+    if user_locked_screen or (is_long_break and seconds_passed >= min_seconds):
         __lock_screen_now()
 
 

@@ -30,7 +30,7 @@ def validate(plugin_config, plugin_settings):
             return None
         command = "wlrctl"
     else:
-        command = "xprop"
+        return None
     if not utility.command_exist(command):
         return _("Please install the command-line tool '%s'") % command
     else:

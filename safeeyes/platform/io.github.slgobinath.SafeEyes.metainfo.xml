@@ -38,21 +38,22 @@
     <screenshots>
         <screenshot type="default">
             <caption>Safe Eyes short break screen.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_1.png</image>
+            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_1.png</image>
         </screenshot>
         <screenshot>
             <caption>Safe Eyes long break screen.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_3.png</image>
+            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_3.png</image>
         </screenshot>
         <screenshot>
             <caption>Safe Eyes settings window.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/assets/screenshots/safeeyes_6.png</image>
+            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_6.png</image>
         </screenshot>
     </screenshots>
 
     <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
 
     <releases>
+        <release version="3.0.0" date="2025-08-24" />
         <release version="3.0.0b6" date="2025-08-24" />
         <release version="3.0.0b5" date="2025-08-22" />
         <release version="3.0.0b4" date="2025-08-22" />
