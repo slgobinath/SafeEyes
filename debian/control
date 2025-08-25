@@ -11,6 +11,7 @@ Package: safeeyes
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}, 
  python3 (>= 3.10.0),
+ python3-gi,
  python3-xlib,
  python3-babel,
  python3-croniter,

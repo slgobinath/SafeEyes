@@ -121,6 +121,7 @@ Ensure to meet the following dependencies:
 - `gir1.2-gtk-4.0`
 - `ffmpeg` or `pipewire` (any of them works)
 - `python3` (>= 3.10.0)
+- `python3-gi`
 - `python3-xlib`
 - `python3-babel`
 - `python3-croniter`
