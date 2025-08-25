@@ -117,17 +117,15 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-notify-0.7
-- gir1.2-gtk-4.0
-- python3-babel
-- python3-croniter
-- python3-gi
-- python3-packaging
-- python3-xlib
-- python3-pywayland (optional for KDE/other wayland)
-- xprintidle (optional for X11)
-- wlrctl (optional for wayland/wlroots)
-- Python 3.10+
+- `gir1.2-notify-0.7`
+- `gir1.2-gtk-4.0`
+- `ffmpeg` or `pipewire` (any of them works)
+- `python3` (>= 3.10.0)
+- `python3-xlib`
+- `python3-babel`
+- `python3-croniter`
+- `python3-packaging`
+- `python3-pywayland` (optional in Wayland for smartpause) or `xprintidle` (provides smartpause in x11). Use either one depending on whether you are using Wayland or x11.
 
 **To install Safe Eyes from PyPI:**
 
