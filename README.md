@@ -126,7 +126,7 @@ Ensure to meet the following dependencies:
 - `python3-babel`
 - `python3-croniter`
 - `python3-packaging`
-- Either `python3-pywayland` (optional in Wayland for smartpause) or `xprintidle` (provides smartpause in x11).
+- **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
 
 **To install Safe Eyes from PyPI:**
 
