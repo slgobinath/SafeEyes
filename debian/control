@@ -16,10 +16,10 @@ Depends: ${misc:Depends}, ${python3:Depends},
  python3-croniter,
  python3-packaging,
  gir1.2-notify-0.7,
- gir1.2-gtk-4.0
-Recommends:
- python3-pywayland,
+ gir1.2-gtk-4.0,
  ffmpeg | pipewire
+Recommends:
+ python3-pywayland
 Suggests:
  xprintidle
 Description: Prevent eye strain with Safe Eyes – an essential screen break reminder.
