@@ -150,7 +150,7 @@ Note that on Wayland, this may still not be enough to get window icons working p
 
 ### Install in a virtual environment
 
-Some Linux systems like CentOS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python virtual environment.
+Some Linux systems like CentOS do not have matching dependencies available in their repository (of course you can use the flatpak there). In such systems, you can install and use Safe Eyes in a Python virtual environment.
 
 1. Install the necessary dependencies for CentOS 7
 
