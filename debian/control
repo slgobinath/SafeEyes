@@ -18,6 +18,7 @@ Depends: ${misc:Depends}, ${python3:Depends},
  gir1.2-notify-0.7,
  gir1.2-gtk-4.0
 Recommends:
+ python3-pywayland,
  ffmpeg | pipewire
 Suggests:
  xprintidle
