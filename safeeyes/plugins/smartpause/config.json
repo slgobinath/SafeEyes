@@ -5,7 +5,7 @@
         "version": "0.0.3"
     },
     "dependencies": {
-        "python_modules": ["pywayland"],
+        "python_modules": [],
         "shell_commands": [],
         "operating_systems": [],
         "desktop_environments": [],
