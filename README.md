@@ -117,17 +117,16 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-notify-0.7
-- gir1.2-gtk-4.0
-- python3-babel
-- python3-croniter
-- python3-gi
-- python3-packaging
-- python3-xlib
-- python3-pywayland (optional for KDE/other wayland)
-- xprintidle (optional for X11)
-- wlrctl (optional for wayland/wlroots)
-- Python 3.10+
+- `gir1.2-notify-0.7`
+- `gir1.2-gtk-4.0`
+- `ffmpeg` or `pipewire` (any of them works)
+- `python3` (>= 3.10.0)
+- `python3-gi`
+- `python3-xlib`
+- `python3-babel`
+- `python3-croniter`
+- `python3-packaging`
+- **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
 
 **To install Safe Eyes from PyPI:**
 
@@ -152,7 +151,7 @@ Note that on Wayland, this may still not be enough to get window icons working p
 
 ### Install in a virtual environment
 
-Some Linux systems like CentOS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python virtual environment.
+Some Linux systems like CentOS do not have matching dependencies available in their repository (of course you can use the flatpak there). In such systems, you can install and use Safe Eyes in a Python virtual environment.
 
 1. Install the necessary dependencies for CentOS 7
 
