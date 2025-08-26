@@ -226,7 +226,7 @@ To manually change the version number, update the following places (Open the pro
     - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L35)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above.
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above, but you may want to manually add more lines to describe what's new in this release.
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
