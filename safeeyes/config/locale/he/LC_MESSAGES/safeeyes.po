@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2025-08-27 12:02+0000\n"
-"Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/he/>\n"
 "Language: he\n"
@@ -136,7 +136,7 @@ msgstr "משך השבתת קיצורי המקלדת (בשניות)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr "משך דחייה (בשניות)"
+msgstr "משך דחייה (בדקות)"
 
 # Settings dialog
 msgid "Show breaks in random order"
@@ -521,12 +521,12 @@ msgstr "כמה פעמים ניתן לדחות או לדלג ברצף"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr "הגבלת כמות הפעמים שבהן ניתן לדחות או לדלג ברצף על הפסקות"
+msgstr "הגבלת כמות הפעמים שניתן לדחות או לדלג ברצף על הפסקות"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr "דילגת או דחית %(num)d/%(allowed)d הפסקות ברצף"
+msgstr "דילגת על או דחית %(num)d/%(allowed)d הפסקות ברצף"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
