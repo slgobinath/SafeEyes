@@ -220,12 +220,13 @@ The available dependency groups can be found in the `pyproject.toml` file.
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
-3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
+3. Update the Safe Eyes version. Run `./update-version.sh "version.number.number" "New version with shiny new feature"`. 
+To manually change the version number, update the following places (Open the project in VSCode and search for the current version):
     - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L4)
     - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L35)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above.
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
