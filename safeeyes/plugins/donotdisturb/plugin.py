@@ -26,7 +26,6 @@ import gi
 
 gi.require_version("Gio", "2.0")
 from gi.repository import Gio
-import Xlib
 from safeeyes import utility
 
 context = None
@@ -62,6 +61,8 @@ def is_active_window_skipped_xorg(pre_break):
     cause random failure.
     """
     logging.info("Searching for full-screen application")
+
+    import Xlib
 
     def get_window_property(window, prop, proptype):
         result = window.get_full_property(prop, proptype)
