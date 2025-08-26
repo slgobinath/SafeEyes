@@ -13,9 +13,9 @@ fi
 version="$1"
 message="$2"
 
-# Validate version format (strictly a.b.c)
-if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    echo "Warning: Version '$version' does not match the standard format a.b.c."
+# Validate version format (allow x.y or x.y.z)
+if [[ ! "$version" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+    echo "Warning: Version '$version' does not match the standard format x.y or x.y.z."
     echo "Please validate the version number manually."
     read -p "Do you want to continue? [y/N]: " confirm
     if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
