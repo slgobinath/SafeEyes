@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-11-11 13:00+0000\n"
-"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"PO-Revision-Date: 2025-08-27 12:02+0000\n"
+"Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/he/>\n"
 "Language: he\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.13\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -94,7 +94,9 @@ msgstr "סגירה"
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "תיאור"
+msgstr ""
+"‏Safe Eyes מסייע לך להגן על העיניים מפני מאמץ יתר (אסתנופיה) בכך שהוא מזכיר "
+"לך לקחת הפסקה באמצע עבודה ארוכה על המחשב"
 
 # About dialog
 msgid "License"
@@ -114,7 +116,7 @@ msgstr "מסך הפסקה"
 
 # Break screen
 msgid "Postpone"
-msgstr "עיכוב"
+msgstr "דחייה"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
@@ -134,7 +136,7 @@ msgstr "משך השבתת קיצורי המקלדת (בשניות)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr "משך עיכוב (בשניות)"
+msgstr "משך דחייה (בשניות)"
 
 # Settings dialog
 msgid "Show breaks in random order"
@@ -400,7 +402,7 @@ msgstr "לפרש את זמן ההמתנה שווה הערך למשך ההפסק�
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr "לעכב את ההפסקה הבאה עד שהמערכת הופכת לבלתי פעילה"
+msgstr "דחיית ההפסקה הבאה עד שהמערכת עוברת למצב בלתי פעיל"
 
 #: plugins/trayicon
 msgid "Tray Icon"
@@ -515,16 +517,16 @@ msgstr "הגבלת דילוג מחזורי"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr "כמה דילוגים או השהיות מותר ברצף"
+msgstr "כמה פעמים ניתן לדחות או לדלג ברצף"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr "הגבלת כמות ההפסקות שאפשר לדלג או להשהות ברצף"
+msgstr "הגבלת כמות הפעמים שבהן ניתן לדחות או לדלג ברצף על הפסקות"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr "דילגת או השהית %(num)d/%(allowed)d הפסקות ברצף"
+msgstr "דילגת או דחית %(num)d/%(allowed)d הפסקות ברצף"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -570,28 +572,30 @@ msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
+"נמצא גיליון סגנונות ישן בתוך „%(old)s”, נתעלם ממנו. לצורך סגנונות מותאמים "
+"אישית, נא ליצור גיליון סגנונות חדש בתוך „%(new)s” במקום."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "אין תמיכה בהתאמה אישית של קיצורי הדחייה והדילוג ב־Wayland."
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "‏Safe Eyes - שגיאה"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "חסרות תלויות לתוסף הכרחי!"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "משך הדחייה ב"
 
 msgid "minutes"
-msgstr ""
+msgstr "דקות"
 
 msgid "seconds"
-msgstr ""
+msgstr "שניות"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "נא להתקין את אחד מכלי שורת הפקודה: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
