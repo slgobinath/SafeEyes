@@ -91,7 +91,7 @@ echo "Updated $CHANGELOG"
 # Insert release element as the first child under <releases>
 # Keep indentation consistent with project file (8 spaces for release lines)
 awk -v ver="$version" -v iso="$iso_date" '
-/^\s*<releases>\s*$/ { print; printf "        <release version=\"%s\" date=\"%s\" />\n", ver, iso; next }
+/^[[:space:]]*<releases>[[:space:]]*$/ { print; printf "        <release version=\"%s\" date=\"%s\" />\n", ver, iso; next }
 { print }
 ' "$METAFILE" > "$METAFILE.new" && mv "$METAFILE.new" "$METAFILE"
 echo "Updated $METAFILE"
