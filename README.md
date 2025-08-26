@@ -122,10 +122,10 @@ Ensure to meet the following dependencies:
 - `ffmpeg` or `pipewire` (any of them works)
 - `python3` (>= 3.10.0)
 - `python3-gi`
-- `python3-xlib`
 - `python3-babel`
 - `python3-croniter`
 - `python3-packaging`
+- `python3-xlib` (required on x11)
 - **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
 
 **To install Safe Eyes from PyPI:**

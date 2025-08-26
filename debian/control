@@ -12,7 +12,6 @@ Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}, 
  python3 (>= 3.10.0),
  python3-gi,
- python3-xlib,
  python3-babel,
  python3-croniter,
  python3-packaging,
@@ -20,6 +19,7 @@ Depends: ${misc:Depends}, ${python3:Depends},
  gir1.2-gtk-4.0,
  ffmpeg | pipewire
 Recommends:
+ python3-xlib,
  python3-pywayland
 Suggests:
  xprintidle
