@@ -60,6 +60,7 @@ if [ -f "$PYPROJECT" ]; then
     # Set Downloads to canonical GitHub archive URL for this version
     # Use a stable URL: https://github.com/slgobinath/SafeEyes/archive/v<version>.tar.gz
     sed -i "s#^[[:space:]]*Downloads = \".*\"#Downloads = \"https://github.com/slgobinath/SafeEyes/archive/v$version.tar.gz\"#" "$PYPROJECT" || true
+    echo "Updated $PYPROJECT"
 fi
 
 # Update glade about dialog label if present
@@ -67,6 +68,7 @@ GLADE_ABOUT="safeeyes/glade/about_dialog.glade"
 if [ -f "$GLADE_ABOUT" ]; then
     # replace 'Safe Eyes x.y.z' inside <property name="label">...<
     sed -i "s/\(<property name=\"label\">Safe Eyes \).*\(<\/property>\)/\1$version\2/" "$GLADE_ABOUT" || true
+    echo "Updated $GLADE_ABOUT"
 fi
 
 
@@ -84,6 +86,7 @@ EOF
 
 cat "$tmpfile" "$CHANGELOG" > "$CHANGELOG.new" && mv "$CHANGELOG.new" "$CHANGELOG"
 rm -f "$tmpfile"
+echo "Updated $CHANGELOG"
 
 # Insert release element as the first child under <releases>
 # Keep indentation consistent with project file (8 spaces for release lines)
@@ -91,6 +94,7 @@ awk -v ver="$version" -v iso="$iso_date" '
 /^\s*<releases>\s*$/ { print; printf "        <release version=\"%s\" date=\"%s\" />\n", ver, iso; next }
 { print }
 ' "$METAFILE" > "$METAFILE.new" && mv "$METAFILE.new" "$METAFILE"
+echo "Updated $METAFILE"
 
 echo "Updated $CHANGELOG and $METAFILE"
 
