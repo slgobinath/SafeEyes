@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2017-09-17 07:59-0400\n"
-"PO-Revision-Date: 2025-08-27 12:02+0000\n"
-"Last-Translator: \"Omer I.S.\" <omeritzicschwartz@gmail.com>\n"
+"PO-Revision-Date: 2024-08-07 15:09+0000\n"
+"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
 "Language-Team: English (United States) <https://hosted.weblate.org/projects/"
 "safe-eyes/translations/en_US/>\n"
 "Language: en_US\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: pygettext.py 1.5\n"
 
 # Short break
@@ -109,7 +109,7 @@ msgstr "List of Contributors"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr "עזרו לנו בתרגום יישום זה"
+msgstr ""
 
 # Break screen
 msgid "Skip"
@@ -482,15 +482,15 @@ msgstr "Take a break now"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr "כל הפסקה"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr "הפסקה קצרה"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr "הפסקה ארוכה"
+msgstr ""
 
 #: plugins/trayicon
 msgid "Until restart"
@@ -535,68 +535,64 @@ msgstr "RSI Prevention"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr "נא להתקין שירות לצורך הצגת סמלים במגש המערכת של סביבת שולחן העבודה שלך."
+msgstr ""
 
 #, python-format
 msgid "Next long break at %s"
-msgstr "ההפסקה הבאה תהיה ב־%s"
+msgstr ""
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr "ההפסקות הבאות יהיו ב־%(short)s/‏%(long)s"
+msgstr ""
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr "חסרות תלויות לתוסף הנחוץ „%s”"
+msgstr ""
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
 msgstr ""
-"נא להתקין את התלויות או להסיר את התוסף. להסתרת הודעה זו ניתן גם להשבית את "
-"התוסף בהגדרות."
 
 msgid "Click here for more information"
-msgstr "למידע נוסף יש ללחוץ כאן"
+msgstr ""
 
 msgid "Disable plugin temporarily"
-msgstr "השבתת התוסף באופן זמני"
+msgstr ""
 
 msgid "Disable permanently"
-msgstr "השבתת התוסף לצמיתות"
+msgstr ""
 
 msgid "License:"
-msgstr "רישיון:"
+msgstr ""
 
 #, python-format
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
 msgstr ""
-"נמצא גיליון סגנונות בתוך „%(old)s”, נתעלם ממנו. לצורך סגנונות מותאמים אישית, "
-"יש ליצור גיליון סגנונות חדש בתוך „%(new)s”."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr "ב־Wayland אין תמיכה בהתאמה אישית של הקיצורים לדילוג ולדחייה."
+msgstr ""
 
 msgid "Safe Eyes - Error"
-msgstr "‏Safe Eyes - שגיאה"
+msgstr ""
 
 msgid "A required plugin is missing dependencies!"
-msgstr "חסרות תלויות לתוסף נחוץ!"
+msgstr ""
 
 msgid "Postponement duration in"
-msgstr "זמן הדחייה בתוך"
+msgstr ""
 
 msgid "minutes"
-msgstr "דקות"
+msgstr ""
 
 msgid "seconds"
-msgstr "שניות"
+msgstr ""
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr "נא להתקין את אחד מכלי שורת הפקודהL %s"
+msgstr ""
 
 # Short break
 #~ msgid "Tightly close your eyes"
