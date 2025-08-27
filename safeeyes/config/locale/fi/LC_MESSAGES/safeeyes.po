@@ -1,0 +1,573 @@
+# SAFE EYES ENGLISH TRANSLATION.
+# Copyright (C) 2017 Gobinath
+# Gobinath slgobinath@gmail.com, 2017.
+#
+msgid ""
+msgstr ""
+
+# Short break
+msgid "Gently close your eyes"
+msgstr ""
+
+# Short break
+msgid "Roll your eyes a few times to each side"
+msgstr ""
+
+# Short break
+msgid "Rotate your eyes in clockwise direction"
+msgstr ""
+
+# Short break
+msgid "Rotate your eyes in counterclockwise direction"
+msgstr ""
+
+# Short break
+msgid "Blink your eyes"
+msgstr ""
+
+# Short break
+msgid "Focus on a point in the far distance"
+msgstr ""
+
+# Short break
+msgid "Have some water"
+msgstr ""
+
+# Long break
+msgid "Walk for a while"
+msgstr ""
+
+# Long break
+msgid "Lean back at your seat and relax"
+msgstr ""
+
+# Commandline arg description
+msgid "show the about dialog"
+msgstr ""
+
+# Commandline arg description
+msgid "disable the currently running safeeyes instance"
+msgstr ""
+
+# Commandline arg description
+msgid "enable the currently running safeeyes instance"
+msgstr ""
+
+# Commandline arg description
+msgid "quit the running safeeyes instance and exit"
+msgstr ""
+
+# Commandline arg description
+msgid "show the settings dialog"
+msgstr ""
+
+# Commandline arg description
+msgid "start safeeyes in debug mode"
+msgstr ""
+
+# Commandline arg description
+msgid "print the status of running safeeyes instance and exit"
+msgstr ""
+
+# Status message
+msgid "Safe Eyes is not running"
+msgstr ""
+
+# About dialog
+msgid "Close"
+msgstr ""
+
+# Description in about dialog
+# Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
+msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgstr ""
+
+# About dialog
+msgid "License"
+msgstr ""
+
+# About dialog
+msgid "List of Contributors"
+msgstr ""
+
+# About dialog
+msgid "Help us translate this app"
+msgstr ""
+
+# Break screen
+msgid "Skip"
+msgstr ""
+
+# Break screen
+msgid "Postpone"
+msgstr ""
+
+# Settings dialog
+msgid "Break duration (in seconds)"
+msgstr ""
+
+# Settings dialog
+msgid "Interval between two breaks (in minutes)"
+msgstr ""
+
+# Settings dialog
+msgid "Time to prepare for a break (in seconds)"
+msgstr ""
+
+# Settings dialog
+msgid "Keyboard shortcuts disabled period (in seconds)"
+msgstr ""
+
+# Settings dialog
+msgid "Postponement duration (in minutes)"
+msgstr ""
+
+# Settings dialog
+msgid "Show breaks in random order"
+msgstr ""
+
+# Settings dialog
+msgid "Strict break (No way to skip breaks)"
+msgstr ""
+
+# Settings dialog
+msgid "Allow postponing breaks"
+msgstr ""
+
+# Settings dialog
+msgid "Persist the internal state"
+msgstr ""
+
+# Settings dialog
+msgid "Long break interval must be a multiple of short break interval"
+msgstr ""
+
+# Settings dialog
+msgid "Reset"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to reset all settings to default?"
+msgstr ""
+
+# Settings dialog
+msgid "Options"
+msgstr ""
+
+# Settings dialog
+msgid "Short Breaks"
+msgstr ""
+
+# Settings dialog
+msgid "Long Breaks"
+msgstr ""
+
+# Settings dialog
+msgid "Delete"
+msgstr ""
+
+# Settings dialog
+msgid "Are you sure you want to delete this break?"
+msgstr ""
+
+# Settings dialog
+msgid "You can't undo this action."
+msgstr ""
+
+# Settings dialog
+msgid "Break"
+msgstr ""
+
+# Settings dialog
+msgid "Breaks"
+msgstr ""
+
+# Settings dialog
+msgid "Plugins"
+msgstr ""
+
+# Settings dialog
+msgid "Type"
+msgstr ""
+
+# Settings dialog
+msgid "Short"
+msgstr ""
+
+# Settings dialog
+msgid "Long"
+msgstr ""
+
+# Settings dialog
+msgid "Image"
+msgstr ""
+
+# Settings dialog
+msgid "Select"
+msgstr ""
+
+# Settings dialog
+msgid "Please select an image"
+msgstr ""
+
+# Settings dialog
+msgid "Duration"
+msgstr ""
+
+# Settings dialog
+msgid "Time to wait"
+msgstr ""
+
+# Settings dialog
+msgid "Override"
+msgstr ""
+
+# Settings dialog
+msgid "Time (in seconds)"
+msgstr ""
+
+# Settings dialog
+msgid "Time (in minutes)"
+msgstr ""
+
+# Settings dialog
+msgid "Break Settings"
+msgstr ""
+
+# Settings dialog
+msgid "Plugin Settings"
+msgstr ""
+
+# Settings dialog
+#, python-format
+msgid "Plugin does not support %s desktop environment"
+msgstr ""
+
+# Settings dialog
+#, python-format
+msgid "Please install the Python module '%s'"
+msgstr ""
+
+# Settings dialog
+#, python-format
+msgid "Please install the command-line tool '%s'"
+msgstr ""
+
+# Settings dialog
+msgid "Invalid cron expression '%s'"
+msgstr ""
+
+# Settings dialog
+#, python-format
+msgid "Please add the resource %(resource)s to %(config_resource)s directory"
+msgstr ""
+
+# Settings dialog
+msgid "New Break"
+msgstr ""
+
+# Settings dialog
+msgid "Remove"
+msgstr ""
+
+# Settings dialog
+msgid "Discard"
+msgstr ""
+
+# Settings dialog
+msgid "Save"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Audible Alert"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Play audible alert before and after breaks"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Play audible alert before breaks"
+msgstr ""
+
+# plugin/audiblealert
+msgid "Play audible alert after breaks"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Do Not Disturb"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Skip break if the active window is in fullscreen mode"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Do not interrupt these windows anytime"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Interrupt these windows regardless of their state"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Switch the interruptible windows to normal mode"
+msgstr ""
+
+# plugin/donotdisturb
+msgid "Do not disturb while on battery"
+msgstr ""
+
+# plugin/healthstats
+msgid "Health Statistics"
+msgstr ""
+
+# plugin/healthstats
+msgid "Show statistics based on how you use Safe Eyes"
+msgstr ""
+
+# plugin/healthstats
+msgid "Statistics reset interval (cron expression)"
+msgstr ""
+
+# plugin/notification
+msgid "Notification"
+msgstr ""
+
+# plugin/notification
+msgid "Show a system notification before breaks"
+msgstr ""
+
+# plugin/notification
+#, python-format
+msgid "Ready for a short break in %s seconds"
+msgstr ""
+
+# plugin/notification
+#, python-format
+msgid "Ready for a long break in %s seconds"
+msgstr ""
+
+# plugin/screensaver
+msgid "Screensaver"
+msgstr ""
+
+# plugin/screensaver
+msgid "Lock the screen after long breaks by starting screensaver"
+msgstr ""
+
+# plugin/screensaver
+msgid "Custom screensaver command"
+msgstr ""
+
+# plugin/screensaver
+msgid "Minimum seconds to skip without screensaver"
+msgstr ""
+
+# plugin/screensaver
+msgid "Lock screen"
+msgstr ""
+
+# plugin/smartpause
+msgid "Smart Pause"
+msgstr ""
+
+# plugin/smartpause
+msgid "Pause Safe Eyes if the system is idle"
+msgstr ""
+
+# plugin/smartpause
+msgid "Minimum idle time to pause Safe Eyes (in seconds)"
+msgstr ""
+
+# plugin/smartpause
+msgid "Interpret idle time equivalent to upcoming break duration as a break"
+msgstr ""
+
+# plugin/smartpause
+msgid "Postpone the next break until the system becomes idle"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Tray Icon"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Show a tray icon in the notification area"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Show next break time in tray icon"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Allow disabling Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
+msgid "About"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Disable Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
+#, python-format
+msgid "Disabled until %s"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Disabled until restart"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Enable Safe Eyes"
+msgstr ""
+
+#: plugins/trayicon
+#, python-format
+msgid "For %(num)d Hour"
+msgid_plural "For %(num)d Hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/trayicon
+#, python-format
+msgid "For %(num)d Minute"
+msgid_plural "For %(num)d Minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/trayicon
+#, python-format
+msgid "For %(num)d Second"
+msgid_plural "For %(num)d Seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: plugins/trayicon
+#, python-format
+msgid "Next break at %s"
+msgstr ""
+
+#: plugins/trayicon
+msgid "No Breaks Available"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Settings"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Take a break now"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Any break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Short break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Long break"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Until restart"
+msgstr ""
+
+#: plugins/trayicon
+msgid "Quit"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Media Control"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media players from the break screen"
+msgstr ""
+
+# plugin/mediacontrol
+msgid "Pause media"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit Consecutive Skipping"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "How many skips or postpones are allowed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+msgid "Limit how many breaks can be skipped or postponed in a row"
+msgstr ""
+
+# plugin/limitconsecutiveskipping
+#, python-format
+msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
+msgstr ""
+
+# safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
+msgid "RSI Prevention"
+msgstr ""
+
+msgid "Please install service providing tray icons for your desktop environment."
+msgstr ""
+
+#, python-format
+msgid "Next long break at %s"
+msgstr ""
+
+#, python-format
+msgid "Next breaks at %(short)s/%(long)s"
+msgstr ""
+
+#, python-format
+msgid "The required plugin '%s' is missing dependencies!"
+msgstr ""
+
+msgid "Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings."
+msgstr ""
+
+msgid "Click here for more information"
+msgstr ""
+
+msgid "Disable plugin temporarily"
+msgstr ""
+
+msgid "Disable permanently"
+msgstr ""
+
+msgid "License:"
+msgstr ""
+
+#, python-format
+msgid "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new stylesheet in '%(new)s' instead."
+msgstr ""
+
+msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
+msgstr ""
+
+msgid "Safe Eyes - Error"
+msgstr ""
+
+msgid "A required plugin is missing dependencies!"
+msgstr ""
+
+msgid "Postponement duration in"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+#, python-format
+msgid "Please install one of the command-line tools: %s"
+msgstr ""
