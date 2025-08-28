@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-08-16 15:09+0000\n"
+"PO-Revision-Date: 2025-08-29 07:01+0000\n"
 "Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
 "Language-Team: Bengali <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/bn/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Weblate 5.7\n"
+"X-Generator: Weblate 5.13.1-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -23,7 +23,7 @@ msgstr "আলতো করে চোখ বন্ধ করুন"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr ""
+msgstr "দুদিকে কয়েকবার চোখ ঘুরিয়ে নিন"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
