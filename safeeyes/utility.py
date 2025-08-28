@@ -95,18 +95,29 @@ def get_resource_path(resource_name):
     return resource_location
 
 
-def start_thread(target_function, **args):
+P1 = typing.ParamSpec("P1")
+
+
+def start_thread(
+    target_function: typing.Callable[P1, None], *args: P1.args, **kwargs: P1.kwargs
+) -> None:
     """Execute the function in a separate thread."""
     thread = threading.Thread(
         target=target_function,
         name=f"WorkThread {target_function.__qualname__}",
         daemon=False,
-        kwargs=args,
+        args=args,
+        kwargs=kwargs,
     )
     thread.start()
 
 
-def execute_main_thread(target_function, *args, **kwargs):
+P2 = typing.ParamSpec("P2")
+
+
+def execute_main_thread(
+    target_function: typing.Callable[P2, None], *args: P2.args, **kwargs: P2.kwargs
+) -> None:
     """Execute the given function in main thread."""
     GLib.idle_add(lambda: target_function(*args, **kwargs))
 
