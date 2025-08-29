@@ -27,19 +27,19 @@ msgstr "দুদিকে কয়েকবার চোখ ঘুরিয়ে �
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
-msgstr ""
+msgstr "ঘড়ির কাঁটার দিকে চোখ ঘোরান"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr ""
+msgstr "ঘড়ির কাঁটার বিপরীত দিকে চোখ ঘোরান"
 
 # Short break
 msgid "Blink your eyes"
-msgstr ""
+msgstr "চোখ পিটপিট করুন"
 
 # Short break
 msgid "Focus on a point in the far distance"
-msgstr ""
+msgstr "দূরের কোনো একটি স্থানে দৃষ্টি স্থির করুন"
 
 # Short break
 msgid "Have some water"
@@ -51,35 +51,35 @@ msgstr "একটু হেঁটে আসুন"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr ""
+msgstr "চেয়ারে ভালো করে আরাম নিন"
 
 # Commandline arg description
 msgid "show the about dialog"
-msgstr ""
+msgstr "অ্যাপ সম্পর্কে তথ্য দেখুন"
 
 # Commandline arg description
 msgid "disable the currently running safeeyes instance"
-msgstr ""
+msgstr "বর্তমানে চলমান Safe Eyes নিষ্ক্রিয় করুন"
 
 # Commandline arg description
 msgid "enable the currently running safeeyes instance"
-msgstr ""
+msgstr "বর্তমানে চলমান Safe Eyes সক্রিয় করুন"
 
 # Commandline arg description
 msgid "quit the running safeeyes instance and exit"
-msgstr ""
+msgstr "চলমান Safe Eyes বন্ধ করে বেরিয়ে যান"
 
 # Commandline arg description
 msgid "show the settings dialog"
-msgstr ""
+msgstr "সেটিংস ডায়ালগ দেখান"
 
 # Commandline arg description
 msgid "start safeeyes in debug mode"
-msgstr ""
+msgstr "Safe Eyes-কে debug মোডে চালান"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr ""
+msgstr "চলমান Safe Eyes-এর অবস্থা দেখিয়ে বেরিয়ে যান"
 
 # Status message
 msgid "Safe Eyes is not running"
@@ -87,14 +87,14 @@ msgstr "Safe Eyes চলছে না"
 
 # About dialog
 msgid "Close"
-msgstr ""
+msgstr "বন্ধ করুন"
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr ""
+msgstr "Safe Eyes আপনাকে কম্পিউটারে দীর্ঘসময় কাজ করার সময় বিরতি নিতে স্মরণ করিয়ে দেয় এবং এর মাধ্যমে চোখের ক্লান্তি (অ্যাস্থেনোপিয়া) থেকে রক্ষা করে।"
 
 # About dialog
 msgid "License"
@@ -102,139 +102,139 @@ msgstr "অনুমতিপত্র"
 
 # About dialog
 msgid "List of Contributors"
-msgstr ""
+msgstr "অংশগ্রহণকারীদের তালিকা"
 
 # About dialog
 msgid "Help us translate this app"
-msgstr ""
+msgstr "এই অ্যাপটি অনুবাদ করতে আমাদের সাহায্য করুন"
 
 # Break screen
 msgid "Skip"
-msgstr ""
+msgstr "বাতিল করুন"
 
 # Break screen
 msgid "Postpone"
-msgstr ""
+msgstr "স্থগিত করুন"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr ""
+msgstr "বিরতির সময়কাল (সেকেন্ডে)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr ""
+msgstr "দুইটি বিরতির মধ্যে ব্যবধান (মিনিটে)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr ""
+msgstr "বিরতির জন্য প্রস্তুতির সময় (সেকেন্ডে)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
-msgstr ""
+msgstr "কীবোর্ড শর্টকাট নিষ্ক্রিয়করণের সময় (সেকেন্ডে)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr ""
+msgstr "স্থগিতকরণের সময়কাল (মিনিটে)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr ""
+msgstr "বিরতিগুলো এলোমেলোভাবে দেখান"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr ""
+msgstr "কঠোর বিরতি (বিরতি বাদ দেওয়া যাবে না)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr ""
+msgstr "বিরতি স্থগিত করার অনুমতি দিন"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr ""
+msgstr "অভ্যন্তরীণ অবস্থা সংরক্ষণ করুন"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr ""
+msgstr "দীর্ঘ বিরতির ব্যবধান অবশ্যই সংক্ষিপ্ত বিরতির ব্যবধানের গুণিতক হতে হবে"
 
 # Settings dialog
 msgid "Reset"
-msgstr ""
+msgstr "Reset করুন"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে সব সেটিংস নতুন অবস্থায় reset করতে চান?"
 
 # Settings dialog
 msgid "Options"
-msgstr ""
+msgstr "বিকল্প"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr ""
+msgstr "সংক্ষিপ্ত বিরতি"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr ""
+msgstr "দীর্ঘ বিরতি"
 
 # Settings dialog
 msgid "Delete"
-msgstr ""
+msgstr "মুছে ফেলুন"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr ""
+msgstr "আপনি কি নিশ্চিত যে এই বিরতি মুছে ফেলতে চান?"
 
 # Settings dialog
 msgid "You can't undo this action."
-msgstr ""
+msgstr "আপনি এটি পূর্বাবস্থায় ফিরিয়ে আনতে পারবেন না।"
 
 # Settings dialog
 msgid "Break"
-msgstr ""
+msgstr "বিরতি"
 
 # Settings dialog
 msgid "Breaks"
-msgstr ""
+msgstr "বিরতিসমূহ"
 
 # Settings dialog
 msgid "Plugins"
-msgstr ""
+msgstr "প্লাগইন"
 
 # Settings dialog
 msgid "Type"
-msgstr ""
+msgstr "ধরন"
 
 # Settings dialog
 msgid "Short"
-msgstr ""
+msgstr "সংক্ষিপ্ত"
 
 # Settings dialog
 msgid "Long"
-msgstr ""
+msgstr "দীর্ঘ"
 
 # Settings dialog
 msgid "Image"
-msgstr ""
+msgstr "ছবি"
 
 # Settings dialog
 msgid "Select"
-msgstr ""
+msgstr "নির্বাচন করুন"
 
 # Settings dialog
 msgid "Please select an image"
-msgstr ""
+msgstr "অনুগ্রহ করে একটি ছবি নির্বাচন করুন"
 
 # Settings dialog
 msgid "Duration"
-msgstr ""
+msgstr "দৈর্ঘ্য"
 
 # Settings dialog
 msgid "Time to wait"
-msgstr ""
+msgstr "অপেক্ষার সময়"
 
 # Settings dialog
 msgid "Override"
-msgstr ""
+msgstr "মুছে দিয়ে নতুন করে তৈরি করুন"
 
 # Settings dialog
 msgid "Time (in seconds)"
@@ -246,347 +246,347 @@ msgstr "সময় (মিনিটে)"
 
 # Settings dialog
 msgid "Break Settings"
-msgstr ""
+msgstr "বিরতি সেটিংস"
 
 # Settings dialog
 msgid "Plugin Settings"
-msgstr ""
+msgstr "প্লাগইন সেটিংস"
 
 # Settings dialog
 #, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr ""
+msgstr "প্লাগইনটি %s ডেস্কটপ পরিবেশ সমর্থন করে না"
 
 # Settings dialog
 #, python-format
 msgid "Please install the Python module '%s'"
-msgstr ""
+msgstr "অনুগ্রহ করে '%s' পাইথন মডিউলটি ইনস্টল করুন"
 
 # Settings dialog
 #, python-format
 msgid "Please install the command-line tool '%s'"
-msgstr ""
+msgstr "অনুগ্রহ করে '%s' কমান্ড-লাইন টুলটি ইনস্টল করুন"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
-msgstr ""
+msgstr "অবৈধ cron এক্সপ্রেশন '%s'"
 
 # Settings dialog
 #, python-format
 msgid "Please add the resource %(resource)s to %(config_resource)s directory"
-msgstr ""
+msgstr "অনুগ্রহ করে %(resource)s টি %(config_resource)s ডিরেক্টরিতে যোগ করুন"
 
 # Settings dialog
 msgid "New Break"
-msgstr ""
+msgstr "নতুন বিরতি"
 
 # Settings dialog
 msgid "Remove"
-msgstr ""
+msgstr "মুছে ফেলুন"
 
 # Settings dialog
 msgid "Discard"
-msgstr ""
+msgstr "বাতিল করুন"
 
 # Settings dialog
 msgid "Save"
-msgstr ""
+msgstr "সংরক্ষণ করুন"
 
 # plugin/audiblealert
 msgid "Audible Alert"
-msgstr ""
+msgstr "শব্দ সতর্কতা"
 
 # plugin/audiblealert
 msgid "Play audible alert before and after breaks"
-msgstr ""
+msgstr "বিরতির আগে এবং পরে শব্দ সতর্কতা বাজান"
 
 # plugin/audiblealert
 msgid "Play audible alert before breaks"
-msgstr ""
+msgstr "বিরতির আগে শব্দ সতর্কতা বাজান"
 
 # plugin/audiblealert
 msgid "Play audible alert after breaks"
-msgstr ""
+msgstr "বিরতির পরে শব্দ সতর্কতা বাজান"
 
 # plugin/donotdisturb
 msgid "Do Not Disturb"
-msgstr ""
+msgstr "বিঘ্নমুক্ত পরিবেশ"
 
 # plugin/donotdisturb
 msgid "Skip break if the active window is in fullscreen mode"
-msgstr ""
+msgstr "যদি সক্রিয় উইন্ডো ফুলস্ক্রিন থাকে তবে বিরতি বাদ দিন"
 
 # plugin/donotdisturb
 msgid "Do not interrupt these windows anytime"
-msgstr ""
+msgstr "এই উইন্ডোগুলোকে কখনো ব্যাহত করা হবে না"
 
 # plugin/donotdisturb
 msgid "Interrupt these windows regardless of their state"
-msgstr ""
+msgstr "উইন্ডোগুলোকে তাদের অবস্থা নির্বিশেষে ব্যাহত করা হবে"
 
 # plugin/donotdisturb
 msgid "Switch the interruptible windows to normal mode"
-msgstr ""
+msgstr "বাধাযোগ্য উইন্ডোগুলোকে সবাভাবিন অবস্থায় এনে দিন"
 
 # plugin/donotdisturb
 msgid "Do not disturb while on battery"
-msgstr ""
+msgstr "ব্যাটারিতে থাকাকালে বিঘ্নিত করবেন না"
 
 # plugin/healthstats
 msgid "Health Statistics"
-msgstr ""
+msgstr "স্বাস্থ্য পরিসংখ্যান"
 
 # plugin/healthstats
 msgid "Show statistics based on how you use Safe Eyes"
-msgstr ""
+msgstr "আপনি Safe Eyes কীভাবে ব্যবহার করছেন তা ভিত্তিতে পরিসংখ্যান দেখান"
 
 # plugin/healthstats
 msgid "Statistics reset interval (cron expression)"
-msgstr ""
+msgstr "পরিসংখ্যান নতুন করে শুরু করার সময়সূচী (cron এক্সপ্রেশন)"
 
 # plugin/notification
 msgid "Notification"
-msgstr ""
+msgstr "বিজ্ঞপ্তি"
 
 # plugin/notification
 msgid "Show a system notification before breaks"
-msgstr ""
+msgstr "বিরতির আগে সিস্টেম বিজ্ঞপ্তি দেখান"
 
 # plugin/notification
 #, python-format
 msgid "Ready for a short break in %s seconds"
-msgstr ""
+msgstr "%s সেকেন্ড পরে সংক্ষিপ্ত বিরতির জন্য প্রস্তুত"
 
 # plugin/notification
 #, python-format
 msgid "Ready for a long break in %s seconds"
-msgstr ""
+msgstr "%s সেকেন্ড পরে দীর্ঘ বিরতির জন্য প্রস্তুত"
 
 # plugin/screensaver
 msgid "Screensaver"
-msgstr ""
+msgstr "স্ক্রিনসেভার"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver"
-msgstr ""
+msgstr "দীর্ঘ বিরতির পরে স্ক্রিনসেভার শুরু করে স্ক্রিন লক করুন"
 
 # plugin/screensaver
 msgid "Custom screensaver command"
-msgstr ""
+msgstr "কাস্টম স্ক্রিনসেভার কমান্ড"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
-msgstr ""
+msgstr "স্ক্রিনসেভার ছাড়া বাদ দেয়ার ন্যূনতম সময় (সেকেন্ডে)"
 
 # plugin/screensaver
 msgid "Lock screen"
-msgstr ""
+msgstr "স্ক্রিন লক করুন"
 
 # plugin/smartpause
 msgid "Smart Pause"
-msgstr ""
+msgstr "স্মার্ট পজ"
 
 # plugin/smartpause
 msgid "Pause Safe Eyes if the system is idle"
-msgstr ""
+msgstr "কম্পিউটার ঘুমিয়ে থাকলে Safe Eyes পজ করুন"
 
 # plugin/smartpause
 msgid "Minimum idle time to pause Safe Eyes (in seconds)"
-msgstr ""
+msgstr "Safe Eyes পজ করার জন্য ন্যূনতম ঘুমিয়ে থাকার সময় (সেকেন্ডে)"
 
 # plugin/smartpause
 msgid "Interpret idle time equivalent to upcoming break duration as a break"
-msgstr ""
+msgstr "আসন্ন বিরতির সময়ের সমপরিমাণ ঘুমের সময়কে একটি বিরতি হিসেবে গণ্য করুন"
 
 # plugin/smartpause
 msgid "Postpone the next break until the system becomes idle"
-msgstr ""
+msgstr "সিস্টেম ঘুমিয়ে না পড়া পর্যন্ত পরবর্তী বিরতি স্থগিত রাখুন"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr ""
+msgstr "ট্রে চিহ্ন"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr ""
+msgstr "নোটিফিকেশন এলাকায় একটি ট্রে চিহ্ন দেখান"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr ""
+msgstr "ট্রে চিহ্নে পরবর্তী বিরতির সময় দেখান"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes নিষ্ক্রিয় করার অনুমতি দিন"
 
 #: plugins/trayicon
 msgid "About"
-msgstr ""
+msgstr "এই সম্বন্ধে"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes নিষ্ক্রিয় করুন"
 
 #: plugins/trayicon
 #, python-format
 msgid "Disabled until %s"
-msgstr ""
+msgstr "%s পর্যন্ত নিষ্ক্রিয় থাকবে"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr ""
+msgstr "রিস্টার্ট না করা পর্যন্ত নিষ্ক্রিয়"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr ""
+msgstr "Safe Eyes সক্রিয় করুন"
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Hour"
 msgid_plural "For %(num)d Hours"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(num)d ঘণ্টার জন্য"
+msgstr[1] "%(num)d ঘণ্টার জন্য"
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Minute"
 msgid_plural "For %(num)d Minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(num)d মিনিটের জন্য"
+msgstr[1] "%(num)d মিনিটের জন্য"
 
 #: plugins/trayicon
 #, python-format
 msgid "For %(num)d Second"
 msgid_plural "For %(num)d Seconds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(num)d সেকেন্ডের জন্য"
+msgstr[1] "%(num)d সেকেন্ডের জন্য"
 
 #: plugins/trayicon
 #, python-format
 msgid "Next break at %s"
-msgstr ""
+msgstr "%s-এ পরবর্তী বিরতি"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr ""
+msgstr "কোনো বিরতি উপলব্ধ নয়"
 
 #: plugins/trayicon
 msgid "Settings"
-msgstr ""
+msgstr "সেটিংস"
 
 #: plugins/trayicon
 msgid "Take a break now"
-msgstr ""
+msgstr "এখনই বিরতি নিন"
 
 #: plugins/trayicon
 msgid "Any break"
-msgstr ""
+msgstr "যেকোনো বিরতি"
 
 #: plugins/trayicon
 msgid "Short break"
-msgstr ""
+msgstr "সংক্ষিপ্ত বিরতি"
 
 #: plugins/trayicon
 msgid "Long break"
-msgstr ""
+msgstr "দীর্ঘ বিরতি"
 
 #: plugins/trayicon
 msgid "Until restart"
-msgstr ""
+msgstr "রিস্টার্ট না করা পর্যন্ত"
 
 #: plugins/trayicon
 msgid "Quit"
-msgstr ""
+msgstr "প্রস্থান"
 
 # plugin/mediacontrol
 msgid "Media Control"
-msgstr ""
+msgstr "মিডিয়া নিয়ন্ত্রণ"
 
 # plugin/mediacontrol
 msgid "Pause media players from the break screen"
-msgstr ""
+msgstr "ব্রীক স্ক্রিন থেকে মিডিয়া প্লেয়ার পজ করুন"
 
 # plugin/mediacontrol
 msgid "Pause media"
-msgstr ""
+msgstr "মিডিয়া পজ করুন"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit Consecutive Skipping"
-msgstr ""
+msgstr "পরপর স্থগিত করা যাবে না"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr ""
+msgstr "পরপর কতবার স্থগিত করা যাবে"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr ""
+msgstr "পরপর কতবার বিরতি স্থগিত করা যাবে তা সীমাবদ্ধ করুন"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr ""
+msgstr "পরপর %(num)d/%(allowed)d টি বিরতি স্থগিত হয়েছে"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
-msgstr ""
+msgstr "RSI প্রতিরোধ"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr ""
+msgstr "অনুগ্রহ করে আপনার ডেস্কটপ পরিবেশের জন্য ট্রে আইকন প্রদানকারী সার্ভিসটি ইনস্টল করুন।"
 
 #, python-format
 msgid "Next long break at %s"
-msgstr ""
+msgstr "%s-এ পরবর্তী দীর্ঘ বিরতি"
 
 #, python-format
 msgid "Next breaks at %(short)s/%(long)s"
-msgstr ""
+msgstr "পরবর্তী বিরতিগুলো: %(short)s/%(long)s"
 
 #, python-format
 msgid "The required plugin '%s' is missing dependencies!"
-msgstr ""
+msgstr "প্রয়োজনীয় প্লাগইন '%s' এর dependencyগুলো অনুপস্থিত!"
 
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
-msgstr ""
+msgstr "অনুগ্রহ করে dependencyগুলো ইনস্টল করুন অথবা প্লাগইনটি নিষ্ক্রিয় করুন। এই বার্তাটি মুছে ফেলতে আপনি সেটিংসে প্লাগইনটি নিষ্ক্রিয়ও করতে পারেন।"
 
 msgid "Click here for more information"
-msgstr ""
+msgstr "আরও তথ্যের জন্য এখানে ক্লিক করুন"
 
 msgid "Disable plugin temporarily"
-msgstr ""
+msgstr "প্লাগইনটি সাময়িকভাবে নিষ্ক্রিয় করুন"
 
 msgid "Disable permanently"
-msgstr ""
+msgstr "একেবারে নিষ্ক্রিয় করুন"
 
 msgid "License:"
-msgstr ""
+msgstr "লাইসেন্স:"
 
 #, python-format
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
-msgstr ""
+msgstr "পুরনো স্টাইলশীট '%(old)s' এ পাওয়া গেছে; এটি উপেক্ষা করা হচ্ছে। কাস্টম স্টাইলের জন্য '%(new)s' এ একটি নতুন স্টাইলশীট তৈরি করুন।"
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "Wayland-এ স্থগিত এবং বাতিল করার শর্টকাট কাস্টমাইজ করা কাজ করে না।"
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - ত্রুটি"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "একটি প্রয়োজনীয় প্লাগইনের dependency অনুপস্থিত!"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "স্থগিতকরণ সময়কাল"
 
 msgid "minutes"
-msgstr ""
+msgstr "মিনিট"
 
 msgid "seconds"
-msgstr ""
+msgstr "সেকেন্ড"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "অনুগ্রহ করে নিচের কমান্ড-লাইন টুলগুলোর একটি ইনস্টল করুন: %s"
