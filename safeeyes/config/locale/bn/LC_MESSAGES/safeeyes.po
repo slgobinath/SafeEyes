@@ -23,7 +23,7 @@ msgstr "আলতো করে চোখ বন্ধ করুন"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
-msgstr "চোখগুলো কয়েকবার ডানে-বামে ঘোরান"
+msgstr "চোখদুটি কয়েকবার ডানে-বামে ঘোরান"
 
 # Short break
 msgid "Rotate your eyes in clockwise direction"
