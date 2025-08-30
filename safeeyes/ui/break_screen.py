@@ -27,9 +27,6 @@ from safeeyes import utility
 from safeeyes.context import Context
 from safeeyes.model import Break, Config, TrayAction
 from safeeyes.translations import translate as _
-import Xlib
-from Xlib.display import Display
-from Xlib import X
 
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gdk
@@ -71,7 +68,9 @@ class BreakScreen:
         self.show_postpone_button = False
 
         if not self.context.is_wayland:
-            self.x11_display = Display()
+            import Xlib.display
+
+            self.x11_display = Xlib.display.Display()
 
     def initialize(self, config: Config) -> None:
         """Initialize the internal properties from configuration."""
@@ -231,6 +230,8 @@ class BreakScreen:
         if self.x11_display is None:
             return
 
+        import Xlib
+
         NET_WM_STATE = self.x11_display.intern_atom("_NET_WM_STATE")
         NET_WM_STATE_ABOVE = self.x11_display.intern_atom("_NET_WM_STATE_ABOVE")
         NET_WM_STATE_STICKY = self.x11_display.intern_atom("_NET_WM_STATE_STICKY")
@@ -276,6 +277,8 @@ class BreakScreen:
         """
         if self.x11_display is None:
             return
+
+        from Xlib import X
 
         logging.info("Lock the keyboard")
         self.lock_keyboard = True
