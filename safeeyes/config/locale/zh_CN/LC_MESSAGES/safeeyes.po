@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-18 08:50+0000\n"
-"Last-Translator: lalala <lalala_233@qq.com>\n"
+"PO-Revision-Date: 2025-09-04 11:01+0000\n"
+"Last-Translator: Sketch6580 <sketch6580@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/safe-eyes/translations/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.13.1-rc\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -267,7 +267,7 @@ msgstr "请安装Python模块“%s\""
 # Settings dialog
 #, python-format
 msgid "Please install the command-line tool '%s'"
-msgstr "请安装命令行工具”%s“"
+msgstr "请安装命令行工具“%s”"
 
 # Settings dialog
 msgid "Invalid cron expression '%s'"
@@ -580,17 +580,17 @@ msgid "A required plugin is missing dependencies!"
 msgstr "所需插件缺少依赖项！"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "推迟休息时长"
 
 msgid "minutes"
-msgstr ""
+msgstr "分钟"
 
 msgid "seconds"
-msgstr ""
+msgstr "秒"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "请安装以下任一命令行工具：%s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
