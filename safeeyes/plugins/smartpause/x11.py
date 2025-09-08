@@ -61,7 +61,6 @@ class IdleMonitorX11(IdleMonitorInterface):
         if not self._is_active():
             # If SmartPause is already started, do not start it again
             self._set_active(True)
-            utility.start_thread(self._start_idle_monitor)
             utility.start_thread(
                 self._start_idle_monitor,
                 on_idle=on_idle,
