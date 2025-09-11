@@ -27,6 +27,7 @@ import typing
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
+
 EXT_IDLE_NOTIFY_IMPORT_ERROR = False
 try:
     from pywayland.protocol.ext_idle_notify_v1 import (
@@ -34,7 +35,8 @@ try:
         ExtIdleNotificationV1,
     )
 except Exception as e:
-    logging.warning("[SafeEyes] The ext_idle_notify_v1 feature is not available. This is likely due to an older version of Wayland installed on this computer.")
+    logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
+    logging.warning("This is likely due to an older version of Wayland.")
     EXT_IDLE_NOTIFY_IMPORT_ERROR = True
     ExtIdleNotifierV1 = None
     ExtIdleNotificationV1 = None
