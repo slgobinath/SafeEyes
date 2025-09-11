@@ -2,6 +2,7 @@
 name = "safeeyes"
 version = "3.0.0"
 description = "Protect your eyes from eye strain using this continuous breaks reminder."
+license = "GPL-3.0-or-later"
 keywords = ["linux utility health eye-strain safe-eyes"]
 readme = "README.md"
 authors = [
@@ -12,7 +13,6 @@ classifiers = [
     "Environment :: X11 Applications :: GTK",
     "Environment :: Other Environment",
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
