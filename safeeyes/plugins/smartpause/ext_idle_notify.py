@@ -27,13 +27,17 @@ import typing
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
+EXT_IDLE_NOTIFY_IMPORT_ERROR = False
 try:
     from pywayland.protocol.ext_idle_notify_v1 import (
         ExtIdleNotifierV1,
         ExtIdleNotificationV1,
     )
-except ImportError:
+except Exception as e:
     print("[SafeEyes] The ext_idle_notify_v1 feature is not available. This is likely due to an older version of Wayland installed on this computer.")
+    EXT_IDLE_NOTIFY_IMPORT_ERROR = True
+    ExtIdleNotifierV1 = None
+    ExtIdleNotificationV1 = None
 
 from .interface import IdleMonitorInterface
 from safeeyes import utility
@@ -185,8 +189,9 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
-    _notification: typing.Optional[ExtIdleNotificationV1] = None
+    import typing
+    _idle_notifier: typing.Optional[typing.Any] = None
+    _notification: typing.Optional[typing.Any] = None
     _display: Display
     _r_channel_stop: int
     _w_channel_started: int
