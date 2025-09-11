@@ -17,22 +17,24 @@ Visit the official site: https://slgobinath.github.io/SafeEyes/ for more details
 ## Safe Eyes command-line arguments
 
 ```text
-usage: safeeyes [-h] [-a | -d | -e | -q | -s | -t] [--debug] [--version]
+Usage:
+  safeeyes [OPTION…]
 
-Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to
-take breaks while you're working long hours at the computer.
+Help Options:
+  -h, --help                 Show help options
+  --help-all                 Show all help options
+  --help-gapplication        Show GApplication options
 
-optional arguments:
-  -h, --help        show this help message and exit
-  -a, --about       show the about dialog
-  -d, --disable     disable the currently running safeeyes instance
-  -e, --enable      enable the currently running safeeyes instance
-  -q, --quit        quit the running safeeyes instance and exit
-  -s, --settings    show the settings dialog
-  -t, --take-break  take a break now
-  --debug           start safeeyes in debug mode
-  --status          print the status of running safeeyes instance and exit
-  --version         show program's version number and exit
+Application Options:
+  -a, --about                show the about dialog
+  -s, --settings             show the settings dialog
+  -t, --take-break           take a break now
+  -d, --disable              disable the currently running safeeyes instance
+  -e, --enable               enable the currently running safeeyes instance
+  -q, --quit                 quit the running safeeyes instance and exit
+  --status                   print the status of running safeeyes instance and exit
+  --debug                    start safeeyes in debug mode
+  --version                  show program's version number and exit
 ```
 
 ## Installation guide
