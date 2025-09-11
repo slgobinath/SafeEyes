@@ -73,7 +73,7 @@ class SafeEyes(Gtk.Application):
         flags = [
             # startup window
             ("about", "a", _("show the about dialog")),
-            ("settings", "s", _("start safeeyes in debug mode")),
+            ("settings", "s", _("show the settings dialog")),
             ("take-break", "t", _("Take a break now").lower()),
             # activate action
             ("disable", "d", _("disable the currently running safeeyes instance")),
