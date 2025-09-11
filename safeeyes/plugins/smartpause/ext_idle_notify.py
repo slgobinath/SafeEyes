@@ -189,7 +189,6 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    import typing
     _idle_notifier: typing.Optional[typing.Any] = None
     _notification: typing.Optional[typing.Any] = None
     _display: Display
