@@ -271,7 +271,7 @@ class ExtIdleNotifyInternal:
                     self._listen()
                 elif result == b"0":
                     if self._notification is not None:
-                        self._notification.destroy()  # type: ignore[attr-defined]
+                        self._notification.destroy()
                         self._notification = None
 
             if self._r_channel_stop in read:
@@ -284,7 +284,7 @@ class ExtIdleNotifyInternal:
         self._display.roundtrip()
 
         if self._notification is not None:
-            self._notification.destroy()  # type: ignore[attr-defined]
+            self._notification.destroy()
             self._notification = None
 
         self._display.roundtrip()
