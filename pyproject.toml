@@ -21,11 +21,9 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "pywayland",
     "PyGObject",
     "babel",
     "packaging",
-    "python-xlib",
 ]
 requires-python = ">=3.10"
 
@@ -38,6 +36,8 @@ safeeyes = "safeeyes.__main__:main"
 
 [project.optional-dependencies]
 healthstats = ["croniter"]
+wayland = ["pywayland"]
+x11 = ["python-xlib"]
 
 [build-system]
 requires = ["setuptools"]
