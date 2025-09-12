@@ -1,3 +1,9 @@
+safeeyes (3.0.1) noble; urgency=medium
+
+  * bugfix release
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 11 Sep 2025 22:17:07 +0000
+
 safeeyes (3.0.0) noble; urgency=medium
 
   * Internal fixes for flatpak.

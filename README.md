@@ -17,22 +17,24 @@ Visit the official site: https://slgobinath.github.io/SafeEyes/ for more details
 ## Safe Eyes command-line arguments
 
 ```text
-usage: safeeyes [-h] [-a | -d | -e | -q | -s | -t] [--debug] [--version]
+Usage:
+  safeeyes [OPTION…]
 
-Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to
-take breaks while you're working long hours at the computer.
+Help Options:
+  -h, --help                 Show help options
+  --help-all                 Show all help options
+  --help-gapplication        Show GApplication options
 
-optional arguments:
-  -h, --help        show this help message and exit
-  -a, --about       show the about dialog
-  -d, --disable     disable the currently running safeeyes instance
-  -e, --enable      enable the currently running safeeyes instance
-  -q, --quit        quit the running safeeyes instance and exit
-  -s, --settings    show the settings dialog
-  -t, --take-break  take a break now
-  --debug           start safeeyes in debug mode
-  --status          print the status of running safeeyes instance and exit
-  --version         show program's version number and exit
+Application Options:
+  -a, --about                show the about dialog
+  -s, --settings             show the settings dialog
+  -t, --take-break           take a break now
+  -d, --disable              disable the currently running safeeyes instance
+  -e, --enable               enable the currently running safeeyes instance
+  -q, --quit                 quit the running safeeyes instance and exit
+  --status                   print the status of running safeeyes instance and exit
+  --debug                    start safeeyes in debug mode
+  --version                  show program's version number and exit
 ```
 
 ## Installation guide
@@ -117,17 +119,16 @@ flatpak install flathub io.github.slgobinath.SafeEyes
 
 Ensure to meet the following dependencies:
 
-- gir1.2-notify-0.7
-- gir1.2-gtk-4.0
-- python3-babel
-- python3-croniter
-- python3-gi
-- python3-packaging
-- python3-xlib
-- python3-pywayland (optional for KDE/other wayland)
-- xprintidle (optional for X11)
-- wlrctl (optional for wayland/wlroots)
-- Python 3.10+
+- `gir1.2-notify-0.7`
+- `gir1.2-gtk-4.0`
+- `ffmpeg` or `pipewire` (any of them works)
+- `python3` (>= 3.10.0)
+- `python3-gi`
+- `python3-babel`
+- `python3-croniter`
+- `python3-packaging`
+- `python3-xlib` (required on x11)
+- **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
 
 **To install Safe Eyes from PyPI:**
 
@@ -152,7 +153,7 @@ Note that on Wayland, this may still not be enough to get window icons working p
 
 ### Install in a virtual environment
 
-Some Linux systems like CentOS do not have matching dependencies available in their repository. In such systems, you can install and use Safe Eyes in a Python virtual environment.
+Some Linux systems like CentOS do not have matching dependencies available in their repository (of course you can use the flatpak there). In such systems, you can install and use Safe Eyes in a Python virtual environment.
 
 1. Install the necessary dependencies for CentOS 7
 
@@ -221,12 +222,13 @@ The available dependency groups can be found in the `pyproject.toml` file.
 0. Run `update-po.sh` to generate new translation files (which will be eventually updated by translators). Commit and push the changes to the master branch.
 1. Checkout the latest commits from the `master` branch
 2. Run `python3 -m safeeyes` to make sure nothing is broken
-3. Update the Safe Eyes version in the following places (Open the project in VSCode and search for the current version):
+3. Update the Safe Eyes version. Run `./update-version.sh "version.number.number" "New version with shiny new feature"`. 
+To manually change the version number, update the following places (Open the project in VSCode and search for the current version):
     - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L4)
     - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L35)
     - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
     - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release)
+4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above, but you may want to manually add more lines to describe what's new in this release.
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)

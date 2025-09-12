@@ -53,13 +53,14 @@
     <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
 
     <releases>
+        <release version="3.0.1" date="2025-09-11" />
         <release version="3.0.0" date="2025-08-24" />
-        <release version="3.0.0b6" date="2025-08-24" />
-        <release version="3.0.0b5" date="2025-08-22" />
-        <release version="3.0.0b4" date="2025-08-22" />
-        <release version="3.0.0b3" date="2025-05-05" />
-        <release version="3.0.0b2" date="2025-05-05" />
-        <release version="3.0.0b1" date="2025-05-05" />
+        <release version="3.0.0~b6" date="2025-08-24" />
+        <release version="3.0.0~b5" date="2025-08-22" />
+        <release version="3.0.0~b4" date="2025-08-22" />
+        <release version="3.0.0~b3" date="2025-05-05" />
+        <release version="3.0.0~b2" date="2025-05-05" />
+        <release version="3.0.0~b1" date="2025-05-05" />
         <release version="2.2.3" date="2024-12-25" />
         <release version="2.2.2" date="2024-08-05" />
         <release version="2.2.1" date="2024-07-14" />

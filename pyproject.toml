@@ -1,7 +1,8 @@
 [project]
 name = "safeeyes"
-version = "3.0.0"
+version = "3.0.1"
 description = "Protect your eyes from eye strain using this continuous breaks reminder."
+license = "GPL-3.0-or-later"
 keywords = ["linux utility health eye-strain safe-eyes"]
 readme = "README.md"
 authors = [
@@ -12,7 +13,6 @@ classifiers = [
     "Environment :: X11 Applications :: GTK",
     "Environment :: Other Environment",
     "Intended Audience :: End Users/Desktop",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -21,23 +21,23 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "pywayland",
     "PyGObject",
     "babel",
     "packaging",
-    "python-xlib",
 ]
 requires-python = ">=3.10"
 
 [project.urls]
 Homepage = "https://github.com/slgobinath/SafeEyes"
-Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.0.tar.gz"
+Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.0.1.tar.gz"
 
 [project.scripts]
 safeeyes = "safeeyes.__main__:main"
 
 [project.optional-dependencies]
 healthstats = ["croniter"]
+wayland = ["pywayland"]
+x11 = ["python-xlib"]
 
 [build-system]
 requires = ["setuptools"]

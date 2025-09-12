@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-05-12 09:03+0000\n"
-"Last-Translator: Sergey Ponomarev <stokito@gmail.com>\n"
+"PO-Revision-Date: 2025-09-06 12:01+0000\n"
+"Last-Translator: Dmitriy Q <krotesk@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -586,26 +586,26 @@ msgstr ""
 "'%(new)s'."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "Настройка ярлыков \"отложить\" и \"пропустить\" не работает в Wayland."
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - Ошибка"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "В обязательном плагине отсутствуют зависимости!"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "Продолжительность откладывания в"
 
 msgid "minutes"
-msgstr ""
+msgstr "минутах"
 
 msgid "seconds"
-msgstr ""
+msgstr "секунд"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "Пожалуйста, установите один из инструментов командной строки: %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
