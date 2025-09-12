@@ -33,7 +33,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Save .deb as workflow artifact
-        if: github.event_name != 'release'
         uses: actions/upload-artifact@v4
         with:
           name: deb-package
