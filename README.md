@@ -87,7 +87,7 @@ Available on the [praiskup/safeeyes](https://copr.fedorainfracloud.org/coprs/pra
 sudo dnf -y copr enable praiskup/safeeyes
 sudo dnf -y install python3-safeeyes
 ```
-For smart pause plugin, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/)
+For smartpause in Wayland, install the `python3-pywayland` package (in case the installer does not automatically install it as a dependency). For smart pause plugin in X11, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/). 
 
 ### OpenSUSE Tumbleweed
 
