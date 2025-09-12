@@ -38,8 +38,8 @@ EXT_IDLE_NOTIFY_IMPORT_ERROR = False
 
 try:
     from pywayland.protocol.ext_idle_notify_v1 import (
-        ExtIdleNotifierV1,  # noqa: F401
-        ExtIdleNotificationV1,  # noqa: F401
+        ExtIdleNotifierV1,
+        ExtIdleNotificationV1,
     )
 except Exception as e:
     logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
@@ -196,7 +196,6 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    # Use string-based type hints so mypy can resolve them during type checking
     _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
     _notification: typing.Optional[ExtIdleNotificationV1] = None
     _display: Display
