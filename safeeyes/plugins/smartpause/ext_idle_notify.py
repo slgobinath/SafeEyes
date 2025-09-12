@@ -28,12 +28,18 @@ import typing
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
 
+
+if typing.TYPE_CHECKING:
+    from pywayland.protocol.ext_idle_notify_v1 import (
+        ExtIdleNotifierV1,
+        ExtIdleNotificationV1,
+    )
 EXT_IDLE_NOTIFY_IMPORT_ERROR = False
 
 try:
     from pywayland.protocol.ext_idle_notify_v1 import (
-        ExtIdleNotifierV1,
-        ExtIdleNotificationV1,
+        ExtIdleNotifierV1,  # noqa: F401
+        ExtIdleNotificationV1,  # noqa: F401
     )
 except Exception as e:
     logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
@@ -190,8 +196,9 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
-    _notification: typing.Optional[ExtIdleNotificationV1] = None
+    # Use string-based type hints so mypy can resolve them during type checking
+    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None  # type: ignore[no-any-unimported]
+    _notification: typing.Optional[ExtIdleNotificationV1] = None  # type: ignore[no-any-unimported]
     _display: Display
     _r_channel_stop: int
     _w_channel_started: int
