@@ -39,8 +39,6 @@ except Exception as e:
     logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
     logging.warning("This is likely due to an older version of Wayland.")
     EXT_IDLE_NOTIFY_IMPORT_ERROR = True
-    ExtIdleNotifierV1: typing.Any = None
-    ExtIdleNotificationV1: typing.Any = None
 
 from .interface import IdleMonitorInterface
 from safeeyes import utility
