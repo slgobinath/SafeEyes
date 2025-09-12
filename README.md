@@ -50,7 +50,7 @@ It is also available in Ubuntu PPA, Arch AUR and Python PyPI. You can choose any
 
 ### Ubuntu, Linux Mint and other Ubuntu Derivatives
 
-The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest version of safeeyes **for Ubuntu 22.04 and above**. 
+The [Official PPA for Safe Eyes](https://launchpad.net/~safeeyes-team/+archive/ubuntu/safeeyes) hosts the latest (as much as allowed by dependencies) version of safeeyes **for Ubuntu 22.04 and above**. 
 ```bash
 sudo add-apt-repository ppa:safeeyes-team/safeeyes
 sudo apt update
