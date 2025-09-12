@@ -197,8 +197,8 @@ class ExtIdleNotifyInternal:
     """
 
     # Use string-based type hints so mypy can resolve them during type checking
-    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None  # type: ignore[no-any-unimported]
-    _notification: typing.Optional[ExtIdleNotificationV1] = None  # type: ignore[no-any-unimported]
+    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
+    _notification: typing.Optional[ExtIdleNotificationV1] = None
     _display: Display
     _r_channel_stop: int
     _w_channel_started: int
