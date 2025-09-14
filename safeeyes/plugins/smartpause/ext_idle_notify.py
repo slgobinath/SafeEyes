@@ -35,6 +35,7 @@ if typing.TYPE_CHECKING:
         ExtIdleNotificationV1,
     )
 EXT_IDLE_NOTIFY_IMPORT_ERROR = False
+# We will set it to be True in case of importError
 
 try:
     from pywayland.protocol.ext_idle_notify_v1 import (
@@ -45,6 +46,7 @@ except Exception as e:
     logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
     logging.warning("This is likely due to an older version of Wayland.")
     EXT_IDLE_NOTIFY_IMPORT_ERROR = True
+    # It was otherwise set to be False
 
 from .interface import IdleMonitorInterface
 from safeeyes import utility
