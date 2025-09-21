@@ -33,6 +33,6 @@ jobs:
       - run: |
           sudo apt-get update
           sudo apt-get install -y libwayland-dev libcairo2-dev libgirepository-2.0-dev
-      - run: uv pip install -r pyproject.toml --extra wayland --extra x11
+      - run: uv pip install -r pyproject.toml --extra wayland
       - run: uv pip install --group types
       - run: mypy safeeyes

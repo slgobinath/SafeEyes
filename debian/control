@@ -17,9 +17,9 @@ Depends: ${misc:Depends}, ${python3:Depends},
  python3-packaging,
  gir1.2-notify-0.7,
  gir1.2-gtk-4.0,
- ffmpeg | pipewire
+ ffmpeg | pipewire,
+ python3-xlib
 Recommends:
- python3-xlib,
  python3-pywayland
 Suggests:
  xprintidle
