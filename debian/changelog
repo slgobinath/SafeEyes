@@ -1,3 +1,11 @@
+safeeyes (3.1.0) noble; urgency=medium
+
+  * Ensure compatibility with older Wayland
+
+  * Made xlib a mandatory dependency so that it does not break in x11.
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Sun, 21 Sep 2025 15:28:01 +0000
+
 safeeyes (3.0.1) noble; urgency=medium
 
   * bugfix release
