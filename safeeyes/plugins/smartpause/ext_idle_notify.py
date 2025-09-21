@@ -27,10 +27,25 @@ import typing
 
 from pywayland.client import Display
 from pywayland.protocol.wayland.wl_seat import WlSeat
-from pywayland.protocol.ext_idle_notify_v1 import (
-    ExtIdleNotifierV1,
-    ExtIdleNotificationV1,
-)
+
+
+if typing.TYPE_CHECKING:
+    from pywayland.protocol.ext_idle_notify_v1 import (
+        ExtIdleNotifierV1,
+        ExtIdleNotificationV1,
+    )
+
+try:
+    from pywayland.protocol.ext_idle_notify_v1 import (
+        ExtIdleNotifierV1,
+        ExtIdleNotificationV1,
+    )
+except Exception as e:
+    logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
+    logging.warning("This is likely due to an older version of Wayland.")
+    EXT_IDLE_NOTIFY_IMPORT_ERROR = True
+else:
+    EXT_IDLE_NOTIFY_IMPORT_ERROR = False
 
 from .interface import IdleMonitorInterface
 from safeeyes import utility
