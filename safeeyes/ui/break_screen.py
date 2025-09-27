@@ -201,8 +201,13 @@ class BreakScreen:
                 # Fix flickering screen in KDE by setting opacity to 1
                 window.set_opacity(0.9)
 
-            window.fullscreen_on_monitor(monitor)
             window.present()
+
+            # Apparently this needs to run after present() (as of GTK 4.20)
+            # On Wayland, either work seems to work fine
+            # On X11, calling this before present() always fullscreens only on the
+            # focused monitor regardless
+            window.fullscreen_on_monitor(monitor)
 
             # this ensures that none of the buttons is in focus immediately
             # otherwise, pressing space presses that button instead of triggering the
