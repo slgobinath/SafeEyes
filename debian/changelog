@@ -1,3 +1,9 @@
+safeeyes (3.2.0) noble; urgency=medium
+
+  * Fixed XFCE multi-screen bug (thanks to @deltragon)
+
+ -- Archisman Panigrahi <apandada1@gmail.com>  Thu, 02 Oct 2025 02:25:38 +0000
+
 safeeyes (3.1.0) noble; urgency=medium
 
   * Ensure compatibility with older Wayland
