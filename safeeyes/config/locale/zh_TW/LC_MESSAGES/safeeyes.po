@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-05-24 13:01+0000\n"
-"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"PO-Revision-Date: 2025-10-04 01:01+0000\n"
+"Last-Translator: 麋麓 BigELK176 <BigELK176@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -569,26 +569,26 @@ msgstr ""
 "樣式表。"
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "自訂延後及忽略快速鍵在 Wayland 上不起作用。"
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - 錯誤"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "所要求的外掛程式缺少依賴項目！"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "延遲持續時間"
 
 msgid "minutes"
-msgstr ""
+msgstr "分鐘"
 
 msgid "seconds"
-msgstr ""
+msgstr "秒"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "請安裝其中一項指令工具： %s"
 
 # Short break
 #~ msgid "Tightly close your eyes"
