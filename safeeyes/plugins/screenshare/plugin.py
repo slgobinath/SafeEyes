@@ -2,8 +2,9 @@
 # Safe Eyes - Screen Share Do Not Disturb plugin
 # Skips breaks while a screen share is active (detected via PipeWire).
 #
-# Copyright (C) 2025
+# Copyright (C) 2025  Archisman Panigrahi <apandada1@gmail.com>
 # License: GPL-3.0-or-later
+# This program was written with the help of copilot
 
 import json
 import logging
