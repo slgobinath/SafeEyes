@@ -96,21 +96,10 @@ def _node_is_screencast(node: Dict[str, Any]) -> bool:
 
 
 def _is_screencast_active_pipewire() -> bool:
+    # Return True if any PipeWire node matches our screencast heuristic.
+    # Avoid printing or exposing application names.
     nodes = _pw_dump_nodes()
-    if not nodes:
-        return False
-
-    for n in nodes:
-        if _node_is_screencast(n):
-            props = (n.get("info") or {}).get("props") or {}
-            app_name = props.get("application.name", None)
-            if app_name:
-                print(f"Screen sharing app detected: {app_name}")
-            else:
-                print("Screen sharing app detected: Unknown")
-            return True
-
-    return False
+    return any(_node_is_screencast(n) for n in nodes)
 
 
 def init(ctx, safeeyes_config, plugin_config):
