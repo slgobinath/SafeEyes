@@ -7,7 +7,6 @@
 # This program was written with the help of copilot
 
 import json
-import logging
 import shutil
 import subprocess
 from typing import Any, Dict, List
@@ -54,8 +53,6 @@ def _ensure_pw_dump() -> bool:
     global _checked_pw_dump, _has_pw_dump
     if not _checked_pw_dump:
         _has_pw_dump = shutil.which("pw-dump") is not None
-        if not _has_pw_dump:
-            logging.debug("ScreenShare DND: pw-dump not found")
         _checked_pw_dump = True
     return _has_pw_dump
 
@@ -74,8 +71,7 @@ def _pw_dump_nodes() -> List[Dict[str, Any]]:
         if not isinstance(nodes, list):
             return []
         return nodes
-    except Exception as e:
-        logging.debug("ScreenShare DND: pw-dump failed: %s", e)
+    except Exception:
         return []
 
 
@@ -114,17 +110,6 @@ def _is_screencast_active_pipewire() -> bool:
     if not nodes:
         return False
 
-    if _config.get("log_nodes", False):
-        for n in nodes:
-            props = (n.get("info") or {}).get("props") or {}
-            if props.get("media.class") == "Video/Source":
-                logging.debug(
-                    "ScreenShare DND: Video/Source node: app=%s name=%s desc=%s",
-                    props.get("application.name"),
-                    props.get("node.name"),
-                    props.get("node.description"),
-                )
-
     for n in nodes:
         if _node_is_screencast(n):
             props = (n.get("info") or {}).get("props") or {}
@@ -142,7 +127,6 @@ def init(ctx, safeeyes_config, plugin_config):
     global _context
     _context = ctx
     _load_config(plugin_config or {})
-    logging.debug("Initialized ScreenShare Do Not Disturb plugin")
 
 
 def on_pre_break(break_obj):
@@ -151,7 +135,6 @@ def on_pre_break(break_obj):
     Return True to skip break.
     """
     if _is_screencast_active_pipewire():
-        logging.info("Skipping break: active screen share detected (PipeWire)")
         return True
     return False
 
@@ -162,6 +145,5 @@ def on_start_break(break_obj):
     Return True to skip break.
     """
     if _is_screencast_active_pipewire():
-        logging.info("Skipping break: active screen share detected (PipeWire)")
         return True
     return False
