@@ -7,7 +7,6 @@
 # This program was written with the help of copilot
 
 import json
-import shutil
 import subprocess
 from typing import Any, Dict, List
 
@@ -31,10 +30,6 @@ _DEFAULT_PRODUCERS = {
 }
 _DEFAULT_KEYWORDS = {"screencast", "screen", "desktop", "monitor"}
 
-# Avoid spamming logs if pw-dump is missing
-_checked_pw_dump = False
-_has_pw_dump = False
-
 
 def _load_config(plugin_config: Dict[str, Any]) -> None:
     global _config
@@ -49,22 +44,11 @@ def _load_config(plugin_config: Dict[str, Any]) -> None:
     }
 
 
-def _ensure_pw_dump() -> bool:
-    global _checked_pw_dump, _has_pw_dump
-    if not _checked_pw_dump:
-        _has_pw_dump = shutil.which("pw-dump") is not None
-        _checked_pw_dump = True
-    return _has_pw_dump
-
-
 def _pw_dump_nodes() -> List[Dict[str, Any]]:
     """
     Returns a list of PipeWire node objects (JSON) or an empty list on failure.
     Uses `pw-dump -N` to keep output minimal.
     """
-    if not _ensure_pw_dump():
-        return []
-
     try:
         out = subprocess.check_output(["pw-dump", "-N"], text=True)
         nodes = json.loads(out)
