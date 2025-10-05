@@ -25,8 +25,14 @@ _DEFAULT_PRODUCERS = {
     "xdg-desktop-portal-wlr",
     "xdg-desktop-portal-gnome",
     "xdg-desktop-portal-kde",
+    "xdg-desktop-portal-gtk",  # Xfce, MATE, and other GTK-based DEs
+    "xdg-desktop-portal-xapp",  # Cinnamon
     "wlroots",
     "gamescope",
+    "xfwm4",  # Xfce window manager
+    "cinnamon",  # Cinnamon compositor
+    "marco",  # MATE window manager
+    "gala",  # Pantheon (elementary OS) compositor
 }
 _DEFAULT_KEYWORDS = {"screencast", "screen", "desktop", "monitor"}
 
