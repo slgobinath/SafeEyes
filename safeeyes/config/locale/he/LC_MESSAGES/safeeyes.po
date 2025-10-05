@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "שומר מסך"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר המסך"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "פקודת שומר מסך מותאמת אישית"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -596,6 +596,14 @@ msgstr "שניות"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "נא להתקין את אחד מכלי שורת הפקודה: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר המסך"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "פקודת שומר מסך מותאמת אישית"
 
 # Short break
 #~ msgid "Tightly close your eyes"

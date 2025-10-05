@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "محافظ صفحه"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "قفل صفحه پس از استراحت‌های طولانی با آغاز محافظ صفحه"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "دستور محافظ صفحه نمایش سفارشی"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -594,6 +594,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "قفل صفحه پس از استراحت‌های طولانی با آغاز محافظ صفحه"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "دستور محافظ صفحه نمایش سفارشی"
 
 # Short break
 #~ msgid "Tightly close your eyes"

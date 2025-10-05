@@ -371,13 +371,12 @@ msgid "Screensaver"
 msgstr "Pantaila babeslea"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
 msgstr ""
-"Blokeatu pantaila etenaldi luzeen ondoren eta erakutsi pantaila-babeslea"
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Pantaila-babeslearentzako komando pertsonalizatua"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -597,6 +596,15 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr ""
+#~ "Blokeatu pantaila etenaldi luzeen ondoren eta erakutsi pantaila-babeslea"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Pantaila-babeslearentzako komando pertsonalizatua"
 
 # Short break
 #~ msgid "Tightly close your eyes"

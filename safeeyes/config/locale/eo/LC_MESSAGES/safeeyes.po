@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "Ekrankurteno"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Bloki la ekranon post longaj paŭzoj ekigante ekrankurtenon"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Propra ekrankurtena komando"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -593,6 +593,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Bloki la ekranon post longaj paŭzoj ekigante ekrankurtenon"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Propra ekrankurtena komando"
 
 # Short break
 #~ msgid "Tightly close your eyes"

@@ -375,12 +375,12 @@ msgid "Screensaver"
 msgstr "Bildschirmschoner"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Nach langer Pause Bildschirm durch Bildschirmschoner sperren"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Benutzerdefinierter Bildschirmschoner-Befehl"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -612,6 +612,14 @@ msgstr "Sekunden"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "Bitte eines dieser Kommandozeilen-Tools installieren: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Nach langer Pause Bildschirm durch Bildschirmschoner sperren"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Benutzerdefinierter Bildschirmschoner-Befehl"
 
 # Short break
 #~ msgid "Tightly close your eyes"

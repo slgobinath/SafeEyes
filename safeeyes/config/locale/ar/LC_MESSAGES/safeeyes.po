@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2025-05-22 09:20+0000\n"
-"Last-Translator: abdelbasset jabrane "
-"<naminio201@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: abdelbasset jabrane <naminio201@users.noreply.hosted."
+"weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -370,12 +370,12 @@ msgid "Screensaver"
 msgstr "شاشة التوقف"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "اغلق الشاشة بعد فترة استراحة طويلة عن طريق بدأ شاشة التوقف"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "أمر شاشة التوقف مخصص"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -610,6 +610,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "اغلق الشاشة بعد فترة استراحة طويلة عن طريق بدأ شاشة التوقف"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "أمر شاشة التوقف مخصص"
 
 # Short break
 #~ msgid "Tightly close your eyes"
