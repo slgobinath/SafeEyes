@@ -590,11 +590,6 @@ msgstr "秒"
 msgid "Please install one of the command-line tools: %s"
 msgstr "請安裝其中一項指令工具： %s"
 
-msgid ""
-"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
-"provides '%s'"
-msgstr ""
-
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "閉上您的眼睛休息一會"

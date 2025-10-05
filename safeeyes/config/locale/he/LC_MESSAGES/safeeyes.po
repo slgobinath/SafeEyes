@@ -597,11 +597,6 @@ msgstr "שניות"
 msgid "Please install one of the command-line tools: %s"
 msgstr "נא להתקין את אחד מכלי שורת הפקודה: %s"
 
-msgid ""
-"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
-"provides '%s'"
-msgstr ""
-
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "לעצום עיניים היטב"
