@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "name": "Disable on Screen Sharing",
+        "description": "Skip break if some app is sharing screen",
+        "version": "0.1"
+    },
+    "dependencies": {
+        "python_modules": [],
+        "shell_commands": ["pw-dump"],
+        "operating_systems": [],
+        "desktop_environments": [],
+        "resources": []
+    },
+    "settings": [],
+    "break_override_allowed": true
+}
