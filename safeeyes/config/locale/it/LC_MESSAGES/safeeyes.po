@@ -535,6 +535,13 @@ msgstr ""
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "%(num)d/%(allowed)d pause saltate o posticipate di seguito"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Prevenzione RSI"
@@ -585,7 +592,8 @@ msgstr ""
 "personalizzati, crea un nuovo foglio di stile in %(new)s invece."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr "Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
+msgstr ""
+"Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
 
 msgid "Safe Eyes - Error"
 msgstr "Safe Eyes - Errore"

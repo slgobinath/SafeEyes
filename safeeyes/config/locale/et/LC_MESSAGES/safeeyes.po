@@ -528,6 +528,13 @@ msgstr "Kui mitu pausi võid järjest vahele jätta või edasi lükata"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "Järjest vahelejäetud või edasilükatatud %(num)d/%(allowed)d pausi"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "RSI ennetus"

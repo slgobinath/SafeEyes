@@ -534,6 +534,13 @@ msgstr "Omezit počet přestávek, které lze vynechat nebo odložit za sebou"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "Vynechané nebo odložené %(num)d/%(allowed)d přestávky za sebou"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Prevence poranění z opakovaného namáhání (RSI)"
