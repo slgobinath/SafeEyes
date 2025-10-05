@@ -55,9 +55,7 @@ def _ensure_pw_dump() -> bool:
     if not _checked_pw_dump:
         _has_pw_dump = shutil.which("pw-dump") is not None
         if not _has_pw_dump:
-            logging.debug(
-                "ScreenShare DND: pw-dump not found (install pipewire-tools to enable detection)"
-            )
+            logging.debug("ScreenShare DND: pw-dump not found")
         _checked_pw_dump = True
     return _has_pw_dump
 
@@ -127,7 +125,6 @@ def _is_screencast_active_pipewire() -> bool:
                     props.get("node.description"),
                 )
 
-
     for n in nodes:
         if _node_is_screencast(n):
             props = (n.get("info") or {}).get("props") or {}
@@ -142,13 +139,6 @@ def _is_screencast_active_pipewire() -> bool:
 
 
 def init(ctx, safeeyes_config, plugin_config):
-    """
-    Initialize the Screen Share Do Not Disturb plugin.
-    plugin_config (optional):
-      - producers: list[str] -> additional known producer application names
-      - keywords: list[str]  -> additional keyword hints in node name/description
-      - log_nodes: bool      -> log discovered Video/Source nodes (debug)
-    """
     global _context
     _context = ctx
     _load_config(plugin_config or {})

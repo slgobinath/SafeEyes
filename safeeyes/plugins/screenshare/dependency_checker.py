@@ -25,6 +25,6 @@ from safeeyes.translations import translate as _
 def validate(plugin_config, plugin_settings):
     command = "pw-dump"
     if not utility.command_exist(command):
-        return _("Please install the package (pipewire/pipewire-utils/pipewire-tools) that provides '%s'") % command
+        return _("Please install the command-line tool '%s'") % command
     else:
         return None
