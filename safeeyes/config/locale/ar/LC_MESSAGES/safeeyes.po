@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2025-05-22 09:20+0000\n"
-"Last-Translator: abdelbasset jabrane "
-"<naminio201@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: abdelbasset jabrane <naminio201@users.noreply.hosted."
+"weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ar/>\n"
 "Language: ar\n"
@@ -609,6 +609,11 @@ msgstr ""
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
+msgstr ""
+
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
 msgstr ""
 
 # Short break

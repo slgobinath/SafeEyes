@@ -79,7 +79,9 @@ msgstr ""
 
 # Description in about dialog
 # Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer
-msgid "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you to take breaks while you're working long hours at the computer"
+msgid ""
+"Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
+"to take breaks while you're working long hours at the computer"
 msgstr ""
 
 # About dialog
@@ -516,7 +518,8 @@ msgstr ""
 msgid "RSI Prevention"
 msgstr ""
 
-msgid "Please install service providing tray icons for your desktop environment."
+msgid ""
+"Please install service providing tray icons for your desktop environment."
 msgstr ""
 
 #, python-format
@@ -531,7 +534,9 @@ msgstr ""
 msgid "The required plugin '%s' is missing dependencies!"
 msgstr ""
 
-msgid "Please install the dependencies or disable the plugin. To hide this message, you can also deactivate the plugin in the settings."
+msgid ""
+"Please install the dependencies or disable the plugin. To hide this message, "
+"you can also deactivate the plugin in the settings."
 msgstr ""
 
 msgid "Click here for more information"
@@ -547,7 +552,9 @@ msgid "License:"
 msgstr ""
 
 #, python-format
-msgid "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new stylesheet in '%(new)s' instead."
+msgid ""
+"Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
+"stylesheet in '%(new)s' instead."
 msgstr ""
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
@@ -570,4 +577,9 @@ msgstr ""
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
+msgstr ""
+
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
 msgstr ""

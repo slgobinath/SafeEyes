@@ -534,7 +534,8 @@ msgstr "RSI প্রতিরোধ"
 
 msgid ""
 "Please install service providing tray icons for your desktop environment."
-msgstr "অনুগ্রহ করে আপনার ডেস্কটপ পরিবেশের জন্য ট্রে আইকন প্রদানকারী সার্ভিসটি ইনস্টল করুন।"
+msgstr ""
+"অনুগ্রহ করে আপনার ডেস্কটপ পরিবেশের জন্য ট্রে আইকন প্রদানকারী সার্ভিসটি ইনস্টল করুন।"
 
 #, python-format
 msgid "Next long break at %s"
@@ -551,7 +552,9 @@ msgstr "প্রয়োজনীয় প্লাগইন '%s' এর dependency
 msgid ""
 "Please install the dependencies or disable the plugin. To hide this message, "
 "you can also deactivate the plugin in the settings."
-msgstr "অনুগ্রহ করে dependencyগুলো ইনস্টল করুন অথবা প্লাগইনটি নিষ্ক্রিয় করুন। এই বার্তাটি মুছে ফেলতে আপনি সেটিংসে প্লাগইনটি নিষ্ক্রিয়ও করতে পারেন।"
+msgstr ""
+"অনুগ্রহ করে dependencyগুলো ইনস্টল করুন অথবা প্লাগইনটি নিষ্ক্রিয় করুন। এই বার্তাটি মুছে "
+"ফেলতে আপনি সেটিংসে প্লাগইনটি নিষ্ক্রিয়ও করতে পারেন।"
 
 msgid "Click here for more information"
 msgstr "আরও তথ্যের জন্য এখানে ক্লিক করুন"
@@ -569,7 +572,9 @@ msgstr "লাইসেন্স:"
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
-msgstr "পুরনো স্টাইলশীট '%(old)s' এ পাওয়া গেছে; এটি উপেক্ষা করা হচ্ছে। কাস্টম স্টাইলের জন্য '%(new)s' এ একটি নতুন স্টাইলশীট তৈরি করুন।"
+msgstr ""
+"পুরনো স্টাইলশীট '%(old)s' এ পাওয়া গেছে; এটি উপেক্ষা করা হচ্ছে। কাস্টম স্টাইলের জন্য "
+"'%(new)s' এ একটি নতুন স্টাইলশীট তৈরি করুন।"
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
 msgstr "Wayland-এ স্থগিত এবং বাতিল করার শর্টকাট কাস্টমাইজ করা কাজ করে না।"
@@ -592,3 +597,8 @@ msgstr "সেকেন্ড"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "অনুগ্রহ করে নিচের কমান্ড-লাইন টুলগুলোর একটি ইনস্টল করুন: %s"
+
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
+msgstr ""

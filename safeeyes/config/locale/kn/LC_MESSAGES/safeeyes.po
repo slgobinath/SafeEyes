@@ -588,6 +588,11 @@ msgstr ""
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
 
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "ಕಣ್ಣನ್ನು ಗಟ್ಟಿಯಾಗಿ ಮುಚ್ಚಿರಿ"

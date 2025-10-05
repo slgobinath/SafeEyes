@@ -607,6 +607,11 @@ msgstr "секунд"
 msgid "Please install one of the command-line tools: %s"
 msgstr "Пожалуйста, установите один из инструментов командной строки: %s"
 
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Плотно закройте глаза"

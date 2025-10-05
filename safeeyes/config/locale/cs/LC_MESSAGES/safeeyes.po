@@ -605,6 +605,11 @@ msgstr "vteřinách"
 msgid "Please install one of the command-line tools: %s"
 msgstr "Nainstalujte prosím jeden z těchto nástrojů příkazového řádku:%s"
 
+msgid ""
+"Please install the package (pipewire/pipewire-utils/pipewire-tools) that "
+"provides '%s'"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Zavřete oči"
