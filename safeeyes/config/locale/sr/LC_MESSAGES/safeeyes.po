@@ -374,13 +374,12 @@ msgid "Screensaver"
 msgstr "Чувар екрана"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
 msgstr ""
-"Закључајте екран за време дугих паузи тако што ћете укључити чувар екрана"
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Команда за чувар екрана по жељи"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -603,6 +602,15 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr ""
+#~ "Закључајте екран за време дугих паузи тако што ћете укључити чувар екрана"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Команда за чувар екрана по жељи"
 
 # Short break
 #~ msgid "Tightly close your eyes"

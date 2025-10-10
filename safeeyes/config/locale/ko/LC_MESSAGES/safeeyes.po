@@ -367,12 +367,12 @@ msgid "Screensaver"
 msgstr "화면 보호기"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "화면 보호기 시작으로 긴 휴식 후 화면 잠금"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "화면 보호기 명령 정의"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -587,6 +587,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "화면 보호기 시작으로 긴 휴식 후 화면 잠금"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "화면 보호기 명령 정의"
 
 # Short break
 #~ msgid "Tightly close your eyes"

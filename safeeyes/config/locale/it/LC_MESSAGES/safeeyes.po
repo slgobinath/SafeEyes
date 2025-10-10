@@ -373,12 +373,12 @@ msgid "Screensaver"
 msgstr "Salvaschermo"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Blocca lo schermo dopo le pause lunghe avviando il salvaschermo"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Comando personalizzato per il salvaschermo"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -585,7 +585,8 @@ msgstr ""
 "personalizzati, crea un nuovo foglio di stile in %(new)s invece."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr "Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
+msgstr ""
+"Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
 
 msgid "Safe Eyes - Error"
 msgstr "Safe Eyes - Errore"
@@ -605,6 +606,14 @@ msgstr "secondi"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "Prego installa uno degli strumenti da riga di comando: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Blocca lo schermo dopo le pause lunghe avviando il salvaschermo"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Comando personalizzato per il salvaschermo"
 
 # Short break
 #~ msgid "Tightly close your eyes"

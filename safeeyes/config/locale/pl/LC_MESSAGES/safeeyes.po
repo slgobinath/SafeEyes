@@ -370,12 +370,12 @@ msgid "Screensaver"
 msgstr "Wygaszacz ekranu"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Zablokuj ekran po długich przerwach za pomocą wygaszacza ekranu"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Niestandardowa komenda wygaszacza ekranu"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -598,6 +598,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Zablokuj ekran po długich przerwach za pomocą wygaszacza ekranu"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Niestandardowa komenda wygaszacza ekranu"
 
 # Short break
 #~ msgid "Tightly close your eyes"

@@ -370,12 +370,12 @@ msgid "Screensaver"
 msgstr "Ekran Koruyucu"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Uzun molalardan sonra ekran koruyucuyu başlatarak ekranı kilitle"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Özel ekran koruyucu komutu"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -599,6 +599,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Uzun molalardan sonra ekran koruyucuyu başlatarak ekranı kilitle"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Özel ekran koruyucu komutu"
 
 # Short break
 #~ msgid "Tightly close your eyes"

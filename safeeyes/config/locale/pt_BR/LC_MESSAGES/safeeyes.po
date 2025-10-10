@@ -374,12 +374,12 @@ msgid "Screensaver"
 msgstr "Proteção de tela"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Bloquear a tela após paradas longas iniciando a proteção de tela"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Comando para proteção de tela personalizada"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -599,6 +599,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Bloquear a tela após paradas longas iniciando a proteção de tela"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Comando para proteção de tela personalizada"
 
 # Short break
 #~ msgid "Tightly close your eyes"

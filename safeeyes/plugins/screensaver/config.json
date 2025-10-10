@@ -1,7 +1,7 @@
 {
     "meta": {
         "name": "Screensaver",
-        "description": "Lock the screen after long breaks by starting screensaver",
+        "description": "Lock the screen after long breaks by starting screensaver/screen-lock",
         "version": "0.0.2"
     },
     "dependencies": {
@@ -14,7 +14,7 @@
     "settings": [
         {
             "id": "command",
-            "label": "Custom screensaver command",
+            "label": "Custom screensaver or screen-lock command",
             "type": "TEXT",
             "default": ""
         },

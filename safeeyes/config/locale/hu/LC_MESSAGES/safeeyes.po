@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "Képernyővédő"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Zárold a képernyőt hosszú pihenők után a képernyővédő indításával"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Egyedi képernyővédő indító parancs"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -592,6 +592,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Zárold a képernyőt hosszú pihenők után a képernyővédő indításával"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Egyedi képernyővédő indító parancs"
 
 # Short break
 #~ msgid "Tightly close your eyes"
