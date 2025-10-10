@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-29 17:30+0000\n"
+"PO-Revision-Date: 2025-10-11 17:07+0000\n"
 "Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
 "Language-Team: Bengali <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/bn/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Generator: Weblate 5.13.1-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -370,11 +370,11 @@ msgstr "স্ক্রিনসেভার"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
-msgstr ""
+msgstr "দীর্ঘবিরতির পর স্ক্রিনসেভার/স্ক্রিন-লক চালু করুন"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
-msgstr ""
+msgstr "কাস্টম স্ক্রিনসেভার বা স্ক্রিন-লক কমান্ড"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
