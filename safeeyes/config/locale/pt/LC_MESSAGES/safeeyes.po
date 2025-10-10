@@ -531,6 +531,13 @@ msgstr "Limitar quantas pausas podem ser puladas ou adiadas em sequência"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "%(num)d%(allowed)d pausas seguidas ignoradas ou adiadas"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Prevenção de LER"

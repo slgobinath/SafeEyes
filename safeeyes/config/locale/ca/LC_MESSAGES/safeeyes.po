@@ -534,6 +534,13 @@ msgstr "Limita quantes pauses seguides es poden ometre o posposar"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "Heu saltat o posposat %(num)d/%(allowed)d pauses seguides"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Prevenció de lesions a causa de moviments repetitius"

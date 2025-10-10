@@ -539,6 +539,13 @@ msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 "%(num)d/%(allowed)d Pausen hintereinander übersprungen oder aufgeschoben"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "RSI-Prävention"

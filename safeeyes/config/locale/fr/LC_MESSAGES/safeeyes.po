@@ -538,6 +538,13 @@ msgstr "Limiter le nombre de pauses sautées ou reportées d’affilée"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "%(num)d/%(allowed)d pauses sautées ou reportées d’affilée"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Prévention des lésions attribuables au travail répétitif"

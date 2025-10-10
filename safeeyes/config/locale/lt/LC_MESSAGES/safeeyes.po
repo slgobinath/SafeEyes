@@ -536,6 +536,13 @@ msgstr "Apriboti, kiek kartų galima iš eilės praleisti arba atidėti pertrauk
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "Paeiliui praleistos arba atidėtos pertraukos: %(num)d/%(allowed)d"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Apsaugokite savo akis nuo įtampos"

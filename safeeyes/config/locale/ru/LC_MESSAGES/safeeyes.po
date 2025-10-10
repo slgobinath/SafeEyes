@@ -535,6 +535,13 @@ msgstr "Какое количество перерывов можно пропу
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "Пропущенные или отложенные %(num)d/%(allowed)d перерывы подряд"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "Профилактика RSI"

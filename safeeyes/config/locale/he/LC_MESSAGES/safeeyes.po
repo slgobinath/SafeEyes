@@ -528,6 +528,13 @@ msgstr "הגבלת כמות הפעמים שניתן לדחות או לדלג ב�
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "דילגת על או דחית %(num)d/%(allowed)d הפסקות ברצף"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "מניעת פציעת מאמץ חוזרני"

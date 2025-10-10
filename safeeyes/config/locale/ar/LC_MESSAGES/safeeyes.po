@@ -541,6 +541,13 @@ msgstr "حدد عدد فترات الاستراحة التي يمكن تخطيه
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "تم تخطي أو تأجيل %(num)d/%(allowed)d من فترات الاستراحة على التوالي"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "الوقاية من الإصابات الناتجة عن الإجهاد المتكرر للعينين"

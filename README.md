@@ -121,14 +121,15 @@ Ensure to meet the following dependencies:
 
 - `gir1.2-notify-0.7`
 - `gir1.2-gtk-4.0`
-- `ffmpeg` or `pipewire` (any of them works)
+- `ffmpeg` or `pipewire` (for the audible alert plugin)
 - `python3` (>= 3.10.0)
 - `python3-gi`
 - `python3-babel`
 - `python3-croniter`
 - `python3-packaging`
 - `python3-xlib` (required on x11)
-- **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
+- **Optional**: `pipewire`/`pipewire-tools`/`pipewire-utils` (depending on the distro) for providing `pw-dump` tool. This is for the "Disable on Screen Sharing" plugin.
+- **Optional**: Either `python3-pywayland` (for "smartpause" plugin in Wayland) or `xprintidle` (for "smartpause" plugin in x11).
 
 **To install Safe Eyes from PyPI:**
 

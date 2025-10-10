@@ -525,6 +525,13 @@ msgstr "限制连续跳过或推迟的次数"
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "连续跳过或推迟休息 %(num)d/%(allowed)d 次"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "RSI 预防"

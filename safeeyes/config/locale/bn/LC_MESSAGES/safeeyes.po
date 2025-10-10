@@ -528,6 +528,13 @@ msgstr "পরপর কতবার বিরতি স্থগিত কর�
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr "পরপর %(num)d/%(allowed)d টি বিরতি স্থগিত হয়েছে"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "RSI প্রতিরোধ"

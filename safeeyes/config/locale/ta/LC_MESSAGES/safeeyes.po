@@ -532,6 +532,13 @@ msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
 msgstr ""
 "ஒரு வரிசையில் %(num)d/ %(allowed)d இடைவெளிகளைத் தவிர்க்கவும் அல்லது ஒத்திவைக்கவும்"
 
+# plugin/screenshare
+msgid "Disable on Screen Sharing"
+msgstr ""
+
+msgid "Skip break if some app is sharing screen"
+msgstr ""
+
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
 msgstr "ஆர்.எச்.ஐ தடுப்பு"
