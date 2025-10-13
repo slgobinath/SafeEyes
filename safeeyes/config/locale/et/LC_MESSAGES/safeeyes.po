@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-19 19:02+0000\n"
+"PO-Revision-Date: 2025-10-14 13:07+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/et/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -370,11 +370,12 @@ msgstr "Ekraanisäästja"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
-msgstr ""
+msgstr "Pika pausi järgselt käivitata ekraani lukustamiseks ekraanisäästja"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
 msgstr ""
+"Sinu määratud käsk ekraani lukustamiseks või ekraanuisäästja käivitamiseks"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
