@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-21 09:01+0000\n"
+"PO-Revision-Date: 2025-10-31 13:02+0000\n"
 "Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14.1-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -372,10 +372,12 @@ msgstr "Spořič obrazovky"
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
 msgstr ""
+"Uzamknout obrazovku po dlouhých přestávkách spuštěním spořiče obrazovky/"
+"uzamčením obrazovky"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
-msgstr ""
+msgstr "Vlastní příkaz pro spořič obrazovky nebo uzamknutí obrazovky"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
