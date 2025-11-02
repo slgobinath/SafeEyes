@@ -471,7 +471,7 @@ class SafeEyes(Gtk.Application):
         self.break_screen.initialize(config)
 
         try:
-            self.plugins_manager.init(self.context, self.config)
+            self.plugins_manager.reload(self.context, self.config)
         except RequiredPluginException as e:
             self.show_required_plugin_dialog(e)
             return

@@ -123,6 +123,31 @@ class PluginManager:
         for plugin in self.__plugins.values():
             plugin.init_plugin(context, config)
 
+    def reload(self, context: Context, config: Config) -> None:
+        """Reinitialize all the plugins with updated config."""
+        # Load the plugins
+        for plugin in config.get("plugins"):
+            plugin_id = plugin["id"]
+            if plugin_id in self.__plugins:
+                self.__plugins[plugin_id].reload_config(plugin)
+            else:
+                try:
+                    loaded_plugin = LoadedPlugin(plugin)
+                    self.__plugins[loaded_plugin.id] = loaded_plugin
+                except BaseException as e:
+                    traceback_wanted = (
+                        logging.getLogger().getEffectiveLevel() == logging.DEBUG
+                    )
+                    if traceback_wanted:
+                        import traceback
+
+                        traceback.print_exc()
+                    logging.error("Error in loading the plugin %s: %s", plugin["id"], e)
+                    continue
+        # Initialize the plugins
+        for plugin in self.__plugins.values():
+            plugin.init_plugin(context, config)
+
     def needs_retry(self) -> bool:
         return self.get_retryable_error() is not None
 
@@ -292,14 +317,17 @@ class LoadedPlugin:
             self._import_plugin()
 
     def reload_config(self, plugin: dict) -> None:
-        if self.enabled and not plugin["enabled"]:
-            self.enabled = False
-            if (
-                not self.errored
-                and self.module is not None
-                and utility.has_method(self.module, "disable")
-            ):
-                self.module.disable()
+        if not plugin["enabled"]:
+            if self.enabled:
+                self.enabled = False
+                if (
+                    not self.errored
+                    and self.module is not None
+                    and utility.has_method(self.module, "disable")
+                ):
+                    self.module.disable()
+                logging.info("Successfully unloaded the plugin '%s'", plugin["id"])
+            return
 
         if not self.enabled and plugin["enabled"]:
             self.enabled = True
