@@ -159,18 +159,8 @@ def on_start() -> None:
         elif use_swayidle:
             idle_monitor = IdleMonitorSwayidle()
         elif use_ext_idle_notify:
-            from .ext_idle_notify import (
-                IdleMonitorExtIdleNotify,
-                EXT_IDLE_NOTIFY_IMPORT_ERROR,
-            )
+            from .ext_idle_notify import IdleMonitorExtIdleNotify
 
-            if EXT_IDLE_NOTIFY_IMPORT_ERROR:
-                logging.warning(
-                    "SmartPause plugin disabled:"
-                    " ext_idle_notify_v1 not available on this system."
-                )
-                idle_monitor_unsupported = True
-                return
             idle_monitor = IdleMonitorExtIdleNotify()
         else:
             idle_monitor = IdleMonitorX11()
