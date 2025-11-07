@@ -197,8 +197,8 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
-    _notification: typing.Optional[ExtIdleNotificationV1] = None
+    _idle_notifier: typing.Optional["ExtIdleNotifierV1"] = None
+    _notification: typing.Optional["ExtIdleNotificationV1"] = None
     _display: Display
     _r_channel_stop: int
     _w_channel_started: int
