@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-10-27 01:02+0000\n"
+"PO-Revision-Date: 2025-11-11 01:51+0000\n"
 "Last-Translator: 麋麓 BigELK176 <BigELK176@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/safe-eyes/translations/zh_Hant/>\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14.1-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr "輕柔地閤起您的眼睛"
+msgstr "輕柔地閉閤您的眼睛"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -47,7 +47,7 @@ msgstr "喝點水"
 
 # Long break
 msgid "Walk for a while"
-msgstr "起來走一會兒"
+msgstr "起來走動一會兒"
 
 # Long break
 msgid "Lean back at your seat and relax"
