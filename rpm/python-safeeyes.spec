@@ -16,10 +16,12 @@ BuildRequires:  python3-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 
+# for notification plugin
+BuildRequires: libnotify
+Requires: libnotify
+
 # for audiblealert plugin
 Requires: (ffmpeg-free or pipewire-utils)
-# for notification plugin
-Requires: libnotify
 
 # for smartpause plugin (optional in pyproject.toml)
 BuildRequires: python3-pywayland
