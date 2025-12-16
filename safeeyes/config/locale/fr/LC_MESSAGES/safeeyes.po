@@ -7,7 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2025-12-17 13:00+0000\n"
-"Last-Translator: Ἥλιος <mu6mj1y62@mozmail.com>\n"
+"Last-Translator: AO Localisation Lab "
+"<ao_localization_lab@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
 "Language: fr\n"
@@ -376,13 +377,11 @@ msgstr "Économiseur d’écran"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
-msgstr ""
-"Verrouiller l'écran après les pauses longues en déclenchant l'apparition de "
-"l'économiseur d'écran/de l'écran de verrouillage"
+msgstr "Verrouiller l’écran après les pauses longues"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
-msgstr "Commande personnalisée pour l'économiseur d'écran ou le verrouillage"
+msgstr "Commande personnalisée pour l’économiseur ou le verrouillage d'écran"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
