@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-19 19:02+0000\n"
-"Last-Translator: AO Localisation Lab <ao_localization_lab@users.noreply."
-"hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-12-17 13:00+0000\n"
+"Last-Translator: AO Localisation Lab "
+"<ao_localization_lab@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fr/>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.15.1-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -377,11 +377,11 @@ msgstr "Économiseur d’écran"
 
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
-msgstr ""
+msgstr "Verrouiller l’écran après les pauses longues"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
-msgstr ""
+msgstr "Commande personnalisée pour l’économiseur ou le verrouillage d'écran"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
