@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-27 12:02+0000\n"
+"PO-Revision-Date: 2025-10-11 17:07+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/he/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "שומר מסך"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר המסך"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר מסך/נעילת מסך"
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "פקודת שומר מסך מותאמת אישית"
+msgid "Custom screensaver or screen-lock command"
+msgstr "פקודת שומר מסך או נעילת מסך מותאמת אישית"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -596,6 +596,14 @@ msgstr "שניות"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "נא להתקין את אחד מכלי שורת הפקודה: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "לנעול את המסך אחרי הפסקות ארוכות על ידי הפעלת שומר המסך"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "פקודת שומר מסך מותאמת אישית"
 
 # Short break
 #~ msgid "Tightly close your eyes"

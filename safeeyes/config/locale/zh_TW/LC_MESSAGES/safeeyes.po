@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-05-24 13:01+0000\n"
-"Last-Translator: Peter Dave Hello <hsu@peterdavehello.org>\n"
+"PO-Revision-Date: 2025-11-11 01:51+0000\n"
+"Last-Translator: 麋麓 BigELK176 <BigELK176@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/safe-eyes/translations/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
-msgstr "輕柔閉起您的眼睛"
+msgstr "輕柔地閉閤您的眼睛"
 
 # Short break
 msgid "Roll your eyes a few times to each side"
@@ -31,11 +31,11 @@ msgstr "順時針方向旋轉您的眼睛"
 
 # Short break
 msgid "Rotate your eyes in counterclockwise direction"
-msgstr "以逆時針方向旋轉您的眼睛"
+msgstr "逆時鐘方向旋轉您的眼睛"
 
 # Short break
 msgid "Blink your eyes"
-msgstr "眨您的眼睛"
+msgstr "眨眨您的眼睛"
 
 # Short break
 msgid "Focus on a point in the far distance"
@@ -47,11 +47,11 @@ msgstr "喝點水"
 
 # Long break
 msgid "Walk for a while"
-msgstr "起來走一會"
+msgstr "起來走動一會兒"
 
 # Long break
 msgid "Lean back at your seat and relax"
-msgstr "向後靠在椅背放鬆一下"
+msgstr "向後靠在椅背上放鬆一下"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -83,7 +83,7 @@ msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "Safe Eyes 未啟動"
+msgstr "Safe Eyes 尚未運行"
 
 # About dialog
 msgid "Close"
@@ -94,7 +94,8 @@ msgstr "關閉"
 msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
-msgstr "描述"
+msgstr "Safe Eyes 保護您的眼睛避免眼睛視覺疲勞的影響，會提醒您在長時間使用電腦時進行"
+"休息"
 
 # About dialog
 msgid "License"
@@ -114,19 +115,19 @@ msgstr "跳過"
 
 # Break screen
 msgid "Postpone"
-msgstr "延遲"
+msgstr "延後"
 
 # Settings dialog
 msgid "Break duration (in seconds)"
-msgstr "休息時長（秒）"
+msgstr "休息時間(秒)"
 
 # Settings dialog
 msgid "Interval between two breaks (in minutes)"
-msgstr "休息間隔（分鐘）"
+msgstr "前後休息的間隔時間(分)"
 
 # Settings dialog
 msgid "Time to prepare for a break (in seconds)"
-msgstr "休息前準備時間（秒）"
+msgstr "休息之前的準備時間(秒)"
 
 # Settings dialog
 msgid "Keyboard shortcuts disabled period (in seconds)"
@@ -134,27 +135,27 @@ msgstr "鍵盤快速鍵停用期間(秒)"
 
 # Settings dialog
 msgid "Postponement duration (in minutes)"
-msgstr "推遲休息時長（分鐘）"
+msgstr "延後休息時間(分)"
 
 # Settings dialog
 msgid "Show breaks in random order"
-msgstr "以隨機順序顯示休息"
+msgstr "隨機順序顯示休息"
 
 # Settings dialog
 msgid "Strict break (No way to skip breaks)"
-msgstr "強制休息（無法跳過）"
+msgstr "強制休息(無法跳過)"
 
 # Settings dialog
 msgid "Allow postponing breaks"
-msgstr "允許推遲休息"
+msgstr "允許延後休息"
 
 # Settings dialog
 msgid "Persist the internal state"
-msgstr "維持內部計算狀態"
+msgstr "維持內部狀態"
 
 # Settings dialog
 msgid "Long break interval must be a multiple of short break interval"
-msgstr "長休息間隔須為短休息間隔的倍數"
+msgstr "長時休息間隔須為短暫休息間隔的倍數"
 
 # Settings dialog
 msgid "Reset"
@@ -162,7 +163,7 @@ msgstr "重設"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "確定重設為預設設定？"
+msgstr "確定要重新設定為預設？"
 
 # Settings dialog
 msgid "Options"
@@ -170,11 +171,11 @@ msgstr "選項"
 
 # Settings dialog
 msgid "Short Breaks"
-msgstr "短休息"
+msgstr "短暫休息"
 
 # Settings dialog
 msgid "Long Breaks"
-msgstr "長休息"
+msgstr "長時休息"
 
 # Settings dialog
 msgid "Delete"
@@ -182,7 +183,7 @@ msgstr "刪除"
 
 # Settings dialog
 msgid "Are you sure you want to delete this break?"
-msgstr "確定刪除此休息？"
+msgstr "確定要刪除此休息？"
 
 # Settings dialog
 msgid "You can't undo this action."
@@ -206,7 +207,7 @@ msgstr "類型"
 
 # Settings dialog
 msgid "Short"
-msgstr "短"
+msgstr "短暫"
 
 # Settings dialog
 msgid "Long"
@@ -355,7 +356,7 @@ msgstr "在休息之前顯示系統通知"
 # plugin/notification
 #, python-format
 msgid "Ready for a short break in %s seconds"
-msgstr "在 %s 秒後準備進入一個短休息"
+msgstr "在 %s 秒後準備進入一個短暫休息"
 
 # plugin/notification
 #, python-format
@@ -367,12 +368,12 @@ msgid "Screensaver"
 msgstr "螢幕保護"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "在長休息之後啟動螢幕保護之前進行鎖定螢幕"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr "經由啟動螢幕保護程式/螢幕鎖定，在長時休息之後鎖定螢幕"
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "自訂螢幕保護指令"
+msgid "Custom screensaver or screen-lock command"
+msgstr "自訂螢幕保護程式或螢幕鎖定指令"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -404,19 +405,19 @@ msgstr "延後下次休息直到系統進入閒置"
 
 #: plugins/trayicon
 msgid "Tray Icon"
-msgstr "面板圖示"
+msgstr "系統匣圖示"
 
 #: plugins/trayicon
 msgid "Show a tray icon in the notification area"
-msgstr "在通知區域顯示面板圖示"
+msgstr "在通知區域顯示系統匣圖示"
 
 #: plugins/trayicon
 msgid "Show next break time in tray icon"
-msgstr "在面板圖示中顯示下次休息時間"
+msgstr "在系統匣圖示中顯示下次休息時間"
 
 #: plugins/trayicon
 msgid "Allow disabling Safe Eyes"
-msgstr "允許關閉 Safe Eyes"
+msgstr "允許停用 Safe Eyes"
 
 #: plugins/trayicon
 msgid "About"
@@ -424,20 +425,20 @@ msgstr "關於"
 
 #: plugins/trayicon
 msgid "Disable Safe Eyes"
-msgstr "關閉 Safe Eyes"
+msgstr "停用 Safe Eyes"
 
 #: plugins/trayicon
 #, python-format
 msgid "Disabled until %s"
-msgstr "關閉直到 %s"
+msgstr "停用直到 %s"
 
 #: plugins/trayicon
 msgid "Disabled until restart"
-msgstr "關閉直到重新啟動"
+msgstr "停用直到重新啟動"
 
 #: plugins/trayicon
 msgid "Enable Safe Eyes"
-msgstr "開啟 Safe Eyes"
+msgstr "啟用 Safe Eyes"
 
 #: plugins/trayicon
 #, python-format
@@ -464,7 +465,7 @@ msgstr "下次休息在 %s"
 
 #: plugins/trayicon
 msgid "No Breaks Available"
-msgstr "無休息等待使用"
+msgstr "無休息可用"
 
 #: plugins/trayicon
 msgid "Settings"
@@ -512,16 +513,16 @@ msgstr "限制連續跳過"
 
 # plugin/limitconsecutiveskipping
 msgid "How many skips or postpones are allowed in a row"
-msgstr "連續允許多少個跳過或延遲"
+msgstr "連續允許多少個跳過或延後"
 
 # plugin/limitconsecutiveskipping
 msgid "Limit how many breaks can be skipped or postponed in a row"
-msgstr "限制可以連續跳過或延遲多少次休息"
+msgstr "限制可以連續跳過或延後多少次休息"
 
 # plugin/limitconsecutiveskipping
 #, python-format
 msgid "Skipped or postponed %(num)d/%(allowed)d breaks in a row"
-msgstr "跳過或延遲 %(num)d/%(allowed)d 個休息"
+msgstr "跳過或延後 %(num)d/%(allowed)d 個休息"
 
 # safeeyes/platform/io.github.slgobinath.SafeEyes.desktop
 msgid "RSI Prevention"
@@ -564,31 +565,38 @@ msgstr "授權："
 msgid ""
 "Old stylesheet found at '%(old)s', ignoring. For custom styles, create a new "
 "stylesheet in '%(new)s' instead."
-msgstr ""
-"在 '%(old)s' 發現舊的樣式表，已忽略。若需自訂樣式，請在 '%(new)s' 中建立新的"
-"樣式表。"
+msgstr "在 '%(old)s' 發現舊的樣式表，已為忽略。用於自訂樣式，請在 '%(new)s' 中新建樣"
+"式表來取代。"
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr ""
+msgstr "自訂延後及忽略快速鍵在 Wayland 上不起作用。"
 
 msgid "Safe Eyes - Error"
-msgstr ""
+msgstr "Safe Eyes - 錯誤"
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "所要求的外掛程式缺少依賴項目！"
 
 msgid "Postponement duration in"
-msgstr ""
+msgstr "延後持續時間"
 
 msgid "minutes"
-msgstr ""
+msgstr "分鐘"
 
 msgid "seconds"
-msgstr ""
+msgstr "秒"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "請安裝其中一項指令工具： %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "在長休息之後啟動螢幕保護之前進行鎖定螢幕"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "自訂螢幕保護指令"
 
 # Short break
 #~ msgid "Tightly close your eyes"

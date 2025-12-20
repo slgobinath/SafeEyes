@@ -68,9 +68,17 @@ import importlib
 import logging
 import os
 import sys
+import typing
 
 from safeeyes import utility
-from safeeyes.model import Break, PluginDependency, RequiredPluginException, TrayAction
+from safeeyes.context import Context
+from safeeyes.model import (
+    Config,
+    Break,
+    PluginDependency,
+    RequiredPluginException,
+    TrayAction,
+)
 
 sys.path.append(os.path.abspath(utility.SYSTEM_PLUGINS_DIR))
 sys.path.append(os.path.abspath(utility.USER_PLUGINS_DIR))
@@ -81,13 +89,16 @@ HORIZONTAL_LINE_LENGTH = 64
 class PluginManager:
     """Imports the Safe Eyes plugins and calls the methods defined in those plugins."""
 
-    def __init__(self):
+    __plugins: dict[str, "LoadedPlugin"]
+    last_break: typing.Optional[Break]
+
+    def __init__(self) -> None:
         logging.info("Load all the plugins")
         self.__plugins = {}
         self.last_break = None
         self.horizontal_line = "─" * HORIZONTAL_LINE_LENGTH
 
-    def init(self, context, config):
+    def init(self, context: Context, config: Config) -> None:
         """Initialize all the plugins with init(context, safe_eyes_config,
         plugin_config) function.
         """
@@ -111,12 +122,43 @@ class PluginManager:
         # Initialize the plugins
         for plugin in self.__plugins.values():
             plugin.init_plugin(context, config)
-        return True
 
-    def needs_retry(self):
+    def reload(self, context: Context, config: Config) -> None:
+        """Reinitialize all the plugins with updated config."""
+        plugin_ids: set[str] = set()
+        # Load the plugins
+        for plugin in config.get("plugins"):
+            plugin_id = plugin["id"]
+            plugin_ids.add(plugin_id)
+            if plugin_id in self.__plugins:
+                self.__plugins[plugin_id].reload_config(plugin)
+            else:
+                try:
+                    loaded_plugin = LoadedPlugin(plugin)
+                    self.__plugins[loaded_plugin.id] = loaded_plugin
+                except BaseException as e:
+                    traceback_wanted = (
+                        logging.getLogger().getEffectiveLevel() == logging.DEBUG
+                    )
+                    if traceback_wanted:
+                        import traceback
+
+                        traceback.print_exc()
+                    logging.error("Error in loading the plugin %s: %s", plugin["id"], e)
+                    continue
+
+        removed_plugins = set(self.__plugins.keys()).difference(plugin_ids)
+        for plugin_id in removed_plugins:
+            self.__plugins[plugin_id].disable()
+
+        # Initialize the plugins
+        for plugin in self.__plugins.values():
+            plugin.init_plugin(context, config)
+
+    def needs_retry(self) -> bool:
         return self.get_retryable_error() is not None
 
-    def get_retryable_error(self):
+    def get_retryable_error(self) -> typing.Optional[RequiredPluginException]:
         for plugin in self.__plugins.values():
             if plugin.required_plugin and plugin.errored and plugin.enabled:
                 if (
@@ -129,7 +171,7 @@ class PluginManager:
 
         return None
 
-    def retry_errored_plugins(self):
+    def retry_errored_plugins(self) -> None:
         for plugin in self.__plugins.values():
             if plugin.required_plugin and plugin.errored and plugin.enabled:
                 if (
@@ -138,32 +180,29 @@ class PluginManager:
                 ):
                     plugin.reload_errored()
 
-    def start(self):
+    def start(self) -> None:
         """Execute the on_start() function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method("on_start")
-        return True
 
-    def stop(self):
+    def stop(self) -> None:
         """Execute the on_stop() function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method("on_stop")
-        return True
 
-    def exit(self):
+    def exit(self) -> None:
         """Execute the on_exit() function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method("on_exit")
-        return True
 
-    def pre_break(self, break_obj):
+    def pre_break(self, break_obj) -> bool:
         """Execute the on_pre_break(break_obj) function of plugins."""
         for plugin in self.__plugins.values():
             if plugin.call_plugin_method_break_obj("on_pre_break", 1, break_obj):
                 return False
         return True
 
-    def start_break(self, break_obj):
+    def start_break(self, break_obj) -> bool:
         """Execute the start_break(break_obj) function of plugins."""
         self.last_break = break_obj
         for plugin in self.__plugins.values():
@@ -172,25 +211,24 @@ class PluginManager:
 
         return True
 
-    def stop_break(self):
+    def stop_break(self) -> None:
         """Execute the stop_break() function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method("on_stop_break")
 
-    def countdown(self, countdown, seconds):
+    def countdown(self, countdown, seconds) -> None:
         """Execute the on_countdown(countdown, seconds) function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method("on_countdown", 2, countdown, seconds)
 
-    def update_next_break(self, break_obj, break_time):
+    def update_next_break(self, break_obj, break_time) -> None:
         """Execute the update_next_break(break_time) function of plugins."""
         for plugin in self.__plugins.values():
             plugin.call_plugin_method_break_obj(
                 "update_next_break", 2, break_obj, break_time
             )
-        return True
 
-    def get_break_screen_widgets(self, break_obj):
+    def get_break_screen_widgets(self, break_obj) -> str:
         """Return the HTML widget generated by the plugins.
 
         The widget is generated by calling the get_widget_title and
@@ -246,14 +284,14 @@ class LoadedPlugin:
     # misc data
     # FIXME: rename to plugin_config to plugin_json? plugin_config and config are easy
     # to confuse
-    config = None
-    plugin_config = None
-    plugin_dir = None
-    module = None
-    last_error = None
-    id = None
+    config: dict
+    plugin_config: dict
+    plugin_dir: str
+    module: typing.Optional[typing.Any] = None
+    last_error: typing.Optional[typing.Union[str, PluginDependency]] = None
+    id: str
 
-    def __init__(self, plugin):
+    def __init__(self, plugin: dict) -> None:
         (plugin_config, plugin_dir) = self._load_config_json(plugin["id"])
 
         self.id = plugin["id"]
@@ -285,11 +323,10 @@ class LoadedPlugin:
 
             self._import_plugin()
 
-    def reload_config(self, plugin):
-        if self.enabled and not plugin["enabled"]:
-            self.enabled = False
-            if not self.errored and utility.has_method(self.module, "disable"):
-                self.module.disable()
+    def reload_config(self, plugin: dict) -> None:
+        if not plugin["enabled"]:
+            self.disable()
+            return
 
         if not self.enabled and plugin["enabled"]:
             self.enabled = True
@@ -315,7 +352,18 @@ class LoadedPlugin:
                 # No longer errored, import the module now
                 self._import_plugin()
 
-    def reload_errored(self):
+    def disable(self) -> None:
+        if self.enabled:
+            self.enabled = False
+            if (
+                not self.errored
+                and self.module is not None
+                and utility.has_method(self.module, "disable")
+            ):
+                self.module.disable()
+            logging.info("Successfully unloaded the plugin '%s'", self.id)
+
+    def reload_errored(self) -> None:
         if not self.errored:
             return
 
@@ -336,10 +384,10 @@ class LoadedPlugin:
                 # No longer errored, import the module now
                 self._import_plugin()
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.plugin_config["meta"]["name"]
 
-    def _import_plugin(self):
+    def _import_plugin(self) -> None:
         if self.errored:
             # do not try to import errored plugin
             return
@@ -350,7 +398,7 @@ class LoadedPlugin:
         if utility.has_method(self.module, "enable"):
             self.module.enable()
 
-    def _load_config_json(self, plugin_id):
+    def _load_config_json(self, plugin_id: str) -> typing.Tuple[dict, str]:
         # Look for plugin.py
         if os.path.isfile(
             os.path.join(utility.SYSTEM_PLUGINS_DIR, plugin_id, "plugin.py")
@@ -373,16 +421,16 @@ class LoadedPlugin:
 
         return (plugin_config, plugin_dir)
 
-    def init_plugin(self, context, safeeyes_config):
+    def init_plugin(self, context: Context, safeeyes_config: Config) -> None:
         if self.errored:
             return
         if self.break_override_allowed or self.enabled:
-            if utility.has_method(self.module, "init", 3):
+            if self.module is not None and utility.has_method(self.module, "init", 3):
                 self.module.init(context, safeeyes_config, self.config)
 
     def call_plugin_method_break_obj(
         self, method_name: str, num_args, break_obj, *args, **kwargs
-    ):
+    ) -> typing.Any:
         if self.errored:
             return None
 
@@ -399,7 +447,9 @@ class LoadedPlugin:
 
         return None
 
-    def call_plugin_method(self, method_name: str, num_args=0, *args, **kwargs):
+    def call_plugin_method(
+        self, method_name: str, num_args=0, *args, **kwargs
+    ) -> typing.Any:
         if self.errored:
             return None
 
@@ -412,7 +462,7 @@ class LoadedPlugin:
 
     def _call_plugin_method_internal(
         self, method_name: str, num_args=0, *args, **kwargs
-    ):
+    ) -> typing.Any:
         # FIXME: cache if method exists
         if utility.has_method(self.module, method_name, num_args):
             return getattr(self.module, method_name)(*args, **kwargs)

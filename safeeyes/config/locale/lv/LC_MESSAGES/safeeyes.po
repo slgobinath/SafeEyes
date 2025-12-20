@@ -292,11 +292,13 @@ msgstr "Gatavojies garam pārtraukumam pēc %s sekundēm"
 msgid "Screensaver"
 msgstr "Ekrāna saudzētājs"
 
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Slēgt ekrānu (ar ekrāna saudzētāju) pēc garajiem pārtraukumiem"
+# plugin/screensaver
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
-msgid "Custom screensaver command"
-msgstr "Pielāgota ekrāna saudzētāja komanda"
+# plugin/screensaver
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 msgid "Minimum seconds to skip without screensaver"
 msgstr "Mazākais laiks (s), ko izlaist bez ekrāna saudzētāja"
@@ -509,6 +511,12 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Slēgt ekrānu (ar ekrāna saudzētāju) pēc garajiem pārtraukumiem"
+
+#~ msgid "Custom screensaver command"
+#~ msgstr "Pielāgota ekrāna saudzētāja komanda"
 
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Cieši aizver acis"

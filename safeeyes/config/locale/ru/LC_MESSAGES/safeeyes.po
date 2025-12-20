@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-09-06 12:01+0000\n"
+"PO-Revision-Date: 2025-12-20 08:00+0000\n"
 "Last-Translator: Dmitriy Q <krotesk@mail.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/ru/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -371,12 +371,14 @@ msgid "Screensaver"
 msgstr "Хранитель экрана"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Блокировать экран после длинного перерыва запуском хранителя экрана"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
+"Заблокировать экран после долгого перерыва, запустив заставку/блокировщик "
+"экрана"
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Настроить команду запуска хранителя экрана"
+msgid "Custom screensaver or screen-lock command"
+msgstr "Пользовательская заставка или команда блокировки экрана"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -606,6 +608,14 @@ msgstr "секунд"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "Пожалуйста, установите один из инструментов командной строки: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Блокировать экран после длинного перерыва запуском хранителя экрана"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Настроить команду запуска хранителя экрана"
 
 # Short break
 #~ msgid "Tightly close your eyes"

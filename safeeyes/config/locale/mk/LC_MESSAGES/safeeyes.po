@@ -369,11 +369,11 @@ msgid "Screensaver"
 msgstr ""
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
 msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
+msgid "Custom screensaver or screen-lock command"
 msgstr ""
 
 # plugin/screensaver

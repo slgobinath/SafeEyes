@@ -35,18 +35,6 @@ if typing.TYPE_CHECKING:
         ExtIdleNotificationV1,
     )
 
-try:
-    from pywayland.protocol.ext_idle_notify_v1 import (
-        ExtIdleNotifierV1,
-        ExtIdleNotificationV1,
-    )
-except Exception as e:
-    logging.warning("The ext_idle_notify_v1 feature is not available. Exception: %s", e)
-    logging.warning("This is likely due to an older version of Wayland.")
-    EXT_IDLE_NOTIFY_IMPORT_ERROR = True
-else:
-    EXT_IDLE_NOTIFY_IMPORT_ERROR = False
-
 from .interface import IdleMonitorInterface
 from safeeyes import utility
 
@@ -74,6 +62,16 @@ class IdleMonitorExtIdleNotify(IdleMonitorInterface):
     _idle_config: typing.Optional[IdleConfig] = None
 
     def init(self) -> None:
+        try:
+            from pywayland.protocol.ext_idle_notify_v1 import (
+                ExtIdleNotifierV1,  # noqa: F401
+                ExtIdleNotificationV1,  # noqa: F401
+            )
+        except Exception as e:
+            logging.warning("The ext_idle_notify_v1 feature is not available.")
+            logging.warning("This is likely due to an older version of Wayland.")
+            raise e
+
         # we spawn one wayland client once
         # when the monitor is not running, it should be quite idle
         self._r_channel_started, self._w_channel_started = os.pipe()
@@ -197,8 +195,8 @@ class ExtIdleNotifyInternal:
     Split out into a separate object to simplify lifetime handling.
     """
 
-    _idle_notifier: typing.Optional[ExtIdleNotifierV1] = None
-    _notification: typing.Optional[ExtIdleNotificationV1] = None
+    _idle_notifier: typing.Optional["ExtIdleNotifierV1"] = None
+    _notification: typing.Optional["ExtIdleNotificationV1"] = None
     _display: Display
     _r_channel_stop: int
     _w_channel_started: int
@@ -323,6 +321,8 @@ class ExtIdleNotifyInternal:
         self._notification.dispatcher["resumed"] = self._idle_notifier_resume_handler
 
     def _global_handler(self, reg, id_num, iface_name, version) -> None:
+        from pywayland.protocol.ext_idle_notify_v1 import ExtIdleNotifierV1
+
         if iface_name == "wl_seat":
             self._seat = reg.bind(id_num, WlSeat, version)
         if iface_name == "ext_idle_notifier_v1":

@@ -32,7 +32,7 @@ import typing
 Safe Eyes tray icon plugin
 """
 
-tray_icon = None
+tray_icon: typing.Optional["TrayIcon"] = None
 safeeyes_config = None
 
 SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
@@ -405,6 +405,14 @@ class StatusNotifierItemService(DBusService):
             cancellable=None,
         )
 
+        # Note that according to the (freedesktop) spec, we should own the name
+        # org.freedesktop.StatusNotifierItem-PID-ID and pass that to the watcher
+        # instead
+        # with the path being hardcoded at /StatusNotifierItem
+        # The spec behaviour is worse for flatpak, however, as it requires owning a
+        # pretty generic name.
+        # Note that libappindicator/ayatana also used this non-standard behaviour -
+        # this must be pretty well supported then.
         watcher.RegisterStatusNotifierItem("(s)", self.DBUS_SERVICE_PATH)
 
     def unregister(self):
@@ -441,6 +449,8 @@ class TrayIcon:
 
     _resume_timeout_id: typing.Optional[int] = None
 
+    _session_bus: Gio.DBusConnection
+
     def __init__(self, context: Context, plugin_config):
         self.context = context
         self.on_show_settings = context.api.show_settings
@@ -458,10 +468,19 @@ class TrayIcon:
         self.allow_disabling = plugin_config["allow_disabling"]
         self.menu_locked = False
 
-        session_bus = Gio.bus_get_sync(Gio.BusType.SESSION)
+        # This is using a separate dbus connection on purpose
+        # StatusNotifierWatcher does not have an unregister method - the spec instead
+        # says that the watcher should detect the item "going away from the bus"
+        # in practice, this means that the connection closing is detected by the watcher
+        # which can only happen if we use our own connection, and close it manually
+        self._session_bus = Gio.DBusConnection.new_for_address_sync(
+            Gio.dbus_address_get_for_bus_sync(Gio.BusType.SESSION),
+            Gio.DBusConnectionFlags.AUTHENTICATION_CLIENT
+            | Gio.DBusConnectionFlags.MESSAGE_BUS_CONNECTION,
+        )
 
         self.sni_service = StatusNotifierItemService(
-            session_bus, menu_items=self.get_items()
+            self._session_bus, menu_items=self.get_items()
         )
         self.sni_service.register()
 
@@ -474,6 +493,10 @@ class TrayIcon:
 
         self.update_menu()
         self.update_tooltip()
+
+    def unregister(self) -> None:
+        self.sni_service.unregister()
+        self._session_bus.close_sync()
 
     def get_items(self):
         breaks_found = self.has_breaks()
@@ -864,3 +887,12 @@ def on_start():
 def on_stop():
     """Disable the tray icon."""
     tray_icon.disable_ui()
+
+
+def disable() -> None:
+    """Disable the tray icon plugin."""
+    global tray_icon
+
+    if tray_icon:
+        tray_icon.unregister()
+        tray_icon = None

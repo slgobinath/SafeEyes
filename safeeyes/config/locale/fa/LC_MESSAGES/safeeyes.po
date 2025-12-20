@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2024-09-20 00:40+0000\n"
+"PO-Revision-Date: 2025-10-11 17:07+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/fa/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8-dev\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -369,12 +369,12 @@ msgid "Screensaver"
 msgstr "محافظ صفحه"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "قفل صفحه پس از استراحت‌های طولانی با آغاز محافظ صفحه"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "دستور محافظ صفحه نمایش سفارشی"
+msgid "Custom screensaver or screen-lock command"
+msgstr "دستور قفل صفحه یا محافظ صفحهٔ سفارشی"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -580,20 +580,28 @@ msgid "Safe Eyes - Error"
 msgstr ""
 
 msgid "A required plugin is missing dependencies!"
-msgstr ""
+msgstr "افزایه‌ای لازم پیش‌نیازی را ندارد!"
 
 msgid "Postponement duration in"
 msgstr ""
 
 msgid "minutes"
-msgstr ""
+msgstr "دقیقه"
 
 msgid "seconds"
-msgstr ""
+msgstr "ثانیه"
 
 #, python-format
 msgid "Please install one of the command-line tools: %s"
-msgstr ""
+msgstr "نصب یکی از این ابزارهای خط فرمان: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "قفل صفحه پس از استراحت‌های طولانی با آغاز محافظ صفحه"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "دستور محافظ صفحه نمایش سفارشی"
 
 # Short break
 #~ msgid "Tightly close your eyes"

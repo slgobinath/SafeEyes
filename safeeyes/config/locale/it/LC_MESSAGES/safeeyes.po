@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-08-21 09:01+0000\n"
-"Last-Translator: cas9 <cas9@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-10-14 13:07+0000\n"
+"Last-Translator: coronabond <coronabond@airmail.cc>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.14-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -95,7 +95,7 @@ msgid ""
 "Safe Eyes protects your eyes from eye strain (asthenopia) by reminding you "
 "to take breaks while you're working long hours at the computer"
 msgstr ""
-"Safe Eyes protegge gli occhi dall'asthenopia ricordandoti di fare una pausa "
+"Safe Eyes protegge gli occhi dall'astenopia ricordandoti di fare una pausa "
 "mentre lavori per ore al computer"
 
 # About dialog
@@ -167,7 +167,7 @@ msgstr "Reimposta"
 
 # Settings dialog
 msgid "Are you sure you want to reset all settings to default?"
-msgstr "Le impostazioni saranno resettate ai valori di default vuoi procedere?"
+msgstr "Le impostazioni saranno resettate ai valori di default. Vuoi procedere?"
 
 # Settings dialog
 msgid "Options"
@@ -260,7 +260,7 @@ msgstr "Preferenze delle estensioni"
 # Settings dialog
 #, python-format
 msgid "Plugin does not support %s desktop environment"
-msgstr "L'estensione non supporta %s l'ambiente desktop"
+msgstr "L'estensione non supporta l'ambiente desktop %s"
 
 # Settings dialog
 #, python-format
@@ -373,12 +373,12 @@ msgid "Screensaver"
 msgstr "Salvaschermo"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Blocca lo schermo dopo le pause lunghe avviando il salvaschermo"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Comando personalizzato per il salvaschermo"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -585,7 +585,8 @@ msgstr ""
 "personalizzati, crea un nuovo foglio di stile in %(new)s invece."
 
 msgid "Customizing the postpone and skip shortcuts does not work on Wayland."
-msgstr "Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
+msgstr ""
+"Personalizzare le scorciatoie postponi e salta non funziona in Wayland."
 
 msgid "Safe Eyes - Error"
 msgstr "Safe Eyes - Errore"
@@ -605,6 +606,14 @@ msgstr "secondi"
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr "Prego installa uno degli strumenti da riga di comando: %s"
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Blocca lo schermo dopo le pause lunghe avviando il salvaschermo"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Comando personalizzato per il salvaschermo"
 
 # Short break
 #~ msgid "Tightly close your eyes"

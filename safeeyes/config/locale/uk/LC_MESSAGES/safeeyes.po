@@ -371,12 +371,12 @@ msgid "Screensaver"
 msgstr "Заставка"
 
 # plugin/screensaver
-msgid "Lock the screen after long breaks by starting screensaver"
-msgstr "Блокувати екран після довгих перерв шляхом запуску заставки"
+msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
+msgstr ""
 
 # plugin/screensaver
-msgid "Custom screensaver command"
-msgstr "Вказівка власної заставки"
+msgid "Custom screensaver or screen-lock command"
+msgstr ""
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -599,6 +599,14 @@ msgstr ""
 #, python-format
 msgid "Please install one of the command-line tools: %s"
 msgstr ""
+
+# plugin/screensaver
+#~ msgid "Lock the screen after long breaks by starting screensaver"
+#~ msgstr "Блокувати екран після довгих перерв шляхом запуску заставки"
+
+# plugin/screensaver
+#~ msgid "Custom screensaver command"
+#~ msgstr "Вказівка власної заставки"
 
 # Short break
 #~ msgid "Tightly close your eyes"
