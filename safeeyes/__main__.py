@@ -30,6 +30,8 @@ from safeeyes.safeeyes import SafeEyes
 
 def main():
     """Start the Safe Eyes."""
+    signal.signal(signal.SIGINT, signal.SIG_DFL)  # Handle Ctrl + C
+
     system_locale = translations.setup()
 
     config = Config.load()
@@ -39,5 +41,4 @@ def main():
 
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal.SIG_DFL)  # Handle Ctrl + C
     main()
