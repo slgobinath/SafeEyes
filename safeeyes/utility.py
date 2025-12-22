@@ -564,7 +564,11 @@ def initialize_platform():
             parent_dir = str(Path(local_icon).parent)
 
             if os.path.exists(global_icon):
-                # This icon is already added to the /usr/share/icons/hicolor folder
+                # This icon is already added to the /usr/share/icons/hicolor folder.
+                # No need to create a link but we delete potentially stale symlinks
+                # from e.g. past runs from a virtualenv that has been removed in the
+                # meantime to avoid ending up with hard-to-debug SafeEyes without icons.
+                delete(local_icon)
                 continue
 
             # Create the directory if not exists
