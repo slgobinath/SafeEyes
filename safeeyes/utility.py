@@ -429,7 +429,7 @@ def initialize_safeeyes():
 
     # Copy the safeeyes.json
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
-    os.chmod(CONFIG_FILE_PATH, 0o666)
+    os.chmod(CONFIG_FILE_PATH, 0o600)
 
     # initialize_safeeyes gets called when the configuration file is not present, which
     # happens just after installation or manual deletion of
@@ -588,7 +588,7 @@ def reset_config():
     shutil.copy2(SYSTEM_CONFIG_FILE_PATH, CONFIG_FILE_PATH)
 
     # Add write permission (e.g. if original file was stored in /nix/store)
-    os.chmod(CONFIG_FILE_PATH, 0o666)
+    os.chmod(CONFIG_FILE_PATH, 0o600)
 
     create_startup_entry()
 
