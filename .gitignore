@@ -33,6 +33,7 @@ wheels/
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+!rpm/*.spec
 
 # Installer logs
 pip-log.txt
@@ -114,3 +115,8 @@ debian/files
 debian/safeeyes.substvars
 debian/safeeyes.prerm.debhelper
 debian/safeeyes.postinst.debhelper
+
+# rpm build
+rpm/*.tar.gz
+rpm/*.src.rpm
+rpm/noarch
