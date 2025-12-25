@@ -546,6 +546,7 @@ def initialize_platform():
         delete(desktop_entry)
 
         # Create a link
+        logging.debug(f"Create desktop entry at {desktop_entry}")
         try:
             os.symlink(SYSTEM_DESKTOP_FILE, desktop_entry)
         except OSError:
@@ -568,7 +569,9 @@ def initialize_platform():
                 # No need to create a link but we delete potentially stale symlinks
                 # from e.g. past runs from a virtualenv that has been removed in the
                 # meantime to avoid ending up with hard-to-debug SafeEyes without icons.
-                delete(local_icon)
+                if os.path.lexists(local_icon):
+                    logging.debug(f"Delete duplicate icon link at {local_icon}")
+                    delete(local_icon)
                 continue
 
             # Create the directory if not exists
@@ -578,6 +581,7 @@ def initialize_platform():
             delete(local_icon)
 
             # Add a link for the icon
+            logging.debug(f"Create icon link at {local_icon}")
             try:
                 os.symlink(system_icon, local_icon)
             except OSError:
