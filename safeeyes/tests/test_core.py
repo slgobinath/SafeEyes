@@ -461,7 +461,7 @@ class TestSafeEyesCore:
         sequential_threading: SequentialThreadingFixture,
         time_machine: TimeMachineFixture,
     ):
-        """Example taken from https://github.com/slgobinath/SafeEyes/issues/640."""
+        """Example taken from https://github.com/slgobinath/safeeyes/issues/640."""
         ctx = context.Context(
             api=mock.Mock(spec=context.API), locale="en_US", version="0.0.0", session={}
         )

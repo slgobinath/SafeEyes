@@ -1,8 +1,8 @@
-<img src="https://raw.githubusercontent.com/slgobinath/SafeEyes/master/safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
+<img src="https://raw.githubusercontent.com/slgobinath/safeeyes/master/safeeyes/platform/icons/hicolor/64x64/apps/io.github.slgobinath.SafeEyes.png" align="left">
 
 # Safe Eyes
 
-[![Release](https://img.shields.io/github/v/release/slgobinath/SafeEyes)](https://github.com/slgobinath/SafeEyes/releases)
+[![Release](https://img.shields.io/github/v/release/slgobinath/safeeyes)](https://github.com/slgobinath/safeeyes/releases)
 [![PyPI version](https://badge.fury.io/py/safeeyes.svg)](https://badge.fury.io/py/safeeyes)
 [![Debian](https://badges.debian.net/badges/debian/unstable/safeeyes/version.svg)](https://packages.debian.org/unstable/safeeyes)
 [![AUR](https://img.shields.io/aur/version/safeeyes)](https://aur.archlinux.org/packages/safeeyes)
@@ -12,7 +12,7 @@
 
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder.
 
-Visit the official site: https://slgobinath.github.io/SafeEyes/ for more details.
+Visit the official site: https://slgobinath.github.io/safeeyes/ for more details.
 
 ## Safe Eyes command-line arguments
 
@@ -141,7 +141,7 @@ After installation, restart your system to update the icons,
 **To run from source:**
 
 ```bash
-git clone https://github.com/slgobinath/SafeEyes.git
+git clone https://github.com/slgobinath/safeeyes.git
 cd SafeEyes
 python3 -m safeeyes
 ```
@@ -179,7 +179,7 @@ Some Linux systems like CentOS do not have matching dependencies available in th
     python3 -m safeeyes
     ```
 
-For more details, please check the issue: [#329](https://github.com/slgobinath/SafeEyes/issues/329)
+For more details, please check the issue: [#329](https://github.com/slgobinath/safeeyes/issues/329)
 
 This method has the same caveats about icons/window icons as running from source.
 
@@ -224,11 +224,11 @@ The available dependency groups can be found in the `pyproject.toml` file.
 2. Run `python3 -m safeeyes` to make sure nothing is broken
 3. Update the Safe Eyes version. Run `./update-version.sh "version.number.number" "New version with shiny new feature"`. 
 To manually change the version number, update the following places (Open the project in VSCode and search for the current version):
-    - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L4)
-    - [pyproject.toml](https://github.com/slgobinath/SafeEyes/blob/master/pyproject.toml#L35)
-    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
-    - [about_dialog.glade](https://github.com/slgobinath/SafeEyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
-4. Update the [changelog](https://github.com/slgobinath/SafeEyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above, but you may want to manually add more lines to describe what's new in this release.
+    - [pyproject.toml](https://github.com/slgobinath/safeeyes/blob/master/pyproject.toml#L4)
+    - [pyproject.toml](https://github.com/slgobinath/safeeyes/blob/master/pyproject.toml#L35)
+    - [io.github.slgobinath.SafeEyes.metainfo.xml](https://github.com/slgobinath/safeeyes/blob/master/safeeyes/platform/io.github.slgobinath.SafeEyes.metainfo.xml#L56)
+    - [about_dialog.glade](https://github.com/slgobinath/safeeyes/blob/master/safeeyes/glade/about_dialog.glade#L74)
+4. Update the [changelog](https://github.com/slgobinath/safeeyes/blob/master/debian/changelog) (for Ubuntu PPA release). *This is automated* if you use the `./update-version.sh` script mentioned above, but you may want to manually add more lines to describe what's new in this release.
 5. Commit the changes to `master`
 6. Create a pull-request from `master` to `release`
 7. Merge the PR to release **with merge commit** (Important to merge with merge commit)
@@ -238,7 +238,7 @@ To manually change the version number, update the following places (Open the pro
 First check if translations for your language are already available on [Weblate](https://hosted.weblate.org/engage/safe-eyes/), which is the cloud based translation platform we use. 
 
 - If the language is already there, feel free to add new translations or improve the existing ones.
-- If it is not there, please [open an issue](https://github.com/slgobinath/SafeEyes/issues) in Github so that we can add your language to Weblate.
+- If it is not there, please [open an issue](https://github.com/slgobinath/safeeyes/issues) in Github so that we can add your language to Weblate.
 
 ## License
 

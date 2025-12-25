@@ -76,7 +76,7 @@
         <child>
           <object class="GtkLinkButton" id="btn_plugin_extra_link">
             <property name="label" translatable="yes">Click here for more information</property>
-            <property name="uri">https://slgobinath.github.io/SafeEyes</property>
+            <property name="uri">https://slgobinath.github.io/safeeyes</property>
             <property name="visible">0</property>
             <property name="margin-start">0</property>
             <property name="margin-top">5</property>

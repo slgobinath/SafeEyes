@@ -25,7 +25,7 @@ A clear and concise description of what you expected to happen.
  - Desktop Env [e.g. Gnome, KDE]
  - Version [e.g. 2.0.3]
 
-**Flatpak issues**: If you experience any issue with flatpak, first please ensure that the bug is present in the [native package](https://github.com/slgobinath/SafeEyes?tab=readme-ov-file#installation-guide), and it is not a flatpak-only bug. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes. (**Please erase this paragraph before creating the bug report**)
+**Flatpak issues**: If you experience any issue with flatpak, first please ensure that the bug is present in the [native package](https://github.com/slgobinath/safeeyes?tab=readme-ov-file#installation-guide), and it is not a flatpak-only bug. Flatpak-only bugs should be reported at https://github.com/flathub/io.github.slgobinath.SafeEyes. (**Please erase this paragraph before creating the bug report**)
 
 **Debug Log**
 Run the Safe Eyes using `safeeyes --debug` command attach the ~/safeeyes.log` file.

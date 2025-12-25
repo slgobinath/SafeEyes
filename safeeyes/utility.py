@@ -481,7 +481,7 @@ def create_startup_entry(force=False):
         startup_dir_path, "io.github.slgobinath.SafeEyes.desktop"
     )
     # until SafeEyes 2.1.5 the startup entry had another name
-    # https://github.com/slgobinath/SafeEyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398
+    # https://github.com/slgobinath/safeeyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398
     obsolete_entry = os.path.join(startup_dir_path, "safeeyes.desktop")
 
     create_link = False

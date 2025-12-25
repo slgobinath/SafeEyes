@@ -44,6 +44,6 @@ def validate(plugin_config, plugin_settings):
                 "Please install service providing tray icons for your desktop"
                 " environment."
             ),
-            link="https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon",
+            link="https://github.com/slgobinath/safeeyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon",
             retryable=True,
         )

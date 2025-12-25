@@ -38,19 +38,19 @@
     <screenshots>
         <screenshot type="default">
             <caption>Safe Eyes short break screen.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_1.png</image>
+            <image>https://slgobinath.github.io/safeeyes/images/safeeyes_1.png</image>
         </screenshot>
         <screenshot>
             <caption>Safe Eyes long break screen.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_3.png</image>
+            <image>https://slgobinath.github.io/safeeyes/images/safeeyes_3.png</image>
         </screenshot>
         <screenshot>
             <caption>Safe Eyes settings window.</caption>
-            <image>https://slgobinath.github.io/SafeEyes/images/safeeyes_6.png</image>
+            <image>https://slgobinath.github.io/safeeyes/images/safeeyes_6.png</image>
         </screenshot>
     </screenshots>
 
-    <url type="homepage">https://slgobinath.github.io/SafeEyes/</url>
+    <url type="homepage">https://slgobinath.github.io/safeeyes/</url>
 
     <releases>
         <release version="3.3.0" date="2025-12-20" />

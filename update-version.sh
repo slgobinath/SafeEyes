@@ -69,8 +69,8 @@ if [ -f "$PYPROJECT" ]; then
     # Replace version = "..."
     sed -i "s/^version = \".*\"/version = \"$version\"/" "$PYPROJECT"
     # Set Downloads to canonical GitHub archive URL for this version
-    # Use a stable URL: https://github.com/slgobinath/SafeEyes/archive/v<version>.tar.gz
-    sed -i "s#^[[:space:]]*Downloads = \".*\"#Downloads = \"https://github.com/slgobinath/SafeEyes/archive/v$version.tar.gz\"#" "$PYPROJECT" || true
+    # Use a stable URL: https://github.com/slgobinath/safeeyes/archive/v<version>.tar.gz
+    sed -i "s#^[[:space:]]*Downloads = \".*\"#Downloads = \"https://github.com/slgobinath/safeeyes/archive/v$version.tar.gz\"#" "$PYPROJECT" || true
     echo "Updated $PYPROJECT"
 fi
 
