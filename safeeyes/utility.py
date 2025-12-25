@@ -480,7 +480,7 @@ def create_startup_entry(force=False):
     startup_entry = os.path.join(
         startup_dir_path, "io.github.slgobinath.SafeEyes.desktop"
     )
-    # until SafeEyes 2.1.5 the startup entry had another name
+    # until Safe Eyes 2.1.5 the startup entry had another name
     # https://github.com/slgobinath/safeeyes/commit/684d16265a48794bb3fd670da67283fe4e2f591b#diff-0863348c2143a4928518a4d3661f150ba86d042bf5320b462ea2e960c36ed275L398
     obsolete_entry = os.path.join(startup_dir_path, "safeeyes.desktop")
 
@@ -568,7 +568,8 @@ def initialize_platform():
                 # This icon is already added to the /usr/share/icons/hicolor folder.
                 # No need to create a link but we delete potentially stale symlinks
                 # from e.g. past runs from a virtualenv that has been removed in the
-                # meantime to avoid ending up with hard-to-debug SafeEyes without icons.
+                # meantime to avoid ending up with hard-to-debug Safe Eyes without
+                # icons.
                 if os.path.lexists(local_icon):
                     logging.debug(f"Delete duplicate icon link at {local_icon}")
                     delete(local_icon)

@@ -137,7 +137,7 @@ class SafeEyes(Gtk.Application):
         utility.cleanup_old_user_stylesheet()
 
         if options.contains("version"):
-            print(f"safeeyes {SAFE_EYES_VERSION}")
+            print(f"Safe Eyes {SAFE_EYES_VERSION}")
             return 0  # exit
 
         # needed for calling is_remote
@@ -347,7 +347,7 @@ class SafeEyes(Gtk.Application):
         dialog.show()
 
     def disable_plugin(self, plugin_id):
-        """Temporarily disable plugin, and restart SafeEyes."""
+        """Temporarily disable plugin, and restart Safe Eyes."""
         config = self.config.clone()
 
         for plugin in config.get("plugins"):

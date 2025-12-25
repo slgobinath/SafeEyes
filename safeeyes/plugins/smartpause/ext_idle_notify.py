@@ -128,7 +128,7 @@ class IdleMonitorExtIdleNotify(IdleMonitorInterface):
         # Note that this creates a new connection to the wayland compositor.
         # This is not an issue per se, but does mean that the compositor sees this as
         # a new, separate client, that just happens to run in the same process as
-        # the SafeEyes gtk application.
+        # the Safe Eyes gtk application.
         # (This is not a problem, currently. swayidle does the same, it even runs in a
         # separate process.)
         # If in the future, a compositor decides to lock down ext-idle-notify-v1 to
