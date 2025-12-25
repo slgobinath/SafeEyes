@@ -5,7 +5,7 @@ Maintainer: Gobinath Loganathan <slgobinath@gmail.com>
 Build-Depends: debhelper (>= 10), dh-python, python3, python3-packaging, python3-setuptools
 Standards-Version: 3.9.6
 X-Python3-Version: >= 3.10
-Homepage: https://github.com/slgobinath/SafeEyes/
+Homepage: https://github.com/slgobinath/safeeyes/
 
 Package: safeeyes
 Architecture: all

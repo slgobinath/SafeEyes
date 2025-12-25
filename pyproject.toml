@@ -29,8 +29,8 @@ dependencies = [
 requires-python = ">=3.10"
 
 [project.urls]
-Homepage = "https://github.com/slgobinath/SafeEyes"
-Downloads = "https://github.com/slgobinath/SafeEyes/archive/v3.3.0.tar.gz"
+Homepage = "https://github.com/slgobinath/safeeyes"
+Downloads = "https://github.com/slgobinath/safeeyes/archive/v3.3.0.tar.gz"
 
 [project.scripts]
 safeeyes = "safeeyes.__main__:main"
