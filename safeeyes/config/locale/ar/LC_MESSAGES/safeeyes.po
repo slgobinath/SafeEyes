@@ -60,32 +60,32 @@ msgid "show the about dialog"
 msgstr "أظهر نافذة \"عن البرنامج\""
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "عطّل برنامج safeeyes المشتغل حاليّا"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "عطّل برنامج Safe Eyes المشتغل حاليّا"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "فعّل برنامج safeeyes المشتغل حاليّا"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "فعّل برنامج Safe Eyes المشتغل حاليّا"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "غادر برنامج safeeyes المشتغل حاليّا"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "غادر برنامج Safe Eyes المشتغل حاليّا"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "إظهار لوحة اﻹعدادات"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "ابدأ safeeyes في وضع التنقيح (debug)"
+msgid "start Safe Eyes in debug mode"
+msgstr "ابدأ Safe Eyes في وضع التنقيح (debug)"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "أظهر حالة برنامج safeeyes المشتغل حاليا و أخرج"
+msgstr "أظهر حالة برنامج Safe Eyes المشتغل حاليا و أخرج"
 
 # Status message
 msgid "Safe Eyes is not running"
-msgstr "SafeEyes لا يعمل"
+msgstr "Safe Eyes لا يعمل"
 
 # About dialog
 msgid "Close"

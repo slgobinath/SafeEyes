@@ -58,15 +58,15 @@ msgid "show the about dialog"
 msgstr "정보 대화 상자 표시"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "실행 중인 세이프아이즈 객체 비활성화"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "실행 중인 세이브아이즈 객체 활성화"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "실행 중인 세이프아이즈 객체를 끝내고 종료"
 
 # Commandline arg description
@@ -74,7 +74,7 @@ msgid "show the settings dialog"
 msgstr "설정 대화 상자 표시"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "디버그 모드에서 세이브아이즈 시작"
 
 # Commandline arg description

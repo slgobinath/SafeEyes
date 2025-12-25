@@ -58,27 +58,27 @@ msgid "show the about dialog"
 msgstr "Hiện hộp thoại giới thiệu"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "vô hiệu hóa thể hiện safeeyes đăng chạy"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "vô hiệu hóa thể hiện Safe Eyes đăng chạy"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "kích hoạt thể hiện safeeyes đang chạy"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "kích hoạt thể hiện Safe Eyes đang chạy"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "bỏ thể hiện safeeyes đang chạy và thoát"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "bỏ thể hiện Safe Eyes đang chạy và thoát"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "Hiện hộp thoại cài đặt"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "Chạy Safe Eyes trong chế độ gỡ rối"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
+msgid "print the status of running Safe Eyes instance and exit"
 msgstr "in trạng thái chạy phiên bản Safe Eyes và thoát"
 
 # Status message

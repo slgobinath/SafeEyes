@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "Tampilkan dialog about"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "nonaktifkan instance safeeyes yang sedang berjalan"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "nonaktifkan instance Safe Eyes yang sedang berjalan"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "aktifkan instance safeeyes yang sedang berjalan"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "aktifkan instance Safe Eyes yang sedang berjalan"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "keluar dari instance safeeyes yang sedang berjalan dan keluar"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "keluar dari instance Safe Eyes yang sedang berjalan dan keluar"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "tampilkan dialog pengaturan"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "mulai amankan dalam mode debug"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "cetak status menjalankan instance safeeyes dan keluar"
+msgstr "cetak status menjalankan instance Safe Eyes dan keluar"
 
 # Status message
 msgid "Safe Eyes is not running"

@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "het over-dialoogvenster tonen"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "het momenteel draaiende safeeyes-proces uitschakelen"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "het momenteel draaiende Safe Eyes-proces uitschakelen"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "het momenteel draaiende safeeyes-proces inschakelen"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "het momenteel draaiende Safe Eyes-proces inschakelen"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "het draaiende safeeyes-proces beëindigen en afsluiten"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "het draaiende Safe Eyes-proces beëindigen en afsluiten"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "het instellingen-dialoogvenster tonen"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "safeeyes opstarten in foutopsporingsmodus"
+msgid "start Safe Eyes in debug mode"
+msgstr "Safe Eyes opstarten in foutopsporingsmodus"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "de status van de draaiende safeeyes-instantie printen en afsluiten"
+msgstr "de status van de draaiende Safe Eyes-instantie printen en afsluiten"
 
 # Status message
 msgid "Safe Eyes is not running"

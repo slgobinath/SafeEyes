@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "mostrar el cuadro de diálogo Acerca de"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "desactivar el ejemplar de safeeyes en ejecución"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "desactivar el ejemplar de Safe Eyes en ejecución"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "activar el ejemplar de safeeyes en ejecución"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "activar el ejemplar de Safe Eyes en ejecución"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "abandonar el ejemplar de safeeyes en ejecución y salir"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "abandonar el ejemplar de Safe Eyes en ejecución y salir"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "mostrar el cuadro de diálogo Configuración"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "iniciar safeeyes en modo de depuración"
+msgid "start Safe Eyes in debug mode"
+msgstr "iniciar Safe Eyes en modo de depuración"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "mostrar el estado del ejemplar de safeeyes en ejecución y salir"
+msgstr "mostrar el estado del ejemplar de Safe Eyes en ejecución y salir"
 
 # Status message
 msgid "Safe Eyes is not running"

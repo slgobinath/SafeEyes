@@ -50,23 +50,23 @@ msgstr "Atlaidies krēslā un atslābinies"
 msgid "show the about dialog"
 msgstr "rādīt apraksta dialogu"
 
-msgid "disable the currently running safeeyes instance"
-msgstr "atspējot pašlaik darbojošos safeeyes instanci"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "atspējot pašlaik darbojošos Safe Eyes instanci"
 
-msgid "enable the currently running safeeyes instance"
-msgstr "iespējot pašlaik darbojošos safeeyes instanci"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "iespējot pašlaik darbojošos Safe Eyes instanci"
 
-msgid "quit the running safeeyes instance and exit"
-msgstr "izslēgt darbojošos safeeyes instanci un iziet"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "izslēgt darbojošos Safe Eyes instanci un iziet"
 
 msgid "show the settings dialog"
 msgstr "rādīt iestatījumu dialogu"
 
-msgid "start safeeyes in debug mode"
-msgstr "palaist safeeyes atkļūdošanas režīmā"
+msgid "start Safe Eyes in debug mode"
+msgstr "palaist Safe Eyes atkļūdošanas režīmā"
 
 msgid "print the status of running safeeyes instance and exit"
-msgstr "drukāt darbojošās safeeyes instances statusu un iziet"
+msgstr "drukāt darbojošās Safe Eyes instances statusu un iziet"
 
 msgid "Safe Eyes is not running"
 msgstr "Safe Eyes nav palaists"

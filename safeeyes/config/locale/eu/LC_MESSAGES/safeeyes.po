@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "erakutsi \"honi buruz\" elkarrizketa-koadroa"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "desgaitu uneko safeeyes instantzia"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "desgaitu uneko Safe Eyes instantzia"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "gaitu uneko safeeyes instantzia"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "gaitu uneko Safe Eyes instantzia"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "itxi uneko safeeyes instantzia eta irten"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "itxi uneko Safe Eyes instantzia eta irten"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "erakutsi ezarpenak"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "abiarazi safeeyes arazketa moduan"
+msgid "start Safe Eyes in debug mode"
+msgstr "abiarazi Safe Eyes arazketa moduan"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "inprimatu uneko safeeyes instantziaren egoera eta irten"
+msgstr "inprimatu uneko Safe Eyes instantziaren egoera eta irten"
 
 # Status message
 msgid "Safe Eyes is not running"

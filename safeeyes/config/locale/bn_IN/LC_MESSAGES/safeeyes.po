@@ -58,15 +58,15 @@ msgid "show the about dialog"
 msgstr "অ্যাপ সম্পর্কে তথ্য দেখুন"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "বর্তমানে চলমান Safe Eyes নিষ্ক্রিয় করুন"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "বর্তমানে চলমান Safe Eyes সক্রিয় করুন"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "চলমান Safe Eyes বন্ধ করে বেরিয়ে যান"
 
 # Commandline arg description
@@ -74,7 +74,7 @@ msgid "show the settings dialog"
 msgstr "সেটিংস ডায়ালগ দেখান"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "Safe Eyes-কে debug মোডে চালান"
 
 # Commandline arg description

@@ -59,28 +59,28 @@ msgid "show the about dialog"
 msgstr "montri la pri-dialogon"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "malebligi la nunan rulantan aperon de safeeyes"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "malebligi la nunan rulantan aperon de Safe Eyes"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "ebligi la nunan rulantan aperon de safeeyes"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "ebligi la nunan rulantan aperon de Safe Eyes"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "ĉesi la rulantan aperon de safeeyes kaj eliri"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "ĉesi la rulantan aperon de Safe Eyes kaj eliri"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "montri la dialogon de agordoj"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "komenci safeeyes-on en sencimiga reĝimo"
+msgid "start Safe Eyes in debug mode"
+msgstr "komenci Safe Eyes-on en sencimiga reĝimo"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "montri la staton de la rulanta apero de safeeyes kaj eliri"
+msgstr "montri la staton de la rulanta apero de Safe Eyes kaj eliri"
 
 # Status message
 msgid "Safe Eyes is not running"

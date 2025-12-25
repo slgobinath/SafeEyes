@@ -58,15 +58,15 @@ msgid "show the about dialog"
 msgstr "kuva infoaken"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "peatab programmi töö"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "lubab programmi töö"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "peatab programmi töö ja väljub"
 
 # Commandline arg description
@@ -74,12 +74,12 @@ msgid "show the settings dialog"
 msgstr "kuva seadete aken"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "käivita veatuvastuse režiimis"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "väljasta hetkel töötava safeeyes instantsi staatus ja välju"
+msgstr "väljasta hetkel töötava Safe Eyes instantsi staatus ja välju"
 
 # Status message
 msgid "Safe Eyes is not running"

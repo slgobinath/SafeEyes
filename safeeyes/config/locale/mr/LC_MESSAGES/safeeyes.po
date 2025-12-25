@@ -58,15 +58,15 @@ msgid "show the about dialog"
 msgstr "बद्दल संवाद दर्शवा"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "सध्या चालू असलेल्या डोळ्यांचा देखावा अक्षम करा"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "सध्या चालू असलेल्या सुरक्षित डोळ्यांचा दृष्टांत सक्षम करा"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "चालू असणार्‍या डोळ्यांची उदाहरणे सोडून बाहेर पडा"
 
 # Commandline arg description
@@ -74,7 +74,7 @@ msgid "show the settings dialog"
 msgstr "सेटिंग्ज संवाद दर्शवा"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "डीबग मोडमध्ये सुरक्षित डोळे प्रारंभ करा"
 
 # Commandline arg description

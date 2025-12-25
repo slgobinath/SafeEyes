@@ -59,28 +59,28 @@ msgid "show the about dialog"
 msgstr "показ діалогового вікна про програму"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "вимикання поточного виконуваного екземпляру програми safeeyes"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "вимикання поточного виконуваного екземпляру програми Safe Eyes"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "вмикання поточного виконуваного екземпляру програми safeeyes"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "вмикання поточного виконуваного екземпляру програми Safe Eyes"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "вихід з поточного виконуваного екземпляру програми safeeyes"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "вихід з поточного виконуваного екземпляру програми Safe Eyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "показ діалогового вікна налаштувань"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "запуск safeeyes в режимі зневадження"
+msgid "start Safe Eyes in debug mode"
+msgstr "запуск Safe Eyes в режимі зневадження"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
-msgstr "виведення стану виконуваного екземпляру програми safeeyes та вихід"
+msgid "print the status of running Safe Eyes instance and exit"
+msgstr "виведення стану виконуваного екземпляру програми Safe Eyes та вихід"
 
 # Status message
 msgid "Safe Eyes is not running"

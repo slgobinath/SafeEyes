@@ -59,15 +59,15 @@ msgid "show the about dialog"
 msgstr "தகவல் சாளரத்தை காண்பி"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ முடக்கு"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "முடக்க பட்டிருக்கும் Safe Eyes ஐ செயல்படுத்துக"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "செயற்பட்டு கொண்டிருக்கும் Safe Eyes ஐ நிறுத்துக"
 
 # Commandline arg description
@@ -75,11 +75,11 @@ msgid "show the settings dialog"
 msgstr "அமைப்புகள் சாளரத்தை காண்பி"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "வழு நீக்கும் முறையில் Safe Eyes ஐ ஆரம்பிக்குக"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
+msgid "print the status of running Safe Eyes instance and exit"
 msgstr "இயங்கும் Safe Eyes நிலையை காண்பித்து வெளியேறுக"
 
 # Status message
