@@ -58,27 +58,27 @@ msgid "show the about dialog"
 msgstr "hakkında penceresini göster"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "çalışmakta olan safeeyes kopyasını etkisizleştir"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "çalışmakta olan Safe Eyes kopyasını etkisizleştir"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "çalışmakta olan safeeyes kopyasını etkinleştir"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "çalışmakta olan Safe Eyes kopyasını etkinleştir"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "çalışmakta olan safeeyese kopyasını sonlandır ve çık"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "çalışmakta olan Safe Eyes kopyasını sonlandır ve çık"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "ayarlar penceresini göster"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "safeeyes'ı hata ayıklama kipinde başlat"
+msgid "start Safe Eyes in debug mode"
+msgstr "Safe Eyes hata ayıklama kipinde başlat"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
+msgid "print the status of running Safe Eyes instance and exit"
 msgstr "çalışan Safe Eyes örneğinin durumunu yaz ve çık"
 
 # Status message

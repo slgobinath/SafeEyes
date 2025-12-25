@@ -59,28 +59,28 @@ msgid "show the about dialog"
 msgstr "rodyti informaciją apie programą"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "išjungti šiuo metu paleistą safeeyes"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "išjungti šiuo metu paleistą Safe Eyes"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "įjungti šiuo metu paleistą safeeyes"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "įjungti šiuo metu paleistą Safe Eyes"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "baigti paleisto safeeyes darbą ir išeiti"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "baigti paleisto Safe Eyes darbą ir išeiti"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "rodyti nuostatų langą"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "paleisti safeeyes derinimo veiksenoje"
+msgid "start Safe Eyes in debug mode"
+msgstr "paleisti Safe Eyes derinimo veiksenoje"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "išvesti paleisto safeeyes egzemplioriaus būseną ir išeiti"
+msgstr "išvesti paleisto Safe Eyes egzemplioriaus būseną ir išeiti"
 
 # Status message
 msgid "Safe Eyes is not running"

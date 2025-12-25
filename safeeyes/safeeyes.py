@@ -76,17 +76,17 @@ class SafeEyes(Gtk.Application):
             ("settings", "s", _("show the settings dialog")),
             ("take-break", "t", _("Take a break now").lower()),
             # activate action
-            ("disable", "d", _("disable the currently running safeeyes instance")),
-            ("enable", "e", _("enable the currently running safeeyes instance")),
-            ("quit", "q", _("quit the running safeeyes instance and exit")),
+            ("disable", "d", _("disable the currently running Safe Eyes instance")),
+            ("enable", "e", _("enable the currently running Safe Eyes instance")),
+            ("quit", "q", _("quit the running Safe Eyes instance and exit")),
             # special handling
             (
                 "status",
                 None,
-                _("print the status of running safeeyes instance and exit"),
+                _("print the status of running Safe Eyes instance and exit"),
             ),
             # toggle
-            ("debug", None, _("start safeeyes in debug mode")),
+            ("debug", None, _("start Safe Eyes in debug mode")),
             # TODO: translate
             ("version", None, "show program's version number and exit"),
         ]

@@ -59,28 +59,28 @@ msgid "show the about dialog"
 msgstr "Прикажи о нама прозор"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "Онемогућите тренутну сесију safeeyes-a"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "Онемогућите тренутну сесију Safe Eyes-a"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "Омогућите тренутну сесију safeeyes-a"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "Омогућите тренутну сесију Safe Eyes-a"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "Искључите тренутну сесију safeeyes-а и затворите програм"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "Искључите тренутну сесију Safe Eyes-а и затворите програм"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "Прикажи прозор са подешавањима"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "Покрените safeeyes у режиму за исправљање грешака"
+msgid "start Safe Eyes in debug mode"
+msgstr "Покрените Safe Eyes у режиму за исправљање грешака"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
-msgstr "Одштампајте статус тренутне сесије safeeyes-a и напустите"
+msgid "print the status of running Safe Eyes instance and exit"
+msgstr "Одштампајте статус тренутне сесије Safe Eyes-a и напустите"
 
 # Status message
 msgid "Safe Eyes is not running"

@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "Mostra la finestra \"Quant a\""
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "Inhabilita la instància de safeeyes en funcionament"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "Inhabilita la instància de Safe Eyes en funcionament"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "Habilita la instància de safeeyes en funcionament"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "Habilita la instància de Safe Eyes en funcionament"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "Tanca de la instància de safeeyes en funcionament i surt"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "Tanca de la instància de Safe Eyes en funcionament i surt"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "Mostra la finestra de preferències"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "Inicia safeeyes en mode de depuració"
+msgid "start Safe Eyes in debug mode"
+msgstr "Inicia Safe Eyes en mode de depuració"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"
-msgstr "Mostra l'estat de la instància de safeeyes en funcionament i surt"
+msgstr "Mostra l'estat de la instància de Safe Eyes en funcionament i surt"
 
 # Status message
 msgid "Safe Eyes is not running"

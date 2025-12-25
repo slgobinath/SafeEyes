@@ -58,24 +58,24 @@ msgid "show the about dialog"
 msgstr "zobrazit dialog O aplikaci"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "zablokovat spuštěnou instanci safeeyes"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "zablokovat spuštěnou instanci Safe Eyes"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "odblokovat spuštěnou instanci safeeyes"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "odblokovat spuštěnou instanci Safe Eyes"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "ukončit spuštěnou instanci safeeyes"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "ukončit spuštěnou instanci Safe Eyes"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "zobrazit nastavovací dialog"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "spustit safeeyes v režimu pro ladění"
+msgid "start Safe Eyes in debug mode"
+msgstr "spustit Safe Eyes v režimu pro ladění"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"

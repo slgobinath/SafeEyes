@@ -58,24 +58,24 @@ msgid "show the about dialog"
 msgstr "a Névjegy ablak megjelenítése"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "a jelenleg futó SafeEyes példány letiltása"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "a jelenleg futó Safe Eyes példány letiltása"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "a jelenleg futó SafeEyes példány engedélyezése"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "a jelenleg futó Safe Eyes példány engedélyezése"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "kilépés a futó SafeEyes példányból"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "kilépés a futó Safe Eyes példányból"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "mutasd a beállítások dialógust"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "Indítsd a SafeEyes-t debug módban"
+msgid "start Safe Eyes in debug mode"
+msgstr "Indítsd a Safe Eyes-t debug módban"
 
 # Commandline arg description
 msgid "print the status of running safeeyes instance and exit"

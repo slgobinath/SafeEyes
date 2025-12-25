@@ -58,15 +58,15 @@ msgid "show the about dialog"
 msgstr "ಇದರ ಬಗ್ಗೆ ತೋರಿಸು"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
+msgid "disable the currently running Safe Eyes instance"
 msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ನಿಶ್ಕ್ರಿಯ ಗೊಳಿಸು"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
+msgid "enable the currently running Safe Eyes instance"
 msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ಸಕ್ರಿಯ ಗೊಳಿಸು"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
+msgid "quit the running Safe Eyes instance and exit"
 msgstr "ನೆಡುಯುತ್ತಿರುವ ಸೇಫ್‌ಐಸ್ಅನ್ನು ತ್ಯಜಿಸು"
 
 # Commandline arg description
@@ -74,7 +74,7 @@ msgid "show the settings dialog"
 msgstr "ಸಿದ್ಧತೆಗಳನ್ನು ತೋರಿಸು"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
+msgid "start Safe Eyes in debug mode"
 msgstr "ಡೀಬಗ್ ಮೋಡ್‌ನಲ್ಲಿ ಸೇಫ್ಐಸ್ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ"
 
 # Commandline arg description

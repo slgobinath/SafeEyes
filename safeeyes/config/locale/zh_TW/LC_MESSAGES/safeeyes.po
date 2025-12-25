@@ -58,28 +58,28 @@ msgid "show the about dialog"
 msgstr "顯示關於對話方塊"
 
 # Commandline arg description
-msgid "disable the currently running safeeyes instance"
-msgstr "停用目前正在執行的 safeeyes 事例"
+msgid "disable the currently running Safe Eyes instance"
+msgstr "停用目前正在執行的 Safe Eyes 事例"
 
 # Commandline arg description
-msgid "enable the currently running safeeyes instance"
-msgstr "啟用目前正在執行的 safeeyes 事例"
+msgid "enable the currently running Safe Eyes instance"
+msgstr "啟用目前正在執行的 Safe Eyes 事例"
 
 # Commandline arg description
-msgid "quit the running safeeyes instance and exit"
-msgstr "離開目前正在執行的 safeeyes 事例"
+msgid "quit the running Safe Eyes instance and exit"
+msgstr "離開目前正在執行的 Safe Eyes 事例"
 
 # Commandline arg description
 msgid "show the settings dialog"
 msgstr "顯示設定視窗"
 
 # Commandline arg description
-msgid "start safeeyes in debug mode"
-msgstr "以除錯模式開啓 safeeyes"
+msgid "start Safe Eyes in debug mode"
+msgstr "以除錯模式開啓 Safe Eyes"
 
 # Commandline arg description
-msgid "print the status of running safeeyes instance and exit"
-msgstr "顯示目前正在執行的 safeeyes 狀態並離開"
+msgid "print the status of running Safe Eyes instance and exit"
+msgstr "顯示目前正在執行的 Safe Eyes 狀態並離開"
 
 # Status message
 msgid "Safe Eyes is not running"

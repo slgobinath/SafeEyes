@@ -29,11 +29,11 @@ Application Options:
   -a, --about                show the about dialog
   -s, --settings             show the settings dialog
   -t, --take-break           take a break now
-  -d, --disable              disable the currently running safeeyes instance
-  -e, --enable               enable the currently running safeeyes instance
-  -q, --quit                 quit the running safeeyes instance and exit
-  --status                   print the status of running safeeyes instance and exit
-  --debug                    start safeeyes in debug mode
+  -d, --disable              disable the currently running Safe Eyes instance
+  -e, --enable               enable the currently running Safe Eyes instance
+  -q, --quit                 quit the running Safe Eyes instance and exit
+  --status                   print the status of running Safe Eyes instance and exit
+  --debug                    start Safe Eyes in debug mode
   --version                  show program's version number and exit
 ```
 
