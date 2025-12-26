@@ -1,12 +1,12 @@
-# SafeEyes Website
+# Safe Eyes Website
 
-This repository contains the static website for SafeEyes, a free and open source tool that protects your eyes from eye strain by reminding you to take breaks while working on the computer.
+This repository contains the static website for Safe Eyes, a free and open source tool that protects your eyes from eye strain by reminding you to take breaks while working on the computer.
 
 ## Website Overview
 
-The website is designed to be hosted on GitHub Pages and provides information about SafeEyes, including:
+The website is designed to be hosted on GitHub Pages and provides information about Safe Eyes, including:
 
-- Features of SafeEyes
+- Features of Safe Eyes
 - Detailed installation instructions for various Linux distributions
 - Usage guide with command-line arguments
 - Information on how to contribute to the project
