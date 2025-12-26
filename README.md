@@ -16,7 +16,7 @@ The website is designed to be hosted on GitHub Pages and provides information ab
 To deploy this website to GitHub Pages:
 
 1. Push this repository on GitHub
-6. GitHub will automatically build it on https://slgobinath.github.io/SafeEyes/
+6. GitHub will automatically build it on https://slgobinath.github.io/safeeyes/
 
 ## Local Development
 
