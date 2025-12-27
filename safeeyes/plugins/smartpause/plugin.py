@@ -287,7 +287,7 @@ def disable() -> None:
 
 
 def on_exit() -> None:
-    """SafeEyes is exiting."""
+    """Safe Eyes is exiting."""
     global idle_monitor
 
     if idle_monitor is not None:
