@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-04-03 15:09+0000\n"
-"Last-Translator: vikdevelop <vikdevelop@proton.me>\n"
+"PO-Revision-Date: 2026-07-24 07:01+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -55,43 +55,43 @@ msgstr "Opřete se zády do židle a uvolněte se"
 
 # Short break
 msgid "Take five slow, deep breaths"
-msgstr ""
+msgstr "Pětkrát se pomalu, zhluboka nadechněte"
 
 # Short break
 msgid "Relax your shoulders and drop them away from your ears"
-msgstr ""
+msgstr "Uvolněte svá ramena a přestaňte je přitahovat ke svým uším"
 
 # Short break
 msgid "Unclench your jaw and relax your face"
-msgstr ""
+msgstr "Uvolněte čelist a obličej"
 
 # Short break
 msgid "Stretch your neck gently from side to side"
-msgstr ""
+msgstr "Jemně si protáhněte krk ze strany na stranu"
 
 # Short break
 msgid "Check your posture and sit back comfortably"
-msgstr ""
+msgstr "Zkontrolujte držení těla a zase se pohodlně posaďte"
 
 # Short break
 msgid "Stretch your wrists and fingers"
-msgstr ""
+msgstr "Protáhněte si zápěstí a prsty"
 
 # Long break
 msgid "Stand up and stretch your back and legs"
-msgstr ""
+msgstr "Stoupněte si a protáhněte si záda a nohy"
 
 # Long break
 msgid "Walk around and refill your water"
-msgstr ""
+msgstr "Projděte se a doplňte si vodu"
 
 # Long break
 msgid "Step away from the screen and do a short mobility stretch"
-msgstr ""
+msgstr "Odstupte od obrazovky a krátce se protáhněte pohybem"
 
 # Long break
 msgid "Rest your eyes and focus on distant objects"
-msgstr ""
+msgstr "Nechte odpočívat své oči a zaostřete na vzdálené objekty"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -647,16 +647,16 @@ msgid "Skipping/postponing disabled period (in seconds)"
 msgstr "Přeskakování zakázané periody (v sekundách)"
 
 msgid "take a short break now"
-msgstr ""
+msgstr "nyní si udělejte krátkou přestávku"
 
 msgid "take a long break now"
-msgstr ""
+msgstr "nyní si udělejte dlouhou přestávku"
 
 msgid "Fade in when breaks start"
-msgstr ""
+msgstr "Postupné ztmavování při začátku přestávek"
 
 msgid "Fade in duration (in milliseconds)"
-msgstr ""
+msgstr "Doba ztmavování (v milisekundách)"
 
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
