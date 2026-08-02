@@ -302,6 +302,7 @@ def desktop_environment():
             "trinity",
             "kde",
             "hyprland",
+            "sway",
         ]:
             env = desktop_session
         elif desktop_session.startswith("xubuntu") or (
@@ -316,8 +317,12 @@ def desktop_environment():
             or os.environ.get("KDE_FULL_SESSION") == "true"
         ):
             env = "kde"
-        elif os.environ.get("GNOME_DESKTOP_SESSION_ID") or desktop_session.startswith(
-            "gnome"
+        elif (
+            os.environ.get("GNOME_DESKTOP_SESSION_ID")
+            or desktop_session.startswith("gnome")
+            # Ubuntu sets DESKTOP_SESSION=ubuntu, but XDG_CURRENT_DESKTOP is
+            # "ubuntu:GNOME", so it is a GNOME session as well
+            or (current_desktop is not None and "gnome" in current_desktop.lower())
         ):
             env = "gnome"
         elif desktop_session.startswith("ubuntu"):
@@ -325,6 +330,8 @@ def desktop_environment():
     elif current_desktop is not None:
         if current_desktop.startswith("sway"):
             env = "sway"
+        elif "gnome" in current_desktop.lower():
+            env = "gnome"
     DESKTOP_ENVIRONMENT = env
     return env
 
@@ -353,6 +360,16 @@ def is_wayland():
     else:
         IS_WAYLAND = bool(re.search(b"wayland", output, re.IGNORECASE))
     return IS_WAYLAND
+
+
+def is_gnome_wayland() -> bool:
+    """Return whether Safe Eyes is running on a GNOME Wayland session.
+
+    GNOME is the only major Wayland compositor that may show a permission
+    dialog when shortcut inhibition is requested, so some options are gated
+    on it.
+    """
+    return is_wayland() and desktop_environment() == "gnome"
 
 
 def execute_command(command, args=[]):

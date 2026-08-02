@@ -139,9 +139,11 @@ class SettingsDialog(Gtk.ApplicationWindow):
             config.get("shortcut_disable_time")
         )
         self.switch_strict_break.set_active(config.get("strict_break"))
-        # This setting is only relevant on Wayland, where Safe Eyes calls
-        # inhibit_system_shortcuts() and GNOME may show a permission dialog for it
-        if not utility.is_wayland():
+        # This setting is only relevant on GNOME Wayland, where Safe Eyes calls
+        # inhibit_system_shortcuts() and GNOME may show a permission dialog for it.
+        # Other Wayland compositors (e.g. KWin, sway) grant the inhibition
+        # silently, so the switch is hidden there.
+        if not utility.is_gnome_wayland():
             self.box_skip_shortcut_inhibition.set_visible(False)
         else:
             self.switch_skip_shortcut_inhibition.set_active(
@@ -376,7 +378,9 @@ class SettingsDialog(Gtk.ApplicationWindow):
             self.spin_disable_keyboard_shortcut.get_value_as_int(),
         )
         self.config.set("strict_break", self.switch_strict_break.get_active())
-        if utility.is_wayland():
+        # Only write back the value when the switch is actually shown, so that
+        # users on other Wayland desktops keep their manual config file edits.
+        if utility.is_gnome_wayland():
             self.config.set(
                 "skip_system_shortcuts_inhibition",
                 self.switch_skip_shortcut_inhibition.get_active(),

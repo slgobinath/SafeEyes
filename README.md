@@ -90,7 +90,7 @@ You can install with `pip`
 ```bash
 pip3 install --user safeeyes
 ```
-For smartpause in Wayland, install the `python3-pywayland` package (in case the installer does not automatically install it as a dependency). For smart pause plugin in X11, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/).
+For smartpause in Wayland, install the `python3-pywayland` package (in case the installer does not automatically install it as a dependency). If you are using sway, install `swayidle` instead. For smart pause plugin in X11, you may have to install the latest xprintidle from: [alonid/xprintidle](https://copr.fedorainfracloud.org/coprs/alonid/xprintidle/).
 
 Alternatively, use the [Flatpak version](https://github.com/slgobinath/safeeyes?tab=readme-ov-file#flatpak), which comes preinstalls with dependencies and features automatic updates.
 
@@ -133,7 +133,7 @@ Ensure to meet the following dependencies:
 - `python3-croniter`
 - `python3-packaging`
 - `python3-xlib` (required on x11)
-- **Optional**: Either `python3-pywayland` (provides smartpause in Wayland) or `xprintidle` (provides smartpause in x11).
+- **Optional**: Either `python3-pywayland` (provides smartpause on Wayland), `swayidle` (provides smartpause on sway), or `xprintidle` (provides smartpause on x11).
 
 **To install Safe Eyes from PyPI:**
 
@@ -159,7 +159,7 @@ Note that on Wayland, this may still not be enough to get window icons working p
 
 On Wayland, Safe Eyes calls `inhibit_system_shortcuts` while a break is showing, so that system-level shortcuts (e.g. Alt+Tab or the Super key) do not interfere with the break. Depending on the compositor (notably GNOME), this can trigger a permission dialog every time a break starts. GNOME does not support remembering this permission persistently (the [related issue](https://gitlab.gnome.org/GNOME/gnome-connections/-/work_items/85) has been open since 2021), so Safe Eyes offers an option to skip requesting it entirely.
 
-To avoid that, set `skip_system_shortcuts_inhibition` to `true` in `~/.config/safeeyes/safeeyes.json` (it defaults to `false`), or enable the "Suppress GNOME shortcut permission dialog" switch in the Plugins section of the settings dialog (this option is only shown on Wayland). With it enabled, Safe Eyes will not request shortcut inhibition: system shortcuts stay active during breaks, while the break screen's own skip/postpone shortcuts keep working. This setting only affects Wayland; on X11 the keyboard is handled differently and is not affected.
+To avoid that, set `skip_system_shortcuts_inhibition` to `true` in `~/.config/safeeyes/safeeyes.json` (it defaults to `false`), or enable the "Suppress GNOME shortcut permission dialog" switch in the Plugins section of the settings dialog (this switch is only shown on GNOME Wayland; other Wayland compositors such as KWin or sway grant shortcut inhibition silently, so you can still set the option manually in the config file if you want to skip it there as well). With it enabled, Safe Eyes will not request shortcut inhibition: system shortcuts stay active during breaks, while the break screen's own skip/postpone shortcuts keep working. This setting only affects Wayland; on X11 the keyboard is handled differently and is not affected.
 
 
 ### Install in a virtual environment
