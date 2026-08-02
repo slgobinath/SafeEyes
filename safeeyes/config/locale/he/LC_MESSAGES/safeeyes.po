@@ -648,6 +648,10 @@ msgstr "כניסה הדרגתית למסך ההפסקה בעת התחלתה"
 msgid "Fade in duration (in milliseconds)"
 msgstr "משך זמן עמעום (במילישניות)"
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "print the status of running Safe Eyes instance and exit"

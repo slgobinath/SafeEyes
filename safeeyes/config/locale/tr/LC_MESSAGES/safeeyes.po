@@ -652,6 +652,10 @@ msgid "Fade in duration (in milliseconds)"
 msgstr ""
 
 # Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
+# Settings dialog
 #~ msgid "Keyboard shortcuts disabled period (in seconds)"
 #~ msgstr "Klavye kısayollarının etkisiz kalma süresi (saniye)"
 

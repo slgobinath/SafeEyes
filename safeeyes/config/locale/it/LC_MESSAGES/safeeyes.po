@@ -659,6 +659,10 @@ msgstr "Dissolvenza in entrata all'inizio delle pause"
 msgid "Fade in duration (in milliseconds)"
 msgstr "Durata della dissolvenza in entrata (in millisecondi)"
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "stampa lo stato di esecuzione di Safe Eyes ed esci"

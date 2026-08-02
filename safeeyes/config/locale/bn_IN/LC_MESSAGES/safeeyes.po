@@ -649,6 +649,10 @@ msgstr "আস্তে আস্তে বিরতি ফুটে উঠু�
 msgid "Fade in duration (in milliseconds)"
 msgstr "ফুটে ওঠার সময় (মিলিসেকেন্ডে)"
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "চলমান Safe Eyes-এর অবস্থা দেখিয়ে বেরিয়ে যান"

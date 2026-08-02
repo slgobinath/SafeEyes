@@ -688,3 +688,7 @@ msgstr "Durée du fondu (en millisecondes)"
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Fréquence de réinitialisation (en heures)"
+
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""

@@ -684,3 +684,7 @@ msgstr "Laipsniško ryškėjimo trukmė (milisekundėmis)"
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Statistikos atstatymo intervalas (valandomis)"
+
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""

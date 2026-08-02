@@ -644,6 +644,10 @@ msgid "Fade in duration (in milliseconds)"
 msgstr "淡入时长（毫秒）"
 
 # Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
+# Settings dialog
 #~ msgid "Keyboard shortcuts disabled period (in seconds)"
 #~ msgstr "禁用键盘快捷键的时长（秒）"
 

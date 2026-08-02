@@ -658,6 +658,10 @@ msgstr "Postupné ztmavování při začátku přestávek"
 msgid "Fade in duration (in milliseconds)"
 msgstr "Doba ztmavování (v milisekundách)"
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "Popis argumentu příkazového řádku"

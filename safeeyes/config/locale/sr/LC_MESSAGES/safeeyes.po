@@ -670,3 +670,7 @@ msgstr ""
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Чврсто затворите очи"
+
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""

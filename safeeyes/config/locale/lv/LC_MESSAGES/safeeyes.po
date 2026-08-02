@@ -565,6 +565,10 @@ msgstr ""
 msgid "Fade in duration (in milliseconds)"
 msgstr ""
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "drukāt darbojošās Safe Eyes instances statusu un iziet"
 

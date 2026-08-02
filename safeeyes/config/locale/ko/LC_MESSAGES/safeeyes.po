@@ -639,6 +639,10 @@ msgstr ""
 msgid "Fade in duration (in milliseconds)"
 msgstr ""
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "실행 중인 세이프아이즈 객체를 종료하고 상태 출력"
