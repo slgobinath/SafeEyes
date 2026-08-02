@@ -707,21 +707,55 @@
             <property name="name">page2</property>
             <property name="title" translatable="yes">Plugins</property>
             <property name="child">
-              <object class="GtkScrolledWindow" id="scrolledwindow_plugins">
+              <object class="GtkBox" id="box_plugins_page">
                 <property name="visible">1</property>
-                <property name="can-focus">1</property>
-                <property name="hscrollbar-policy">never</property>
-                <property name="has-frame">1</property>
+                <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkViewport" id="viewport_plugins">
+                  <object class="GtkScrolledWindow" id="scrolledwindow_plugins">
                     <property name="visible">1</property>
+                    <property name="can-focus">1</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="has-frame">1</property>
+                    <property name="hexpand">1</property>
+                    <property name="vexpand">1</property>
                     <child>
-                      <object class="GtkBox" id="box_plugins">
+                      <object class="GtkViewport" id="viewport_plugins">
                         <property name="visible">1</property>
-                        <property name="margin-top">10</property>
-                        <property name="margin-bottom">10</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkBox" id="box_plugins">
+                            <property name="visible">1</property>
+                            <property name="margin-top">10</property>
+                            <property name="margin-bottom">10</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">5</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox" id="box_skip_shortcut_inhibition">
+                    <property name="visible">1</property>
+                    <property name="margin-start">5</property>
+                    <property name="margin-end">5</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-bottom">10</property>
+                    <property name="spacing">5</property>
+                    <property name="homogeneous">1</property>
+                    <child>
+                      <object class="GtkLabel" id="lbl_skip_shortcut_inhibition">
+                        <property name="visible">1</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Suppress GNOME shortcut permission dialog</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSwitch" id="switch_skip_shortcut_inhibition">
+                        <property name="visible">1</property>
+                        <property name="can-focus">1</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
                       </object>
                     </child>
                   </object>
