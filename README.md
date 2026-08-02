@@ -155,6 +155,12 @@ Safe Eyes installers install the required icons to `/usr/share/icons/hicolor`. W
 
 Note that on Wayland, this may still not be enough to get window icons working properly, as Wayland requires the .desktop file to match the running application, which is hard to do when running from source. If at all possible, prefer using an installed package.
 
+#### Wayland and system shortcuts during breaks
+
+On Wayland, Safe Eyes calls `inhibit_system_shortcuts` while a break is showing, so that system-level shortcuts (e.g. Alt+Tab or the Super key) do not interfere with the break. Depending on the compositor (notably GNOME), this can trigger a permission dialog every time a break starts. GNOME does not support remembering this permission persistently (the [related issue](https://gitlab.gnome.org/GNOME/gnome-connections/-/work_items/85) has been open since 2021), so Safe Eyes offers an option to skip requesting it entirely.
+
+To avoid that, set `skip_system_shortcuts_inhibition` to `true` in `~/.config/safeeyes/safeeyes.json` (it defaults to `false`), or enable the "Suppress GNOME shortcut permission dialog" switch in the Plugins section of the settings dialog (this option is only shown on Wayland). With it enabled, Safe Eyes will not request shortcut inhibition: system shortcuts stay active during breaks, while the break screen's own skip/postpone shortcuts keep working. This setting only affects Wayland; on X11 the keyboard is handled differently and is not affected.
+
 
 ### Install in a virtual environment
 
