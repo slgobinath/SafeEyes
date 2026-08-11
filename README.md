@@ -12,7 +12,7 @@
 
 Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder.
 
-[![Star History Chart](https://api.star-history.com/svg?repos=slgobinath/safeeyes&type=date&legend=top-left)](https://www.star-history.com/#slgobinath/safeeyes&type=date&legend=top-left)
+[![Star History Chart](https://star-history.dera.page/svg?repos=slgobinath/safeeyes&type=date&legend=top-left)](https://star-history.dera.page/#slgobinath/safeeyes&type=date&legend=top-left)
 
 Visit the official site: https://slgobinath.github.io/safeeyes/ for more details.
 
