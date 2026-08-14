@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-07-24 07:01+0000\n"
+"PO-Revision-Date: 2026-08-15 19:51+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/cs/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.8.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -55,11 +55,11 @@ msgstr "Opřete se zády do židle a uvolněte se"
 
 # Short break
 msgid "Take five slow, deep breaths"
-msgstr "Pětkrát se pomalu, zhluboka nadechněte"
+msgstr "Pětkrát se zhluboka a pomalu nadechněte"
 
 # Short break
 msgid "Relax your shoulders and drop them away from your ears"
-msgstr "Uvolněte svá ramena a přestaňte je přitahovat ke svým uším"
+msgstr "Uvolněte ramena a spusťte je dolů, od uší"
 
 # Short break
 msgid "Unclench your jaw and relax your face"
@@ -67,7 +67,7 @@ msgstr "Uvolněte čelist a obličej"
 
 # Short break
 msgid "Stretch your neck gently from side to side"
-msgstr "Jemně si protáhněte krk ze strany na stranu"
+msgstr "Jemně protahujte krk ze strany na stranu"
 
 # Short break
 msgid "Check your posture and sit back comfortably"
