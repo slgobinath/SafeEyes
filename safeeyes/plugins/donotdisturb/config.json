@@ -34,6 +34,13 @@
             "label": "Do not disturb while on battery",
             "type": "BOOL",
             "default": false
+        },
+        {
+            "id": "ignored_inhibitor_apps",
+            "label": "Ignored inhibitor applications (GNOME only)",
+            "info": "Applications whose idle inhibitors should be ignored. Use Select to pick from active inhibitors.",
+            "type": "TEXT_WITH_PICKER",
+            "default": ""
         }
     ],
     "break_override_allowed": true

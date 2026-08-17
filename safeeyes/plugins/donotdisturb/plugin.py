@@ -21,6 +21,7 @@
 import os
 import logging
 import subprocess
+import typing
 
 import gi
 
@@ -33,6 +34,8 @@ skip_break_window_classes: list[str] = []
 take_break_window_classes: list[str] = []
 unfullscreen_allowed = True
 dnd_while_on_battery = False
+ignored_inhibitor_apps: set[str] = set()
+_kde_warning_logged = False
 
 
 def is_active_window_skipped_wayland(pre_break):
@@ -154,11 +157,74 @@ def is_active_window_skipped_xorg(pre_break):
     return False
 
 
+def get_active_inhibitors() -> typing.Optional[list[tuple[str, str, int]]]:
+    """Query GNOME SessionManager for active inhibitors.
+
+    Returns list of (app_id, reason, flags) tuples.
+    Returns None on error (callers should handle this as a failure, not empty).
+    """
+    try:
+        session_proxy = Gio.DBusProxy.new_for_bus_sync(
+            bus_type=Gio.BusType.SESSION,
+            flags=Gio.DBusProxyFlags.NONE,
+            info=None,
+            name="org.gnome.SessionManager",
+            object_path="/org/gnome/SessionManager",
+            interface_name="org.gnome.SessionManager",
+            cancellable=None,
+        )
+        inhibitors_variant = session_proxy.call_sync(
+            "GetInhibitors",
+            None,
+            Gio.DBusCallFlags.NONE,
+            -1,
+            None,
+        )
+        inhibitor_paths = inhibitors_variant.unpack()[0]
+
+        result = []
+        for inhibitor_path in inhibitor_paths:
+            try:
+                inhibitor_proxy = Gio.DBusProxy.new_for_bus_sync(
+                    bus_type=Gio.BusType.SESSION,
+                    flags=Gio.DBusProxyFlags.NONE,
+                    info=None,
+                    name="org.gnome.SessionManager",
+                    object_path=inhibitor_path,
+                    interface_name="org.gnome.SessionManager.Inhibitor",
+                    cancellable=None,
+                )
+                app_id = inhibitor_proxy.call_sync(
+                    "GetAppId", None, Gio.DBusCallFlags.NONE, -1, None
+                ).unpack()[0]
+                reason = inhibitor_proxy.call_sync(
+                    "GetReason", None, Gio.DBusCallFlags.NONE, -1, None
+                ).unpack()[0]
+                flags = inhibitor_proxy.call_sync(
+                    "GetFlags", None, Gio.DBusCallFlags.NONE, -1, None
+                ).unpack()[0]
+                result.append((app_id, reason, flags))
+            except Exception:
+                logging.warning(
+                    "Failed to query inhibitor at %s, skipping",
+                    inhibitor_path,
+                )
+                continue
+        return result
+    except Exception:
+        logging.warning("Failed to enumerate inhibitors")
+        return None
+
+
 def is_idle_inhibited_gnome():
     """GNOME Shell doesn't work with wlrctl, and there is no way to enumerate
     fullscreen windows, but GNOME does expose whether idle actions like
     starting a screensaver are inhibited, which is a close approximation if not
     a better metric.
+
+    When ignored_inhibitor_apps is configured, enumerates individual inhibitors
+    and filters out ignored ones, so breaks can proceed when only ignored apps
+    (e.g. Caffeine) are inhibiting idle.
     """
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,
@@ -174,7 +240,43 @@ def is_idle_inhibited_gnome():
     # The result is a bitfield, documented here:
     # https://gitlab.gnome.org/GNOME/gnome-session/-/blob/9aa419397b7f6d42bee6e66cc5c5aad12902fba0/gnome-session/org.gnome.SessionManager.xml#L155
     # The fourth bit indicates that idle is inhibited.
-    return bool(result & 0b1000)
+    is_inhibited = bool(result & 0b1000)
+
+    if not is_inhibited:
+        return False
+
+    # Fast path: no exceptions configured, preserve current behavior
+    if not ignored_inhibitor_apps:
+        return True
+
+    # Slow path: enumerate inhibitors, filter out ignored ones
+    inhibitors = get_active_inhibitors()
+    if inhibitors is None:
+        logging.warning(
+            "Failed to enumerate inhibitors, falling back to bitfield result"
+        )
+        return True
+
+    for app_id, reason, flags in inhibitors:
+        logging.debug("Found inhibitor: %s (flags: %d)", app_id.lower(), flags)
+
+        # Only care about idle inhibitors (fourth bit)
+        if not (flags & 0b1000):
+            continue
+
+        if app_id.lower() in ignored_inhibitor_apps:
+            logging.debug(
+                "Ignoring idle inhibitor: %s (in ignored list)", app_id.lower()
+            )
+            continue
+
+        # Found a non-ignored idle inhibitor
+        logging.debug("Non-ignored idle inhibitor found: %s", app_id.lower())
+        return True
+
+    # All idle inhibitors were in the ignored list (or enumeration failed)
+    logging.debug("All idle inhibitors are in ignored list, proceeding with break")
+    return False
 
 
 def is_idle_inhibited_kde() -> bool:
@@ -183,7 +285,18 @@ def is_idle_inhibited_kde() -> bool:
     org.freedesktop.Notifications, which does communicate the Do Not Disturb status
     on KDE.
     This is also only an approximation, but comes pretty close.
+
+    Note: ignored_inhibitor_apps is not supported on KDE as there is no
+    per-inhibitor enumeration API available.
     """
+    global _kde_warning_logged
+
+    if ignored_inhibitor_apps and not _kde_warning_logged:
+        logging.warning(
+            "ignored_inhibitor_apps is not supported on KDE, ignoring setting"
+        )
+        _kde_warning_logged = True
+
     dbus_proxy = Gio.DBusProxy.new_for_bus_sync(
         bus_type=Gio.BusType.SESSION,
         flags=Gio.DBusProxyFlags.NONE,
@@ -240,7 +353,10 @@ def init(ctx, safeeyes_config, plugin_config):
     global take_break_window_classes
     global unfullscreen_allowed
     global dnd_while_on_battery
+    global ignored_inhibitor_apps
+    global _kde_warning_logged
     logging.debug("Initialize Skip Fullscreen plugin")
+    _kde_warning_logged = False
     context = ctx
     skip_break_window_classes = _normalize_window_classes(
         plugin_config["skip_break_windows"]
@@ -250,10 +366,18 @@ def init(ctx, safeeyes_config, plugin_config):
     )
     unfullscreen_allowed = plugin_config["unfullscreen"]
     dnd_while_on_battery = plugin_config["while_on_battery"]
+    ignored_inhibitor_apps = set(
+        _parse_space_separated_list(plugin_config.get("ignored_inhibitor_apps", ""))
+    )
 
 
-def _normalize_window_classes(classes_as_str: str):
-    return [w.lower() for w in classes_as_str.split()]
+def _parse_space_separated_list(value: str) -> list[str]:
+    """Parse a space-separated string into a lowercased list."""
+    return [w.lower() for w in value.split()]
+
+
+def _normalize_window_classes(classes_as_str: str) -> list[str]:
+    return _parse_space_separated_list(classes_as_str)
 
 
 def __should_skip_break(pre_break: bool) -> bool:

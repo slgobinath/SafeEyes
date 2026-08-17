@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~ Safe Eyes is a utility to remind you to take break frequently
+~ to protect your eyes from eye strain.
+
+~ Copyright (C) 2017  Gobinath
+
+~ This program is free software: you can redistribute it and/or modify
+~ it under the terms of the GNU General Public License as published by
+~ the Free Software Foundation, either version 3 of the License, or
+~ (at your option) any later version.
+
+~ This program is distributed in the hope that it will be useful,
+~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+~ GNU General Public License for more details.
+
+~ You should have received a copy of the GNU General Public License
+~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<interface domain="safeeyes">
+  <requires lib="gtk" version="4.0"/>
+  <template parent="GtkBox" class="TextWithPickerItem">
+    <property name="visible">1</property>
+    <property name="margin-start">5</property>
+    <property name="margin-end">5</property>
+    <property name="margin-top">5</property>
+    <property name="margin-bottom">5</property>
+    <property name="spacing">10</property>
+    <child>
+      <object class="GtkLabel" id="lbl_name">
+        <property name="visible">1</property>
+        <property name="valign">center</property>
+        <property name="halign">start</property>
+        <property name="label">label</property>
+        <property name="xalign">0</property>
+        <property name="hexpand">1</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkEntry" id="txt_value">
+        <property name="visible">1</property>
+        <property name="can-focus">1</property>
+        <property name="valign">center</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="btn_pick">
+        <property name="visible">1</property>
+        <property name="label" translatable="yes">Select…</property>
+        <property name="valign">center</property>
+        <signal name="clicked" handler="on_btn_pick_clicked"/>
+      </object>
+    </child>
+  </template>
+</interface>

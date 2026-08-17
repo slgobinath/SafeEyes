@@ -52,6 +52,9 @@ SETTINGS_PLUGIN_ITEM_GLADE = os.path.join(
 SETTINGS_ITEM_INT_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_int.glade")
 SETTINGS_ITEM_TEXT_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_text.glade")
 SETTINGS_ITEM_BOOL_GLADE = os.path.join(utility.BIN_DIRECTORY, "glade/item_bool.glade")
+SETTINGS_ITEM_TEXT_WITH_PICKER_GLADE = os.path.join(
+    utility.BIN_DIRECTORY, "glade/item_text_with_picker.glade"
+)
 
 
 @Gtk.Template(filename=SETTINGS_DIALOG_GLADE)
@@ -526,6 +529,158 @@ class BoolItem(Gtk.Box):
         return self.switch_value.get_active()
 
 
+class InhibitorPickerDialog(Gtk.Window):
+    """Dialog showing active idle inhibitors with checkboxes."""
+
+    def __init__(
+        self,
+        parent: Gtk.Window,
+        current_value: str,
+        on_result: typing.Callable[[str], None],
+    ):
+        super().__init__(
+            transient_for=parent,
+            title=_("Select Inhibitors to Ignore"),
+            default_width=450,
+            default_height=350,
+            modal=True,
+        )
+        self._on_result = on_result
+        self._original_apps = current_value.split() if current_value.strip() else []
+        current_apps = {a.lower() for a in self._original_apps}
+
+        # Main layout
+        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        vbox.set_margin_top(16)
+        vbox.set_margin_bottom(16)
+        vbox.set_margin_start(16)
+        vbox.set_margin_end(16)
+        self.set_child(vbox)
+
+        # Description
+        desc = Gtk.Label(
+            label=_(
+                "These applications are currently inhibiting idle. "
+                "Check the ones Safe Eyes should ignore."
+            ),
+            wrap=True,
+            xalign=0,
+        )
+        desc.add_css_class("dim-label")
+        vbox.append(desc)
+
+        # Scrolled list
+        scrolled = Gtk.ScrolledWindow(vexpand=True)
+        self.listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE)
+        self.listbox.add_css_class("boxed-list")
+        scrolled.set_child(self.listbox)
+        vbox.append(scrolled)
+
+        # Populate from DBus
+        self.checks: list[tuple[Gtk.CheckButton, str]] = []
+        try:
+            from safeeyes.plugins.donotdisturb.plugin import get_active_inhibitors
+
+            inhibitors = get_active_inhibitors()
+        except Exception:
+            inhibitors = None
+
+        # Filter to only idle inhibitors (fourth bit of flags)
+        if inhibitors:
+            inhibitors = [(a, r, f) for a, r, f in inhibitors if f & 0b1000]
+
+        if inhibitors:
+            for app_id, reason, flags in inhibitors:
+                row = Gtk.ListBoxRow()
+                hbox = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+                hbox.set_margin_top(8)
+                hbox.set_margin_bottom(8)
+                hbox.set_margin_start(10)
+                hbox.set_margin_end(10)
+
+                check = Gtk.CheckButton()
+                check.set_active(app_id.lower() in current_apps)
+                hbox.append(check)
+
+                labels_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
+                name_label = Gtk.Label(label=app_id, xalign=0)
+                name_label.add_css_class("heading")
+                labels_box.append(name_label)
+
+                if reason:
+                    reason_label = Gtk.Label(label=reason, xalign=0)
+                    reason_label.add_css_class("dim-label")
+                    labels_box.append(reason_label)
+
+                hbox.append(labels_box)
+                row.set_child(hbox)
+                self.listbox.append(row)
+                self.checks.append((check, app_id))
+        else:
+            empty_label = Gtk.Label(
+                label=_(
+                    "No active inhibitors found. "
+                    "You can still type app IDs manually in the text field."
+                ),
+                wrap=True,
+                xalign=0,
+            )
+            empty_label.add_css_class("dim-label")
+            empty_label.set_margin_top(20)
+            empty_label.set_margin_bottom(20)
+            vbox.append(empty_label)
+
+        # Buttons
+        button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        button_box.set_halign(Gtk.Align.END)
+
+        cancel_btn = Gtk.Button(label=_("Cancel"))
+        cancel_btn.connect("clicked", lambda *_: self.destroy())
+        button_box.append(cancel_btn)
+
+        apply_btn = Gtk.Button(label=_("Apply"))
+        apply_btn.add_css_class("suggested-action")
+        apply_btn.connect("clicked", self._on_apply)
+        button_box.append(apply_btn)
+
+        vbox.append(button_box)
+
+    def _on_apply(self, *args) -> None:
+        selected = [app_id for check, app_id in self.checks if check.get_active()]
+        # Preserve manually-entered IDs not in the active list
+        active_ids = {app_id.lower() for _, app_id in self.checks}
+        manual = [a for a in self._original_apps if a.lower() not in active_ids]
+        self._on_result(" ".join(manual + selected))
+        self.destroy()
+
+
+@Gtk.Template(filename=SETTINGS_ITEM_TEXT_WITH_PICKER_GLADE)
+class TextWithPickerItem(Gtk.Box):
+    __gtype_name__ = "TextWithPickerItem"
+
+    lbl_name: Gtk.Label = Gtk.Template.Child()
+    txt_value: Gtk.Entry = Gtk.Template.Child()
+    btn_pick: Gtk.Button = Gtk.Template.Child()
+
+    def __init__(self, name: str, value: str):
+        super().__init__()
+        self.lbl_name.set_label(_(name))
+        self.txt_value.set_text(value)
+
+    def get_value(self) -> str:
+        return self.txt_value.get_text()
+
+    @Gtk.Template.Callback()
+    def on_btn_pick_clicked(self, *args) -> None:
+        parent = self.get_root()
+        dialog = InhibitorPickerDialog(
+            parent,
+            self.txt_value.get_text(),
+            on_result=self.txt_value.set_text,
+        )
+        dialog.present()
+
+
 @Gtk.Template(filename=SETTINGS_DIALOG_PLUGIN_GLADE)
 class PluginSettingsDialog(Gtk.Window):
     """Builds a settings dialog based on the configuration of a plugin."""
@@ -541,7 +696,7 @@ class PluginSettingsDialog(Gtk.Window):
         self.property_controls = []
 
         for setting in config.get("settings"):
-            box: typing.Union[IntItem, BoolItem, TextItem]
+            box: typing.Union[IntItem, BoolItem, TextItem, TextWithPickerItem]
             if setting["type"].upper() == "INT":
                 box = IntItem(
                     setting["label"],
@@ -555,6 +710,10 @@ class PluginSettingsDialog(Gtk.Window):
                 )
             elif setting["type"].upper() == "BOOL":
                 box = BoolItem(
+                    setting["label"], config["active_plugin_config"][setting["id"]]
+                )
+            elif setting["type"].upper() == "TEXT_WITH_PICKER":
+                box = TextWithPickerItem(
                     setting["label"], config["active_plugin_config"][setting["id"]]
                 )
             else:

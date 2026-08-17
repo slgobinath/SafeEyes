@@ -85,7 +85,8 @@
                 "skip_break_windows": "",
                 "take_break_windows": "",
                 "unfullscreen": true,
-                "while_on_battery": false
+                "while_on_battery": false,
+                "ignored_inhibitor_apps": ""
             }
         },
         {
