@@ -49,8 +49,9 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
         <property name="IconName" type="s" access="read"/>
         <property name="IconThemePath" type="s" access="read"/>
         <property name="Status" type="s" access="read"/>
+        <signal name="NewTitle"/>
         <signal name="NewIcon"/>
-        <signal name="NewTooltip"/>
+        <signal name="NewToolTip"/>
 
         <method name="ProvideXdgActivationToken">
             <arg name="token" type="s" direction="in"/>
@@ -65,6 +66,7 @@ SNI_NODE_INFO = Gio.DBusNodeInfo.new_for_xml(
         </method>
 
         <property name="XAyatanaLabel" type="s" access="read"/>
+        <property name="XAyatanaLabelGuide" type="s" access="read"/>
         <signal name="XAyatanaNewLabel">
             <arg type="s" name="label" direction="out" />
             <arg type="s" name="guide" direction="out" />
@@ -382,6 +384,7 @@ class StatusNotifierItemService(DBusService):
     IconThemePath = ""
     ToolTip: tuple[str, list[typing.Any], str, str] = ("", [], "Safe Eyes", "")
     XAyatanaLabel = ""
+    XAyatanaLabelGuide = ""
     ItemIsMenu = True
     Menu = None
 
@@ -451,20 +454,26 @@ class StatusNotifierItemService(DBusService):
     def set_items(self, items):
         self._menu.set_items(items)
 
-    def set_icon(self, icon):
+    def set_icon(self, icon: str) -> None:
         self.IconName = icon
 
         self.emit_signal("NewIcon")
 
-    def set_tooltip(self, title, description):
+    def set_title(self, title: str) -> None:
+        self.Title = title
+
+        self.emit_signal("NewTitle")
+
+    def set_tooltip(self, title: str, description: str) -> None:
         self.ToolTip = ("", [], title, description)
 
-        self.emit_signal("NewTooltip")
+        self.emit_signal("NewToolTip")
 
-    def set_xayatanalabel(self, label):
+    def set_xayatanalabel(self, label: str, guide: str = "") -> None:
         self.XAyatanaLabel = label
+        self.XAyatanaLabelGuide = guide
 
-        self.emit_signal("XAyatanaNewLabel", (label, ""))
+        self.emit_signal("XAyatanaNewLabel", (label, guide))
 
     def ProvideXdgActivationToken(self, token: str) -> None:
         self.last_activation_token = token
@@ -716,8 +725,9 @@ class TrayIcon:
         else:
             description = ""
 
+        self.sni_service.set_title(description or "Safe Eyes")
         self.sni_service.set_tooltip("Safe Eyes", description)
-        self.sni_service.set_xayatanalabel(description)
+        self.sni_service.set_xayatanalabel(description, description)
 
     def quit_safe_eyes(self):
         """Handle Quit menu action.
@@ -839,6 +849,7 @@ class TrayIcon:
 
             self.sni_service.set_icon("io.github.slgobinath.SafeEyes-disabled")
             self.update_menu()
+            self.update_tooltip()
 
     def enable_ui(self):
         """Change the UI to enabled state."""
@@ -848,6 +859,7 @@ class TrayIcon:
 
             self.sni_service.set_icon("io.github.slgobinath.SafeEyes-enabled")
             self.update_menu()
+            self.update_tooltip()
 
     def __resume(self):
         """Reenable Safe Eyes after the given timeout."""
