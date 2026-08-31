@@ -1,116 +1,107 @@
 {
-    "meta": {
-        "config_version": "6.0.5"
-    },
-    "random_order": true,
     "allow_postpone": false,
-    "short_break_interval": 15,
-    "long_break_interval": 75,
-    "long_break_duration": 60,
-    "pre_break_warning_time": 10,
-    "short_break_duration": 15,
-    "persist_state": false,
-    "postpone_duration": 5,
-    "postpone_unit": "minutes",
-    "shortcut_disable_time": 2,
-    "shortcut_skip": 9,
-    "shortcut_postpone": 65,
     "fade_in_break_screen": true,
     "fade_in_break_screen_duration": 1500,
-    "strict_break": false,
-    "short_breaks": [{
-            "name": "Gently close your eyes"
-        },
+    "long_break_duration": 60,
+    "long_break_interval": 75,
+    "long_breaks": [
         {
-            "name": "Take five slow, deep breaths"
-        },
-        {
-            "name": "Rotate your eyes in clockwise direction"
-        },
-        {
-            "name": "Relax your shoulders and drop them away from your ears"
-        },
-        {
-            "name": "Blink your eyes"
-        },
-        {
-            "name": "Stretch your neck gently from side to side"
-        },
-        {
-            "name": "Roll your eyes a few times to each side"
-        },
-        {
-            "name": "Check your posture and sit back comfortably"
-        },
-        {
-            "name": "Rotate your eyes in counterclockwise direction"
-        },
-        {
-            "name": "Unclench your jaw and relax your face"
-        },
-        {
-            "name": "Focus on a point in the far distance"
-        },
-        {
-            "name": "Stretch your wrists and fingers"
-        },
-        {
-            "name": "Have some water"
-        }
-    ],
-    "long_breaks": [{
+            "image": "exercises/stand-stretch-back-legs.gif",
             "name": "Stand up and stretch your back and legs"
         },
         {
+            "image": "exercises/lean-back-relax.gif",
             "name": "Lean back at your seat and relax"
         },
         {
+            "image": "exercises/walk-refill-water.gif",
             "name": "Walk around and refill your water"
         },
         {
+            "image": "exercises/walk-while.gif",
             "name": "Walk for a while"
         },
         {
+            "image": "exercises/step-away-mobility.gif",
             "name": "Step away from the screen and do a short mobility stretch"
         },
         {
+            "image": "exercises/rest-eyes-distant.gif",
             "name": "Rest your eyes and focus on distant objects"
+        },
+        {
+            "duration": 40,
+            "image": "exercises/shoulder-arm-stretch.gif",
+            "name": "Shoulder-arm stretch: Keep one arm horizontally stretched in front of your chest and push it with your other arm"
+        },
+        {
+            "duration": 40,
+            "image": "exercises/finger-stretch.gif",
+            "name": "Finger stretch: Separate and stretch your fingers until mild tension is felt, then bend at the knuckles"
+        },
+        {
+            "duration": 30,
+            "image": "exercises/backward-shoulder-stretch.gif",
+            "name": "Backward shoulder stretch: Interlace your fingers behind your back and turn your elbows inward"
+        },
+        {
+            "duration": 20,
+            "image": "exercises/look-into-darkness.gif",
+            "name": "Look into the darkness: Cover your eyes with your palms and look into the darkness"
+        },
+        {
+            "duration": 30,
+            "image": "exercises/move-shoulders.gif",
+            "name": "Move the shoulders: Spin your arms like a plane propeller beside your body"
+        },
+        {
+            "duration": 30,
+            "image": "exercises/move-shoulders-up-down.gif",
+            "name": "Move the shoulders up and down: Press your body up from the chair armrests and lower your shoulders"
+        },
+        {
+            "duration": 24,
+            "image": "exercises/turn-head.gif",
+            "name": "Turn your head: Turn your head left and right, holding for 2 seconds each side"
         }
     ],
-    "plugins": [{
-            "id": "donotdisturb",
+    "meta": {
+        "config_version": "6.0.6"
+    },
+    "persist_state": false,
+    "plugins": [
+        {
             "enabled": true,
-            "version": "0.0.2",
+            "id": "donotdisturb",
             "settings": {
                 "skip_break_windows": "",
                 "take_break_windows": "",
                 "unfullscreen": true,
                 "while_on_battery": false
-            }
+            },
+            "version": "0.0.2"
         },
         {
-            "id": "notification",
             "enabled": true,
+            "id": "notification",
             "version": "0.0.1"
         },
         {
-            "id": "audiblealert",
             "enabled": true,
-            "version": "0.0.3",
+            "id": "audiblealert",
             "settings": {
-                "pre_break_alert": true,
-                "post_break_alert": true
-            }
+                "post_break_alert": true,
+                "pre_break_alert": true
+            },
+            "version": "0.0.3"
         },
         {
-            "id": "trayicon",
             "enabled": true,
-            "version": "0.0.3",
+            "id": "trayicon",
             "settings": {
-                "show_time_in_tray": false,
-                "show_long_time_in_tray": false,
                 "allow_disabling": true,
-                "disable_options": [{
+                "disable_options": [
+                    {
                         "time": 30,
                         "unit": "minute"
                     },
@@ -126,47 +117,114 @@
                         "time": 3,
                         "unit": "hour"
                     }
-                ]
-            }
+                ],
+                "show_long_time_in_tray": false,
+                "show_time_in_tray": false
+            },
+            "version": "0.0.3"
         },
         {
-            "id": "smartpause",
             "enabled": true,
-            "version": "0.0.3",
+            "id": "smartpause",
             "settings": {
                 "idle_time": 5,
                 "postpone_if_active": false
-            }
+            },
+            "version": "0.0.3"
         },
         {
-            "id": "screensaver",
             "enabled": true,
-            "version": "0.0.2",
+            "id": "screensaver",
             "settings": {
                 "command": "",
                 "min_seconds": 3
-            }
+            },
+            "version": "0.0.2"
         },
         {
-            "id": "healthstats",
             "enabled": false,
-            "version": "0.0.2",
+            "id": "healthstats",
             "settings": {
                 "statistics_reset_cron": "0 0 * * *"
-            }
+            },
+            "version": "0.0.2"
         },
         {
-            "id": "mediacontrol",
             "enabled": true,
+            "id": "mediacontrol",
             "version": "0.0.1"
         },
         {
-            "id": "limitconsecutiveskipping",
             "enabled": true,
-            "version": "0.0.1",
+            "id": "limitconsecutiveskipping",
             "settings": {
                 "number_of_allowed_skips_in_a_row": 2
-            }
+            },
+            "version": "0.0.1"
         }
-    ]
+    ],
+    "postpone_duration": 5,
+    "postpone_unit": "minutes",
+    "pre_break_warning_time": 10,
+    "random_order": true,
+    "short_break_duration": 15,
+    "short_break_interval": 15,
+    "short_breaks": [
+        {
+            "image": "exercises/gently-close-eyes.gif",
+            "name": "Gently close your eyes"
+        },
+        {
+            "image": "exercises/take-five-breaths.gif",
+            "name": "Take five slow, deep breaths"
+        },
+        {
+            "image": "exercises/rotate-clockwise.gif",
+            "name": "Rotate your eyes in clockwise direction"
+        },
+        {
+            "image": "exercises/relax-shoulders.gif",
+            "name": "Relax your shoulders and drop them away from your ears"
+        },
+        {
+            "image": "exercises/blink-eyes.gif",
+            "name": "Blink your eyes"
+        },
+        {
+            "image": "exercises/stretch-neck-side.gif",
+            "name": "Stretch your neck gently from side to side"
+        },
+        {
+            "image": "exercises/roll-eyes.gif",
+            "name": "Roll your eyes a few times to each side"
+        },
+        {
+            "image": "exercises/check-posture.gif",
+            "name": "Check your posture and sit back comfortably"
+        },
+        {
+            "image": "exercises/rotate-counterclockwise.gif",
+            "name": "Rotate your eyes in counterclockwise direction"
+        },
+        {
+            "image": "exercises/unclench-jaw.gif",
+            "name": "Unclench your jaw and relax your face"
+        },
+        {
+            "image": "exercises/focus-far-distance.gif",
+            "name": "Focus on a point in the far distance"
+        },
+        {
+            "image": "exercises/stretch-wrists-fingers.gif",
+            "name": "Stretch your wrists and fingers"
+        },
+        {
+            "image": "exercises/have-water.gif",
+            "name": "Have some water"
+        }
+    ],
+    "shortcut_disable_time": 2,
+    "shortcut_postpone": 65,
+    "shortcut_skip": 9,
+    "strict_break": false
 }

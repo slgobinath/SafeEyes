@@ -503,17 +503,40 @@ class BreakScreenWindow(Gtk.Window):
     def __set_break_image(
         self, image_path: str, monitor_width: int, monitor_height: int
     ) -> None:
-        """Load the break image and cap it relative to the current monitor size."""
+        """Load the break image and cap it relative to the current monitor size.
+
+        Supports static images (PNG/JPEG) and animated GIFs (issue #439).
+        For animated GIFs, uses Gtk.Picture filename to preserve animation
+        and relies on ContentFit.SCALE_DOWN for scaling.
+        """
         max_width = max(1, (monitor_width * 8) // 10 - 1)
         max_height = max(1, (monitor_height * 3) // 10 - 1)
 
+        # Try to handle animated GIF via PixbufAnimation
         try:
-            loaded = GdkPixbuf.Pixbuf.new_from_file(image_path)
+            animation = GdkPixbuf.PixbufAnimation.new_from_file(image_path)
+            if animation is None:
+                raise ValueError("Failed to load break image")
+            if not animation.is_static_image():
+                # Animated GIF - use filename to preserve animation;
+                # Gtk.Picture with ContentFit.SCALE_DOWN will scale automatically
+                # but we enforce max size via size request alternative: just set file
+                self.img_break.set_filename(image_path)
+                # Store animation reference to keep it alive (Gtk.Picture holds it)
+                return
+            # Static image - fall through to pixbuf path
+            loaded = animation.get_static_image()
             if loaded is None:
                 raise ValueError("Failed to load break image")
-        except Exception:
-            logging.exception("Failed to load break image: %s", image_path)
-            return
+        except Exception as e:
+            # If PixbufAnimation fails (e.g., unsupported format), try legacy pixbuf
+            try:
+                loaded = GdkPixbuf.Pixbuf.new_from_file(image_path)
+                if loaded is None:
+                    raise ValueError("Failed to load break image")
+            except Exception:
+                logging.exception("Failed to load break image: %s", image_path)
+                return
         pixbuf: GdkPixbuf.Pixbuf = loaded
 
         width, height = pixbuf.get_width(), pixbuf.get_height()

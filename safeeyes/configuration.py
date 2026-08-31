@@ -45,8 +45,8 @@ class Config:
         system_config = utility.load_json(utility.SYSTEM_CONFIG_FILE_PATH)
         # If there any breaking changes in long_breaks, short_breaks or any other keys,
         # use the force_upgrade_keys list
-        force_upgrade_keys: list[str] = []
-        # force_upgrade_keys = ['long_breaks', 'short_breaks']
+        # For 6.0.6: add animated images for all breaks and new Workrave exercises (issue #439)
+        force_upgrade_keys: list[str] = ["long_breaks", "short_breaks"]
 
         if user_config is None:
             cls._initialize_config()
