@@ -8,7 +8,7 @@
         <name>Gobinath</name>
     </developer>
 
-    <summary>A FOSS tool for Linux users to reduce and prevent repetitive strain injury (RSI)</summary>
+    <summary>Protect your eyes from eye strain</summary>
 
     <metadata_license>CC0-1.0</metadata_license>
     <project_license>GPL-3.0</project_license>
@@ -55,6 +55,12 @@
     <url type="vcs-browser">https://github.com/slgobinath/safeeyes</url>
 
     <releases>
+        <release version="3.5.1" date="2026-09-05">
+            <url>https://github.com/slgobinath/safeeyes/releases/tag/v3.5.1</url>
+            <description>
+                <p>Fix smartpause with pywayland</p>
+            </description>
+        </release>
         <release version="3.5.0" date="2026-04-23">
             <url>https://github.com/slgobinath/safeeyes/releases/tag/v3.5.0</url>
             <description>

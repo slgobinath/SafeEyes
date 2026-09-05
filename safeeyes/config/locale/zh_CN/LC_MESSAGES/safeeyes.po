@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-04-14 02:09+0000\n"
+"PO-Revision-Date: 2026-04-25 17:16+0000\n"
 "Last-Translator: Sketch6580 <sketch6580@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/safe-eyes/translations/zh_Hans/>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 5.17.1-dev\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -55,43 +55,43 @@ msgstr "靠在椅背上休息一下"
 
 # Short break
 msgid "Take five slow, deep breaths"
-msgstr ""
+msgstr "做五次缓慢而深长的呼吸"
 
 # Short break
 msgid "Relax your shoulders and drop them away from your ears"
-msgstr ""
+msgstr "放松肩膀，双肩下沉、远离耳朵"
 
 # Short break
 msgid "Unclench your jaw and relax your face"
-msgstr ""
+msgstr "放松下巴，放松面部"
 
 # Short break
 msgid "Stretch your neck gently from side to side"
-msgstr ""
+msgstr "轻轻地左右转动脖子"
 
 # Short break
 msgid "Check your posture and sit back comfortably"
-msgstr ""
+msgstr "检查坐姿，舒适地向后靠"
 
 # Short break
 msgid "Stretch your wrists and fingers"
-msgstr ""
+msgstr "拉伸手腕和手指"
 
 # Long break
 msgid "Stand up and stretch your back and legs"
-msgstr ""
+msgstr "站起来，拉伸背部和腿部"
 
 # Long break
 msgid "Walk around and refill your water"
-msgstr ""
+msgstr "走动一下，补充水分"
 
 # Long break
 msgid "Step away from the screen and do a short mobility stretch"
-msgstr ""
+msgstr "远离屏幕，做一些短暂的活动性拉伸"
 
 # Long break
 msgid "Rest your eyes and focus on distant objects"
-msgstr ""
+msgstr "让眼睛休息，眺望远处的物体"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -638,10 +638,10 @@ msgid "take a long break now"
 msgstr "现在进行长时间的休息"
 
 msgid "Fade in when breaks start"
-msgstr ""
+msgstr "休息开始时淡入"
 
 msgid "Fade in duration (in milliseconds)"
-msgstr ""
+msgstr "淡入时长（毫秒）"
 
 # Settings dialog
 #~ msgid "Keyboard shortcuts disabled period (in seconds)"

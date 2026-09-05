@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-03-31 05:45+0000\n"
-"Last-Translator: Archisman Panigrahi <apandada1@gmail.com>\n"
+"PO-Revision-Date: 2026-05-22 18:11+0000\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/safe-eyes/"
 "translations/it/>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 # Short break
 msgid "Gently close your eyes"
@@ -55,43 +55,43 @@ msgstr "Appoggiati alla sedia e rilassati"
 
 # Short break
 msgid "Take five slow, deep breaths"
-msgstr ""
+msgstr "Fai cinque respiri lenti e profondi"
 
 # Short break
 msgid "Relax your shoulders and drop them away from your ears"
-msgstr ""
+msgstr "Rilassa le spalle e allontanale dalle orecchie"
 
 # Short break
 msgid "Unclench your jaw and relax your face"
-msgstr ""
+msgstr "Rilassa la mascella e distendi il viso"
 
 # Short break
 msgid "Stretch your neck gently from side to side"
-msgstr ""
+msgstr "Allunga delicatamente il collo da un lato all'altro"
 
 # Short break
 msgid "Check your posture and sit back comfortably"
-msgstr ""
+msgstr "Controlla la tua postura e siediti comodamente"
 
 # Short break
 msgid "Stretch your wrists and fingers"
-msgstr ""
+msgstr "Allunga i polsi e le dita"
 
 # Long break
 msgid "Stand up and stretch your back and legs"
-msgstr ""
+msgstr "Alzati e allunga la schiena e le gambe"
 
 # Long break
 msgid "Walk around and refill your water"
-msgstr ""
+msgstr "Fai un giro e riempi la tua borraccia"
 
 # Long break
 msgid "Step away from the screen and do a short mobility stretch"
-msgstr ""
+msgstr "Allontanati dallo schermo ed esegui un breve esercizio di mobilità"
 
 # Long break
 msgid "Rest your eyes and focus on distant objects"
-msgstr ""
+msgstr "Riposa gli occhi e concentrati su oggetti lontani"
 
 # Commandline arg description
 msgid "show the about dialog"
@@ -411,10 +411,11 @@ msgstr "Salvaschermo"
 # plugin/screensaver
 msgid "Lock the screen after long breaks by starting screensaver/screen-lock"
 msgstr ""
+"Blocca lo schermo dopo lunghe pause avviando lo screensaver/blocco schermo"
 
 # plugin/screensaver
 msgid "Custom screensaver or screen-lock command"
-msgstr ""
+msgstr "Salvaschermo personalizzato o comando di blocco schermo"
 
 # plugin/screensaver
 msgid "Minimum seconds to skip without screensaver"
@@ -644,19 +645,19 @@ msgid "Please install one of the command-line tools: %s"
 msgstr "Prego installa uno degli strumenti da riga di comando: %s"
 
 msgid "Skipping/postponing disabled period (in seconds)"
-msgstr ""
+msgstr "Saltare/posticipare il periodo di inattività (in secondi)"
 
 msgid "take a short break now"
-msgstr ""
+msgstr "fai una breve pausa"
 
 msgid "take a long break now"
-msgstr ""
+msgstr "prenditi una lunga pausa ora"
 
 msgid "Fade in when breaks start"
-msgstr ""
+msgstr "Dissolvenza in entrata all'inizio delle pause"
 
 msgid "Fade in duration (in milliseconds)"
-msgstr ""
+msgstr "Durata della dissolvenza in entrata (in millisecondi)"
 
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
