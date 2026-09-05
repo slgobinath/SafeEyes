@@ -154,23 +154,24 @@ def on_start() -> None:
         return
 
     if idle_monitor is None:
-        if is_wayland_and_gnome:
-            idle_monitor = IdleMonitorGnomeDBus()
-        elif use_swayidle:
-            idle_monitor = IdleMonitorSwayidle()
-        elif use_ext_idle_notify:
-            from .ext_idle_notify import IdleMonitorExtIdleNotify
-
-            idle_monitor = IdleMonitorExtIdleNotify()
-        else:
-            idle_monitor = IdleMonitorX11()
-
         try:
+            if is_wayland_and_gnome:
+                idle_monitor = IdleMonitorGnomeDBus()
+            elif use_swayidle:
+                idle_monitor = IdleMonitorSwayidle()
+            elif use_ext_idle_notify:
+                from .ext_idle_notify import IdleMonitorExtIdleNotify
+
+                idle_monitor = IdleMonitorExtIdleNotify()
+            else:
+                idle_monitor = IdleMonitorX11()
+
             idle_monitor.init()
         except BaseException as e:
             logging.warning("Unable to get idle time, idle monitor not supported.")
             logging.warning(str(e))
-            idle_monitor.stop()
+            if idle_monitor is not None:
+                idle_monitor.stop()
             idle_monitor = None
             idle_monitor_unsupported = True
 

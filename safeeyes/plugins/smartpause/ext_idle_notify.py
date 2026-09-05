@@ -26,7 +26,15 @@ import select
 import typing
 
 from pywayland.client import Display
-from pywayland.protocol.wayland.wl_seat import WlSeat
+
+if typing.TYPE_CHECKING:
+    from pywayland.protocol.wayland import WlSeat
+else:
+    try:
+        from pywayland.protocol.wayland import WlSeat
+    except ImportError:
+        # Older PyWayland versions generated one module per interface.
+        from pywayland.protocol.wayland.wl_seat import WlSeat
 
 
 if typing.TYPE_CHECKING:

@@ -55,6 +55,12 @@
     <url type="vcs-browser">https://github.com/slgobinath/safeeyes</url>
 
     <releases>
+        <release version="3.5.1" date="2026-09-05">
+            <url>https://github.com/slgobinath/safeeyes/releases/tag/v3.5.1</url>
+            <description>
+                <p>Fix smartpause with pywayland</p>
+            </description>
+        </release>
         <release version="3.5.0" date="2026-04-23">
             <url>https://github.com/slgobinath/safeeyes/releases/tag/v3.5.0</url>
             <description>
