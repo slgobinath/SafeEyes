@@ -68,7 +68,7 @@ types = [
     {include-group = "tests"},
 ]
 tests = [
-    "pytest==8.3.5",
+    "pytest==9.0.3",
     "time-machine==2.16.0",
 ]
 
