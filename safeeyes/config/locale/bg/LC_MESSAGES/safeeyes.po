@@ -642,6 +642,10 @@ msgstr ""
 msgid "Fade in duration (in milliseconds)"
 msgstr ""
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Short break
 #~ msgid "Tightly close your eyes"
 #~ msgstr "Затворете плътно очи"

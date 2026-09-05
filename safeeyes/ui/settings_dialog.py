@@ -84,6 +84,8 @@ class SettingsDialog(Gtk.ApplicationWindow):
     plugin_items: dict[str, "PluginItem"]
     plugin_map: dict[str, str]
     config: Config
+    box_skip_shortcut_inhibition: Gtk.Box = Gtk.Template.Child()
+    switch_skip_shortcut_inhibition: Gtk.Switch = Gtk.Template.Child()
 
     def __init__(
         self,
@@ -137,6 +139,16 @@ class SettingsDialog(Gtk.ApplicationWindow):
             config.get("shortcut_disable_time")
         )
         self.switch_strict_break.set_active(config.get("strict_break"))
+        # This setting is only relevant on GNOME Wayland, where Safe Eyes calls
+        # inhibit_system_shortcuts() and GNOME may show a permission dialog for it.
+        # Other Wayland compositors (e.g. KWin, sway) grant the inhibition
+        # silently, so the switch is hidden there.
+        if not utility.is_gnome_wayland():
+            self.box_skip_shortcut_inhibition.set_visible(False)
+        else:
+            self.switch_skip_shortcut_inhibition.set_active(
+                config.get("skip_system_shortcuts_inhibition", False)
+            )
         self.switch_random_order.set_active(config.get("random_order"))
         self.switch_postpone.set_active(config.get("allow_postpone"))
         self.switch_fade_in_break_screen.set_active(
@@ -366,6 +378,13 @@ class SettingsDialog(Gtk.ApplicationWindow):
             self.spin_disable_keyboard_shortcut.get_value_as_int(),
         )
         self.config.set("strict_break", self.switch_strict_break.get_active())
+        # Only write back the value when the switch is actually shown, so that
+        # users on other Wayland desktops keep their manual config file edits.
+        if utility.is_gnome_wayland():
+            self.config.set(
+                "skip_system_shortcuts_inhibition",
+                self.switch_skip_shortcut_inhibition.get_active(),
+            )
         self.config.set("random_order", self.switch_random_order.get_active())
         self.config.set("allow_postpone", self.switch_postpone.get_active())
         self.config.set(

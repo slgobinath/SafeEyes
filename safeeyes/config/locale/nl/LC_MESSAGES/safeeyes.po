@@ -660,6 +660,10 @@ msgstr "Vervagingseffect tonen aan begin van pauze"
 msgid "Fade in duration (in milliseconds)"
 msgstr "Vervaagduur (in milliseconden)"
 
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
+
 # Commandline arg description
 #~ msgid "print the status of running safeeyes instance and exit"
 #~ msgstr "de status van de draaiende Safe Eyes-instantie printen en afsluiten"

@@ -637,3 +637,7 @@ msgstr ""
 
 msgid "Fade in duration (in milliseconds)"
 msgstr ""
+
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""

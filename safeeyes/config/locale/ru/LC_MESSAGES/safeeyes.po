@@ -683,3 +683,7 @@ msgstr ""
 # plugin/healthstats
 #~ msgid "Interval to reset statistics (in hours)"
 #~ msgstr "Интервал для сброса статистики (в часах)"
+
+# Settings dialog
+msgid "Suppress GNOME shortcut permission dialog"
+msgstr ""
